@@ -30,7 +30,7 @@
 */
 
 //! version hexadecimal number
-#define XLW_HEX_VERSION 0x010100
+#define XLW_HEX_VERSION 0x010100f0
 
 //! version string
 #ifdef XLW_DEBUG
