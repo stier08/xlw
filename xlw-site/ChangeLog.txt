@@ -1,3 +1,7 @@
+2002-04-16 22:06  nando
+
+	* ChangeLog.txt (1.6): updated
+
 2002-04-16 20:58  nando
 
 	* index.html (1.7): added "add-in" word in the index page
