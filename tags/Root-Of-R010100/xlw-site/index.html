@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+<head>
+<title>XLW: a free/open-source C++ wrapper of the Excel C
+API</title>
+<meta name="description" content=
+"XLW: a free/open-source library for quantitative finance">
+<meta name="keywords" content=
+"Excel32, Excel32 Wrapper, XLW, C++, Excel, add-in, addin">
+<!--includeHTML file="xlwmeta.inc"-->
+<meta name="resource-type" content="document">
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name="generator" content="HTML-Kit">
+<meta name="revisit-after" content="15 days">
+<meta name="classification" content="Personal">
+<meta name="robots" content="ALL">
+<meta name="distribution" content="Global">
+<meta name="rating" content="Safe For Kids">
+<meta name="doc-type" content="Web Page">
+<meta name="doc-rights" content="Public">
+<meta http-equiv="reply-to" content="xlw-users@lists.sf.net">
+<meta http-equiv="Content-Type" content=
+"text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/ccs">
+<meta http-equiv="Window-target" content="_top">
+<meta http-equiv="Content-Language" content="en">
+<link rel="stylesheet" href="styles/xlw.css" type="text/css">
+<link rev="made" href="mailto:xlw-users@lists.sf.net">
+<script type="text/javascript">
+<!-- hiding
+
+if (self != window.top) {
+window.open(location.href);
+}
+
+// done hiding -->
+</script>
+
+<!--/includeHTML-->
+</head>
+<!--includeHTML file="xlwtablehead.inc"-->
+<body>
+<table summary=
+"Layout table: navigation bar in the first cell, contents in the second cell"
+ class="layout">
+<tbody>
+<tr>
+<td class="navbar">
+<div class="center"><strong><a href=
+"http://xlw.sf.net">http://xlw.sf.net</a></strong></div>
+
+<ul class="navlinklist">
+<li><a class="navlink" href=
+"http://xlw.sf.net">Home&nbsp;page</a></li>
+
+<li><a class="navlink" href="download.html">Download</a></li>
+
+<li><a class="navlink" href="mailinglists.html">Mailing
+lists</a></li>
+
+<li><a class="navlink" href=
+"http://sf.net/news/?group_id=45222">News (exits)</a></li>
+
+<li><a class="navlink" href="html/index.html">Documentation
+(exits)</a></li>
+
+<li><a class="navlink" href="license.html">License</a></li>
+
+<!--
+<li><a class="navlink" href="html/overview.html">Project Overview (exits)</a></li>
+<li><a class="navlink" href="extensions.html">Extensions</a></li>
+<li><a class="navlink" href="html/examples.html">Examples (exits)</a></li>
+<li><a class="navlink" href="html/history.html">History (exits)</a></li>
+<li><a class="navlink" href="html/platforms.html">Supported Platforms (exits)</a></li>
+<li><a class="navlink" href="html/group.html">XLW Group (exits)</a></li>
+-->
+<li><a class="navlink" href=
+"http://sf.net/project/stats/?group_id=45222">Project Statistics
+(exits)</a></li>
+</ul>
+
+<hr>
+<h3 class="navbartitle">XLW Development</h3>
+
+<ul>
+<li><a class="navlink" href=
+"http://sf.net/projects/xlw">Project&nbsp;page (exits)</a></li>
+
+<li><a class="navlink" href="cvs.html">CVS</a></li>
+
+<li><a class="navlink" href="snapshot.html">Latest build</a></li>
+
+<li><a class="navlink" href=
+"http://sourceforge.net/tracker/?atid=442236&amp;group_id=45222&amp;func=browse">
+Bugs (exits)</a></li>
+
+<li><a class="navlink" href=
+"http://sourceforge.net/tracker/?atid=442238&amp;group_id=45222&amp;func=browse">
+Patches (exits)</a></li>
+
+<li><a class="navlink" href=
+"http://sourceforge.net/tracker/?atid=442239&amp;group_id=45222&amp;func=browse">
+Feature&nbsp;Requests (exits)</a></li>
+
+<!--
+<li><a class="navlink" href="quep.html">Enhancement Proposals</a></li>
+<li><a class="navlink" href="FAQ.html">Developer&nbsp;FAQ</a></li>
+<li><a class="navlink" href="style.html">Programming Style Guidelines</a></li>
+-->
+</ul>
+
+<hr>
+<div class="center"><strong>Hosted by</strong><br>
+ <a href="http://sf.net"><img src=
+"http://sf.net/sflogo.php?group_id=45222" width="88" height="31"
+border="0" alt="SourceForge.net Logo"></a></div>
+
+<br>
+ <a href="http://sf.net/docman/?group_id=1">About SourceForge.net,
+Open Source, CVS, etc.</a> 
+
+<hr>
+<div class="center">
+<p><a href="http://validator.w3.org/check/referer"><img border="0"
+src="http://www.w3.org/Icons/valid-html401" alt="Valid HTML 4.01!"
+height="31" width="88"></a></p>
+</div>
+</td>
+<td class="main"><!--/includeHTML-->
+<h1 class="center">XLW</h1>
+
+<h2 class="center">C++ wrapper of Excel C API</h2>
+
+<p>The excel32 C++ wrapper package (a.k.a. XLW) is a <em><a href=
+"http://www.gnu.org/philosophy/free-sw.html">free</a>/<a href=
+"http://www.opensource.org/">open source</a></em> C++ wrapper of
+the Excel C API described in <a href=
+"http://msdn.microsoft.com/library/officedev/office97/sfacb.htm">Microsoft
+Excel 97 Developer's Kit</a>. It makes Excel API programming
+simpler. Its powerfull interface will empower your C or C++
+numerics by embeding them in Excel just like the built-in
+functions.</p>
+
+<p>XLW has been developed by <a href=
+"mailto:xlw@ifrance.com">J&eacute;r&ocirc;me Lecomte</a>. Early
+versions of this package have been used for years and tested under
+Windows 9X/NT with Visual C++ 6.0 and Excel 97 SR-1 &amp; SR-2 with
+minor problems (see Known bugs and limitations in the <a href=
+"html/index.html">documentation</a>). The package is not perfect
+but certainly has reached a stage where it can be usefull. If you
+have comments, suggestions, improvements and critics to the
+software and/or the documentation you can email <a href=
+"mailto:xlw-users@lists.sf.net">xlw-users@lists.sf.net</a></p>
+
+<p>A few resources have been setup with the help from XLW's
+generous host <a href=
+"http://sourceforge.net">SourceForge.net</a>:</p>
+
+<ul>
+<li>The <a href="http://sourceforge.net/projects/xlw">XLW project
+page</a> is the main gathering point for the activities.</li>
+
+<li>Anyone interested is invited to join one of the <a href=
+"http://sourceforge.net/mail/?group_id=45222">mailing
+lists</a>.</li>
+
+<li>Check the <a href=
+"http://sourceforge.net/news/?group_id=45222">latest news</a> for
+the most recent updates on the project.</li>
+
+<li>The released files (source code, binaries, documentation, etc.)
+are available at the <a href="download.html">download
+page</a>.</li>
+
+<li>The XLW CVS, providing all the snapshots of the development,
+can be <a href="cvs.html">accessed directly</a>, or through the <a
+href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/xlw/">CVS web
+interface</a>.</li>
+
+<li>To submit a bug report, please use the <a href=
+"http://sourceforge.net/tracker/?group_id=45222&amp;atid=145222">Bug
+Tracker</a>.</li>
+
+<li>If you have patches you'd like to submit, the best way is to
+use the <a href=
+"http://sourceforge.net/tracker/?group_id=45222&amp;atid=345222">Patch
+Manager</a>.</li>
+
+<li>If you have a feature request, please <a href=
+"http://sourceforge.net/tracker/?group_id=45222&amp;atid=362740">let
+us know</a>.</li>
+</ul>
+
+<!--includeHTML file="xlwtablefoot.inc"-->
+<div class="endmatter">
+<hr>
+<div class="center">
+<p>Feedback and questions concerning this site and project can be
+directed to<br>
+ the <a href=
+"http://lists.sourceforge.net/lists/listinfo/xlw-users">xlw-users</a>
+mailing list.</p>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+
+<!--/includeHTML-->
+</body>
+</html>
+
