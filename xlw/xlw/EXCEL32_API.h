@@ -47,6 +47,7 @@
     #pragma DEBUG_HEADERS
 #endif
 
+//! Place holder for import/export declaration
 #if defined (_DLL) && defined(XLW_IMPORTEXPORT)
     #ifdef EXCEL32_EXPORTS
         #define EXCEL32_API PORT_EXPORT_SYMBOL
