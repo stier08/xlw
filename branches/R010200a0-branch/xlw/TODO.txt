@@ -1,0 +1,19 @@
+
+
+add example of option parameter
+where is the mopdule name ??
+error message available on request
+XlfOper.asVector
+
+bug1: too large input matrix
+bug2: too many functions in AutoOpen
+
+add contributors in documentation
+
+activate cvs mailing list
+
+add advanced example
+un-frame documentation if framed
+fix Borland support
+add the know bugs to sf bug tracker
+pragma.h into config.msvc.h ?
