@@ -60,6 +60,8 @@ CLEAN :
 	-@erase "$(INTDIR)\XlfOper.sbr"
 	-@erase "$(INTDIR)\XlfRef.obj"
 	-@erase "$(INTDIR)\XlfRef.sbr"
+	-@erase "$(INTDIR)\XllTypeLib.obj"
+	-@erase "$(INTDIR)\XllTypeLib.sbr"
 	-@erase "$(OUTDIR)\xlw.bsc"
 	-@erase ".\lib\Win32\VisualStudio\xlw.lib"
 
@@ -112,7 +114,8 @@ BSC32_SBRS= \
 	"$(INTDIR)\XlfException.sbr" \
 	"$(INTDIR)\XlfFuncDesc.sbr" \
 	"$(INTDIR)\XlfOper.sbr" \
-	"$(INTDIR)\XlfRef.sbr"
+	"$(INTDIR)\XlfRef.sbr" \
+	"$(INTDIR)\XllTypeLib.sbr"
 
 "$(OUTDIR)\xlw.bsc" : "$(OUTDIR)" $(BSC32_SBRS)
     $(BSC32) @<<
@@ -131,7 +134,8 @@ LIB32_OBJS= \
 	"$(INTDIR)\XlfException.obj" \
 	"$(INTDIR)\XlfFuncDesc.obj" \
 	"$(INTDIR)\XlfOper.obj" \
-	"$(INTDIR)\XlfRef.obj"
+	"$(INTDIR)\XlfRef.obj" \
+	"$(INTDIR)\XllTypeLib.obj"
 
 ".\lib\Win32\VisualStudio\xlw.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
     $(LIB32) @<<
@@ -172,6 +176,8 @@ CLEAN :
 	-@erase "$(INTDIR)\XlfOper.sbr"
 	-@erase "$(INTDIR)\XlfRef.obj"
 	-@erase "$(INTDIR)\XlfRef.sbr"
+	-@erase "$(INTDIR)\XllTypeLib.obj"
+	-@erase "$(INTDIR)\XllTypeLib.sbr"
 	-@erase "$(OUTDIR)\xlw.bsc"
 	-@erase ".\lib\Win32\VisualStudio\xlwd.lib"
 
@@ -224,7 +230,8 @@ BSC32_SBRS= \
 	"$(INTDIR)\XlfException.sbr" \
 	"$(INTDIR)\XlfFuncDesc.sbr" \
 	"$(INTDIR)\XlfOper.sbr" \
-	"$(INTDIR)\XlfRef.sbr"
+	"$(INTDIR)\XlfRef.sbr" \
+	"$(INTDIR)\XllTypeLib.sbr"
 
 "$(OUTDIR)\xlw.bsc" : "$(OUTDIR)" $(BSC32_SBRS)
     $(BSC32) @<<
@@ -243,7 +250,8 @@ LIB32_OBJS= \
 	"$(INTDIR)\XlfException.obj" \
 	"$(INTDIR)\XlfFuncDesc.obj" \
 	"$(INTDIR)\XlfOper.obj" \
-	"$(INTDIR)\XlfRef.obj"
+	"$(INTDIR)\XlfRef.obj" \
+	"$(INTDIR)\XllTypeLib.obj"
 
 ".\lib\Win32\VisualStudio\xlwd.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
     $(LIB32) @<<
@@ -284,6 +292,8 @@ CLEAN :
 	-@erase "$(INTDIR)\XlfOper.sbr"
 	-@erase "$(INTDIR)\XlfRef.obj"
 	-@erase "$(INTDIR)\XlfRef.sbr"
+	-@erase "$(INTDIR)\XllTypeLib.obj"
+	-@erase "$(INTDIR)\XllTypeLib.sbr"
 	-@erase "$(OUTDIR)\xlw.bsc"
 	-@erase ".\lib\Win32\VisualStudio\xlwd.lib"
 
@@ -336,7 +346,8 @@ BSC32_SBRS= \
 	"$(INTDIR)\XlfException.sbr" \
 	"$(INTDIR)\XlfFuncDesc.sbr" \
 	"$(INTDIR)\XlfOper.sbr" \
-	"$(INTDIR)\XlfRef.sbr"
+	"$(INTDIR)\XlfRef.sbr" \
+	"$(INTDIR)\XllTypeLib.sbr"
 
 "$(OUTDIR)\xlw.bsc" : "$(OUTDIR)" $(BSC32_SBRS)
     $(BSC32) @<<
@@ -355,7 +366,8 @@ LIB32_OBJS= \
 	"$(INTDIR)\XlfException.obj" \
 	"$(INTDIR)\XlfFuncDesc.obj" \
 	"$(INTDIR)\XlfOper.obj" \
-	"$(INTDIR)\XlfRef.obj"
+	"$(INTDIR)\XlfRef.obj" \
+	"$(INTDIR)\XllTypeLib.obj"
 
 ".\lib\Win32\VisualStudio\xlwd.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
     $(LIB32) @<<
@@ -395,6 +407,8 @@ CLEAN :
 	-@erase "$(INTDIR)\XlfOper.sbr"
 	-@erase "$(INTDIR)\XlfRef.obj"
 	-@erase "$(INTDIR)\XlfRef.sbr"
+	-@erase "$(INTDIR)\XllTypeLib.obj"
+	-@erase "$(INTDIR)\XllTypeLib.sbr"
 	-@erase "$(OUTDIR)\xlw.bsc"
 	-@erase ".\lib\Win32\VisualStudio\xlw.lib"
 
@@ -447,7 +461,8 @@ BSC32_SBRS= \
 	"$(INTDIR)\XlfException.sbr" \
 	"$(INTDIR)\XlfFuncDesc.sbr" \
 	"$(INTDIR)\XlfOper.sbr" \
-	"$(INTDIR)\XlfRef.sbr"
+	"$(INTDIR)\XlfRef.sbr" \
+	"$(INTDIR)\XllTypeLib.sbr"
 
 "$(OUTDIR)\xlw.bsc" : "$(OUTDIR)" $(BSC32_SBRS)
     $(BSC32) @<<
@@ -466,7 +481,8 @@ LIB32_OBJS= \
 	"$(INTDIR)\XlfException.obj" \
 	"$(INTDIR)\XlfFuncDesc.obj" \
 	"$(INTDIR)\XlfOper.obj" \
-	"$(INTDIR)\XlfRef.obj"
+	"$(INTDIR)\XlfRef.obj" \
+	"$(INTDIR)\XllTypeLib.obj"
 
 ".\lib\Win32\VisualStudio\xlw.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
     $(LIB32) @<<
@@ -543,6 +559,12 @@ SOURCE=.\xlw\XlfOper.cpp
 SOURCE=.\xlw\XlfRef.cpp
 
 "$(INTDIR)\XlfRef.obj"	"$(INTDIR)\XlfRef.sbr" : $(SOURCE) "$(INTDIR)"
+	$(CPP) $(CPP_PROJ) $(SOURCE)
+
+
+SOURCE=.\xlw\XllTypeLib.cpp
+
+"$(INTDIR)\XllTypeLib.obj"	"$(INTDIR)\XllTypeLib.sbr" : $(SOURCE) "$(INTDIR)"
 	$(CPP) $(CPP_PROJ) $(SOURCE)
 
 
