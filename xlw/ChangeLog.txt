@@ -1,3 +1,15 @@
+2002-04-11 07:45  nando
+
+	* History.txt (1.2.4.1): history updated
+
+2002-04-11 07:04  nando
+
+	* NEWS.TXT (1.9.4.1): updated old item
+
+2002-04-09 09:17  nando
+
+	* ChangeLog.txt (1.8): updated
+
 2002-04-08 10:42  nando
 
 	* xlw.nsi (1.18), Docs/xlw.doxy (1.12), dev_tools/srcdist.bat
