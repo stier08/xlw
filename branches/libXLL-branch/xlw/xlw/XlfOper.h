@@ -67,6 +67,8 @@ public:
   XlfOper(bool value);
   //! 0 terminated chararcter string ctor.
   XlfOper(const char *value);
+  //! std::string ctor.
+  XlfOper(const std::string& value);
   //! XlfRef ctor.
   XlfOper(const XlfRef& range);
 #ifndef PORT_NO_MEMBER_TEMPLATE

@@ -25,7 +25,8 @@ CORE_OBJS = \
     XlfException.obj$(_D) \
     XlfFuncDesc.obj$(_D) \
     XlfOper.obj$(_D) \
-    XlfRef.obj$(_D)
+    XlfRef.obj$(_D) \
+    XllTypeLib.obj$(_D)
 
 # Tools to be used
 CC        = bcc32

@@ -1,0 +1,636 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0074)http://msdn.microsoft.com/library/en-us/office97/html/SF85E.asp?frame=true -->
+<HTML><HEAD><TITLE>REGISTER (Form 1)</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso8859-1">
+<META content="" name=Description>
+<META content=all name=Robots>
+<META content="" name=Keywords>
+<META content=en-us name=MS.LOCALE>
+<META content=msdn name=Author><LINK href="html/ie4.css" type=text/css 
+rel=stylesheet><LINK href="html/ie5.css" type=text/css rel=stylesheet>
+<STYLE type=text/css>PRE.clsCode {
+	FONT-SIZE: 110%
+}
+PRE.clsSyntax {
+	FONT-SIZE: 100%
+}
+</STYLE>
+
+<SCRIPT language=javascript src="html/toolbar.js"></SCRIPT>
+<LINK href="html/default.css" type=text/css rel=stylesheet>
+<SCRIPT language=JavaScript><!--
+   function BrowserData()
+{
+		this.userAgent = "Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)";
+
+		this.browser = "MSIE";
+
+		this.majorVer = 5;
+
+		this.minorVer = "5";
+
+		this.betaVer = "0";
+
+		this.platform = "NT";
+
+		this.platVer = "5.0";
+
+		this.getsNavBar = true;
+
+		this.doesActiveX = true;
+
+		this.doesPersistence = true;
+
+		this.fullVer = 5.5;
+
+   }
+
+   var oBD = new BrowserData();
+
+   //--></SCRIPT>
+
+<xml id=xmlPageContext><eyebrow findmenu="false">
+	<item label="MSDN Home" url="/default.asp"/>
+	<item label="MSDN Library" url="/library/default.asp"/>
+	<item label="Office Solutions Development" id="msdnlib564" xmlsrc="/library/en-us/toc/msdnlib/msdnlib564.xml"/><item label="Microsoft Office" url="/nhp/default.asp?contentid=28000550" id="msdnlib625" xmlsrc="/library/en-us/toc/msdnlib/msdnlib625.xml"/><item label="Microsoft Office 97" id="msdnlib663" xmlsrc="/library/en-us/toc/msdnlib/msdnlib663.xml"/><item label="Product Documentation" id="msdnlib664"/><item label="Excel" id="office97167"/><item label="Microsoft Excel 97 Developer's Kit" id="office97168"/><item label="Applications Programming Interface Function Reference" url="/library/en-us/office97/html/SF829.asp" id="office97360" xmlsrc="/library/en-us/toc/office97/office97360.xml"/><item label="Functions Included in This Chapter" url="/library/en-us/office97/html/SF82B.asp" id="office97362"/><item label="REGISTER (Form 1)" url="/library/en-us/office97/html/SF85E.asp" id="office97374"/></eyebrow></xml>
+<META content="MSHTML 5.50.4807.2300" name=GENERATOR></HEAD>
+<BODY text=#000000 bgColor=#ffffff leftMargin=0 topMargin=0 MARGINWIDTH="0" 
+MARGINHEIGHT="0">
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top align=left width="100%">
+      <TABLE height=24 cellSpacing=0 cellPadding=4 width="100%" bgColor=#ffffff 
+      border=0>
+        <TBODY>
+        <TR>
+          <TD class=eyebrow vAlign=center align=left width="100%">&nbsp;&nbsp; 
+            <A class=small target=_top 
+            href="http://msdn.microsoft.com/default.asp">MSDN 
+            Home</A>&nbsp;&gt;&nbsp; <A class=small target=_top 
+            href="http://msdn.microsoft.com/library/default.asp">MSDN 
+            Library</A>&nbsp;&gt;&nbsp; <A class=small target=_top 
+            href="http://msdn.microsoft.com/library/default.asp?url=/nhp/default.asp?contentid=28000550">Microsoft 
+            Office</A>&nbsp;&gt;&nbsp; <A class=small target=_top 
+            href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/office97/html/SF829.asp">Applications 
+            Programming Interface Function Reference</A>&nbsp;&gt;&nbsp; <A 
+            class=small target=_top 
+            href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/office97/html/SF82B.asp">Functions 
+            Included in This Chapter</A><A 
+            href="http://msdn.microsoft.com/library/en-us/office97/html/"></A> 
+          </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<TABLE class=clsContainer cellSpacing=0 cellPadding=15 width="100%" border=0 
+float="left">
+  <TBODY>
+  <TR>
+    <TD vAlign=top align=left><!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END--><!-----------------><!--BEGIN_CONTENT--><!-----------------><FONT 
+      face="Verdana, Arial, Helvetica" size=2>
+      <H2>REGISTER (Form 1)</H2>
+      <P class=t>Called from a Microsoft Excel XLM macro sheet or DLL. This 
+      function makes a&nbsp;function or command in a DLL or command available to 
+      Microsoft Excel, and&nbsp;returns the register ID identifying the function 
+      for use by CALL and UNREGISTER.</P>
+      <P class=t>Returns the register ID of the function (xltypeNum), which can 
+      be used in subsequent CALL and UNREGISTER calls.</P>
+      <H4 class=h4><A name=sec0></A>Syntax</H4>
+      <P class=t>From a macro sheet:</P><PRE><CODE><FONT face=Courier size=2>REGISTER(module_text,procedure,type_text,function_text,<BR>argument_text,macro_type,category,shortcut_text)
+</FONT></CODE></PRE>
+      <P class=t>From a DLL:</P><PRE><CODE><FONT face=Courier size=2>Excel4(xlfRegister, LPXLOPER pxRes, 8,
+    LPXLOPER pxModuleText,   LPXLOPER pxProcedure,
+    LPXLOPER pxTypeText,     LPXLOPER pxFunctionText,
+    LPXLOPER pxArgumentText, LPXLOPER pxMacroType,
+    LPXLOPER pxCategory,     LPXLOPER pxShortcutText);
+</FONT></CODE></PRE>
+      <P class=term1><I>module_text</I> (xltypeStr)</P>
+      <P class=dt1>The name of the DLL containing the function.</P>
+      <P class=term1><I>procedure</I> (xltypeStr or xltypeNum)</P>
+      <P class=dt1>If a string, the name of the function to call. If a number, 
+      the ordinal export number of the function to call. For clarity and 
+      robustness, always use the string&nbsp;form.</P>
+      <P class=term1><I>type_text</I> (xltypeStr)</P>
+      <P class=dt1>An optional string specifying the types of all the arguments 
+      to the function and the type of the return value of the function. For more 
+      information, see the following "Remarks" section. This argument can be 
+      omitted for a stand-alone DLL (XLL) that includes an xlAutoRegister 
+      function.</P>
+      <P class=term1><I>function_text</I> (xltypeStr)</P>
+      <P class=dt1>The name of the function as it will appear in the Function 
+      Wizard. This argument is optional; if omitted, the function will not be 
+      available in the Function Wizard, and it can be called only using the CALL 
+      function.</P>
+      <P class=term1><I>argument_text</I> (xltypeStr)</P>
+      <P class=dt1>An optional text string describing the arguments to 
+      the&nbsp;function. The user sees this in the Function Wizard. If omitted, 
+      it will be constructed based on the <I>type_text.</I></P>
+      <P></P>
+      <P></P>
+      <P></P>
+      <P class=term1><I>macro_type</I> (xltypeNum)</P>
+      <P class=dt1>An optional argument indicating the type of function. Use 0 
+      for none, 1 for a function (default), or 2 for a command. This argument 
+      can be used to define hidden functions (use <I>macro_type</I> = 0) or to 
+      define functions available only from macro sheets (use <I>macro_type</I> = 
+      2).</P>
+      <P class=term1><I>category</I> (xltypeStr or xltypeNum)</P>
+      <P class=dt1>An optional argument allowing you to specify which category 
+      the new function or command should belong to. The Function Wizard divides 
+      functions by type (category). You can specify a category name or a 
+      sequential number, where the number is the position in which the category 
+      appears in the Function Wizard. For more information, see "Category Names" 
+      on page 225. If omitted, the User Defined category is assumed.</P>
+      <P class=term1><I>shortcut_text</I> (xltypeStr)</P>
+      <P class=dt1>A one-character, case-sensitive string specifying the control 
+      key that will be assigned to this command. For example, "A" will assign 
+      this command to CONTROL+SHIFT+A. This argument is optional and is used for 
+      commands only.</P>
+      <P></P>
+      <H4 class=h4><A name=sec1></A>Remarks</H4>
+      <H5 class=h5><A name=sec2></A>Data Types</H5>
+      <P class=t>In the CALL, REGISTER, and REGISTER.ID functions, the 
+      <I>type_text</I> argument specifies the data type of the return value and 
+      the data types of all arguments to the DLL function or code resource. The 
+      first character of <I>type_text</I> specifies the data type of the return 
+      value. The remaining characters indicate the data types of all the 
+      arguments. For example, a DLL function that returns a floating-point 
+      number and takes an integer and a floating-point number as arguments would 
+      require "BIB" for the <I>type_text</I> argument.</P>
+      <P class=t>The following table contains a complete list of the data type 
+      codes that Microsoft Excel recognizes, a description of each data type, 
+      how the argument or return value is passed, and a typical declaration for 
+      the data type in the C programming language.</P>
+      <TABLE cols=4 cellPadding=7 border=0>
+        <COLGROUP>
+        <COL vAlign=top width=24>
+        <COL vAlign=top width=144>
+        <COL vAlign=top width=68>
+        <COL vAlign=top width=112></COLGROUP>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=thf><B>Code</B></P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=th><B>Description</B></P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=th><B>Pass by</B></P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=th><B>C declaration</B></P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top colSpan=4><FONT face="Verdana, Arial, Helvetica" 
+            size=2>
+            <P class=tr></P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>A</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Logical <BR>(FALSE = 0, TRUE = 1)</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Value</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>short int</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>B</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>IEEE 8-byte floating-point number</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Value</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>double</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>C</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Null-terminated string (maximum string length = 255 
+            characters)</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Reference</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>char *</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>D</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Byte-counted string (first byte contains length of 
+            string, maximum string length = 255 characters)</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Reference</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>unsigned char *</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>E</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>IEEE 8-byte floating-point number</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Reference</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>double *</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>F</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Null-terminated string (maximum string length = 255 
+            characters)</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Reference (modify in place)</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>char *</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>G</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Byte-counted string (first byte contains length of 
+            string, maximum string length = 255 characters)</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Reference (modify in place)</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>unsigned char *</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>H</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Unsigned 2-byte integer</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Value</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>unsigned short int</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>I</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Signed 2-byte integer</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Value</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>short int</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>J</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Signed 4-byte integer</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Value</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>long int</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>K</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Array</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Reference</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>FP *</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>L</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Logical <BR>(FALSE = 0, TRUE = 1)</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Reference</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>short int *</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>M</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Signed 2-byte integer</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Reference</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>short int *</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>N</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Signed 4-byte integer</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Reference</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>long int *</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>O</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Array</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Reference</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Three arguments are passed:<BR>unsigned short int 
+            *<BR>unsigned short int *<BR>double []</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>P</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Microsoft Excel OPER data structure</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Reference</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>OPER *</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>R</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Microsoft Excel XLOPER data structure</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Reference</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>XLOPER *</P></FONT></TD></TR></TBODY></TABLE>
+      <P class=spacing><BR></P>
+      <P></P>
+      <P class=t>When working with the data types displayed in the preceding 
+      table, keep the following in mind:</P>
+      <UL>
+        <LI class=ULI1>The C-language declarations are based on the assumption 
+        that your compiler defaults to 8-byte doubles, 2-byte short integers, 
+        and 4-byte long integers.
+        <LI class=ULI1>All functions in DLLs and code resources are called using 
+        the __stdcall calling&nbsp;convention. Most C compilers allow you to use 
+        the __stdcall calling convention by adding the __stdcall keyword to the 
+        function declaration, as&nbsp;shown in the following example: <PRE><CODE><FONT face=Courier size=2>__stdcall void main (rows,columns,a)
+</FONT></CODE></PRE>
+        <LI class=ULI1>If a function uses a pass-by-reference data type for its 
+        return value, you can pass a null pointer as the return value. Microsoft 
+        Excel will interpret the null pointer as the #NUM! error value.</LI></UL>
+      <P></P>
+      <P></P>
+      <P></P>
+      <P></P>
+      <H4 class=h4><A name=sec3></A>Additional Data Type Information</H4>
+      <P class=t>This section contains detailed information about the E, F, G, 
+      K, O, P, and R data types, and other information about the 
+      <I>type_text</I> argument.</P>
+      <H5 class=h5><A name=sec4></A>E Data Type</H5>
+      <P class=t>Microsoft Excel expects a DLL using the E data type to pass 
+      pointers to floating-point numbers on the stack. This can cause problems 
+      with some languages (for example, Borland C++) that expect the number to 
+      be passed on the coprocessor emulator stack. The workaround is to pass a 
+      pointer to the number on the coprocessor stack. The following example 
+      shows how to return a double from Borland C++:</P><PRE><CODE><FONT face=Courier size=2>typedef double * lpDbl;
+extern "C" lpDbl __stdcall AddDbl(double D1,
+    double D2, WORD npDbl)
+{
+    lpDbl Result;
+    Result = (lpDbl)MK_FP(_SS, npDbl);
+    *Result = D1 + D2;
+    return (Result);
+}
+</FONT></CODE></PRE>
+      <H5 class=h5><A name=sec5></A>F and G Data Types</H5>
+      <P class=t>With the F and G data types, a function can modify a string 
+      buffer that is allocated by Microsoft Excel. If the return value type code 
+      is F or G, then Microsoft Excel ignores the value returned by the 
+      function. Instead, Microsoft Excel searches the&nbsp;list of function 
+      arguments for the first corresponding data type (F or G) and then takes 
+      the current contents of the allocated string buffer as the return value. 
+      Microsoft Excel allocates 256 bytes for the argument, so the function may 
+      return a&nbsp;larger string than it received.</P>
+      <H5 class=h5><A name=sec6></A>K Data Type</H5>
+      <P class=t>The K data type uses a pointer to a variable-size FP structure. 
+      You should define this structure in the DLL or code resource as 
+      follows:</P><PRE><CODE><FONT face=Courier size=2>typedef struct _FP
+{
+    unsigned short int rows;
+    unsigned short int columns;
+    double array[1];        /* Actually, array[rows][columns] */
+} FP;
+</FONT></CODE></PRE>
+      <P class=t>The declaration double array[1] allocates storage only for a 
+      single-element array. The number of elements in the actual array equals 
+      the number of rows multiplied by the number of columns.</P>
+      <P></P>
+      <P></P>
+      <P></P>
+      <H5 class=h5><A name=sec7></A>O Data Type</H5>
+      <P class=t>The O data type can be used only as an argument, not as a 
+      return value. It passes three items: a pointer to the number of rows in an 
+      array, a pointer to the number of&nbsp;columns in an array, and a pointer 
+      to a two-dimensional array of floating-point numbers.</P>
+      <P class=t>Instead of returning a value, a function can modify an array 
+      passed by the O data type. To do this, you could use "&gt;O" as the 
+      <I>type_text</I> argument. For more information about modifying an array, 
+      see the section<B> </B>"Modifying in Place &#8212; Functions Declared as Void" 
+      on page 225.</P>
+      <P class=t>The O data type was created for direct compatibility with 
+      FORTRAN DLLs, which pass arguments by reference.</P>
+      <H5 class=h5><A name=sec8></A>P Data Type</H5>
+      <P class=t>The P data type is a pointer to an OPER structure. The OPER 
+      structure contains 8&nbsp;bytes of data, followed by a 2-byte identifier 
+      that specifies the type of data. With&nbsp;the P data type, a DLL function 
+      or code resource can take and return any Microsoft Excel data type.</P>
+      <P class=t>The OPER structure is defined as follows:</P><PRE><CODE><FONT face=Courier size=2>typedef struct _oper
+{
+    union
+    {
+        double num;
+        unsigned char *str;
+        unsigned short int bool;
+        unsigned short int err;
+        struct
+        {
+            struct _oper *lparray;
+            unsigned short int rows;
+            unsigned short int columns;
+        } array;
+    } val;
+    unsigned short int type;
+} OPER;
+</FONT></CODE></PRE>
+      <P class=t>The <I>type</I> field contains one of the values listed in the 
+      following table.</P>
+      <TABLE cols=3 cellPadding=7 border=0>
+        <COLGROUP>
+        <COL vAlign=top width=40>
+        <COL vAlign=top width=204>
+        <COL vAlign=top width=102></COLGROUP>
+        <TBODY>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=thf><B>Type</B></P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=th><B>Description</B></P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=th><B>Val field to use</B></P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top colSpan=3><FONT face="Verdana, Arial, Helvetica" 
+            size=2>
+            <P class=tr></P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>1</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Numeric</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>num</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>2</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>String (first byte contains length of 
+          string)</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>str</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>4</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Boolean (logical)</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>bool</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>16</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Error: the error values are:<BR>0 #NULL!<BR>7 
+            #DIV/0!<BR>15 #VALUE!<BR>23 #REF!<BR>29 #NAME?<BR>36 #NUM!<BR>42 
+            #N/A</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>err</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>64</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Array</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>array</P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>128</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Missing argument</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt></P></FONT></TD></TR>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>256</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt>Empty cell</P></FONT></TD>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <P class=tt></P></FONT></TD></TR></TBODY></TABLE>
+      <P class=spacing><BR></P>
+      <P></P>
+      <P class=t>The last two values can be used only as arguments, not return 
+      values. The missing argument value (128) is passed when the caller omits 
+      an argument. The empty cell value (256) is passed when the caller passes a 
+      reference to an empty cell.</P>
+      <H5 class=h5><A name=sec9></A>R Data Type &#8212; Calling Microsoft Excel 
+      Functions from DLLs</H5>
+      <P class=t>The R data type is a pointer to an XLOPER structure, which is 
+      an enhanced version of the OPER structure. In Microsoft Excel versions 5.0 
+      and later, you can use the R data type to write DLLs and code resources 
+      that call Microsoft Excel functions. With the XLOPER structure, a DLL 
+      function can pass sheet references and implement flow control, in addition 
+      to passing data. For more information about flow control, see the section 
+      "Advanced Flow Control in Macro Sheets" on page&nbsp;191.</P>
+      <H5 class=h5><A name=sec10></A>Volatile Functions and Recalculation</H5>
+      <P class=t>Microsoft Excel usually calculates a DLL function (or a code 
+      resource) only when it is entered into a cell, when one of its precedents 
+      changes, or when the cell is calculated during a macro. On a worksheet, 
+      you can make a DLL function or code&nbsp;resource volatile, which means 
+      that it recalculates every time the worksheet recalculates. To make a 
+      function volatile, add an exclamation point (!) as the last character in 
+      the <I>type_text</I> argument.</P>
+      <P class=t>For example, in Microsoft Excel for Windows, the following 
+      worksheet formula recalculates every time the worksheet recalculates:</P><PRE><CODE><FONT face=Courier size=2>CALL("User","GetTickCount","J!")
+</FONT></CODE></PRE>
+      <P></P>
+      <P></P>
+      <P></P>
+      <H5 class=h5><A name=sec11></A>Modifying in Place &#8212; Functions Declared as 
+      Void</H5>
+      <P class=t>You can use a single digit <I>n</I> for the return type code in 
+      <I>type_text,</I> where <I>n</I> is a number from 1 to 9. This tells 
+      Microsoft Excel to take the value of the variable in the location pointed 
+      to by the <I>n</I>th argument in <I>type_text</I> as the return value. 
+      This is also known as modifying in place. The <I>n</I>th argument must be 
+      a pass-by-reference data type (C, D, E, F, G, K, L, M, N, O, P, or R). The 
+      DLL function or code resource also must be declared with the void keyword 
+      in the C language (or the procedure keyword in the Pascal language).</P>
+      <P class=t>For example, a DLL function that takes a null-terminated string 
+      and two pointers to integers as arguments can modify the string in place. 
+      Use "1FMM" as the <I>type_text</I> argument, and declare the function as 
+      void.</P>
+      <P class=t>Previous versions of Microsoft Excel used the &gt; character to 
+      modify the first argument in place &#8212; there was no way to modify any 
+      argument other than the first.&nbsp;The &gt; character is equivalent to 
+      <I>n</I> = 1 in Microsoft Excel versions 5.0 and&nbsp;later.</P>
+      <H5 class=h5><A name=sec12></A>Handling Uncalculated Cells</H5>
+      <P class=t>Appending a number sign (#) to the end of <I>type_text</I> 
+      changes the way the DLL handles uncalculated cells when called from a 
+      worksheet. If the number sign is&nbsp;present, dereferencing uncalculated 
+      cells returns the old values (this is the behavior found in the macro 
+      language). If the number sign is not present, evaluating an uncalculated 
+      cell will result in an xlretUncalced error, and the current function will 
+      be called again once the cell has been calculated. In addition, if the 
+      number sign is not present, the DLL may call only Class 1 functions. If 
+      the&nbsp;number sign is present, the DLL may call any Class 2 function. 
+      For more information about working with uncalculated cells, see the 
+      section "Dealing with&nbsp;Uncalculated Cells" on page 196.</P>
+      <H5 class=h5><A name=sec13></A>Category Names</H5>
+      <P class=t>Here are some guidelines for determining which category you 
+      should put your XLL functions in (the <I>category</I> argument to 
+      REGISTER).</P>
+      <UL>
+        <LI class=ULI1>If the function does something that could be done by the 
+        user as a part of your add-in's user interface, you should put the 
+        function in the Commands category.
+        <LI class=ULI1>If the function returns information about the state of 
+        the add-in or any other useful information, you should put the function 
+        in the Information category.
+        <LI class=ULI1>An add-in should never add functions or commands to the 
+        User Defined category. This category is for the exclusive use of end 
+        users.</LI></UL>
+      <P></P>
+      <P></P>
+      <P></P>
+      <P></P>
+      <H4 class=h4><A name=sec14></A>Example for a Macro</H4>
+      <P class=t>The following example registers the CalcCircum function in 
+      CIRCUM.DLL, and&nbsp;then&nbsp;calls the function using the defined name 
+      for cell B1.</P>
+      <P class=a><IMG src="html/CH08_04.gif"></P>
+      <H4 class=h4><A name=sec15></A>Example</H4>
+      <P class=t>See the code for the xlAutoOpen function in GENERIC.C in the 
+      FRAMEWRK directory.</P>
+      <H4 class=h4><A name=sec16></A>Related Functions</H4>
+      <P class=t>CALL, REGISTER.ID, UNREGISTER</P></FONT></FONT><!-----------------><!--END_CONTENT--><!-----------------></TD></TR></TBODY></TABLE>
+<TABLE id=idFooter style="WIDTH: 100%; BACKGROUND-COLOR: white" cellSpacing=0 
+cellPadding=0 border=0>
+  <TBODY>
+  <TR vAlign=center>
+    <TD id=idFooterRow1 
+    style="WIDTH: 100%; HEIGHT: 20px; BACKGROUND-COLOR: #003399" 
+      noWrap>&nbsp;<A onmouseover="this.style.color = '#FF3300'" 
+      style="FONT: bold xx-small Verdana; CURSOR: hand; COLOR: #ffffff; TEXT-DECORATION: none" 
+      onmouseout="this.style.color = '#FFFFFF'" target=_top 
+      href="http://msdn.microsoft.com/resources/siteguide/write-us.asp">Contact 
+      Us</A> &nbsp;<SPAN 
+      style="FONT: bold xx-small Verdana; COLOR: #ffffff">&nbsp;|</SPAN> 
+      &nbsp;<A onmouseover="this.style.color = '#FF3300'" 
+      style="FONT: bold xx-small Verdana; CURSOR: hand; COLOR: #ffffff; TEXT-DECORATION: none" 
+      onmouseout="this.style.color = '#FFFFFF'" target=_top 
+      href="mailto:?subject=An article from MSDN&amp;body=Here is an interesting article from MSDN:  http://msdn.microsoft.com/library/en-us/office97/html/SF85E.asp">E-mail 
+      this Page</A> &nbsp;<SPAN 
+      style="FONT: bold xx-small Verdana; COLOR: #ffffff">&nbsp;|</SPAN> 
+      &nbsp;<A onmouseover="this.style.color = '#FF3300'" 
+      style="FONT: bold xx-small Verdana; CURSOR: hand; COLOR: #ffffff; TEXT-DECORATION: none" 
+      onmouseout="this.style.color = '#FFFFFF'" target=_top 
+      href="http://msdn.microsoft.com/flash/">MSDN Flash Newsletter</A> </TD></TR>
+  <TR vAlign=center>
+    <TD id=idFooterRow2 
+    style="WIDTH: 100%; HEIGHT: 30px; BACKGROUND-COLOR: #003399" noWrap><SPAN 
+      style="FONT: xx-small Verdana; COLOR: #ffffff">&nbsp;© 2001 Microsoft 
+      Corporation. All rights reserved.&nbsp;</SPAN> &nbsp;<A 
+      onmouseover="this.style.color = '#FF3300'" 
+      style="FONT: xx-small Verdana; CURSOR: hand; COLOR: #ffffff; TEXT-DECORATION: none" 
+      onmouseout="this.style.color = '#FFFFFF'" target=_top 
+      href="http://msdn.microsoft.com/isapi/gomscom.asp?target=/info/cpyright.htm">Terms 
+      of Use</A>&nbsp;&nbsp;<A onmouseover="this.style.color = '#FF3300'" 
+      style="FONT: xx-small Verdana; CURSOR: hand; COLOR: #ffffff; TEXT-DECORATION: none" 
+      onmouseout="this.style.color = '#FFFFFF'" target=_top 
+      href="http://msdn.microsoft.com/isapi/gomscom.asp?target=/info/privacy.htm">Privacy 
+      Statement </A>&nbsp;&nbsp;<A onmouseover="this.style.color = '#FF3300'" 
+      style="FONT: xx-small Verdana; CURSOR: hand; COLOR: #ffffff; TEXT-DECORATION: none" 
+      onmouseout="this.style.color = '#FFFFFF'" target=_top 
+      href="http://msdn.microsoft.com/isapi/gomscom.asp?target=/enable/telecomm.htm">Accessibility 
+      </A></TD></TR></TBODY></TABLE></BODY></HTML>

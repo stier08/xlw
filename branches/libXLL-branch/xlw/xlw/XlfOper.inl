@@ -76,6 +76,15 @@ INLINE XlfOper::XlfOper(const char *value)
 }
 
 /*!
+See XlfOper::Set(const std::string& value)
+*/
+INLINE XlfOper::XlfOper(const std::string& value)
+{
+  Allocate();
+  Set(value.c_str());
+}
+
+/*!
 See XlfOper::Set(const XlfRef&)
 
 \sa XlfRef

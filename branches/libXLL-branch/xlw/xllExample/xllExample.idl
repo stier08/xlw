@@ -1,0 +1,278 @@
+/*! $Id$
+ *********************************************************************
+ *              
+ *  \file       xllExample.idl
+ *              
+ *  \brief      define add-in function, output goes to xllExample.h
+ *              
+ *  \project    libXLL - support for MS Excel Add-Ins
+ *              
+ *  \author     Jens Thiel <Jens.Thiel@stochastix.de>
+ *              
+ *  \date       17.03.2002
+ *              
+ ***************************************************** \begincopyright
+ *
+ *  Copyright (c) 2002 by Jens Thiel. All rights reserved.
+ *
+ *  You should have received a printed copy of the license agreement.
+ *
+ *  Otherwise, please contact
+ *
+ *      Jens Thiel
+ *      Stochastix GmbH
+ *      Rathausallee 10
+ *      D-53757 Sankt Augustin
+ *
+ *      Fon	  +49 (2241) 1484-200
+ *      Fax   +49 (2241) 1484-222
+ *
+ *      Email Jens.Thiel@stochastix.de
+ *
+ *  or lookup our web page at:
+ *
+ *      http://www.stochastix.de/
+ *
+ ******************************************************* \endcopyright
+ *
+ *  \internal
+ *
+ *  $Log$
+ *  Revision 1.1.2.1  2003/02/20 16:44:46  nando
+ *  libXLL added
+ *
+ *
+ *********************************************************************
+ */
+
+
+/////////////////////////////////////////////////////////////////////////////
+// The usual boilerplate stuff
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+/////////////////////////////////////////////////////////////////////////////
+// Excel add-in specific definitions from libXLL
+
+#include "xlw/xll.h"
+
+/////////////////////////////////////////////////////////////////////////////
+//! What every TypeLib needs... a library
+	
+[
+	uuid(3F2CDC50-F5CD-4760-8D45-0FA17E43B676),
+	version(1.0),
+	helpstring("xll_example 1.0 Type Library")
+]
+library XLL_EXAMPLE
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+/////////////////////////////////////////////////////////////////////////////
+// First we define some constants that we can use eg. as default values later.
+// The constants are also available in VBA and make typing (and reading) a lot
+// easier.
+
+		//!Option Types
+		/*	\seealso xllStdEuroOptValue
+		 */
+		//@{
+			[
+				uuid(837688D2-5881-4cb7-8313-9DE80AAACDFA),
+				helpstring("QuantLib option type")
+			]
+			typedef [v1_enum] enum QlOptionType {
+				qlOptionCall     = 1,
+				qlOptionPut      = 2,
+				qlOptionStraddle = 3
+			} QlOptionType;
+		//@}
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Everything not COM-alike lives in a module and references a specific DLL
+//
+// Exporting this as Excel Add-In, libXLL replaces the dllname below with
+// actual path and name so this will be no problem, ...BUT:
+// if you plan to use your exports from other applications or VBA, you should
+// make sure the name is the same as your final Add-In AND place the DLL
+// somewhere in your ath (eg. system directory).
+//
+// We use custom typelib properties (eg. XLL_category) to include information
+// for use in the Excel function wizard. This is totally transparent with any
+// other application
+
+
+	//! XLL_Example module (exported as Add-In)
+	/*! let your module name start with an underscore to mark 
+	 *  it as hidden in Visual Basic and others
+	 * 
+	 *  We use the custom property XLL_CATEGORY to supply a 
+	 *  default category for the function wizard
+     */
+    [
+		uuid(C86A0C6B-C2E6-41b3-953F-BA1850BF3599),
+		helpstring("This module is exported as Excel Add-In"),
+		// default category for this module
+		custom(XLL_CATEGORY, "xll Examples"),	
+		// hide -- but do not protect - from VBA
+		// hidden,								
+		// best to use just the file name and place DLL in system dir
+		dllname("xllExample.dll")				
+    ]
+    module XLL_Example {	
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Now define some functions for use in Excel
+//
+// It is good practice to give all your stuff a prefix, since it is
+// possible that the user already has an add-in with the same function(s)
+//
+
+		//! give the user a warm welcome
+		[
+			entry("xllSayHello"),
+			helpstring("give the user a warm welcome")
+		]
+		void XLL_EXPORT xllSayHello();
+		
+		
+// Again, we use a custom property (XLL_ARG_HELP) to supply an argument 
+// help string to the function wizard. The function help string is extracted
+// from the usual TypeLib helpstring. 
+
+
+		//! return true if argument is not a number (NaN)
+		[
+			entry("xllIsNaN"),
+			helpstring("return true if argument is not a number (NaN)")
+		]
+		// use VARIANT_BOOL for true/false values
+		VARIANT_BOOL XLL_EXPORT xllIsNaN(
+			[
+				in,
+				custom(XLL_ARG_HELP, "a numeric (floating point) value to check")
+			] 
+			double number
+		);
+
+
+// In the next example, we introduce another custom property, 
+// XLL_ARG_DEFAULT, which is as you might have guessed a default 
+// value to be used if the user does not supply one.
+// We also specified a defaultvalue to be used by TypeLib compatible
+// applications. But these only support defaults for the last
+// parameter(s), where Excel can make every argument optional.
+//
+// nb: There really shouldn't be a default arg in this example
+
+		//! Computes the circumference of a circle
+		[
+			entry("xllCirc"),			
+			helpstring("Computes the circumference of a circle")
+		]
+		double XLL_EXPORT xllCirc(
+			[
+				in,
+				custom(XLL_ARG_HELP, "Diameter of the circle"),
+				custom(XLL_ARG_DEFAULT, 1.0),
+				defaultvalue(1.0)
+			] 
+			double diameter		//!< Diameter of the circle
+		);
+
+
+/////////////////////////////////////////////////////////////////////////////
+// A real world example with it's own categories
+// this requires to have QuantLib installed
+//
+
+		//! Standard european option
+		[
+			entry("xllStdEuroOptValue"),	// this must be exported from your .DEF file
+			helpstring("Value of a standard European Option"),
+			custom(XLL_CATEGORY, "QuantLib Derivatives")	// place in a new category
+		]
+		double XLL_EXPORT xllStdEuroOptValue(
+			//!Input
+		    //@{
+			[
+				in,
+				custom(XLL_ARG_HELP, "option type: 1 for Call, 2 for Put, 3 for Straddle"),
+				custom(XLL_ARG_DEFAULT, qlOptionCall)
+			]
+			QlOptionType optionType,	//! option type: 1 for Call, 2 for Put, 3 for Straddle
+
+			[
+				in,
+				custom(XLL_ARG_HELP, "underlying price"),
+			]
+			double underlying,			//! underlying price
+
+			[
+				in,
+				custom(XLL_ARG_HELP, "strike price"),
+			]
+			double strike,				//! strike price
+
+			[
+				in,
+				custom(XLL_ARG_HELP, "dividend yield p.a."),
+			]
+			double dividendYield,		//! dividend yield p.a.
+
+			[
+				in,
+				custom(XLL_ARG_HELP, "risk free rate p.a."),
+				custom(XLL_ARG_DEFAULT, 0.0)
+			]
+			double riskFreeRate,		//! risk free rate p.a.
+
+			[
+				in,
+				custom(XLL_ARG_HELP, "absoulute time now as excel date"),
+			]
+			double startTime,			//! absoulute time now as excel value
+
+			[
+				in,
+				custom(XLL_ARG_HELP, "absolute time at maturity as excel date"),
+			]
+			double endTime,			//! absolute time at maturity as excel date
+
+			[
+				in,
+				custom(XLL_ARG_HELP, "annual volatility"),
+			]
+			double volatility			//! annual volatility 
+			//@}
+		);	
+
+/////////////////////////////////////////////////////////////////////////////
+// Another real world example, this time using the Intel MKL
+//
+// You can see how to pass (and return) a matrix using the FP type
+// We declare this as restricted since we do not want to expose this
+// routine to eg. Visual Basic (FPs are only for Excel)
+
+		//! Invert a Matrix using Intel MKL
+		[
+			entry("xllMINV"),
+			helpstring("Invert a Matrix using Intel MKL"),
+			hidden
+		]
+		void XLL_EXPORT xllMINV(
+			[
+				in, out,	// also used to return inverse matrix
+				custom(XLL_ARG_HELP, "n x n matrix to invert"),
+			]
+			FP *Matrix
+		);
+
+    }	// end of module
+
+}	// end of library
+
