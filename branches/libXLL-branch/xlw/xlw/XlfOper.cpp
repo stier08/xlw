@@ -313,7 +313,7 @@ int XlfOper::ConvertToBool(bool& b) const throw()
 
   if (lpxloper_->xltype & xltypeBool)
   {
-    b = (lpxloper_->val.boolean != 0);
+    b = (lpxloper_->val.bool_ != 0);
     xlret = xlretSuccess;
   }
   else
@@ -461,7 +461,7 @@ XlfOper& XlfOper::Set(bool value)
   if (lpxloper_)
   {
     lpxloper_->xltype = xltypeBool;
-    lpxloper_->val.boolean = value;
+    lpxloper_->val.bool_ = value;
   }
   return *this;
 }
