@@ -8,6 +8,6 @@ set USERNAME=%1
 :DONE
 
 
-scp -C ../QL.tar.bz2 %USERNAME%@shell.sourceforge.net:/home/groups/x/xl/xlw/htdocs
+scp -C ../XLW.tar.bz2 %USERNAME%@shell.sourceforge.net:/home/groups/x/xl/xlw/htdocs
 
 pause
