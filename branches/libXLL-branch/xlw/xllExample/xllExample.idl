@@ -1,16 +1,16 @@
 /*! $Id$
  *********************************************************************
- *              
+ *
  *  \file       xllExample.idl
- *              
+ *
  *  \brief      define add-in function, output goes to xllExample.h
- *              
+ *
  *  \project    libXLL - support for MS Excel Add-Ins
- *              
+ *
  *  \author     Jens Thiel <Jens.Thiel@stochastix.de>
- *              
+ *
  *  \date       17.03.2002
- *              
+ *
  ***************************************************** \begincopyright
  *
  *  Copyright (c) 2002 by Jens Thiel. All rights reserved.
@@ -38,6 +38,9 @@
  *  \internal
  *
  *  $Log$
+ *  Revision 1.1.2.2  2003/03/02 17:19:16  nando
+ *  typo fixed
+ *
  *  Revision 1.1.2.1  2003/02/20 16:44:46  nando
  *  libXLL added
  *
@@ -59,7 +62,7 @@ import "ocidl.idl";
 
 /////////////////////////////////////////////////////////////////////////////
 //! What every TypeLib needs... a library
-	
+
 [
 	uuid(3F2CDC50-F5CD-4760-8D45-0FA17E43B676),
 	version(1.0),
@@ -98,7 +101,7 @@ library XLL_EXAMPLE
 // actual path and name so this will be no problem, ...BUT:
 // if you plan to use your exports from other applications or VBA, you should
 // make sure the name is the same as your final Add-In AND place the DLL
-// somewhere in your ath (eg. system directory).
+// somewhere in your path (eg. system directory).
 //
 // We use custom typelib properties (eg. XLL_category) to include information
 // for use in the Excel function wizard. This is totally transparent with any
@@ -106,23 +109,23 @@ library XLL_EXAMPLE
 
 
 	//! XLL_Example module (exported as Add-In)
-	/*! let your module name start with an underscore to mark 
+	/*! let your module name start with an underscore to mark
 	 *  it as hidden in Visual Basic and others
-	 * 
-	 *  We use the custom property XLL_CATEGORY to supply a 
+	 *
+	 *  We use the custom property XLL_CATEGORY to supply a
 	 *  default category for the function wizard
      */
     [
 		uuid(C86A0C6B-C2E6-41b3-953F-BA1850BF3599),
 		helpstring("This module is exported as Excel Add-In"),
 		// default category for this module
-		custom(XLL_CATEGORY, "xll Examples"),	
+		custom(XLL_CATEGORY, "xll Examples"),
 		// hide -- but do not protect - from VBA
-		// hidden,								
+		// hidden,
 		// best to use just the file name and place DLL in system dir
-		dllname("xllExample.dll")				
+		dllname("xllExample.dll")
     ]
-    module XLL_Example {	
+    module XLL_Example {
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -138,11 +141,11 @@ library XLL_EXAMPLE
 			helpstring("give the user a warm welcome")
 		]
 		void XLL_EXPORT xllSayHello();
-		
-		
-// Again, we use a custom property (XLL_ARG_HELP) to supply an argument 
+
+
+// Again, we use a custom property (XLL_ARG_HELP) to supply an argument
 // help string to the function wizard. The function help string is extracted
-// from the usual TypeLib helpstring. 
+// from the usual TypeLib helpstring.
 
 
 		//! return true if argument is not a number (NaN)
@@ -155,13 +158,13 @@ library XLL_EXAMPLE
 			[
 				in,
 				custom(XLL_ARG_HELP, "a numeric (floating point) value to check")
-			] 
+			]
 			double number
 		);
 
 
-// In the next example, we introduce another custom property, 
-// XLL_ARG_DEFAULT, which is as you might have guessed a default 
+// In the next example, we introduce another custom property,
+// XLL_ARG_DEFAULT, which is as you might have guessed a default
 // value to be used if the user does not supply one.
 // We also specified a defaultvalue to be used by TypeLib compatible
 // applications. But these only support defaults for the last
@@ -171,7 +174,7 @@ library XLL_EXAMPLE
 
 		//! Computes the circumference of a circle
 		[
-			entry("xllCirc"),			
+			entry("xllCirc"),
 			helpstring("Computes the circumference of a circle")
 		]
 		double XLL_EXPORT xllCirc(
@@ -180,7 +183,7 @@ library XLL_EXAMPLE
 				custom(XLL_ARG_HELP, "Diameter of the circle"),
 				custom(XLL_ARG_DEFAULT, 1.0),
 				defaultvalue(1.0)
-			] 
+			]
 			double diameter		//!< Diameter of the circle
 		);
 
@@ -247,9 +250,9 @@ library XLL_EXAMPLE
 				in,
 				custom(XLL_ARG_HELP, "annual volatility"),
 			]
-			double volatility			//! annual volatility 
+			double volatility			//! annual volatility
 			//@}
-		);	
+		);
 
 /////////////////////////////////////////////////////////////////////////////
 // Another real world example, this time using the Intel MKL
