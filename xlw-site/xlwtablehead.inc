@@ -11,7 +11,7 @@
 <li><a class="navlink" href="http://xlw.sf.net">Home&nbsp;page</a></li>
 
 
-<li><a class="navlink" href="download.html">Download</a></li>
+<li><a class="navlink" href="http://sourceforge.net/project/showfiles.php?group_id=45222">Download (exits)</a></li>
 
 <li><a class="navlink" href="mailinglists.html">Mailing lists</a></li>
 
