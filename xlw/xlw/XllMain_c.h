@@ -38,6 +38,9 @@
  *  \internal
  *
  *  $Log$
+ *  Revision 1.1.2.2  2003/02/20 17:44:57  nando
+ *  libXLL added
+ *
  *  Revision 1.1.2.1  2003/02/20 16:41:59  nando
  *  libXLL added
  *
@@ -395,7 +398,10 @@ BOOL __declspec(dllexport) xlAutoClose(void)
  
 BOOL APIENTRY DllMain( HANDLE hModule, DWORD dwReason, LPVOID)
 {
-    if( dwReason == DLL_PROCESS_ATTACH)
-        XlfExcel::Instance().DllHandle(hModule);
+
+// commented out for the time being, as per Jens' suggestion
+// the method DllHandle has been removed in XlfExcel.h by Jerome 
+//    if( dwReason == DLL_PROCESS_ATTACH)
+//        XlfExcel::Instance().DllHandle(hModule);
     return TRUE;
 }
