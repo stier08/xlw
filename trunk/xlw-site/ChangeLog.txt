@@ -1,3 +1,12 @@
+2002-04-11 08:07  nando
+
+	* download.html (1.4.2.1), nextrelease.html (1.5.2.1): updated for
+	new release
+
+2002-04-09 09:17  nando
+
+	* ChangeLog.txt (1.4): updated
+
 2002-04-08 11:38  nando
 
 	* nextrelease.html (1.7): fixed links
