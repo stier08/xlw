@@ -35,16 +35,16 @@ OutDir=.\Release
 
 !IF "$(RECURSE)" == "0" 
 
-ALL : "$(OUTDIR)\xllExample.dll" ".\xllExample.tlb" ".\xllExample.h"
+ALL : "$(OUTDIR)\xllExample.dll"
 
 !ELSE 
 
-ALL : "xlw - Win32 Release" "idl2def - Win32 Release" "$(OUTDIR)\xllExample.dll" ".\xllExample.tlb" ".\xllExample.h"
+ALL : "xlw - Win32 Release" "$(OUTDIR)\xllExample.dll"
 
 !ENDIF 
 
 !IF "$(RECURSE)" == "1" 
-CLEAN :"idl2def - Win32 ReleaseCLEAN" "xlw - Win32 ReleaseCLEAN" 
+CLEAN :"xlw - Win32 ReleaseCLEAN" 
 !ELSE 
 CLEAN :
 !ENDIF 
@@ -128,11 +128,11 @@ OutDir=.\Debug
 
 !IF "$(RECURSE)" == "0" 
 
-ALL : "$(OUTDIR)\xllExample.dll"
+ALL : "$(OUTDIR)\xllExample.dll" ".\xllExample.tlb" ".\xllExample.h"
 
 !ELSE 
 
-ALL : "xlw - Win32 Debug" "$(OUTDIR)\xllExample.dll"
+ALL : "xlw - Win32 Debug" "$(OUTDIR)\xllExample.dll" ".\xllExample.tlb" ".\xllExample.h"
 
 !ENDIF 
 
@@ -229,7 +229,7 @@ SOURCE="$(InputPath)"
 !IF "$(CFG)" == "xllExample - Win32 Release" || "$(CFG)" == "xllExample - Win32 Debug"
 SOURCE=.\xllExample.cpp
 
-"$(INTDIR)\xllExample.obj" : $(SOURCE) "$(INTDIR)"
+"$(INTDIR)\xllExample.obj" : $(SOURCE) "$(INTDIR)" ".\xllExample.h"
 
 
 SOURCE=.\xllExample.idl
@@ -258,47 +258,31 @@ MTL_SWITCHES=/nologo /I ".." /D "_DEBUG" /tlb "xllExample.tlb" /h "xllExample.h"
 
 SOURCE=.\xllExample.rc
 
-"$(INTDIR)\xllExample.res" : $(SOURCE) "$(INTDIR)"
+"$(INTDIR)\xllExample.res" : $(SOURCE) "$(INTDIR)" ".\xllExample.tlb"
 	$(RSC) $(RSC_PROJ) $(SOURCE)
 
 
 !IF  "$(CFG)" == "xllExample - Win32 Release"
 
-"idl2def - Win32 Release" : 
-   cd "\Projects\xlw\idl2def"
-   $(MAKE) /$(MAKEFLAGS) /F .\idl2def.mak CFG="idl2def - Win32 Release" 
-   cd "..\xllExample"
-
-"idl2def - Win32 ReleaseCLEAN" : 
-   cd "\Projects\xlw\idl2def"
-   $(MAKE) /$(MAKEFLAGS) /F .\idl2def.mak CFG="idl2def - Win32 Release" RECURSE=1 CLEAN 
-   cd "..\xllExample"
-
-!ELSEIF  "$(CFG)" == "xllExample - Win32 Debug"
-
-!ENDIF 
-
-!IF  "$(CFG)" == "xllExample - Win32 Release"
-
 "xlw - Win32 Release" : 
-   cd "\Projects\xlw"
+   cd "\Projects\XLW"
    $(MAKE) /$(MAKEFLAGS) /F .\xlw.mak CFG="xlw - Win32 Release" 
    cd ".\xllExample"
 
 "xlw - Win32 ReleaseCLEAN" : 
-   cd "\Projects\xlw"
+   cd "\Projects\XLW"
    $(MAKE) /$(MAKEFLAGS) /F .\xlw.mak CFG="xlw - Win32 Release" RECURSE=1 CLEAN 
    cd ".\xllExample"
 
 !ELSEIF  "$(CFG)" == "xllExample - Win32 Debug"
 
 "xlw - Win32 Debug" : 
-   cd "\Projects\xlw"
+   cd "\Projects\XLW"
    $(MAKE) /$(MAKEFLAGS) /F .\xlw.mak CFG="xlw - Win32 Debug" 
    cd ".\xllExample"
 
 "xlw - Win32 DebugCLEAN" : 
-   cd "\Projects\xlw"
+   cd "\Projects\XLW"
    $(MAKE) /$(MAKEFLAGS) /F .\xlw.mak CFG="xlw - Win32 Debug" RECURSE=1 CLEAN 
    cd ".\xllExample"
 

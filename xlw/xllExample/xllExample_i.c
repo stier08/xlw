@@ -5,7 +5,7 @@
 
 
 /* File created by MIDL compiler version 5.01.0164 */
-/* at Thu Feb 20 17:40:50 2003
+/* at Thu Feb 20 18:13:23 2003
  */
 /* Compiler settings for D:\Projects\xlw\xllExample\xllExample.idl:
     Os (OptLev=s), W1, Zp8, env=Win32, ms_ext, c_ext
