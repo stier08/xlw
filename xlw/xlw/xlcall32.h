@@ -18,7 +18,10 @@ basis of it.
 #ifndef INC_excel32_H
 #define INC_excel32_H
 
-#define STRICT
+// jT: I wonder why we not include <WINDEF.H>
+#ifndef STRICT
+#define STRICT 1
+#endif
 #include "windows.h"
 
 /*
@@ -36,123 +39,32 @@ basis of it.
 *
 */
 
+#include <xlw/xldata32.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif	/*! __cplusplus */
-
-/*!
-* XLREF structure
-*
-* Describes a single rectangular reference
-*/
-
-typedef struct xlref
-{
-    WORD rwFirst;       /*!< \brief first row. */
-    WORD rwLast;       /*!< \brief last row. */
-    BYTE colFirst;       /*!< \brief first column. */
-    BYTE colLast;       /*!< \brief last column. */
-} XLREF, FAR *LPXLREF;
-
-
-/*!
-* XLMREF structure
-*
-* Describes multiple rectangular references.
-* This is a variable size structure, default
-* size is 1 reference.
-*/
-
-typedef struct xlmref
-{
-    //! Nb of XLREF.
-    WORD count;
-    //! Array of XLREF.
-    /*! actually reftbl[count] */
-    XLREF reftbl[1];
-} XLMREF, FAR *LPXLMREF;
-
-
-/*!
-* XLOPER structure
-*
-* Excel's fundamental data type: can hold data
-* of any type. Use "R" as the argument type in the
-* REGISTER function.
-*/
-
-typedef struct xloper
-{
-    union
-    {
-        double num;                     /*!< \brief xltypeNum */
-        LPSTR str;                         /*!< \brief xltypeStr */
-//        WORD bool;                      /*!< \brief xltypeBool */
-          WORD boolean;                      /*!< \brief xltypeBool */
-          WORD err;                       /*!< \brief xltypeErr */
-        short int w;                    /*!< \brief xltypeInt */
-        struct
-        {
-            WORD count;                 /*!< \brief always = 1 */
-            XLREF ref;
-        } sref;                         /*!< \brief  xltypeSRef */
-        struct
-        {
-            XLMREF far *lpmref;
-            DWORD idSheet;
-        } mref;                         /*!< \brief  xltypeRef */
-        struct
-        {
-            struct xloper far *lparray;
-            WORD rows;
-            WORD columns;
-        } array;                        /*!< \brief  xltypeMulti */
-        struct
-        {
-            union
-            {
-                short int level;        /*!< \brief  xlflowRestart */
-                short int tbctrl;       /*!< \brief  xlflowPause */
-                DWORD idSheet;          /*!< \brief  xlflowGoto */
-            } valflow;
-            WORD rw;                    /*!< \brief  xlflowGoto */
-            BYTE col;                   /*!< \brief  xlflowGoto */
-            BYTE xlflow;
-        } flow;                         /*!< \brief  xltypeFlow */
-        struct
-        {
-            union
-            {
-                BYTE far *lpbData;      /*!< \brief  data passed to XL */
-                HANDLE hdata;           /*!< \brief  data returned from XL */
-            } h;
-            long cbData;
-        } bigdata;                      /*!< \brief  xltypeBigData */
-    } val;                              /*!< \brief data bits*/
-    WORD xltype;                        /*!< \brief type flag */
-} XLOPER, FAR *LPXLOPER;
 
 /*!
 * XLOPER data types
 *
 * Used for xltype field of XLOPER structure
 */
+static const int xltypeNum        = 0x0001;
+static const int xltypeStr        = 0x0002;
+static const int xltypeBool       = 0x0004;
+static const int xltypeRef        = 0x0008;
+static const int xltypeErr        = 0x0010;
+static const int xltypeFlow       = 0x0020;
+static const int xltypeMulti      = 0x0040;
+static const int xltypeMissing    = 0x0080;
+static const int xltypeNil        = 0x0100;
+static const int xltypeSRef       = 0x0400;
+static const int xltypeInt        = 0x0800;
+static const int xlbitXLFree      = 0x1000;
+static const int xlbitDLLFree     = 0x4000;
 
-#define xltypeNum        0x0001
-#define xltypeStr        0x0002
-#define xltypeBool       0x0004
-#define xltypeRef        0x0008
-#define xltypeErr        0x0010
-#define xltypeFlow       0x0020
-#define xltypeMulti      0x0040
-#define xltypeMissing    0x0080
-#define xltypeNil        0x0100
-#define xltypeSRef       0x0400
-#define xltypeInt        0x0800
-#define xlbitXLFree      0x1000
-#define xlbitDLLFree     0x4000
-
-#define xltypeBigData    (xltypeStr | xltypeInt)
+static const int xltypeBigData    = (xltypeStr | xltypeInt);
 
 
 /*!
@@ -162,13 +74,13 @@ typedef struct xloper
 * when constructing error XLOPERs
 */
 
-#define xlerrNull    0
-#define xlerrDiv0    7
-#define xlerrValue   15
-#define xlerrRef     23
-#define xlerrName    29
-#define xlerrNum     36
-#define xlerrNA      42
+static const int xlerrNull    = 0;
+static const int xlerrDiv0    = 7;
+static const int xlerrValue   = 15;
+static const int xlerrRef     = 23;
+static const int xlerrName    = 29;
+static const int xlerrNum     = 36;
+static const int xlerrNA      = 42;
 
 
 /*!
@@ -178,11 +90,12 @@ typedef struct xloper
 * when constructing flow-control XLOPERs
 */
 
-#define xlflowHalt       1
-#define xlflowGoto       2
-#define xlflowRestart    8
-#define xlflowPause      16
-#define xlflowResume     64
+static const int xlflowHalt       = 1;
+static const int xlflowGoto       = 2;
+static const int xlflowRestart    = 8;
+static const int xlflowPause      = 16;
+static const int xlflowResume     = 64;
+
 
 /*!
 * Function prototypes
@@ -208,24 +121,24 @@ extern int (__stdcall *XLCallVer)(void);
 * These values can be returned from Excel4() or Excel4v().
 */
 
-#define xlretSuccess    0     /*! success */
-#define xlretAbort      1     /*! macro halted */
-#define xlretInvXlfn    2     /*! invalid function number */
-#define xlretInvCount   4     /*! invalid number of arguments */
-#define xlretInvXloper  8     /*! invalid OPER structure */
-#define xlretStackOvfl  16    /*! stack overflow */
-#define xlretFailed     32    /*! command failed */
-#define xlretUncalced   64    /*! uncalced cell */
+static const int xlretSuccess    = 0;     /*! success */ 
+static const int xlretAbort      = 1;     /*! macro halted */
+static const int xlretInvXlfn    = 2;     /*! invalid function number */ 
+static const int xlretInvCount   = 4;     /*! invalid number of arguments */ 
+static const int xlretInvXloper  = 8;     /*! invalid OPER structure */  
+static const int xlretStackOvfl  = 16;    /*! stack overflow */  
+static const int xlretFailed     = 32;    /*! command failed */  
+static const int xlretUncalced   = 64;    /*! uncalced cell */
 
 
 /*!
 * Function number bits
 */
 
-#define xlCommand    0x8000
-#define xlSpecial    0x4000
-#define xlIntl       0x2000
-#define xlPrompt     0x1000
+static const int xlCommand    = 0x8000;
+static const int xlSpecial    = 0x4000;
+static const int xlIntl       = 0x2000;
+static const int xlPrompt     = 0x1000;
 
 
 /*!
@@ -235,20 +148,20 @@ extern int (__stdcall *XLCallVer)(void);
 * not from the Excel macro language.
 */
 
-#define xlFree             (0  | xlSpecial)
-#define xlStack            (1  | xlSpecial)
-#define xlCoerce           (2  | xlSpecial)
-#define xlSet              (3  | xlSpecial)
-#define xlSheetId          (4  | xlSpecial)
-#define xlSheetNm          (5  | xlSpecial)
-#define xlAbort            (6  | xlSpecial)
-#define xlGetInst          (7  | xlSpecial)
-#define xlGetHwnd          (8  | xlSpecial)
-#define xlGetName          (9  | xlSpecial)
-#define xlEnableXLMsgs     (10 | xlSpecial)
-#define xlDisableXLMsgs    (11 | xlSpecial)
-#define xlDefineBinaryName (12 | xlSpecial)
-#define xlGetBinaryName    (13 | xlSpecial)
+static const int xlFree             = (0  | xlSpecial);
+static const int xlStack            = (1  | xlSpecial);
+static const int xlCoerce           = (2  | xlSpecial);
+static const int xlSet              = (3  | xlSpecial);
+static const int xlSheetId          = (4  | xlSpecial);
+static const int xlSheetNm          = (5  | xlSpecial);
+static const int xlAbort            = (6  | xlSpecial);
+static const int xlGetInst          = (7  | xlSpecial);
+static const int xlGetHwnd          = (8  | xlSpecial);
+static const int xlGetName          = (9  | xlSpecial);
+static const int xlEnableXLMsgs     = (10 | xlSpecial);
+static const int xlDisableXLMsgs    = (11 | xlSpecial);
+static const int xlDefineBinaryName = (12 | xlSpecial);
+static const int xlGetBinaryName    = (13 | xlSpecial);
 
 
 /*!
@@ -257,7 +170,7 @@ extern int (__stdcall *XLCallVer)(void);
 * First argument should be a function reference.
 */
 
-#define xlUDF      255
+static const int xlUDF      = 255;
 
 
 /*!
@@ -266,734 +179,748 @@ extern int (__stdcall *XLCallVer)(void);
 
 
 /*! Excel function numbers */
-#define xlfCount 0
-#define xlfIsna 2
-#define xlfIserror 3
-#define xlfSum 4
-#define xlfAverage 5
-#define xlfMin 6
-#define xlfMax 7
-#define xlfRow 8
-#define xlfColumn 9
-#define xlfNa 10
-#define xlfNpv 11
-#define xlfStdev 12
-#define xlfDollar 13
-#define xlfFixed 14
-#define xlfSin 15
-#define xlfCos 16
-#define xlfTan 17
-#define xlfAtan 18
-#define xlfPi 19
-#define xlfSqrt 20
-#define xlfExp 21
-#define xlfLn 22
-#define xlfLog10 23
-#define xlfAbs 24
-#define xlfInt 25
-#define xlfSign 26
-#define xlfRound 27
-#define xlfLookup 28
-#define xlfIndex 29
-#define xlfRept 30
-#define xlfMid 31
-#define xlfLen 32
-#define xlfValue 33
-#define xlfTrue 34
-#define xlfFalse 35
-#define xlfAnd 36
-#define xlfOr 37
-#define xlfNot 38
-#define xlfMod 39
-#define xlfDcount 40
-#define xlfDsum 41
-#define xlfDaverage 42
-#define xlfDmin 43
-#define xlfDmax 44
-#define xlfDstdev 45
-#define xlfVar 46
-#define xlfDvar 47
-#define xlfText 48
-#define xlfLinest 49
-#define xlfTrend 50
-#define xlfLogest 51
-#define xlfGrowth 52
-#define xlfGoto 53
-#define xlfHalt 54
-#define xlfPv 56
-#define xlfFv 57
-#define xlfNper 58
-#define xlfPmt 59
-#define xlfRate 60
-#define xlfMirr 61
-#define xlfIrr 62
-#define xlfRand 63
-#define xlfMatch 64
-#define xlfDate 65
-#define xlfTime 66
-#define xlfDay 67
-#define xlfMonth 68
-#define xlfYear 69
-#define xlfWeekday 70
-#define xlfHour 71
-#define xlfMinute 72
-#define xlfSecond 73
-#define xlfNow 74
-#define xlfAreas 75
-#define xlfRows 76
-#define xlfColumns 77
-#define xlfOffset 78
-#define xlfAbsref 79
-#define xlfRelref 80
-#define xlfArgument 81
-#define xlfSearch 82
-#define xlfTranspose 83
-#define xlfError 84
-#define xlfStep 85
-#define xlfType 86
-#define xlfEcho 87
-#define xlfSetName 88
-#define xlfCaller 89
-#define xlfDeref 90
-#define xlfWindows 91
-#define xlfSeries 92
-#define xlfDocuments 93
-#define xlfActiveCell 94
-#define xlfSelection 95
-#define xlfResult 96
-#define xlfAtan2 97
-#define xlfAsin 98
-#define xlfAcos 99
-#define xlfChoose 100
-#define xlfHlookup 101
-#define xlfVlookup 102
-#define xlfLinks 103
-#define xlfInput 104
-#define xlfIsref 105
-#define xlfGetFormula 106
-#define xlfGetName 107
-#define xlfSetValue 108
-#define xlfLog 109
-#define xlfExec 110
-#define xlfChar 111
-#define xlfLower 112
-#define xlfUpper 113
-#define xlfProper 114
-#define xlfLeft 115
-#define xlfRight 116
-#define xlfExact 117
-#define xlfTrim 118
-#define xlfReplace 119
-#define xlfSubstitute 120
-#define xlfCode 121
-#define xlfNames 122
-#define xlfDirectory 123
-#define xlfFind 124
-#define xlfCell 125
-#define xlfIserr 126
-#define xlfIstext 127
-#define xlfIsnumber 128
-#define xlfIsblank 129
-#define xlfT 130
-#define xlfN 131
-#define xlfFopen 132
-#define xlfFclose 133
-#define xlfFsize 134
-#define xlfFreadln 135
-#define xlfFread 136
-#define xlfFwriteln 137
-#define xlfFwrite 138
-#define xlfFpos 139
-#define xlfDatevalue 140
-#define xlfTimevalue 141
-#define xlfSln 142
-#define xlfSyd 143
-#define xlfDdb 144
-#define xlfGetDef 145
-#define xlfReftext 146
-#define xlfTextref 147
-#define xlfIndirect 148
-#define xlfRegister 149
-#define xlfCall 150
-#define xlfAddBar 151
-#define xlfAddMenu 152
-#define xlfAddCommand 153
-#define xlfEnableCommand 154
-#define xlfCheckCommand 155
-#define xlfRenameCommand 156
-#define xlfShowBar 157
-#define xlfDeleteMenu 158
-#define xlfDeleteCommand 159
-#define xlfGetChartItem 160
-#define xlfDialogBox 161
-#define xlfClean 162
-#define xlfMdeterm 163
-#define xlfMinverse 164
-#define xlfMmult 165
-#define xlfFiles 166
-#define xlfIpmt 167
-#define xlfPpmt 168
-#define xlfCounta 169
-#define xlfCancelKey 170
-#define xlfInitiate 175
-#define xlfRequest 176
-#define xlfPoke 177
-#define xlfExecute 178
-#define xlfTerminate 179
-#define xlfRestart 180
-#define xlfHelp 181
-#define xlfGetBar 182
-#define xlfProduct 183
-#define xlfFact 184
-#define xlfGetCell 185
-#define xlfGetWorkspace 186
-#define xlfGetWindow 187
-#define xlfGetDocument 188
-#define xlfDproduct 189
-#define xlfIsnontext 190
-#define xlfGetNote 191
-#define xlfNote 192
-#define xlfStdevp 193
-#define xlfVarp 194
-#define xlfDstdevp 195
-#define xlfDvarp 196
-#define xlfTrunc 197
-#define xlfIslogical 198
-#define xlfDcounta 199
-#define xlfDeleteBar 200
-#define xlfUnregister 201
-#define xlfUsdollar 204
-#define xlfFindb 205
-#define xlfSearchb 206
-#define xlfReplaceb 207
-#define xlfLeftb 208
-#define xlfRightb 209
-#define xlfMidb 210
-#define xlfLenb 211
-#define xlfRoundup 212
-#define xlfRounddown 213
-#define xlfAsc 214
-#define xlfDbcs 215
-#define xlfRank 216
-#define xlfAddress 219
-#define xlfDays360 220
-#define xlfToday 221
-#define xlfVdb 222
-#define xlfMedian 227
-#define xlfSumproduct 228
-#define xlfSinh 229
-#define xlfCosh 230
-#define xlfTanh 231
-#define xlfAsinh 232
-#define xlfAcosh 233
-#define xlfAtanh 234
-#define xlfDget 235
-#define xlfCreateObject 236
-#define xlfVolatile 237
-#define xlfLastError 238
-#define xlfCustomUndo 239
-#define xlfCustomRepeat 240
-#define xlfFormulaConvert 241
-#define xlfGetLinkInfo 242
-#define xlfTextBox 243
-#define xlfInfo 244
-#define xlfGroup 245
-#define xlfGetObject 246
-#define xlfDb 247
-#define xlfPause 248
-#define xlfResume 251
-#define xlfFrequency 252
-#define xlfAddToolbar 253
-#define xlfDeleteToolbar 254
-#define xlfResetToolbar 256
-#define xlfEvaluate 257
-#define xlfGetToolbar 258
-#define xlfGetTool 259
-#define xlfSpellingCheck 260
-#define xlfErrorType 261
-#define xlfAppTitle 262
-#define xlfWindowTitle 263
-#define xlfSaveToolbar 264
-#define xlfEnableTool 265
-#define xlfPressTool 266
-#define xlfRegisterId 267
-#define xlfGetWorkbook 268
-#define xlfAvedev 269
-#define xlfBetadist 270
-#define xlfGammaln 271
-#define xlfBetainv 272
-#define xlfBinomdist 273
-#define xlfChidist 274
-#define xlfChiinv 275
-#define xlfCombin 276
-#define xlfConfidence 277
-#define xlfCritbinom 278
-#define xlfEven 279
-#define xlfExpondist 280
-#define xlfFdist 281
-#define xlfFinv 282
-#define xlfFisher 283
-#define xlfFisherinv 284
-#define xlfFloor 285
-#define xlfGammadist 286
-#define xlfGammainv 287
-#define xlfCeiling 288
-#define xlfHypgeomdist 289
-#define xlfLognormdist 290
-#define xlfLoginv 291
-#define xlfNegbinomdist 292
-#define xlfNormdist 293
-#define xlfNormsdist 294
-#define xlfNorminv 295
-#define xlfNormsinv 296
-#define xlfStandardize 297
-#define xlfOdd 298
-#define xlfPermut 299
-#define xlfPoisson 300
-#define xlfTdist 301
-#define xlfWeibull 302
-#define xlfSumxmy2 303
-#define xlfSumx2my2 304
-#define xlfSumx2py2 305
-#define xlfChitest 306
-#define xlfCorrel 307
-#define xlfCovar 308
-#define xlfForecast 309
-#define xlfFtest 310
-#define xlfIntercept 311
-#define xlfPearson 312
-#define xlfRsq 313
-#define xlfSteyx 314
-#define xlfSlope 315
-#define xlfTtest 316
-#define xlfProb 317
-#define xlfDevsq 318
-#define xlfGeomean 319
-#define xlfHarmean 320
-#define xlfSumsq 321
-#define xlfKurt 322
-#define xlfSkew 323
-#define xlfZtest 324
-#define xlfLarge 325
-#define xlfSmall 326
-#define xlfQuartile 327
-#define xlfPercentile 328
-#define xlfPercentrank 329
-#define xlfMode 330
-#define xlfTrimmean 331
-#define xlfTinv 332
-#define xlfMovieCommand 334
-#define xlfGetMovie 335
-#define xlfConcatenate 336
-#define xlfPower 337
-#define xlfPivotAddData 338
-#define xlfGetPivotTable 339
-#define xlfGetPivotField 340
-#define xlfGetPivotItem 341
-#define xlfRadians 342
-#define xlfDegrees 343
-#define xlfSubtotal 344
-#define xlfSumif 345
-#define xlfCountif 346
-#define xlfCountblank 347
-#define xlfScenarioGet 348
-#define xlfOptionsListsGet 349
-#define xlfIspmt 350
-#define xlfDatedif 351
-#define xlfDatestring 352
-#define xlfNumberstring 353
-#define xlfRoman 354
-#define xlfOpenDialog 355
-#define xlfSaveDialog 356
+
+static const int xlfCount = 0;
+static const int xlfIsna = 2;
+static const int xlfIserror = 3;
+static const int xlfSum = 4;
+static const int xlfAverage = 5;
+static const int xlfMin = 6;
+static const int xlfMax = 7;
+static const int xlfRow = 8;
+static const int xlfColumn = 9;
+static const int xlfNa = 10;
+static const int xlfNpv = 11;
+static const int xlfStdev = 12;
+static const int xlfDollar = 13;
+static const int xlfFixed = 14;
+static const int xlfSin = 15;
+static const int xlfCos = 16;
+static const int xlfTan = 17;
+static const int xlfAtan = 18;
+static const int xlfPi = 19;
+static const int xlfSqrt = 20;
+static const int xlfExp = 21;
+static const int xlfLn = 22;
+static const int xlfLog10 = 23;
+static const int xlfAbs = 24;
+static const int xlfInt = 25;
+static const int xlfSign = 26;
+static const int xlfRound = 27;
+static const int xlfLookup = 28;
+static const int xlfIndex = 29;
+static const int xlfRept = 30;
+static const int xlfMid = 31;
+static const int xlfLen = 32;
+static const int xlfValue = 33;
+static const int xlfTrue = 34;
+static const int xlfFalse = 35;
+static const int xlfAnd = 36;
+static const int xlfOr = 37;
+static const int xlfNot = 38;
+static const int xlfMod = 39;
+static const int xlfDcount = 40;
+static const int xlfDsum = 41;
+static const int xlfDaverage = 42;
+static const int xlfDmin = 43;
+static const int xlfDmax = 44;
+static const int xlfDstdev = 45;
+static const int xlfVar = 46;
+static const int xlfDvar = 47;
+static const int xlfText = 48;
+static const int xlfLinest = 49;
+static const int xlfTrend = 50;
+static const int xlfLogest = 51;
+static const int xlfGrowth = 52;
+static const int xlfGoto = 53;
+static const int xlfHalt = 54;
+static const int xlfPv = 56;
+static const int xlfFv = 57;
+static const int xlfNper = 58;
+static const int xlfPmt = 59;
+static const int xlfRate = 60;
+static const int xlfMirr = 61;
+static const int xlfIrr = 62;
+static const int xlfRand = 63;
+static const int xlfMatch = 64;
+static const int xlfDate = 65;
+static const int xlfTime = 66;
+static const int xlfDay = 67;
+static const int xlfMonth = 68;
+static const int xlfYear = 69;
+static const int xlfWeekday = 70;
+static const int xlfHour = 71;
+static const int xlfMinute = 72;
+static const int xlfSecond = 73;
+static const int xlfNow = 74;
+static const int xlfAreas = 75;
+static const int xlfRows = 76;
+static const int xlfColumns = 77;
+static const int xlfOffset = 78;
+static const int xlfAbsref = 79;
+static const int xlfRelref = 80;
+static const int xlfArgument = 81;
+static const int xlfSearch = 82;
+static const int xlfTranspose = 83;
+static const int xlfError = 84;
+static const int xlfStep = 85;
+static const int xlfType = 86;
+static const int xlfEcho = 87;
+static const int xlfSetName = 88;
+static const int xlfCaller = 89;
+static const int xlfDeref = 90;
+static const int xlfWindows = 91;
+static const int xlfSeries = 92;
+static const int xlfDocuments = 93;
+static const int xlfActiveCell = 94;
+static const int xlfSelection = 95;
+static const int xlfResult = 96;
+static const int xlfAtan2 = 97;
+static const int xlfAsin = 98;
+static const int xlfAcos = 99;
+static const int xlfChoose = 100;
+static const int xlfHlookup = 101;
+static const int xlfVlookup = 102;
+static const int xlfLinks = 103;
+static const int xlfInput = 104;
+static const int xlfIsref = 105;
+static const int xlfGetFormula = 106;
+static const int xlfGetName = 107;
+static const int xlfSetValue = 108;
+static const int xlfLog = 109;
+static const int xlfExec = 110;
+static const int xlfChar = 111;
+static const int xlfLower = 112;
+static const int xlfUpper = 113;
+static const int xlfProper = 114;
+static const int xlfLeft = 115;
+static const int xlfRight = 116;
+static const int xlfExact = 117;
+static const int xlfTrim = 118;
+static const int xlfReplace = 119;
+static const int xlfSubstitute = 120;
+static const int xlfCode = 121;
+static const int xlfNames = 122;
+static const int xlfDirectory = 123;
+static const int xlfFind = 124;
+static const int xlfCell = 125;
+static const int xlfIserr = 126;
+static const int xlfIstext = 127;
+static const int xlfIsnumber = 128;
+static const int xlfIsblank = 129;
+static const int xlfT = 130;
+static const int xlfN = 131;
+static const int xlfFopen = 132;
+static const int xlfFclose = 133;
+static const int xlfFsize = 134;
+static const int xlfFreadln = 135;
+static const int xlfFread = 136;
+static const int xlfFwriteln = 137;
+static const int xlfFwrite = 138;
+static const int xlfFpos = 139;
+static const int xlfDatevalue = 140;
+static const int xlfTimevalue = 141;
+static const int xlfSln = 142;
+static const int xlfSyd = 143;
+static const int xlfDdb = 144;
+static const int xlfGetDef = 145;
+static const int xlfReftext = 146;
+static const int xlfTextref = 147;
+static const int xlfIndirect = 148;
+static const int xlfRegister = 149;
+static const int xlfCall = 150;
+static const int xlfAddBar = 151;
+static const int xlfAddMenu = 152;
+static const int xlfAddCommand = 153;
+static const int xlfEnableCommand = 154;
+static const int xlfCheckCommand = 155;
+static const int xlfRenameCommand = 156;
+static const int xlfShowBar = 157;
+static const int xlfDeleteMenu = 158;
+static const int xlfDeleteCommand = 159;
+static const int xlfGetChartItem = 160;
+static const int xlfDialogBox = 161;
+static const int xlfClean = 162;
+static const int xlfMdeterm = 163;
+static const int xlfMinverse = 164;
+static const int xlfMmult = 165;
+static const int xlfFiles = 166;
+static const int xlfIpmt = 167;
+static const int xlfPpmt = 168;
+static const int xlfCounta = 169;
+static const int xlfCancelKey = 170;
+static const int xlfInitiate = 175;
+static const int xlfRequest = 176;
+static const int xlfPoke = 177;
+static const int xlfExecute = 178;
+static const int xlfTerminate = 179;
+static const int xlfRestart = 180;
+static const int xlfHelp = 181;
+static const int xlfGetBar = 182;
+static const int xlfProduct = 183;
+static const int xlfFact = 184;
+static const int xlfGetCell = 185;
+static const int xlfGetWorkspace = 186;
+static const int xlfGetWindow = 187;
+static const int xlfGetDocument = 188;
+static const int xlfDproduct = 189;
+static const int xlfIsnontext = 190;
+static const int xlfGetNote = 191;
+static const int xlfNote = 192;
+static const int xlfStdevp = 193;
+static const int xlfVarp = 194;
+static const int xlfDstdevp = 195;
+static const int xlfDvarp = 196;
+static const int xlfTrunc = 197;
+static const int xlfIslogical = 198;
+static const int xlfDcounta = 199;
+static const int xlfDeleteBar = 200;
+static const int xlfUnregister = 201;
+static const int xlfUsdollar = 204;
+static const int xlfFindb = 205;
+static const int xlfSearchb = 206;
+static const int xlfReplaceb = 207;
+static const int xlfLeftb = 208;
+static const int xlfRightb = 209;
+static const int xlfMidb = 210;
+static const int xlfLenb = 211;
+static const int xlfRoundup = 212;
+static const int xlfRounddown = 213;
+static const int xlfAsc = 214;
+static const int xlfDbcs = 215;
+static const int xlfRank = 216;
+static const int xlfAddress = 219;
+static const int xlfDays360 = 220;
+static const int xlfToday = 221;
+static const int xlfVdb = 222;
+static const int xlfMedian = 227;
+static const int xlfSumproduct = 228;
+static const int xlfSinh = 229;
+static const int xlfCosh = 230;
+static const int xlfTanh = 231;
+static const int xlfAsinh = 232;
+static const int xlfAcosh = 233;
+static const int xlfAtanh = 234;
+static const int xlfDget = 235;
+static const int xlfCreateObject = 236;
+static const int xlfVolatile = 237;
+static const int xlfLastError = 238;
+static const int xlfCustomUndo = 239;
+static const int xlfCustomRepeat = 240;
+static const int xlfFormulaConvert = 241;
+static const int xlfGetLinkInfo = 242;
+static const int xlfTextBox = 243;
+static const int xlfInfo = 244;
+static const int xlfGroup = 245;
+static const int xlfGetObject = 246;
+static const int xlfDb = 247;
+static const int xlfPause = 248;
+static const int xlfResume = 251;
+static const int xlfFrequency = 252;
+static const int xlfAddToolbar = 253;
+static const int xlfDeleteToolbar = 254;
+static const int xlfResetToolbar = 256;
+static const int xlfEvaluate = 257;
+static const int xlfGetToolbar = 258;
+static const int xlfGetTool = 259;
+static const int xlfSpellingCheck = 260;
+static const int xlfErrorType = 261;
+static const int xlfAppTitle = 262;
+static const int xlfWindowTitle = 263;
+static const int xlfSaveToolbar = 264;
+static const int xlfEnableTool = 265;
+static const int xlfPressTool = 266;
+static const int xlfRegisterId = 267;
+static const int xlfGetWorkbook = 268;
+static const int xlfAvedev = 269;
+static const int xlfBetadist = 270;
+static const int xlfGammaln = 271;
+static const int xlfBetainv = 272;
+static const int xlfBinomdist = 273;
+static const int xlfChidist = 274;
+static const int xlfChiinv = 275;
+static const int xlfCombin = 276;
+static const int xlfConfidence = 277;
+static const int xlfCritbinom = 278;
+static const int xlfEven = 279;
+static const int xlfExpondist = 280;
+static const int xlfFdist = 281;
+static const int xlfFinv = 282;
+static const int xlfFisher = 283;
+static const int xlfFisherinv = 284;
+static const int xlfFloor = 285;
+static const int xlfGammadist = 286;
+static const int xlfGammainv = 287;
+static const int xlfCeiling = 288;
+static const int xlfHypgeomdist = 289;
+static const int xlfLognormdist = 290;
+static const int xlfLoginv = 291;
+static const int xlfNegbinomdist = 292;
+static const int xlfNormdist = 293;
+static const int xlfNormsdist = 294;
+static const int xlfNorminv = 295;
+static const int xlfNormsinv = 296;
+static const int xlfStandardize = 297;
+static const int xlfOdd = 298;
+static const int xlfPermut = 299;
+static const int xlfPoisson = 300;
+static const int xlfTdist = 301;
+static const int xlfWeibull = 302;
+static const int xlfSumxmy2 = 303;
+static const int xlfSumx2my2 = 304;
+static const int xlfSumx2py2 = 305;
+static const int xlfChitest = 306;
+static const int xlfCorrel = 307;
+static const int xlfCovar = 308;
+static const int xlfForecast = 309;
+static const int xlfFtest = 310;
+static const int xlfIntercept = 311;
+static const int xlfPearson = 312;
+static const int xlfRsq = 313;
+static const int xlfSteyx = 314;
+static const int xlfSlope = 315;
+static const int xlfTtest = 316;
+static const int xlfProb = 317;
+static const int xlfDevsq = 318;
+static const int xlfGeomean = 319;
+static const int xlfHarmean = 320;
+static const int xlfSumsq = 321;
+static const int xlfKurt = 322;
+static const int xlfSkew = 323;
+static const int xlfZtest = 324;
+static const int xlfLarge = 325;
+static const int xlfSmall = 326;
+static const int xlfQuartile = 327;
+static const int xlfPercentile = 328;
+static const int xlfPercentrank = 329;
+static const int xlfMode = 330;
+static const int xlfTrimmean = 331;
+static const int xlfTinv = 332;
+static const int xlfMovieCommand = 334;
+static const int xlfGetMovie = 335;
+static const int xlfConcatenate = 336;
+static const int xlfPower = 337;
+static const int xlfPivotAddData = 338;
+static const int xlfGetPivotTable = 339;
+static const int xlfGetPivotField = 340;
+static const int xlfGetPivotItem = 341;
+static const int xlfRadians = 342;
+static const int xlfDegrees = 343;
+static const int xlfSubtotal = 344;
+static const int xlfSumif = 345;
+static const int xlfCountif = 346;
+static const int xlfCountblank = 347;
+static const int xlfScenarioGet = 348;
+static const int xlfOptionsListsGet = 349;
+static const int xlfIspmt = 350;
+static const int xlfDatedif = 351;
+static const int xlfDatestring = 352;
+static const int xlfNumberstring = 353;
+static const int xlfRoman = 354;
+static const int xlfOpenDialog = 355;
+static const int xlfSaveDialog = 356;
+static const int xlfViewGet = 357;
+static const int xlfGetPivotData = 358;
+static const int xlfHyperlink = 359;
+static const int xlfPhonetic = 360;
+static const int xlfAverageA = 361;
+static const int xlfMaxA = 362;
+static const int xlfMinA = 363;
+static const int xlfStDevPA = 364;
+static const int xlfVarPA = 365;
+static const int xlfStDevA = 366;
+static const int xlfVarA = 367;
+
 
 /*! Excel command numbers */
-#define xlcBeep (0 | xlCommand)
-#define xlcOpen (1 | xlCommand)
-#define xlcOpenLinks (2 | xlCommand)
-#define xlcCloseAll (3 | xlCommand)
-#define xlcSave (4 | xlCommand)
-#define xlcSaveAs (5 | xlCommand)
-#define xlcFileDelete (6 | xlCommand)
-#define xlcPageSetup (7 | xlCommand)
-#define xlcPrint (8 | xlCommand)
-#define xlcPrinterSetup (9 | xlCommand)
-#define xlcQuit (10 | xlCommand)
-#define xlcNewWindow (11 | xlCommand)
-#define xlcArrangeAll (12 | xlCommand)
-#define xlcWindowSize (13 | xlCommand)
-#define xlcWindowMove (14 | xlCommand)
-#define xlcFull (15 | xlCommand)
-#define xlcClose (16 | xlCommand)
-#define xlcRun (17 | xlCommand)
-#define xlcSetPrintArea (22 | xlCommand)
-#define xlcSetPrintTitles (23 | xlCommand)
-#define xlcSetPageBreak (24 | xlCommand)
-#define xlcRemovePageBreak (25 | xlCommand)
-#define xlcFont (26 | xlCommand)
-#define xlcDisplay (27 | xlCommand)
-#define xlcProtectDocument (28 | xlCommand)
-#define xlcPrecision (29 | xlCommand)
-#define xlcA1R1c1 (30 | xlCommand)
-#define xlcCalculateNow (31 | xlCommand)
-#define xlcCalculation (32 | xlCommand)
-#define xlcDataFind (34 | xlCommand)
-#define xlcExtract (35 | xlCommand)
-#define xlcDataDelete (36 | xlCommand)
-#define xlcSetDatabase (37 | xlCommand)
-#define xlcSetCriteria (38 | xlCommand)
-#define xlcSort (39 | xlCommand)
-#define xlcDataSeries (40 | xlCommand)
-#define xlcTable (41 | xlCommand)
-#define xlcFormatNumber (42 | xlCommand)
-#define xlcAlignment (43 | xlCommand)
-#define xlcStyle (44 | xlCommand)
-#define xlcBorder (45 | xlCommand)
-#define xlcCellProtection (46 | xlCommand)
-#define xlcColumnWidth (47 | xlCommand)
-#define xlcUndo (48 | xlCommand)
-#define xlcCut (49 | xlCommand)
-#define xlcCopy (50 | xlCommand)
-#define xlcPaste (51 | xlCommand)
-#define xlcClear (52 | xlCommand)
-#define xlcPasteSpecial (53 | xlCommand)
-#define xlcEditDelete (54 | xlCommand)
-#define xlcInsert (55 | xlCommand)
-#define xlcFillRight (56 | xlCommand)
-#define xlcFillDown (57 | xlCommand)
-#define xlcDefineName (61 | xlCommand)
-#define xlcCreateNames (62 | xlCommand)
-#define xlcFormulaGoto (63 | xlCommand)
-#define xlcFormulaFind (64 | xlCommand)
-#define xlcSelectLastCell (65 | xlCommand)
-#define xlcShowActiveCell (66 | xlCommand)
-#define xlcGalleryArea (67 | xlCommand)
-#define xlcGalleryBar (68 | xlCommand)
-#define xlcGalleryColumn (69 | xlCommand)
-#define xlcGalleryLine (70 | xlCommand)
-#define xlcGalleryPie (71 | xlCommand)
-#define xlcGalleryScatter (72 | xlCommand)
-#define xlcCombination (73 | xlCommand)
-#define xlcPreferred (74 | xlCommand)
-#define xlcAddOverlay (75 | xlCommand)
-#define xlcGridlines (76 | xlCommand)
-#define xlcSetPreferred (77 | xlCommand)
-#define xlcAxes (78 | xlCommand)
-#define xlcLegend (79 | xlCommand)
-#define xlcAttachText (80 | xlCommand)
-#define xlcAddArrow (81 | xlCommand)
-#define xlcSelectChart (82 | xlCommand)
-#define xlcSelectPlotArea (83 | xlCommand)
-#define xlcPatterns (84 | xlCommand)
-#define xlcMainChart (85 | xlCommand)
-#define xlcOverlay (86 | xlCommand)
-#define xlcScale (87 | xlCommand)
-#define xlcFormatLegend (88 | xlCommand)
-#define xlcFormatText (89 | xlCommand)
-#define xlcEditRepeat (90 | xlCommand)
-#define xlcParse (91 | xlCommand)
-#define xlcJustify (92 | xlCommand)
-#define xlcHide (93 | xlCommand)
-#define xlcUnhide (94 | xlCommand)
-#define xlcWorkspace (95 | xlCommand)
-#define xlcFormula (96 | xlCommand)
-#define xlcFormulaFill (97 | xlCommand)
-#define xlcFormulaArray (98 | xlCommand)
-#define xlcDataFindNext (99 | xlCommand)
-#define xlcDataFindPrev (100 | xlCommand)
-#define xlcFormulaFindNext (101 | xlCommand)
-#define xlcFormulaFindPrev (102 | xlCommand)
-#define xlcActivate (103 | xlCommand)
-#define xlcActivateNext (104 | xlCommand)
-#define xlcActivatePrev (105 | xlCommand)
-#define xlcUnlockedNext (106 | xlCommand)
-#define xlcUnlockedPrev (107 | xlCommand)
-#define xlcCopyPicture (108 | xlCommand)
-#define xlcSelect (109 | xlCommand)
-#define xlcDeleteName (110 | xlCommand)
-#define xlcDeleteFormat (111 | xlCommand)
-#define xlcVline (112 | xlCommand)
-#define xlcHline (113 | xlCommand)
-#define xlcVpage (114 | xlCommand)
-#define xlcHpage (115 | xlCommand)
-#define xlcVscroll (116 | xlCommand)
-#define xlcHscroll (117 | xlCommand)
-#define xlcAlert (118 | xlCommand)
-#define xlcNew (119 | xlCommand)
-#define xlcCancelCopy (120 | xlCommand)
-#define xlcShowClipboard (121 | xlCommand)
-#define xlcMessage (122 | xlCommand)
-#define xlcPasteLink (124 | xlCommand)
-#define xlcAppActivate (125 | xlCommand)
-#define xlcDeleteArrow (126 | xlCommand)
-#define xlcRowHeight (127 | xlCommand)
-#define xlcFormatMove (128 | xlCommand)
-#define xlcFormatSize (129 | xlCommand)
-#define xlcFormulaReplace (130 | xlCommand)
-#define xlcSendKeys (131 | xlCommand)
-#define xlcSelectSpecial (132 | xlCommand)
-#define xlcApplyNames (133 | xlCommand)
-#define xlcReplaceFont (134 | xlCommand)
-#define xlcFreezePanes (135 | xlCommand)
-#define xlcShowInfo (136 | xlCommand)
-#define xlcSplit (137 | xlCommand)
-#define xlcOnWindow (138 | xlCommand)
-#define xlcOnData (139 | xlCommand)
-#define xlcDisableInput (140 | xlCommand)
-#define xlcEcho (141 | xlCommand)
-#define xlcOutline (142 | xlCommand)
-#define xlcListNames (143 | xlCommand)
-#define xlcFileClose (144 | xlCommand)
-#define xlcSaveWorkbook (145 | xlCommand)
-#define xlcDataForm (146 | xlCommand)
-#define xlcCopyChart (147 | xlCommand)
-#define xlcOnTime (148 | xlCommand)
-#define xlcWait (149 | xlCommand)
-#define xlcFormatFont (150 | xlCommand)
-#define xlcFillUp (151 | xlCommand)
-#define xlcFillLeft (152 | xlCommand)
-#define xlcDeleteOverlay (153 | xlCommand)
-#define xlcNote (154 | xlCommand)
-#define xlcShortMenus (155 | xlCommand)
-#define xlcSetUpdateStatus (159 | xlCommand)
-#define xlcColorPalette (161 | xlCommand)
-#define xlcDeleteStyle (162 | xlCommand)
-#define xlcWindowRestore (163 | xlCommand)
-#define xlcWindowMaximize (164 | xlCommand)
-#define xlcError (165 | xlCommand)
-#define xlcChangeLink (166 | xlCommand)
-#define xlcCalculateDocument (167 | xlCommand)
-#define xlcOnKey (168 | xlCommand)
-#define xlcAppRestore (169 | xlCommand)
-#define xlcAppMove (170 | xlCommand)
-#define xlcAppSize (171 | xlCommand)
-#define xlcAppMinimize (172 | xlCommand)
-#define xlcAppMaximize (173 | xlCommand)
-#define xlcBringToFront (174 | xlCommand)
-#define xlcSendToBack (175 | xlCommand)
-#define xlcMainChartType (185 | xlCommand)
-#define xlcOverlayChartType (186 | xlCommand)
-#define xlcSelectEnd (187 | xlCommand)
-#define xlcOpenMail (188 | xlCommand)
-#define xlcSendMail (189 | xlCommand)
-#define xlcStandardFont (190 | xlCommand)
-#define xlcConsolidate (191 | xlCommand)
-#define xlcSortSpecial (192 | xlCommand)
-#define xlcGallery3dArea (193 | xlCommand)
-#define xlcGallery3dColumn (194 | xlCommand)
-#define xlcGallery3dLine (195 | xlCommand)
-#define xlcGallery3dPie (196 | xlCommand)
-#define xlcView3d (197 | xlCommand)
-#define xlcGoalSeek (198 | xlCommand)
-#define xlcWorkgroup (199 | xlCommand)
-#define xlcFillGroup (200 | xlCommand)
-#define xlcUpdateLink (201 | xlCommand)
-#define xlcPromote (202 | xlCommand)
-#define xlcDemote (203 | xlCommand)
-#define xlcShowDetail (204 | xlCommand)
-#define xlcUngroup (206 | xlCommand)
-#define xlcObjectProperties (207 | xlCommand)
-#define xlcSaveNewObject (208 | xlCommand)
-#define xlcShare (209 | xlCommand)
-#define xlcShareName (210 | xlCommand)
-#define xlcDuplicate (211 | xlCommand)
-#define xlcApplyStyle (212 | xlCommand)
-#define xlcAssignToObject (213 | xlCommand)
-#define xlcObjectProtection (214 | xlCommand)
-#define xlcHideObject (215 | xlCommand)
-#define xlcSetExtract (216 | xlCommand)
-#define xlcCreatePublisher (217 | xlCommand)
-#define xlcSubscribeTo (218 | xlCommand)
-#define xlcAttributes (219 | xlCommand)
-#define xlcShowToolbar (220 | xlCommand)
-#define xlcPrintPreview (222 | xlCommand)
-#define xlcEditColor (223 | xlCommand)
-#define xlcShowLevels (224 | xlCommand)
-#define xlcFormatMain (225 | xlCommand)
-#define xlcFormatOverlay (226 | xlCommand)
-#define xlcOnRecalc (227 | xlCommand)
-#define xlcEditSeries (228 | xlCommand)
-#define xlcDefineStyle (229 | xlCommand)
-#define xlcLinePrint (240 | xlCommand)
-#define xlcEnterData (243 | xlCommand)
-#define xlcGalleryRadar (249 | xlCommand)
-#define xlcMergeStyles (250 | xlCommand)
-#define xlcEditionOptions (251 | xlCommand)
-#define xlcPastePicture (252 | xlCommand)
-#define xlcPastePictureLink (253 | xlCommand)
-#define xlcSpelling (254 | xlCommand)
-#define xlcZoom (256 | xlCommand)
-#define xlcResume (258 | xlCommand)
-#define xlcInsertObject (259 | xlCommand)
-#define xlcWindowMinimize (260 | xlCommand)
-#define xlcSize (261 | xlCommand)
-#define xlcMove (262 | xlCommand)
-#define xlcSoundNote (265 | xlCommand)
-#define xlcSoundPlay (266 | xlCommand)
-#define xlcFormatShape (267 | xlCommand)
-#define xlcExtendPolygon (268 | xlCommand)
-#define xlcFormatAuto (269 | xlCommand)
-#define xlcGallery3dBar (272 | xlCommand)
-#define xlcGallery3dSurface (273 | xlCommand)
-#define xlcFillAuto (274 | xlCommand)
-#define xlcCustomizeToolbar (276 | xlCommand)
-#define xlcAddTool (277 | xlCommand)
-#define xlcEditObject (278 | xlCommand)
-#define xlcOnDoubleclick (279 | xlCommand)
-#define xlcOnEntry (280 | xlCommand)
-#define xlcWorkbookAdd (281 | xlCommand)
-#define xlcWorkbookMove (282 | xlCommand)
-#define xlcWorkbookCopy (283 | xlCommand)
-#define xlcWorkbookOptions (284 | xlCommand)
-#define xlcSaveWorkspace (285 | xlCommand)
-#define xlcChartWizard (288 | xlCommand)
-#define xlcDeleteTool (289 | xlCommand)
-#define xlcMoveTool (290 | xlCommand)
-#define xlcWorkbookSelect (291 | xlCommand)
-#define xlcWorkbookActivate (292 | xlCommand)
-#define xlcAssignToTool (293 | xlCommand)
-#define xlcCopyTool (295 | xlCommand)
-#define xlcResetTool (296 | xlCommand)
-#define xlcConstrainNumeric (297 | xlCommand)
-#define xlcPasteTool (298 | xlCommand)
-#define xlcPlacement (300 | xlCommand)
-#define xlcFillWorkgroup (301 | xlCommand)
-#define xlcWorkbookNew (302 | xlCommand)
-#define xlcScenarioCells (305 | xlCommand)
-#define xlcScenarioDelete (306 | xlCommand)
-#define xlcScenarioAdd (307 | xlCommand)
-#define xlcScenarioEdit (308 | xlCommand)
-#define xlcScenarioShow (309 | xlCommand)
-#define xlcScenarioShowNext (310 | xlCommand)
-#define xlcScenarioSummary (311 | xlCommand)
-#define xlcPivotTableWizard (312 | xlCommand)
-#define xlcPivotFieldProperties (313 | xlCommand)
-#define xlcPivotField (314 | xlCommand)
-#define xlcPivotItem (315 | xlCommand)
-#define xlcPivotAddFields (316 | xlCommand)
-#define xlcOptionsCalculation (318 | xlCommand)
-#define xlcOptionsEdit (319 | xlCommand)
-#define xlcOptionsView (320 | xlCommand)
-#define xlcAddinManager (321 | xlCommand)
-#define xlcMenuEditor (322 | xlCommand)
-#define xlcAttachToolbars (323 | xlCommand)
-#define xlcVbaReset (324 | xlCommand)
-#define xlcOptionsChart (325 | xlCommand)
-#define xlcStart (326 | xlCommand)
-#define xlcVbaEnd (327 | xlCommand)
-#define xlcVbaInsertFile (328 | xlCommand)
-#define xlcVbaProcedureDefinition (330 | xlCommand)
-#define xlcVbaReferences (331 | xlCommand)
-#define xlcVbaStepInto (332 | xlCommand)
-#define xlcVbaStepOver (333 | xlCommand)
-#define xlcVbaToggleBreakpoint (334 | xlCommand)
-#define xlcVbaClearBreakpoints (335 | xlCommand)
-#define xlcRoutingSlip (336 | xlCommand)
-#define xlcRouteDocument (338 | xlCommand)
-#define xlcMailLogon (339 | xlCommand)
-#define xlcInsertPicture (342 | xlCommand)
-#define xlcEditTool (343 | xlCommand)
-#define xlcGalleryDoughnut (344 | xlCommand)
-#define xlcVbaObjectBrowser (345 | xlCommand)
-#define xlcVbaDebugWindow (346 | xlCommand)
-#define xlcVbaAddWatch (347 | xlCommand)
-#define xlcVbaEditWatch (348 | xlCommand)
-#define xlcVbaInstantWatch (349 | xlCommand)
-#define xlcChartTrend (350 | xlCommand)
-#define xlcPivotItemProperties (352 | xlCommand)
-#define xlcWorkbookInsert (354 | xlCommand)
-#define xlcOptionsTransition (355 | xlCommand)
-#define xlcOptionsGeneral (356 | xlCommand)
-#define xlcFilterAdvanced (370 | xlCommand)
-#define xlcMailAddMailer (373 | xlCommand)
-#define xlcMailDeleteMailer (374 | xlCommand)
-#define xlcMailReply (375 | xlCommand)
-#define xlcMailReplyAll (376 | xlCommand)
-#define xlcMailForward (377 | xlCommand)
-#define xlcMailNextLetter (378 | xlCommand)
-#define xlcDataLabel (379 | xlCommand)
-#define xlcInsertTitle (380 | xlCommand)
-#define xlcFontProperties (381 | xlCommand)
-#define xlcMacroOptions (382 | xlCommand)
-#define xlcWorkbookHide (383 | xlCommand)
-#define xlcWorkbookUnhide (384 | xlCommand)
-#define xlcWorkbookDelete (385 | xlCommand)
-#define xlcWorkbookName (386 | xlCommand)
-#define xlcGalleryCustom (388 | xlCommand)
-#define xlcAddChartAutoformat (390 | xlCommand)
-#define xlcDeleteChartAutoformat (391 | xlCommand)
-#define xlcChartAddData (392 | xlCommand)
-#define xlcAutoOutline (393 | xlCommand)
-#define xlcTabOrder (394 | xlCommand)
-#define xlcShowDialog (395 | xlCommand)
-#define xlcSelectAll (396 | xlCommand)
-#define xlcUngroupSheets (397 | xlCommand)
-#define xlcSubtotalCreate (398 | xlCommand)
-#define xlcSubtotalRemove (399 | xlCommand)
-#define xlcRenameObject (400 | xlCommand)
-#define xlcWorkbookScroll (412 | xlCommand)
-#define xlcWorkbookNext (413 | xlCommand)
-#define xlcWorkbookPrev (414 | xlCommand)
-#define xlcWorkbookTabSplit (415 | xlCommand)
-#define xlcFullScreen (416 | xlCommand)
-#define xlcWorkbookProtect (417 | xlCommand)
-#define xlcScrollbarProperties (420 | xlCommand)
-#define xlcPivotShowPages (421 | xlCommand)
-#define xlcTextToColumns (422 | xlCommand)
-#define xlcFormatCharttype (423 | xlCommand)
-#define xlcLinkFormat (424 | xlCommand)
-#define xlcTracerDisplay (425 | xlCommand)
-#define xlcTracerNavigate (430 | xlCommand)
-#define xlcTracerClear (431 | xlCommand)
-#define xlcTracerError (432 | xlCommand)
-#define xlcPivotFieldGroup (433 | xlCommand)
-#define xlcPivotFieldUngroup (434 | xlCommand)
-#define xlcCheckboxProperties (435 | xlCommand)
-#define xlcLabelProperties (436 | xlCommand)
-#define xlcListboxProperties (437 | xlCommand)
-#define xlcEditboxProperties (438 | xlCommand)
-#define xlcPivotRefresh (439 | xlCommand)
-#define xlcLinkCombo (440 | xlCommand)
-#define xlcOpenText (441 | xlCommand)
-#define xlcHideDialog (442 | xlCommand)
-#define xlcSetDialogFocus (443 | xlCommand)
-#define xlcEnableObject (444 | xlCommand)
-#define xlcPushbuttonProperties (445 | xlCommand)
-#define xlcSetDialogDefault (446 | xlCommand)
-#define xlcFilter (447 | xlCommand)
-#define xlcFilterShowAll (448 | xlCommand)
-#define xlcClearOutline (449 | xlCommand)
-#define xlcFunctionWizard (450 | xlCommand)
-#define xlcAddListItem (451 | xlCommand)
-#define xlcSetListItem (452 | xlCommand)
-#define xlcRemoveListItem (453 | xlCommand)
-#define xlcSelectListItem (454 | xlCommand)
-#define xlcSetControlValue (455 | xlCommand)
-#define xlcSaveCopyAs (456 | xlCommand)
-#define xlcOptionsListsAdd (458 | xlCommand)
-#define xlcOptionsListsDelete (459 | xlCommand)
-#define xlcSeriesAxes (460 | xlCommand)
-#define xlcSeriesX (461 | xlCommand)
-#define xlcSeriesY (462 | xlCommand)
-#define xlcErrorbarX (463 | xlCommand)
-#define xlcErrorbarY (464 | xlCommand)
-#define xlcFormatChart (465 | xlCommand)
-#define xlcSeriesOrder (466 | xlCommand)
-#define xlcMailLogoff (467 | xlCommand)
-#define xlcClearRoutingSlip (468 | xlCommand)
-#define xlcAppActivateMicrosoft (469 | xlCommand)
-#define xlcMailEditMailer (470 | xlCommand)
-#define xlcOnSheet (471 | xlCommand)
-#define xlcStandardWidth (472 | xlCommand)
-#define xlcScenarioMerge (473 | xlCommand)
-#define xlcSummaryInfo (474 | xlCommand)
-#define xlcFindFile (475 | xlCommand)
-#define xlcActiveCellFont (476 | xlCommand)
-#define xlcEnableTipwizard (477 | xlCommand)
-#define xlcVbaMakeAddin (478 | xlCommand)
-#define xlcMailSendMailer (482 | xlCommand)
+static const int xlcBeep = (0 | xlCommand);
+static const int xlcOpen = (1 | xlCommand);
+static const int xlcOpenLinks = (2 | xlCommand);
+static const int xlcCloseAll = (3 | xlCommand);
+static const int xlcSave = (4 | xlCommand);
+static const int xlcSaveAs = (5 | xlCommand);
+static const int xlcFileDelete = (6 | xlCommand);
+static const int xlcPageSetup = (7 | xlCommand);
+static const int xlcPrint = (8 | xlCommand);
+static const int xlcPrinterSetup = (9 | xlCommand);
+static const int xlcQuit = (10 | xlCommand);
+static const int xlcNewWindow = (11 | xlCommand);
+static const int xlcArrangeAll = (12 | xlCommand);
+static const int xlcWindowSize = (13 | xlCommand);
+static const int xlcWindowMove = (14 | xlCommand);
+static const int xlcFull = (15 | xlCommand);
+static const int xlcClose = (16 | xlCommand);
+static const int xlcRun = (17 | xlCommand);
+static const int xlcSetPrintArea = (22 | xlCommand);
+static const int xlcSetPrintTitles = (23 | xlCommand);
+static const int xlcSetPageBreak = (24 | xlCommand);
+static const int xlcRemovePageBreak = (25 | xlCommand);
+static const int xlcFont = (26 | xlCommand);
+static const int xlcDisplay = (27 | xlCommand);
+static const int xlcProtectDocument = (28 | xlCommand);
+static const int xlcPrecision = (29 | xlCommand);
+static const int xlcA1R1c1 = (30 | xlCommand);
+static const int xlcCalculateNow = (31 | xlCommand);
+static const int xlcCalculation = (32 | xlCommand);
+static const int xlcDataFind = (34 | xlCommand);
+static const int xlcExtract = (35 | xlCommand);
+static const int xlcDataDelete = (36 | xlCommand);
+static const int xlcSetDatabase = (37 | xlCommand);
+static const int xlcSetCriteria = (38 | xlCommand);
+static const int xlcSort = (39 | xlCommand);
+static const int xlcDataSeries = (40 | xlCommand);
+static const int xlcTable = (41 | xlCommand);
+static const int xlcFormatNumber = (42 | xlCommand);
+static const int xlcAlignment = (43 | xlCommand);
+static const int xlcStyle = (44 | xlCommand);
+static const int xlcBorder = (45 | xlCommand);
+static const int xlcCellProtection = (46 | xlCommand);
+static const int xlcColumnWidth = (47 | xlCommand);
+static const int xlcUndo = (48 | xlCommand);
+static const int xlcCut = (49 | xlCommand);
+static const int xlcCopy = (50 | xlCommand);
+static const int xlcPaste = (51 | xlCommand);
+static const int xlcClear = (52 | xlCommand);
+static const int xlcPasteSpecial = (53 | xlCommand);
+static const int xlcEditDelete = (54 | xlCommand);
+static const int xlcInsert = (55 | xlCommand);
+static const int xlcFillRight = (56 | xlCommand);
+static const int xlcFillDown = (57 | xlCommand);
+static const int xlcDefineName = (61 | xlCommand);
+static const int xlcCreateNames = (62 | xlCommand);
+static const int xlcFormulaGoto = (63 | xlCommand);
+static const int xlcFormulaFind = (64 | xlCommand);
+static const int xlcSelectLastCell = (65 | xlCommand);
+static const int xlcShowActiveCell = (66 | xlCommand);
+static const int xlcGalleryArea = (67 | xlCommand);
+static const int xlcGalleryBar = (68 | xlCommand);
+static const int xlcGalleryColumn = (69 | xlCommand);
+static const int xlcGalleryLine = (70 | xlCommand);
+static const int xlcGalleryPie = (71 | xlCommand);
+static const int xlcGalleryScatter = (72 | xlCommand);
+static const int xlcCombination = (73 | xlCommand);
+static const int xlcPreferred = (74 | xlCommand);
+static const int xlcAddOverlay = (75 | xlCommand);
+static const int xlcGridlines = (76 | xlCommand);
+static const int xlcSetPreferred = (77 | xlCommand);
+static const int xlcAxes = (78 | xlCommand);
+static const int xlcLegend = (79 | xlCommand);
+static const int xlcAttachText = (80 | xlCommand);
+static const int xlcAddArrow = (81 | xlCommand);
+static const int xlcSelectChart = (82 | xlCommand);
+static const int xlcSelectPlotArea = (83 | xlCommand);
+static const int xlcPatterns = (84 | xlCommand);
+static const int xlcMainChart = (85 | xlCommand);
+static const int xlcOverlay = (86 | xlCommand);
+static const int xlcScale = (87 | xlCommand);
+static const int xlcFormatLegend = (88 | xlCommand);
+static const int xlcFormatText = (89 | xlCommand);
+static const int xlcEditRepeat = (90 | xlCommand);
+static const int xlcParse = (91 | xlCommand);
+static const int xlcJustify = (92 | xlCommand);
+static const int xlcHide = (93 | xlCommand);
+static const int xlcUnhide = (94 | xlCommand);
+static const int xlcWorkspace = (95 | xlCommand);
+static const int xlcFormula = (96 | xlCommand);
+static const int xlcFormulaFill = (97 | xlCommand);
+static const int xlcFormulaArray = (98 | xlCommand);
+static const int xlcDataFindNext = (99 | xlCommand);
+static const int xlcDataFindPrev = (100 | xlCommand);
+static const int xlcFormulaFindNext = (101 | xlCommand);
+static const int xlcFormulaFindPrev = (102 | xlCommand);
+static const int xlcActivate = (103 | xlCommand);
+static const int xlcActivateNext = (104 | xlCommand);
+static const int xlcActivatePrev = (105 | xlCommand);
+static const int xlcUnlockedNext = (106 | xlCommand);
+static const int xlcUnlockedPrev = (107 | xlCommand);
+static const int xlcCopyPicture = (108 | xlCommand);
+static const int xlcSelect = (109 | xlCommand);
+static const int xlcDeleteName = (110 | xlCommand);
+static const int xlcDeleteFormat = (111 | xlCommand);
+static const int xlcVline = (112 | xlCommand);
+static const int xlcHline = (113 | xlCommand);
+static const int xlcVpage = (114 | xlCommand);
+static const int xlcHpage = (115 | xlCommand);
+static const int xlcVscroll = (116 | xlCommand);
+static const int xlcHscroll = (117 | xlCommand);
+static const int xlcAlert = (118 | xlCommand);
+static const int xlcNew = (119 | xlCommand);
+static const int xlcCancelCopy = (120 | xlCommand);
+static const int xlcShowClipboard = (121 | xlCommand);
+static const int xlcMessage = (122 | xlCommand);
+static const int xlcPasteLink = (124 | xlCommand);
+static const int xlcAppActivate = (125 | xlCommand);
+static const int xlcDeleteArrow = (126 | xlCommand);
+static const int xlcRowHeight = (127 | xlCommand);
+static const int xlcFormatMove = (128 | xlCommand);
+static const int xlcFormatSize = (129 | xlCommand);
+static const int xlcFormulaReplace = (130 | xlCommand);
+static const int xlcSendKeys = (131 | xlCommand);
+static const int xlcSelectSpecial = (132 | xlCommand);
+static const int xlcApplyNames = (133 | xlCommand);
+static const int xlcReplaceFont = (134 | xlCommand);
+static const int xlcFreezePanes = (135 | xlCommand);
+static const int xlcShowInfo = (136 | xlCommand);
+static const int xlcSplit = (137 | xlCommand);
+static const int xlcOnWindow = (138 | xlCommand);
+static const int xlcOnData = (139 | xlCommand);
+static const int xlcDisableInput = (140 | xlCommand);
+static const int xlcEcho = (141 | xlCommand);
+static const int xlcOutline = (142 | xlCommand);
+static const int xlcListNames = (143 | xlCommand);
+static const int xlcFileClose = (144 | xlCommand);
+static const int xlcSaveWorkbook = (145 | xlCommand);
+static const int xlcDataForm = (146 | xlCommand);
+static const int xlcCopyChart = (147 | xlCommand);
+static const int xlcOnTime = (148 | xlCommand);
+static const int xlcWait = (149 | xlCommand);
+static const int xlcFormatFont = (150 | xlCommand);
+static const int xlcFillUp = (151 | xlCommand);
+static const int xlcFillLeft = (152 | xlCommand);
+static const int xlcDeleteOverlay = (153 | xlCommand);
+static const int xlcNote = (154 | xlCommand);
+static const int xlcShortMenus = (155 | xlCommand);
+static const int xlcSetUpdateStatus = (159 | xlCommand);
+static const int xlcColorPalette = (161 | xlCommand);
+static const int xlcDeleteStyle = (162 | xlCommand);
+static const int xlcWindowRestore = (163 | xlCommand);
+static const int xlcWindowMaximize = (164 | xlCommand);
+static const int xlcError = (165 | xlCommand);
+static const int xlcChangeLink = (166 | xlCommand);
+static const int xlcCalculateDocument = (167 | xlCommand);
+static const int xlcOnKey = (168 | xlCommand);
+static const int xlcAppRestore = (169 | xlCommand);
+static const int xlcAppMove = (170 | xlCommand);
+static const int xlcAppSize = (171 | xlCommand);
+static const int xlcAppMinimize = (172 | xlCommand);
+static const int xlcAppMaximize = (173 | xlCommand);
+static const int xlcBringToFront = (174 | xlCommand);
+static const int xlcSendToBack = (175 | xlCommand);
+static const int xlcMainChartType = (185 | xlCommand);
+static const int xlcOverlayChartType = (186 | xlCommand);
+static const int xlcSelectEnd = (187 | xlCommand);
+static const int xlcOpenMail = (188 | xlCommand);
+static const int xlcSendMail = (189 | xlCommand);
+static const int xlcStandardFont = (190 | xlCommand);
+static const int xlcConsolidate = (191 | xlCommand);
+static const int xlcSortSpecial = (192 | xlCommand);
+static const int xlcGallery3dArea = (193 | xlCommand);
+static const int xlcGallery3dColumn = (194 | xlCommand);
+static const int xlcGallery3dLine = (195 | xlCommand);
+static const int xlcGallery3dPie = (196 | xlCommand);
+static const int xlcView3d = (197 | xlCommand);
+static const int xlcGoalSeek = (198 | xlCommand);
+static const int xlcWorkgroup = (199 | xlCommand);
+static const int xlcFillGroup = (200 | xlCommand);
+static const int xlcUpdateLink = (201 | xlCommand);
+static const int xlcPromote = (202 | xlCommand);
+static const int xlcDemote = (203 | xlCommand);
+static const int xlcShowDetail = (204 | xlCommand);
+static const int xlcUngroup = (206 | xlCommand);
+static const int xlcObjectProperties = (207 | xlCommand);
+static const int xlcSaveNewObject = (208 | xlCommand);
+static const int xlcShare = (209 | xlCommand);
+static const int xlcShareName = (210 | xlCommand);
+static const int xlcDuplicate = (211 | xlCommand);
+static const int xlcApplyStyle = (212 | xlCommand);
+static const int xlcAssignToObject = (213 | xlCommand);
+static const int xlcObjectProtection = (214 | xlCommand);
+static const int xlcHideObject = (215 | xlCommand);
+static const int xlcSetExtract = (216 | xlCommand);
+static const int xlcCreatePublisher = (217 | xlCommand);
+static const int xlcSubscribeTo = (218 | xlCommand);
+static const int xlcAttributes = (219 | xlCommand);
+static const int xlcShowToolbar = (220 | xlCommand);
+static const int xlcPrintPreview = (222 | xlCommand);
+static const int xlcEditColor = (223 | xlCommand);
+static const int xlcShowLevels = (224 | xlCommand);
+static const int xlcFormatMain = (225 | xlCommand);
+static const int xlcFormatOverlay = (226 | xlCommand);
+static const int xlcOnRecalc = (227 | xlCommand);
+static const int xlcEditSeries = (228 | xlCommand);
+static const int xlcDefineStyle = (229 | xlCommand);
+static const int xlcLinePrint = (240 | xlCommand);
+static const int xlcEnterData = (243 | xlCommand);
+static const int xlcGalleryRadar = (249 | xlCommand);
+static const int xlcMergeStyles = (250 | xlCommand);
+static const int xlcEditionOptions = (251 | xlCommand);
+static const int xlcPastePicture = (252 | xlCommand);
+static const int xlcPastePictureLink = (253 | xlCommand);
+static const int xlcSpelling = (254 | xlCommand);
+static const int xlcZoom = (256 | xlCommand);
+static const int xlcResume = (258 | xlCommand);
+static const int xlcInsertObject = (259 | xlCommand);
+static const int xlcWindowMinimize = (260 | xlCommand);
+static const int xlcSize = (261 | xlCommand);
+static const int xlcMove = (262 | xlCommand);
+static const int xlcSoundNote = (265 | xlCommand);
+static const int xlcSoundPlay = (266 | xlCommand);
+static const int xlcFormatShape = (267 | xlCommand);
+static const int xlcExtendPolygon = (268 | xlCommand);
+static const int xlcFormatAuto = (269 | xlCommand);
+static const int xlcGallery3dBar = (272 | xlCommand);
+static const int xlcGallery3dSurface = (273 | xlCommand);
+static const int xlcFillAuto = (274 | xlCommand);
+static const int xlcCustomizeToolbar = (276 | xlCommand);
+static const int xlcAddTool = (277 | xlCommand);
+static const int xlcEditObject = (278 | xlCommand);
+static const int xlcOnDoubleclick = (279 | xlCommand);
+static const int xlcOnEntry = (280 | xlCommand);
+static const int xlcWorkbookAdd = (281 | xlCommand);
+static const int xlcWorkbookMove = (282 | xlCommand);
+static const int xlcWorkbookCopy = (283 | xlCommand);
+static const int xlcWorkbookOptions = (284 | xlCommand);
+static const int xlcSaveWorkspace = (285 | xlCommand);
+static const int xlcChartWizard = (288 | xlCommand);
+static const int xlcDeleteTool = (289 | xlCommand);
+static const int xlcMoveTool = (290 | xlCommand);
+static const int xlcWorkbookSelect = (291 | xlCommand);
+static const int xlcWorkbookActivate = (292 | xlCommand);
+static const int xlcAssignToTool = (293 | xlCommand);
+static const int xlcCopyTool = (295 | xlCommand);
+static const int xlcResetTool = (296 | xlCommand);
+static const int xlcConstrainNumeric = (297 | xlCommand);
+static const int xlcPasteTool = (298 | xlCommand);
+static const int xlcPlacement = (300 | xlCommand);
+static const int xlcFillWorkgroup = (301 | xlCommand);
+static const int xlcWorkbookNew = (302 | xlCommand);
+static const int xlcScenarioCells = (305 | xlCommand);
+static const int xlcScenarioDelete = (306 | xlCommand);
+static const int xlcScenarioAdd = (307 | xlCommand);
+static const int xlcScenarioEdit = (308 | xlCommand);
+static const int xlcScenarioShow = (309 | xlCommand);
+static const int xlcScenarioShowNext = (310 | xlCommand);
+static const int xlcScenarioSummary = (311 | xlCommand);
+static const int xlcPivotTableWizard = (312 | xlCommand);
+static const int xlcPivotFieldProperties = (313 | xlCommand);
+static const int xlcPivotField = (314 | xlCommand);
+static const int xlcPivotItem = (315 | xlCommand);
+static const int xlcPivotAddFields = (316 | xlCommand);
+static const int xlcOptionsCalculation = (318 | xlCommand);
+static const int xlcOptionsEdit = (319 | xlCommand);
+static const int xlcOptionsView = (320 | xlCommand);
+static const int xlcAddinManager = (321 | xlCommand);
+static const int xlcMenuEditor = (322 | xlCommand);
+static const int xlcAttachToolbars = (323 | xlCommand);
+static const int xlcVbaReset = (324 | xlCommand);
+static const int xlcOptionsChart = (325 | xlCommand);
+static const int xlcStart = (326 | xlCommand);
+static const int xlcVbaEnd = (327 | xlCommand);
+static const int xlcVbaInsertFile = (328 | xlCommand);
+static const int xlcVbaProcedureDefinition = (330 | xlCommand);
+static const int xlcVbaReferences = (331 | xlCommand);
+static const int xlcVbaStepInto = (332 | xlCommand);
+static const int xlcVbaStepOver = (333 | xlCommand);
+static const int xlcVbaToggleBreakpoint = (334 | xlCommand);
+static const int xlcVbaClearBreakpoints = (335 | xlCommand);
+static const int xlcRoutingSlip = (336 | xlCommand);
+static const int xlcRouteDocument = (338 | xlCommand);
+static const int xlcMailLogon = (339 | xlCommand);
+static const int xlcInsertPicture = (342 | xlCommand);
+static const int xlcEditTool = (343 | xlCommand);
+static const int xlcGalleryDoughnut = (344 | xlCommand);
+static const int xlcVbaObjectBrowser = (345 | xlCommand);
+static const int xlcVbaDebugWindow = (346 | xlCommand);
+static const int xlcVbaAddWatch = (347 | xlCommand);
+static const int xlcVbaEditWatch = (348 | xlCommand);
+static const int xlcVbaInstantWatch = (349 | xlCommand);
+static const int xlcChartTrend = (350 | xlCommand);
+static const int xlcPivotItemProperties = (352 | xlCommand);
+static const int xlcWorkbookInsert = (354 | xlCommand);
+static const int xlcOptionsTransition = (355 | xlCommand);
+static const int xlcOptionsGeneral = (356 | xlCommand);
+static const int xlcFilterAdvanced = (370 | xlCommand);
+static const int xlcMailAddMailer = (373 | xlCommand);
+static const int xlcMailDeleteMailer = (374 | xlCommand);
+static const int xlcMailReply = (375 | xlCommand);
+static const int xlcMailReplyAll = (376 | xlCommand);
+static const int xlcMailForward = (377 | xlCommand);
+static const int xlcMailNextLetter = (378 | xlCommand);
+static const int xlcDataLabel = (379 | xlCommand);
+static const int xlcInsertTitle = (380 | xlCommand);
+static const int xlcFontProperties = (381 | xlCommand);
+static const int xlcMacroOptions = (382 | xlCommand);
+static const int xlcWorkbookHide = (383 | xlCommand);
+static const int xlcWorkbookUnhide = (384 | xlCommand);
+static const int xlcWorkbookDelete = (385 | xlCommand);
+static const int xlcWorkbookName = (386 | xlCommand);
+static const int xlcGalleryCustom = (388 | xlCommand);
+static const int xlcAddChartAutoformat = (390 | xlCommand);
+static const int xlcDeleteChartAutoformat = (391 | xlCommand);
+static const int xlcChartAddData = (392 | xlCommand);
+static const int xlcAutoOutline = (393 | xlCommand);
+static const int xlcTabOrder = (394 | xlCommand);
+static const int xlcShowDialog = (395 | xlCommand);
+static const int xlcSelectAll = (396 | xlCommand);
+static const int xlcUngroupSheets = (397 | xlCommand);
+static const int xlcSubtotalCreate = (398 | xlCommand);
+static const int xlcSubtotalRemove = (399 | xlCommand);
+static const int xlcRenameObject = (400 | xlCommand);
+static const int xlcWorkbookScroll = (412 | xlCommand);
+static const int xlcWorkbookNext = (413 | xlCommand);
+static const int xlcWorkbookPrev = (414 | xlCommand);
+static const int xlcWorkbookTabSplit = (415 | xlCommand);
+static const int xlcFullScreen = (416 | xlCommand);
+static const int xlcWorkbookProtect = (417 | xlCommand);
+static const int xlcScrollbarProperties = (420 | xlCommand);
+static const int xlcPivotShowPages = (421 | xlCommand);
+static const int xlcTextToColumns = (422 | xlCommand);
+static const int xlcFormatCharttype = (423 | xlCommand);
+static const int xlcLinkFormat = (424 | xlCommand);
+static const int xlcTracerDisplay = (425 | xlCommand);
+static const int xlcTracerNavigate = (430 | xlCommand);
+static const int xlcTracerClear = (431 | xlCommand);
+static const int xlcTracerError = (432 | xlCommand);
+static const int xlcPivotFieldGroup = (433 | xlCommand);
+static const int xlcPivotFieldUngroup = (434 | xlCommand);
+static const int xlcCheckboxProperties = (435 | xlCommand);
+static const int xlcLabelProperties = (436 | xlCommand);
+static const int xlcListboxProperties = (437 | xlCommand);
+static const int xlcEditboxProperties = (438 | xlCommand);
+static const int xlcPivotRefresh = (439 | xlCommand);
+static const int xlcLinkCombo = (440 | xlCommand);
+static const int xlcOpenText = (441 | xlCommand);
+static const int xlcHideDialog = (442 | xlCommand);
+static const int xlcSetDialogFocus = (443 | xlCommand);
+static const int xlcEnableObject = (444 | xlCommand);
+static const int xlcPushbuttonProperties = (445 | xlCommand);
+static const int xlcSetDialogDefault = (446 | xlCommand);
+static const int xlcFilter = (447 | xlCommand);
+static const int xlcFilterShowAll = (448 | xlCommand);
+static const int xlcClearOutline = (449 | xlCommand);
+static const int xlcFunctionWizard = (450 | xlCommand);
+static const int xlcAddListItem = (451 | xlCommand);
+static const int xlcSetListItem = (452 | xlCommand);
+static const int xlcRemoveListItem = (453 | xlCommand);
+static const int xlcSelectListItem = (454 | xlCommand);
+static const int xlcSetControlValue = (455 | xlCommand);
+static const int xlcSaveCopyAs = (456 | xlCommand);
+static const int xlcOptionsListsAdd = (458 | xlCommand);
+static const int xlcOptionsListsDelete = (459 | xlCommand);
+static const int xlcSeriesAxes = (460 | xlCommand);
+static const int xlcSeriesX = (461 | xlCommand);
+static const int xlcSeriesY = (462 | xlCommand);
+static const int xlcErrorbarX = (463 | xlCommand);
+static const int xlcErrorbarY = (464 | xlCommand);
+static const int xlcFormatChart = (465 | xlCommand);
+static const int xlcSeriesOrder = (466 | xlCommand);
+static const int xlcMailLogoff = (467 | xlCommand);
+static const int xlcClearRoutingSlip = (468 | xlCommand);
+static const int xlcAppActivateMicrosoft = (469 | xlCommand);
+static const int xlcMailEditMailer = (470 | xlCommand);
+static const int xlcOnSheet = (471 | xlCommand);
+static const int xlcStandardWidth = (472 | xlCommand);
+static const int xlcScenarioMerge = (473 | xlCommand);
+static const int xlcSummaryInfo = (474 | xlCommand);
+static const int xlcFindFile = (475 | xlCommand);
+static const int xlcActiveCellFont = (476 | xlCommand);
+static const int xlcEnableTipwizard = (477 | xlCommand);
+static const int xlcVbaMakeAddin = (478 | xlCommand);
+static const int xlcMailSendMailer = (482 | xlCommand);
 
 #ifdef __cplusplus
 }			/*! End of extern "C" { */
 #endif	/*! __cplusplus */
+
 
 #endif

@@ -1,0 +1,71 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "idl2def", "idl2def\idl2def.vcproj", "{8960DA84-FF9A-4518-8E0B-B97A8E5B1E53}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xllExample", "xllExample\xllExample.vcproj", "{465EDD0E-3CFE-4810-A98B-DD397AA28CBE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xlw", "xlw.vcproj", "{43F708FE-AEEF-4EBA-800D-9227D8141B0E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xlwExample", "xlwExample\xlwExample.vcproj", "{BA100F84-EEE9-4E8D-9285-29FB2A99F52B}"
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccProjectUniqueName0 = xlw.vcproj
+		SccProjectName0 = \u0022$/xlw\u0022,\u0020BXAAAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		SccProjectUniqueName1 = xlwExample\\xlwExample.vcproj
+		SccProjectName1 = \u0022$/afl/xlw/xlwExample\u0022,\u0020IXAAAAAA
+		SccLocalPath1 = xlwExample
+		SccProvider1 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = OnTheEdgeDebug
+		ConfigName.2 = OnTheEdgeRelease
+		ConfigName.3 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+		{465EDD0E-3CFE-4810-A98B-DD397AA28CBE}.0 = {8960DA84-FF9A-4518-8E0B-B97A8E5B1E53}
+		{465EDD0E-3CFE-4810-A98B-DD397AA28CBE}.1 = {43F708FE-AEEF-4EBA-800D-9227D8141B0E}
+		{BA100F84-EEE9-4E8D-9285-29FB2A99F52B}.0 = {43F708FE-AEEF-4EBA-800D-9227D8141B0E}
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{8960DA84-FF9A-4518-8E0B-B97A8E5B1E53}.Debug.ActiveCfg = Release|Win32
+		{8960DA84-FF9A-4518-8E0B-B97A8E5B1E53}.Debug.Build.0 = Release|Win32
+		{8960DA84-FF9A-4518-8E0B-B97A8E5B1E53}.OnTheEdgeDebug.ActiveCfg = Release|Win32
+		{8960DA84-FF9A-4518-8E0B-B97A8E5B1E53}.OnTheEdgeDebug.Build.0 = Release|Win32
+		{8960DA84-FF9A-4518-8E0B-B97A8E5B1E53}.OnTheEdgeRelease.ActiveCfg = Release|Win32
+		{8960DA84-FF9A-4518-8E0B-B97A8E5B1E53}.OnTheEdgeRelease.Build.0 = Release|Win32
+		{8960DA84-FF9A-4518-8E0B-B97A8E5B1E53}.Release.ActiveCfg = Release|Win32
+		{8960DA84-FF9A-4518-8E0B-B97A8E5B1E53}.Release.Build.0 = Release|Win32
+		{465EDD0E-3CFE-4810-A98B-DD397AA28CBE}.Debug.ActiveCfg = Debug|Win32
+		{465EDD0E-3CFE-4810-A98B-DD397AA28CBE}.Debug.Build.0 = Debug|Win32
+		{465EDD0E-3CFE-4810-A98B-DD397AA28CBE}.OnTheEdgeDebug.ActiveCfg = Release|Win32
+		{465EDD0E-3CFE-4810-A98B-DD397AA28CBE}.OnTheEdgeDebug.Build.0 = Release|Win32
+		{465EDD0E-3CFE-4810-A98B-DD397AA28CBE}.OnTheEdgeRelease.ActiveCfg = Debug|Win32
+		{465EDD0E-3CFE-4810-A98B-DD397AA28CBE}.OnTheEdgeRelease.Build.0 = Debug|Win32
+		{465EDD0E-3CFE-4810-A98B-DD397AA28CBE}.Release.ActiveCfg = Release|Win32
+		{465EDD0E-3CFE-4810-A98B-DD397AA28CBE}.Release.Build.0 = Release|Win32
+		{43F708FE-AEEF-4EBA-800D-9227D8141B0E}.Debug.ActiveCfg = Debug|Win32
+		{43F708FE-AEEF-4EBA-800D-9227D8141B0E}.Debug.Build.0 = Debug|Win32
+		{43F708FE-AEEF-4EBA-800D-9227D8141B0E}.OnTheEdgeDebug.ActiveCfg = OnTheEdgeRelease|Win32
+		{43F708FE-AEEF-4EBA-800D-9227D8141B0E}.OnTheEdgeDebug.Build.0 = OnTheEdgeRelease|Win32
+		{43F708FE-AEEF-4EBA-800D-9227D8141B0E}.OnTheEdgeRelease.ActiveCfg = OnTheEdgeDebug|Win32
+		{43F708FE-AEEF-4EBA-800D-9227D8141B0E}.OnTheEdgeRelease.Build.0 = OnTheEdgeDebug|Win32
+		{43F708FE-AEEF-4EBA-800D-9227D8141B0E}.Release.ActiveCfg = Release|Win32
+		{43F708FE-AEEF-4EBA-800D-9227D8141B0E}.Release.Build.0 = Release|Win32
+		{BA100F84-EEE9-4E8D-9285-29FB2A99F52B}.Debug.ActiveCfg = Debug|Win32
+		{BA100F84-EEE9-4E8D-9285-29FB2A99F52B}.Debug.Build.0 = Debug|Win32
+		{BA100F84-EEE9-4E8D-9285-29FB2A99F52B}.OnTheEdgeDebug.ActiveCfg = OnTheEdgeDebug|Win32
+		{BA100F84-EEE9-4E8D-9285-29FB2A99F52B}.OnTheEdgeDebug.Build.0 = OnTheEdgeDebug|Win32
+		{BA100F84-EEE9-4E8D-9285-29FB2A99F52B}.OnTheEdgeRelease.ActiveCfg = OnTheEdgeDebug|Win32
+		{BA100F84-EEE9-4E8D-9285-29FB2A99F52B}.OnTheEdgeRelease.Build.0 = OnTheEdgeDebug|Win32
+		{BA100F84-EEE9-4E8D-9285-29FB2A99F52B}.Release.ActiveCfg = Release|Win32
+		{BA100F84-EEE9-4E8D-9285-29FB2A99F52B}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
