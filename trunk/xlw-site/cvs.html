@@ -84,7 +84,7 @@ lists</a></li>
 <li><a class="navlink" href=
 "http://sf.net/projects/xlw">Project&nbsp;page (exits)</a></li>
 
-<li><a class="navlink" href="cvs.html">CVS</a></li>
+<li><a class="navlink" href="http://sourceforge.net/svn/?group_id=45222">SVN (exits)</a></li>
 
 <li><a class="navlink" href="snapshot.html">Latest build</a></li>
 
@@ -127,105 +127,15 @@ height="31" width="88"></a></p>
 <td class="main"><!--/includeHTML-->
 <h1 class="center">XLW's CVS Repository</h1>
 
-<p>If you're new to CVS please read the <a href=
-"http://sourceforge.net/docman/?group_id=1">SourceForge.net CVS
-documentation</a>, especially their <a href=
-"http://sourceforge.net/docman/display_doc.php?docid=765&amp;group_id=1">
-CVS FAQ</a>. For general (and more advanced) information consult
-the <a href="http://cvsbook.red-bean.com/">free CVS Book</a> and
-the <a href="http://www.loria.fr/~molli/cvs/doc/cvs_toc.html">CVS
-Docs at www.loria.fr</a></p>
+<table border="1" bgcolor="lightsteelblue">
+<tr>
+<td><b>NB:</b> Documentation on the xlw CVS repository was previously located
+at this link.  The xlw repository has been migrated to Subversion, please refer
+instead to the document below:<br><br>
+<a href="http://sourceforge.net/svn/?group_id=45222">http://sourceforge.net/svn/?group_id=45222<a></td>
+</tr>
+</table>
 
-<p>You can <a href=
-"http://cvs.sf.net/cgi-bin/viewcvs.cgi/xlw/">browse the CVS
-tree</a>: this gives you a great view into the current status of
-the project's code. You may also view the complete histories of any
-file in the repository.</p>
-
-<h3>Anonymous CVS Access</h3>
-
-<p>The modules can be checked out through anonymous (pserver) CVS
-with the following instruction set. The module you wish to check
-out must be specified as the modulename. When prompted for a
-password for anonymous, simply press the Enter key.</p>
-
-<p>Unix:</p>
-
-<pre>
-export CVSROOT=:pserver:anonymous@cvs.xlw.sf.net:/cvsroot/xlw
-cvs login
-cvs -z3 co -P xlw
-</pre>
-
-<p>Win32:</p>
-
-<pre>
-SET CVSROOT=:pserver:anonymous@cvs.xlw.sf.net:/cvsroot/xlw
-cvs login
-cvs -z3 co -P xlw
-</pre>
-
-<p>After initial checkout, you can execute cvs commands in this
-directory without the CVSROOT exporting/setting. For example:</p>
-
-<pre>
-cvs update
-</pre>
-
-<p>If you are behind a firewall ask your sysadmin to open the
-cvspserver port (2401) for outgoing connection from your machine to
-cvs.xlw.sf.net</p>
-
-<br>
-<h3>Developer CVS Access via SSH</h3>
-
-<p>If you are a SourceForge.net-recognized XLW developer you can
-access the CVS tree via SSH. SSH1 must be installed on your client
-machine. Substitute modulename and developername with the proper
-values. Enter your site password when prompted.</p>
-
-<p>Unix:</p>
-
-<pre>
-export CVSROOT=developername@cvs.xlw.sf.net:/cvsroot/xlw
-export CVS_RSH=ssh
-cvs -z3 co -P xlw
-</pre>
-
-<p>Win32:</p>
-
-<pre>
-SET CVSROOT=developername@cvs.xlw.sf.net:/cvsroot/xlw
-SET CVS_RSH=ssh
-cvs -z3 co -P xlw
-</pre>
-
-<p>After initial checkout, you can change into this directory and
-execute cvs commands without the CVSROOT exporting/setting. For
-example:</p>
-
-<pre>
-cvs update
-cvs commit -m "comments for this commit"
-cvs add myfile.c
-</pre>
-
-<p>If you are behind a firewall you need to open the shh port (22)
-for outgoing connection from your machine to xlw.sf.net,
-shell.sf.net, and upload.sf.net (the latter just in case you plan
-to help the XLW release process).</p>
-
-<!--includeHTML file="xlwtablefoot.inc"-->
-<div class="endmatter">
-<hr>
-<div class="center">
-<p>Feedback and questions concerning this site and project can be
-directed to<br>
- the <a href=
-"http://lists.sourceforge.net/lists/listinfo/xlw-users">xlw-users</a>
-mailing list.</p>
-</div>
-</div>
 </td>
 </tr>
 </tbody>
