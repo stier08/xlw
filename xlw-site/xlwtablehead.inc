@@ -43,7 +43,7 @@ Statistics (exits)</a></li>
 <li><a class="navlink" href=
 "http://sf.net/projects/xlw">Project&nbsp;page (exits)</a></li>
 
-<li><a class="navlink" href="cvs.html">CVS</a></li>
+<li><a class="navlink" href="http://sourceforge.net/svn/?group_id=45222">SVN (exits)</a></li>
 
 <li><a class="navlink" href="snapshot.html">Latest build</a></li>
 
