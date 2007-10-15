@@ -126,8 +126,11 @@ The table below summarizes the advantages and disadvantages of the supported int
 <p>
 Legacy code references to <code>XlfOper</code> map by default to the new <code>XlfOper</code> class. The new build of xlw provides preprocessor symbols allowing legacy code to <code>#define</code> <code>XlfOper</code> to <code>XlfOper4</code> or <code>XlfOper12</code> if desired.<h2><a class="anchor" name="ep_prototype">
 Prototype</a></h2>
-Below is a Visual C++ 2005 console (DOS) project which prototypes the design proposed in this document.<p>
-<a href="prototype.zip">prototype.zip</a><h2><a class="anchor" name="ep_notes">
+Below are links to directories in the xlw subversion repository containing a Visual C++ 2005 console (DOS) project which prototypes the design proposed in this document.<p>
+To browse online:<p>
+<a href="http://xlw.svn.sourceforge.net/viewvc/xlw/branches/prototype/">http://xlw.svn.sourceforge.net/viewvc/xlw/branches/prototype/</a><p>
+For checkout by an svn client such as TortoiseSVN:<p>
+<a href="https://xlw.svn.sourceforge.net/svnroot/xlw/branches/prototype/">https://xlw.svn.sourceforge.net/svnroot/xlw/branches/prototype/</a><h2><a class="anchor" name="ep_notes">
 Notes</a></h2>
 <ul>
 <li>The existing <code>XlfOper</code> class declares data member lpxloper_ public, even though a public accessor is also supplied. lpxloper4_/lpxloper12_ are declared private in the new <code>XlfOper</code> class.</li>
@@ -142,7 +145,13 @@ The table below summarizes the revision history for this document.<p>
 <tr>
 <td><b>Date</b></td><td><b>Revision</b> </td></tr>
 <tr>
-<td>15 October 2007</td><td>Initial draft </td></tr>
+<td>15-October-2007 </td><td><ul>
+<li>Link to prototype code in svn repository </li>
+<li>Update prototype to emphasize that when Excel passes values of type <code>LPXLOPER</code> to an xlw Addin function having parameters of type <code>XlfOper</code> no <code>XlfOper</code> ctor is invoked </li>
+</ul>
+</td></tr>
+<tr>
+<td>15-October-2007</td><td>Initial draft </td></tr>
 </table>
 
 <hr size="1">
