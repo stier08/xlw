@@ -8,7 +8,7 @@
 #define DLLEXPORT extern "C" __declspec(dllexport)
 #define XL_MAX_STR_LEN 255
 
-bool test_excel12() {
+bool excel12() {
     XLOPER xRet1, xRet2;
     Excel(xlfGetWorkspace, &xRet1, 1, TempInt(2));
     Excel(xlCoerce, &xRet2, 2, &xRet1, TempInt(xltypeInt));
@@ -21,9 +21,7 @@ DLLEXPORT int xlAutoOpen() {
     XLOPER xDll;
     Excel(xlGetName, &xDll, 0);
 
-    bool excel12 = test_excel12();
-
-    if (excel12) {
+    if (excel12()) {
 
         static XlfOperImpl12 xlfOperImpl12;
 
