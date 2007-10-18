@@ -6,7 +6,6 @@
 #include <xlfoperimpl12.hpp>
 
 #define DLLEXPORT extern "C" __declspec(dllexport)
-#define XL_MAX_STR_LEN 255
 
 bool excel12() {
     XLOPER xRet1, xRet2;

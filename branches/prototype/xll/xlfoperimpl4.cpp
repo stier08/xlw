@@ -6,9 +6,14 @@
 long XlfOperImpl4::strlen(const XlfOper &xlfOper) const {
 
     XLOPER xStr;
+    long ret;
     Excel(xlCoerce, &xStr, 2, xlfOper.lpxloper4_, TempInt(xltypeStr));
-    long ret = (BYTE)xStr.val.str[0];
-    Excel(xlFree, 0, 1, &xStr);
+    if (xStr.xltype == xltypeStr) {
+        ret = (BYTE)xStr.val.str[0];
+        Excel(xlFree, 0, 1, &xStr);
+    } else {
+        ret = 0;
+    }
     return ret;
 
 }
