@@ -191,6 +191,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\xlfoper12.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\xlfoper4.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\xlfoperimpl.cpp"
 				>
 			</File>
@@ -218,6 +226,14 @@
 			</File>
 			<File
 				RelativePath=".\xlfoper.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\xlfoper12.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\xlfoper4.hpp"
 				>
 			</File>
 			<File

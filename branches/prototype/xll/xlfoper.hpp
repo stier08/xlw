@@ -19,12 +19,13 @@ class XlfOper {
         LPXLOPER lpxloper4_;
         LPXLOPER12 lpxloper12_;
     };
-    // XlfOper default ctor declared but not implemented.  This emphasizes 
-    // the fact that when Excel passes LPXLOPER values to an xlw Addin function 
-    // with parms of type XlfOper, the XlfOper ctor is not called.
-    XlfOper();
 public:
-    long strlen() const;
+    XlfOper(LPXLOPER lpxloper4) : lpxloper4_(lpxloper4) {}
+    XlfOper(LPXLOPER12 lpxloper12) : lpxloper12_(lpxloper12) {}
+    XlfOper echo() const;
+    operator void*() const;
+    operator LPXLOPER() const;
+    operator LPXLOPER12() const;
 };
 
 #endif
