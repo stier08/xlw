@@ -2,6 +2,9 @@
 #ifndef xlfoperimpl_hpp
 #define xlfoperimpl_hpp
 
+#include <windows.h>
+#include <xlcall.h>
+
 class XlfOper;
 
 // Class XlfOperImpl
@@ -15,7 +18,11 @@ class XlfOperImpl {
 public:
     static const XlfOperImpl &instance() { return *instance_; }
     XlfOperImpl() { instance_ = this; }
-    virtual long strlen(const XlfOper &xlfOper) const = 0;
+    virtual XlfOper create(void *in) const = 0;
+    virtual void *as_void(const XlfOper &xlfOper) const = 0;
+    virtual LPXLOPER as_LPXLOPER(const XlfOper &xlfOper) const = 0;
+    virtual LPXLOPER12 as_LPXLOPER12(const XlfOper &xlfOper) const = 0;
+    virtual XlfOper echo(const XlfOper &xlfOper) const = 0;
 };
 
 #endif

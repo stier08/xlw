@@ -3,17 +3,30 @@
 #include <xlfoper.hpp>
 #include <framewrk.h>
 
-long XlfOperImpl4::strlen(const XlfOper &xlfOper) const {
+XlfOper XlfOperImpl4::create(void *in) const {
+    XlfOper ret(static_cast<LPXLOPER>(in));
+    return ret;
+}
 
-    XLOPER xStr;
-    long ret;
-    Excel(xlCoerce, &xStr, 2, xlfOper.lpxloper4_, TempInt(xltypeStr));
-    if (xStr.xltype == xltypeStr) {
-        ret = (BYTE)xStr.val.str[0];
-        Excel(xlFree, 0, 1, &xStr);
-    } else {
-        ret = 0;
-    }
+void *XlfOperImpl4::as_void(const XlfOper &xlfOper) const {
+    return xlfOper.lpxloper4_;
+}
+
+LPXLOPER XlfOperImpl4::as_LPXLOPER(const XlfOper &xlfOper) const {
+    return xlfOper.lpxloper4_;
+}
+
+LPXLOPER12 XlfOperImpl4::as_LPXLOPER12(const XlfOper &xlfOper) const {
+    throw("operation not implemented");
+}
+
+XlfOper XlfOperImpl4::echo(const XlfOper &xlfOper) const {
+
+    static XLOPER x;
+    Excel(xlCoerce, &x, 1, xlfOper.lpxloper4_);
+    x.xltype |= xlbitXLFree;
+    XlfOper ret(&x);
     return ret;
 
 }
+
