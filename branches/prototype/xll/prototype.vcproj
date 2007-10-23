@@ -187,10 +187,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\xlfoper.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\xlfoper12.cpp"
 				>
 			</File>

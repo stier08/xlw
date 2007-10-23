@@ -2,8 +2,7 @@
 #ifndef xlfoper_hpp
 #define xlfoper_hpp
 
-#include <windows.h>
-#include <xlcall.h>
+#include <xlfoperimpl.hpp>
 
 class XlfOperImpl4;
 class XlfOperImpl12;
@@ -20,12 +19,13 @@ class XlfOper {
         LPXLOPER12 lpxloper12_;
     };
 public:
+    XlfOper(LPXLFOPER lpxloper) : lpxloper4_(reinterpret_cast<LPXLOPER>(lpxloper)) {}
     XlfOper(LPXLOPER lpxloper4) : lpxloper4_(lpxloper4) {}
     XlfOper(LPXLOPER12 lpxloper12) : lpxloper12_(lpxloper12) {}
-    XlfOper echo() const;
-    operator void*() const;
-    operator LPXLOPER() const;
-    operator LPXLOPER12() const;
+    XlfOper echo() const { return XlfOperImpl::instance().echo(*this); }
+    operator LPXLFOPER() const { return XlfOperImpl::instance().as_LPXLFOPER(*this); }
+    operator LPXLOPER() const { return XlfOperImpl::instance().as_LPXLOPER(*this); }
+    operator LPXLOPER12() const { return XlfOperImpl::instance().as_LPXLOPER12(*this); }
 };
 
 #endif

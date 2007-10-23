@@ -3,12 +3,7 @@
 #include <xlfoper.hpp>
 #include <framewrk.h>
 
-XlfOper XlfOperImpl12::create(void *in) const {
-    XlfOper ret(static_cast<LPXLOPER12>(in));
-    return ret;
-}
-
-void *XlfOperImpl12::as_void(const XlfOper &xlfOper) const {
+LPXLFOPER XlfOperImpl12::as_LPXLFOPER(const XlfOper &xlfOper) const {
     return xlfOper.lpxloper12_;
 }
 
