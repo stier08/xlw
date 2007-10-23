@@ -25,25 +25,25 @@ DLLEXPORT int xlAutoOpen() {
         static XlfOperImpl12 xlfOperImpl12;
 
         Excel(xlfRegister, 0, 7, &xDll,
-            TempStrConst("echo"),       // function code name
+            TempStrConst("xlw_echo"),   // function code name
             TempStrConst("QQ"),         // parameter codes
-            TempStrConst("echo"),       // function display name
+            TempStrConst("xlw_echo"),   // function display name
             TempStrConst(""),           // comma-delimited list of parameters
             TempStrConst("1"),          // function type (0 = hidden function, 1 = worksheet function, 2 = command macro)
             TempStrConst("PROTOTYPE")); // function category
 
         Excel(xlfRegister, 0, 7, &xDll,
-            TempStrConst("echo4"),      // function code name
+            TempStrConst("xlw_echo4"),  // function code name
             TempStrConst("PP"),         // parameter codes
-            TempStrConst("echo4"),      // function display name
+            TempStrConst("xlw_echo4"),  // function display name
             TempStrConst(""),           // comma-delimited list of parameters
             TempStrConst("1"),          // function type (0 = hidden function, 1 = worksheet function, 2 = command macro)
             TempStrConst("PROTOTYPE")); // function category
 
         Excel(xlfRegister, 0, 7, &xDll,
-            TempStrConst("echo12"),     // function code name
+            TempStrConst("xlw_echo12"), // function code name
             TempStrConst("QQ"),         // parameter codes
-            TempStrConst("echo12"),     // function display name
+            TempStrConst("xlw_echo12"), // function display name
             TempStrConst(""),           // comma-delimited list of parameters
             TempStrConst("1"),          // function type (0 = hidden function, 1 = worksheet function, 2 = command macro)
             TempStrConst("PROTOTYPE")); // function category
@@ -53,17 +53,17 @@ DLLEXPORT int xlAutoOpen() {
         static XlfOperImpl4 xlfOperImpl4;
 
         Excel(xlfRegister, 0, 7, &xDll,
-            TempStrConst("echo"),       // function code name
+            TempStrConst("xlw_echo"),   // function code name
             TempStrConst("PP"),         // parameter codes
-            TempStrConst("echo"),       // function display name
+            TempStrConst("xlw_echo"),   // function display name
             TempStrConst(""),           // comma-delimited list of parameters
             TempStrConst("1"),          // function type (0 = hidden function, 1 = worksheet function, 2 = command macro)
             TempStrConst("PROTOTYPE")); // function category
 
         Excel(xlfRegister, 0, 7, &xDll,
-            TempStrConst("echo4"),      // function code name
+            TempStrConst("xlw_echo4"),  // function code name
             TempStrConst("PP"),         // parameter codes
-            TempStrConst("echo4"),      // function display name
+            TempStrConst("xlw_echo4"),  // function display name
             TempStrConst(""),           // comma-delimited list of parameters
             TempStrConst("1"),          // function type (0 = hidden function, 1 = worksheet function, 2 = command macro)
             TempStrConst("PROTOTYPE")); // function category
