@@ -1,0 +1,75 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+// 
+// 2005-12-01  ksc  Initial release
+//  
+-->
+
+<html>
+<head>
+	<title>xlw - A C++ Wrapper for Excel</title>
+	<meta http-equiv='Content-Style-Type' content='text/css' />
+    <!--HeaderText--><style type='text/css'><!--
+  ul, ol, pre, dl, p { margin-top:0px; margin-bottom:0px; }
+  code.escaped { white-space: nowrap; }
+  .vspace { margin-top:1.33em; }
+  .indent { margin-left:40px; }
+  .outdent { margin-left:40px; text-indent:-40px; }
+  a.createlinktext { text-decoration:none; border-bottom:1px dotted gray; }
+  a.createlink { text-decoration:none; position:relative; top:-0.5em;
+    font-weight:bold; font-size:smaller; border-bottom:none; }
+  img { border:0px; }
+  .editconflict { color:green; 
+  font-style:italic; margin-top:1.33em; margin-bottom:1.33em; }
+
+  table.markup { border:2px dotted #ccf; width:90%; }
+  td.markup1, td.markup2 { padding-left:10px; padding-right:10px; }
+  table.vert td.markup1 { border-bottom:1px solid #ccf; }
+  table.horiz td.markup1 { width:23em; border-right:1px solid #ccf; }
+  table.markup caption { text-align:left; }
+  div.faq p, div.faq pre { margin-left:2em; }
+  div.faq p.question { margin:1em 0 0.75em 0; font-weight:bold; }
+   
+    .frame 
+      { border:1px solid #cccccc; padding:4px; background-color:#f9f9f9; }
+    .lfloat { float:left; margin-right:0.5em; }
+    .rfloat { float:right; margin-left:0.5em; }
+a.varlink { text-decoration:none; }
+
+--></style>  <meta name='robots' content='index,follow' />
+
+    <link rel='stylesheet' title="A Bit Modern" href='xlw.css' type='text/css' />
+
+	<script type="text/javascript">
+	<!-- //
+	browser_type = navigator.appName;
+	if (browser_type == "Microsoft Internet Explorer") { 
+		document.write("<link href='xlw.css' rel='stylesheet' type='text/css' />");
+	}
+	//-->
+	</script>
+</head>
+
+<body>
+    <div id='wrapper'>
+        <div id='head'></div>
+
+        <div id='content'>
+            <div id='col-left'>
+                <!--PageLeftFmt-->
+                <div id='sidebar'><ul><li><a class='wikilink' href='index.shtml'>Home</a>
+</li><li><a class='wikilink' href='project.shtml'>Project</a>
+</li><li><a class='wikilink' href='license.shtml'>License</a>
+</li><li><a class='wikilink' href='history.shtml'>History</a>
+<p class='vspace'></p></li><li><a class='wikilink' href='documentation.shtml'>Documentation</a>
+</li><li><a class='wikilink' href='refman/index.html'>Reference Manual</a>
+</li><li><a class='wikilink' href='version2/index.html'>Version 2</a>
+</li><li><a class='wikilink' href='version3/index.html'>Version 3</a>
+</li></ul><p class='vspace'></p>
+</div>
+                <!--/PageLeftFmt-->
+            </div>
+            <div id='col-right'>
