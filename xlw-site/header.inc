@@ -65,9 +65,6 @@ a.varlink { text-decoration:none; }
 </li><li><a class='wikilink' href='license.shtml'>License</a>
 </li><li><a class='wikilink' href='history.shtml'>History</a>
 <p class='vspace'></p></li><li><a class='wikilink' href='documentation.shtml'>Documentation</a>
-</li><li><a class='wikilink' href='refman/index.html'>Reference Manual</a>
-</li><li><a class='wikilink' href='version2/index.html'>Version 2</a>
-</li><li><a class='wikilink' href='version3/index.html'>Version 3</a>
 </li></ul><p class='vspace'></p>
 </div>
                 <!--/PageLeftFmt-->
