@@ -10,7 +10,7 @@
 
 <h3>Release 2.0 - 18 December 2006</h3>
 
-<p>This is an extension to the xlw project by Jerome Lecomte. Changes are copyright, Mark Joshi 2006 with the same licence as for the original xlw. Major new features:</p>
+<p>This is an extension to the xlw project by J&eacute;r&ocirc;me Lecomte. Changes are copyright, Mark Joshi 2006 with the same licence as for the original xlw. Major new features:</p>
 <ol><li>Automatic generation of interface file.</li>
 <li>Registration code done at point of function declaration.</li>
 <li>Improved error catching, strings, const char* and run_time errors used to pass strings back to excel containing an error message.</li>
@@ -21,101 +21,97 @@
 
 <h3>Release 1.2.2 - 7 March 2003</h3>
 
-<ul><li>xlwExample/xlwExample.xls: Added recalcPolicy to let user register function as volatile ( unconditionally recalculated). Note that default is still not volatile </li>
-<li>TODO.txt: fixed since 1.2 2003-03-02 nando </li>
-<li>xlw.dsp: english version of the dsp 2003-02-20 nando </li>
-<li>xlwExample/xlwExample.vcproj: file xlwExample.vcproj was initially added on branch libXLL branch. </li>
-<li>xlwExample/xlwExample.vcproj: libXLL added </li>
-<li>xlw/XllTypeLib.cpp: file XllTypeLib.cpp was initially added on branch libXLL-branch. </li>
-<li>xlw.vcproj: file xlw.vcproj was initially added on branch libXLL-branch. </li>
-<li>xlw/xll.h: file xll.h was initially added on branch libXLL-branch. </li>
-<li>Docs/Setting up a project with libXLL.pdf: file Setting up a project with libXLL.pdf was initially added on branch libXLL-branch. </li>
-<li>xlw.sln: file xlw.sln was initially added on branch libXLL-branch. </li>
-<li>xlw/xldata32.h: file xldata32.h was initially added on branch libXLL-branch. </li>
-<li>Docs/excel97sdk.chm: file excel97sdk.chm was initially added on branch libXLL-branch. </li>
-<li>xlfRegister.html: file xlfRegister.html was initially added on branch libXLL branch. </li>
-<li>Docs/Setting up a project with libXLL.doc: file Setting up a project with libXLL.doc was initially added on branch libXLL-branch. </li>
-<li>READMELIBXLL.TXT: file READMELIBXLL.TXT was initially added on branch libXLL branch. </li>
-<li>xlw/XllMain_c.h: file XllMain_c.h was initially added on branch libXLL-branch. </li>
-<li>xlw/XllTypeLib.h: file XllTypeLib.h was initially added on branch libXLL-branch. 2003-02-10 nando </li>
-<li>xlwExample/xll/Win32/VisualStudio/.cvsignore: added .cvsignore files 2003-02-07 nando </li>
-<li>xlwExample/xlwExample.mak: cvsignore list of files 2002-07-24 nando </li>
-<li>xlwExample/xlwExample.mak: updated version number 2002-07-09 jlecomte </li>
-<li>xlwExample/xlwExample.cpp: Merged update made for R010200f0 </li>
-<li>xlw/XlfOper.cpp: Removed PORT_USING(std) in header. Various documentation fixes </li>
-<li>Docs/images/doxygen.png: Fixed file corruption due to ascii manipulation </li>
-<li>Docs/xlwfooter.html: better proportions </li>
-<li>xlw/XlfExcel.h: Removed reference to log and ofstream </li>
-<li>xlw/EXCEL32_API.h: Updated version number to 010200f0 </li>
-<li>Docs/pages/install.txt: Updated doc for new download link, new features and updated xlwExample.cpp </li>
-<li>ChangeLog.txt: Mainly documentation fixes 2002-07-08 jlecomte </li>
-<li>Docs/images/doxygen.png: Added doxygen logo </li>
-<li>Docs/images/doxygen.png: previous version was corrupted when I checked it in as ascii </li>
-<li>Docs/pages/history.txt: Updated </li>
-<li>Docs/xlwfooter.html: Merged last minute changes that were made to HEAD </li>
-<li>Docs/xlwfooter.html: Now points to images directory. Refences new doxygen.png 2002-07-07 jlecomte </li>
-<li>xlwExample/xlwExample.dsp: Copies xll and debug information to the $BIN directory (assumed to be defined) </li>
-<li>xlw.dsw: Dependency flag helps in OnTheEdge build and does not hurt for other builds </li>
-<li>xlw/EXCEL32_API.h: Update for release 1.2.0a 2002-06-30 jlecomte </li>
-<li>xlw/XlfOper.inl: Simplified interface: ConvertToXXX is now private, AsXXX now takes an int </li>
-<li>to store the error code. If the pointer is null an exception is thrown 2002-06-26 jlecomte </li>
-<li>xlw/XlfOper.h: Moved test for auxiliary memory from XlfOper to XlfExcel. Cleaned up </li>
-<li>xlw/XlfExcel.h: Added IsCalledByFuncWiz </li>
-<li>xlwExample/xlwExample.xls: Added IsInWiz to demonstrate XlfExcel::IsCalledByFuncWiz </li>
-<li>xlwExample/xlwExample.cpp: Amended IsInWiz to demonstrate how to retrieve the caller cell 2002-06-13 jlecomte </li>
-<li>xlw/XlfOper.cpp: Fixed memory leak thanks to Ale 2002-06-11 jlecomte </li>
-<li>xlw/XlfOper.h: Fixed deletion of MS Excel data 2002-06-08 jlecomte </li>
-<li>xlw/macros.h: Moved static error OPER constructor to XlfOper </li>
-<li>xlw/XlfOper.inl: Added ThrowOnError and Error. Added documentation </li>
-<li>xlw/XlfExcel.inl: Moved ThrowOnError to XlfOper. Made XlfBuffer private. Got rid of XlfExcelDestroyer (use xlAutoClose instead) and IsInitialize Added documentation </li>
-<li>xlw/XlfOper.h: Fixed big memory leak (forgot it in previous version's log). Got rid of unneeded boolean parameter </li>
-<li>xlwExample/xlwExample.cpp: Fixed small memory leak 2002-06-05 jlecomte </li>
-<li>xlwExample/xlwExample.cpp: Simplified Stats function to take advantage of AsDoubleVector </li>
-<li>xlw/XlfOper.h: Added policy argument to AsDoubleVector and ConvertToDoubleVector. Defaults is to generate an error if the range is not 1d 2002-06-03 nando </li>
-<li>xlwExample/xlwExample.xls: added "what's changed" 2002-05-21 nando </li>
-<li>xlw.nsi: removed Borland distribution </li>
-<li>xlwExample/xlwExample.mak: makefile updated 2002-05-14 jlecomte </li>
-<li>xlw/XlfOper.h: Added (should be) throw free ConvertToDoubleVector. Updated logging to use std::cerr </li>
-<li>xlwExample/xlwExample.cpp: Updated logging to use std::cerr. Uses std::vector instead of double[] </li>
-<li>xlwExample/Win32StreamBuf.inl: Updated logging to use std::cerr </li>
-<li>xlw/XlfExcel.inl: Made allocation engine more intelligent. Updated logging to use std::cerr and removed old logging methods (did not work) </li>
-<li>xlw.dsp: Removed ERR_Macros.h </li>
-<li>xlwExample/xlwExample.dsp: Added Win32StreamBuf 2002-05-13 nando </li>
-<li>xlw/XlfOper.h: added XlfOper.AsDoubleVector() 2002-05-12 jlecomte </li>
-<li>xlw/XlfOper.h: When buffer is full, don't throw any exception, sets lpxloper_ to 0 instead. Changed other method to check for xloper_ </li>
-<li>xlw/XlfRef.h: Documention change 2002-05-11 jlecomte </li>
-<li>xlwExample/xlwExample.cpp: Reverted to v.1.3 The FreeMemory calls should not be necessary 2002-05-07 jlecomte </li>
-<li>xlw/XlfRef.inl: Changed XlfRef implementation to handle ranges in external sheets 2002-05-05 jlecomte </li>
-<li>xlw/XlfOper.cpp: Added XlfOper::ConvertToXXX (to be exception free) </li>
-<li>xlw/XlfExcel.h: Changed buffer default size to 65K. Moved xlret error handling to ThrowsOnCriticalError. </li>
-<li>xlwExample/xlwExample.cpp: Added FreeMemory calls to allow many function registrations </li>
-<li>xlw/XlfOper.h: Added (to be) exception free XlfOper::ConvertToXXX functions 2002-04-27 nando </li>
-<li>xlwExample/xlwExample-mingw32.mak: Jos� Fonseca fixes for MINGW32 </li>
-<li>xlwExample/xlwExample-mingw32.mak: Jose Fonseca fixes for MINGW32 </li>
-<li>xlw/XlfException.h: Jos� Fonseca fixes for MINGW32 </li>
-<li>xlwExample/xlwExample-mingw32.mak: Jose Fonseca fixes for MINGW32\nthe config.mgw.h file is still missing 2002-04-13 nando </li>
-<li>xlw/XlfOper.h: Jos� Fonseca fixes for MINGW32 </li>
-<li>xlw/XlfException.h: Jose Fonseca fixes for MINGW32 </li>
-<li>TODO.txt: adding Jos� Fonseca to the contributors list </li>
-<li>xlw/port.h: Jose Fonseca fixes for MINGW32\nthe config.mgw.h file is still missing 2002-04-11 nando </li>
-<li>xlwExample/xlwExample.mak: reversed logic from XLW_NOIMPORTEXPORT to XLW_IMPORTEXPORT </li>
-<li>xlwExample/xlwExample.mak: removed project dependencies: they make makefile not portable </li>
-<li>xlwExample/makefile.mak: improved parametrization of debug trailing identifier in Borland makefiles 2002-03-20 nando </li>
-<li>xlw/EXCEL32_API.h: version up to a2 </li>
-<li>xlwExample/xlwExample.mak: removed dependencies </li>
-<li>xlwExample/xlwExample.mak: project setting fixed </li>
-<li>xlw.nsi: added Borland support </li>
-<li>Docs/makefile.mak: removed winhelp from the all target </li>
-<li>xlw/config.msvc.h: excel32 renamed xlw </li>
-<li>xlw.nsi: correct version number </li>
-<li>test/main.cpp: new license </li>
-<li>Docs/pages/misc.txt: modified to have correct PDF output </li>
-<li>Docs/pages/excel32.txt: dummy commit </li>
-<li>Docs/pages/bibliography.txt: modified for correct PDF output </li>
-<li>xlw/xlcall32.h: switched to verbatim BSD license </li>
-<li>xlw/macros.h: added default catch (...) {} Temporary removed try/catch from xlAutoOpen() 2002-02-12 nando </li>
-<li>xlw/config.msvc.h: changed _d into d (degub version of the library) 2002-02-11 nando </li>
-<li>xlw/xlcall32.h: project restructuring </li></ul>
+<ul><li>xlwExample/xlwExample.xls: Added recalcPolicy to let user register function as volatile ( unconditionally recalculated). Note that default is still not volatile</li>
+<li>TODO.txt: fixed since 1.2</li>
+<li>xlw.dsp: english version of the dsp</li>
+<li>xlwExample/xlwExample.vcproj: file xlwExample.vcproj was initially added on branch libXLL branch.</li>
+<li>xlwExample/xlwExample.vcproj: libXLL added</li>
+<li>xlw/XllTypeLib.cpp: file XllTypeLib.cpp was initially added on branch libXLL-branch.</li>
+<li>xlw.vcproj: file xlw.vcproj was initially added on branch libXLL-branch.</li>
+<li>xlw/xll.h: file xll.h was initially added on branch libXLL-branch.</li>
+<li>Docs/Setting up a project with libXLL.pdf: file Setting up a project with libXLL.pdf was initially added on branch libXLL-branch.</li>
+<li>xlw.sln: file xlw.sln was initially added on branch libXLL-branch.</li>
+<li>xlw/xldata32.h: file xldata32.h was initially added on branch libXLL-branch.</li>
+<li>Docs/excel97sdk.chm: file excel97sdk.chm was initially added on branch libXLL-branch.</li>
+<li>xlfRegister.html: file xlfRegister.html was initially added on branch libXLL branch.</li>
+<li>Docs/Setting up a project with libXLL.doc: file Setting up a project with libXLL.doc was initially added on branch libXLL-branch.</li>
+<li>READMELIBXLL.TXT: file READMELIBXLL.TXT was initially added on branch libXLL branch.</li>
+<li>xlw/XllMain_c.h: file XllMain_c.h was initially added on branch libXLL-branch.</li>
+<li>xlw/XllTypeLib.h: file XllTypeLib.h was initially added on branch libXLL-branch.</li>
+<li>xlwExample/xlwExample.mak: updated version number</li>
+<li>xlwExample/xlwExample.cpp: Merged update made for R010200f0</li>
+<li>xlw/XlfOper.cpp: Removed PORT_USING(std) in header. Various documentation fixes</li>
+<li>Docs/images/doxygen.png: Fixed file corruption due to ascii manipulation</li>
+<li>Docs/xlwfooter.html: better proportions</li>
+<li>xlw/XlfExcel.h: Removed reference to log and ofstream</li>
+<li>xlw/EXCEL32_API.h: Updated version number to 010200f0</li>
+<li>Docs/pages/install.txt: Updated doc for new download link, new features and updated xlwExample.cpp</li>
+<li>ChangeLog.txt: Mainly documentation fixes</li>
+<li>Docs/images/doxygen.png: Added doxygen logo</li>
+<li>Docs/pages/history.txt: Updated</li>
+<li>Docs/xlwfooter.html: Merged last minute changes that were made to HEAD</li>
+<li>Docs/xlwfooter.html: Now points to images directory. Refences new doxygen.png</li>
+<li>xlwExample/xlwExample.dsp: Copies xll and debug information to the $BIN directory (assumed to be defined)</li>
+<li>xlw.dsw: Dependency flag helps in OnTheEdge build and does not hurt for other builds</li>
+<li>xlw/EXCEL32_API.h: Update for release 1.2.0a</li>
+<li>xlw/XlfOper.inl: Simplified interface: ConvertToXXX is now private, AsXXX now takes an int to store the error code. If the pointer is null an exception is thrown</li>
+<li>xlw/XlfOper.h: Moved test for auxiliary memory from XlfOper to XlfExcel. Cleaned up</li>
+<li>xlw/XlfExcel.h: Added IsCalledByFuncWiz</li>
+<li>xlwExample/xlwExample.xls: Added IsInWiz to demonstrate XlfExcel::IsCalledByFuncWiz</li>
+<li>xlwExample/xlwExample.cpp: Amended IsInWiz to demonstrate how to retrieve the caller cell</li>
+<li>xlw/XlfOper.cpp: Fixed memory leak thanks to Ale</li>
+<li>xlw/XlfOper.h: Fixed deletion of MS Excel data</li>
+<li>xlw/macros.h: Moved static error OPER constructor to XlfOper</li>
+<li>xlw/XlfOper.inl: Added ThrowOnError and Error. Added documentation</li>
+<li>xlw/XlfExcel.inl: Moved ThrowOnError to XlfOper. Made XlfBuffer private. Got rid of XlfExcelDestroyer (use xlAutoClose instead) and IsInitialize Added documentation</li>
+<li>xlw/XlfOper.h: Fixed big memory leak (forgot it in previous version's log). Got rid of unneeded boolean parameter</li>
+<li>xlwExample/xlwExample.cpp: Fixed small memory leak</li>
+<li>xlwExample/xlwExample.cpp: Simplified Stats function to take advantage of AsDoubleVector</li>
+<li>xlw/XlfOper.h: Added policy argument to AsDoubleVector and ConvertToDoubleVector. Defaults is to generate an error if the range is not 1d</li>
+<li>xlwExample/xlwExample.xls: added "what's changed"</li>
+<li>xlw.nsi: removed Borland distribution</li>
+<li>xlwExample/xlwExample.mak: makefile updated</li>
+<li>xlw/XlfOper.h: Added (should be) throw free ConvertToDoubleVector. Updated logging to use std::cerr</li>
+<li>xlwExample/xlwExample.cpp: Updated logging to use std::cerr. Uses std::vector instead of double[]</li>
+<li>xlwExample/Win32StreamBuf.inl: Updated logging to use std::cerr</li>
+<li>xlw/XlfExcel.inl: Made allocation engine more intelligent. Updated logging to use std::cerr and removed old logging methods (did not work)</li>
+<li>xlw.dsp: Removed ERR_Macros.h</li>
+<li>xlwExample/xlwExample.dsp: Added Win32StreamBuf</li>
+<li>xlw/XlfOper.h: added XlfOper.AsDoubleVector()</li>
+<li>xlw/XlfOper.h: When buffer is full, don't throw any exception, sets lpxloper_ to 0 instead. Changed other method to check for xloper_</li>
+<li>xlw/XlfRef.h: Documention change</li>
+<li>xlwExample/xlwExample.cpp: Reverted to v.1.3 The FreeMemory calls should not be necessary</li>
+<li>xlw/XlfRef.inl: Changed XlfRef implementation to handle ranges in external sheets</li>
+<li>xlw/XlfOper.cpp: Added XlfOper::ConvertToXXX (to be exception free)</li>
+<li>xlw/XlfExcel.h: Changed buffer default size to 65K. Moved xlret error handling to ThrowsOnCriticalError.</li>
+<li>xlwExample/xlwExample.cpp: Added FreeMemory calls to allow many function registrations</li>
+<li>xlw/XlfOper.h: Added (to be) exception free XlfOper::ConvertToXXX functions</li>
+<li>xlwExample/xlwExample-mingw32.mak: Jose Fonseca fixes for MINGW32</li>
+<li>xlwExample/xlwExample-mingw32.mak: Jose Fonseca fixes for MINGW32</li>
+<li>xlw/XlfException.h: Jose Fonseca fixes for MINGW32</li>
+<li>xlwExample/xlwExample-mingw32.mak: Jose Fonseca fixes for MINGW32\nthe config.mgw.h file is still missing</li>
+<li>xlw/XlfOper.h: Jose Fonseca fixes for MINGW32</li>
+<li>xlw/XlfException.h: Jose Fonseca fixes for MINGW32</li>
+<li>TODO.txt: adding Jose Fonseca to the contributors list</li>
+<li>xlw/port.h: Jose Fonseca fixes for MINGW32\nthe config.mgw.h file is still missing</li>
+<li>xlwExample/xlwExample.mak: reversed logic from XLW_NOIMPORTEXPORT to XLW_IMPORTEXPORT</li>
+<li>xlwExample/xlwExample.mak: removed project dependencies: they make makefile not portable</li>
+<li>xlwExample/makefile.mak: improved parametrization of debug trailing identifier in Borland makefiles</li>
+<li>xlw/EXCEL32_API.h: version up to a2</li>
+<li>xlwExample/xlwExample.mak: removed dependencies</li>
+<li>xlwExample/xlwExample.mak: project setting fixed</li>
+<li>xlw.nsi: added Borland support</li>
+<li>Docs/makefile.mak: removed winhelp from the all target</li>
+<li>xlw/config.msvc.h: excel32 renamed xlw</li>
+<li>xlw.nsi: correct version number</li>
+<li>test/main.cpp: new license</li>
+<li>Docs/pages/misc.txt: modified to have correct PDF output</li>
+<li>Docs/pages/excel32.txt: dummy commit</li>
+<li>Docs/pages/bibliography.txt: modified for correct PDF output</li>
+<li>xlw/xlcall32.h: switched to verbatim BSD license</li>
+<li>xlw/macros.h: added default catch (...) {} Temporary removed try/catch from xlAutoOpen()</li>
+<li>xlw/config.msvc.h: changed _d into d (degub version of the library)</li>
+<li>xlw/xlcall32.h: project restructuring</li></ul>
 
 <h3>Release 1.2.0 - 7 July 2002</h3>
 <ul><li>Buffer is not fixed in size anymore but extend as needed by the functions registered in Excel. Growing policy is still subject to change but it should not impact user interface.</li>

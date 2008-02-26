@@ -15,7 +15,7 @@ body {
 	font-size: 9pt;
     margin: 0px auto;
     width: 700px;
-    background: #92847b url(images/background700.gif) top center repeat-y; 
+    background: #92847b url(images/background.gif) top center repeat-y; 
 }
 /*
 hr { border: none; height: 1px; background-color: #ccc; color: #fff; width: 100%; }
@@ -46,13 +46,13 @@ Firefox & Camino when resizing the window to less than content width */
     width: 700px;
 	height: 97.3%;
     margin: 0px auto;
-    background: #92847b url(images/background700.gif) top center repeat-y; 
+    background: #92847b url(images/background.gif) top center repeat-y; 
 }
 #head {
 	position: relative;
 	top: 0px;
     height: 120px;
-    background: url(images/header700.gif) top center no-repeat;
+    background: url(images/header.gif) top center no-repeat;
     /* border: 1px solid red; */
 }
 #page-title {
