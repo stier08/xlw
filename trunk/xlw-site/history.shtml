@@ -1,7 +1,4 @@
 <!--#include virtual="header.inc"-->
-<!--PageText-->
-<div id='wikitext'>
-<div style='text-align: justify;' > 
 <h2>Version History</h2>
 
 <h3>Release 3.0.0 - ?? March 2008</h3>
@@ -21,7 +18,7 @@
 
 <h3>Release 1.2.2 - 7 March 2003</h3>
 
-<ul><li>xlwExample/xlwExample.xls: Added recalcPolicy to let user register function as volatile ( unconditionally recalculated). Note that default is still not volatile</li>
+<ul><li>xlwExample/xlwExample.xls: Added recalcPolicy to let user register function as volatile (unconditionally recalculated). Note that default is still not volatile</li>
 <li>TODO.txt: fixed since 1.2</li>
 <li>xlw.dsp: english version of the dsp</li>
 <li>xlwExample/xlwExample.vcproj: file xlwExample.vcproj was initially added on branch libXLL branch.</li>
@@ -150,11 +147,9 @@
 <li>doxygen.cfg renamed as xlw.doxy, moved under Docs folder, and modified in order to account for the Docs folder</li>
 <li>Updated to doxygen 1.2.14</li>
 <li>All *.txt documentation pages moved under Docs folder</li>
-<li>Added CVS Id tag to all files</li>
+<li>Added CVS Id tag to all files</li></ul>
 
 <h3>Release 1.0 - 28 January 2002</h3>
 <p>Initial release by J&eacute;r&ocirc;me Lecomte (xlw@ifrance.com)</p>
 
-</div>
-</div>
 <!--#include virtual="footer.inc"-->

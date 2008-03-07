@@ -2,12 +2,6 @@
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<!--
-// 
-// 2005-12-01  ksc  Initial release
-//  
--->
-
 <html>
 <head>
 	<title>xlw - A C++ Wrapper for Excel</title>
@@ -41,22 +35,25 @@ a.varlink { text-decoration:none; }
 
 --></style>  <meta name='robots' content='index,follow' />
 
-    <link rel='stylesheet' title="A Bit Modern" href='xlw.css' type='text/css' />
+    <link rel='stylesheet' href='xlw.css' type='text/css' />
 
 	<script type="text/javascript">
 	<!-- //
 	browser_type = navigator.appName;
 	if (browser_type == "Microsoft Internet Explorer") { 
-		document.write("<link href='xlw.css' rel='stylesheet' type='text/css' />");
+		document.write("<link href='xlw-ie.css' rel='stylesheet' type='text/css' />");
 	}
 	//-->
 	</script>
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
     <div id='wrapper'>
         <div id='head'></div>
-
+        <div id='version'>Version 3.0.0 beta</div>
+        <div id='tagline'>A C++ Wrapper For Excel</div>
         <div id='content'>
             <div id='col-left'>
                 <!--PageLeftFmt-->
@@ -64,9 +61,18 @@ a.varlink { text-decoration:none; }
 </li><li><a class='wikilink' href='project.shtml'>Project</a>
 </li><li><a class='wikilink' href='license.shtml'>License</a>
 </li><li><a class='wikilink' href='history.shtml'>History</a>
-<p class='vspace'></p></li><li><a class='wikilink' href='documentation.shtml'>Documentation</a>
+<!--p class='vspace'></p-->
+</li><li><a class='wikilink' href='documentation.shtml'>Documentation</a>
 </li></ul><p class='vspace'></p>
 </div>
+
+<div id="ntlogo"><a class="imglink" href="http://www.nazcatech.be"><img src="images/nazcatech.jpg" width="88" height="98" border="0" alt="nazcatech"/></a></div>
+<div id="sflogo"><a class="imglink" href="http://sourceforge.net"><img src="images/sflogo.php" width="88" height="31" border="0" alt="SourceForge.net Logo"/></a></div>
+
                 <!--/PageLeftFmt-->
             </div>
+
             <div id='col-right'>
+<!--PageText-->
+<div id='wikitext'>
+<div style='text-align: justify;' > 
