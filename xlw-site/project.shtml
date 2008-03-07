@@ -1,13 +1,12 @@
 <!--#include virtual="header.inc"-->
-<!--PageText-->
-<div id='wikitext'>
-<div style='text-align: justify;' > 
 <h2>Project Page</h2>
 <p>Below is the link to the xlw project page on SourceForge:</p>
+<br>
 <p><a href="http://sourceforge.net/projects/xlw/">http://sourceforge.net/projects/xlw/</a></p>
+<br>
 <p>There you can find various project resources including:</p>
+<br>
 <p><ul><li>Mailing lists and archives</li>
 <li>Downloads for source code, documentation and examples</li>
-<li>Subversion source code repository</li></ul></p></div>
-</div>
+<li>Subversion source code repository</li></ul></p>
 <!--#include virtual="footer.inc"-->

@@ -1,9 +1,9 @@
 <!--#include virtual="header.inc"-->
-<!--PageText-->
-<div id='wikitext'>
-<div style='text-align: justify;' > 
 <h2>xlw - A C++ Wrapper for Excel</h2>
-<p>xlw - A C++ Wrapper for Excel
-</p></div>
-</div>
+<div id="download"><a class="imglink" id="imghover" href="http://downloads.sourceforge.net/quantlib/QuantLibXL-bin-0.9.0.exe"><img src="images/download.jpg" border=0/></a></div>
+<p>xlw implements a C++ wrapper for Excel, enabling you to write your own worksheet formulas and menu items.</p>
+<br>
+<p>The project includes the InterfaceGenerator utility which parses the header files of your C++ application and automatically generates the corresponding Excel addin.</p>
+<br>
+<p>xlw version 3 introduces support for new features of Excel 2007 such as multithreading, larger spreadsheets, and Unicode strings.</p>
 <!--#include virtual="footer.inc"-->
