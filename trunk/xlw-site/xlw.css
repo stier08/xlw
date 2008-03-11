@@ -91,9 +91,9 @@ Firefox & Camino when resizing the window to less than content width */
 #page-actions li a { text-decoration: none; color: #eee; margin: 0px; padding: 2px; }
 #page-actions li a:hover { text-decoration: underline; color: #eee; margin: 0px; padding: 2px; }
 */
-#version {
+#version_string {
     position: absolute;
-    top: 100px;
+    top: 102px;
     left: 55px;
     width: 200px;
     font-size: 7pt;
@@ -101,7 +101,7 @@ Firefox & Camino when resizing the window to less than content width */
 }
 #tagline {
     position: absolute;
-    top: 100px;
+    top: 102px;
     left: 220px;
     width: 630px;
     font-size: 7pt;
