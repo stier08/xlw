@@ -52,7 +52,7 @@ a.varlink { text-decoration:none; }
 <body>
     <div id='wrapper'>
         <div id='head'></div>
-        <div id='version'>Version 3.0.0 beta</div>
+        <div id='version_string'>Version 3.0.0 beta</div>
         <div id='tagline'>A C++ Wrapper For Excel</div>
         <div id='content'>
             <div id='col-left'>
