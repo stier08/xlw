@@ -1,6 +1,6 @@
 <!--#include virtual="header.inc"-->
 <h2>Copyright</h2>
-<p>xlw is</p>
+<p>XLW is</p>
 <div class="box">
 <p>Copyright &copy; 1998, 1999, 2001, 2002, 2003, 2004 J&eacute;r&ocirc;me Lecomte</p>
 <p>Copyright &copy; 2002, 2003, 2004 Ferdinando Ametrano</p>
@@ -9,7 +9,7 @@
 <p>Copyright &copy; 2007, 2008 Eric Ehlers</p>
 <p>All rights reserved.</p></div>
 <h2>License</h2>
-<p>xlw is released under the modified BSD license.</p>
+<p>XLW is released under the modified BSD license.</p>
 <div class="box">
 <p>Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:</p>
