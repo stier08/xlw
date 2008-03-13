@@ -131,7 +131,7 @@ Firefox & Camino when resizing the window to less than content width */
 
 #wikitext h1, h2, h3, h4, h5 { color: #2E3192; }
 #wikitext h1 { font-size: 16pt; }
-#wikitext h2 { font-size: 14pt; }
+#wikitext h2 { font-size: 14pt; text-align: center; }
 #wikitext h3 { font-size: 12pt; }
 #wikitext h4 { font-size: 10pt; } 
 #wikitext h5 { font-size: 10pt; font-style: italic; }
@@ -142,7 +142,7 @@ Firefox & Camino when resizing the window to less than content width */
 }
 #sidebar ul { list-style: none; margin: 0px; padding: 0px; }
 #sidebar li { display: list-item; margin: 0px; border-bottom: 1px solid #fff; }
-#sidebar li a { text-decoration: none; color: #2E3192; padding: 2px 2px 4px 2px; text-indent: 4px; }
+#sidebar li a { text-decoration: none; color: #2E3192; padding: 2px 2px 4px 2px; text-indent: 4px; /*font-weight: bold;*/ }
 #sidebar ul li a { display: block; }
 #sidebar ul li a:hover { 
     text-decoration: none; 

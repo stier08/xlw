@@ -7,34 +7,21 @@
 
 <h3>Release 2.0 - 18 December 2006</h3>
 
-<p>This is an extension to the xlw project by J&eacute;r&ocirc;me Lecomte. Changes are copyright, Mark Joshi 2006 with the same licence as for the original xlw. Major new features:</p>
-<ol><li>Automatic generation of interface file.</li>
+<p>This is an extension to the XLW project by J&eacute;r&ocirc;me Lecomte. Changes are copyright, Mark Joshi 2006 with the same licence as for the original XLW. Major new features:</p>
+<ul><li>Automatic generation of interface file.</li>
 <li>Registration code done at point of function declaration.</li>
 <li>Improved error catching, strings, const char* and run_time errors used to pass strings back to excel containing an error message.</li>
 <li>Conversions from XlfOper routines throw strings identifying the bad argument.</li>
 <li>XlfOpers adapted to work with data types CellMatrix and MyMatrix for both input and output. CellMatrix allows each cell to be of type string, number, boolean or error, or empty.</li>
-<li>Works with Visual Studio Express 6 7, 8.0 and DevCpp 4.9.9.2 and project files included.</li>
-<li>ability to add type registrations</li></ol>
+<li>Works with Visual Studio 6, 7, and 8 and DevCpp 4.9.9.2, project files included.</li>
+<li>Ability to add type registrations.</li></ul>
 
 <h3>Release 1.2.2 - 7 March 2003</h3>
 
 <ul><li>xlwExample/xlwExample.xls: Added recalcPolicy to let user register function as volatile (unconditionally recalculated). Note that default is still not volatile</li>
 <li>TODO.txt: fixed since 1.2</li>
 <li>xlw.dsp: english version of the dsp</li>
-<li>xlwExample/xlwExample.vcproj: file xlwExample.vcproj was initially added on branch libXLL branch.</li>
 <li>xlwExample/xlwExample.vcproj: libXLL added</li>
-<li>xlw/XllTypeLib.cpp: file XllTypeLib.cpp was initially added on branch libXLL-branch.</li>
-<li>xlw.vcproj: file xlw.vcproj was initially added on branch libXLL-branch.</li>
-<li>xlw/xll.h: file xll.h was initially added on branch libXLL-branch.</li>
-<li>Docs/Setting up a project with libXLL.pdf: file Setting up a project with libXLL.pdf was initially added on branch libXLL-branch.</li>
-<li>xlw.sln: file xlw.sln was initially added on branch libXLL-branch.</li>
-<li>xlw/xldata32.h: file xldata32.h was initially added on branch libXLL-branch.</li>
-<li>Docs/excel97sdk.chm: file excel97sdk.chm was initially added on branch libXLL-branch.</li>
-<li>xlfRegister.html: file xlfRegister.html was initially added on branch libXLL branch.</li>
-<li>Docs/Setting up a project with libXLL.doc: file Setting up a project with libXLL.doc was initially added on branch libXLL-branch.</li>
-<li>READMELIBXLL.TXT: file READMELIBXLL.TXT was initially added on branch libXLL branch.</li>
-<li>xlw/XllMain_c.h: file XllMain_c.h was initially added on branch libXLL-branch.</li>
-<li>xlw/XllTypeLib.h: file XllTypeLib.h was initially added on branch libXLL-branch.</li>
 <li>xlwExample/xlwExample.mak: updated version number</li>
 <li>xlwExample/xlwExample.cpp: Merged update made for R010200f0</li>
 <li>xlw/XlfOper.cpp: Removed PORT_USING(std) in header. Various documentation fixes</li>
