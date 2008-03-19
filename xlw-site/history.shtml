@@ -1,7 +1,7 @@
 <!--#include virtual="header.inc"-->
 <h2>Version History</h2>
 
-<h3>Release 3.0 - ?? March 2008</h3>
+<h3>Release 3.0 - 19 March 2008</h3>
 <p>XLW version 3 is currently in beta status.  You're invited to <a href="http://downloads.sourceforge.net/xlw/xlw-3.0.0.exe">download</a> and test the software and report any problems in the <a href="http://sourceforge.net/tracker/?group_id=45222&atid=442236">bug tracker</a>.</p><br>
 <ul>
 <li>Introduce support for Excel 2007, including the XLOPER12 datatype, multithreaded worksheet functions, UNICODE strings, long strings, and larger spreadsheets</li>
