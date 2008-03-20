@@ -5,7 +5,7 @@
 <br>
 <p>The project includes the InterfaceGenerator utility which parses the header files of your C++ application and automatically generates the corresponding XLW Excel addin.</p>
 <br>
-<p>XLW supports new features introduced by Excel 2007 such as multithreading, larger spreadsheets, and Unicode strings.</p>
+<p>XLW supports new features introduced by Excel 2007 such as multithreaded worksheet formulas, larger spreadsheets, and Unicode strings.</p>
 <br>
 <p>XLW version 3 is currently in beta status.  You're invited to <a href="http://downloads.sourceforge.net/xlw/xlw-3.0.0.exe">download</a> and test the software and report any problems in the <a href="http://sourceforge.net/tracker/?group_id=45222&atid=442236">bug tracker</a>.</p>
 <!--#include virtual="footer.inc"-->
