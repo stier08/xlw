@@ -1,0 +1,268 @@
+
+html,body {
+    height: 100%;
+}
+body {
+    position: relative;    
+    font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
+    color: #000000;
+    font-size: 9pt;
+    margin: 0px auto;
+    width: 898px;
+    background: #e0dada url(images/background.jpg) top center repeat-y; 
+    /*border: 1px solid red;*/
+}
+/*
+hr { border: none; height: 1px; background-color: #ccc; color: #fff; width: 100%; }
+hr { 
+    height: 12px;
+    max-width: 399px;
+    border-bottom: 1px solid #877;
+    border-top: 1px solid #877;
+    border-left: 1px solid #877;
+    border-right: 12px solid #877;
+    color: #fff;
+    background-color: #fff;
+    border: 1px solid red;
+}
+*/
+hr {
+    height: 0;
+    border: 0;
+    border-top: 1px solid #8FA8C7;
+    margin-top: 10px;
+    clear: both; 
+}
+a {
+    color: #2E3192;
+    text-decoration: underline;
+}
+a:hover {
+    color: #838f96;
+    text-decoration: none;
+}
+
+/* including bkacground again (mostly) covers up a problem with the background in 
+Firefox & Camino when resizing the window to less than content width */
+#wrapper {
+    position: relative;
+    width: 898px;
+    height: 97.3%;
+    margin: 0px auto;
+    background: #92847b url(images/background.jpg) top center repeat-y; 
+    /*border: 1px solid red;*/
+}
+#head {
+    position: relative;
+    top: 0px;
+    height: 120px;
+    background: url(images/header.jpg) top center no-repeat;
+    /*border: 1px solid red;*/
+}
+/*
+#page-title {
+    position: absolute;
+    top: 25px;
+    left: 235px;
+    width: 405px;
+    font-size: 30pt;
+    font-weight: bold;
+    color: #eee;
+}
+#page-subtitle {
+    position: absolute;
+    top: 67px;
+    left: 235px;
+    width: 405px;
+    font-size: 12pt;
+    font-weight: bold;
+    color: #ddd;
+}
+#head #page-actions {
+    position: absolute;
+    top: 101px;
+    left: 135px;
+    width: 505px;
+    font-size: 9pt;
+    text-align: right;
+}
+#page-actions ul { list-style: none; margin: 0px; padding: 2px; }
+#page-actions li { display: inline; margin: 0px; padding: 2px; }
+#page-actions li a { text-decoration: none; color: #eee; margin: 0px; padding: 2px; }
+#page-actions li a:hover { text-decoration: underline; color: #eee; margin: 0px; padding: 2px; }
+*/
+#version_string {
+    position: absolute;
+    top: 102px;
+    left: 55px;
+    width: 200px;
+    font-size: 7pt;
+    color: #fff;
+}
+#tagline {
+    position: absolute;
+    top: 102px;
+    left: 220px;
+    width: 630px;
+    font-size: 7pt;
+    text-align: right;
+    color: #fff;
+}
+
+#content {
+    width: 898px;
+    margin: 0px auto;
+}
+#col-left {
+    position: relative;
+    float: left;
+    width: 171px;
+    margin: 15px 0px 0px 40px;
+    padding-left: 10px;
+    /*border: 1px solid red;*/
+}
+#col-right {
+    position: relative;
+    float: right;    
+    width: 600px;
+    margin: 15px 61px 0px 0px;
+    /*border: 1px solid red;*/
+}
+
+#wikitext h1, h2, h3, h4, h5 { color: #2E3192; }
+#wikitext h1 { font-size: 16pt; }
+#wikitext h2 { font-size: 14pt; text-align: center; }
+#wikitext h3 { font-size: 12pt; }
+#wikitext h4 { font-size: 10pt; } 
+#wikitext h5 { font-size: 10pt; font-style: italic; }
+
+#sidebar { 
+    text-align: left;
+    /*border: 1px solid red;*/
+}
+#sidebar ul { list-style: none; margin: 0px; padding: 0px; }
+#sidebar li { display: list-item; margin: 0px; border-bottom: 1px solid #fff; }
+#sidebar li a { text-decoration: none; color: #2E3192; padding: 2px 2px 4px 2px; text-indent: 4px; /*font-weight: bold;*/ }
+#sidebar ul li a { display: block; }
+#sidebar ul li a:hover { 
+    text-decoration: none; 
+    color: #fff; 
+    background: #2E3192 url(images/selector.gif) center right no-repeat; 
+    padding: 2px 2px 4px 2px; 
+    text-indent: 4px; 
+}
+#sidebar a.selflink { 
+    text-decoration: none; 
+    color: #fff; 
+    background: #2E3192 url(images/selector.gif) center right no-repeat; 
+    padding: 2px 2px 4px 2px; 
+    text-indent: 4px; 
+}
+
+#sidebar h2 { font-size:150%; color: #fff; margin-bottom: 0px; border-bottom: 1px solid #666; }
+#sidebar h3 { font-size:130%; color: #fff; margin-bottom: 0px; border-bottom: 1px solid #666; }
+#sidebar h4 { font-size:100%; color: #fff; margin-bottom: 0px; border-bottom: 1px solid #666; }
+
+#wikiedit form { margin:0px; }
+#wikiedit textarea { width:99%; font-family: monospace; }
+
+/*#footer { text-align: right; color: #2E3192; border-top: 1px solid #ccc; margin-top: 18px; padding: 10px 0px 10px 0px;}*/
+
+.difftype,.difftime,.diffrestore { font-size: 8pt; }
+
+.diffbox { width:400px; margin-top:10px; }
+
+.quickref table { margin: 2px auto; }
+.quickref tr { border: 1px solid #999; }
+.quickref td { padding: 2px; vertical-align: top; }
+
+table.markup { border: 1px solid #ccc; }
+td.markup1 { border-bottom: 1px solid #ccc; }
+dd { margin-left: 18px; }
+
+.clearfix:after {
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+
+.clearfix {display: inline-table;}
+
+/* Hides from IE-mac \*/
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+/* End hide from IE-mac */
+
+.box {
+    font-family: monospace, fixed;
+    font-size: 95%;
+    border: 1px solid #CCCCCC;
+    background-color: #f5f5f5;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 2px;
+    margin-right: 8px;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.imglink:focus, .imglink:hover, .imglink:active, .imglink:visited {
+    background-color: transparent; /* override doxygen setting*/
+    outline: none;
+}
+
+#ntlogo {
+    background-color: transparent;
+    width: 161;
+    height: 118px;
+    padding: 20px 0px 0px 37px;
+}
+
+#sflogo {
+    background-color: transparent;
+    width: 161;
+    height: 71px;
+    padding: 10px 0px 0px 37px;
+}
+
+#footer {
+    clear: both;
+    background-repeat: repeat-x;
+    background-image: url('images/footer.jpg');
+    height: 60px;
+    font-family: sans-serif;
+    font-size: 10px;
+    text-align: center;
+    /*padding-top: 13px;*/
+    color: #8FA8C7;
+}
+
+#footer-link, #footer-link a.focus, #footer-link a.hover, #footer-link a.active, #footer-link a.visited {
+    text-decoration: underline;
+    color: #8FA8C7;
+}
+
+#download {
+    float: right;
+    padding: 10px 0px 10px 10px;
+}
+
+#imghover img{
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+    -moz-opacity: 1;
+}
+
+#imghover:hover img{
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=75);
+    -moz-opacity: 0.75;
+}
+
+#content {
+    vertical-align: top;
+    /*margin: 10px 10px 10px 200px;*/
+}
+
