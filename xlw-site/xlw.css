@@ -271,3 +271,17 @@ dd { margin-left: 18px; }
     /*margin: 10px 10px 10px 200px;*/
 }
 
+.fragment {
+       font-family: monospace, fixed;
+       font-size: 95%;
+}
+PRE.fragment {
+	border: 1px solid #CCCCCC;
+	background-color: #f5f5f5;
+    margin: 10px 0px 10px 0px;
+    padding: 4px 6px 4px 6px;
+}
+SPAN.keyword       { color: blue }
+SPAN.comment       { color: green }
+SPAN.preprocessor  { color: red }
+

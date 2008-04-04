@@ -3,9 +3,34 @@
 <div id="download"><a class="imglink" id="imghover" href="http://downloads.sourceforge.net/xlw/xlw-3.0.0b0.exe"><img src="images/download.jpg" width=308 height=68 border=0 /></a></div>
 <p>XLW wraps the Excel C API in a simple C++ interface which you can use to customize Excel with your own worksheet formulas and menu items.</p>
 <br>
-<p>The project includes the InterfaceGenerator utility which parses the header files of your C++ application and automatically generates the corresponding XLW Excel addin.</p>
-<br>
+<p>The project includes the InterfaceGenerator utility which parses the header files of your C++ application...
+
+<div class="fragment">
+<pre class="fragment">
+<span class="comment">// Test.h</span>
+
+<span class="preprocessor">#ifndef TEST_H</span>
+<span class="preprocessor">#define TEST_H</span>
+
+<span class="preprocessor">#include &lt;xlw/xlw.h&gt;</span>
+
+<span class="comment">//&lt;xlw:libraryname=MyTestLibrary</span>
+
+std::wstring <span class="comment">// Concatenate two strings</span>
+<span class="comment">//&lt;xlw:time</span>
+Concat(std::wstring str1,  <span class="comment">// First string</span>
+       std::wstring str2); <span class="comment">// Second string</span>
+
+<span class="keyword">double</span> <span class="comment">// Compute the circumference of a circle</span>
+<span class="comment">//&lt;xlw:time</span>
+Circ(<span class="keyword">double</span> Diameter); <span class="comment">// The circle's diameter</span>
+
+<span class="preprocessor">#endif</span>
+</pre></div>
+
+<p>... and automatically generates the corresponding XLW Excel addin.</p>
+<div id="screenshot"><img width=411 height=312 src="images/screenshot.jpg"></div>
 <p>XLW supports new features introduced by Excel 2007 such as multithreaded worksheet formulas, larger spreadsheets, and Unicode strings.</p>
-<div id="screenshot"><img width=429 height=346 src="images/screenshot.jpg"></div>
+<br>
 <p>Version 3 of XLW is currently in beta status.  You're invited to <a href="http://downloads.sourceforge.net/xlw/xlw-3.0.0b0.exe">download</a> and test the software and report any problems in the <a href="http://sourceforge.net/tracker/?group_id=45222&atid=442236">bug tracker</a>.</p>
 <!--#include virtual="footer.inc"-->
