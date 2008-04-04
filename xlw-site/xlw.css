@@ -283,5 +283,5 @@ PRE.fragment {
 }
 SPAN.keyword       { color: blue }
 SPAN.comment       { color: green }
-SPAN.preprocessor  { color: red }
+SPAN.preprocessor  { color: gray }
 
