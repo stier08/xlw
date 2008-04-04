@@ -10,7 +10,7 @@
 <li>Classes XlfOper4 and XlfOper12 specifically wrap XLOPER or XLOPER12 respectively, avoiding performance overhead incurred by class XlfOper</li>
 <li>Ensure thread safety as required to support multithreaded worksheet functions under Excel 2007 - introduce new mutex class for this purpose</li>
 <li>Represent Excel parameter type codes as std::string rather than char, because Excel 2007 introduces codes comprising multiple characters</li>
-<li>Extend the support for datatypes to allow function inputs of type XlfOper to be registered with Excel as either P/Q (OPER/OPER12) or R/U (XLOPER/XLOPER12)</li>
+<li>Extend the support for datatypes to allow function inputs of type XlfOper to be registered with Excel as either P/R (OPER/XLOPER) or Q/U (OPER12/XLOPER12)</li>
 <li>Add support for boost matrix class (thanks to Tim Brunne)</li>
 <li>Introduce support for sheet-level references (xltypeSRef)</li>
 <li>Implement routine to unregister functions from Excel - this uses a technique published by Laurent Longre to work around a bug in the Excel C API</li>
@@ -18,7 +18,7 @@
 <li>Store string length in a variable of type unsigned char (BYTE) rather than int, to fix a problem in which strings longer than 128 bytes were processed incorrectly</li>
 <li>Implement workaround for Excel bug in which parameter descriptions are corrupted in Function Wizard</li>
 <li>Implement new VC NMAKE project RunInterfaceGenerator to detect changes in the inputs to InterfaceGenerator and rerun the utility as necessary</li>
-<li>Reintroduce the example application that accompanied xlw version 1</li>
+<li>Reintroduce the example application that accompanied XLW version 1</li>
 <li>Drop support for VC6, introduce support for VC9, update support for VC7, VC8, and Dev C++</li>
 <li>Update documentation, fix broken links, reorganize website</li>
 </ul>
