@@ -40,7 +40,7 @@ a.varlink { text-decoration:none; }
 	<script type="text/javascript">
 	<!-- //
 	browser_type = navigator.appName;
-	if (browser_type == "Microsoft Internet Explorer") { 
+	if (browser_type == "Microsoft Internet Explorer" && browser_version < 7) { 
 		document.write("<link href='xlw-ie.css' rel='stylesheet' type='text/css' />");
 	}
 	//-->
