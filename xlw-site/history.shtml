@@ -1,22 +1,23 @@
 <!--#include virtual="header.inc"-->
 <h2>Version History</h2>
 
-<h3>Release 3.0 - 19 March 2008</h3>
+<h3>Release 3.0 - 14 April 2008</h3>
 
-<p>XLW version 3 is currently in beta status.  You're invited to <a href="http://downloads.sourceforge.net/xlw/xlw-3.0.0b0.exe">download</a> and test the software and report any problems in the <a href="http://sourceforge.net/tracker/?group_id=45222&atid=442236">bug tracker</a>.</p><br>
 <ul>
 <li>Introduce support for Excel 2007, including the XLOPER12 datatype, multithreaded worksheet functions, UNICODE strings, long strings, and larger spreadsheets</li>
 <li>Class XlfOper wraps either XLOPER or XLOPER12 depending on version of Excel detected at startup</li>
 <li>Classes XlfOper4 and XlfOper12 specifically wrap XLOPER or XLOPER12 respectively, avoiding performance overhead incurred by class XlfOper</li>
-<li>Ensure thread safety as required to support multithreaded worksheet functions under Excel 2007 - introduce new mutex class for this purpose</li>
+<li>Ensure thread safety as required to support multithreaded worksheet functions under Excel 2007 - introduce new mutex class for this purpose - new tag &lt;xlw:threadsafe for InterfaceGenerator</li>
 <li>Represent Excel parameter type codes as std::string rather than char, because Excel 2007 introduces codes comprising multiple characters</li>
 <li>Extend the support for datatypes to allow function inputs of type XlfOper to be registered with Excel as either P/R (OPER/XLOPER) or Q/U (OPER12/XLOPER12)</li>
 <li>Add support for boost matrix class (thanks to Tim Brunne)</li>
 <li>Introduce support for sheet-level references (xltypeSRef)</li>
+<li>Extend support for arrays (xltypeMulti)</li>
 <li>Implement routine to unregister functions from Excel - this uses a technique published by Laurent Longre to work around a bug in the Excel C API</li>
 <li>Put all classes in new namespace xlw</li>
 <li>Store string length in a variable of type unsigned char (BYTE) rather than int, to fix a problem in which strings longer than 128 bytes were processed incorrectly</li>
 <li>Implement workaround for Excel bug in which parameter descriptions are corrupted in Function Wizard</li>
+<li>Multiple minor bug fixes</li>
 <li>Implement new VC NMAKE project RunInterfaceGenerator to detect changes in the inputs to InterfaceGenerator and rerun the utility as necessary</li>
 <li>Reintroduce the example application that accompanied XLW version 1</li>
 <li>Drop support for VC6, introduce support for VC9, update support for VC7, VC8, and Dev C++</li>

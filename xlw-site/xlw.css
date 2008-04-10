@@ -211,7 +211,6 @@ dd { margin-left: 18px; }
 }
 
 .imglink:focus, .imglink:hover, .imglink:active, .imglink:visited {
-    background-color: transparent; /* override doxygen setting*/
     outline: none;
 }
 
