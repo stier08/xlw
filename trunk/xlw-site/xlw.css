@@ -7,25 +7,10 @@ body {
     font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
     color: #000000;
     font-size: 9pt;
-    margin: 0px auto;
+    margin: 0px;
     width: 898px;
-    background: #e0dada url(images/background.jpg) top center repeat-y; 
-    /*border: 1px solid red;*/
+    background: #e0dada url(images/background.jpg) top left repeat-y; 
 }
-/*
-hr { border: none; height: 1px; background-color: #ccc; color: #fff; width: 100%; }
-hr { 
-    height: 12px;
-    max-width: 399px;
-    border-bottom: 1px solid #877;
-    border-top: 1px solid #877;
-    border-left: 1px solid #877;
-    border-right: 12px solid #877;
-    color: #fff;
-    background-color: #fff;
-    border: 1px solid red;
-}
-*/
 hr {
     height: 0;
     border: 0;
@@ -42,59 +27,22 @@ a:hover {
     text-decoration: none;
 }
 
-/* including bkacground again (mostly) covers up a problem with the background in 
-Firefox & Camino when resizing the window to less than content width */
 #wrapper {
     position: relative;
     width: 898px;
     height: 97.3%;
     margin: 0px auto;
-    background: #92847b url(images/background.jpg) top center repeat-y; 
-    /*border: 1px solid red;*/
 }
 #head {
     position: relative;
     top: 0px;
     height: 120px;
-    background: url(images/header.jpg) top center no-repeat;
-    /*border: 1px solid red;*/
+    background: url(images/header.jpg) top left no-repeat;
 }
-/*
-#page-title {
-    position: absolute;
-    top: 25px;
-    left: 235px;
-    width: 405px;
-    font-size: 30pt;
-    font-weight: bold;
-    color: #eee;
-}
-#page-subtitle {
-    position: absolute;
-    top: 67px;
-    left: 235px;
-    width: 405px;
-    font-size: 12pt;
-    font-weight: bold;
-    color: #ddd;
-}
-#head #page-actions {
-    position: absolute;
-    top: 101px;
-    left: 135px;
-    width: 505px;
-    font-size: 9pt;
-    text-align: right;
-}
-#page-actions ul { list-style: none; margin: 0px; padding: 2px; }
-#page-actions li { display: inline; margin: 0px; padding: 2px; }
-#page-actions li a { text-decoration: none; color: #eee; margin: 0px; padding: 2px; }
-#page-actions li a:hover { text-decoration: underline; color: #eee; margin: 0px; padding: 2px; }
-*/
 #version_string {
     position: absolute;
     top: 102px;
-    left: 55px;
+    left: 50px;
     width: 200px;
     font-size: 7pt;
     color: #fff;
@@ -102,7 +50,7 @@ Firefox & Camino when resizing the window to less than content width */
 #tagline {
     position: absolute;
     top: 102px;
-    left: 220px;
+    left: 215px;
     width: 630px;
     font-size: 7pt;
     text-align: right;
@@ -119,14 +67,12 @@ Firefox & Camino when resizing the window to less than content width */
     width: 171px;
     margin: 15px 0px 0px 40px;
     padding-left: 10px;
-    /*border: 1px solid red;*/
 }
 #col-right {
     position: relative;
-    float: right;    
+    float: left;    
     width: 600px;
-    margin: 15px 61px 0px 0px;
-    /*border: 1px solid red;*/
+    margin: 15px 61px 0px 10px;
 }
 
 #wikitext h1, h2, h3, h4, h5 { color: #2E3192; }
@@ -138,7 +84,6 @@ Firefox & Camino when resizing the window to less than content width */
 
 #sidebar { 
     text-align: left;
-    /*border: 1px solid red;*/
 }
 #sidebar ul { list-style: none; margin: 0px; padding: 0px; }
 #sidebar li { display: list-item; margin: 0px; border-bottom: 1px solid #fff; }
@@ -165,8 +110,6 @@ Firefox & Camino when resizing the window to less than content width */
 
 #wikiedit form { margin:0px; }
 #wikiedit textarea { width:99%; font-family: monospace; }
-
-/*#footer { text-align: right; color: #2E3192; border-top: 1px solid #ccc; margin-top: 18px; padding: 10px 0px 10px 0px;}*/
 
 .difftype,.difftime,.diffrestore { font-size: 8pt; }
 
@@ -236,7 +179,6 @@ dd { margin-left: 18px; }
     font-family: sans-serif;
     font-size: 10px;
     text-align: center;
-    /*padding-top: 13px;*/
     color: #8FA8C7;
 }
 
@@ -267,7 +209,6 @@ dd { margin-left: 18px; }
 
 #content {
     vertical-align: top;
-    /*margin: 10px 10px 10px 200px;*/
 }
 
 .fragment {
