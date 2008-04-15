@@ -36,11 +36,10 @@ a.varlink { text-decoration:none; }
 --></style>  <meta name='robots' content='index,follow' />
 
     <link rel='stylesheet' href='xlw.css' type='text/css' />
-
 	<script type="text/javascript">
 	<!-- //
-	browser_type = navigator.appName;
-	if (browser_type == "Microsoft Internet Explorer" && browser_version < 7) { 
+    IE6 = navigator.appVersion.indexOf("MSIE 6.") == -1 ? false : true;
+	if (IE6) { 
 		document.write("<link href='xlw-ie.css' rel='stylesheet' type='text/css' />");
 	}
 	//-->
