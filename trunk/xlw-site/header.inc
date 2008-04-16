@@ -56,17 +56,20 @@ a.varlink { text-decoration:none; }
         <div id='content'>
             <div id='col-left'>
                 <!--PageLeftFmt-->
-                <div id='sidebar'><ul><li><a class='wikilink' href='index.shtml'>Home</a>
-</li><li><a class='wikilink' href='project.shtml'>Project</a>
-</li><li><a class='wikilink' href='documentation.shtml'>Documentation</a>
-</li><li><a class='wikilink' href='license.shtml'>License</a>
-</li><li><a class='wikilink' href='history.shtml'>History</a>
-<!--p class='vspace'></p-->
-</li></ul><p class='vspace'></p>
+                <div id='sidebar'><ul><li><a href='index.shtml'>Home</a>
+</li><li><a href='project.shtml'>Project</a>
+</li><li><a href='documentation.shtml'>Documentation</a>
+</li><li><a href='license.shtml'>License</a>
+</li><li><a href='history.shtml'>History</a>
+</li></ul>
 </div>
 
-<div id="ntlogo"><a class="imglink" href="http://www.nazcatech.be"><img src="images/nazcatech.jpg" width="88" height="98" border="0" alt="nazcatech"/></a></div>
-<div id="sflogo"><a class="imglink" href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=45222&amp;type=1" width="88" height="31" border="0" alt="SourceForge.net Logo"/></a></div>
+<div class="logolist">
+<div class="vspace"></div>
+<a class="imglink" href="http://www.nazcatech.be"><img src="images/nazcatech.jpg" width="88" height="98" border="0" alt="nazcatech"/></a>
+<div class="vspace"></div>
+<a class="imglink" href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=45222&amp;type=1" width="88" height="31" border="0" alt="SourceForge.net Logo"/></a>
+</div>
 
                 <!--/PageLeftFmt-->
             </div>
