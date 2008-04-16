@@ -157,18 +157,12 @@ dd { margin-left: 18px; }
     outline: none;
 }
 
-#ntlogo {
-    background-color: transparent;
-    width: 161;
-    height: 118px;
-    padding: 20px 0px 0px 37px;
+.logolist {
+    text-align: center;
 }
 
-#sflogo {
-    background-color: transparent;
-    width: 161;
-    height: 71px;
-    padding: 10px 0px 0px 37px;
+.vspace {
+    height: 20px;
 }
 
 #footer {
