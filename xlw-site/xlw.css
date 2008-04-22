@@ -64,15 +64,15 @@ a:hover {
 #col-left {
     position: relative;
     float: left;
-    width: 171px;
+    width: 170px;
     margin: 15px 0px 0px 40px;
     padding-left: 10px;
 }
 #col-right {
     position: relative;
     float: left;    
-    width: 600px;
-    margin: 15px 61px 0px 10px;
+    width: 616px;
+    margin: 15px 10px 0px 10px;
 }
 
 #wikitext h1, h2, h3, h4, h5 { color: #2E3192; }
@@ -167,8 +167,6 @@ dd { margin-left: 18px; }
 
 #footer {
     clear: both;
-    background-repeat: repeat-x;
-    background-image: url('images/footer.jpg');
     height: 60px;
     font-family: sans-serif;
     font-size: 10px;
