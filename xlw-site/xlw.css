@@ -143,14 +143,8 @@ dd { margin-left: 18px; }
     font-size: 95%;
     border: 1px solid #CCCCCC;
     background-color: #f5f5f5;
-    margin-top: 4px;
-    margin-bottom: 4px;
-    margin-left: 2px;
-    margin-right: 8px;
-    padding-left: 6px;
-    padding-right: 6px;
-    padding-top: 4px;
-    padding-bottom: 4px;
+    margin: 10px 0px 10px 0px;
+    padding: 4px 6px 4px 6px;
 }
 
 .imglink:focus, .imglink:hover, .imglink:active, .imglink:visited {
@@ -181,7 +175,7 @@ dd { margin-left: 18px; }
 
 #download {
     float: right;
-    padding: 0px 0px 5px 10px;
+    padding: 0px 0px 10px 15px;
 }
 
 #screenshot {
