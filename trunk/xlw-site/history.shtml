@@ -1,7 +1,14 @@
 <!--#include virtual="header.inc"-->
 <h2>Version History</h2>
 
-<h3>Release 3.0 - 14 April 2008</h3>
+<h3>Release 3.0 Final - 11 May 2008</h3>
+
+<ul>
+<li>Extend class XLFunctionRegistrationHelper to allow function return type default value (XlfOper) to be overridden</li>
+<li>Update the handwritten example to use XLFunctionRegistrationHelper instead of XlfArgDesc/XlfFuncDesc</li>
+</ul>
+
+<h3>Release 3.0 Beta - 14 April 2008</h3>
 
 <ul>
 <li>Introduce support for Excel 2007, including the XLOPER12 datatype, multithreaded worksheet functions, UNICODE strings, long strings, and larger spreadsheets</li>
@@ -12,7 +19,7 @@
 <li>Extend the support for datatypes to allow function inputs of type XlfOper to be registered with Excel as either P/R (OPER/XLOPER) or Q/U (OPER12/XLOPER12)</li>
 <li>Add support for boost matrix class (thanks to Tim Brunne)</li>
 <li>Introduce support for sheet-level references (xltypeSRef)</li>
-<li>Extend support for arrays (xltypeMulti)</li>
+<li>Extend support for arrays (xltypeMulti).  An explanation of the new interface is included in the documentation for the XlfOper class.</li>
 <li>Implement routine to unregister functions from Excel - this uses a technique published by Laurent Longre to work around a bug in the Excel C API</li>
 <li>Put all classes in new namespace xlw</li>
 <li>Store string length in a variable of type unsigned char (BYTE) rather than int, to fix a problem in which strings longer than 128 bytes were processed incorrectly</li>

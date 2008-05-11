@@ -1,9 +1,7 @@
 <!--#include virtual="header.inc"-->
 <h2>XLW - A C++ Wrapper for Excel</h2>
-<div id="download"><a class="imglink" id="imghover" href="http://downloads.sourceforge.net/xlw/xlw-3.0.0f0.exe"><img src="images/download.jpg" width=276 height=68 border=0 /></a></div>
+<div id="download"><a class="imglink" id="imghover" href="http://downloads.sourceforge.net/xlw/xlw-3.0.0f0.exe"><img src="images/download.jpg" alt="download" width=276 height=68 border=0 /></a></div>
 <p>XLW wraps the Excel C API in a simple C++ interface which you can use to customize Excel with your own worksheet formulas and menu items.</p>
-<br>
-<p>XLW supports new features introduced by Excel 2007 such as multithreaded worksheet formulas, larger spreadsheets, and Unicode strings.</p>
 <br>
 <p>The project includes the InterfaceGenerator utility which parses the header files of your C++ application...
 
@@ -31,5 +29,6 @@ Circ(<span class="keyword">double</span> Diameter); <span class="comment">// The
 </pre></div>
 
 <p>... and automatically generates the corresponding XLW Excel addin.</p>
-<div id="screenshot"><img width=371 height=312 src="images/screenshot.jpg"></div>
+<div id="screenshot"><img src="images/screenshot.jpg" alt="screenshot" width=371 height=312></div>
+<p>XLW supports new features introduced by Excel 2007 such as multithreaded worksheet formulas, larger spreadsheets, and Unicode strings.</p>
 <!--#include virtual="footer.inc"-->
