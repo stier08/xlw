@@ -1,0 +1,34 @@
+<!--#include virtual="header.inc"-->
+<h2>XLW - A C++ Wrapper for Excel</h2>
+<div id="download"><a class="imglink" id="imghover" href="http://downloads.sourceforge.net/xlw/xlw-3.0.0f0.exe"><img src="images/download.jpg" alt="download" width=276 height=68 border=0 /></a></div>
+<p>XLW wraps the Excel C API in a simple C++ interface which you can use to customize Excel with your own worksheet formulas and menu items.</p>
+<br>
+<p>The project includes the InterfaceGenerator utility which parses the header files of your C++ application...
+
+<div class="fragment">
+<pre class="fragment">
+<span class="comment">// Test.h</span>
+
+<span class="preprocessor">#ifndef TEST_H</span>
+<span class="preprocessor">#define TEST_H</span>
+
+<span class="preprocessor">#include &lt;xlw/xlw.h&gt;</span>
+
+<span class="comment">//&lt;xlw:libraryname=MyTestLibrary</span>
+
+std::wstring <span class="comment">// Concatenate two strings</span>
+<span class="comment">//&lt;xlw:time</span>
+Concat(std::wstring str1,  <span class="comment">// First string</span>
+       std::wstring str2); <span class="comment">// Second string</span>
+
+<span class="keyword">double</span> <span class="comment">// Compute the circumference of a circle</span>
+<span class="comment">//&lt;xlw:time</span>
+Circ(<span class="keyword">double</span> Diameter); <span class="comment">// The circle's diameter</span>
+
+<span class="preprocessor">#endif</span>
+</pre></div>
+
+<p>... and automatically generates the corresponding XLW Excel addin.</p>
+<div id="screenshot"><img src="images/screenshot.jpg" alt="screenshot" width=371 height=312></div>
+<p>XLW supports new features introduced by Excel 2007 such as multithreaded worksheet formulas, larger spreadsheets, and Unicode strings.</p>
+<!--#include virtual="footer.inc"-->
