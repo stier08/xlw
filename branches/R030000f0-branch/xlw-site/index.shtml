@@ -12,8 +12,6 @@
 <span class="preprocessor">#ifndef TEST_H</span>
 <span class="preprocessor">#define TEST_H</span>
 
-<span class="preprocessor">#include &lt;xlw/xlw.h&gt;</span>
-
 <span class="comment">//&lt;xlw:libraryname=MyTestLibrary</span>
 
 std::wstring <span class="comment">// Concatenate two strings</span>
