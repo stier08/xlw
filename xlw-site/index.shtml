@@ -1,6 +1,6 @@
 <!--#include virtual="header.inc"-->
 <h2>XLW - A C++ Wrapper for Excel</h2>
-<div id="download"><a class="imglink" id="imghover" href="http://downloads.sourceforge.net/xlw/xlw-3.0.0f0.exe"><img src="images/download.jpg" alt="download" width=264 height=68 border=0 /></a></div>
+<div id="download"><a class="imglink" id="imghover" href="http://downloads.sourceforge.net/xlw/xlw-3.0.0f0.exe"><img src="images/download.jpg" alt="download" width=235 height=50 border=0 /></a></div>
 <p>XLW wraps the Excel C API in a simple C++ interface which you can use to customize Excel with your own worksheet formulas and menu items.</p>
 <br>
 <p>The project includes the InterfaceGenerator utility which parses the header files of your C++ application...
@@ -11,8 +11,6 @@
 
 <span class="preprocessor">#ifndef TEST_H</span>
 <span class="preprocessor">#define TEST_H</span>
-
-<span class="preprocessor">#include &lt;xlw/xlw.h&gt;</span>
 
 <span class="comment">//&lt;xlw:libraryname=MyTestLibrary</span>
 
