@@ -1,5 +1,5 @@
 
-$Id: README.txt 221 2003-04-22 12:41:13Z nando $
+$Id$
 
 This directory contains the files for the website.  The files rely on server side includes.  If you have these pages on your hard drive and want to view them in the browser, add the following lines to your Apache configuration file:
 
