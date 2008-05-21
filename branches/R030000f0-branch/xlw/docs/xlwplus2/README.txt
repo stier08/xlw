@@ -1,5 +1,5 @@
 
-$Id: README.txt 221 2003-04-22 12:41:13Z nando $
+$Id$
 
 This directory contains the documentation for xlw version 2, including the InterfaceGenerator utility.
 
