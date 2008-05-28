@@ -1,6 +1,12 @@
 <!--#include virtual="header.inc"-->
 <h2>Version History</h2>
 
+<h3>Release ?.? - DD MMM YYYY</h3>
+
+<ul>
+<li>Enhance InterfaceGenerator to ignore 'using namespace xxx;' in Test.h</li>
+</ul>
+
 <h3>Release 3.0 Final - 11 May 2008</h3>
 
 <ul>
