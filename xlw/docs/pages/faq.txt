@@ -27,7 +27,7 @@ arguments.
 
 Excel versions up to and including 2003 have a limit of 30 function arguments.
 But there is an effective limit of 20 arguments for user defined functions.
-This is because you must register your function by calling xlfRegister, which
+This is because the function is registered with a call to xlfRegister, which
 is itself limited to 30 arguments.  xlfRegister uses 10 of its arguments to
 register the function, leaving 20 slots for the descriptions of the arguments
 to your addin function.  XLW ought to raise an exception on an attempt to
