@@ -5,6 +5,7 @@
 
 <ul>
 <li>Enhance InterfaceGenerator to ignore 'using namespace xxx;' in Test.h</li>
+<li>Fix bug in XlfMutex class which prevented proper release of handle (Thanks to Winfried Kromen)</li>
 </ul>
 
 <h3>Release 3.0 Final - 11 May 2008</h3>
@@ -23,7 +24,7 @@
 <li>Ensure thread safety as required to support multithreaded worksheet functions under Excel 2007 - introduce new mutex class for this purpose - new tag &lt;xlw:threadsafe for InterfaceGenerator</li>
 <li>Represent Excel parameter type codes as std::string rather than char, because Excel 2007 introduces codes comprising multiple characters</li>
 <li>Extend the support for datatypes to allow function inputs of type XlfOper to be registered with Excel as either P/R (OPER/XLOPER) or Q/U (OPER12/XLOPER12)</li>
-<li>Add support for boost matrix class (thanks to Tim Brunne)</li>
+<li>Add support for boost matrix class (Thanks to Tim Brunne)</li>
 <li>Introduce support for sheet-level references (xltypeSRef)</li>
 <li>Extend support for arrays (xltypeMulti).  An explanation of the new interface is included in the documentation for the XlfOper class.</li>
 <li>Implement routine to unregister functions from Excel - this uses a technique published by Laurent Longre to work around a bug in the Excel C API</li>
@@ -87,7 +88,7 @@
 <li>xlw/XlfExcel.h: Added IsCalledByFuncWiz</li>
 <li>xlwExample/xlwExample.xls: Added IsInWiz to demonstrate XlfExcel::IsCalledByFuncWiz</li>
 <li>xlwExample/xlwExample.cpp: Amended IsInWiz to demonstrate how to retrieve the caller cell</li>
-<li>xlw/XlfOper.cpp: Fixed memory leak thanks to Ale</li>
+<li>xlw/XlfOper.cpp: Fixed memory leak (Thanks to Ale)</li>
 <li>xlw/XlfOper.h: Fixed deletion of MS Excel data</li>
 <li>xlw/macros.h: Moved static error OPER constructor to XlfOper</li>
 <li>xlw/XlfOper.inl: Added ThrowOnError and Error. Added documentation</li>
