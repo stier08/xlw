@@ -11,6 +11,7 @@ namespace ExcelConfConfigurator
     {
         static int  Main(string[] args)
         {
+
             try
             {
                 if (args.Length != 3)
@@ -21,14 +22,20 @@ namespace ExcelConfConfigurator
                 string ListFileName = args[1];
                 string fname;
                 List<string> AssembleyList = new List<string>();
+           
                 using (StreamReader ListFile = new StreamReader(ListFileName))
                 {
                     while ((fname = ListFile.ReadLine()) != null)
                     {
-                        AssembleyList.Add(fname);
+                        fname = fname.Trim();
+                        if (fname != "")
+                        {
+                            AssembleyList.Add(fname);
+                        }
                     }
 
                 }
+                
                 Updater.Configurator.Config(args[0], args[2], "Excel.exe.conf", AssembleyList.ToArray());
 
                 return 0;

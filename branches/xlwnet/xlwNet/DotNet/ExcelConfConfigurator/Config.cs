@@ -52,7 +52,7 @@ namespace Updater
                         theAssemblies.Add(theRecord);
 
                 }
-
+                
                 XmlDocument doc = new XmlDocument();
                 doc.Load(installPath + @"\" + original);
                 XmlNamespaceManager nsmgr = new XmlNamespaceManager(doc.NameTable);
