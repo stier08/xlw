@@ -13,9 +13,9 @@
 
 
 
-MAKEFILE=$(XLW)\DotNet\Build\vc_common\RunDotNetInterfaceGenerator.nmake
-BUILDFLAG=$(XLW)\DotNet\Build\VS9_Pro\$(ENVIRON)\buildflag
-IFACE_EXE=$(XLW)\DotNet\Build\VS9_Pro\$(ENVIRON)\DotNetInterfaceGenerator.exe
+MAKEFILE=$(XLW)\xlwNet\DotNet\Build\vc_common\RunDotNetInterfaceGenerator.nmake
+BUILDFLAG=$(XLW)\xlwNet\DotNet\Build\VS9_Pro\$(ENVIRON)\buildflag
+IFACE_EXE=$(XLW)\xlwNet\DotNet\Build\VS9_Pro\$(ENVIRON)\DotNetInterfaceGenerator.exe
 IFACE_DLL=$(SolutionDir)$(ENVIRON)\$(LibraryName).NET.dll
 IFACE_OUTPUT=$(SolutionDir)
 

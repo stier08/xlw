@@ -14,9 +14,9 @@
 
 
 
-MAKEFILE=$(XLW)\DotNet\Build\vc_common\RunInterfaceGenerator.nmake
+MAKEFILE=$(XLW)\xlwNet\DotNet\Build\vc_common\RunInterfaceGenerator.nmake
 BUILDFLAG=$(ENVIRON)\buildflag
-IFACE_EXE=$(XLW)\build\vc9\InterfaceGenerator\$(ENVIRON)\InterfaceGenerator.exe
+IFACE_EXE=$(XLW)\xlw\build\vc9\InterfaceGenerator\$(ENVIRON)\InterfaceGenerator.exe
 IFACE_INPUT=$(SolutionDir)DLL.h
 IFACE_OUTPUT=$(SolutionDir)\xlwDLL.cpp
 

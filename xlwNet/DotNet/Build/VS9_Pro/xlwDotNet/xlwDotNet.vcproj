@@ -18,7 +18,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../../../../lib"
+			OutputDirectory="$(XLW)/xlwNet/lib"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -43,7 +43,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../../../include"
+				AdditionalIncludeDirectories="$(XLW)/xlw/include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;XLWDOTNET_EXPORTS"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="0"
@@ -68,7 +68,7 @@
 				OutputFile="$(OutDir)\$(ProjectName)-vc90-mt-gd.dll"
 				Version="1.0.0.0"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="../../../../lib"
+				AdditionalLibraryDirectories="$(XLW)/xlw/lib"
 				ModuleDefinitionFile=""
 				GenerateDebugInformation="true"
 				AssemblyDebug="1"
@@ -101,7 +101,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../../../../lib"
+			OutputDirectory="$(XLW)/xlwNet/lib"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -128,7 +128,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../../../include"
+				AdditionalIncludeDirectories="$(XLW)/xlw/include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;XLWDOTNET_EXPORTS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -151,7 +151,7 @@
 				OutputFile="$(OutDir)\$(ProjectName)-vc90-mt.dll"
 				Version="1.0.0.0"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="../../../../lib"
+				AdditionalLibraryDirectories="$(XLW)/xlw/lib"
 				ModuleDefinitionFile=""
 				GenerateDebugInformation="false"
 				SubSystem="2"

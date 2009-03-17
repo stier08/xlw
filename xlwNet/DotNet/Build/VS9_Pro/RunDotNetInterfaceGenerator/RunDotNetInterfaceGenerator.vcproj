@@ -33,7 +33,7 @@
 				ForcedIncludes=""
 				AssemblySearchPath=""
 				ForcedUsingAssemblies=""
-				CompileAsManaged=""
+				CompileAsManaged="1"
 			/>
 		</Configuration>
 		<Configuration

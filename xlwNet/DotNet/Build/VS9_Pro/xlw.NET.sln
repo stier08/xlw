@@ -1,6 +1,9 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetInterfaceGenerator", "DotNetInterfaceGenerator\DotNetInterfaceGenerator.csproj", "{DD1BE378-4232-420B-9A96-A0802FA2E596}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8DC33132-DEC5-488D-B16F-F5C40C970CBA} = {8DC33132-DEC5-488D-B16F-F5C40C970CBA}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xlwDotNet", "xlwDotNet\xlwDotNet.vcproj", "{8DC33132-DEC5-488D-B16F-F5C40C970CBA}"
 EndProject

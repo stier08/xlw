@@ -14,11 +14,11 @@
 
 
 
-MAKEFILE=$(XLW)\DotNet\Build\vc_common\RunExcelConfConfigurator.nmake
+MAKEFILE=$(XLW)\xlwNet\DotNet\Build\vc_common\RunExcelConfConfigurator.nmake
 BUILDFLAG=$(ENVIRON)\buildflag
-IFACE_EXE=$(XLW)\DotNet\Build\VS9_Pro\$(ENVIRON)\ExcelConfConfigurator.exe 
-TEMPLATE =$(XLW)\DotNet\ExcelConfConfigurator\Excel.exe.config
-ASSEMBLEYLIST=$(SolutionDir)AssembleyList
+IFACE_EXE=$(XLW)\xlwNet\DotNet\Build\VS9_Pro\$(ENVIRON)\ExcelConfConfigurator.exe 
+TEMPLATE =$(XLW)\xlwNet\DotNet\ExcelConfConfigurator\Excel.exe.config
+ASSEMBLEYLIST=$(SolutionDir)AssembleyList.$(ENVIRON)
 
 INPUTS = $(MAKEFILE) $(TEMPLATE) $(ASSEMBLEYLIST)
 
