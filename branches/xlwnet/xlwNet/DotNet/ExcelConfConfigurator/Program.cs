@@ -36,7 +36,7 @@ namespace ExcelConfConfigurator
 
                 }
                 
-                Updater.Configurator.Config(args[0], args[2], "Excel.exe.conf", AssembleyList.ToArray());
+                Updater.Configurator.Config(args[0], args[2], "Excel.exe.config", AssembleyList.ToArray());
 
                 return 0;
             }
