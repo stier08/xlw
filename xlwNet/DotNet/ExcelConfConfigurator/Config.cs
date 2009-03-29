@@ -44,17 +44,24 @@ namespace Updater
                         string theInfo = thePhysical.FullName;
                         string[] theTokens = theInfo.Split(',');
 
-                        theRecord.name = theTokens[0];
+                        theRecord.name = thePhysical.GetName().Name;
                         theRecord.version = theTokens[1].Split('=')[1];
                         theRecord.culture = theTokens[2].Split('=')[1];
                         theRecord.publickeytoken = theTokens[3].Split('=')[1];
 
+                  
+                        Console.WriteLine(theRecord.name);
+                        Console.WriteLine(theRecord.version);
+                        Console.WriteLine(theRecord.culture);
+                        Console.WriteLine(theRecord.publickeytoken);
                         theAssemblies.Add(theRecord);
 
                 }
                 
                 XmlDocument doc = new XmlDocument();
-                doc.Load(installPath + @"\" + original);
+                Console.WriteLine("Creatiing " + installPath + @"\" + destination);
+                doc.Load(original);
+          
                 XmlNamespaceManager nsmgr = new XmlNamespaceManager(doc.NameTable);
                 string ns = "urn:schemas-microsoft-com:asm.v1";
                 nsmgr.AddNamespace("ns", ns);
@@ -79,7 +86,7 @@ namespace Updater
 
                 }
 
-                XmlTextWriter theWriter = new XmlTextWriter(destination, Encoding.ASCII);
+                XmlTextWriter theWriter = new XmlTextWriter(installPath + @"\" + destination, Encoding.ASCII);
 
                 doc.WriteTo(theWriter);
                 theWriter.Close();
