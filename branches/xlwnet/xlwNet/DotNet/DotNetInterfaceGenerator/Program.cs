@@ -82,10 +82,10 @@ namespace DotNetInterfaceGenerator
                                 foreach (ParameterInfo param in paramInfo)
                                 {
                                     isParamOk =
-                                        isParamOk && ((xlwTypes.Contains<Type>(method.ReturnType)) || (primitives.Contains<Type>(method.ReturnType)) || (semiprimitives.Contains<Type>(method.ReturnType)));
+                                        isParamOk && ((xlwTypes.Contains(method.ReturnType)) || (primitives.Contains(method.ReturnType)) || (semiprimitives.Contains(method.ReturnType)));
                                 }
                                 isParamOk =
-                                        isParamOk && ((xlwTypes.Contains<Type>(method.ReturnType)) || (primitives.Contains<Type>(method.ReturnType)) || (semiprimitives.Contains<Type>(method.ReturnType)));
+                                        isParamOk && ((xlwTypes.Contains(method.ReturnType)) || (primitives.Contains(method.ReturnType)) || (semiprimitives.Contains(method.ReturnType)));
                                 if (!isParamOk)
                                 {
                                     throw(new Exception("Not exporting  " + method.Name + " : Unknown Parameter"));
@@ -156,7 +156,7 @@ namespace DotNetInterfaceGenerator
         {
             string[] tokens = CSType.Name.Split('.');
             string basicType = tokens[tokens.Length - 1];
-            if(primitives.Contains<Type>(CSType))
+            if(primitives.Contains(CSType))
             {
                 basicType = basicType.ToLower();
                 if (basicType == "int32")
@@ -167,7 +167,7 @@ namespace DotNetInterfaceGenerator
                 if (basicType == "int16") basicType = "short";
                 return basicType;
             }
-            if(semiprimitives.Contains<Type>(CSType))
+            if(semiprimitives.Contains(CSType))
             {
                 basicType = basicType.ToLower();
                 if (basicType == "string") basicType = "std::wstring";
@@ -195,7 +195,7 @@ namespace DotNetInterfaceGenerator
 
              string castString = "";
 
-             if (!primitives.Contains<Type>(theMethod.ReturnType))
+             if (!primitives.Contains(theMethod.ReturnType))
              {
                  castString = "*(" + writeCType(theMethod.ReturnType, false) +
                               "*)(xlwTypes::"+ writeCType(theMethod.ReturnType, false)+ "::getInner(" ;
@@ -218,7 +218,7 @@ namespace DotNetInterfaceGenerator
                  
                  
                  /////// Primitive Type
-                 if (primitives.Contains<Type>(param.ParameterType))
+                 if (primitives.Contains(param.ParameterType))
                  {
                      sourceFile.Write(tabString + tabString + param.Name);
                  }
@@ -233,7 +233,7 @@ namespace DotNetInterfaceGenerator
                      else
                      {
                          string gcnew = "gcnew";
-                         if (semiprimitives.Contains<Type>(param.ParameterType)) gcnew = "";
+                         if (semiprimitives.Contains(param.ParameterType)) gcnew = "";
                          sourceFile.Write(tabString + tabString + gcnew + " xlwTypes::" + writeCType(param.ParameterType, false) + "(IntPtr((void*)&" + param.Name + "))");
                      }
                  }
@@ -246,7 +246,7 @@ namespace DotNetInterfaceGenerator
                  sourceFile.WriteLine();
              }
              sourceFile.Write(tabString + ")");
-             if (!primitives.Contains<Type>(theMethod.ReturnType) && !(theMethod.ReturnType == typeof(String)))
+             if (!primitives.Contains(theMethod.ReturnType) && !(theMethod.ReturnType == typeof(String)))
              {
                  sourceFile.Write("))");
              }
