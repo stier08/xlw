@@ -1,22 +1,8 @@
 
-# build\vc_common\RunInterfaceGenerator.nmake
-# 
-# Visual C++ NMAKE file which is invoked by the VC projects in directories
-#     build\vc?\RunInterfaceGenerator
-# Where ? is 7, 8 or 9 depending on the version of VC.  This makefile is stored
-# separately from the VC project files since it is shared by all 3 of them.
-#
-# This makefile detects changes to the inputs of InterfaceGenerator.exe and
-# re-runs the utility as necessary.  InterfaceGenerator.exe parses the header
-# file of the example application and autogenerates source code for the
-# corresponding xlw addin.
-
-
-
 
 MAKEFILE=$(XLW)\xlwNet\DotNet\Build\vc_common\RunInterfaceGenerator.nmake
 BUILDFLAG=$(ENVIRON)\buildflag
-IFACE_EXE=$(XLW)\xlw\build\vc9\InterfaceGenerator\$(ENVIRON)\InterfaceGenerator.exe
+IFACE_EXE=$(XLW)\xlw\build\$(VCVERSION)\InterfaceGenerator\$(ENVIRON)\InterfaceGenerator.exe
 IFACE_INPUT=$(SolutionDir)DLL.h
 IFACE_OUTPUT=$(SolutionDir)\xlwDLL.cpp
 
