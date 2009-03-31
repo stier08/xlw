@@ -67,7 +67,7 @@
 				OutputFile="$(OutDir)\$(SolutionName)C.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="$(XLW)/xlw/lib;"
-				ModuleDefinitionFile="Example.def"
+				ModuleDefinitionFile=""
 				GenerateDebugInformation="true"
 				AssemblyDebug="1"
 				SubSystem="2"
@@ -190,6 +190,10 @@
 			ReferencedProjectIdentifier="{8679824E-0E59-4620-AFAB-3E201D045BC3}"
 			RelativePathToProject=".\DotNet.csproj"
 		/>
+		<AssemblyReference
+			RelativePath="..\..\..\..\lib\xlwDotNet-vc80-mt-gd.dll"
+			AssemblyName="xlwDotNet-vc80-mt-gd, Version=0.0.0.0, PublicKeyToken=e6c495227a9be340, processorArchitecture=x86"
+		/>
 	</References>
 	<Files>
 		<File
@@ -198,10 +202,6 @@
 		</File>
 		<File
 			RelativePath="DLL.h"
-			>
-		</File>
-		<File
-			RelativePath=".\Example.def"
 			>
 		</File>
 	</Files>

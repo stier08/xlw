@@ -24,9 +24,9 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="NMAKE /f ..\..\vc_common\RunDotNetInterfaceGenerator.nmake  ENVIRON=Debug  LibraryName=$(SolutionName)  SolutionDir=$(SolutionDir)"
-				ReBuildCommandLine="NMAKE /f ..\..\vc_common\RunDotNetInterfaceGenerator.nmake /a ENVIRON=Debug    LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)"
-				CleanCommandLine="NMAKE /f ..\..\vc_common\RunDotNetInterfaceGenerator.nmake clean ENVIRON=Debug    LibraryName=$(SolutionName)    SolutionDir=$(SolutionDir)"
+				BuildCommandLine="NMAKE /f ..\..\vc_common\RunDotNetInterfaceGenerator.nmake  ENVIRON=Debug  LibraryName=$(SolutionName)  SolutionDir=$(SolutionDir) VSVERSION=VS8_Pro"
+				ReBuildCommandLine="NMAKE /f ..\..\vc_common\RunDotNetInterfaceGenerator.nmake /a ENVIRON=Debug    LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir) VSVERSION=VS8_Pro"
+				CleanCommandLine="NMAKE /f ..\..\vc_common\RunDotNetInterfaceGenerator.nmake clean ENVIRON=Debug    LibraryName=$(SolutionName)    SolutionDir=$(SolutionDir) VSVERSION=VS8_Pro"
 				Output=""
 				PreprocessorDefinitions="WIN32;_DEBUG"
 				IncludeSearchPath=""
@@ -44,9 +44,9 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="NMAKE /f ..\..\vc_common\RunDotNetInterfaceGenerator.nmake ENVIRON=Release   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)"
-				ReBuildCommandLine="NMAKE /f ..\..\vc_common\RunDotNetInterfaceGenerator.nmake /a ENVIRON=Release   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)"
-				CleanCommandLine="NMAKE /f ..\..\vc_common\RunDotNetInterfaceGenerator.nmake clean ENVIRON=Release   LibraryName=$(SolutionName)    SolutionDir=$(SolutionDir)"
+				BuildCommandLine="NMAKE /f ..\..\vc_common\RunDotNetInterfaceGenerator.nmake ENVIRON=Release   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)  VSVERSION=VS8_Pro"
+				ReBuildCommandLine="NMAKE /f ..\..\vc_common\RunDotNetInterfaceGenerator.nmake /a ENVIRON=Release   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)  VSVERSION=VS8_Pro"
+				CleanCommandLine="NMAKE /f ..\..\vc_common\RunDotNetInterfaceGenerator.nmake clean ENVIRON=Release   LibraryName=$(SolutionName)    SolutionDir=$(SolutionDir)  VSVERSION=VS8_Pro"
 				Output=""
 				PreprocessorDefinitions="WIN32;NDEBUG"
 				IncludeSearchPath=""

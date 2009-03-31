@@ -49,6 +49,7 @@
 				BasicRuntimeChecks="0"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
+				ProgramDataBaseFileName="$(IntDir)\vc80.pdb"
 				BrowseInformation="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
@@ -66,7 +67,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="xlw-vc90-mt-gd-3_0_0.lib"
 				OutputFile="$(OutDir)\$(ProjectName)-vc90-mt-gd.dll"
-				Version="1.0.0.0"
+				Version="0.0.0.0"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="$(XLW)/xlw/lib"
 				ModuleDefinitionFile=""
@@ -75,6 +76,7 @@
 				SubSystem="2"
 				TargetMachine="1"
 				KeyFile="../../../xlwDotNet/xlwDotNet.snk"
+				CLRUnmanagedCodeCheck="false"
 			/>
 			<Tool
 				Name="VCALinkTool"

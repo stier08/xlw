@@ -24,9 +24,9 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="NMAKE /f ..\..\vc_common\RunInterfaceGenerator.nmake ENVIRON=Debug  LibraryName=$(SolutionName)  SolutionDir=$(SolutionDir)"
-				ReBuildCommandLine="NMAKE /f ..\..\vc_common\RunInterfaceGenerator.nmake /a ENVIRON=Debug   LibraryName=$(SolutionName)    SolutionDir=$(SolutionDir)"
-				CleanCommandLine="NMAKE /f ..\..\vc_common\RunInterfaceGenerator.nmake clean ENVIRON=Debug   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)"
+				BuildCommandLine="NMAKE /f ..\..\vc_common\RunInterfaceGenerator.nmake ENVIRON=Debug  LibraryName=$(SolutionName)  SolutionDir=$(SolutionDir)   VCVERSION=vc9"
+				ReBuildCommandLine="NMAKE /f ..\..\vc_common\RunInterfaceGenerator.nmake /a ENVIRON=Debug   LibraryName=$(SolutionName)    SolutionDir=$(SolutionDir)    VCVERSION=vc9"
+				CleanCommandLine="NMAKE /f ..\..\vc_common\RunInterfaceGenerator.nmake clean ENVIRON=Debug   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)    VCVERSION=vc9"
 				Output=""
 				PreprocessorDefinitions="WIN32;_DEBUG"
 				IncludeSearchPath=""
@@ -44,9 +44,9 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="NMAKE /f ..\..\vc_common\RunInterfaceGenerator.nmake ENVIRON=Release   LibraryName=$(SolutionName)    SolutionDir=$(SolutionDir)"
-				ReBuildCommandLine="NMAKE /f ..\..\vc_common\RunInterfaceGenerator.nmake /a ENVIRON=Release   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)"
-				CleanCommandLine="NMAKE /f ..\..\vc_common\RunInterfaceGenerator.nmake clean ENVIRON=Release   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)"
+				BuildCommandLine="NMAKE /f ..\..\vc_common\RunInterfaceGenerator.nmake ENVIRON=Release   LibraryName=$(SolutionName)    SolutionDir=$(SolutionDir)    VCVERSION=vc9"
+				ReBuildCommandLine="NMAKE /f ..\..\vc_common\RunInterfaceGenerator.nmake /a ENVIRON=Release   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)    VCVERSION=vc9"
+				CleanCommandLine="NMAKE /f ..\..\vc_common\RunInterfaceGenerator.nmake clean ENVIRON=Release   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)    VCVERSION=vc9"
 				Output=""
 				PreprocessorDefinitions="WIN32;NDEBUG"
 				IncludeSearchPath=""

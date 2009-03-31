@@ -11,12 +11,9 @@
 #include<string>
 #include<xlw/XlfException.h>
 
+
+
 #define DLLEXPORT __declspec(dllexport)
-
-namespace xlwDotNet   //not required in VS9 but required in VS8 for some reason
-{}                    // or I could just have it wrong
-
-
 namespace {
 	std::string errMessage;
 	xlw::CellMatrix errCells;
