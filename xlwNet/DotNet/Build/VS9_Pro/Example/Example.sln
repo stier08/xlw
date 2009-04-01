@@ -28,10 +28,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RunInterfaceGenerator", "..
 		{1115BBB6-8140-40EF-8805-DF2E41D1330E} = {1115BBB6-8140-40EF-8805-DF2E41D1330E}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExcelConfConfigurator", "..\RunExcelConfConfigurator\ExcelConfConfigurator.vcproj", "{7C22BF4D-0F19-46F7-A3CF-D5138D5D9A5A}"
-	ProjectSection(ProjectDependencies) = postProject
-		{DE8A087D-EF7B-4777-A464-F47096EE968C} = {DE8A087D-EF7B-4777-A464-F47096EE968C}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RunExcelConfConfigurator", "..\RunExcelConfConfigurator\RunExcelConfConfigurator.vcproj", "{7C22BF4D-0F19-46F7-A3CF-D5138D5D9A5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

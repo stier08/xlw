@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8.00"
-	Name="ExcelConfConfigurator"
+	Version="9.00"
+	Name="RunExcelConfConfigurator"
 	ProjectGUID="{7C22BF4D-0F19-46F7-A3CF-D5138D5D9A5A}"
 	RootNamespace="ExcelConfConfigurator"
 	Keyword="MakeFileProj"
@@ -24,9 +24,9 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="NMAKE /f ..\..\vc_common\RunExcelConfConfigurator.nmake ENVIRON=Debug  LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir) VSVERSION=VS8_Pro"
-				ReBuildCommandLine="NMAKE /f ..\..\vc_common\RunExcelConfConfigurator.nmake /a ENVIRON=Debug   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir) VSVERSION=VS8_Pro"
-				CleanCommandLine="NMAKE /f ..\..\vc_common\RunExcelConfConfigurator.nmake clean ENVIRON=Debug   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir) VSVERSION=VS8_Pro"
+				BuildCommandLine="NMAKE /f ..\..\vc_common\RunExcelConfConfigurator.nmake ENVIRON=Debug  LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir) VSVERSION=VS9_Pro"
+				ReBuildCommandLine="NMAKE /f ..\..\vc_common\RunExcelConfConfigurator.nmake /a ENVIRON=Debug   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)  VSVERSION=VS9_Pro"
+				CleanCommandLine="NMAKE /f ..\..\vc_common\RunExcelConfConfigurator.nmake clean ENVIRON=Debug   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)  VSVERSION=VS9_Pro"
 				Output=""
 				PreprocessorDefinitions="WIN32;_DEBUG"
 				IncludeSearchPath=""
@@ -44,9 +44,9 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="NMAKE /f ..\..\vc_common\RunExcelConfConfigurator.nmake ENVIRON=Release   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir) VSVERSION=VS8_Pro"
-				ReBuildCommandLine="NMAKE /f ..\..\vc_common\RunExcelConfConfigurator.nmake /a ENVIRON=Release   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir) VSVERSION=VS8_Pro"
-				CleanCommandLine="NMAKE /f ..\..\vc_common\RunExcelConfConfigurator.nmake clean ENVIRON=Release   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir) VSVERSION=VS8_Pro"
+				BuildCommandLine="NMAKE /f ..\..\vc_common\RunExcelConfConfigurator.nmake ENVIRON=Release   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)  VSVERSION=VS9_Pro"
+				ReBuildCommandLine="NMAKE /f ..\..\vc_common\RunExcelConfConfigurator.nmake /a ENVIRON=Release   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)  VSVERSION=VS9_Pro"
+				CleanCommandLine="NMAKE /f ..\..\vc_common\RunExcelConfConfigurator.nmake clean ENVIRON=Release   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)  VSVERSION=VS9_Pro"
 				Output=""
 				PreprocessorDefinitions="WIN32;NDEBUG"
 				IncludeSearchPath=""

@@ -183,7 +183,7 @@
 	</References>
 	<Files>
 		<File
-			RelativePath="xlwDLL.cpp"
+			RelativePath="xlwExample.cpp"
 			>
 		</File>
 	</Files>
