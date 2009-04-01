@@ -6,7 +6,6 @@
 	ProjectGUID="{A0ABD763-74BE-48DF-8B5D-50E9FCB79C5B}"
 	RootNamespace="ExampleXll"
 	Keyword="Win32Proj"
-	AssemblyReferenceSearchPaths="&quot;$(XLW)/xlwDotNet/lib&quot;"
 	>
 	<Platforms>
 		<Platform
@@ -51,6 +50,7 @@
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
+                        ForcedUsingFiles="$(XLW)/xlwNet/lib/xlwDotNet-vc80-mt-gd.dll;$(OutDir)/$(SolutionName).NET.dll"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -135,6 +135,7 @@
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
+				ForcedUsingFiles="$(XLW)/xlwNet/lib/xlwDotNet-vc80-mt.dll;$(OutDir)/$(SolutionName).NET.dll"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -186,22 +187,14 @@
 		</Configuration>
 	</Configurations>
 	<References>
-		<ProjectReference
-			ReferencedProjectIdentifier="{8679824E-0E59-4620-AFAB-3E201D045BC3}"
-			RelativePathToProject=".\DotNet.csproj"
-		/>
-		<AssemblyReference
-			RelativePath="..\..\..\..\lib\xlwDotNet-vc80-mt-gd.dll"
-			AssemblyName="xlwDotNet-vc80-mt-gd, Version=0.0.0.0, PublicKeyToken=e6c495227a9be340, processorArchitecture=x86"
-		/>
-	</References>
+			</References>
 	<Files>
 		<File
-			RelativePath="DLL.cpp"
+			RelativePath="Example.cpp"
 			>
 		</File>
 		<File
-			RelativePath="DLL.h"
+			RelativePath="Example.h"
 			>
 		</File>
 	</Files>

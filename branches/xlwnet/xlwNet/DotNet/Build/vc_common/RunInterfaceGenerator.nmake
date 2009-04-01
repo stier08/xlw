@@ -3,8 +3,8 @@
 MAKEFILE=$(XLW)\xlwNet\DotNet\Build\vc_common\RunInterfaceGenerator.nmake
 BUILDFLAG=$(ENVIRON)\buildflag
 IFACE_EXE=$(XLW)\xlw\build\$(VCVERSION)\InterfaceGenerator\$(ENVIRON)\InterfaceGenerator.exe
-IFACE_INPUT=$(SolutionDir)DLL.h
-IFACE_OUTPUT=$(SolutionDir)\xlwDLL.cpp
+IFACE_INPUT=$(SolutionDir)$(LibraryName).h
+IFACE_OUTPUT=$(SolutionDir)\xlw$(LibraryName).cpp
 
 INPUTS = $(MAKEFILE) $(IFACE_EXE) $(IFACE_INPUT)
 

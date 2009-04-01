@@ -13,6 +13,7 @@
 
 
 
+
 #define DLLEXPORT __declspec(dllexport)
 namespace {
 	std::string errMessage;
