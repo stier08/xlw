@@ -25,9 +25,9 @@ namespace DotNetInterfaceGenerator
         {
             try
             {
-                if (args.Length > 3 || args.Length < 2)
+                if (args.Length > 4 || args.Length < 2)
                 {
-                    Console.WriteLine("Usage: DotNetInterfaceGenerator <input assembley> <output library name> <output directory>");
+                    Console.WriteLine("Usage: DotNetInterfaceGenerator <input assembley> <output library name> <output directory> <outputfilename>");
                     return 0;
                 }
                 Assembly sourceAssembley = Assembly.LoadFrom(args[0]);
@@ -42,17 +42,23 @@ namespace DotNetInterfaceGenerator
 
 
                 string dirName = "";
-                if (args.Length == 3)
+                if (args.Length >= 3)
                 {
                     dirName = args[2];
                 }
 
-                IO.StreamWriter headerFile = IO.File.CreateText(dirName + "/" + args[1] + ".h");
-                IO.StreamWriter sourceFile = IO.File.CreateText(dirName + "/" + args[1] + ".cpp");
+                string fileName=args[1];
+                if (args.Length == 4)
+                {
+                    fileName = args[3];
+                }
+
+                IO.StreamWriter headerFile = IO.File.CreateText(dirName + "/" + fileName + ".h");
+                IO.StreamWriter sourceFile = IO.File.CreateText(dirName + "/" + fileName + ".cpp");
 
 
-                headerFile.WriteLine("#ifndef " + args[1].ToUpper() + "_H");
-                headerFile.WriteLine("#define " + args[1].ToUpper() + "_H"); headerFile.WriteLine();
+                headerFile.WriteLine("#ifndef " + fileName.ToUpper() + "_H");
+                headerFile.WriteLine("#define " + fileName.ToUpper() + "_H"); headerFile.WriteLine();
                 headerFile.WriteLine("#include <xlwDotNet.h>"); headerFile.WriteLine();
                 headerFile.WriteLine("//<xlw:libraryname=" + args[1]); headerFile.WriteLine();
 
