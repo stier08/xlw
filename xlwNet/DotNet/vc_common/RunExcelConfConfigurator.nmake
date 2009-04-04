@@ -4,14 +4,14 @@ MAKEFILE=$(XLW)\xlwNet\DotNet\vc_common\RunExcelConfConfigurator.nmake
 BUILDFLAG=$(ENVIRON)\buildflag
 IFACE_EXE=$(XLW)\xlwNet\DotNet\Build\$(VSVERSION)\$(ENVIRON)\ExcelConfConfigurator.exe 
 TEMPLATE =$(XLW)\xlwNet\DotNet\ExcelConfConfigurator\Excel.exe.config
-ASSEMBLEYLIST=$(SolutionDir)Addin\AssembleyList.$(ENVIRON)
+ASSEMBLY=..\$(ENVIRON)\$(LibraryName).NET.dll 
 
-INPUTS = $(IFACE_EXE) $(MAKEFILE) $(TEMPLATE) $(ASSEMBLEYLIST) 
+INPUTS = $(IFACE_EXE) $(MAKEFILE) $(TEMPLATE) $(ASSEMBLY) 
 
 ALL : $(BUILDFLAG)
 
 $(BUILDFLAG) : $(INPUTS)
-    $(IFACE_EXE) $(TEMPLATE) $(ASSEMBLEYLIST) $(SolutionDir)$(ENVIRON)
+    $(IFACE_EXE) $(TEMPLATE) $(ASSEMBLY) $(SolutionDir)$(ENVIRON) 
 	ECHO flagged > $@
 
 CLEAN :
