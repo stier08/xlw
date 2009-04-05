@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="RunExcelConfConfigurator"
+	ProjectGUID="{7C22BF4D-0F19-46F7-A3CF-D5138D5D9A5A}"
+	RootNamespace="ExcelConfConfigurator"
+	Keyword="MakeFileProj"
+	>
+	<Platforms>
+		<Platform
+			Name="Win32"
+		/>
+	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="0"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="NMAKE /f $(XLW)\xlwNet\DotNet\vc_common\RunExcelConfConfigurator.nmake ENVIRON=Debug  LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)../ VSVERSION=VS8_EXPRESS"
+				ReBuildCommandLine="NMAKE /f $(XLW)\xlwNet\DotNet\vc_common\RunExcelConfConfigurator.nmake /a ENVIRON=Debug   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)../ VSVERSION=VS8_EXPRESS"
+				CleanCommandLine="NMAKE /f $(XLW)\xlwNet\DotNet\vc_common\RunExcelConfConfigurator.nmake clean ENVIRON=Debug   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)../ VSVERSION=VS8_EXPRESS"
+				Output=""
+				PreprocessorDefinitions="WIN32;_DEBUG"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="0"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="NMAKE /f $(XLW)\xlwNet\DotNet\vc_common\RunExcelConfConfigurator.nmake ENVIRON=Release   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)../ VSVERSION=VS8_EXPRESS"
+				ReBuildCommandLine="NMAKE /f $(XLW)\xlwNet\DotNet\vc_common\RunExcelConfConfigurator.nmake /a ENVIRON=Release   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)../ VSVERSION=VS8_EXPRESS"
+				CleanCommandLine="NMAKE /f $(XLW)\xlwNet\DotNet\vc_common\RunExcelConfConfigurator.nmake clean ENVIRON=Release   LibraryName=$(SolutionName)   SolutionDir=$(SolutionDir)../ VSVERSION=VS8_EXPRESS"
+				Output=""
+				PreprocessorDefinitions="WIN32;NDEBUG"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>
