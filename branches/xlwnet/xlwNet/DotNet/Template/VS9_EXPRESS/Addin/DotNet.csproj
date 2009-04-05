@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8679824E-0E59-4620-AFAB-3E201D045BC3}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -18,6 +18,7 @@
     <AssemblyOriginatorKeyFile>KeyFile.snk</AssemblyOriginatorKeyFile>
     <TargetFrameworkSubset>
     </TargetFrameworkSubset>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <gdconfig>-gd</gdconfig>
@@ -45,7 +46,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="xlwDotNet, Version=0.0.0.0, Culture=neutral, PublicKeyToken=e6c495227a9be340, processorArchitecture=x86">
-      <HintPath>$(XLW)\xlwNet\lib\xlwDotNet-vc80-mt$(gdconfig).dll</HintPath>
+      <HintPath>$(XLW)\xlwNet\lib\xlwDotNet-vc90-mt$(gdconfig).dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
   </ItemGroup>
@@ -65,7 +66,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>$(FrameworkDir)$(FrameworkVersion)/msbuild /p:Configuration=$(ConfigurationName) $(SolutionDir)Addin/$(SolutionName).sln</PostBuildEvent>
+    <PostBuildEvent>$(MSBuildBinPath)\msbuild $(SolutionDir)Addin\$(SolutionName).sln  /p:Configuration=$(ConfigurationName)</PostBuildEvent>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
