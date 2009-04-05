@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="xlwDotNet"
-	ProjectGUID="{8DC33132-DEC5-488D-B16F-F5C40C970CBA}"
-	RootNamespace="xlwDotNet"
+	Name="XLL"
+	ProjectGUID="{DE8A087D-EF7B-4777-A464-F47096EE968C}"
+	RootNamespace="ExampleXll"
 	Keyword="Win32Proj"
 	>
 	<Platforms>
@@ -17,11 +17,11 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(XLW)/xlwNet/lib"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)/../$(ConfigurationName)"
+			IntermediateDirectory="$(OutDir)/obj"
 			ConfigurationType="2"
 			CharacterSet="1"
-			ManagedExtensions="1"
+			ManagedExtensions="0"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -42,13 +42,12 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(XLW)/xlw/include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;XLWDOTNET_EXPORTS"
+				AdditionalIncludeDirectories="&quot;$(XLW)/xlw/include&quot;;&quot;$(XLW)/xlwNet/DotNet/xlwDotNet&quot;;&quot;$(PSDK)/Include&quot;"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLEXLL_EXPORTS"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="0"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
-				BrowseInformation="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -63,18 +62,15 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="xlw-vc80-mt-gd-3_0_0.lib odbc32.lib odbccp32.lib User32.lib"
-				OutputFile="$(OutDir)\$(ProjectName)-vc80-mt-gd.dll"
-				Version="0.0.0.0"
+				IgnoreImportLibrary="true"
+				AdditionalDependencies="xlw-vc80-mt-gd-3_0_0.lib $(SolutionName)C.lib odbc32.lib odbccp32.lib User32.lib"
+				OutputFile="$(OutDir)/$(SolutionName).xll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(XLW)/xlw/lib"
-				ModuleDefinitionFile=""
+				AdditionalLibraryDirectories="$(XLW)/xlw/lib;../$(ConfigurationName);$(PSDK)/Lib"
 				GenerateDebugInformation="true"
 				AssemblyDebug="1"
 				SubSystem="2"
 				TargetMachine="1"
-				KeyFile="../../../xlwDotNet/xlwDotNet.snk"
-				CLRUnmanagedCodeCheck="false"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -99,21 +95,18 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(XLW)/xlwNet/lib"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)/../$(ConfigurationName)"
+			IntermediateDirectory="$(OutDir)/obj"
 			ConfigurationType="2"
 			CharacterSet="1"
-			ManagedExtensions="1"
 			WholeProgramOptimization="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine=""
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -131,8 +124,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="$(XLW)/xlw/include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;XLWDOTNET_EXPORTS"
+				AdditionalIncludeDirectories="&quot;$(XLW)/xlw/include&quot;;&quot;$(XLW)/xlwNet/DotNet/xlwDotNet&quot;;&quot;$(PSDK)/Include&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLEXLL_EXPORTS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -150,18 +143,15 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="xlw-vc80-mt-3_0_0.lib"
-				OutputFile="$(OutDir)\$(ProjectName)-vc80-mt.dll"
-				Version="1.0.0.0"
+				AdditionalDependencies="xlw-vc80-mt-3_0_0.lib $(SolutionName)C.lib odbc32.lib odbccp32.lib User32.lib"
+				OutputFile="$(OutDir)/$(SolutionName).xll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(XLW)/xlw/lib"
-				ModuleDefinitionFile=""
-				GenerateDebugInformation="false"
+				AdditionalLibraryDirectories="$(XLW)/xlw/lib;../$(ConfigurationName);$(PSDK)/Lib"
+				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				TargetMachine="1"
-				KeyFile="../../../xlwDotNet/xlwDotNet.snk"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -186,7 +176,6 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine=""
 			/>
 		</Configuration>
 	</Configurations>
@@ -194,39 +183,7 @@
 	</References>
 	<Files>
 		<File
-			RelativePath="..\..\..\xlwDotNet\ExcelExportAttribute.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\xlwDotNet\managedArgumentList.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\xlwDotNet\managedCellMatrix.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\xlwDotNet\managedMyArray.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\xlwDotNet\managedMyMatrix.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\xlwDotNet\managedString.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\xlwDotNet\xdnException.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\xlwDotNet\xlwDotNet.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\xlwDotNet\xlwTypeBaseClass.h"
+			RelativePath="..\AutoGeneratedSource\xlwXLL.cpp"
 			>
 		</File>
 	</Files>
