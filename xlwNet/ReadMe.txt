@@ -1,4 +1,0 @@
-
-
-
-Read the License.
