@@ -1,7 +1,7 @@
 
 
 ** These are premliminary INSTALL notes for use by XLW developers and for testing **
-06 Apr 09
+08 Apr 09
 Narinder Claire
 
 
@@ -97,11 +97,9 @@ Narinder Claire
 
    2.2 Building xlwDotNet
    ----------------------
-   In directory xlwnet\xlwNet\DotNet\Build you will find 4 directories :
-       VS9_PRO 
-       VS9_EXPRESS
-       VS8_PRO 
-       VS8_EXPRESS
+   In directory xlwnet\xlwNet\DotNet\Build you will find 2 directories :
+       VS9
+       VS8
 
    In the directory corresponding to your version of Visual Studio, you will find the Solution xlw.NET.sln
    Build this, preferably in both Build & Release.
@@ -115,11 +113,10 @@ Narinder Claire
 
    3.1 Building The Example
    ------------------------
-   In directory xlwnet\xlwNet\DotNet\Build you will find 4 directories :
-       VS9_PRO 
-       VS9_EXPRESS
-       VS8_PRO 
-       VS8_EXPRESS
+   In directory xlwnet\xlwNet\DotNet\Build you will find 2 directories :
+       VS9
+       VS8
+     
 
    In the directory corresponding to your version of Visual Studio, you will find the Solution Example.sln
    Build this in Debug. Ensure that the configuration is indeed set to Debug.
@@ -185,11 +182,9 @@ The only time you will have to repeat steps 3.3 & 3.4 are when :
    4.1 Obtaining the Template Project
    ----------------------------------
 
-   In directory xlwnet\xlwNet\DotNet\Build you will find 4 directories :
-       VS9_PRO 
-       VS9_EXPRESS
-       VS8_PRO 
-       VS8_EXPRESS
+   In directory xlwnet\xlwNet\DotNet\Build you will find 2 directories :
+       VS9 
+       VS8
 
    Copy the directory corresponding to your Visual Studio environment to wherever you would like to place
    your new xll project. Preferaby do not make it a sub directory of the xlw source tree.
