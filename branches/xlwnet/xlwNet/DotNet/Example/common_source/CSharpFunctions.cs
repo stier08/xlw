@@ -107,13 +107,6 @@ namespace Example
         }
 
 
-        [ExcelExport("throws an exception")]
-        public static double Exception()
-        {
-            throw (new ArgumentException("OH NO"));
-            return 1.1;
-        }
-
         [ExcelExport("says hello name")]
         public static string HelloWorldAgain(
                              [Parameter("name to be echoed")] string name
@@ -122,8 +115,43 @@ namespace Example
             return "hello " + name;
         }
 
+        [ExcelExport("echoes an unsigned long")]
+        public static double EchoUL(
+                             [Parameter("number to echo")] double b
+                            )
+        {
+            throw new Exception("type UInt64 not supported in xlwDotNet");
+            return 0.0;
+        }
+        [ExcelExport("tests DoubleOrNothingType")]
+        public static double EchoDoubleOrNothing(
+                             [Parameter("value to specify")] CellMatrix x, 
+                             [Parameter("default value")] double defaultValue 
+                            )
+        {
+            throw new Exception("type DoubleOrNothing not supported in xlwDotNet");
+            return 0.0;
+        }
 
 
+        [ExcelExport("system clock")]
+        public static double SystemTime(
+                             [Parameter("number to divide by")] CellMatrix ticksPerSecond
+                            )
+        {
+            if (ticksPerSecond.ColumnsInStructure != 1 || ticksPerSecond.RowsInStructure != 1)
+                throw new Exception("Multiple values given where one expected for a double or nothing ");
+
+            if (!ticksPerSecond[0, 0].IsEmpty && !ticksPerSecond[0, 0].IsANumber)
+                throw new Exception("expected a double or nothing, got something else ");
+
+            bool Empty = ticksPerSecond[0, 0].IsEmpty;
+
+            double Value = Empty ? 1000: ticksPerSecond[0, 0].NumericValue();
+
+            return DateTime.Now.Ticks / Value;
+            
+        }
         [ExcelExport("echoes arg list")]
         public static CellMatrix EchoArgList(
                              [Parameter(" arguments to echo")] ArgumentList args
@@ -132,8 +160,79 @@ namespace Example
             return args.AllData();
         }
 
+        [ExcelExport("evaluate pay--off")]
+        public static double PayOffEvaluation(
+                             [Parameter(" table for payoff")] CellMatrix OptionPayoff,
+                             [Parameter(" point for evaluation")] double Spot
+                            )
+        {
+            throw new Exception("type Wrapper<PayOff> not supported in xlwDotNet");
+            return 0.0;
+        }
+
+        [ExcelExport("checks to see if there's an error")]
+        public static int ContainsError(
+                             [Parameter("data to check for errors")] CellMatrix input
+                            )
+        {
+            for (int i = 0; i < input.RowsInStructure; ++i)
+                for (int j = 0; j < input.ColumnsInStructure; ++j)
+                    if (input[i, j].IsError)
+                        return 1;
+
+            return 0;
+        }
+
+        [ExcelExport("checks to see if there's a div by zero")]
+        public static int ContainsDivByZero(
+                             [Parameter("data to check for errors")] CellMatrix input
+                            )
+        {
+            for (int i = 0; i < input.RowsInStructure; ++i)
+                for (int j = 0; j < input.ColumnsInStructure; ++j)
+                    if (input[i, j].IsError)
+                        if (input[i, j].ErrorValue() == 7)
+                            return 1;
+
+            return 0;
+
+        }
+        [ExcelExport("Gets the thread id", volatileFlag = true)]
+        public static double GetThreadId()
+        {
+            return (double)System.AppDomain.GetCurrentThreadId();
+
+        }
+
+        [ExcelExport("return a string indicating datatype of OPER/OPER12 input")]
+        public static string typeString(
+                             [Parameter("parameter")] CellMatrix input
+                            )
+        {
+            throw new Exception("XlfOper not implemented directly in xlwDotNet");
+            return "";
+
+        }
+
+        [ExcelExport("return a string indicating datatype of XLOPER/XLOPER12 input")]
+        public static string typeString2(
+                             [Parameter("parameter")] CellMatrix input
+                            )
+        {
+            throw new Exception("XlfOper not implemented directly in xlwDotNet");
+            return "";
+
+        }
+
+
+
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////
 /////////////// C# Specific test /////////////////////////////////////////////////
+
+
         [ExcelExport("takes double[]")]
         public static MyArray CastToCSArray (
                              [Parameter(" double Array")] double[] csarray
@@ -174,7 +273,7 @@ namespace Example
                              [Parameter("Just any random string ")] string err
                             )
         {
-            throw(new ArgumentNullException(err,err));
+            throw(new ArgumentNullException("err",err));
             return 0;
         }
         [ExcelExport("throws an exception of type cellMatrixException")]
@@ -196,6 +295,9 @@ namespace Example
             MyMatrix theMatrix = new MyMatrix(2,2);
             return theMatrix[3,3];
         }
+
+
     }
 }
+
 
