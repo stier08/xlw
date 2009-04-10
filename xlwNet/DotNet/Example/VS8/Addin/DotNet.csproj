@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="..\..\common_source\Properties\AssemblyInfo.cs" />
     <Compile Include="..\..\common_source\CSharpFunctions.cs" />
+    <Compile Include="..\..\common_source\Historic.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\common_source\Example.snk" />

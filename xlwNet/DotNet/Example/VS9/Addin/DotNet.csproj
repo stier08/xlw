@@ -45,6 +45,8 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
     <Reference Include="xlwDotNet, Version=0.0.0.0, Culture=neutral, PublicKeyToken=e6c495227a9be340, processorArchitecture=x86">
       <HintPath>$(XLW)\xlwNet\lib\xlwDotNet-vc90-mt$(gdconfig).dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
@@ -53,6 +55,7 @@
   <ItemGroup>
     <Compile Include="..\..\common_source\Properties\AssemblyInfo.cs" />
     <Compile Include="..\..\common_source\CSharpFunctions.cs" />
+    <Compile Include="..\..\common_source\Historic.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\common_source\Example.snk" />
