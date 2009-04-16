@@ -26,6 +26,7 @@ using System.IO;
 using System.Reflection;
 using System.Xml;
 using System.Configuration;
+//using System.Windows.Forms;
 
 
 
@@ -59,6 +60,7 @@ namespace Updater
                         theRecord.path = installPath + @"\" + theAssembly;
                         Console.WriteLine("Creating record for "+theRecord.path);
 
+                       // MessageBox.Show("Loading " + installPath + @"\" + theAssembly);
                         Assembly thePhysical = Assembly.LoadFile(installPath + @"\" + theAssembly);
                         string theInfo = thePhysical.FullName;
                         string[] theTokens = theInfo.Split(',');
