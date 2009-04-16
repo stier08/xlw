@@ -23,6 +23,8 @@ using System.Text;
 using System.IO;
 using System.Collections;
 using System.Reflection;
+//using System.Windows.Forms;
+
 
 
 namespace ExcelConfConfigurator
@@ -59,36 +61,56 @@ namespace ExcelConfConfigurator
                     }
                 }
                 string dllName = args[1];
-                Console.WriteLine("Attempting to Load Assembley " + dllName);
+                Console.WriteLine("Finding Assemblies refernced by " + dllName);
                 AssembleyList.Add(dllName);
-                Assembly theLoadedAssembley = Assembly.LoadFrom(dllName);
-                Console.WriteLine("Attempting to get all referenced aseemblies of " + dllName + " that are in the same directory\n");
-                AssemblyName[] ReferencedAssemblies =
-                    theLoadedAssembley.GetReferencedAssemblies();
-                string AssemblyPath = Path.GetDirectoryName(theLoadedAssembley.Location);
-
-                foreach (AssemblyName s in ReferencedAssemblies)
+                AssembleyList.AddRange(GetReferencedAssemblies(dllName));
+                AssembleyList.Sort();
+                List<string> CleanedAssembleyList = new List<string>();
+                CleanedAssembleyList.Add(AssembleyList[0]);
+                for(int i = 1 ; i < AssembleyList.Count; ++i)
                 {
-                    string tryDll = s.Name + ".dll";
-                    string tryFullDLLPath = Path.Combine(AssemblyPath, tryDll);
-                    if (File.Exists(tryFullDLLPath))
+                    if(AssembleyList[i]!=AssembleyList[i-1])
                     {
-                        Console.WriteLine("Referenced Assembly " + s.Name + " found\n");
-                        AssembleyList.Add(tryDll);
+                        CleanedAssembleyList.Add(AssembleyList[i]);
                     }
-
                 }
-               
 
-                Updater.Configurator.Config(args[0], args[2], "Excel.exe.config", AssembleyList.ToArray());
+                Updater.Configurator.Config(args[0], args[2], "Excel.exe.config", CleanedAssembleyList.ToArray());
 
                 return 0;
             }
             catch (Exception e)
             {
+               // MessageBox.Show(e.Message);
                 Console.WriteLine("********************\n" + e.Message + "\n********************\n");
-                return -1;
+                return -255;
             }
+        }
+
+        private static List<string> GetReferencedAssemblies(string dllName)
+        {
+            List<string> AssembleyList = new List<string>();
+            Console.WriteLine("Attempting to Load Assembley " + dllName);
+           // MessageBox.Show("Attempting to Load Assembley " + dllName);
+            Assembly theLoadedAssembley = Assembly.LoadFrom(dllName);
+            Console.WriteLine("Attempting to get all referenced aseemblies of " + dllName + " that are in the same directory\n");
+            AssemblyName[] ReferencedAssemblies =
+                theLoadedAssembley.GetReferencedAssemblies();
+            string AssemblyPath = Path.GetDirectoryName(theLoadedAssembley.Location);
+
+            foreach (AssemblyName s in ReferencedAssemblies)
+            {
+                string tryDll = s.Name + ".dll";
+                string tryFullDLLPath = Path.Combine(AssemblyPath, tryDll);
+                if (File.Exists(tryFullDLLPath))
+                {
+                    Console.WriteLine("Referenced Assembly " + s.Name + " found\n");
+                    AssembleyList.Add(tryDll);
+                    AssembleyList.AddRange(GetReferencedAssemblies(tryFullDLLPath));
+                }
+
+            }
+            return AssembleyList;
         }
     }
 }
