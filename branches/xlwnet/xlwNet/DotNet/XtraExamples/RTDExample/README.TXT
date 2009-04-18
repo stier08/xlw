@@ -1,19 +1,16 @@
-You need to install IronPython from 
-   http://ironpython.codeplex.com/Release/ProjectReleases.aspx?ReleaseId=12481
-
-Then you need to make sure the Ironpython asemblies are referenced correctly in your DotNet project.
-By default they will be refernced from 
-          C:\Program Files\IronPython 2.0.1
-
-But if you installed your IronPython elswwhere or you have a differnt version you need to re-refernce them. 
-In your DotNet project in Visual STudio you will see 'References', thats where you need to do it.
 
 
 
-Will follow up this example with more documentation
 
+Q. What is an RTD Server ?
 
+A. http://support.microsoft.com/kb/289150
+   
 
+On how to set up a basic RTD Server 
+see 
+
+  http://weblogs.asp.net/kennykerr/archive/2008/11/13/Rtd3.aspx
 
 
 
