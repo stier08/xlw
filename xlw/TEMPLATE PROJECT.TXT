@@ -1,0 +1,217 @@
+
+
+This doc explains how to quickly set up your own xll project by cloning
+a dedicated Template project from "Template Project" 
+
+
+
+
+1.PRE-REQUISITE
+===============
+
+  1.1 Visual Studio environment
+  -----------------------------
+
+   Developing with xlwDotNet requires one of the following Microsoft Visual Studio environments :
+
+   1. MicroSoft Visual Studio 2008 with both C++ and C# installed.                      (VS9_PRO) 
+   2. MicroSoft Visual Studio 2005 with both C++ and C# installed.                      (VS8_PRO) 
+   3. Visual Studio 2008 Express Editions C++ & Visual Studio 2008 Express Editions C#  (VS9_EXPRESS)
+   4. Visual Studio 2005 Express Editions C++ & Visual Studio 2005 Express Editions C#  (VS8_EXPRESS)
+   5. MicroSoft Visual Studio 2003 with both C++ and C# installed.                      (VS7.1_PRO) 
+
+    
+
+   
+     1.1.1 Extra requirement with Visual Studio 2005 Express Edition.
+     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     If your development enviroment is VS8_EXPRESS (4) you will also need to install the Microsoft Platform SDK,
+     available from :
+ 
+      http://www.microsoft.com/downloads/details.aspx?FamilyId=A55B6B43-E24F-4EA3-A93E-40C0EC4F68E5&displaylang=en
+
+     Once this is installed, you need to set a new environment variable, PSDK, assigned the path of the newly installed SDK.
+     For me the Path is  :
+
+          PSDK = C:\Program Files\Microsoft SDKs\Windows\v6.1
+
+
+----------------------------------------------------------------------------------------------------
+
+
+2.XLW ENVIRONMENT VARIABLE
+==========================
+
+  
+
+   Adding the XLW Environmet Variable
+   --------------------------------------
+   You need to create a new enviroment variable XLW. This environment value must be set to the value of
+   the path to xlwnet (inclusive of xlwnet), the root of the source code tree. For me this is 
+           XLW = C:\xlwdownload\xlwnet
+   
+
+
+----------------------------------------------------------------------------------------------------
+
+3.BUILDING XLW
+===============
+
+   3.1 Building xlw
+   ----------------
+
+ 
+
+   If you environment is VS9_PRO or VS9_EXPRESS then you will find the VS Solution file xlw.sln
+   in xlwnet\xlw\build\vc9
+   
+   If you environment is VS8_PRO or VS8_EXPRESS then you will find the VS Solution file xlw.sln
+   in xlwnet\xlw\build\vc8  
+
+   Build xlw.sln and its best to have both Debug and Release builds.
+
+
+  
+   
+   
+---------------------------------------------------------------------------------------------------------
+
+
+
+4. YOUR OWN XLL
+===============
+
+   4.1 Obtaining the Template Project
+   ----------------------------------
+
+   In directory "xlwnet\xlw\Template Project" you will find 2 sub-directories :
+       VS9 
+       VS8
+
+   Copy the directory corresponding to your Visual Studio environment to wherever you would like to place
+   the source code for your new xll project. Preferably do not make it a sub directory of the xlw source tree.
+
+    4.2 Naming your Library
+   ------------------------
+   
+   The name of you xll addin  will be taken from the names of the Visual Studio Solutions NOT the
+   constituent Visual Studio Projects.
+   We will change the name 2 places.
+
+   i.   Change the name of the directory you have just copied in 4.1 from VS* to MyLib ( replacing MyLib 
+        with the name of your Library.)
+   
+   ii.  In this directory  You will find a C++ Solution file called Template.sln, change the name to MyLib.sln
+        (replacing MyLib  with the name of your Library)
+
+   iii. You can now open with Visual Studio the original renamed Solution file (i.e the one u renamed in (ii) )
+        Build this  Solution to see if everything is ok. If not check your variable XLW is set correctly.
+
+  
+
+   
+   4.3 Adding your own functions
+   -----------------------------
+
+   In the the project XLL add you source c++ files with your C++ functions. But for e\ch C++ function 
+   you want to make available in your xll be sure to add  the appropriate declaration in cppnterface.h
+   Also at the top of cppinterface.h you will see the line 
+
+                   //<xlw:libraryname=MyTestLibrary
+ 
+  Change this to reflect the name of your library.
+
+ 
+Thats it for now
+
+ENJOY !!!!
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+
+
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+    Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.
+
+    Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+
+    Neither the names of the copyright holders nor the names of the XLW
+    Group and its contributors may be used to endorse or promote products
+    derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
