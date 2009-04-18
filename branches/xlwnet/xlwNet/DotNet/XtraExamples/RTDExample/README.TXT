@@ -16,7 +16,11 @@ see
 
 
 
-
+PS THIS WILL NOT WORK WITH TWO INSTANCE OF EXCEL.
+   If you open a second instance of excel, this 
+   addin will only work on the first one. This 
+   is NOT a bug, its a limitation. Maybe some one can 
+   remove this limitation.
 
 
 
