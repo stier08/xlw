@@ -1,1 +1,1 @@
-Read the file "TEMPLATE PROJECT.TXT" in the directory above
+Read the file "TEMPLATE PROJECT.TXT" in the directory docs
