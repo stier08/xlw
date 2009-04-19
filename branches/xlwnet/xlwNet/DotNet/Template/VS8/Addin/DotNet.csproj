@@ -65,7 +65,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>$(FrameworkDir)$(FrameworkVersion)/msbuild /p:Configuration=$(ConfigurationName) $(SolutionDir)Addin/$(SolutionName).sln</PostBuildEvent>
+    <PostBuildEvent>"$(DevEnvDir)..\..\VC\vcpackages\vcbuild"  $(SolutionDir)Addin\$(SolutionName).sln    "$(Configuration)|Win32"</PostBuildEvent>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>

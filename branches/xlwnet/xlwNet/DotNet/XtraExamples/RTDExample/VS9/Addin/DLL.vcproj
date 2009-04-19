@@ -43,7 +43,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(XLW)/xlw/include;$(XLW)/xlwNet\DotNet\xlwDotNet"
+				AdditionalIncludeDirectories="&quot;$(XLW)/xlw/include&quot;;&quot;$(XLW)/xlwNet\DotNet\xlwDotNet&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLEXLL_EXPORTS"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="0"
