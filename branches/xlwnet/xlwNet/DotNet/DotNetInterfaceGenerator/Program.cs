@@ -73,6 +73,7 @@ namespace DotNetInterfaceGenerator
 
                 IO.StreamWriter headerFile = IO.File.CreateText(dirName + "/" + fileName + ".h");
                 IO.StreamWriter sourceFile = IO.File.CreateText(dirName + "/" + fileName + ".cpp");
+                AssemblyFinderGenerator.WriteAssemblyFinder(dirName + "/" + "AssembleyFinder.cpp");
 
 
                 headerFile.WriteLine("#ifndef " + fileName.ToUpper() + "_H");

@@ -47,25 +47,7 @@ YOUR OWN XLL
    Append xlwnet\xlwNet\DotNet\Example\VS*_***\Debug to the Path variable.
   
 
-
-   4 Setting the Assembly search Path 
-   -----------------------------------
-   In the directory xlwnet\xlwNet\DotNet\Example\VS*\Debug (where * corresponds to your Visual Studio environment)
-   you should see, amongst others, the following file
-
-       Excel.exe.config
-  
-   Feel free to examine this file ( its an XML file and you can open it with a web browser) 
-   This identifies the location of some Assemblies. Copy this file to the directory containing the excel.exe executable,
-   for me this is :
-
-       C:\Program Files\Microsoft Office\Office12
-
-   Now you can open Example.xll and the spread-sheet xlwnet\xlwNet\DotNet\Example\Example.xls.
-   You see that some the functions being evaluated.
-
-   
-   5 Adding your own functions
+   4 Adding your own functions
    -----------------------------
 
    The parameter and return types of you functions can be :
@@ -110,19 +92,14 @@ YOUR OWN XLL
    Your functions must be Public & static and in a Public class.
 
 .......................................................................................................................
-Steps 3 & 4 only have to be done after the first build, then you can continue to work with your code and
+Steps 4 only has to be done after the first build, then you can continue to work with your code and
 building the xll without having to do those steps. 
 The only time you will have to repeat steps 3 & 4 are when :
 
-1.  You Do a Release Build. ( since you will want the Release directory on your Path not the Debug AND your new Assembly
-                              search path is the Release directory and not the Debug directory)
+1.  You Do a Release Build. ( since you will want the Release directory on your Path not the Debug )
 
 2.  You build the xll under a different VS enviroment ( for similar reason to 1)
 
-3.  You add an extra Assembley to your Project. You may for example have existing C# Assembly which you would like 
-    to reference in you DotNet Project ( the project containg your C# functions being exported to Excel).
-    Then when you build, your new Excel.config.exe file have a reference to this new Assembly that Excel needs to find.
-    So you  need to copy the Excel.onfig.exe file to the same Directory as your Excel.exe executable overwritinng the original.
 .............................................................................................................................
 
 
@@ -148,8 +125,7 @@ ENJOY !!!!
    in the function List under the Category with the same name as your Library. BUT if you try to evaluate any function, 
    Excel crashes.
 
-   Most likely Excel can not find your Assemblies, ensure you have the correct Excel.config.exe in the directory containg
-   the Excel.exe executable. 
+   Most likely Excel can not find your Assemblies. Ensure all the dependant Assemblies are in the same directory as the XLL 
 
     
 -----------------------------------------------------------------------------------------------------------------

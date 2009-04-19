@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\DotNetInterfaceGenerator\Program.cs" />
+    <Compile Include="..\..\..\DotNetInterfaceGenerator\AssemblyFinder.cs" />
     <Compile Include="..\..\..\DotNetInterfaceGenerator\Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

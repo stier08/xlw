@@ -136,30 +136,11 @@ Narinder Claire
    Some of these DLLs have to be found by excel at runtime. so will add the directory to the path.
    Append xlwnet\xlwNet\DotNet\Example\VS*_***\Debug to the Path variable.
   
-(---- Note to developers, we can automate this step, do we want to ? -----)
-
-   3.3 Setting the Assembly search Path 
-   ------------------------------------
-   In the directory xlwnet\xlwNet\DotNet\Example\VS*\Debug (where * corresponds to your Visual Studio environment)
-   you should see, amongst others, the following file
-
-       Excel.exe.config
-  
-   Feel free to examine this file ( its an XML file and you can open it with a web browser) 
-   This identifies the location of some Assemblies. Copy this file to the directory containing the excel.exe executable,
-   for me this is :
-
-       C:\Program Files\Microsoft Office\Office12
-
-   Now you can open Example.xll and the spread-sheet xlwnet\xlwNet\DotNet\Example\Example.xls.
-   You see that some the functions being evaluated.
-  
-(--- Note to the developer  : This step can be automated also, again do we wat to ? ----)  
 
   
- Steps 3.3 & 3.4 only have to be done after the first build, then you can continue to play with the Example and
+ Steps 3.2 only has to be done after the first build, then you can continue to play with the Example and
 building the xll without having to do those steps. 
-The only time you will have to repeat steps 3.3 & 3.4 are when :
+The only time you will have to repeat step 3.2 are when :
 
 1.  You Do a Release Build. ( since you will want the Release directory on your Path not the Debug AND your new Assembly
                               search path is the Release directory and not the Debug directory)
@@ -208,7 +189,7 @@ The only time you will have to repeat steps 3.3 & 3.4 are when :
    iv.  You can now open with Visual Studio the original renamed Solution file (i.e the one u renamed in (ii) )
         Build this  Solution to see if everything is ok. If not check your variable XLW is set correctly.
 
-   v.   Now follow steps 3.2 and 3.3 but with the Debug directory in your project.
+   v.   Now follow step 3.2 ( ie add directory to the path) but with the Debug directory in your project.
 
    
    4.3 Adding your own functions
@@ -278,8 +259,7 @@ ENJOY !!!!
    in the function List under the Category with the same name as your Library. BUT if you try to evaluate any function, 
    Excel crashes.
 
-   Most likely Excel can not find your Assemblies, ensure you have the correct Excel.config.exe in the directory containg
-   the Excel.exe executable. 
+   Most likely Excel can not find your Assemblies. 
 
     
 -----------------------------------------------------------------------------------------------------------------
