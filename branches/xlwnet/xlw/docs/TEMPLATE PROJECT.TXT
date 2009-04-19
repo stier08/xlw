@@ -44,7 +44,7 @@ a dedicated Template project from "Template Project"
 
   
 
-   Adding the XLW Environmet Variable
+   Adding the XLW Environment Variable
    --------------------------------------
    You need to create a new enviroment variable XLW. This environment value must be set to the value of
    the path to xlwnet (inclusive of xlwnet), the root of the source code tree. For me this is 
@@ -84,9 +84,10 @@ a dedicated Template project from "Template Project"
    4.1 Obtaining the Template Project
    ----------------------------------
 
-   In directory "xlwnet\xlw\Template Project" you will find 2 sub-directories :
-       VS9 
-       VS8
+   In directory "xlwnet\xlw\Template Project" you will find 3 sub-directories :
+       vc9 
+       vc8
+       vc7
 
    Copy the directory corresponding to your Visual Studio environment to wherever you would like to place
    the source code for your new xll project. Preferably do not make it a sub directory of the xlw source tree.
@@ -96,7 +97,7 @@ a dedicated Template project from "Template Project"
    
    The name of you xll addin  will be taken from the names of the Visual Studio Solutions NOT the
    constituent Visual Studio Projects.
-   We will change the name 2 places.
+   We will change the name 3 places.
 
    i.   Change the name of the directory you have just copied in 4.1 from VS* to MyLib ( replacing MyLib 
         with the name of your Library.)
@@ -104,7 +105,7 @@ a dedicated Template project from "Template Project"
    ii.  In this directory  You will find a C++ Solution file called Template.sln, change the name to MyLib.sln
         (replacing MyLib  with the name of your Library)
 
-   iii. You can now open with Visual Studio the original renamed Solution file (i.e the one u renamed in (ii) )
+   iii. You can now open with Visual Studio the renamed Solution file (i.e the one you renamed in (ii) )
         Build this  Solution to see if everything is ok. If not check your variable XLW is set correctly.
 
   
@@ -113,7 +114,7 @@ a dedicated Template project from "Template Project"
    4.3 Adding your own functions
    -----------------------------
 
-   In the the project XLL add you source c++ files with your C++ functions. But for e\ch C++ function 
+   In the the project XLL add you source c++ files with your C++ functions. But for each C++ function 
    you want to make available in your xll be sure to add  the appropriate declaration in cppnterface.h
    Also at the top of cppinterface.h you will see the line 
 
