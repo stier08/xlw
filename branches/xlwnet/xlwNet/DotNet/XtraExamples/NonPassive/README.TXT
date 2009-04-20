@@ -1,18 +1,6 @@
 
 
 
-
-Q. What is an RTD Server ?
-
-A. http://support.microsoft.com/kb/289150
-   
-
-On how to set up a basic RTD Server 
-see 
-
-  http://weblogs.asp.net/kennykerr/archive/2008/11/13/Rtd3.aspx
-
-
 To build this demo, you need to make sure that the DotNet project
 references 
  Microsoft.Office.Core ( Microsodt 1x.x Object Library) founf under COM in th references 
@@ -22,20 +10,6 @@ references
 
 You may need to remove my references in the project as I may have different versions to you and
  re-add your own
-
-
-
-
-PS THIS WILL NOT WORK WITH TWO INSTANCE OF EXCEL.
-   If you open a second instance of excel, this 
-   addin will only work on the first one. This 
-   is NOT a bug, its a limitation. Maybe some one can 
-   remove this limitation.
-
-
-
-
-
 
 
 
