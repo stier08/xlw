@@ -41,7 +41,9 @@ namespace {
 #define DOT_NET_EXCEL_BEGIN  try {
 #define DOT_NET_EXCEL_END \
 } catch (xlwDotNet::cellMatrixException^ theError ) { \
-   errCells = *(xlw::CellMatrix*)((theError->inner).ToPointer());\
+   String^ ErrorMessage = theError->Message;\
+   errCells = CellMatrix(std::string((const char*)(Marshal::StringToHGlobalAnsi(ErrorMessage).ToPointer())));\
+   errCells.PushBottom ( *(xlw::CellMatrix*)((theError->inner).ToPointer()));\
    throw(errCells);\
 } catch (XlfException& theError) { \
     throw(theError); \
@@ -53,9 +55,13 @@ namespace {
     throw(theError); \
 } catch (System::Exception^ theError ) { \
     String^ ErrorType = theError->GetType()->ToString() + " : ";\
-	String^ ErrorMessage = theError->Message;\
-	errMessage = (const char*)(Marshal::StringToHGlobalAnsi(ErrorType+ErrorMessage).ToPointer());\
-    throw(errMessage.c_str());\
+        String^ ErrorMessage = theError->Message;\
+        String^ StackTrace = theError->StackTrace;\
+        xlw::ArgumentList theArg = xlw::ArgumentList((const char*)(Marshal::StringToHGlobalAnsi(ErrorType).ToPointer()));\
+        theArg.add("ErrorMessage",std::string((const char*)(Marshal::StringToHGlobalAnsi(ErrorMessage).ToPointer())));\
+        theArg.add("StackTrace",std::string((const char*)(Marshal::StringToHGlobalAnsi(StackTrace).ToPointer())));\
+        errCells = theArg.AllData();\
+    throw(errCells);\
 } 
 
 
