@@ -14,20 +14,21 @@ auto-generated source files in this project.
 
 You can add your C++ functions to Native. See the documentation for xlw to see how to do this.
 But briefly to the C++ function foo to excel, implement th function in any source file (.cpp)
-in the Native project
+in the Native project. You must decorate the function with the macro XLLEXPORT.
 
-std::string foo(std::string name)
+std::string XLLEXPORT foo(std::string name)
 {
 	return std::string("Hello ") + name + ", how are you ?"
 }
 
 Then add a declaration of this function to the header file native.h
-with appropriate decorators
+with appropriate decorators ( function & parameter descriptions)
 
 std::string // This C++ function just says hello
+
 foo (
       std::string name // This parameter is the users name
-    )
+    );
 
 
 To add a C# function just add the C# function to the DotNet project
@@ -43,7 +44,7 @@ public static string foo(
 And thats it.
 
 All exported functions (C++ & C# ) appear as excel functions in the same way. 
-The user will not  be able to tell wheteher the function is implemented in C++ 
+The user will not  be able to tell whteher the function is implemented in C++ 
 or C#.
 This is very useful if you have an older C++ xll library and you want to extend it
 with C# but not have to drop the old library.

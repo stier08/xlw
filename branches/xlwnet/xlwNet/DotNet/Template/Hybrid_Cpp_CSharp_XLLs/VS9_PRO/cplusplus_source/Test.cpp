@@ -2,7 +2,7 @@
 #include<string>
 
 std::string  // C++ Function
-DLLEXPORT CPlusPlusFunction()
+XLLEXPORT CPlusPlusFunction()
 {
     return "Hello from the Native C++ World !";
 }
