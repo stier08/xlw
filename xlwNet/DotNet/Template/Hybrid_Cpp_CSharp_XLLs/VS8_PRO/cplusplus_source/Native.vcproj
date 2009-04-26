@@ -41,7 +41,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DDLLEXPORT=__declspec(dllexport) "
+				AdditionalOptions="/DXLLEXPORT=__declspec(dllexport) "
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(XLW)/xlw/include&quot;;&quot;$(XLW)/xlwNet\DotNet\xlwDotNet&quot;;&quot;$(PSDK)/Include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLEXLL_EXPORTS"
@@ -127,7 +127,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DDLLEXPORT=__declspec(dllexport) "
+				AdditionalOptions="/DXLLEXPORT=__declspec(dllexport) "
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="&quot;$(XLW)/xlw/include&quot;;&quot;$(XLW)/xlwNet\DotNet\xlwDotNet&quot;;&quot;$(PSDK)/Include&quot;"
