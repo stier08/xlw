@@ -24,7 +24,7 @@
 \brief Declares class XlfExcel.
 */
 
-// $Id$
+// $Id: XlfExcel.h 478 2008-03-06 11:43:12Z ericehlers $
 
 #include <xlw/EXCEL32_API.h>
 #include <xlw/xlcall32.h>
