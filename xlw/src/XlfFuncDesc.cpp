@@ -20,7 +20,7 @@
 \brief Implements the XlfFuncDesc class.
 */
 
-// $Id$
+// $Id: XlfFuncDesc.cpp 474 2008-03-05 15:40:40Z ericehlers $
 
 #include <xlw/XlfFuncDesc.h>
 #include <xlw/XlfException.h>
