@@ -23,7 +23,7 @@
 \brief Class XlfCmdDesc - Encapsulates Excel C macro command
 */
 
-// $Id$
+// $Id: XlfCmdDesc.h 474 2008-03-05 15:40:40Z ericehlers $
 
 #include <xlw/XlfAbstractCmdDesc.h>
 

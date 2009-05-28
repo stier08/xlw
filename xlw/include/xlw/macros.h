@@ -22,7 +22,7 @@
 \brief Some macros to consolidate XLW code.
 */
 
-// $Id$
+// $Id: macros.h 514 2008-04-03 15:08:41Z ericehlers $
 
 #include <xlw/XlfException.h>
 #include <xlw/XlfExcel.h>

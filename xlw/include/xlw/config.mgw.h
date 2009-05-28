@@ -14,7 +14,7 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-// $Id$
+// $Id: config.mgw.h 476 2008-03-05 17:03:00Z ericehlers $
 
 #ifndef xlw_config_mgw_h
 #define xlw_config_mgw_h

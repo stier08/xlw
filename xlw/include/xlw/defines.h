@@ -21,7 +21,7 @@
 \file defines.h
 */
 
-// $Id$
+// $Id: defines.h 445 2008-02-29 13:18:46Z ericehlers $
 
 #if defined(_MSC_VER)
 #pragma once
