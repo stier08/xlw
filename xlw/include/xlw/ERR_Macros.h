@@ -13,7 +13,7 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-// $Id$
+// $Id: ERR_Macros.h 490 2008-03-13 16:15:22Z ericehlers $
 
 #ifndef INC_ERR_Macros_H
 #define INC_ERR_Macros_H
