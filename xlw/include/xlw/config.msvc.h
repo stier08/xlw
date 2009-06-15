@@ -17,7 +17,7 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-// $Id$
+// $Id: config.msvc.h 493 2008-03-14 15:40:30Z ericehlers $
 
 #ifndef xlw_config_msvc_h
 #define xlw_config_msvc_h
