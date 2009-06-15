@@ -23,7 +23,7 @@
 \brief Class XlfFuncDesc - Encapsulate a function to be registered to Excel
 */
 
-// $Id$
+// $Id: XlfFuncDesc.h 523 2008-04-10 16:10:03Z ericehlers $
 
 #include <xlw/XlfAbstractCmdDesc.h>
 #include <xlw/XlfExcel.h>

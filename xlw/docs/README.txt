@@ -1,5 +1,5 @@
 
-$Id$
+$Id: README.txt 545 2008-05-21 13:30:50Z ericehlers $
 
 The doxygen utility is used to generate the documentation based on comments extracted from the source code.  The current configuration relies on doxygen version 1.5.5.
 
