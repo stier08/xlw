@@ -20,7 +20,7 @@
 \brief Implements inline methods of XlfExcel.
 */
 
-// $Id$
+// $Id: XlfExcel.inl 507 2008-03-27 13:33:20Z ericehlers $
 
 #ifdef NDEBUG
 #define INLINE inline

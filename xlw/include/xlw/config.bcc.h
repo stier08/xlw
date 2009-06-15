@@ -14,7 +14,7 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-// $Id$
+// $Id: config.bcc.h 476 2008-03-05 17:03:00Z ericehlers $
 
 #ifndef xlw_config_bcc_h
 #define xlw_config_bcc_h
