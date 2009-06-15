@@ -20,7 +20,7 @@
 \brief Implements the XlfAbstractCmdDesc class.
 */
 
-// $Id$
+// $Id: XlfAbstractCmdDesc.cpp 474 2008-03-05 15:40:40Z ericehlers $
 
 #include <xlw/XlfAbstractCmdDesc.h>
 #include <xlw/XlfExcel.h>
