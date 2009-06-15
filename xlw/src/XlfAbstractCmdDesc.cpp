@@ -20,16 +20,14 @@
 \brief Implements the XlfAbstractCmdDesc class.
 */
 
-// $Id$
+// $Id: XlfAbstractCmdDesc.cpp 474 2008-03-05 15:40:40Z ericehlers $
 
 #include <xlw/XlfAbstractCmdDesc.h>
 #include <xlw/XlfExcel.h>
 #include <xlw/XlfException.h>
-//#include <xlw/macros.h>
-#include <xlw/defines.h>
 #include <iostream>
 #include <stdexcept>
-
+#include <xlw/macros.h>
 // Stop header precompilation
 #ifdef _MSC_VER
 #pragma hdrstop

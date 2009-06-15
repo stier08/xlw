@@ -22,7 +22,7 @@
 \brief Class XlfAbstractCmdDesc - Consolidate some properties common to multiple command classes
 */
 
-// $Id$
+// $Id: XlfAbstractCmdDesc.h 474 2008-03-05 15:40:40Z ericehlers $
 
 #include <xlw/EXCEL32_API.h>
 #include <string>
