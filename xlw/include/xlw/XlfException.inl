@@ -19,7 +19,7 @@
 \brief Implements inline methods of XlfException.
 */
 
-// $Id$
+// $Id: XlfException.inl 474 2008-03-05 15:40:40Z ericehlers $
 
 #ifdef NDEBUG
 #define INLINE inline

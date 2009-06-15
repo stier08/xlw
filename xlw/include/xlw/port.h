@@ -25,7 +25,7 @@ This file is part of a broader framework, some of the macros defined here
 are not used in excel32 framework.
 */
 
-// $Id$
+// $Id: port.h 461 2008-03-04 14:23:52Z ericehlers $
 
 #include <xlw/pragmas.h>
 
