@@ -19,7 +19,7 @@
 \brief Implements the XlfArgDescList class.
 */
 
-// $Id$
+// $Id: XlfArgDescList.cpp 474 2008-03-05 15:40:40Z ericehlers $
 
 #include <xlw/XlfArgDescList.h>
 
