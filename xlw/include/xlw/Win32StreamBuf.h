@@ -20,7 +20,7 @@
  * \ingroup utils
  */
 
-// $Id$
+// $Id: Win32StreamBuf.h 474 2008-03-05 15:40:40Z ericehlers $
 
 #ifndef INC_Win32StreamBuf_H
 #define INC_Win32StreamBuf_H

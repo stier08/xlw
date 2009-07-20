@@ -22,7 +22,7 @@
 \brief Class XlfException - Excel emergency exceptions
 */
 
-// $Id$
+// $Id: XlfException.h 474 2008-03-05 15:40:40Z ericehlers $
 
 #include <xlw/XlfOper.h>
 #include <string>
