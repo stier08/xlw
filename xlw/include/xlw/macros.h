@@ -1,6 +1,7 @@
 /*
  Copyright (C) 1998, 1999, 2001, 2002, 2003, 2004 Jérôme Lecomte
  Copyright (C) 2007, 2008 Eric Ehlers
+ Copyright (C) 2009 Narinder S Claire
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -22,7 +23,7 @@
 \brief Some macros to consolidate XLW code.
 */
 
-// $Id$
+// $Id: macros.h 514 2008-04-03 15:08:41Z ericehlers $
 
 #include <xlw/XlfException.h>
 #include <xlw/XlfExcel.h>
@@ -83,7 +84,7 @@ functions.
 #define EXCEL_END \
 } catch (XlfException&) { \
     return 0; \
-} catch (std::runtime_error& error){\
+} catch (std::exception& error){\
     return XlfOper(error.what());\
 } catch (std::string& error){\
     return XlfOper(error);\
@@ -98,7 +99,7 @@ functions.
 #define EXCEL_END_4 \
 } catch (XlfException&) { \
     return 0; \
-} catch (std::runtime_error& error){\
+} catch (std::exception& error){\
     return XlfOper4(error.what());\
 } catch (std::string& error){\
     return XlfOper4(error);\
@@ -113,7 +114,7 @@ functions.
 #define EXCEL_END_12 \
 } catch (XlfException&) { \
     return 0; \
-} catch (std::runtime_error& error){\
+} catch (std::exception& error){\
     return XlfOper12(error.what());\
 } catch (std::string& error){\
     return XlfOper12(error);\
@@ -126,7 +127,8 @@ functions.
 }
 //@}
 
-#define __HERE__ __FILE__ "(" _MAKESTRING(__LINE__) "): "
+
+#define XLW__HERE__ __FILE__ "(" _MAKESTRING(__LINE__) "): "
 #define _MAKESTRING(a) __MAKESTRING(a)
 #define __MAKESTRING(a) #a
 

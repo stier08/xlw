@@ -2,6 +2,8 @@
 /*
  Copyright (C) 1998, 1999, 2001, 2002, 2003, 2004 Jérôme Lecomte
  Copyright (C) 2007, 2008 Eric Ehlers
+ Copyright (C) 2009 Narinder S Claire
+
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -20,14 +22,13 @@
 \brief Implements the XlfCmdDesc class.
 */
 
-// $Id$
+// $Id: XlfCmdDesc.cpp 474 2008-03-05 15:40:40Z ericehlers $
 
 #include <xlw/XlfCmdDesc.h>
 #include <xlw/XlfOper4.h>
 #include <xlw/XlfException.h>
-#include <xlw/defines.h>
 #include <iostream>
-
+#include <xlw/macros.h>
 // Stop header precompilation
 #ifdef _MSC_VER
 #pragma hdrstop
@@ -47,6 +48,8 @@ bool xlw::XlfCmdDesc::IsAddedToMenuBar()
   return !menu_.empty();
 }
 
+/// This function is using a naked XLOPER
+/// It needs updating for Excel 2007 - nc
 int xlw::XlfCmdDesc::AddToMenuBar(const std::string& menu, const std::string& text)
 {
     XLOPER xMenu;
@@ -75,7 +78,7 @@ int xlw::XlfCmdDesc::AddToMenuBar(const std::string& menu, const std::string& te
     xMenu.val.array.columns = 5;
 
     //int err = XlfExcel::Instance().Call(xlfAddCommand, 0, 3, (LPXLOPER)XlfOper(1.0), (LPXLOPER)XlfOper(menu_.c_str()), (LPXLOPER)&xMenu);
-    int err = XlfExcel::Instance().Call(xlfAddCommand, 0, 3, (LPXLFOPER)XlfOper(1.0), (LPXLFOPER)XlfOper(menu_), (LPXLFOPER)&xMenu);
+    int err = XlfExcel::Instance().Call4(xlfAddCommand, 0, 3, (LPXLFOPER)XlfOper(1.0), (LPXLFOPER)XlfOper(menu_), (LPXLFOPER)&xMenu);
     if (err != xlretSuccess)
     std::cerr << XLW__HERE__ << "Add command " << GetName().c_str() << " to " << menu_.c_str() << " failed" << std::endl;
     delete[] pxMenu;
@@ -134,7 +137,7 @@ int xlw::XlfCmdDesc::DoRegister(const std::string& dllName) const
     return err;
     */
 
-    size_t nbargs = arguments.size();
+    int nbargs = static_cast<int>(arguments.size());
     std::string args("A");
     std::string argnames;
 
@@ -148,25 +151,25 @@ int xlw::XlfCmdDesc::DoRegister(const std::string& dllName) const
             argnames+=", ";
     }
 
-    LPXLOPER *rgx = new LPXLOPER[10 + nbargs];
-    LPXLOPER *px = rgx;
+    LPXLFOPER *rgx = new LPXLFOPER[10 + nbargs];
+    LPXLFOPER *px = rgx;
 
-    (*px++) = XlfOper4(dllName);
-    (*px++) = XlfOper4(GetName());
-    (*px++) = XlfOper4(args);
-    (*px++) = XlfOper4(GetAlias());
-    (*px++) = XlfOper4(argnames);
-    (*px++) = XlfOper4(type);
-    (*px++) = XlfOper4("");
-    (*px++) = XlfOper4("");
-    (*px++) = XlfOper4("");
-    (*px++) = XlfOper4(GetComment());
+    (*px++) = XlfOper(dllName);
+    (*px++) = XlfOper(GetName());
+    (*px++) = XlfOper(args);
+    (*px++) = XlfOper(GetAlias());
+    (*px++) = XlfOper(argnames);
+    (*px++) = XlfOper(type);
+    (*px++) = XlfOper("");
+    (*px++) = XlfOper("");
+    (*px++) = XlfOper("");
+    (*px++) = XlfOper(GetComment());
     for (it = arguments.begin(); it != arguments.end(); ++it)
     {
-        (*px++) = XlfOper4((*it).GetComment());
+        (*px++) = XlfOper((*it).GetComment());
     }
 
-    int err = static_cast<int>(XlfExcel::Instance().Call4v(xlfRegister, NULL, 10 + nbargs, rgx));
+    int err = static_cast<int>(XlfExcel::Instance().Callv(xlfRegister, NULL, 10 + nbargs, rgx));
     delete[] rgx;
     return err;
 

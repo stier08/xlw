@@ -2,6 +2,8 @@
 /*
  Copyright (C) 1998, 1999, 2001, 2002, 2003, 2004 Jérôme Lecomte
  Copyright (C) 2007, 2008 Eric Ehlers
+ Copyright (C) 2009 Narinder S Claire
+
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -20,7 +22,7 @@
 \brief Implements the XlfFuncDesc class.
 */
 
-// $Id$
+// $Id: XlfFuncDesc.cpp 474 2008-03-05 15:40:40Z ericehlers $
 
 #include <xlw/XlfFuncDesc.h>
 #include <xlw/XlfException.h>
@@ -125,18 +127,23 @@ int xlw::XlfFuncDesc::DoUnregister(const std::string& dllName) const
     XlfOper unreg;
     //err = Excel4(xlfUnregister, unreg, 1, XlfOper(funcId));
     //err = static_cast<int>(XlfExcel::Instance().Call4(xlfUnregister, unreg, 1, XlfOper(funcId)));
-    err = static_cast<int>(XlfExcel::Instance().Call4(xlfUnregister, unreg, 1, static_cast<LPXLOPER>(XlfOper(funcId))));
+    err = static_cast<int>(XlfExcel::Instance().Call(xlfUnregister, unreg, 1, static_cast<LPXLFOPER>(XlfOper(funcId))));
 
     return err;
 }
 
+// VERY Important :
+// In the following function we are using Excel4 instead of Excel12 ( hence also 
+// using XLOPER4 instead of XLOPER12. This is deliberate. Registering functions
+// Excel12(..) when the arguments add up to more then 255 char is problematic. the functions
+// will not register see  see BUG ID: 2834715 on sourceforge - nc
 int xlw::XlfFuncDesc::RegisterAs(const std::string& dllName, double mode_, double* funcId) const
 {
 
     // alias arguments
     XlfArgDescList& arguments = impl_->arguments_;
 
-    size_t nbargs = arguments.size();
+    int nbargs = static_cast<int>(arguments.size());
     std::string args = returnTypeCode_;
     std::string argnames;
 
@@ -176,12 +183,13 @@ int xlw::XlfFuncDesc::RegisterAs(const std::string& dllName, double mode_, doubl
     {
         (*px++) = XlfOper4((*it).GetComment());
     }
-    XLOPER res;
-    int err = static_cast<int>(XlfExcel::Instance().Call4v(xlfRegister, &res, 10 + nbargs, rgx));
+
+	XlfOper4 res;
+    int err = static_cast<int>(XlfExcel::Instance().Call4v(xlfRegister, static_cast<LPXLOPER>(res), 10 + nbargs, rgx));
 
     if(funcId != NULL)
     {
-        *funcId = res.val.num;
+		*funcId = res.AsDouble();
     }
 
     delete[] rgx;

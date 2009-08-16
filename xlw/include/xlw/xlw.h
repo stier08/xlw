@@ -3,6 +3,7 @@
  Copyright (C) 1998, 1999, 2001, 2002, 2003, 2004 Jérôme Lecomte
  Copyright (C) 2007, 2008 Eric Ehlers
 
+
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
 
@@ -15,7 +16,7 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-// $Id$
+// $Id: xlw.h 530 2008-05-08 14:13:40Z ericehlers $
 
 #ifndef INC_Excel32_H
 #define INC_Excel32_H
@@ -26,8 +27,7 @@
 */
 
 // Package files
-#include <xlw/macros.h>
-#include <xlw/defines.h>
+
 #include <xlw/XlfArgDescList.h>
 #include <xlw/XlfCmdDesc.h>
 #include <xlw/XlfFuncDesc.h>
@@ -39,7 +39,7 @@
 #include <xlw/XlfStr.h>
 #include <xlw/XlFunctionRegistration.h>
 #include <xlw/XlfExcel.h>
-
+#include <xlw/macros.h>
 #ifdef PORT_PRAGMA_ONCE
 #pragma once
 #endif
