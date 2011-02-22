@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>5DEV</ProjectName>
+    <ProjectGuid>{B2CA3E14-BD4A-4186-9303-E1B6454630D5}</ProjectGuid>
+    <RootNamespace>xlw</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\Objects\$(ProjectName)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\Objects\$(ProjectName)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ProgramDataBaseFileName>$(TargetDir)\$(TargetName).pdb</ProgramDataBaseFileName>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Lib>
+      <OutputFile>..\..\lib\xlw-vc100-mt-gd-$(ProjectName).lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG; _CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Lib>
+      <OutputFile>..\..\lib\xlw-vc100-mt-$(ProjectName).lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\ArgList.cpp" />
+    <ClCompile Include="..\..\src\CellMatrix.cpp" />
+    <ClCompile Include="..\..\src\Dispatcher.cpp" />
+    <ClCompile Include="..\..\src\DoubleOrNothing.cpp" />
+    <ClCompile Include="..\..\src\FileConverter.cpp" />
+    <ClCompile Include="..\..\src\MJmatrices.cpp" />
+    <ClCompile Include="..\..\src\MyContainers.cpp" />
+    <ClCompile Include="..\..\src\Win32StreamBuf.cpp" />
+    <ClCompile Include="..\..\src\xlarray.cpp" />
+    <ClCompile Include="..\..\src\xlcall.cpp" />
+    <ClCompile Include="..\..\src\XlfAbstractCmdDesc.cpp" />
+    <ClCompile Include="..\..\src\XlfArgDesc.cpp" />
+    <ClCompile Include="..\..\src\XlfArgDescList.cpp" />
+    <ClCompile Include="..\..\src\XlfCmdDesc.cpp" />
+    <ClCompile Include="..\..\src\XlfExcel.cpp" />
+    <ClCompile Include="..\..\src\XlfException.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</DisableLanguageExtensions>
+    </ClCompile>
+    <ClCompile Include="..\..\src\XlfFuncDesc.cpp" />
+    <ClCompile Include="..\..\src\XlfOper.cpp" />
+    <ClCompile Include="..\..\src\XlfOper12.cpp" />
+    <ClCompile Include="..\..\src\XlfOper4.cpp" />
+    <ClCompile Include="..\..\src\XlfOperImpl.cpp" />
+    <ClCompile Include="..\..\src\XlfOperImpl12.cpp" />
+    <ClCompile Include="..\..\src\XlfOperImpl4.cpp" />
+    <ClCompile Include="..\..\src\XlfRef.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\XlfStr.cpp" />
+    <ClCompile Include="..\..\src\XlFunctionRegistration.cpp" />
+    <ClCompile Include="..\..\src\XlOpenClose.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\xlw\ArgList.h" />
+    <ClInclude Include="..\..\include\xlw\ArgListFactory.h" />
+    <ClInclude Include="..\..\include\xlw\ArgListFactoryHelper.h" />
+    <ClInclude Include="..\..\include\xlw\CellMatrix.h" />
+    <ClInclude Include="..\..\include\xlw\DoubleOrNothing.h" />
+    <ClInclude Include="..\..\include\xlw\ERR_Macros.h" />
+    <ClInclude Include="..\..\include\xlw\EXCEL32_API.h" />
+    <ClInclude Include="..\..\include\xlw\macros.h" />
+    <ClInclude Include="..\..\include\xlw\MJmatrices.h" />
+    <ClInclude Include="..\..\include\xlw\MyContainers.h" />
+    <ClInclude Include="..\..\include\xlw\Win32StreamBuf.h" />
+    <ClInclude Include="..\..\include\xlw\wrapper.h" />
+    <ClInclude Include="..\..\include\xlw\xlarray.h" />
+    <ClInclude Include="..\..\include\xlw\xlcall32.h" />
+    <ClInclude Include="..\..\include\xlw\XlfAbstractCmdDesc.h" />
+    <ClInclude Include="..\..\include\xlw\XlfArgDesc.h" />
+    <ClInclude Include="..\..\include\xlw\XlfArgDescList.h" />
+    <ClInclude Include="..\..\include\xlw\XlfCmdDesc.h" />
+    <ClInclude Include="..\..\include\xlw\XlfExcel.h" />
+    <ClInclude Include="..\..\include\xlw\XlfException.h" />
+    <ClInclude Include="..\..\include\xlw\XlfFuncDesc.h" />
+    <ClInclude Include="..\..\include\xlw\XlfMutex.h" />
+    <ClInclude Include="..\..\include\xlw\XlfOper.h" />
+    <ClInclude Include="..\..\include\xlw\XlfOper12.h" />
+    <ClInclude Include="..\..\include\xlw\XlfOper4.h" />
+    <ClInclude Include="..\..\include\xlw\XlfOperImpl.h" />
+    <ClInclude Include="..\..\include\xlw\XlfOperImpl12.h" />
+    <ClInclude Include="..\..\include\xlw\XlfOperImpl4.h" />
+    <ClInclude Include="..\..\include\xlw\XlfRef.h" />
+    <ClInclude Include="..\..\include\xlw\XlfStr.h" />
+    <ClInclude Include="..\..\include\xlw\XlFunctionRegistration.h" />
+    <ClInclude Include="..\..\include\xlw\XlOpenClose.h" />
+    <ClInclude Include="..\..\include\xlw\xlw.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\include\xlw\Win32StreamBuf.inl" />
+    <None Include="..\..\include\xlw\XlfAbstractCmdDesc.inl" />
+    <None Include="..\..\include\xlw\XlfExcel.inl" />
+    <None Include="..\..\include\xlw\XlfException.inl" />
+    <None Include="..\..\include\xlw\XlfOper.inl" />
+    <None Include="..\..\include\xlw\XlfOper12.inl" />
+    <None Include="..\..\include\xlw\XlfOper4.inl" />
+    <None Include="..\..\include\xlw\XlfRef.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
