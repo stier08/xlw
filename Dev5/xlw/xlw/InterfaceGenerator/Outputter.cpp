@@ -41,7 +41,7 @@ void AddLine(std::vector<char>& file, std::string line)
 }
 
 std::string strip(std::string in) {
-  for (size_t i=in.length(); i; --i)
+  for (size_t i=in.length()-1; i; --i)
     if (in[i] == '/' || in[i] == '\\')
       return in.substr(i + 1, in.length() - i);
   return in;
