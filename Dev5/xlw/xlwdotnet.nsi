@@ -1,7 +1,7 @@
 
 
 	;!define DEV_OR_RELEASE "- This is a Beta Release"  ; uncomment on development version
-	!define DEV_OR_RELEASE "- This is a Development Snapshot"                                ; uncomment on release version
+	!define DEV_OR_RELEASE "- This is a Development Snapshot 23-Feb-2011"                                ; uncomment on release version
 	;!define DEV_OR_RELEASE ""                        
 
 ;------------------------------------------------------------------------------------------------------------------------
@@ -58,7 +58,7 @@
 
 	!define MUI_HEADERIMAGE_BITMAP "xlw-site\images\logo.bmp"
 	!define MUI_WELCOMEFINISHPAGE_BITMAP   "xlw-site\images\header.bmp"
-	!define MUI_WELCOMEPAGE_TITLE "Welcome to the installer of xlw 4.0"
+	!define MUI_WELCOMEPAGE_TITLE "Welcome to the installer of xlw 5DEV - 23Feb2011"
 	
 	
 
@@ -93,12 +93,14 @@
 	 Var VS2003_Saved
 	 Var VS2005_Saved
 	 Var VS2008_Saved
+	 Var VS2010_Saved
 	 Var DEVCPP_Saved
 	 Var CODEBLOCKS_Saved
 	 Var GCCMAKE_Saved
 	 
 	 Var VS2005DotNet_Saved
 	 Var VS2008DotNet_Saved
+	 Var VS2010DotNet_Saved
 	 
 	Var Dialog
 	Var Label
@@ -228,6 +230,7 @@
 		SetOutPath "$INSTDIR\xlwDotNet\build\${dir}"
 		File /r "xlwDotNet\build\${dir}\*.sln"
 		File /r "xlwDotNet\build\${dir}\*.vcproj"
+		;File /r "xlwDotNet\build\${dir}\*.vcxproj"
 		File /r "xlwDotNet\build\${dir}\*.csproj"
 	
 	!macroend
@@ -276,6 +279,7 @@
 			File  /nonfatal /r "${dir}\*.cpp"
 			File  /nonfatal /r "${dir}\*.h"
 			File  /nonfatal /r "${dir}\*.vcproj"
+			File  /nonfatal /r "${dir}\*.vcxproj"
 			File  /nonfatal /r "${dir}\*.csproj"
 			File  /nonfatal /r "${dir}\*.sln"
 			File  /nonfatal /r "${dir}\*.nmake"
@@ -313,6 +317,11 @@
 			SectionGetFlags ${VS2008} $0 
 			${If} $0 == "1"
 				!insertmacro doExamplVCHelper "${dir}\vc9"
+			${EndIf}
+			
+			SectionGetFlags ${VS2010} $0 
+			${If} $0 == "1"
+				!insertmacro doExamplVCHelper "${dir}\vc10"
 			${EndIf}
 			
 			${If} ${gccaswell} == 1
@@ -363,6 +372,11 @@
 			SectionGetFlags ${VS2008DotNet} $0 
 			${If} $0 == "1"
 				!insertmacro doExamplVCHelper "${dir}\vS9"
+			${EndIf}
+			
+			SectionGetFlags ${VS2010DotNet} $0 
+			${If} $0 == "1"
+				!insertmacro doExamplVCHelper "${dir}\vS10"
 			${EndIf}
 			
 
@@ -457,7 +471,7 @@ SubSection "xlw" xlw
 		SectionEnd
 		
 		
-		Section "VS2010" VS200
+		Section "VS2010" VS2010
 			SetOutPath "$INSTDIR\xlw\lib"
 			File  "xlw\lib\xlw-vc100*.lib"
 			File  "xlw\lib\xlw-vc100*.pdb"
@@ -646,6 +660,22 @@ SubSection "xlwDotNet" xlwDotNet
 			CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\xlwDotNet\Extract XLW .NET xll template.lnk " "$INSTDIR\TemplateExtractors\xlwDotNetTemplateExtractor.exe"
 		SectionEnd
 		
+		
+		;Section "VS2010" VS2010DotNet
+		;	SetOutPath "$INSTDIR\xlwDotNet\lib"
+		;	File "xlwDotNet\lib\xlwDotNet-vc100*.dll"
+		;	File "xlwDotNet\lib\xlwDotNet-vc100*.pdb"
+		;	!insertmacro DotNetInterfaceGenerator VS10
+		;	!insertmacro projectfiles "xlwDotNet\Template_Projects\VS10"
+		;	!insertmacro sourcefiles  "xlwDotNet\Template_Projects\VS10"
+		;	!insertmacro projectfiles "xlwDotNet\Template_Projects\VisualBasic\VB2010"
+		;	!insertmacro sourcefiles  "xlwDotNet\Template_Projects\VisualBasic\VB2010"
+		;	!insertmacro projectfiles "xlwDotNet\Template_Projects\Hybrid_Cpp_CSharp_XLLs\VS10_PRO"
+		;	!insertmacro sourcefiles  "xlwDotNet\Template_Projects\Hybrid_Cpp_CSharp_XLLs\VS10_PRO"
+		;	CreateDirectory "$SMPROGRAMS\XLW\${APP_VER}\xlwDotNet"
+		;	CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\xlwDotNet\Extract XLW .NET xll template.lnk " "$INSTDIR\TemplateExtractors\xlwDotNetTemplateExtractor.exe"
+		;SectionEnd
+		
 
 	SectionGroupEnd
 	
@@ -694,6 +724,20 @@ SubSection "xlwDotNet" xlwDotNet
 			${EndIf}
 		SectionEnd
 		
+		;Section "VS2010" VS2010DotNet_SRC
+		;	!insertmacro DotNetbuildfiles "VS10"
+		;	!insertmacro DotNetHeaders
+		;	!insertmacro dotNetInterfaceGenSource
+		;	!insertmacro projectfiles "xlwDotNet\Template_Projects\VS10"
+		;	!insertmacro sourcefiles  "xlwDotNet\Template_Projects\VS10"
+		;	!insertmacro projectfiles "xlwDotNet\Template_Projects\VisualBasic\VB2010"
+		;	!insertmacro sourcefiles  "xlwDotNet\Template_Projects\VisualBasic\VB2010"
+		;	${If} VS2010PRO_CSharp_INST != ""  
+		;		!insertmacro projectfiles "xlwDotNet\Template_Projects\Hybrid_Cpp_CSharp_XLLs\VS10_PRO"
+		;		!insertmacro sourcefiles  "xlwDotNet\Template_Projects\Hybrid_Cpp_CSharp_XLLs\VS10_PRO"
+		;	${EndIf}
+		;SectionEnd
+		
 
 	SectionGroupEnd
 SubSectionEnd
@@ -709,7 +753,7 @@ LangString DESC_Libraries ${LANG_ENGLISH} "The static xlw libraries & Tools."
 LangString DESC_VS2003 ${LANG_ENGLISH} "VS2003  xll C++ build enviroment for Visual Studio 2003 (VS7.1)."
 LangString DESC_VS2005 ${LANG_ENGLISH} "VS2005  xll C++ build enviroment for Visual Studio 2005 (VS8)."
 LangString DESC_VS2008 ${LANG_ENGLISH} "VS2008  xll C++ build enviroment for Visual Studio 2008 (VS9)."
-LangString DESC_VS2010 ${LANG_ENGLISH} "VS2008  xll C++ build enviroment for Visual Studio 2010 (VS10)."
+LangString DESC_VS2010 ${LANG_ENGLISH} "VS2010  xll C++ build enviroment for Visual Studio 2010 (VS10)."
 LangString DESC_DEVCPP ${LANG_ENGLISH} "Dev-C++ xll C++ build enviroment for Dev-C++ for MinGW. The support for Dev-C++ is deprecated and will be discontinued in future versions of XLW. Consider using Code::Blocks."
 LangString DESC_CODEBLOCKS ${LANG_ENGLISH} "Code::Blocks xll C++ build enviroment Code::Blocks ( MinGW only )."
 LangString DESC_GCCMAKE ${LANG_ENGLISH} "gcc/make xll C++ build enviroment with support of GNU-MAKE. This uses makefiles"
@@ -744,6 +788,7 @@ LangString DESC_VS2008DotNet_SRC ${LANG_ENGLISH} "Source code and Visual Studio 
     !insertmacro MUI_DESCRIPTION_TEXT ${VS2003} $(DESC_VS2003)
     !insertmacro MUI_DESCRIPTION_TEXT ${VS2005} $(DESC_VS2005)
     !insertmacro MUI_DESCRIPTION_TEXT ${VS2008} $(DESC_VS2008)
+	!insertmacro MUI_DESCRIPTION_TEXT ${VS2010} $(DESC_VS2010)
     !insertmacro MUI_DESCRIPTION_TEXT ${DEVCPP} $(DESC_DEVCPP)
     !insertmacro MUI_DESCRIPTION_TEXT ${CODEBLOCKS} $(DESC_CODEBLOCKS)
     !insertmacro MUI_DESCRIPTION_TEXT ${GCCMAKE} $(DESC_GCCMAKE)
@@ -822,6 +867,8 @@ Function .onSelChange
     StrCmp $0 1 ThereIs1
     SectionGetFlags ${VS2008} $0 
     StrCmp $0 1 ThereIs1
+	SectionGetFlags ${VS2010} $0 
+    StrCmp $0 1 ThereIs1
 	SectionGetFlags ${DEVCPP} $0 
     StrCmp $0 1 ThereIs1
 	SectionGetFlags ${CODEBLOCKS} $0 
@@ -855,6 +902,7 @@ Function SaveSections
     SectionGetFlags ${VS2003}  $VS2003_Saved 
 	SectionGetFlags ${VS2005}  $VS2005_Saved 
 	SectionGetFlags ${VS2008}  $VS2008_Saved 
+	SectionGetFlags ${VS2010}  $VS2010_Saved 
 	SectionGetFlags ${DEVCPP}  $DEVCPP_Saved 
 	SectionGetFlags ${CODEBLOCKS}  $CODEBLOCKS_Saved 
 	SectionGetFlags ${GCCMAKE}  $GCCMAKE_Saved 
@@ -865,6 +913,7 @@ Function ReloadSections
     SectionSetFlags ${VS2003} $VS2003_Saved 
 	SectionSetFlags ${VS2005} $VS2005_Saved 
 	SectionSetFlags ${VS2008} $VS2008_Saved 
+	SectionSetFlags ${VS2010} $VS2010_Saved 	
 	SectionSetFlags ${DEVCPP} $DEVCPP_Saved 
 	SectionSetFlags ${CODEBLOCKS} $CODEBLOCKS_Saved 
 	SectionSetFlags ${GCCMAKE} $GCCMAKE_Saved 
@@ -942,6 +991,22 @@ Function DevEnvironFinder
 	Pop $VS2008PRO_VisualBasic_INST
 	
 	
+	
+	# Visual Studio 2010
+	
+	!insertmacro FINDENV HKLM "Software\Microsoft\VisualStudio\10.0\InstalledProducts\Microsoft Visual C++" "Package"  "Visual Studio 2010 C++"
+	Pop $VS2010PRO_CPP_INST
+	
+	!insertmacro FINDENV HKLM "Software\Microsoft\VisualStudio\10.0\InstalledProducts\Microsoft Visual C#" "Package"  "Visual Studio 2010 C#"
+	Pop $VS2010PRO_CSharp_INST
+	
+	!insertmacro FINDENV HKLM "Software\Microsoft\VisualStudio\10.0\InstalledProducts\Microsoft Visual Basic" "Package"  "Visual Studio 2010 VisualBasic"
+	Pop $VS2010PRO_VisualBasic_INST
+	
+	
+	
+	
+	
 	# Visual Studio Express 2005 
 	
 	!insertmacro FINDENV HKLM "Software\Microsoft\VCExpress\8.0\InstalledProducts\Microsoft Visual C++" "Package"  "Visual Studio Express 2005 C++"
@@ -970,13 +1035,25 @@ Function DevEnvironFinder
 	Pop $VS2008EXP_VisualBasic_INST
 	
 	
+	# Visual Studio Express 2010
+	
+	!insertmacro FINDENV HKLM "Software\Microsoft\VCExpress\10.0\InstalledProducts\Microsoft Visual C++" "Package"  "Visual Studio Express 2010 C++"
+	Pop $VS2008EXP_CPP_INST
+	
+	!insertmacro FINDENV HKLM "Software\Microsoft\VCSExpress\10.0\InstalledProducts\Microsoft Visual C#" "Package"  "Visual Studio Express 2010 C#"
+	Pop $VS2008EXP_CSharp_INST
+	
+	!insertmacro FINDENV HKLM "Software\Microsoft\VBExpress\10.0\InstalledProducts\Microsoft Visual Basic" "Package"  "Visual Studio Express 2010 VisualBasic"
+	Pop $VS2008EXP_VisualBasic_INST
+	
+	
 	# gcc
 	
 	ReadRegStr $DEVCPP_INST HKLM "Software\Dev-C++" "Install_Dir" 
 	${If} $DEVCPP_INST != ""
 			${NSD_LB_AddString} $ListBox_right "Detected Dev-C++"
 			${NSD_LB_AddString} $ListBox_right "     - Support for Dev-C++ is deprecated and will be discontinued"
-			${NSD_LB_AddString} $ListBox_right "       in future versions of XLW. Consider moving to Code::Blocks."
+			${NSD_LB_AddString} $ListBox_right "       in the final release of this version. Consider moving to Code::Blocks."
 			${NSD_LB_AddString} $ListBox_right "       If you want to install support for Dev-C++ in this installation"
 			${NSD_LB_AddString} $ListBox_right "       you must check the Dev-C++ check-box manualy on the next page."
 			!insertmacro insertline
@@ -1022,6 +1099,7 @@ Function SetUpInfo
 	SectionSetFlags ${VS2003_SRC} 0
 	SectionSetFlags ${VS2005_SRC} 0
 	SectionSetFlags ${VS2008_SRC} 0
+	SectionSetFlags ${VS2010_SRC} 0
 	SectionSetFlags ${DEVCPP_SRC} 0			
  	SectionSetFlags ${CODEBLOCKS_SRC} 0
 	SectionSetFlags ${GCCMAKE_SRC} 0
@@ -1032,6 +1110,7 @@ Function SetUpInfo
 	SectionSetFlags ${VS2003} 0
 	SectionSetFlags ${VS2005} 0
 	SectionSetFlags ${VS2008} 0
+	SectionSetFlags ${VS2010} 0
 	SectionSetFlags ${DEVCPP} 0			
  	SectionSetFlags ${CODEBLOCKS} 0
 	SectionSetFlags ${GCCMAKE} 0
@@ -1041,7 +1120,18 @@ Function SetUpInfo
 	
 	SectionSetFlags ${xlwExamples} 0
 
-
+	
+	${If} $VS2010PRO_CPP_INST != "" 
+		StrCpy $CPP_DETECTED  "1"
+		SectionSetFlags ${VS2010} 1
+	${EndIf}
+	
+	${If} $VS2010EXP_CPP_INST != ""  
+		SectionSetFlags ${VS2010} 1
+		StrCpy $CPP_DETECTED  "1"
+	${EndIf}
+	
+	
 	${If} $VS2008PRO_CPP_INST != "" 
 		StrCpy $CPP_DETECTED  "1"
 		SectionSetFlags ${VS2008} 1
