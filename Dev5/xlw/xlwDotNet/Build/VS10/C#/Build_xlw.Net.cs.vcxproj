@@ -36,9 +36,9 @@
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
-    <NMakeBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NMAKE /f ../../../vc_common/Build_xlw.Net.cs.nmake MSBUILDPATH="$(FrameworkDir)v3.5"  ENVIRON=$(Configuration) BUILD</NMakeBuildCommandLine>
-    <NMakeReBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NMAKE /f ../../../vc_common/Build_xlw.Net.cs.nmake MSBUILDPATH="$(FrameworkDir)v3.5"  ENVIRON=$(Configuration)  REBUILD</NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NMAKE /f ../../../vc_common/Build_xlw.Net.cs.nmake MSBUILDPATH="$(FrameworkDir)v3.5"  ENVIRON=$(Configuration)  CLEAN</NMakeCleanCommandLine>
+    <NMakeBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NMAKE /f ../../../vc_common/Build_xlw.Net.cs.nmake MSBUILDPATH=$(MSBuildBinPath)  ENVIRON=$(Configuration) BUILD</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NMAKE /f ../../../vc_common/Build_xlw.Net.cs.nmake MSBUILDPATH=$(MSBuildBinPath)  ENVIRON=$(Configuration)  REBUILD</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NMAKE /f ../../../vc_common/Build_xlw.Net.cs.nmake MSBUILDPATH=$(MSBuildBinPath)  ENVIRON=$(Configuration)  CLEAN</NMakeCleanCommandLine>
     <NMakeOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
     <NMakePreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
     <NMakeIncludeSearchPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
@@ -47,9 +47,9 @@
     <NMakeForcedUsingAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(NMakeForcedUsingAssemblies)</NMakeForcedUsingAssemblies>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
-    <NMakeBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NMAKE /f ../../../vc_common/Build_xlw.Net.cs.nmake MSBUILDPATH="$(FrameworkDir)v3.5"  ENVIRON=$(Configuration) BUILD</NMakeBuildCommandLine>
-    <NMakeReBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NMAKE /f ../../../vc_common/Build_xlw.Net.cs.nmake MSBUILDPATH="$(FrameworkDir)v3.5"  ENVIRON=$(Configuration) REBUILD</NMakeReBuildCommandLine>
-    <NMakeCleanCommandLine Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NMAKE /f ../../../vc_common/Build_xlw.Net.cs.nmake MSBUILDPATH="$(FrameworkDir)v3.5"  ENVIRON=$(Configuration) CLEAN</NMakeCleanCommandLine>
+    <NMakeBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NMAKE /f ../../../vc_common/Build_xlw.Net.cs.nmake MSBUILDPATH=$(MSBuildBinPath)  ENVIRON=$(Configuration) BUILD</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NMAKE /f ../../../vc_common/Build_xlw.Net.cs.nmake MSBUILDPATH=$(MSBuildBinPath)  ENVIRON=$(Configuration) REBUILD</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NMAKE /f ../../../vc_common/Build_xlw.Net.cs.nmake MSBUILDPATH=$(MSBuildBinPath)  ENVIRON=$(Configuration) CLEAN</NMakeCleanCommandLine>
     <NMakeOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
     <NMakePreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
     <NMakeIncludeSearchPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
