@@ -1,0 +1,1 @@
+C:\xlwDevelop\xlw\xlwDotNet\Build\VS10\DotNetInterfaceGenerator\obj\x86\Debug\ResolveAssemblyReference.cache
