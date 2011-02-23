@@ -1,7 +1,8 @@
 
 
 	;!define DEV_OR_RELEASE "- This is a Beta Release"  ; uncomment on development version
-	!define DEV_OR_RELEASE ""                                ; uncomment on release version
+	!define DEV_OR_RELEASE "- This is a Development Snapshot"                                ; uncomment on release version
+	;!define DEV_OR_RELEASE ""                        
 
 ;------------------------------------------------------------------------------------------------------------------------
 ;------------------------------------------------------------------------------------------------------------------------
@@ -103,6 +104,11 @@
 	Var Label
 	Var ListBox
 	
+	
+	Var VS2010PRO_CPP_INST
+	Var VS2010PRO_CSharp_INST
+	Var VS2010PRO_VisualBasic_INST
+	
 	Var VS2008PRO_CPP_INST
 	Var VS2008PRO_CSharp_INST
 	Var VS2008PRO_VisualBasic_INST
@@ -161,6 +167,7 @@
 	!macro projectfiles dir
 		SetOutPath "$INSTDIR\${dir}"
 		File /nonfatal /r "${dir}\*.vcproj"
+		File /nonfatal /r "${dir}\*.vcxproj"
 		File /nonfatal /r "${dir}\*.csproj"
 		File /nonfatal /r "${dir}\*.vbproj"
 		File /nonfatal /r "${dir}\*.sln"
@@ -449,6 +456,14 @@ SubSection "xlw" xlw
 			!insertmacro InterfaceGenerator vc9
 		SectionEnd
 		
+		
+		Section "VS2010" VS200
+			SetOutPath "$INSTDIR\xlw\lib"
+			File  "xlw\lib\xlw-vc100*.lib"
+			File  "xlw\lib\xlw-vc100*.pdb"
+			!insertmacro InterfaceGenerator vc10
+		SectionEnd
+		
 		Section "Dev-C++" DEVCPP
 			SetOutPath "$INSTDIR\xlw\lib"
 			File  "xlw\lib\libxlw-devcpp*.a"
@@ -506,6 +521,13 @@ SubSection "xlw" xlw
 			!insertmacro buildfiles "vc9"
 			!insertmacro projectfiles "xlw\Template_Projects\vc9"
 			!insertmacro sourcefiles  "xlw\Template_Projects\vc9"
+		SectionEnd
+		
+		
+		Section "VS2010" VS2010_SRC
+			!insertmacro buildfiles "vc10"
+			!insertmacro projectfiles "xlw\Template_Projects\vc10"
+			!insertmacro sourcefiles  "xlw\Template_Projects\vc10"
 		SectionEnd
 		
 		Section "Dev-C++" DEVCPP_SRC
@@ -687,6 +709,7 @@ LangString DESC_Libraries ${LANG_ENGLISH} "The static xlw libraries & Tools."
 LangString DESC_VS2003 ${LANG_ENGLISH} "VS2003  xll C++ build enviroment for Visual Studio 2003 (VS7.1)."
 LangString DESC_VS2005 ${LANG_ENGLISH} "VS2005  xll C++ build enviroment for Visual Studio 2005 (VS8)."
 LangString DESC_VS2008 ${LANG_ENGLISH} "VS2008  xll C++ build enviroment for Visual Studio 2008 (VS9)."
+LangString DESC_VS2010 ${LANG_ENGLISH} "VS2008  xll C++ build enviroment for Visual Studio 2010 (VS10)."
 LangString DESC_DEVCPP ${LANG_ENGLISH} "Dev-C++ xll C++ build enviroment for Dev-C++ for MinGW. The support for Dev-C++ is deprecated and will be discontinued in future versions of XLW. Consider using Code::Blocks."
 LangString DESC_CODEBLOCKS ${LANG_ENGLISH} "Code::Blocks xll C++ build enviroment Code::Blocks ( MinGW only )."
 LangString DESC_GCCMAKE ${LANG_ENGLISH} "gcc/make xll C++ build enviroment with support of GNU-MAKE. This uses makefiles"
@@ -698,6 +721,7 @@ LangString DESC_xlwExamples ${LANG_ENGLISH} "xlw Examples"
 LangString DESC_VS2003_SRC ${LANG_ENGLISH} "Source code and Visual Studio 2003 (VS7.1) project files for building the xlw libraries & Tools."
 LangString DESC_VS2005_SRC ${LANG_ENGLISH} "Source code and Visual Studio 2005 (VS8) project files for building the xlw libraries & Tools.."
 LangString DESC_VS2008_SRC ${LANG_ENGLISH} "Source code and Visual Studio 2008 (VS9) project files for building the xlw libraries & Tools.."
+LangString DESC_VS2010_SRC ${LANG_ENGLISH} "Source code and Visual Studio 2010 (VS10) project files for building the xlw libraries & Tools.."
 LangString DESC_DEVCPP_SRC ${LANG_ENGLISH} "Source code and Dev-C++ project files forbuilding  the xlw libraries & Tools."
 LangString DESC_CODEBLOCKS_SRC ${LANG_ENGLISH} "Source code and Code::Blocks  project files for building the xlw libraries & Tools."
 LangString DESC_GCCMAKE_SRC ${LANG_ENGLISH} "Source code and and gnu-make makefiles for building the xlw libraries & Tools."
@@ -732,6 +756,7 @@ LangString DESC_VS2008DotNet_SRC ${LANG_ENGLISH} "Source code and Visual Studio 
 	!insertmacro MUI_DESCRIPTION_TEXT ${VS2003_SRC} $(DESC_VS2003_SRC)
     !insertmacro MUI_DESCRIPTION_TEXT ${VS2005_SRC} $(DESC_VS2005_SRC)
     !insertmacro MUI_DESCRIPTION_TEXT ${VS2008_SRC} $(DESC_VS2008_SRC)
+	!insertmacro MUI_DESCRIPTION_TEXT ${VS2010_SRC} $(DESC_VS2010_SRC)
     !insertmacro MUI_DESCRIPTION_TEXT ${DEVCPP_SRC} $(DESC_DEVCPP_SRC)
     !insertmacro MUI_DESCRIPTION_TEXT ${CODEBLOCKS_SRC} $(DESC_CODEBLOCKS_SRC)
     !insertmacro MUI_DESCRIPTION_TEXT ${GCCMAKE_SRC} $(DESC_GCCMAKE_SRC)

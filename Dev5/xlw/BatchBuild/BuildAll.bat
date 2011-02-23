@@ -10,6 +10,7 @@ CALL BuildOnlyGCCMake.bat
 CALL BuildOnlyVS7.bat 
 CALL BuildOnlyVS8.bat 
 CALL BuildOnlyVS9.bat 
+CALL BuildOnlyVS10.bat 
 
 REM BUILD XLW EXAMPLES
 
