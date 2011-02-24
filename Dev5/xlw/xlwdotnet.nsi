@@ -1,7 +1,7 @@
 
 
 	;!define DEV_OR_RELEASE "- This is a Beta Release"  ; uncomment on development version
-	!define DEV_OR_RELEASE "- This is a Development Snapshot 23-Feb-2011"                                ; uncomment on release version
+	!define DEV_OR_RELEASE "- This is a Development Snapshot 24-Feb-2011"                                ; uncomment on release version
 	;!define DEV_OR_RELEASE ""                        
 
 ;------------------------------------------------------------------------------------------------------------------------
@@ -58,7 +58,7 @@
 
 	!define MUI_HEADERIMAGE_BITMAP "xlw-site\images\logo.bmp"
 	!define MUI_WELCOMEFINISHPAGE_BITMAP   "xlw-site\images\header.bmp"
-	!define MUI_WELCOMEPAGE_TITLE "Welcome to the installer of xlw 5DEV - 23Feb2011"
+	!define MUI_WELCOMEPAGE_TITLE "Welcome to the installer of xlw 5DEV - 24Feb2011"
 	
 	
 
@@ -110,6 +110,10 @@
 	Var VS2010PRO_CPP_INST
 	Var VS2010PRO_CSharp_INST
 	Var VS2010PRO_VisualBasic_INST
+	
+	Var VS2010EXP_CPP_INST
+	Var VS2010EXP_CSharp_INST
+	Var VS2010EXP_VisualBasic_INST
 	
 	Var VS2008PRO_CPP_INST
 	Var VS2008PRO_CSharp_INST
@@ -230,10 +234,23 @@
 		SetOutPath "$INSTDIR\xlwDotNet\build\${dir}"
 		File /r "xlwDotNet\build\${dir}\*.sln"
 		File /r "xlwDotNet\build\${dir}\*.vcproj"
-		;File /r "xlwDotNet\build\${dir}\*.vcxproj"
 		File /r "xlwDotNet\build\${dir}\*.csproj"
 	
 	!macroend
+	
+	
+	!macro DotNetbuildfiles_VS10  dir
+		SetOutPath "$INSTDIR\xlwDotNet\xlwDotNet"
+		File  "xlwDotNet\xlwDotNet\*.cpp"
+
+		SetOutPath "$INSTDIR\xlwDotNet\build\${dir}"
+		File /r "xlwDotNet\build\${dir}\*.sln"
+		File /r "xlwDotNet\build\${dir}\*.vcxproj"
+		File /r "xlwDotNet\build\${dir}\*.csproj"
+	
+	!macroend
+	
+	
 	
 	!macro DotNetHeaders
 			SetOutPath "$INSTDIR\xlwDotNet\xlwDotNet"
@@ -307,11 +324,6 @@
 			SectionGetFlags ${VS2005} $0 
 			${If} $0 == "1"
 				!insertmacro doExamplVCHelper "${dir}\vc8"
-			${EndIf}
-			
-			SectionGetFlags ${VS2008} $0 
-			${If} $0 == "1"
-				!insertmacro doExamplVCHelper "${dir}\vc9"
 			${EndIf}
 			
 			SectionGetFlags ${VS2008} $0 
@@ -661,20 +673,20 @@ SubSection "xlwDotNet" xlwDotNet
 		SectionEnd
 		
 		
-		;Section "VS2010" VS2010DotNet
-		;	SetOutPath "$INSTDIR\xlwDotNet\lib"
-		;	File "xlwDotNet\lib\xlwDotNet-vc100*.dll"
-		;	File "xlwDotNet\lib\xlwDotNet-vc100*.pdb"
-		;	!insertmacro DotNetInterfaceGenerator VS10
-		;	!insertmacro projectfiles "xlwDotNet\Template_Projects\VS10"
-		;	!insertmacro sourcefiles  "xlwDotNet\Template_Projects\VS10"
+		Section "VS2010" VS2010DotNet
+			SetOutPath "$INSTDIR\xlwDotNet\lib"
+			File "xlwDotNet\lib\xlwDotNet-vc100*.dll"
+			File "xlwDotNet\lib\xlwDotNet-vc100*.pdb"
+			!insertmacro DotNetInterfaceGenerator VS10
+			!insertmacro projectfiles "xlwDotNet\Template_Projects\VS10"
+			!insertmacro sourcefiles  "xlwDotNet\Template_Projects\VS10"
 		;	!insertmacro projectfiles "xlwDotNet\Template_Projects\VisualBasic\VB2010"
 		;	!insertmacro sourcefiles  "xlwDotNet\Template_Projects\VisualBasic\VB2010"
 		;	!insertmacro projectfiles "xlwDotNet\Template_Projects\Hybrid_Cpp_CSharp_XLLs\VS10_PRO"
 		;	!insertmacro sourcefiles  "xlwDotNet\Template_Projects\Hybrid_Cpp_CSharp_XLLs\VS10_PRO"
-		;	CreateDirectory "$SMPROGRAMS\XLW\${APP_VER}\xlwDotNet"
-		;	CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\xlwDotNet\Extract XLW .NET xll template.lnk " "$INSTDIR\TemplateExtractors\xlwDotNetTemplateExtractor.exe"
-		;SectionEnd
+			CreateDirectory "$SMPROGRAMS\XLW\${APP_VER}\xlwDotNet"
+			CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\xlwDotNet\Extract XLW .NET xll template.lnk " "$INSTDIR\TemplateExtractors\xlwDotNetTemplateExtractor.exe"
+		SectionEnd
 		
 
 	SectionGroupEnd
@@ -724,19 +736,19 @@ SubSection "xlwDotNet" xlwDotNet
 			${EndIf}
 		SectionEnd
 		
-		;Section "VS2010" VS2010DotNet_SRC
-		;	!insertmacro DotNetbuildfiles "VS10"
-		;	!insertmacro DotNetHeaders
-		;	!insertmacro dotNetInterfaceGenSource
-		;	!insertmacro projectfiles "xlwDotNet\Template_Projects\VS10"
-		;	!insertmacro sourcefiles  "xlwDotNet\Template_Projects\VS10"
+		Section "VS2010" VS2010DotNet_SRC
+			!insertmacro DotNetbuildfiles_VS10 "VS10"
+			!insertmacro DotNetHeaders
+			!insertmacro dotNetInterfaceGenSource
+			!insertmacro projectfiles "xlwDotNet\Template_Projects\VS10"
+			!insertmacro sourcefiles  "xlwDotNet\Template_Projects\VS10"
 		;	!insertmacro projectfiles "xlwDotNet\Template_Projects\VisualBasic\VB2010"
 		;	!insertmacro sourcefiles  "xlwDotNet\Template_Projects\VisualBasic\VB2010"
 		;	${If} VS2010PRO_CSharp_INST != ""  
 		;		!insertmacro projectfiles "xlwDotNet\Template_Projects\Hybrid_Cpp_CSharp_XLLs\VS10_PRO"
 		;		!insertmacro sourcefiles  "xlwDotNet\Template_Projects\Hybrid_Cpp_CSharp_XLLs\VS10_PRO"
 		;	${EndIf}
-		;SectionEnd
+		SectionEnd
 		
 
 	SectionGroupEnd
@@ -774,11 +786,16 @@ LangString DESC_xlwDotNetLibraries ${LANG_ENGLISH} "The xlwDotNet .NET Assemblie
 
 LangString DESC_VS2005DotNet ${LANG_ENGLISH} "xlwDotNet .NET Assemblies  & Tools to build for xlls with Visual Studio 2005 (VS8)"
 LangString DESC_VS2008DotNet ${LANG_ENGLISH} "xlwDotNet .NET Assemblies  & Tools to build for xlls with Visual Studio 2008 (VS9)"
+LangString DESC_VS2010DotNet ${LANG_ENGLISH} "xlwDotNet .NET Assemblies  & Tools to build for xlls with Visual Studio 2010 (VS10)"
+
 
 LangString DESC_DotNetSource ${LANG_ENGLISH} " You can install the source code for the xlwDotNet libraries & Tools including all appropriates project files."
 
 LangString DESC_VS2005DotNet_SRC ${LANG_ENGLISH} "Source code and Visual Studio 2005 (VS8) project files for building the xlwDotNet Assemblies & Tools."
 LangString DESC_VS2008DotNet_SRC ${LANG_ENGLISH} "Source code and Visual Studio 2008 (VS9) project files for building the xlwDotNet Assemblies & Tools."
+LangString DESC_VS2008DotNet_SRC ${LANG_ENGLISH} "Source code and Visual Studio 2010 (VS10) project files for building the xlwDotNet Assemblies & Tools."
+
+
 
   ;Assign language strings to sections
   !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
@@ -889,6 +906,12 @@ ThereIs1:
     ${If} $0 == "1"
 		SectionSetFlags ${VS2008} 1 
 	${EndIf}
+	
+	SectionGetFlags ${VS2010DotNet} $0 
+    ${If} $0 == "1"
+		SectionSetFlags ${VS2010} 1 
+	${EndIf}
+	
 	
 
 	Call SaveSections 
@@ -1106,6 +1129,7 @@ Function SetUpInfo
 	
 	SectionSetFlags ${VS2005DotNet_SRC} 0
 	SectionSetFlags ${VS2008DotNet_SRC} 0
+	SectionSetFlags ${VS2010DotNet_SRC} 0
 	
 	SectionSetFlags ${VS2003} 0
 	SectionSetFlags ${VS2005} 0
@@ -1170,7 +1194,18 @@ Function SetUpInfo
 	
 	SectionSetFlags ${VS2008DotNet} 1
 	SectionSetFlags ${VS2005DotNet} 1
+	SectionSetFlags ${VS2010DotNet} 1
 	
+	
+	${If} $VS2010PRO_CSharp_INST == "" 
+		${If} $VS2010EXP_CSharp_INST == ""  
+			${If} $VS2010PRO_VisualBasic_INST == "" 
+				${If} $VS2010EXP_VisualBasic_INST == ""  
+					SectionSetFlags ${VS2010DotNet} 0
+				${EndIf}
+			${EndIf}
+		${EndIf}
+	${EndIf}
 	
 	${If} $VS2008PRO_CSharp_INST == "" 
 		${If} $VS2008EXP_CSharp_INST == ""  
@@ -1193,7 +1228,12 @@ Function SetUpInfo
 		${EndIf}
 	${EndIf}
 
-	
+	${If} $VS2010PRO_CPP_INST == "" 
+		${If} $VS2010EXP_CPP_INST == ""  
+			SectionSetFlags ${VS2010} 0
+			SectionSetFlags ${VS2010DotNet} 0
+		${EndIf}
+	${EndIf}
 	
 	${If} $VS2008PRO_CPP_INST == "" 
 		${If} $VS2008EXP_CPP_INST == ""  

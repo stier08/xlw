@@ -71,7 +71,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>"$(MSBuildBinPath)\msbuild.exe"  /p:Configuration=$(Configuration) /p:Platform=Win32  $(SolutionDir)Addin\$(SolutionName).sln"</PostBuildEvent>
+    <PostBuildEvent>"$(MSBuildBinPath)\msbuild.exe"  /p:Configuration=$(Configuration) /p:Platform=Win32  "$(SolutionDir)Addin\$(SolutionName).sln"</PostBuildEvent>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>

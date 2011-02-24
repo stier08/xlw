@@ -57,17 +57,25 @@
 
 Var DIALOG
 
+Var VS10_CSHARP
 Var VS9_CSHARP
 Var VS8_CSHARP
+Var VS10_VISUALBASIC
 Var VS9_VISUALBASIC
 Var VS8_VISUALBASIC
+Var VS10_HYBRID
 Var VS9_HYBRID
 Var VS8_HYBRID
 
+Var VS10_CSHARP_STATE
 Var VS9_CSHARP_STATE
 Var VS8_CSHARP_STATE
+
+Var VS10_VISUALBASIC_STATE
 Var VS9_VISUALBASIC_STATE
 Var VS8_VISUALBASIC_STATE
+
+Var VS10_HYBRID_STATE
 Var VS9_HYBRID_STATE
 Var VS8_HYBRID_STATE
 
@@ -84,24 +92,28 @@ Function ExtractorPage
 
 	GetFunctionAddress $0 RadioChanged
 	
-	${NSD_CreateRadioButton} 40 10 100% 10% "Visual C# 2008 (VS9)"    
+	${NSD_CreateRadioButton} 40 10 100% 10% "Visual C# 2010 (VS10)"    
+	Pop $VS10_CSHARP
+	nsDialogs::OnClick  $VS10_CSHARP $0
+	
+	${NSD_CreateRadioButton} 40 40 100% 10% "Visual C# 2008 (VS9)"    
 	Pop $VS9_CSHARP
 	nsDialogs::OnClick  $VS9_CSHARP $0
-    ${NSD_CreateRadioButton} 40 40 100% 10% "Visual C# 2005 (VS8)" 
+    ${NSD_CreateRadioButton} 40 70 100% 10% "Visual C# 2005 (VS8)" 
 	Pop $VS8_CSHARP
 	nsDialogs::OnClick  $VS8_CSHARP $0
 	
-	${NSD_CreateRadioButton} 40 70 100% 10% "Visual Basic 2008 (VS9)"    
+	${NSD_CreateRadioButton} 40 100 100% 10% "Visual Basic 2008 (VS9)"    
 	Pop $VS9_VISUALBASIC
 	nsDialogs::OnClick  $VS9_VISUALBASIC $0
-    ${NSD_CreateRadioButton} 40 100 100% 10% "Visual Basic 2005 (VS8)" 
+    ${NSD_CreateRadioButton} 40 130 100% 10% "Visual Basic 2005 (VS8)" 
 	Pop $VS8_VISUALBASIC
 	nsDialogs::OnClick  $VS8_VISUALBASIC $0
 	
-	${NSD_CreateRadioButton} 40 130 100% 10% "Visual Studio 2008 (VS9) (Hybrid C++/C# XLL  Not Visual Studio Express)"    
+	${NSD_CreateRadioButton} 40 160 100% 10% "Visual Studio 2008 (VS9) (Hybrid C++/C# XLL  Not Visual Studio Express)"    
 	Pop $VS9_HYBRID
 	nsDialogs::OnClick  $VS9_HYBRID $0
-    ${NSD_CreateRadioButton} 40 160 100% 10% "Visual Studio 2005 (VS8) (Hybrid C++/C# XLL  Not Visual Studio Express)"   
+    ${NSD_CreateRadioButton} 40 190 100% 10% "Visual Studio 2005 (VS8) (Hybrid C++/C# XLL  Not Visual Studio Express)"   
 	Pop $VS8_HYBRID
 	nsDialogs::OnClick  $VS8_HYBRID $0
 
@@ -118,12 +130,15 @@ Function RadioChanged
 	GetDlgItem $0 $HWNDPARENT 1
 	EnableWindow $0 1
 
+	;${NSD_GetState} $VS10_VISUALBASIC $VS10_VISUALBASIC_STATE
 	${NSD_GetState} $VS9_VISUALBASIC $VS9_VISUALBASIC_STATE
 	${NSD_GetState} $VS8_VISUALBASIC $VS8_VISUALBASIC_STATE	
 	
+	${NSD_GetState} $VS10_CSHARP $VS10_CSHARP_STATE
 	${NSD_GetState} $VS9_CSHARP $VS9_CSHARP_STATE
 	${NSD_GetState} $VS8_CSHARP $VS8_CSHARP_STATE
-	
+
+	;${NSD_GetState} $VS10_HYBRID $VS10_HYBRID_STATE	
 	${NSD_GetState} $VS9_HYBRID $VS9_HYBRID_STATE
 	${NSD_GetState} $VS8_HYBRID $VS8_HYBRID_STATE
 	
@@ -133,6 +148,7 @@ FunctionEnd
 !macro projectfiles dir
 		SetOutPath "$INSTDIR"
 		File /nonfatal /r "xlwDotNet\Template_Projects\${dir}\*.vcproj"
+		File /nonfatal /r "xlwDotNet\Template_Projects\${dir}\*.vcxproj"
 		File /nonfatal /r "xlwDotNet\Template_Projects\${dir}\*.vbproj"
 		File /nonfatal /r "xlwDotNet\Template_Projects\${dir}\*.csproj"
 		File /nonfatal /r "xlwDotNet\Template_Projects\${dir}\*.sln"
@@ -164,6 +180,7 @@ FunctionEnd
 
 Section #
 
+	!insertmacro GETDIR $VS10_CSHARP_STATE "VS10"
 	!insertmacro GETDIR $VS9_CSHARP_STATE "VS9"
 	!insertmacro GETDIR $VS8_CSHARP_STATE "VS8"
 	
