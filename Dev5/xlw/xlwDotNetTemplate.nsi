@@ -96,24 +96,29 @@ Function ExtractorPage
 	Pop $VS10_CSHARP
 	nsDialogs::OnClick  $VS10_CSHARP $0
 	
-	${NSD_CreateRadioButton} 40 40 100% 10% "Visual C# 2008 (VS9)"    
+	${NSD_CreateRadioButton} 40 35 100% 10% "Visual C# 2008 (VS9)"    
 	Pop $VS9_CSHARP
 	nsDialogs::OnClick  $VS9_CSHARP $0
-    ${NSD_CreateRadioButton} 40 70 100% 10% "Visual C# 2005 (VS8)" 
+    ${NSD_CreateRadioButton} 40 60 100% 10% "Visual C# 2005 (VS8)" 
 	Pop $VS8_CSHARP
 	nsDialogs::OnClick  $VS8_CSHARP $0
 	
-	${NSD_CreateRadioButton} 40 100 100% 10% "Visual Basic 2008 (VS9)"    
+	${NSD_CreateRadioButton} 40 85 100% 10% "Visual Basic 2008 (VS9)"    
 	Pop $VS9_VISUALBASIC
 	nsDialogs::OnClick  $VS9_VISUALBASIC $0
-    ${NSD_CreateRadioButton} 40 130 100% 10% "Visual Basic 2005 (VS8)" 
+    ${NSD_CreateRadioButton} 40 110 100% 10% "Visual Basic 2005 (VS8)" 
 	Pop $VS8_VISUALBASIC
 	nsDialogs::OnClick  $VS8_VISUALBASIC $0
+	
+	
+	${NSD_CreateRadioButton} 40 135 100% 10% "Visual Studio 2010 (VS10) (Hybrid C++/C# XLL  Not Visual Studio Express)"    
+	Pop $VS10_HYBRID
+	nsDialogs::OnClick  $VS10_HYBRID $0
 	
 	${NSD_CreateRadioButton} 40 160 100% 10% "Visual Studio 2008 (VS9) (Hybrid C++/C# XLL  Not Visual Studio Express)"    
 	Pop $VS9_HYBRID
 	nsDialogs::OnClick  $VS9_HYBRID $0
-    ${NSD_CreateRadioButton} 40 190 100% 10% "Visual Studio 2005 (VS8) (Hybrid C++/C# XLL  Not Visual Studio Express)"   
+    ${NSD_CreateRadioButton} 40 185 100% 10% "Visual Studio 2005 (VS8) (Hybrid C++/C# XLL  Not Visual Studio Express)"   
 	Pop $VS8_HYBRID
 	nsDialogs::OnClick  $VS8_HYBRID $0
 
@@ -138,7 +143,7 @@ Function RadioChanged
 	${NSD_GetState} $VS9_CSHARP $VS9_CSHARP_STATE
 	${NSD_GetState} $VS8_CSHARP $VS8_CSHARP_STATE
 
-	;${NSD_GetState} $VS10_HYBRID $VS10_HYBRID_STATE	
+	${NSD_GetState} $VS10_HYBRID $VS10_HYBRID_STATE	
 	${NSD_GetState} $VS9_HYBRID $VS9_HYBRID_STATE
 	${NSD_GetState} $VS8_HYBRID $VS8_HYBRID_STATE
 	
@@ -187,6 +192,7 @@ Section #
 	!insertmacro GETDIR $VS9_VISUALBASIC_STATE "VisualBasic\VB2008"
 	!insertmacro GETDIR $VS8_VISUALBASIC_STATE "VisualBasic\VB2005"
 	
+	!insertmacro GETDIR $VS10_HYBRID_STATE "Hybrid_Cpp_CSharp_XLLs\VS10_PRO"
 	!insertmacro GETDIR $VS9_HYBRID_STATE "Hybrid_Cpp_CSharp_XLLs\VS9_PRO"
 	!insertmacro GETDIR $VS8_HYBRID_STATE "Hybrid_Cpp_CSharp_XLLs\VS8_PRO"
  
