@@ -1,4 +1,8 @@
 
+DEVELOPMENT SNAPSHOT 5DEV-27Feb2011
+
+
+***************  UPDATED 27 February 2011
 
 For the latest documentation and news visit http://xlw.sourceforge.net/
 
@@ -19,7 +23,7 @@ new fresh xll project, either under xlw(vanilla) or xlwDotNet.
 At this stage the most important factor to a speedy release version is feedback from the users
 Please email xlw-users@lists.sourceforge.net.
 
-If you will be using MinGW ( inc Code::Blocks & Dev-CPP ) then please also read the MinGW section of 
+If you will be using MinGW ( inc Code::Blocks ) (Dev-CPP is deprecated) then please also read the MinGW section of 
 the documentation below.
 
 ===================================================================================================
@@ -34,24 +38,27 @@ PRE-REQUISITE
 	
    Developing C++ with XLW requires one of the following  environments :
   
-   1. MicroSoft Visual Studio 2008 with both C++  (VS9_PRO) 
-   2. MicroSoft Visual Studio 2005 with both C++  (VS8_PRO) 
-   3. Visual Studio 2008 Express Editions C++     (VS9_EXPRESS)
-   4. Visual Studio 2005 Express Editions C++     (VS8_EXPRESS)
-   5. Visual Studio 2003                          (VS7.1)
-   6. Code::Blocks 8.02 (installer WITHOUT MinGW) + MinGW/GCC4.4.0 ( See section on MinGW below) (C::B/MinGW)
-   7. Dev-C++ v5.0 beta 9.2 (Installer WITHOUT MinGW) + MinGW/GCC4.4.0 ( See section on MinGW below) (Dev-C++)
-   8. MinGW/GCC/Make enviroment (GCC/MAKE)
+   1. MicroSoft Visual Studio 2010 with both C++  (VS10_PRO) 
+   2. MicroSoft Visual Studio 2008 with both C++  (VS9_PRO) 
+   3. MicroSoft Visual Studio 2005 with both C++  (VS8_PRO) 
+   4. Visual Studio 2010 Express Editions C++     (VS10_EXPRESS)
+   5. Visual Studio 2008 Express Editions C++     (VS9_EXPRESS)
+   6. Visual Studio 2005 Express Editions C++     (VS8_EXPRESS)
+   7. Visual Studio 2003                          (VS7.1)
+   8. Code::Blocks 10.05 (installer WITHOUT MinGW) + MinGW/GCC4.5.2 ( See section on MinGW below) (C::B/MinGW)
+   9. MSYS/MinGW/GCC/Make enviroment (GCC/MAKE)
    
    C# XLLs
    --------
    
    Developing C# XLLs with XLW requires one of the following Microsoft Visual Studio environments :
-
-   1. MicroSoft Visual Studio 2008 with both C++ and C# installed.                      (VS9_PRO) 
-   2. MicroSoft Visual Studio 2005 with both C++ and C# installed.                      (VS8_PRO) 
-   3. Visual Studio 2008 Express Editions C++ & Visual Studio 2008 Express Editions C#  (VS9_EXPRESS)
-   4. Visual Studio 2005 Express Editions C++ & Visual Studio 2005 Express Editions C#  (VS8_EXPRESS)
+   
+   1. MicroSoft Visual Studio 2010 with both C++ and C# installed.                      (VS10_PRO) 
+   2. MicroSoft Visual Studio 2008 with both C++ and C# installed.                      (VS9_PRO) 
+   3. MicroSoft Visual Studio 2005 with both C++ and C# installed.                      (VS8_PRO) 
+   4. Visual Studio 2008 Express Editions C++ & Visual Studio 2010 Express Editions C#  (VS10_EXPRESS)
+   5. Visual Studio 2008 Express Editions C++ & Visual Studio 2008 Express Editions C#  (VS9_EXPRESS)
+   6. Visual Studio 2005 Express Editions C++ & Visual Studio 2005 Express Editions C#  (VS8_EXPRESS)
 
    There is no support for Visual Studio 2002 & 2003 and none is planned.
    
@@ -186,7 +193,9 @@ PRE-REQUISITE
           {
             ....
           }
-	
+
+		  
+***** THE FOLLOWING SECTION HAS NOT BEEN TESTED FOR VISUAL STUDIO 2010  EXPRESS
   4. Tweaking Visual Studio Express
     '''''''''''''''''''''''''''''''
 	
@@ -197,7 +206,8 @@ PRE-REQUISITE
     then check boxes "Show advanced build configurations' and 
     'Show Output window when build starts'
 	
-	
+
+
   5. If Your .NET Addin Just crashes Excel. 
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 	<  THIS STEP SHOULD BE TAKEN CARE OF BY THE INSTALLER >
@@ -222,7 +232,8 @@ PRE-REQUISITE
    http://krgreenlee.blogspot.com/2006/01/software-running-excel-with-net-11.html
    http://msdn.microsoft.com/en-us/library/w4atty68.aspx
       
-
+	  
+***** THE FOLLOWING SECTION HAS NOT BEEN TESTED FOR VISUAL STUDIO 2010 
    6. Debugging .NET xlls
    '''''''''''''''''''''''
    
@@ -285,59 +296,30 @@ PRE-REQUISITE
 	----------------------------
 
 						
-Recently MinGW has updated its GCC compiler suite to GCC4.4. This version of XLW ( 4.0.0 beta 2 )
-has been updated to reflect this change in MinGW. The dependency in XLW on the earlier version of GCC (3.4.5)
-has been replaced by the dependency on the newer GCC shipped with the latest MinGW ( imminent).
+Recently MinGW (http://www.mingw.org/) has updated its GCC compiler suite to GCC 4.5.2 This version of XLW (5DEV)
+has been updated to reflect this change in MinGW. 
 
-Unfortunatley the MinGW automatic installer has not been updated to install the new compiler suite and if used for
-installation will still install the older GCC, with which XLW will no longer work ( unless compiled from source).
-In this case the normal way around would be to install MinGW manualy without the automatical installer, however 
-this can be somewhat tedious.
+When the previous version if XLW ( ver 4) was released the MinGW automatic installer has not been updated to install the then 
+most current compiler suite and if used for installation would  still have installed the older GCC, with which that version of 
+XLW  would not have worked ( unless compiled from source). In this case the normal way around would have been to install 
+MinGW manualy without the automatical installer
 
-In order to keep the installation, usage and overall experience of XLW simple and painless we have built a MinGW
-installer that will download and install all the necessary MinGW components required for C/C++ compilation and
+In order to keep the installation, usage and overall experience of XLW simple and painless we built a MinGW
+installer that was able to download and install all the necessary MinGW components required for C/C++ compilation and
 to resolve XLW's dependency.
 
-You will find the MinGW installer, 'xlw-MinGW-Installer.exe' on the xlw sourceforge webpage under the download
-section for 'MingW Installer'. This will install all GCC4.4 & MSYS ( from the offical MinGW download site )and put the 
-appropriate Bin directories on the Path. It is however not necessary to use THIS installer to get the latest version
-of MinGW, another installer is provided by TDM which can be found here :
+Since then a much more upto date Mingw installer has been released by the MingW project and made available here:
 
-	http://www.tdragon.net/recentgcc/
-	
-Also the necessary components can be downloaded manualy. The requirements are
+http://sourceforge.net/projects/mingw/files/Automated%20MinGW%20Installer/
 
-			    MinGW
-				-----
-			    gcc-core-4.4.0-mingw32-bin.tar.gz
-				gcc-core-4.4.0-mingw32-dll.tar.gz
-				
-				gcc-c++-4.4.0-mingw32-bin.tar.gz
-				gcc-c++-4.4.0-mingw32-dll.tar.gz
-				
-				gcc-4.4.0-mingw32-notes.txt
+In the meantime we have also updated our Mingw installer to install GCC 4.5.2. Our updated installer installs a more complete system
+than before, more than just bare minimal reuired to compile C++. However it does not install any other language other than C & C++.
+you can download the latest snapshot version here :
 
-				mingw32-make-3.81-20080326-3.tar.gz
-				mingwrt-3.16-mingw32-dll.tar.gz
-				mingwrt-3.16-mingw32-dev.tar.gz
-				binutils-2.19.1-mingw32-bin.tar.gz
+https://sourceforge.net/projects/xlw/files/xlw-mingw-installer/MINGW_GCC4.5.2-1/
 
-				mpfr-2.4.1-mingw32-dll.tar.gz
-				pthreads-w32-2.8.0-mingw32-dll.tar.gz
-				gmp-4.2.4-mingw32-dll.tar.gz
-				w32api-3.13-mingw32-dev.tar.gz
-				libiconv-1.13.1-1-mingw32-bin.tar.lzma
-
-
-
-			    MSYS
-				----
-				msysCORE-1.0.11-bin.tar.gz
-				
-				GDB
-				----
-				gdb-6.8-mingw-3.tar.bz2
-
+Either method of installing MingW should be fine and install the necessary tools to compile xlls with gcc. At present only the installation
+resulting from the xlw installer has been tested but maybe prone to some further minor development.
 
 	2. Code::Blocks
 	----------------
@@ -346,7 +328,7 @@ Also the necessary components can be downloaded manualy. The requirements are
 	one with. Previously it was advised to install the one with the MinGW. However now you 
 	should install the one WITHOUT MinGW, since the MinGW packaged in the Code::Blocks installer
 	is the older version. 
-	To setup Code::Blocks firstly install the latest MinGW ( GCC4.4 ) as described above. 
+	To setup Code::Blocks firstly install the latest MinGW as described above. 
 	Then in Code::Blocks goto 'Settings->Compiler & Debugger -> Toolchain executables' and
 	set the Compilers installation directory to the bin directory of your MinGW installation
 	(if you used the xlw MinGW installer and installed to the default directory, this should be
@@ -355,8 +337,7 @@ Also the necessary components can be downloaded manualy. The requirements are
 	3. Dev-CPP
 	----------------
 
-	You should install the latest MinGW as decsribed above and then install the Dev-CPP package
-	without the inclusive MinGW software from the download page. 
+	This has now been deprecated all support in xlw has been dropped
 	 
 
 
