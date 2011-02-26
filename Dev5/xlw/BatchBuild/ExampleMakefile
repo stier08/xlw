@@ -1,11 +1,11 @@
 
-ifeq ($(DEV),devcpp)
-makefile=Makefile.win
-target=clean all
-else
+# ifeq ($(DEV),devcpp)
+# makefile=Makefile.win
+# target=clean all
+# else
 makefile=Makefile
 target=rebuild
-endif 
+# endif 
 
 
 .PHONY : all

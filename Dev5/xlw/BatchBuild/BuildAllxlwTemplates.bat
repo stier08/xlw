@@ -1,6 +1,6 @@
 "C:\Python26\python.exe" prepareTemplateProject.py
 
-make -f xlwTemplateMakefile DEV=devcpp
+REM make -f xlwTemplateMakefile DEV=devcpp
 make -f xlwTemplateMakefile DEV=gcc-make
 
 

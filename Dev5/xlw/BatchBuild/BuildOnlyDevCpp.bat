@@ -1,2 +1,2 @@
 
-make  -f Makefile DEV=devcpp
+REM make  -f Makefile DEV=devcpp
