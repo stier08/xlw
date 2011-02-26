@@ -12,10 +12,10 @@
 	
 	
 	Name "MinGW"
-    OutFile "xlw-MinGW-Installer.exe"
+    OutFile "xlw-MinGW-Installer-gcc-4.5.2-1.exe"
 	
 	
-     InstallDir C:\GNU
+    InstallDir C:\GNU
 
 ; Request application privileges for Windows Vista
     RequestExecutionLevel admin
@@ -28,7 +28,7 @@
 
    	!define MUI_HEADERIMAGE_BITMAP "logo.bmp"
 	!define MUI_WELCOMEFINISHPAGE_BITMAP   "header.bmp"
-	!define MUI_WELCOMEPAGE_TITLE "xlw Installer for MinGW"
+	!define MUI_WELCOMEPAGE_TITLE "xlw Installer for MinGW GCC 4.5.2-1"
 	
 
 
