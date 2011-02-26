@@ -90,8 +90,8 @@
 	   untgz::extract  -d "$INSTDIR\MinGW" "$INSTDIR\Download\$Mirror\${DLFile}"
 !macroend
 
-!macro Download DLFile 
-	 NSISdl::download "http://downloads.sourceforge.net/mingw/${DLFile}?use_mirror=$Mirror" "$INSTDIR\Download\$Mirror\${DLFile}"
+!macro Download DLFile DLDir
+	 NSISdl::download "http://downloads.sourceforge.net/project/mingw/${DLDir}/${DLFile}?use_mirror=$Mirror" "$INSTDIR\Download\$Mirror\${DLFile}"
 	 DetailPrint "Downloading ${DLFile}"
      Pop $R0 ;Get the return value
        StrCmp $R0 "success" +3
@@ -184,25 +184,58 @@ FunctionEnd
 	; CORE_BIN   CORE_DLL MINGW_MAKE   MINGW_RUNTIME MPFR PTHREADS  GMP   W32API     GPP_BIN   GPP_DLL  BINUTILS
 Section 
 	   SetOutPath "$INSTDIR\Download\$Mirror"
-       !insertmacro Download ${CORE_BIN}
-       !insertmacro Download ${CORE_DLL}   
-       !insertmacro Download ${MINGW_MAKE}
-       !insertmacro Download ${MINGW_RUNTIME_DEV}
-	   !insertmacro Download ${MINGW_RUNTIME_DLL}
-       !insertmacro Download ${MPFR}
-       !insertmacro Download ${PTHREADS} 
-       !insertmacro Download ${GMP} 
-       !insertmacro Download ${W32API} 	   
-       !insertmacro Download ${GPP_BIN} 
-       !insertmacro Download ${GPP_DLL} 
-       !insertmacro Download ${BINUTILS} 
-       !insertmacro Download ${LIBICONV_DEV}
-       !insertmacro Download ${LIBICONV_DLL}
-       !insertmacro Download ${LIBICONV_BIN}
-       !insertmacro Download ${MSYS}
-	   !insertmacro Download ${GDB}
+       !insertmacro Download ${CORE_BIN} ${CORE_BIN_DIR} 
+       !insertmacro Download ${CORE_DLL} ${CORE_BIN_DIR}  
+       !insertmacro Download ${GPP_BIN}  ${CORE_BIN_DIR}   
+       !insertmacro Download ${GPP_DLL}  ${CORE_BIN_DIR}      
+       !insertmacro Download ${MINGW_MAKE}  ${MINGW_MAKE_DIR}
+       !insertmacro Download ${MINGW_RUNTIME_DEV}  ${MINGW_RUNTIME_DIR}
+	   !insertmacro Download ${MINGW_RUNTIME_DLL}  ${MINGW_RUNTIME_DIR}
+       !insertmacro Download ${MPFR}  ${MPFR_DIR}
+       !insertmacro Download ${PTHREADS}  ${PTHREADS_DIR} 
+       !insertmacro Download ${GMP}  ${GMP_DIR} 
+       !insertmacro Download ${W32API}  ${W32API_DIR} 	   
+       !insertmacro Download ${BINUTILS}  ${BINUTILS_DIR} 
+       !insertmacro Download ${LIBICONV_DEV} ${LIBICONV_DIR}
+       !insertmacro Download ${LIBICONV_DLL} ${LIBICONV_DIR}
+       !insertmacro Download ${LIBICONV_BIN} ${LIBICONV_DIR}
+
+	   !insertmacro Download ${GDB} ${GDB_DIR}
 	   
-	   	SetOutPath "$INSTDIR\MinGW"
+	   !insertmacro Download ${MSYS} ${MSYS_DIR}
+	   !insertmacro Download ${MSYS_EXT} ${MSYS_DIR}
+	   !insertmacro Download ${BASH} ${BASH_DIR}
+	   !insertmacro Download ${CORE_UTILS} ${CORE_UTILS_DIR}
+	   !insertmacro Download ${CORE_EXT} ${CORE_UTILS_DIR}	   
+	   
+	   !insertmacro Download ${REGEX} ${REGEX_DIR}
+	   !insertmacro Download ${TAR} ${TAR_DIR}	
+	   !insertmacro Download ${TAR_EXT} ${TAR_DIR}	
+	   !insertmacro Download ${GZIP} ${GZIP_DIR}	
+	   !insertmacro Download ${BZIP2} ${BZIP2_DIR}	
+	   
+	   !insertmacro Download ${TERMCAP} ${TERMCAP_DIR}	
+	   !insertmacro Download ${TERMCAP_DLL} ${TERMCAP_DIR}	
+	   
+	   !insertmacro Download ${MINGW_GETTEXT_DLL}   ${MINGW_GETTEXT_DIR}
+	   !insertmacro Download ${MINGW_INTL_DLL}   ${MINGW_GETTEXT_DIR}
+	   !insertmacro Download ${MINGW_ASPRINTF}   ${MINGW_GETTEXT_DIR}
+	   !insertmacro Download ${MINGW_GETTEXT}   ${MINGW_GETTEXT_DIR}
+	   !insertmacro Download ${MINGW_GETTEXT_EXT}   ${MINGW_GETTEXT_DIR}
+	   
+	   !insertmacro Download ${GETTEXT_DLL}   ${GETTEXT_DIR}
+	   !insertmacro Download ${INTL_DLL}   ${GETTEXT_DIR}
+	   !insertmacro Download ${ASPRINTF}   ${GETTEXT_DIR}
+	   !insertmacro Download ${GETTEXT}   ${GETTEXT_DIR}
+	   !insertmacro Download ${GETTEXT_EXT}   ${GETTEXT_DIR}
+	   
+	   !insertmacro Download ${LIBI_MSYS_CONV2}  ${LIBI_MSYS_CONV_DIR} 
+	   !insertmacro Download ${LIBI_MSYS_CHARSET_MSYS}  ${LIBI_MSYS_CONV_DIR}  
+	   !insertmacro Download ${LIBI_MSYS_CONV_BIN}  ${LIBI_MSYS_CONV_DIR} 
+
+       !insertmacro Download ${MPC} ${MPC_DIR} 
+ 	   
+	   SetOutPath "$INSTDIR\MinGW"
 	   !insertmacro Extract ${CORE_BIN}
        !insertmacro Extract ${CORE_DLL}   
        !insertmacro Extract ${MINGW_MAKE}
@@ -220,8 +253,42 @@ Section
        !insertmacro Extract ${LIBICONV_DEV}
 	   !insertmacro Extract ${GDB}
 	   
+	   !insertmacro Extract ${MINGW_GETTEXT_DLL}  
+	   !insertmacro Extract ${MINGW_INTL_DLL}   
+	   !insertmacro Extract ${MINGW_ASPRINTF} 
+	   !insertmacro Extract ${MINGW_GETTEXT}   
+	   !insertmacro Extract ${MINGW_GETTEXT_EXT} 
+
+       !insertmacro Extract ${MPC}	  
+
+		CopyFiles  "$INSTDIR\MinGW\bin\mingw32-make.exe" "$INSTDIR\MinGW\bin\make.exe"
+
+
 	   SetOutPath "$INSTDIR\MSYS"
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${LIBI_MSYS_CONV2}"
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${LIBI_MSYS_CONV2}"
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${LIBI_MSYS_CONV2}"
+	   
        untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${MSYS}"
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${MSYS_EXT}"
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${BASH}"
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${CORE_UTILS}"
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${CORE_EXT}"
+	   
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${REGEX}"
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${TAR}"
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${GZIP}"
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${BZIP2}"
+	   
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${TERMCAP}"
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${TERMCAP_DLL}"
+	   
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${GETTEXT_DLL}"
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${INTL_DLL}"
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${ASPRINTF}"
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${GETTEXT}"
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${GETTEXT_EXT}"	   
+	   
 	   
 	   SetOutPath "$DESKTOP"
 	   CreateShortcut "$DESKTOP\MSYS.lnk" "$INSTDIR\MSYS\msys.bat"  "" "$INSTDIR\MSYS\msys.ico"
