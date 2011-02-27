@@ -1,7 +1,7 @@
 
 
 	;!define DEV_OR_RELEASE "- This is a Beta Release"  ; uncomment on development version
-	!define DEV_OR_RELEASE "- This is a Development Snapshot 27-Feb-2011"                                ; uncomment on release version
+	!define DEV_OR_RELEASE "- This is a Development Snapshot 28-Feb-2011"                                ; uncomment on release version
 	;!define DEV_OR_RELEASE ""                        
 
 ;------------------------------------------------------------------------------------------------------------------------
@@ -58,7 +58,7 @@
 
 	!define MUI_HEADERIMAGE_BITMAP "xlw-site\images\logo.bmp"
 	!define MUI_WELCOMEFINISHPAGE_BITMAP   "xlw-site\images\header.bmp"
-	!define MUI_WELCOMEPAGE_TITLE "Welcome to the installer of xlw 5DEV - 27Feb2011"
+	!define MUI_WELCOMEPAGE_TITLE "Welcome to the installer of xlw 5DEV - 28Feb2011"
 	
 	
 
@@ -420,7 +420,7 @@ Section #
 		File "xlwLICENSE.TXT"
 		
 		SetOutPath "$INSTDIR"
-		File "Doc-${XLW_VERSION}-27Feb2011.TXT"
+		File "Doc-${XLW_VERSION}-28Feb2011.TXT"
 		
 		SetOutPath "$INSTDIR\utils"
 		File "MinGW_Installer\xlw-MinGW-Installer-gcc-4.5.2-1.exe"
@@ -432,7 +432,7 @@ Section #
 		
 		CreateDirectory "$SMPROGRAMS\XLW\${APP_VER}\xlw"
 		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\xlw\Extract XLW xll template.lnk " "$INSTDIR\TemplateExtractors\xlwTemplateExtractor.exe"
-		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\Getting Started.lnk " "$INSTDIR\Doc-${XLW_VERSION}.TXT"
+		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\Getting Started.lnk " "$INSTDIR\Doc-${XLW_VERSION}-28Feb2011.TXT"
 		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\XLW License.lnk " "$INSTDIR\xlwLICENSE.TXT"
 		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\Uninstall XLW.lnk " "$INSTDIR\Uninstall.exe"
 		
@@ -1048,12 +1048,12 @@ Function DevEnvironFinder
 		ReadRegStr $CodeBlocks_INST  HKCU "Software\CodeBlocks\Components"  "MinGW Compiler Suite" 
 		${If} $CodeBlocks_INST != ""
 			${NSD_LB_AddString} $ListBox_right "...... Detected MinGW Compiler Suite for Code::Blocks"
-			${NSD_LB_AddString} $ListBox_right "...... XLW requires MinGW with GCC4.4. Your Code::Blocks"
+			${NSD_LB_AddString} $ListBox_right "...... XLW requires MinGW with GCC4.5.2 Your Code::Blocks"
 			${NSD_LB_AddString} $ListBox_right "...... may have been installed with an older version of GCC."
 			${NSD_LB_AddString} $ListBox_right "...... You should install the required version of MinGW "
             ${NSD_LB_AddString} $ListBox_right "...... and update the settings in your Code::Blocks environment."
 		${Else}
-			${NSD_LB_AddString} $ListBox_right "     - With Code::Blocks, MinGW/GCC 4.4 will be required. You"
+			${NSD_LB_AddString} $ListBox_right "     - With Code::Blocks, MinGW/GCC 4.5.2 will be required. You"
 			${NSD_LB_AddString} $ListBox_right "       will need to install it if not already installed."
 		${EndIf}
 		!insertmacro insertline

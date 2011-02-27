@@ -1,8 +1,8 @@
 
-DEVELOPMENT SNAPSHOT 5DEV-27Feb2011
+DEVELOPMENT SNAPSHOT 5DEV-28Feb2011
 
 
-***************  UPDATED 27 February 2011
+***************  UPDATED 28 February 2011
 
 For the latest documentation and news visit http://xlw.sourceforge.net/
 
@@ -48,6 +48,8 @@ PRE-REQUISITE
    8. Code::Blocks 10.05 (installer WITHOUT MinGW) + MinGW/GCC4.5.2 ( See section on MinGW below) (C::B/MinGW)
    9. MSYS/MinGW/GCC/Make enviroment (GCC/MAKE)
    
+   There is no support for Visual Studio 2002 (7.0).
+   
    C# XLLs
    --------
    
@@ -60,7 +62,7 @@ PRE-REQUISITE
    5. Visual Studio 2008 Express Editions C++ & Visual Studio 2008 Express Editions C#  (VS9_EXPRESS)
    6. Visual Studio 2005 Express Editions C++ & Visual Studio 2005 Express Editions C#  (VS8_EXPRESS)
 
-   There is no support for Visual Studio 2002 & 2003 and none is planned.
+   There is no support for Visual Studio 2002 (7.0) & 2003 (7.1)and none is planned.
    
 
 
