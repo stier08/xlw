@@ -1,7 +1,7 @@
 
 
 	;!define DEV_OR_RELEASE "- This is a Beta Release"  ; uncomment on development version
-	!define DEV_OR_RELEASE "- This is a Development Snapshot 25-Feb-2011"                                ; uncomment on release version
+	!define DEV_OR_RELEASE "- This is a Development Snapshot 27-Feb-2011"                                ; uncomment on release version
 	;!define DEV_OR_RELEASE ""                        
 
 ;------------------------------------------------------------------------------------------------------------------------
@@ -58,7 +58,7 @@
 
 	!define MUI_HEADERIMAGE_BITMAP "xlw-site\images\logo.bmp"
 	!define MUI_WELCOMEFINISHPAGE_BITMAP   "xlw-site\images\header.bmp"
-	!define MUI_WELCOMEPAGE_TITLE "Welcome to the installer of xlw 5DEV - 25Feb2011"
+	!define MUI_WELCOMEPAGE_TITLE "Welcome to the installer of xlw 5DEV - 27Feb2011"
 	
 	
 
@@ -94,7 +94,6 @@
 	 Var VS2005_Saved
 	 Var VS2008_Saved
 	 Var VS2010_Saved
-	 Var DEVCPP_Saved
 	 Var CODEBLOCKS_Saved
 	 Var GCCMAKE_Saved
 	 
@@ -133,7 +132,7 @@
 	
 	Var VS2003PRO_CPP_INST
 	Var CodeBlocks_INST
-	Var DEVCPP_INST
+
 	Var PSDK
 	
 	Var CPP_DETECTED
@@ -353,12 +352,6 @@
 						File  /nonfatal /r "${dir}\gcc-make\*.mak"
 					${EndIf}
 					
-					SectionGetFlags ${DEVCPP} $0 
-					${If} $0 == "1"
-						SetOutPath "$INSTDIR\${dir}\devcpp"
-						File  /nonfatal /r "${dir}\devcpp\*.mak"
-						File  /nonfatal /r "${dir}\devcpp\*.dev"
-					${EndIf}
 			${EndIf}
 			
 			Pop $0
@@ -427,10 +420,10 @@ Section #
 		File "xlwLICENSE.TXT"
 		
 		SetOutPath "$INSTDIR"
-		File "Doc-${XLW_VERSION}.TXT"
+		File "Doc-${XLW_VERSION}-27Feb2011.TXT"
 		
 		SetOutPath "$INSTDIR\utils"
-		File "MinGW_Installer\xlw-MinGW-Installer.exe"
+		File "MinGW_Installer\xlw-MinGW-Installer-gcc-4.5.2-1.exe"
 		
 		
 		!insertmacro xlwDotNetReadMes
@@ -490,15 +483,6 @@ SubSection "xlw" xlw
 			!insertmacro InterfaceGenerator vc10
 		SectionEnd
 		
-		Section "Dev-C++" DEVCPP
-			SetOutPath "$INSTDIR\xlw\lib"
-			File  "xlw\lib\libxlw-devcpp*.a"
-			SetOutPath "$INSTDIR\xlw\lib"
-			File  "xlw\lib\XlOpenClose*.o"
-			SetOutPath "$INSTDIR\xlw\build\devcpp"
-			File /r "xlw\build\devcpp\*.exe"
-		SectionEnd
-		
 		Section "Code::Blocks(mingw)" CODEBLOCKS
 			SetOutPath "$INSTDIR\xlw\lib"
 			File  "xlw\lib\libxlw-gcc*.a"
@@ -554,12 +538,6 @@ SubSection "xlw" xlw
 			!insertmacro buildfiles "vc10"
 			!insertmacro projectfiles "xlw\Template_Projects\vc10"
 			!insertmacro sourcefiles  "xlw\Template_Projects\vc10"
-		SectionEnd
-		
-		Section "Dev-C++" DEVCPP_SRC
-			!insertmacro buildfiles "devcpp"
-			!insertmacro projectfiles "xlw\Template_Projects\devcpp"
-			!insertmacro sourcefiles  "xlw\Template_Projects\devcpp"
 		SectionEnd
 		
 		Section "Code::Blocks(mingw)" CODEBLOCKS_SRC
@@ -766,7 +744,6 @@ LangString DESC_VS2003 ${LANG_ENGLISH} "VS2003  xll C++ build enviroment for Vis
 LangString DESC_VS2005 ${LANG_ENGLISH} "VS2005  xll C++ build enviroment for Visual Studio 2005 (VS8)."
 LangString DESC_VS2008 ${LANG_ENGLISH} "VS2008  xll C++ build enviroment for Visual Studio 2008 (VS9)."
 LangString DESC_VS2010 ${LANG_ENGLISH} "VS2010  xll C++ build enviroment for Visual Studio 2010 (VS10)."
-LangString DESC_DEVCPP ${LANG_ENGLISH} "Dev-C++ xll C++ build enviroment for Dev-C++ for MinGW. The support for Dev-C++ is deprecated and will be discontinued in future versions of XLW. Consider using Code::Blocks."
 LangString DESC_CODEBLOCKS ${LANG_ENGLISH} "Code::Blocks xll C++ build enviroment Code::Blocks ( MinGW only )."
 LangString DESC_GCCMAKE ${LANG_ENGLISH} "gcc/make xll C++ build enviroment with support of GNU-MAKE. This uses makefiles"
 
@@ -778,7 +755,6 @@ LangString DESC_VS2003_SRC ${LANG_ENGLISH} "Source code and Visual Studio 2003 (
 LangString DESC_VS2005_SRC ${LANG_ENGLISH} "Source code and Visual Studio 2005 (VS8) project files for building the xlw libraries & Tools.."
 LangString DESC_VS2008_SRC ${LANG_ENGLISH} "Source code and Visual Studio 2008 (VS9) project files for building the xlw libraries & Tools.."
 LangString DESC_VS2010_SRC ${LANG_ENGLISH} "Source code and Visual Studio 2010 (VS10) project files for building the xlw libraries & Tools.."
-LangString DESC_DEVCPP_SRC ${LANG_ENGLISH} "Source code and Dev-C++ project files forbuilding  the xlw libraries & Tools."
 LangString DESC_CODEBLOCKS_SRC ${LANG_ENGLISH} "Source code and Code::Blocks  project files for building the xlw libraries & Tools."
 LangString DESC_GCCMAKE_SRC ${LANG_ENGLISH} "Source code and and gnu-make makefiles for building the xlw libraries & Tools."
 
@@ -806,7 +782,6 @@ LangString DESC_VS2008DotNet_SRC ${LANG_ENGLISH} "Source code and Visual Studio 
     !insertmacro MUI_DESCRIPTION_TEXT ${VS2005} $(DESC_VS2005)
     !insertmacro MUI_DESCRIPTION_TEXT ${VS2008} $(DESC_VS2008)
 	!insertmacro MUI_DESCRIPTION_TEXT ${VS2010} $(DESC_VS2010)
-    !insertmacro MUI_DESCRIPTION_TEXT ${DEVCPP} $(DESC_DEVCPP)
     !insertmacro MUI_DESCRIPTION_TEXT ${CODEBLOCKS} $(DESC_CODEBLOCKS)
     !insertmacro MUI_DESCRIPTION_TEXT ${GCCMAKE} $(DESC_GCCMAKE)
 	
@@ -819,7 +794,6 @@ LangString DESC_VS2008DotNet_SRC ${LANG_ENGLISH} "Source code and Visual Studio 
     !insertmacro MUI_DESCRIPTION_TEXT ${VS2005_SRC} $(DESC_VS2005_SRC)
     !insertmacro MUI_DESCRIPTION_TEXT ${VS2008_SRC} $(DESC_VS2008_SRC)
 	!insertmacro MUI_DESCRIPTION_TEXT ${VS2010_SRC} $(DESC_VS2010_SRC)
-    !insertmacro MUI_DESCRIPTION_TEXT ${DEVCPP_SRC} $(DESC_DEVCPP_SRC)
     !insertmacro MUI_DESCRIPTION_TEXT ${CODEBLOCKS_SRC} $(DESC_CODEBLOCKS_SRC)
     !insertmacro MUI_DESCRIPTION_TEXT ${GCCMAKE_SRC} $(DESC_GCCMAKE_SRC)
 	
@@ -886,8 +860,6 @@ Function .onSelChange
     StrCmp $0 1 ThereIs1
 	SectionGetFlags ${VS2010} $0 
     StrCmp $0 1 ThereIs1
-	SectionGetFlags ${DEVCPP} $0 
-    StrCmp $0 1 ThereIs1
 	SectionGetFlags ${CODEBLOCKS} $0 
     StrCmp $0 1 ThereIs1
 	SectionGetFlags ${GCCMAKE} $0 
@@ -926,7 +898,6 @@ Function SaveSections
 	SectionGetFlags ${VS2005}  $VS2005_Saved 
 	SectionGetFlags ${VS2008}  $VS2008_Saved 
 	SectionGetFlags ${VS2010}  $VS2010_Saved 
-	SectionGetFlags ${DEVCPP}  $DEVCPP_Saved 
 	SectionGetFlags ${CODEBLOCKS}  $CODEBLOCKS_Saved 
 	SectionGetFlags ${GCCMAKE}  $GCCMAKE_Saved 
 FunctionEnd
@@ -936,8 +907,7 @@ Function ReloadSections
     SectionSetFlags ${VS2003} $VS2003_Saved 
 	SectionSetFlags ${VS2005} $VS2005_Saved 
 	SectionSetFlags ${VS2008} $VS2008_Saved 
-	SectionSetFlags ${VS2010} $VS2010_Saved 	
-	SectionSetFlags ${DEVCPP} $DEVCPP_Saved 
+	SectionSetFlags ${VS2010} $VS2010_Saved 
 	SectionSetFlags ${CODEBLOCKS} $CODEBLOCKS_Saved 
 	SectionSetFlags ${GCCMAKE} $GCCMAKE_Saved 
 FunctionEnd
@@ -1072,16 +1042,6 @@ Function DevEnvironFinder
 	
 	# gcc
 	
-	ReadRegStr $DEVCPP_INST HKLM "Software\Dev-C++" "Install_Dir" 
-	${If} $DEVCPP_INST != ""
-			${NSD_LB_AddString} $ListBox_right "Detected Dev-C++"
-			${NSD_LB_AddString} $ListBox_right "     - Support for Dev-C++ is deprecated and will be discontinued"
-			${NSD_LB_AddString} $ListBox_right "       in the final release of this version. Consider moving to Code::Blocks."
-			${NSD_LB_AddString} $ListBox_right "       If you want to install support for Dev-C++ in this installation"
-			${NSD_LB_AddString} $ListBox_right "       you must check the Dev-C++ check-box manualy on the next page."
-			!insertmacro insertline
-	${EndIf}	
-	
 	ReadRegStr $CodeBlocks_FRMWK  HKCU "Software\CodeBlocks" "Path"  
 	${If} $CodeBlocks_FRMWK != ""
 		${NSD_LB_AddString} $ListBox_right "Detected Code::Blocks"
@@ -1122,8 +1082,7 @@ Function SetUpInfo
 	SectionSetFlags ${VS2003_SRC} 0
 	SectionSetFlags ${VS2005_SRC} 0
 	SectionSetFlags ${VS2008_SRC} 0
-	SectionSetFlags ${VS2010_SRC} 0
-	SectionSetFlags ${DEVCPP_SRC} 0			
+	SectionSetFlags ${VS2010_SRC} 0	
  	SectionSetFlags ${CODEBLOCKS_SRC} 0
 	SectionSetFlags ${GCCMAKE_SRC} 0
 	
@@ -1134,8 +1093,7 @@ Function SetUpInfo
 	SectionSetFlags ${VS2003} 0
 	SectionSetFlags ${VS2005} 0
 	SectionSetFlags ${VS2008} 0
-	SectionSetFlags ${VS2010} 0
-	SectionSetFlags ${DEVCPP} 0			
+	SectionSetFlags ${VS2010} 0	
  	SectionSetFlags ${CODEBLOCKS} 0
 	SectionSetFlags ${GCCMAKE} 0
 	
@@ -1186,12 +1144,7 @@ Function SetUpInfo
 		StrCpy $CPP_DETECTED  "1"
 	${EndIf}
 	
-	${If}  $DEVCPP_INST != ""  
-	;	SectionSetFlags ${DEVCPP} 1
-		StrCpy $CPP_DETECTED  "1"
-	${EndIf}
-	
-	
+
 	SectionSetFlags ${VS2008DotNet} 1
 	SectionSetFlags ${VS2005DotNet} 1
 	SectionSetFlags ${VS2010DotNet} 1

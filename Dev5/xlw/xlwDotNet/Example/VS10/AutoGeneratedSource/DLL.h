@@ -6,12 +6,6 @@
 //<xlw:libraryname=Example
 
 
-CellMatrix //Obtains historial market data from yahoo
-GetHistoricDataFromYahoo(const std::wstring&  symbol, // Yahoo Symbol
-double beginDate, // Begin Date
-double endDate // End Date
-);
-
 std::wstring //tests empty args 
 EmptyArgFunction();
 
@@ -116,6 +110,12 @@ throwCellMatrix(const std::wstring&  err // Just any random string
 
 double //makes the C Runtime throw an exception
 throwCError(const std::wstring&  err // Just any random string 
+);
+
+CellMatrix //Obtains historial market data from yahoo
+GetHistoricDataFromYahoo(const std::wstring&  symbol, // Yahoo Symbol
+double beginDate, // Begin Date
+double endDate // End Date
 );
 
 #endif 

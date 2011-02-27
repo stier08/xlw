@@ -71,7 +71,7 @@ Var VC9
 Var VC8
 Var VC71
 Var CODEBLOCKS
-Var DEVCPP
+
 Var GCC
 
 Var VC10_STATE
@@ -79,7 +79,7 @@ Var VC9_STATE
 Var VC8_STATE
 Var VC71_STATE
 Var CODEBLOCKS_STATE
-Var DEVCPP_STATE
+
 Var GCC_STATE
 
 
@@ -137,7 +137,7 @@ Function RadioChanged
 	${NSD_GetState} $VC8 $VC8_STATE
 	${NSD_GetState} $VC71 $VC71_STATE
 	${NSD_GetState} $CODEBLOCKS $CODEBLOCKS_STATE
-	${NSD_GetState} $DEVCPP $DEVCPP_STATE
+
 	
 	
 FunctionEnd
@@ -191,7 +191,7 @@ Section #
 	!insertmacro GETDIR $VC71_STATE "vc7"
 	!insertmacro GETDIR $GCC_STATE "gcc-make"
 	!insertmacro GETDIR $CODEBLOCKS_STATE "codeblocks-gcc"
-	!insertmacro GETDIR $DEVCPP_STATE "devcpp"	 
+
 SectionEnd 
 
 
