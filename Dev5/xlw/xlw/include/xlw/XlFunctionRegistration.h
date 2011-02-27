@@ -42,7 +42,8 @@ namespace xlw {
                          int NoOfArguments_,
                          bool Volatile_,
                          bool Threadsafe_,
-                         const std::string &ReturnTypeCode_);
+                         const std::string &ReturnTypeCode_,
+						 const std::string &HelpID_);
 
         std::string GetFunctionName() const;
         std::string GetExcelFunctionName() const;
@@ -64,6 +65,7 @@ namespace xlw {
         }
 
         std::string GetReturnTypeCode() const;
+		std::string GetHelpID() const;
     private:
 
         std::string FunctionName;
@@ -77,6 +79,7 @@ namespace xlw {
         bool Volatile;
         bool Threadsafe;
         std::string ReturnTypeCode;
+		std::string helpID;
 
 
     };
@@ -93,7 +96,8 @@ namespace xlw {
                          int NoOfArguments = 0,
                          bool Volatile = false,
                          bool Threadsafe = false,
-                         const std::string &ReturnTypeCode_ = "");
+                         const std::string &ReturnTypeCode_ = "",
+						 const std::string &HelpID = "");
 
     private:
 

@@ -24,6 +24,8 @@
 #include <xlw/xlfFuncDesc.h>
 #include <xlw/xlfArgDescList.h>
 
+#include <stdio.h>
+
 using namespace xlw;
 using namespace XLRegistration;
 
@@ -35,7 +37,8 @@ XLFunctionRegistrationData::XLFunctionRegistrationData(const std::string& Functi
                      int NoOfArguments_,
                      bool Volatile_,
                      bool Threadsafe_,
-                     const std::string& ReturnTypeCode_)
+                     const std::string& ReturnTypeCode_,
+					 const std::string& HelpID_)
     :                FunctionName(FunctionName_),
                      ExcelFunctionName(ExcelFunctionName_),
                      FunctionDescription(FunctionDescription_),
@@ -43,7 +46,8 @@ XLFunctionRegistrationData::XLFunctionRegistrationData(const std::string& Functi
                      NoOfArguments(NoOfArguments_),
                      Volatile(Volatile_),
                      Threadsafe(Threadsafe_),
-                     ReturnTypeCode(ReturnTypeCode_)
+                     ReturnTypeCode(ReturnTypeCode_),
+					 helpID(HelpID_)
 {
 
     ArgumentNames.reserve(NoOfArguments);
@@ -82,6 +86,11 @@ std::string XLFunctionRegistrationData::GetReturnTypeCode() const
         return ReturnTypeCode;
 }
 
+std::string XLFunctionRegistrationData::GetHelpID() const
+{
+	return helpID;
+}
+
 std::string XLFunctionRegistrationData::GetLibrary() const
 {
     return Library;
@@ -115,7 +124,8 @@ XLFunctionRegistrationHelper::XLFunctionRegistrationHelper(const std::string& Fu
                      int NoOfArguments,
                      bool Volatile,
                      bool Threadsafe,
-                     const std::string& returnTypeCode)
+                     const std::string& returnTypeCode,
+					 const std::string& helpID)
 {
     XLFunctionRegistrationData tmp(FunctionName,
                                                                 ExcelFunctionName,
@@ -125,7 +135,8 @@ XLFunctionRegistrationHelper::XLFunctionRegistrationHelper(const std::string& Fu
                                                                 NoOfArguments,
                                                                 Volatile,
                                                                 Threadsafe,
-                                                                returnTypeCode);
+                                                                returnTypeCode,
+																helpID);
 
     ExcelFunctionRegistrationRegistry::Instance().AddFunction(tmp);
 }
@@ -148,7 +159,8 @@ void ExcelFunctionRegistrationRegistry::DoTheRegistrations() const
                                                     it->GetLibrary(),
                                                     policy,
                                                     it->GetThreadsafe(),
-                                                    it->GetReturnTypeCode());
+                                                    it->GetReturnTypeCode(),
+													it->GetHelpID());
         XlfArgDescList xlFunctionArgs;
 
         for (int i=0; i < it->GetNoOfArguments(); ++i)

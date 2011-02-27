@@ -65,7 +65,8 @@ public:
                          const std::vector<FunctionArgument>& Arguments_, 
                          bool Volatile_,
                          bool Time_, 
-                         bool Threadsafe_);
+                         bool Threadsafe_,
+						 std::string helpID_);
      
      std::string GetFunctionName() const;
      std::string GetFunctionDescription() const;
@@ -76,17 +77,18 @@ public:
      bool GetVolatile() const;
      bool DoTime() const;
      bool GetThreadsafe() const;
+	 std::string GetHelpID() const;
             
 private:
      std::string FunctionName;
      std::string FunctionHelpDescription;
      std::string ReturnType;
      std::string ExcelKey;
+	 std::string helpID;
      std::vector<FunctionArgument> Arguments;
      bool Volatile;
      bool Time;
-     bool Threadsafe;
-     
+     bool Threadsafe;     
       
 };
 

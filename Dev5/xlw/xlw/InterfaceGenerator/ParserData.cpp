@@ -97,7 +97,8 @@ FunctionDescription::FunctionDescription(std::string FunctionName_,
                          const std::vector<FunctionArgument>& Arguments_,
                          bool Volatile_,
                          bool Time_,
-                         bool Threadsafe_)
+                         bool Threadsafe_,
+						 std::string helpID_)
                          :
                          FunctionName(FunctionName_),
                          FunctionHelpDescription(FunctionHelpDescription_),
@@ -106,7 +107,8 @@ FunctionDescription::FunctionDescription(std::string FunctionName_,
                          Arguments(Arguments_),
                          Volatile(Volatile_),
                          Time(Time_),
-                         Threadsafe(Threadsafe_)
+                         Threadsafe(Threadsafe_),
+						 helpID(helpID_)
 {
 }
 
@@ -133,4 +135,9 @@ bool FunctionDescription::DoTime() const
 bool FunctionDescription::GetThreadsafe() const
 {
     return  Threadsafe;
+}
+
+std::string FunctionDescription::GetHelpID() const
+{
+	return helpID;
 }

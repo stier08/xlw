@@ -62,8 +62,9 @@ XlfAbstractCmdDesc::XlfAbstractCmdDesc.
 */
 xlw::XlfFuncDesc::XlfFuncDesc(const std::string& name, const std::string& alias,
                          const std::string& comment, const std::string& category,
-                         RecalcPolicy recalcPolicy, bool Threadsafe, const std::string &returnTypeCode)
-    : XlfAbstractCmdDesc(name, alias, comment), impl_(0), returnTypeCode_(returnTypeCode)
+                         RecalcPolicy recalcPolicy, bool Threadsafe, const std::string &returnTypeCode,
+						 const std::string &helpID)
+    : XlfAbstractCmdDesc(name, alias, comment), impl_(0), returnTypeCode_(returnTypeCode), helpID_(helpID)
 {
     impl_ = new XlfFuncDescImpl(recalcPolicy,Threadsafe,category);
 }
@@ -176,8 +177,8 @@ int xlw::XlfFuncDesc::RegisterAs(const std::string& dllName, double mode_, doubl
     (*px++) = XlfOper4(argnames);
     (*px++) = XlfOper4(mode_);
     (*px++) = XlfOper4(impl_->category_);
-    (*px++) = XlfOper4("");
-    (*px++) = XlfOper4("");
+    (*px++) = XlfOper4(""); // shortcut
+    (*px++) = XlfOper4(helpID_); // help context
     (*px++) = XlfOper4(GetComment());
     for (it = arguments.begin(); it != arguments.end(); ++it)
     {

@@ -25,7 +25,7 @@ class FunctionModel
 {
 public:
 
-    FunctionModel(std::string ReturnType_, std::string Name, std::string Description, bool Volatile_=false, bool Time_=false, bool Threadsafe_=false);
+	FunctionModel(std::string ReturnType_, std::string Name, std::string Description, bool Volatile_=false, bool Time_=false, bool Threadsafe_=false, std::string helpID_="");
 
     void AddArgument(std::string Type_, std::string Name_, std::string Description_);
 
@@ -40,6 +40,11 @@ public:
     {    
         return FunctionName;
     }
+
+	std::string GetHelpID() const
+	{
+		return helpID;
+	}
 
     std::string GetFunctionDescription() const
     {
@@ -83,6 +88,7 @@ private:
     std::string ReturnType;
     std::string FunctionName;
     std::string FunctionDescription;
+	std::string helpID;
     bool Volatile;
     bool Time;
     bool Threadsafe;

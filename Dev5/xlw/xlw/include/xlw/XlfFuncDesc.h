@@ -61,7 +61,8 @@ namespace xlw {
         XlfFuncDesc(const std::string& name, const std::string& alias,
                     const std::string& comment, const std::string& category,
                     RecalcPolicy recalcPolicy = NotVolatile, bool Threadsafe = false,
-                    const std::string &returnTypeCode = XlfExcel::Instance().xlfOperType());
+                    const std::string &returnTypeCode = XlfExcel::Instance().xlfOperType(),
+					const std::string &helpID = "");
         //! Dtor.
         ~XlfFuncDesc();
         //@}
@@ -104,6 +105,7 @@ namespace xlw {
         //int index_;
         //! Excel code for the datatype of this function's return value.
         std::string returnTypeCode_;
+		std::string helpID_;
     };
 
 }

@@ -43,6 +43,9 @@ LibraryName,
 MyAddressArgs,
 1
 ,false
+,false
+,""
+
 );
 }
 
@@ -88,6 +91,9 @@ LibraryName,
 MessageInStatusBarArgs,
 1
 ,false
+,false
+,""
+
 );
 }
 
@@ -135,6 +141,9 @@ LibraryName,
 GetPidArgs,
 0
 ,false
+,false
+,""
+
 );
 }
 

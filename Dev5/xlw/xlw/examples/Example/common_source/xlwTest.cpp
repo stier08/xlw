@@ -49,6 +49,9 @@ LibraryName,
 EmptyArgFunctionArgs,
 0
 ,false
+,false
+,""
+
 );
 }
 
@@ -91,6 +94,9 @@ LibraryName,
 EchoShortArgs,
 1
 ,false
+,false
+,""
+
 );
 }
 
@@ -140,6 +146,9 @@ LibraryName,
 EchoMatArgs,
 1
 ,false
+,false
+,""
+
 );
 }
 
@@ -189,6 +198,9 @@ LibraryName,
 EchoMatrixArgs,
 1
 ,false
+,false
+,""
+
 );
 }
 
@@ -236,6 +248,9 @@ LibraryName,
 EchoArrayArgs,
 1
 ,false
+,false
+,""
+
 );
 }
 
@@ -285,6 +300,9 @@ LibraryName,
 EchoCellsArgs,
 1
 ,false
+,false
+,""
+
 );
 }
 
@@ -341,6 +359,9 @@ LibraryName,
 CircArgs,
 1
 ,false
+,false
+,""
+
 );
 }
 
@@ -394,6 +415,9 @@ LibraryName,
 ConcatArgs,
 2
 ,false
+,false
+,""
+
 );
 }
 
@@ -453,6 +477,9 @@ LibraryName,
 StatsArgs,
 1
 ,false
+,false
+,""
+
 );
 }
 
@@ -509,6 +536,9 @@ LibraryName,
 HelloWorldAgainArgs,
 1
 ,false
+,false
+,""
+
 );
 }
 
@@ -565,6 +595,9 @@ LibraryName,
 EchoULArgs,
 1
 ,false
+,false
+,""
+
 );
 }
 
@@ -619,6 +652,9 @@ LibraryName,
 EchoIntArgs,
 1
 ,false
+,false
+,""
+
 );
 }
 
@@ -674,6 +710,9 @@ LibraryName,
 EchoDoubleOrNothingArgs,
 2
 ,false
+,false
+,""
+
 );
 }
 
@@ -735,6 +774,9 @@ LibraryName,
 EchoArgListArgs,
 1
 ,false
+,false
+,""
+
 );
 }
 
@@ -793,6 +835,9 @@ LibraryName,
 SystemTimeArgs,
 1
 ,true
+,false
+,""
+
 );
 }
 
@@ -852,6 +897,9 @@ LibraryName,
 PayOffEvaluationArgs,
 2
 ,false
+,false
+,""
+
 );
 }
 
@@ -915,6 +963,9 @@ LibraryName,
 ContainsErrorArgs,
 1
 ,false
+,false
+,""
+
 );
 }
 
@@ -964,6 +1015,9 @@ LibraryName,
 ContainsDivByZeroArgs,
 1
 ,false
+,false
+,""
+
 );
 }
 
@@ -1014,6 +1068,8 @@ GetThreadIdArgs,
 0
 ,false
 ,true
+,""
+
 );
 }
 
@@ -1056,6 +1112,9 @@ LibraryName,
 typeStringArgs,
 1
 ,false
+,false
+,""
+
 );
 }
 
@@ -1110,6 +1169,9 @@ LibraryName,
 typeString2Args,
 1
 ,false
+,false
+,""
+
 );
 }
 
