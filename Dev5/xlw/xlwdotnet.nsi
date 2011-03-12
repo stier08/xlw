@@ -1,7 +1,7 @@
 
 
 	;!define DEV_OR_RELEASE "- This is a Beta Release"  ; uncomment on development version
-	!define DEV_OR_RELEASE "- This is a Development Snapshot 28-Feb-2011"                                ; uncomment on release version
+	!define DEV_OR_RELEASE "- This is a Development Snapshot 12-Mar-2011"                                ; uncomment on release version
 	;!define DEV_OR_RELEASE ""                        
 
 ;------------------------------------------------------------------------------------------------------------------------
@@ -58,7 +58,7 @@
 
 	!define MUI_HEADERIMAGE_BITMAP "xlw-site\images\logo.bmp"
 	!define MUI_WELCOMEFINISHPAGE_BITMAP   "xlw-site\images\header.bmp"
-	!define MUI_WELCOMEPAGE_TITLE "Welcome to the installer of xlw 5DEV - 28Feb2011"
+	!define MUI_WELCOMEPAGE_TITLE "Welcome to the installer of xlw 5DEV - 12Mar2011"
 	
 	
 
@@ -313,6 +313,10 @@
 			File  /nonfatal /r "${dir}\common_source\*.cpp"
 			File  /nonfatal /r "${dir}\common_source\*.h"
 			
+			SetOutPath "$INSTDIR\${dir}\Objects"
+			File  /nonfatal /r "${dir}\Objects\*.cpp"
+			File  /nonfatal /r "${dir}\Objects\*.h"
+			
 			
 			
 			SectionGetFlags ${VS2003} $0 
@@ -420,7 +424,7 @@ Section #
 		File "xlwLICENSE.TXT"
 		
 		SetOutPath "$INSTDIR"
-		File "Doc-${XLW_VERSION}-28Feb2011.TXT"
+		File "Doc-${XLW_VERSION}-12Mar2011.TXT"
 		
 		SetOutPath "$INSTDIR\utils"
 		File "MinGW_Installer\xlw-MinGW-Installer-gcc-4.5.2-1.exe"
@@ -432,7 +436,7 @@ Section #
 		
 		CreateDirectory "$SMPROGRAMS\XLW\${APP_VER}\xlw"
 		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\xlw\Extract XLW xll template.lnk " "$INSTDIR\TemplateExtractors\xlwTemplateExtractor.exe"
-		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\Getting Started.lnk " "$INSTDIR\Doc-${XLW_VERSION}-28Feb2011.TXT"
+		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\Getting Started.lnk " "$INSTDIR\Doc-${XLW_VERSION}-12Mar2011.TXT"
 		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\XLW License.lnk " "$INSTDIR\xlwLICENSE.TXT"
 		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\Uninstall XLW.lnk " "$INSTDIR\Uninstall.exe"
 		
@@ -504,6 +508,7 @@ SubSection "xlw" xlw
 	Section "Examples" xlwExamples
 	
 		!insertmacro doExample "xlw\examples\Example" 1
+		!insertmacro doExample "xlw\examples\ObjectCacheDemo" 1
 		!insertmacro doExample "xlw\examples\Handwritten" 0
 		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\xlw\Examples.lnk " "$INSTDIR\xlw\Examples"
 	SectionEnd

@@ -43,6 +43,9 @@ LibraryName,
 CreateObjectArgs,
 1
 ,false
+,false
+,""
+
 );
 }
 
@@ -92,6 +95,9 @@ LibraryName,
 RetrieveObjectArgs,
 1
 ,false
+,false
+,""
+
 );
 }
 
@@ -142,6 +148,9 @@ LibraryName,
 CreateDiscountCurveArgs,
 2
 ,false
+,false
+,""
+
 );
 }
 
@@ -198,6 +207,9 @@ LibraryName,
 RetrieveDiscountCurveArgs,
 1
 ,false
+,false
+,""
+
 );
 }
 
@@ -248,6 +260,9 @@ LibraryName,
 DiscountArgs,
 2
 ,false
+,false
+,""
+
 );
 }
 

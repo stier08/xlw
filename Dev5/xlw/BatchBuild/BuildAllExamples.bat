@@ -16,3 +16,11 @@ make -f ExampleMakefile DEV=gcc-make
 "C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\msbuild.exe" /p:Configuration=Release /t:rebuild  ..\xlw\examples\Handwritten\vc10\ExampleHandWritten.sln  >> ExampleHandWritten10_Release.log 2>&1 
 "C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\msbuild.exe" /p:Configuration=Debug /t:rebuild  ..\xlw\examples\Handwritten\vc10\ExampleHandWritten.sln  >> ExampleHandWritten10_Debug.log 2>&1 
 
+
+"C:\Program Files\Microsoft Visual Studio .NET 2003\Common7\IDE\devenv.exe"   ..\xlw\examples\ObjectCacheDemo\vc7\ObjectCacheDemo.sln  /rebuild Debug    /out ObjectCacheDemo7Debug.log
+"C:\Program Files\Microsoft Visual Studio .NET 2003\Common7\IDE\devenv.exe"   ..\xlw\examples\ObjectCacheDemo\vc7\ObjectCacheDemo.sln  /rebuild Release  /out ObjectCacheDemo7Release.log
+"C:\Program Files\Microsoft Visual Studio 8\VC\vcpackages\vcbuild.exe" /rebuild    ..\xlw\examples\ObjectCacheDemo\vc8\ObjectCacheDemo.sln  >> ObjectCacheDemo8.log 2>&1 
+"C:\Program Files\Microsoft Visual Studio 9.0\VC\vcpackages\vcbuild.exe" /rebuild  ..\xlw\examples\ObjectCacheDemo\vc9\ObjectCacheDemo.sln  >> ObjectCacheDemo9.log 2>&1 
+"C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\msbuild.exe" /p:Configuration=Release /t:rebuild  ..\xlw\examples\ObjectCacheDemo\vc10\ObjectCacheDemo.sln  >> ObjectCacheDemo10_Release.log 2>&1 
+"C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\msbuild.exe" /p:Configuration=Debug /t:rebuild  ..\xlw\examples\ObjectCacheDemo\vc10\ObjectCacheDemo.sln  >> ObjectCacheDemo10_Debug.log 2>&1 
+
