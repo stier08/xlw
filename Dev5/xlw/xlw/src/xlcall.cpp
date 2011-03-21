@@ -52,13 +52,6 @@ void FetchExcel12EntryPt(void)
 
 int _cdecl Excel12(int xlfn, LPXLOPER12 operRes, int count, ...)
 {
-
-#ifdef _WIN64
-
-    return(xlretFailed);
-
-#else
-
     LPXLOPER12 rgxloper12[cxloper12Max];
     va_list ap;
     int ioper;
@@ -84,18 +77,10 @@ int _cdecl Excel12(int xlfn, LPXLOPER12 operRes, int count, ...)
         }
     }
     return(mdRet);
-
-#endif
 }
 
 int pascal Excel12v(int xlfn, LPXLOPER12 operRes, int count, LPXLOPER12 opers[])
 {
-#ifdef _WIN64
-
-    return(xlretFailed);
-
-#else
-
     int mdRet;
 
     FetchExcel12EntryPt();
@@ -108,6 +93,4 @@ int pascal Excel12v(int xlfn, LPXLOPER12 operRes, int count, LPXLOPER12 opers[])
         mdRet = (pexcel12)(xlfn, count, &opers[0], operRes);
     }
     return(mdRet);
-
-#endif
 }
