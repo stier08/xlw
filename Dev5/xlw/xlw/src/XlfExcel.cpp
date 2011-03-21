@@ -138,7 +138,7 @@ bool set_excel12() {
     Excel4_(xlfGetWorkspace, &xRet1, 1, &xTemp1);
     Excel4_(xlCoerce, &xRet2, 2, &xRet1, &xTemp2);
     Excel4_(xlFree, 0, 1, &xRet1);
-    return (xRet2.val.w == 12);
+    return (xRet2.val.w >= 12);
 }
 
 /*!
