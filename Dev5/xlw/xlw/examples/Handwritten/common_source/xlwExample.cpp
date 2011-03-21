@@ -22,8 +22,13 @@
 #include <vector>
 
 // Force export of functions implemented in XlOpenClose.h and required by Excel
+#ifndef _WIN64
 #pragma comment (linker, "/export:_xlAutoOpen")
 #pragma comment (linker, "/export:_xlAutoClose")
+#else
+#pragma comment (linker, "/export:xlAutoOpen")
+#pragma comment (linker, "/export:xlAutoClose")
+#endif
 
 using namespace xlw;
 
@@ -31,6 +36,7 @@ extern "C" {
 
     LPXLFOPER EXCEL_EXPORT xlCirc(XlfOper xlDiam) {
         EXCEL_BEGIN;
+        AdjustIncomingXlfOper(xlDiam);
         // Converts d to a double.
         double ret = xlDiam.AsDouble();
         // Multiplies it.
@@ -42,6 +48,9 @@ extern "C" {
 
     LPXLFOPER EXCEL_EXPORT xlConcat(XlfOper xlStr1, XlfOper xlStr2) {
         EXCEL_BEGIN;
+
+        AdjustIncomingXlfOper(xlStr1);
+        AdjustIncomingXlfOper(xlStr2);
         // Converts the 2 strings.
         std::wstring str1 = xlStr1.AsWstring();
         std::wstring str2 = xlStr2.AsWstring();
@@ -53,6 +62,8 @@ extern "C" {
 
     LPXLOPER EXCEL_EXPORT xlConcat4(XlfOper4 xlStr1, XlfOper4 xlStr2) {
         EXCEL_BEGIN;
+        AdjustIncomingXlfOper(xlStr1);
+        AdjustIncomingXlfOper(xlStr2);
         // Converts the 2 strings.
         std::string str1 = xlStr1.AsString();
         std::string str2 = xlStr2.AsString();
@@ -64,6 +75,8 @@ extern "C" {
 
     LPXLOPER12 EXCEL_EXPORT xlConcat12(XlfOper12 xlStr1, XlfOper12 xlStr2) {
         EXCEL_BEGIN;
+        AdjustIncomingXlfOper(xlStr1);
+        AdjustIncomingXlfOper(xlStr2);
         // Converts the 2 strings.
         std::wstring str1 = xlStr1.AsWstring();
         std::wstring str2 = xlStr2.AsWstring();
@@ -75,6 +88,7 @@ extern "C" {
 
     LPXLFOPER EXCEL_EXPORT xlStats(XlfOper xlTargetRange) {
         EXCEL_BEGIN;
+        AdjustIncomingXlfOper(xlTargetRange);
 
         // Temporary variables.
         double averageTmp = 0.0;
