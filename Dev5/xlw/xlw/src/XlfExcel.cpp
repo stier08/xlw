@@ -190,18 +190,31 @@ int __cdecl xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, int count, ...) co
 int cdecl xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, int count, ...) const
 #endif
 {
+    va_list vargs;
+    va_start(vargs, count);
+    int ret;
     if (excel12_)
-        return Call12v(xlfn, (LPXLOPER12)pxResult, count, (LPXLOPER12 *)(&count + 1));
+        ret = Call12v(xlfn, (LPXLOPER12)pxResult, count, &va_arg(vargs, LPXLOPER12));
     else
-        return Call4v(xlfn, (LPXLOPER)pxResult, count, (LPXLOPER *)(&count + 1));
+        ret = Call4v(xlfn, (LPXLOPER)pxResult, count, &va_arg(vargs, LPXLOPER));
+    va_end(vargs);
+    return ret;
 }
 
 int __cdecl xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult, int count, ...) const {
-    return Call4v(xlfn, pxResult, count, (LPXLOPER *)(&count + 1));
+    va_list vargs;
+    va_start(vargs, count);
+    int ret = Call4v(xlfn, pxResult, count, &va_arg(vargs, LPXLOPER));
+    va_end(vargs);
+    return ret;
 }
 
 int __cdecl xlw::XlfExcel::Call12(int xlfn, LPXLOPER12 pxResult, int count, ...) const {
-    return Call12v(xlfn, pxResult, count, (LPXLOPER12 *)(&count + 1));
+    va_list vargs;
+    va_start(vargs, count);
+    int ret = Call12v(xlfn, pxResult, count, &va_arg(vargs, LPXLOPER12));
+    va_end(vargs);
+    return ret;
 }
 
 /*!
