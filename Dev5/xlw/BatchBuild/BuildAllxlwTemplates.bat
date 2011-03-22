@@ -1,4 +1,4 @@
-"C:\Python26\python.exe" prepareTemplateProject.py
+"C:\Python27\python.exe" prepareTemplateProject.py
 
 REM make -f xlwTemplateMakefile DEV=devcpp
 make -f xlwTemplateMakefile DEV=gcc-make

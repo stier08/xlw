@@ -1,4 +1,4 @@
-"C:\Python26\python.exe" prepareDotNetTemplateProject.py
+"C:\Python27\python.exe" prepareDotNetTemplateProject.py
 
 REM Debug
 
