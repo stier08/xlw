@@ -793,7 +793,7 @@ int xlw::XlfOper12::ConvertToWstring(std::wstring &w) const throw()
     if (lpxloper_->xltype & xltypeStr)
     {
         size_t n = lpxloper_->val.str[0];
-        wchar_t *s = reinterpret_cast<wchar_t*>(XlfExcel::Instance().GetMemory(n*2+1));
+        wchar_t *s = reinterpret_cast<wchar_t*>(XlfExcel::Instance().GetMemory((n+1) * sizeof(wchar_t)));
         memcpy(s, lpxloper_->val.str + 1, n*2);
         s[n] = 0;
         w = std::wstring(s);
@@ -1010,10 +1010,20 @@ xlw::XlfOper12& xlw::XlfOper12::Set(const char *value)
     if (lpxloper_)
     {
         size_t len = strlen(value);
-        lpxloper_->val.str = (XCHAR*)XlfExcel::Instance().GetMemory(len*2+2);
+
+        if (len > 32766) {
+            std::cerr << XLW__HERE__ << "String truncated to 32766 bytes" << std::endl;
+            len = 32766;
+        }
+
+        // One byte more for the string length (convention used by Excel)
+        // and another so that the string is null terminated so that the 
+        // debugger sees it correctly
+        lpxloper_->val.str = (XCHAR*)XlfExcel::Instance().GetMemory((len+2)*sizeof(XCHAR));
         if (lpxloper_->val.str) {
             lpxloper_->xltype = xltypeStr;
-            mbstowcs(lpxloper_->val.str + 1, value, len*2);
+            mbstowcs(lpxloper_->val.str + 1, value, len);
+            lpxloper_->val.str[len + 1] = 0;
             lpxloper_->val.str[0] = static_cast<XCHAR>(len);
         } else {
             lpxloper_ = 0;
@@ -1026,10 +1036,24 @@ xlw::XlfOper12& xlw::XlfOper12::Set(const std::wstring &value)
 {
     if (lpxloper_)
     {
-        lpxloper_->xltype = xltypeStr;
-        lpxloper_->val.str = (XCHAR*)XlfExcel::Instance().GetMemory(value.length()*2+2);
-        wcsncpy(lpxloper_->val.str + 1, value.c_str(), value.length());
-        lpxloper_->val.str[0] = static_cast<XCHAR>(value.length());
+        size_t len = value.length();
+
+        if (len > 32766) {
+            std::cerr << XLW__HERE__ << "String truncated to 32766 bytes" << std::endl;
+            len = 32766;
+        }
+        // One byte more for the string length (convention used by Excel)
+        // and another so that the string is null terminated so that the 
+        // debugger sees it correctly
+        lpxloper_->val.str = (XCHAR*)XlfExcel::Instance().GetMemory((len+2)*sizeof(XCHAR));
+        if (lpxloper_->val.str) {
+            lpxloper_->xltype = xltypeStr;
+            wcsncpy(lpxloper_->val.str + 1, value.c_str(), len);
+            lpxloper_->val.str[len + 1] = 0;
+            lpxloper_->val.str[0] = static_cast<XCHAR>(len);
+        } else {
+            lpxloper_ = 0;
+        }
     }
     return *this;
 }

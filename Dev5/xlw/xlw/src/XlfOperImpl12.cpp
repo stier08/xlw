@@ -596,7 +596,7 @@ int xlw::XlfOperImpl12::ConvertToWstring(const XlfOper &xlfOper, std::wstring &s
     if (xlfOper.lpxloper12_->xltype & xltypeStr)
     {
         size_t n = xlfOper.lpxloper12_->val.str[0];
-        wchar_t *w = reinterpret_cast<wchar_t*>(XlfExcel::Instance().GetMemory(n*2+1));
+        wchar_t *w = reinterpret_cast<wchar_t*>(XlfExcel::Instance().GetMemory((n+1) *sizeof(wchar_t)));
         memcpy(w, xlfOper.lpxloper12_->val.str + 1, n*2);
         w[n]=0;
         s = std::wstring(w);
@@ -775,10 +775,20 @@ xlw::XlfOper& xlw::XlfOperImpl12::Set(XlfOper &xlfOper, const char *value) const
     if (xlfOper.lpxloper12_)
     {
         size_t len = strlen(value);
-        xlfOper.lpxloper12_->val.str = (XCHAR*)XlfExcel::Instance().GetMemory(len*2+2);
+
+        if (len > 32766) {
+            std::cerr << XLW__HERE__ << "String truncated to 32766 bytes" << std::endl;
+            len = 32766;
+        }
+
+        // One byte more for the string length (convention used by Excel)
+        // and another so that the string is null terminated so that the 
+        // debugger sees it correctly
+        xlfOper.lpxloper12_->val.str = (XCHAR*)XlfExcel::Instance().GetMemory((len+2)*sizeof(XCHAR));
         if (xlfOper.lpxloper12_->val.str) {
             xlfOper.lpxloper12_->xltype = xltypeStr;
-            mbstowcs(xlfOper.lpxloper12_->val.str + 1, value, len*2);
+            mbstowcs(xlfOper.lpxloper12_->val.str + 1, value, len);
+            xlfOper.lpxloper12_->val.str[len + 1] = 0;
             xlfOper.lpxloper12_->val.str[0] = static_cast<XCHAR>(len);
         } else {
             xlfOper.lpxloper12_ = 0;
@@ -789,12 +799,25 @@ xlw::XlfOper& xlw::XlfOperImpl12::Set(XlfOper &xlfOper, const char *value) const
 
 xlw::XlfOper& xlw::XlfOperImpl12::Set(XlfOper &xlfOper, const std::wstring &value) const
 {
-    if (xlfOper.lpxloper12_)
-    {
-        xlfOper.lpxloper12_->xltype = xltypeStr;
-        xlfOper.lpxloper12_->val.str = (XCHAR*)XlfExcel::Instance().GetMemory(value.length()*2+2);
-        wcsncpy(xlfOper.lpxloper12_->val.str + 1, value.c_str(), value.length());
-        xlfOper.lpxloper12_->val.str[0] = static_cast<XCHAR>(value.length());
+    if (xlfOper.lpxloper12_) {
+        size_t len = value.length();
+
+        if (len > 32766) {
+            std::cerr << XLW__HERE__ << "String truncated to 32766 bytes" << std::endl;
+            len = 32766;
+        }
+        // One byte more for the string length (convention used by Excel)
+        // and another so that the string is null terminated so that the 
+        // debugger sees it correctly
+        xlfOper.lpxloper12_->val.str = (XCHAR*)XlfExcel::Instance().GetMemory((len+2)*sizeof(XCHAR));
+        if (xlfOper.lpxloper12_->val.str) {
+            xlfOper.lpxloper12_->xltype = xltypeStr;
+            wcsncpy(xlfOper.lpxloper12_->val.str + 1, value.c_str(), len);
+            xlfOper.lpxloper12_->val.str[len + 1] = 0;
+            xlfOper.lpxloper12_->val.str[0] = static_cast<XCHAR>(len);
+        } else {
+            xlfOper.lpxloper12_ = 0;
+        }
     }
     return xlfOper;
 }

@@ -962,7 +962,7 @@ xlw::XlfOper4& xlw::XlfOper4::Set(const char *value)
 {
     if (lpxloper_)
     {
-        unsigned int n = static_cast<unsigned int>(strlen(value));
+        size_t n(strlen(value));
         if (n > 254)
         {
             std::cerr << XLW__HERE__ << "String truncated to 254 bytes" << std::endl;
@@ -981,7 +981,7 @@ xlw::XlfOper4& xlw::XlfOper4::Set(const char *value)
             str[n + 1] = 0;
 
             lpxloper_->val.str = str;
-            lpxloper_->val.str[0] = (BYTE)(n + 1);
+            lpxloper_->val.str[0] = static_cast<BYTE>(n);
             lpxloper_->xltype = xltypeStr;
         }
     }

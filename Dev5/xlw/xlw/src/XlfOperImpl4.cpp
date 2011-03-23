@@ -600,8 +600,8 @@ int xlw::XlfOperImpl4::ConvertToWstring(const XlfOper &xlfOper, std::wstring &s)
     if (xlfOper.lpxloper4_->xltype & xltypeStr)
     {
         size_t n = (unsigned char) xlfOper.lpxloper4_->val.str[0];
-        wchar_t *c = reinterpret_cast<wchar_t*>(XlfExcel::Instance().GetMemory(n*2+2));
-        mbstowcs(c, xlfOper.lpxloper4_->val.str + 1, n*2);
+        wchar_t *c = reinterpret_cast<wchar_t*>(XlfExcel::Instance().GetMemory((n+1) * sizeof(wchar_t)));
+        mbstowcs(c, xlfOper.lpxloper4_->val.str + 1, n);
         c[n]=0;
         s = std::wstring(c);
         xlret = xlretSuccess;
@@ -775,7 +775,7 @@ xlw::XlfOper& xlw::XlfOperImpl4::Set(XlfOper &xlfOper, const char *value) const
 {
     if (xlfOper.lpxloper4_)
     {
-        unsigned int n = static_cast<unsigned int>(strlen(value));
+        size_t n(strlen(value));
 
         if (n > 254)
         {
@@ -783,7 +783,8 @@ xlw::XlfOper& xlw::XlfOperImpl4::Set(XlfOper &xlfOper, const char *value) const
             n = 254;
         }
         // One byte more for the string length (convention used by Excel)
-        // and one for the NULL terminal char (allow use of strcpy)
+        // and another so that the string is null terminated so that the 
+        // debugger sees it correctly
         LPSTR str = reinterpret_cast<LPSTR>(XlfExcel::Instance().GetMemory(n + 2));
         if (str == 0)
         {
@@ -795,7 +796,7 @@ xlw::XlfOper& xlw::XlfOperImpl4::Set(XlfOper &xlfOper, const char *value) const
             str[n + 1] = 0;
 
             xlfOper.lpxloper4_->val.str = str;
-            xlfOper.lpxloper4_->val.str[0] = (BYTE)(n + 1);
+            xlfOper.lpxloper4_->val.str[0] = static_cast<BYTE>(n);
             xlfOper.lpxloper4_->xltype = xltypeStr;
         }
     }
@@ -807,17 +808,17 @@ xlw::XlfOper& xlw::XlfOperImpl4::Set(XlfOper &xlfOper, const std::wstring &value
     if (xlfOper.lpxloper4_)
     {
 
-        size_t n;
-        if (value.length() > 255)
+        size_t n(value.length());
+        if (n > 254)
         {
-            std::cerr << XLW__HERE__ << "String truncated to 255 bytes" << std::endl;
-            n = 255;
-        } else {
-            n = value.length();
+            std::cerr << XLW__HERE__ << "String truncated to 254 bytes" << std::endl;
+            n = 254;
         }
 
         // One byte more for the string length (convention used by Excel)
-        LPSTR str = reinterpret_cast<LPSTR>(XlfExcel::Instance().GetMemory(n + 1));
+        // and another so that the string is null terminated so that the 
+        // debugger sees it correctly
+        LPSTR str = reinterpret_cast<LPSTR>(XlfExcel::Instance().GetMemory((n + 2)));
         if (str == 0)
         {
             xlfOper.lpxloper4_=0;
@@ -825,8 +826,9 @@ xlw::XlfOper& xlw::XlfOperImpl4::Set(XlfOper &xlfOper, const std::wstring &value
         else
         {
             wcstombs(str + 1, value.c_str(), n);
+            str[n + 1] = 0;
             xlfOper.lpxloper4_->val.str = str;
-            xlfOper.lpxloper4_->val.str[0] = (BYTE)(n);
+            xlfOper.lpxloper4_->val.str[0] = static_cast<BYTE>(n);
             xlfOper.lpxloper4_->xltype = xltypeStr;
         }
     }
