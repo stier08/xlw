@@ -6,6 +6,7 @@ python CleanAll.py
 REM BUILD THE LIBRRIES
 
 REM CALL BuildOnlyDevCpp.bat 
+CALL BuildOnlyCodeBlocks.bat 
 CALL BuildOnlyGCCMake.bat 
 CALL BuildOnlyVS7.bat 
 CALL BuildOnlyVS8.bat 

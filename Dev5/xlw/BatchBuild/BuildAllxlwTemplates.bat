@@ -3,8 +3,8 @@
 REM make -f xlwTemplateMakefile DEV=devcpp
 make -f xlwTemplateMakefile DEV=gcc-make
 
-
-
+"C:\Program Files (x86)\CodeBlocks\codeblocks.exe" --rebuild  --target="Debug" "C:\TEMP\xlwTemplate Projects\codeblocks-gcc\Template.workspace"  >> xlwTemplateCodeBlocksDebug.log 2>&1 
+"C:\Program Files (x86)\CodeBlocks\codeblocks.exe" --rebuild  --target="Release" "C:\TEMP\xlwTemplate Projects\codeblocks-gcc\Template.workspace"  >> xlwTemplateCodeBlocksRelease.log 2>&1 
 "C:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Common7\IDE\devenv.exe"   "C:\TEMP\xlwTemplate Projects\vc7\Template.sln"  /rebuild Debug    /out xlwTemplate7Debug.log
 "C:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Common7\IDE\devenv.exe"   "C:\TEMP\xlwTemplate Projects\vc7\Template.sln"  /rebuild Release  /out xlwTemplate7Release.log
 "C:\Program Files (x86)\Microsoft Visual Studio 8\VC\vcpackages\vcbuild.exe" /rebuild    "C:\TEMP\xlwTemplate Projects\vc8\Template.sln"  >> xlwTemplate8.log 2>&1 
