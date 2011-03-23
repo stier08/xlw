@@ -386,31 +386,6 @@ namespace xlw {
     };
 }
 
-    //! Hack incoming xlfOpers as required on x64
-    /*!
-    On x64 build the trick of pretending a LPXLOPER can
-    be replaced by an XlfOper doesn't work.
-    What happens on x64 is the caling convention automatically
-    deferences the incoming class, the following hack undoes this
-    to get back to the correct data. 
-    There is probbaly a better way of doing this.
-    Using XLOPER12 always for both XLOPER and XLOPER12 looks
-    scary but should be Ok as the alignment and paging should
-    mean that the first memcpy shouldn't ever stray across a page.
-    */
-#ifdef _WIN64
-    #define AdjustIncomingXlfOper(XLF_OPER) \
-    { \
-        LPXLOPER12 real_lp_oper = (LPXLOPER12)&XLF_OPER; \
-        LPXLOPER12 pxlfOper = (LPXLOPER12)alloca(sizeof(XLOPER12)); \
-        memcpy(pxlfOper, real_lp_oper, sizeof(XLOPER12)); \
-        memcpy(&XLF_OPER, &pxlfOper, sizeof(LPXLOPER12)); \
-    }
-#else
-    #define AdjustIncomingXlfOper(xlfOper)
-#endif
-
-
 #ifdef NDEBUG
 #include <xlw/XlfOper.inl>
 #endif

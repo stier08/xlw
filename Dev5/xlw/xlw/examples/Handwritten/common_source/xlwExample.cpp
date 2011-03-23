@@ -35,9 +35,10 @@ using namespace xlw;
 
 extern "C" {
 
-    LPXLFOPER EXCEL_EXPORT xlCirc(XlfOper xlDiam) {
+    LPXLFOPER EXCEL_EXPORT xlCirc(LPXLFOPER inDiam) {
         EXCEL_BEGIN;
-        AdjustIncomingXlfOper(xlDiam);
+        XlfOper xlDiam(inDiam);
+
         // Converts d to a double.
         double ret = xlDiam.AsDouble();
         // Multiplies it.
@@ -47,11 +48,11 @@ extern "C" {
         EXCEL_END;
     }
 
-    LPXLFOPER EXCEL_EXPORT xlConcat(XlfOper xlStr1, XlfOper xlStr2) {
+    LPXLFOPER EXCEL_EXPORT xlConcat(LPXLFOPER inStr1, LPXLFOPER inStr2) {
         EXCEL_BEGIN;
+        XlfOper xlStr1(inStr1);
+        XlfOper xlStr2(inStr2);
 
-        AdjustIncomingXlfOper(xlStr1);
-        AdjustIncomingXlfOper(xlStr2);
         // Converts the 2 strings.
         std::wstring str1 = xlStr1.AsWstring();
         std::wstring str2 = xlStr2.AsWstring();
@@ -61,10 +62,11 @@ extern "C" {
         EXCEL_END;
     }
 
-    LPXLOPER EXCEL_EXPORT xlConcat4(XlfOper4 xlStr1, XlfOper4 xlStr2) {
+    LPXLOPER EXCEL_EXPORT xlConcat4(LPXLOPER inStr1, LPXLOPER inStr2) {
         EXCEL_BEGIN;
-        AdjustIncomingXlfOper(xlStr1);
-        AdjustIncomingXlfOper(xlStr2);
+        XlfOper4 xlStr1(inStr1);
+        XlfOper4 xlStr2(inStr2);
+
         // Converts the 2 strings.
         std::string str1 = xlStr1.AsString();
         std::string str2 = xlStr2.AsString();
@@ -74,10 +76,11 @@ extern "C" {
         EXCEL_END_4;
     }
 
-    LPXLOPER12 EXCEL_EXPORT xlConcat12(XlfOper12 xlStr1, XlfOper12 xlStr2) {
+    LPXLOPER12 EXCEL_EXPORT xlConcat12(LPXLOPER12 inStr1, LPXLOPER12 inStr2) {
         EXCEL_BEGIN;
-        AdjustIncomingXlfOper(xlStr1);
-        AdjustIncomingXlfOper(xlStr2);
+        XlfOper12 xlStr1(inStr1);
+        XlfOper12 xlStr2(inStr2);
+
         // Converts the 2 strings.
         std::wstring str1 = xlStr1.AsWstring();
         std::wstring str2 = xlStr2.AsWstring();
@@ -87,9 +90,9 @@ extern "C" {
         EXCEL_END_12;
     }
 
-    LPXLFOPER EXCEL_EXPORT xlStats(XlfOper xlTargetRange) {
+    LPXLFOPER EXCEL_EXPORT xlStats(LPXLFOPER inTargetRange) {
         EXCEL_BEGIN;
-        AdjustIncomingXlfOper(xlTargetRange);
+        XlfOper xlTargetRange(inTargetRange);
 
         // Temporary variables.
         double averageTmp = 0.0;
