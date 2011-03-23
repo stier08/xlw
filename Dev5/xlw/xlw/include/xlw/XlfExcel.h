@@ -109,8 +109,12 @@ namespace xlw {
 
         //! \name Information about the running version of Excel
         //@{
-        //! Boolean differentiating Excel 12 (2007) from previous versions
-        bool excel12() const { return excel12_; }
+        //! Boolean differentiating Excel 12 (2007) and above from previous versions
+        bool excel12() const { return (excelVersion_ >= 12); }
+        //! Boolean differentiating Excel 14 (2010) from previous versions
+        bool excel14() const { return (excelVersion_ >= 14); }
+        //! Returns Excel version number e.g. 12 is 2007
+        int excelVersion() const { return excelVersion_; }
         //! The OPER type in use by this version of Excel
         std::string xlfOperType() const { return xlfOperType_; }
         //! The XLOPER type in use by this version of Excel
@@ -166,7 +170,7 @@ namespace xlw {
         //! Create a new static buffer and add it to the free list.
         void PushNewBuffer(size_t);
 
-        bool excel12_;
+        int excelVersion_;
         std::string xlfOperType_;
         std::string xlfXloperType_;
         std::string wStrType_;

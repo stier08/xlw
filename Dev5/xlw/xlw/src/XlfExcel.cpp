@@ -130,7 +130,7 @@ xlw::XlfExcel::~XlfExcel() {
     return;
 }
 
-bool set_excel12() {
+int get_excel_version() {
     XLOPER xRet1, xRet2, xTemp1, xTemp2;
     xTemp1.xltype = xTemp2.xltype = xltypeInt;
     xTemp1.val.w = 2;
@@ -138,7 +138,7 @@ bool set_excel12() {
     Excel4_(xlfGetWorkspace, &xRet1, 1, &xTemp1);
     Excel4_(xlCoerce, &xRet2, 2, &xRet1, &xTemp2);
     Excel4_(xlFree, 0, 1, &xRet1);
-    return (xRet2.val.w == 12);
+    return xRet2.val.w;
 }
 
 /*!
@@ -156,8 +156,8 @@ void xlw::XlfExcel::InitLibrary() {
     if (Excel4v_ == 0)
         throw std::runtime_error("Could not get address of Excel4v callback");
 
-    excel12_ = set_excel12();
-    if (excel12_) {
+    excelVersion_ = get_excel_version();
+    if (excel12()) {
         static XlfOperImpl12 xlfOperImpl12;
         xlfOperType_ = "Q";
         xlfXloperType_ = "U";
@@ -193,7 +193,7 @@ int cdecl xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, int count, ...) cons
     va_list vargs;
     va_start(vargs, count);
     int ret;
-    if (excel12_)
+    if (excel12())
     {
         LPXLOPER12 first_varg = va_arg(vargs, LPXLOPER12);
         ret = Call12v(xlfn, (LPXLOPER12)pxResult, count, &first_varg);
@@ -235,7 +235,7 @@ with XlfOper::xlbitCallFreeAuxMem.
 \sa XlfOper::~XlfOper
 */
 int xlw::XlfExcel::Callv(int xlfn, LPXLFOPER pxResult, int count, LPXLFOPER pxdata[]) const {
-    if (excel12_)
+    if (excel12())
         return Call12v(xlfn, (LPXLOPER12)pxResult, count, (LPXLOPER12*)pxdata);
     else
         return Call4v(xlfn, (LPXLOPER)pxResult, count, (LPXLOPER*)pxdata);
