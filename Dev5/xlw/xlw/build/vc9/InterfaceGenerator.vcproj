@@ -48,7 +48,6 @@
 				UsePrecompiledHeader="0"
 				ProgramDataBaseFileName="$(TargetDir)\$(TargetName).pdb"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="false"
 				DebugInformationFormat="4"
 			/>
 			<Tool
