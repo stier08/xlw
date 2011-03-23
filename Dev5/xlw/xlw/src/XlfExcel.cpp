@@ -184,24 +184,41 @@ std::string xlw::XlfExcel::GetName() const {
     return ret;
 }
 
-#ifdef __MINGW32__
-int __cdecl xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, int count, ...) const
+#ifdef _WIN64
+template<typename XLOPER_TYPE>
+XLOPER_TYPE* varArgsToArray(int count, va_list& vargs)
+{
+    // on 64 bit the parameters aren't being passed on the stack a useful
+    // enough way so we can't do the pointer trick used on 32 bits
+    // We just copy them into a temporary array
+    XLOPER_TYPE* args = (XLOPER_TYPE*)xlw::XlfExcel::Instance().GetMemory(count*sizeof(XLOPER_TYPE));
+    for(int i(0); i < count; ++i)
+    {
+        args[i] = va_arg(vargs, XLOPER_TYPE);
+    }
+    return args;
+}
 #else
-int cdecl xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, int count, ...) const
+template<typename XLOPER_TYPE>
+XLOPER_TYPE* varArgsToArray(int& count, va_list& vargs)
+{
+    // on 32 bit the parameters are passed in order as an array
+    return (XLOPER_TYPE *)(&count + 1);
+}
 #endif
+
+int __cdecl xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, int count, ...) const
 {
     va_list vargs;
     va_start(vargs, count);
     int ret;
     if (excel12())
     {
-        LPXLOPER12 first_varg = va_arg(vargs, LPXLOPER12);
-        ret = Call12v(xlfn, (LPXLOPER12)pxResult, count, &first_varg);
+        ret = Call12v(xlfn, (LPXLOPER12)pxResult, count, varArgsToArray<LPXLOPER12>(count, vargs));
     }
     else
     {
-        LPXLOPER first_varg = va_arg(vargs, LPXLOPER);
-        ret = Call4v(xlfn, (LPXLOPER)pxResult, count, &first_varg);
+        ret = Call4v(xlfn, (LPXLOPER)pxResult, count, varArgsToArray<LPXLOPER>(count, vargs));
     }
     va_end(vargs);
     return ret;
@@ -210,8 +227,7 @@ int cdecl xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, int count, ...) cons
 int __cdecl xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult, int count, ...) const {
     va_list vargs;
     va_start(vargs, count);
-    LPXLOPER first_varg = va_arg(vargs, LPXLOPER);
-    int ret = Call4v(xlfn, pxResult, count, &first_varg);
+    int ret = Call4v(xlfn, pxResult, count, varArgsToArray<LPXLOPER>(count, vargs));
     va_end(vargs);
     return ret;
 }
@@ -219,8 +235,7 @@ int __cdecl xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult, int count, ...) co
 int __cdecl xlw::XlfExcel::Call12(int xlfn, LPXLOPER12 pxResult, int count, ...) const {
     va_list vargs;
     va_start(vargs, count);
-    LPXLOPER12 first_varg = va_arg(vargs, LPXLOPER12);
-    int ret = Call12v(xlfn, pxResult, count, &first_varg);
+    int ret = Call12v(xlfn, pxResult, count, varArgsToArray<LPXLOPER12>(count, vargs));
     va_end(vargs);
     return ret;
 }
