@@ -68,8 +68,6 @@ xlw::XlfOper4::~XlfOper4()
 int xlw::XlfOper4::Allocate()
 {
     lpxloper_ = (LPXLOPER)XlfExcel::Instance().GetMemory(sizeof(XLOPER));
-    if (!lpxloper_)
-        return xlretInvXloper;
     lpxloper_->xltype = xltypeNil;
     return xlretSuccess;
 }
@@ -938,22 +936,13 @@ xlw::XlfOper4& xlw::XlfOper4::Set(const XlfRef& range)
     {
         lpxloper_->xltype = xltypeRef;
         XLMREF * pmRef = reinterpret_cast<XLMREF *>(XlfExcel::Instance().GetMemory(sizeof(XLMREF)));
-        // if no memory is available
-        if (pmRef == 0)
-        {
-            // set XlfOper4 to an invalid state
-            lpxloper_=0;
-        }
-        else
-        {
-            pmRef->count=1;
-            pmRef->reftbl[0].rwFirst = range.GetRowBegin();
-            pmRef->reftbl[0].rwLast = range.GetRowEnd()-1;
-            pmRef->reftbl[0].colFirst = range.GetColBegin();
-            pmRef->reftbl[0].colLast = range.GetColEnd()-1;
-            lpxloper_->val.mref.lpmref = pmRef;
-            lpxloper_->val.mref.idSheet = range.GetSheetId();
-        }
+        pmRef->count=1;
+        pmRef->reftbl[0].rwFirst = range.GetRowBegin();
+        pmRef->reftbl[0].rwLast = range.GetRowEnd()-1;
+        pmRef->reftbl[0].colFirst = range.GetColBegin();
+        pmRef->reftbl[0].colLast = range.GetColEnd()-1;
+        lpxloper_->val.mref.lpmref = pmRef;
+        lpxloper_->val.mref.idSheet = range.GetSheetId();
     }
     return *this;
 }
@@ -971,19 +960,12 @@ xlw::XlfOper4& xlw::XlfOper4::Set(const char *value)
         // One byte more for NULL terminal char (allow use of strcpy)
         // and one for the std::string size (convention used by Excel)
         LPSTR str = reinterpret_cast<LPSTR>(XlfExcel::Instance().GetMemory(n + 2));
-        if (str == 0)
-        {
-            lpxloper_=0;
-        }
-        else
-        {
-            strncpy(str + 1, value, n);
-            str[n + 1] = 0;
+        strncpy(str + 1, value, n);
+        str[n + 1] = 0;
 
-            lpxloper_->val.str = str;
-            lpxloper_->val.str[0] = static_cast<BYTE>(n);
-            lpxloper_->xltype = xltypeStr;
-        }
+        lpxloper_->val.str = str;
+        lpxloper_->val.str[0] = static_cast<BYTE>(n);
+        lpxloper_->xltype = xltypeStr;
     }
     return *this;
 }

@@ -64,8 +64,6 @@ void xlw::XlfOperImpl4::destroy(const XlfOper &xlfOper) const
 int xlw::XlfOperImpl4::Allocate(XlfOper &xlfOper) const
 {
     xlfOper.lpxloper4_ = (LPXLOPER)XlfExcel::Instance().GetMemory(sizeof(XLOPER));
-    if (!xlfOper.lpxloper4_)
-        return xlretInvXloper;
     xlfOper.lpxloper4_->xltype = xltypeNil;
     return xlretSuccess;
 }
@@ -751,22 +749,13 @@ xlw::XlfOper& xlw::XlfOperImpl4::Set(XlfOper &xlfOper, const XlfRef& range) cons
     {
         xlfOper.lpxloper4_->xltype = xltypeRef;
         XLMREF * pmRef = reinterpret_cast<XLMREF *>(XlfExcel::Instance().GetMemory(sizeof(XLMREF)));
-        // if no memory is available
-        if (pmRef == 0)
-        {
-            // set XlfOper to an invalid state
-            xlfOper.lpxloper4_=0;
-        }
-        else
-        {
-            pmRef->count=1;
-            pmRef->reftbl[0].rwFirst = range.GetRowBegin();
-            pmRef->reftbl[0].rwLast = range.GetRowEnd()-1;
-            pmRef->reftbl[0].colFirst = range.GetColBegin();
-            pmRef->reftbl[0].colLast = range.GetColEnd()-1;
-            xlfOper.lpxloper4_->val.mref.lpmref = pmRef;
-            xlfOper.lpxloper4_->val.mref.idSheet = range.GetSheetId();
-        }
+        pmRef->count=1;
+        pmRef->reftbl[0].rwFirst = range.GetRowBegin();
+        pmRef->reftbl[0].rwLast = range.GetRowEnd()-1;
+        pmRef->reftbl[0].colFirst = range.GetColBegin();
+        pmRef->reftbl[0].colLast = range.GetColEnd()-1;
+        xlfOper.lpxloper4_->val.mref.lpmref = pmRef;
+        xlfOper.lpxloper4_->val.mref.idSheet = range.GetSheetId();
     }
     return xlfOper;
 }
@@ -786,19 +775,12 @@ xlw::XlfOper& xlw::XlfOperImpl4::Set(XlfOper &xlfOper, const char *value) const
         // and another so that the string is null terminated so that the 
         // debugger sees it correctly
         LPSTR str = reinterpret_cast<LPSTR>(XlfExcel::Instance().GetMemory(n + 2));
-        if (str == 0)
-        {
-            xlfOper.lpxloper4_=0;
-        }
-        else
-        {
-            strncpy(str + 1, value, n);
-            str[n + 1] = 0;
+        strncpy(str + 1, value, n);
+        str[n + 1] = 0;
 
-            xlfOper.lpxloper4_->val.str = str;
-            xlfOper.lpxloper4_->val.str[0] = static_cast<BYTE>(n);
-            xlfOper.lpxloper4_->xltype = xltypeStr;
-        }
+        xlfOper.lpxloper4_->val.str = str;
+        xlfOper.lpxloper4_->val.str[0] = static_cast<BYTE>(n);
+        xlfOper.lpxloper4_->xltype = xltypeStr;
     }
     return xlfOper;
 }
@@ -819,18 +801,11 @@ xlw::XlfOper& xlw::XlfOperImpl4::Set(XlfOper &xlfOper, const std::wstring &value
         // and another so that the string is null terminated so that the 
         // debugger sees it correctly
         LPSTR str = reinterpret_cast<LPSTR>(XlfExcel::Instance().GetMemory((n + 2)));
-        if (str == 0)
-        {
-            xlfOper.lpxloper4_=0;
-        }
-        else
-        {
-            wcstombs(str + 1, value.c_str(), n);
-            str[n + 1] = 0;
-            xlfOper.lpxloper4_->val.str = str;
-            xlfOper.lpxloper4_->val.str[0] = static_cast<BYTE>(n);
-            xlfOper.lpxloper4_->xltype = xltypeStr;
-        }
+        wcstombs(str + 1, value.c_str(), n);
+        str[n + 1] = 0;
+        xlfOper.lpxloper4_->val.str = str;
+        xlfOper.lpxloper4_->val.str[0] = static_cast<BYTE>(n);
+        xlfOper.lpxloper4_->xltype = xltypeStr;
     }
     return xlfOper;
 }
