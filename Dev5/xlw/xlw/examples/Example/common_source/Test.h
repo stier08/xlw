@@ -118,4 +118,8 @@ std::string // return a string indicating datatype of XLOPER/XLOPER12 input
 typeString2(const reftest &input // value on which to perform type check 
            );
 
+std::string // the text of the note attached to the calling cell
+//<xlw:macrosheet
+GetNote();
+
 #endif

@@ -182,3 +182,17 @@ std::string // return a string indicating datatype of XLOPER/XLOPER12 input
 typeString2(const reftest &input) {
     return input.xltypeName();
 }
+
+std::string // the text of the note attached to the calling cell
+GetNote() {
+    XlfOper callingCell;
+    XlfOper startChars(short(1));
+    XlfOper numChars(short(255));
+    XlfOper result;
+
+    XlfExcel::Instance().Call(xlfCaller, callingCell, 0);
+    XlfExcel::Instance().Call(xlfGetNote, result, 3, (LPXLFOPER)callingCell, (LPXLFOPER)startChars, (LPXLFOPER)numChars);
+
+    return result.AsString();
+}
+
