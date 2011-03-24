@@ -652,7 +652,8 @@ xlw::XlfOper& xlw::XlfOperImpl12::Set(XlfOper &xlfOper, const CellMatrix& cells)
     size_t r = cells.RowsInStructure();
     size_t c = cells.ColumnsInStructure();
 
-    c = c < 255 ? c : 255;
+    // Excel 12 has a limit of 16384 columns
+    c = c < 16384 ? c : 16384;
 
     xlfOper.lpxloper12_->xltype = xltypeMulti;
     xlfOper.lpxloper12_->val.array.rows = static_cast<RW>(r);
