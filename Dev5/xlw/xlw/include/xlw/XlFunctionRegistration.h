@@ -43,7 +43,10 @@ namespace xlw {
                          bool Volatile_,
                          bool Threadsafe_,
                          const std::string &ReturnTypeCode_,
-						 const std::string &HelpID_);
+						 const std::string &HelpID_,
+                         bool Asynchronous_,
+                         bool MacroSheetEquivalent_,
+                         bool ClusterSafe_);
 
         std::string GetFunctionName() const;
         std::string GetExcelFunctionName() const;
@@ -64,6 +67,21 @@ namespace xlw {
             return Threadsafe;
         }
 
+        bool GetAsynchronous() const
+        {
+            return Asynchronous;
+        }
+
+        bool GetMacroSheetEquivalent() const
+        {
+            return MacroSheetEquivalent;
+        }
+
+        bool GetClusterSafe() const
+        {
+            return ClusterSafe;
+        }
+
         std::string GetReturnTypeCode() const;
 		std::string GetHelpID() const;
     private:
@@ -80,8 +98,9 @@ namespace xlw {
         bool Threadsafe;
         std::string ReturnTypeCode;
 		std::string helpID;
-
-
+        bool Asynchronous;
+        bool MacroSheetEquivalent;
+        bool ClusterSafe;
     };
 
     class XLFunctionRegistrationHelper
@@ -97,8 +116,10 @@ namespace xlw {
                          bool Volatile = false,
                          bool Threadsafe = false,
                          const std::string &ReturnTypeCode_ = "",
-						 const std::string &HelpID = "");
-
+						 const std::string &HelpID = "",
+                         bool Asynchronous = false,
+                         bool MacroSheetEquivalent = false,
+                         bool ClusterSafe = false);
     private:
 
     };

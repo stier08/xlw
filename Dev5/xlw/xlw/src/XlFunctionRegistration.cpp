@@ -38,7 +38,10 @@ XLFunctionRegistrationData::XLFunctionRegistrationData(const std::string& Functi
                      bool Volatile_,
                      bool Threadsafe_,
                      const std::string& ReturnTypeCode_,
-					 const std::string& HelpID_)
+					 const std::string& HelpID_,
+                     bool Asynchronous_,
+                     bool MacroSheetEquivalent_,
+                     bool ClusterSafe_)
     :                FunctionName(FunctionName_),
                      ExcelFunctionName(ExcelFunctionName_),
                      FunctionDescription(FunctionDescription_),
@@ -47,7 +50,10 @@ XLFunctionRegistrationData::XLFunctionRegistrationData(const std::string& Functi
                      Volatile(Volatile_),
                      Threadsafe(Threadsafe_),
                      ReturnTypeCode(ReturnTypeCode_),
-					 helpID(HelpID_)
+					 helpID(HelpID_),
+                     Asynchronous(Asynchronous_),
+                     MacroSheetEquivalent(MacroSheetEquivalent_),
+                     ClusterSafe(ClusterSafe_)
 {
 
     ArgumentNames.reserve(NoOfArguments);
@@ -125,7 +131,10 @@ XLFunctionRegistrationHelper::XLFunctionRegistrationHelper(const std::string& Fu
                      bool Volatile,
                      bool Threadsafe,
                      const std::string& returnTypeCode,
-					 const std::string& helpID)
+					 const std::string& helpID,
+                     bool Asynchronous,
+                     bool MacroSheetEquivalent,
+                     bool ClusterSafe)
 {
     XLFunctionRegistrationData tmp(FunctionName,
                                                                 ExcelFunctionName,
@@ -136,7 +145,10 @@ XLFunctionRegistrationHelper::XLFunctionRegistrationHelper(const std::string& Fu
                                                                 Volatile,
                                                                 Threadsafe,
                                                                 returnTypeCode,
-																helpID);
+																helpID,
+                                                                Asynchronous,
+                                                                MacroSheetEquivalent,
+                                                                ClusterSafe);
 
     ExcelFunctionRegistrationRegistry::Instance().AddFunction(tmp);
 }
@@ -160,7 +172,10 @@ void ExcelFunctionRegistrationRegistry::DoTheRegistrations() const
                                                     policy,
                                                     it->GetThreadsafe(),
                                                     it->GetReturnTypeCode(),
-													it->GetHelpID());
+													it->GetHelpID(),
+                                                    it->GetAsynchronous(),
+                                                    it->GetMacroSheetEquivalent(),
+                                                    it->GetClusterSafe());
         XlfArgDescList xlFunctionArgs;
 
         for (int i=0; i < it->GetNoOfArguments(); ++i)

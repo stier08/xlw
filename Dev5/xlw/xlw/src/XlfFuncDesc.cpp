@@ -38,7 +38,10 @@ struct xlw::XlfFuncDescImpl
 {
     //! Ctor.
     XlfFuncDescImpl(xlw::XlfFuncDesc::RecalcPolicy recalcPolicy, bool Threadsafe,
-        const std::string& category): recalcPolicy_(recalcPolicy), Threadsafe_(Threadsafe), category_(category)
+                    const std::string& category, bool Asynchronous, bool MacroSheetEquivalent,
+                    bool ClusterSafe) : recalcPolicy_(recalcPolicy), Threadsafe_(Threadsafe), 
+                    category_(category), Asynchronous_(Asynchronous), MacroSheetEquivalent_(MacroSheetEquivalent),
+                    ClusterSafe_(ClusterSafe)
         {}
     //! Recalculation policy.
     xlw::XlfFuncDesc::RecalcPolicy recalcPolicy_;
@@ -48,6 +51,12 @@ struct xlw::XlfFuncDescImpl
     XlfArgDescList arguments_;
     //! Flag indicating whether this function is threadsafe in Excel 2007.
     bool Threadsafe_;
+    //! Flag indicating whether this function is can be called Asynchronously in Excel 2010.
+    bool Asynchronous_;
+    //! Flag indicating whether this function get uncaled cells and can call XLM macro functions.
+    bool MacroSheetEquivalent_;
+    //! Flag indicating whether this function is can be called over a cluster in Excel 2010.
+    bool ClusterSafe_;
 };
 
 /*!
@@ -63,10 +72,12 @@ XlfAbstractCmdDesc::XlfAbstractCmdDesc.
 xlw::XlfFuncDesc::XlfFuncDesc(const std::string& name, const std::string& alias,
                          const std::string& comment, const std::string& category,
                          RecalcPolicy recalcPolicy, bool Threadsafe, const std::string &returnTypeCode,
-						 const std::string &helpID)
+						 const std::string &helpID,
+                         bool Asynchronous, bool MacroSheetEquivalent, 
+                         bool ClusterSafe)
     : XlfAbstractCmdDesc(name, alias, comment), impl_(0), returnTypeCode_(returnTypeCode), helpID_(helpID)
 {
-    impl_ = new XlfFuncDescImpl(recalcPolicy,Threadsafe,category);
+    impl_ = new XlfFuncDescImpl(recalcPolicy,Threadsafe,category, Asynchronous, MacroSheetEquivalent, ClusterSafe);
 }
 
 xlw::XlfFuncDesc::~XlfFuncDesc()
@@ -164,6 +175,14 @@ int xlw::XlfFuncDesc::RegisterAs(const std::string& dllName, double mode_, doubl
     if (XlfExcel::Instance().excel12() && impl_->Threadsafe_)
     {
         args+="$";
+    }
+    if (XlfExcel::Instance().excel14() && impl_->ClusterSafe_)
+    {
+        args+="&";
+    }
+    if (impl_->MacroSheetEquivalent_)
+    {
+        args+="#";
     }
 
     args+='\0'; // null termination for C string
