@@ -494,7 +494,7 @@ int xlw::XlfOper4::ConvertToCellMatrix(CellMatrix& output) const
     {
         CellMatrix tmpCell(1,1);
 
-        unsigned long len = *((*lpxloper_).val.str);
+        unsigned long len = static_cast<BYTE>((*lpxloper_).val.str[0]);
 
         std::string tmp;
         tmp.resize(len);
@@ -531,7 +531,7 @@ int xlw::XlfOper4::ConvertToCellMatrix(CellMatrix& output) const
                 {
                     if (thisType==xltypeStr)
                     {
-                          unsigned long len = *((*lpxloper_).val.array.lparray[i*columns+j].val.str);
+                          unsigned long len = static_cast<BYTE>((*lpxloper_).val.array.lparray[i*columns+j].val.str[0]);
 
                           std::string tmp;
                           tmp.resize(len);
@@ -746,7 +746,7 @@ int xlw::XlfOper4::ConvertToString(char *& s) const throw()
     {
         // Must use datatype unsigned char (BYTE) to process 0th byte
         // otherwise numbers greater than 128 are incorrect
-        size_t n = (unsigned char) lpxloper_->val.str[0];
+        size_t n = static_cast<BYTE>(lpxloper_->val.str[0]);
         s = XlfExcel::Instance().GetMemory(n + 1);
         memcpy(s, lpxloper_->val.str + 1, n);
         s[n] = 0;
@@ -989,7 +989,7 @@ xlw::XlfOper4& xlw::XlfOper4::SetElement(WORD r, WORD c, const XlfOper4 &value)
     if (value.lpxloper_->xltype == xltypeNum) {
         element.val.num = value.lpxloper_->val.num;
     } else if (value.lpxloper_->xltype == xltypeStr) {
-        size_t n = (unsigned char)value.lpxloper_->val.str[0] + 1;
+        size_t n = static_cast<BYTE>(value.lpxloper_->val.str[0]) + 1;
         element.val.str = XlfExcel::Instance().GetMemory(n);
         memcpy(element.val.str, value.lpxloper_->val.str, n);
     } else if (value.lpxloper_->xltype == xltypeBool) {

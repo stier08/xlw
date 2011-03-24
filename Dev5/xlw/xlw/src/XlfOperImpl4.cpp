@@ -340,7 +340,7 @@ int xlw::XlfOperImpl4::ConvertToCellMatrix(const XlfOper &xlfOper, CellMatrix& o
     {
         CellMatrix tmpCell(1,1);
 
-        unsigned long len = *((*xlfOper.lpxloper4_).val.str);
+        unsigned long len = static_cast<BYTE>((*xlfOper.lpxloper4_).val.str[0]);
 
         std::string tmp;
         tmp.resize(len);
@@ -374,7 +374,7 @@ int xlw::XlfOperImpl4::ConvertToCellMatrix(const XlfOper &xlfOper, CellMatrix& o
                 {
                     if (thisType==xltypeStr)
                     {
-                          unsigned long len = *((*xlfOper.lpxloper4_).val.array.lparray[i*columns+j].val.str);
+                          unsigned long len = static_cast<BYTE>((*xlfOper.lpxloper4_).val.array.lparray[i*columns+j].val.str[0]);
 
                           std::string tmp;
                           tmp.resize(len);
@@ -566,7 +566,7 @@ int xlw::XlfOperImpl4::ConvertToString(const XlfOper &xlfOper, char *& s) const 
     {
         // Must use datatype unsigned char (BYTE) to process 0th byte
         // otherwise numbers greater than 128 are incorrect
-        size_t n = (unsigned char) xlfOper.lpxloper4_->val.str[0];
+        size_t n = static_cast<BYTE>(xlfOper.lpxloper4_->val.str[0]);
         s = XlfExcel::Instance().GetMemory(n + 1);
         memcpy(s, xlfOper.lpxloper4_->val.str + 1, n);
         s[n] = 0;
@@ -597,7 +597,7 @@ int xlw::XlfOperImpl4::ConvertToWstring(const XlfOper &xlfOper, std::wstring &s)
 
     if (xlfOper.lpxloper4_->xltype & xltypeStr)
     {
-        size_t n = (unsigned char) xlfOper.lpxloper4_->val.str[0];
+        size_t n = static_cast<BYTE>(xlfOper.lpxloper4_->val.str[0]);
         wchar_t *c = reinterpret_cast<wchar_t*>(XlfExcel::Instance().GetMemory((n+1) * sizeof(wchar_t)));
         mbstowcs(c, xlfOper.lpxloper4_->val.str + 1, n);
         c[n]=0;
@@ -829,7 +829,7 @@ xlw::XlfOper& xlw::XlfOperImpl4::SetElement(XlfOper &xlfOper, RW r, COL c, const
     if (value.lpxloper4_->xltype == xltypeNum) {
         element.val.num = value.lpxloper4_->val.num;
     } else if (value.lpxloper4_->xltype == xltypeStr) {
-        size_t n = (unsigned char)value.lpxloper4_->val.str[0] + 1;
+        size_t n = static_cast<BYTE>(value.lpxloper4_->val.str[0]) + 1;
         element.val.str = XlfExcel::Instance().GetMemory(n);
         memcpy(element.val.str, value.lpxloper4_->val.str, n);
     } else if (value.lpxloper4_->xltype == xltypeBool) {
