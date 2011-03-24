@@ -69,8 +69,7 @@ int xlw::XlfOperImpl12::Allocate(XlfOper &xlfOper) const
 
 void xlw::XlfOperImpl12::FreeAuxiliaryMemory(const XlfOper &xlfOper) const
 {
-    // FIXME call Call12() instead?
-    int err = XlfExcel::Instance().XlfExcel::Instance().Call(xlFree, NULL, 1, (LPXLFOPER)xlfOper.lpxloper12_);
+    int err = XlfExcel::Instance().XlfExcel::Instance().Call12(xlFree, NULL, 1, xlfOper.lpxloper12_);
     if (err != xlretSuccess)
         std::cerr << XLW__HERE__ << "Call to xlFree failed" << std::endl;
     return;
@@ -79,8 +78,7 @@ void xlw::XlfOperImpl12::FreeAuxiliaryMemory(const XlfOper &xlfOper) const
 int xlw::XlfOperImpl12::Coerce(const XlfOper &xlfOper, short type, XlfOper& result) const
 {
     XlfOper xlType(type);
-    // FIXME call Call12() instead?
-    int xlret = XlfExcel::Instance().Call(xlCoerce, (LPXLFOPER)result, 2, (LPXLFOPER)xlfOper.lpxloper12_, (LPXLFOPER)xlType);
+    int xlret = XlfExcel::Instance().Call12(xlCoerce, result.lpxloper12_, 2, xlfOper.lpxloper12_, xlType.lpxloper12_);
     return xlret;
 }
 
