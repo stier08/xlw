@@ -172,6 +172,25 @@ extern "C" {
 
         EXCEL_END;
     }
+
+    /*! 
+     * Demonstrates calling Excel macro functions from within a
+     * a function, for this to work you must set the MacroSheetEquivalent
+     * to true when registering.
+     * This function gets the formula in the current cell when calculated
+     */
+    LPXLFOPER EXCEL_EXPORT xlCurrentFormula() {
+        EXCEL_BEGIN;
+        XlfOper activeCell;
+        XlfOper result;
+
+        XlfExcel::Instance().Call(xlfActiveCell, activeCell, 0);
+        XlfExcel::Instance().Call(xlfGetFormula, result, 1, (LPXLFOPER)activeCell);
+
+        return XlfOper(result.AsString());
+        EXCEL_END;
+    }
+
 }
 
 namespace {
@@ -243,4 +262,11 @@ namespace {
         "xlNbCalls", "NbCalls", "Return the number of times the function "
         "has been calculated since the xll was loaded (volatile)",
         "xlw Example", 0, 0, true);
+
+    // Register the function CurrentFormula as volatile and MacroSheetEquivalent
+
+    XLRegistration::XLFunctionRegistrationHelper registerCurrentFormula(
+        "xlCurrentFormula", "CurrentFormula", "Returns the formula in the current cell "
+        "by calling Excel Macro functions",
+        "xlw Example", 0, 0, true, false, "", "", false, true);
 }
