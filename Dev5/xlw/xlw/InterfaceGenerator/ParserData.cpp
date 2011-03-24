@@ -98,7 +98,10 @@ FunctionDescription::FunctionDescription(std::string FunctionName_,
                          bool Volatile_,
                          bool Time_,
                          bool Threadsafe_,
-						 std::string helpID_)
+						 std::string helpID_,
+                         bool Asynchronous_,
+                         bool MacroSheet_, 
+                         bool ClusterSafe_)
                          :
                          FunctionName(FunctionName_),
                          FunctionHelpDescription(FunctionHelpDescription_),
@@ -108,7 +111,10 @@ FunctionDescription::FunctionDescription(std::string FunctionName_,
                          Volatile(Volatile_),
                          Time(Time_),
                          Threadsafe(Threadsafe_),
-						 helpID(helpID_)
+						 helpID(helpID_),
+                         Asynchronous(Asynchronous_),
+                         MacroSheet(MacroSheet_),
+                         ClusterSafe(ClusterSafe_)
 {
 }
 
@@ -140,4 +146,18 @@ bool FunctionDescription::GetThreadsafe() const
 std::string FunctionDescription::GetHelpID() const
 {
 	return helpID;
+}
+bool FunctionDescription::GetAsynchronous() const
+{
+    return Asynchronous;
+}
+
+bool FunctionDescription::GetMacroSheet() const
+{
+    return MacroSheet;
+}
+
+bool FunctionDescription::GetClusterSafe() const
+{
+    return ClusterSafe;
 }

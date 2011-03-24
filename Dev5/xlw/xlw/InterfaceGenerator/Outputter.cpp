@@ -142,12 +142,29 @@ std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& func
       AddLine(output,",false");
     if ( functionDescriptions[i].GetThreadsafe())
       AddLine(output,",true");
-	else
-	  AddLine(output,",false");
-	AddLine(output,",\"\"");
-	if ( functionDescriptions[i].GetHelpID().length() > 0 )
-		AddLine(output,",");
-	AddLine(output,functionDescriptions[i].GetHelpID());
+    else
+      AddLine(output,",false");
+    AddLine(output,",\"\"");
+    if ( functionDescriptions[i].GetHelpID().length() > 0 )
+    {
+        std::string helpline(",");
+        helpline += functionDescriptions[i].GetHelpID();
+        AddLine(output,helpline);
+    }
+    else
+      AddLine(output,",\"\"");
+    if ( functionDescriptions[i].GetAsynchronous())
+      AddLine(output,",true");
+    else
+      AddLine(output,",false");
+    if ( functionDescriptions[i].GetMacroSheet())
+      AddLine(output,",true");
+    else
+      AddLine(output,",false");
+    if ( functionDescriptions[i].GetClusterSafe())
+      AddLine(output,",true");
+    else
+      AddLine(output,",false");
 
     AddLine(output, ");");
     AddLine(output,"}");

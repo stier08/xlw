@@ -76,7 +76,8 @@ std::vector<FunctionDescription> FunctionTyper(std::vector<FunctionModel>& input
             Arguments.push_back(thisArgument);
         }
 
-        FunctionDescription thisDescription(name,desc,returnType,key,Arguments,it->GetVolatile(),it->DoTime(),it->GetThreadsafe(),it->GetHelpID());
+        FunctionDescription thisDescription(name,desc,returnType,key,Arguments,it->GetVolatile(),it->DoTime(),it->GetThreadsafe(),it->GetHelpID(),
+                                            it->GetAsynchronous(), it->GetMacroSheet(), it->GetClusterSafe());
         output.push_back(thisDescription);
         ++it;
     }

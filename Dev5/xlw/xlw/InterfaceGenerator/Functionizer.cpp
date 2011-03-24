@@ -45,6 +45,9 @@ FunctionModel FunctionFind(std::vector<Token>::const_iterator& it, std::vector<T
     bool Volatile = false;
     bool time =TimeDefault;
     bool threadsafe = false;
+    bool asynchronous  = false;
+    bool macrosheet = false;
+    bool clustersafe = false;
 	std::string helpID = "";
 
     if (it == end)
@@ -93,6 +96,30 @@ FunctionModel FunctionFind(std::vector<Token>::const_iterator& it, std::vector<T
             if (it == end)
                 throw("function half declared at end of file");
         }
+        if (commentString == "<xlw:asynchronous")
+        {
+            asynchronous = true;
+            ++it;
+            found = true;
+            if (it == end)
+                throw("function half declared at end of file");
+        }
+        if (commentString == "<xlw:macrosheet")
+        {
+            macrosheet = true;
+            ++it;
+            found = true;
+            if (it == end)
+                throw("function half declared at end of file");
+        }
+        if (commentString == "<xlw:clustersafe")
+        {
+            clustersafe = true;
+            ++it;
+            found = true;
+            if (it == end)
+                throw("function half declared at end of file");
+        }
 		if (commentString.find("<xlw:help=") == 0 )
 		{
 			helpID = commentString.substr(10);
@@ -110,7 +137,8 @@ FunctionModel FunctionFind(std::vector<Token>::const_iterator& it, std::vector<T
     
     std::string functionName(it->GetValue());
 
-    FunctionModel theFunction(returnType,functionName,functionDesc,Volatile,time,threadsafe,helpID);
+    FunctionModel theFunction(returnType,functionName,functionDesc,Volatile,time,threadsafe,
+                              helpID,asynchronous,macrosheet,clustersafe);
 
     ++it;
     if (it == end)

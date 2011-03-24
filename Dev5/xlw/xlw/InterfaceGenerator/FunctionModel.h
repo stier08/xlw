@@ -25,7 +25,10 @@ class FunctionModel
 {
 public:
 
-	FunctionModel(std::string ReturnType_, std::string Name, std::string Description, bool Volatile_=false, bool Time_=false, bool Threadsafe_=false, std::string helpID_="");
+	FunctionModel(std::string ReturnType_, std::string Name, std::string Description, 
+                  bool Volatile_=false, bool Time_=false, bool Threadsafe_=false, 
+                  std::string helpID_="",
+                  bool asynchronous=false,bool macrosheet=false, bool clustersafe=false);
 
     void AddArgument(std::string Type_, std::string Name_, std::string Description_);
 
@@ -84,6 +87,21 @@ public:
         return Threadsafe;
     }
 
+    bool GetAsynchronous() const
+    {
+        return Asynchronous;
+    }
+
+    bool GetMacroSheet() const
+    {
+        return MacroSheet;
+    }
+
+    bool GetClusterSafe() const
+    {
+        return ClusterSafe;
+    }
+
 private:
     std::string ReturnType;
     std::string FunctionName;
@@ -92,6 +110,9 @@ private:
     bool Volatile;
     bool Time;
     bool Threadsafe;
+    bool Asynchronous;
+    bool MacroSheet;
+    bool ClusterSafe;
 
     std::vector<std::string > ArgumentTypes;
     std::vector<std::string > ArgumentNames;
