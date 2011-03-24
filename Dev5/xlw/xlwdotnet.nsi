@@ -470,6 +470,9 @@ SubSection "xlw" xlw
 			SetOutPath "$INSTDIR\xlw\lib"
 			File "xlw\lib\xlw-vc80*.lib"
 			File "xlw\lib\xlw-vc80*.pdb"
+			SetOutPath "$INSTDIR\xlw\lib\x64"
+			File  "xlw\lib\x64\xlw-vc80*.lib"
+			File  "xlw\lib\x64\xlw-vc80*.pdb"
 			!insertmacro InterfaceGenerator vc8
 		SectionEnd
 		
