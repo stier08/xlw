@@ -64,7 +64,7 @@ void xlw::XlfOperImpl4::destroy(const XlfOper &xlfOper) const
 
 int xlw::XlfOperImpl4::Allocate(XlfOper &xlfOper) const
 {
-    xlfOper.lpxloper4_ = (LPXLOPER)TempMemory::GetMemory(sizeof(XLOPER));
+    xlfOper.lpxloper4_ = TempMemory::GetMemory<XLOPER>();
     xlfOper.lpxloper4_->xltype = xltypeNil;
     return xlretSuccess;
 }
@@ -566,7 +566,7 @@ int xlw::XlfOperImpl4::ConvertToString(const XlfOper &xlfOper, char *& s) const 
         // Must use datatype unsigned char (BYTE) to process 0th byte
         // otherwise numbers greater than 128 are incorrect
         size_t n = static_cast<BYTE>(xlfOper.lpxloper4_->val.str[0]);
-        s = TempMemory::GetMemory(n + 1);
+        s = TempMemory::GetMemory<char>(n + 1);
         memcpy(s, xlfOper.lpxloper4_->val.str + 1, n);
         s[n] = 0;
         xlret = xlretSuccess;
@@ -597,7 +597,7 @@ int xlw::XlfOperImpl4::ConvertToWstring(const XlfOper &xlfOper, std::wstring &s)
     if (xlfOper.lpxloper4_->xltype & xltypeStr)
     {
         size_t n = static_cast<BYTE>(xlfOper.lpxloper4_->val.str[0]);
-        wchar_t *c = reinterpret_cast<wchar_t*>(TempMemory::GetMemory((n+1) * sizeof(wchar_t)));
+        wchar_t *c = TempMemory::GetMemory<wchar_t>(n+1);
         mbstowcs(c, xlfOper.lpxloper4_->val.str + 1, n);
         c[n]=0;
         s = std::wstring(c);
@@ -661,8 +661,7 @@ xlw::XlfOper& xlw::XlfOperImpl4::Set(XlfOper &xlfOper, const CellMatrix& cells) 
     xlfOper.lpxloper4_->val.array.rows = static_cast<WORD>(r);
     xlfOper.lpxloper4_->val.array.columns = static_cast<WORD>(c);
 
-    xlfOper.lpxloper4_->val.array.lparray
-            = (LPXLOPER)TempMemory::GetMemory(r*c*sizeof(XLOPER));
+    xlfOper.lpxloper4_->val.array.lparray = TempMemory::GetMemory<XLOPER>(r*c);
 
     for (size_t i=0; i < r; i++)
         for (size_t j=0; j < c; j++)
@@ -747,7 +746,7 @@ xlw::XlfOper& xlw::XlfOperImpl4::Set(XlfOper &xlfOper, const XlfRef& range) cons
     if (xlfOper.lpxloper4_)
     {
         xlfOper.lpxloper4_->xltype = xltypeRef;
-        XLMREF * pmRef = reinterpret_cast<XLMREF *>(TempMemory::GetMemory(sizeof(XLMREF)));
+        XLMREF * pmRef = TempMemory::GetMemory<XLMREF>();
         pmRef->count=1;
         pmRef->reftbl[0].rwFirst = range.GetRowBegin();
         pmRef->reftbl[0].rwLast = range.GetRowEnd()-1;
@@ -773,7 +772,7 @@ xlw::XlfOper& xlw::XlfOperImpl4::Set(XlfOper &xlfOper, const char *value) const
         // One byte more for the string length (convention used by Excel)
         // and another so that the string is null terminated so that the 
         // debugger sees it correctly
-        LPSTR str = reinterpret_cast<LPSTR>(TempMemory::GetMemory(n + 2));
+        LPSTR str = TempMemory::GetMemory<char>(n + 2);
         strncpy(str + 1, value, n);
         str[n + 1] = 0;
 
@@ -799,7 +798,7 @@ xlw::XlfOper& xlw::XlfOperImpl4::Set(XlfOper &xlfOper, const std::wstring &value
         // One byte more for the string length (convention used by Excel)
         // and another so that the string is null terminated so that the 
         // debugger sees it correctly
-        LPSTR str = reinterpret_cast<LPSTR>(TempMemory::GetMemory((n + 2)));
+        LPSTR str = TempMemory::GetMemory<char>(n + 2);
         wcstombs(str + 1, value.c_str(), n);
         str[n + 1] = 0;
         xlfOper.lpxloper4_->val.str = str;
@@ -814,7 +813,7 @@ xlw::XlfOper& xlw::XlfOperImpl4::Set(XlfOper &xlfOper, RW r, COL c) const
     xlfOper.lpxloper4_->xltype = xltypeMulti;
     xlfOper.lpxloper4_->val.array.rows = r;
     xlfOper.lpxloper4_->val.array.columns = c;
-    xlfOper.lpxloper4_->val.array.lparray = (LPXLOPER)TempMemory::GetMemory(r * c * sizeof(XLOPER));
+    xlfOper.lpxloper4_->val.array.lparray = TempMemory::GetMemory<XLOPER>(r * c);
     for (size_t i = 0; i < static_cast<size_t>(r) * static_cast<size_t>(c); ++i)
         xlfOper.lpxloper4_->val.array.lparray[i].xltype = xltypeNil;
     return xlfOper;
@@ -829,7 +828,7 @@ xlw::XlfOper& xlw::XlfOperImpl4::SetElement(XlfOper &xlfOper, RW r, COL c, const
         element.val.num = value.lpxloper4_->val.num;
     } else if (value.lpxloper4_->xltype == xltypeStr) {
         size_t n = static_cast<BYTE>(value.lpxloper4_->val.str[0]) + 1;
-        element.val.str = TempMemory::GetMemory(n);
+        element.val.str = TempMemory::GetMemory<char>(n);
         memcpy(element.val.str, value.lpxloper4_->val.str, n);
     } else if (value.lpxloper4_->xltype == xltypeBool) {
         element.val.xbool = value.lpxloper4_->val.xbool;

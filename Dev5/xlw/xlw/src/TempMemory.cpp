@@ -26,7 +26,7 @@ static DWORD tlsIndex = TLS_OUT_OF_INDEXES;
 
 namespace xlw {
 
-    char* TempMemory::GetMemory(size_t bytes)
+    char* TempMemory::GetBytes(size_t bytes)
     {
         TempMemory* threadStorage = (TempMemory*)TlsGetValue(tlsIndex);
         if(!threadStorage)

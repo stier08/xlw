@@ -148,8 +148,7 @@ namespace xlw {
                 xlfOper.lpxloper12_->xltype = xltypeMulti;
                 xlfOper.lpxloper12_->val.array.rows = rows;
                 xlfOper.lpxloper12_->val.array.columns = cols;
-                xlfOper.lpxloper12_->val.array.lparray =
-                    (LPXLOPER12)XlfExcel::Instance().GetMemory(rows * cols * sizeof(XLOPER12));
+                xlfOper.lpxloper12_->val.array.lparray = TempMemory::GetMemory<XLOPER12>(rows * cols);
                 for (int i = 0; i < rows * cols; ++i, ++it)
                     xlfOper.lpxloper12_->val.array.lparray[i] = *(LPXLOPER12)XlfOper(*it);
                 return xlfOper;
@@ -176,8 +175,7 @@ namespace xlw {
                 xlfOper.lpxloper4_->xltype = xltypeMulti;
                 xlfOper.lpxloper4_->val.array.rows = rows;
                 xlfOper.lpxloper4_->val.array.columns = cols;
-                xlfOper.lpxloper4_->val.array.lparray =
-                    (LPXLOPER)XlfExcel::Instance().GetMemory(rows * cols * sizeof(XLOPER));
+                xlfOper.lpxloper4_->val.array.lparray = TempMemory::GetMemory<XLOPER>(rows * cols);
                 for (int i = 0; i < rows*cols; ++i, ++it)
                     xlfOper.lpxloper4_->val.array.lparray[i] = *(LPXLOPER)XlfOper(*it);
                 return xlfOper;

@@ -145,7 +145,7 @@ namespace xlw {
             lpxloper_->xltype = xltypeMulti;
             lpxloper_->val.array.rows = r;
             lpxloper_->val.array.columns = c;
-            lpxloper_->val.array.lparray = (LPXLOPER12)XlfExcel::Instance().GetMemory(r*c*sizeof(XLOPER12));
+            lpxloper_->val.array.lparray = TempMemory::GetMemory<XLOPER12>(r*c);
             for (size_t i = 0; i < size_t(r*c); ++i, ++it)
                 lpxloper_->val.array.lparray[i] = *(LPXLOPER12)XlfOper12(*it);
             return *this;

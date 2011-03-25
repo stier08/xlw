@@ -42,7 +42,11 @@ namespace xlw {
         //! \name Memory management
         //@{
         //! Allocates memory in the framework temporary buffer
-        static char* GetMemory(size_t bytes);
+        template<typename TYPE>
+        static TYPE* GetMemory(size_t numItems = 1)
+        {
+            return reinterpret_cast<TYPE*>(GetBytes(numItems * sizeof(TYPE)));
+        }
         //! Frees temporary memory used by the XLL
         static void FreeMemory();
 
@@ -62,6 +66,9 @@ namespace xlw {
         //! Dtor.
         ~TempMemory();
         //@}
+
+        //! Allocates memory in the framework temporary buffer
+        static char* GetBytes(size_t bytes);
 
         char* InternalGetMemory(size_t bytes);
         //! Frees temporary memory used by the XLL
