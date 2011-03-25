@@ -26,26 +26,24 @@
 
 #include <xlw/XlfExcel.h>
 #include <cstdio>
+#include <iostream>
 #include <stdexcept>
 #include <xlw/XlfOper.h>
 #include <xlw/XlfOperImpl4.h>
 #include <xlw/XlfOperImpl12.h>
 #include <xlw/macros.h>
+#include <xlw/TempMemory.h>
 // Stop header precompilation
 #ifdef _MSC_VER
 #pragma hdrstop
 #endif
 
-#ifndef NDEBUG
-#include <xlw/XlfExcel.inl>
-#endif
-
 extern "C"
 {
     //! Main API function to Excel.
-    int (__cdecl *Excel4_)(int xlfn, LPXLOPER operRes, int count, ...);
+    static int (__cdecl *Excel4_)(int xlfn, LPXLOPER operRes, int count, ...);
     //! Main API function to Excel, passing the argument as an array.
-    int (__stdcall *Excel4v_)(int xlfn, LPXLOPER operRes, int count, LPXLOPER far opers[]);
+    static int (__stdcall *Excel4v_)(int xlfn, LPXLOPER operRes, int count, LPXLOPER far opers[]);
 }
 
 xlw::XlfExcel *xlw::XlfExcel::this_ = 0;
@@ -118,13 +116,12 @@ bool xlw::XlfExcel::IsEscPressed() const {
     return ret.AsBool();
 }
 
-xlw::XlfExcel::XlfExcel(): impl_(0), offset_(0) {
+xlw::XlfExcel::XlfExcel(): impl_(0) {
     impl_ = new XlfExcelImpl();
     return;
 }
 
 xlw::XlfExcel::~XlfExcel() {
-    FreeMemory(true);
     delete impl_;
     this_ = 0;
     return;
@@ -191,7 +188,7 @@ XLOPER_TYPE* varArgsToArray(int count, va_list& vargs)
     // on 64 bit the parameters aren't being passed on the stack a useful
     // enough way so we can't do the pointer trick used on 32 bits
     // We just copy them into a temporary array
-    XLOPER_TYPE* args = (XLOPER_TYPE*)xlw::XlfExcel::Instance().GetMemory(count*sizeof(XLOPER_TYPE));
+    XLOPER_TYPE* args = (XLOPER_TYPE*)xlw::TempMemory::GetMemory(count*sizeof(XLOPER_TYPE));
     for(int i(0); i < count; ++i)
     {
         args[i] = va_arg(vargs, XLOPER_TYPE);

@@ -33,6 +33,7 @@
 #include <xlw/CellMatrix.h>
 #include <algorithm>
 #include <xlw/macros.h>
+#include <xlw/TempMemory.h>
 
 // Stop header precompilation
 #ifdef _MSC_VER
@@ -67,7 +68,7 @@ xlw::XlfOper4::~XlfOper4()
 
 int xlw::XlfOper4::Allocate()
 {
-    lpxloper_ = (LPXLOPER)XlfExcel::Instance().GetMemory(sizeof(XLOPER));
+    lpxloper_ = (LPXLOPER)TempMemory::GetMemory(sizeof(XLOPER));
     lpxloper_->xltype = xltypeNil;
     return xlretSuccess;
 }
@@ -747,7 +748,7 @@ int xlw::XlfOper4::ConvertToString(char *& s) const throw()
         // Must use datatype unsigned char (BYTE) to process 0th byte
         // otherwise numbers greater than 128 are incorrect
         size_t n = static_cast<BYTE>(lpxloper_->val.str[0]);
-        s = XlfExcel::Instance().GetMemory(n + 1);
+        s = TempMemory::GetMemory(n + 1);
         memcpy(s, lpxloper_->val.str + 1, n);
         s[n] = 0;
         xlret = xlretSuccess;
@@ -849,7 +850,7 @@ xlw::XlfOper4& xlw::XlfOper4::Set(const CellMatrix& cells)
     lpxloper_->val.array.columns = static_cast<WORD>(c);
 
     lpxloper_->val.array.lparray
-            = (LPXLOPER)XlfExcel::Instance().GetMemory(r*c*sizeof(XLOPER));
+            = (LPXLOPER)TempMemory::GetMemory(r*c*sizeof(XLOPER));
 
     for (size_t i=0; i < r; i++)
         for (size_t j=0; j < c; j++)
@@ -935,7 +936,7 @@ xlw::XlfOper4& xlw::XlfOper4::Set(const XlfRef& range)
     if (lpxloper_)
     {
         lpxloper_->xltype = xltypeRef;
-        XLMREF * pmRef = reinterpret_cast<XLMREF *>(XlfExcel::Instance().GetMemory(sizeof(XLMREF)));
+        XLMREF * pmRef = reinterpret_cast<XLMREF *>(TempMemory::GetMemory(sizeof(XLMREF)));
         pmRef->count=1;
         pmRef->reftbl[0].rwFirst = range.GetRowBegin();
         pmRef->reftbl[0].rwLast = range.GetRowEnd()-1;
@@ -959,7 +960,7 @@ xlw::XlfOper4& xlw::XlfOper4::Set(const char *value)
         }
         // One byte more for NULL terminal char (allow use of strcpy)
         // and one for the std::string size (convention used by Excel)
-        LPSTR str = reinterpret_cast<LPSTR>(XlfExcel::Instance().GetMemory(n + 2));
+        LPSTR str = reinterpret_cast<LPSTR>(TempMemory::GetMemory(n + 2));
         strncpy(str + 1, value, n);
         str[n + 1] = 0;
 
@@ -975,7 +976,7 @@ xlw::XlfOper4& xlw::XlfOper4::Set(WORD r, WORD c)
     lpxloper_->xltype = xltypeMulti;
     lpxloper_->val.array.rows = r;
     lpxloper_->val.array.columns = c;
-    lpxloper_->val.array.lparray = (LPXLOPER)XlfExcel::Instance().GetMemory(r * c * sizeof(XLOPER));
+    lpxloper_->val.array.lparray = (LPXLOPER)TempMemory::GetMemory(r * c * sizeof(XLOPER));
     for (size_t i = 0; i < static_cast<size_t>(r * c); ++i)
         lpxloper_->val.array.lparray[i].xltype = xltypeNil;
     return *this;
@@ -990,7 +991,7 @@ xlw::XlfOper4& xlw::XlfOper4::SetElement(WORD r, WORD c, const XlfOper4 &value)
         element.val.num = value.lpxloper_->val.num;
     } else if (value.lpxloper_->xltype == xltypeStr) {
         size_t n = static_cast<BYTE>(value.lpxloper_->val.str[0]) + 1;
-        element.val.str = XlfExcel::Instance().GetMemory(n);
+        element.val.str = TempMemory::GetMemory(n);
         memcpy(element.val.str, value.lpxloper_->val.str, n);
     } else if (value.lpxloper_->xltype == xltypeBool) {
         element.val.xbool = value.lpxloper_->val.xbool;

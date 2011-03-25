@@ -116,6 +116,8 @@
 				<File
 						RelativePath="..\..\src\MyContainers.cpp"/>
 				<File
+						RelativePath="..\..\src\TempMemory.cpp"/>
+				<File
 						RelativePath="..\..\src\Win32StreamBuf.cpp"/>
 				<File
 						RelativePath="..\..\src\xlarray.cpp"/>
@@ -181,6 +183,8 @@
 				<File
 						RelativePath="..\..\include\xlw\MyContainers.h"/>
 				<File
+						RelativePath="..\..\include\xlw\TempMemory.h"/>
+				<File
 						RelativePath="..\..\include\xlw\Win32StreamBuf.h"/>
 				<File
 						RelativePath="..\..\include\xlw\Win32StreamBuf.inl"/>
@@ -202,8 +206,6 @@
 						RelativePath="..\..\include\xlw\XlfCmdDesc.h"/>
 				<File
 						RelativePath="..\..\include\xlw\XlfExcel.h"/>
-				<File
-						RelativePath="..\..\include\xlw\XlfExcel.inl"/>
 				<File
 						RelativePath="..\..\include\xlw\XlfException.h"/>
 				<File

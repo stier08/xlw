@@ -28,6 +28,7 @@ LIBSRC = ArgList.cpp \
          FileConverter.cpp \
          MJmatrices.cpp \
          MyContainers.cpp \
+         TempMemory.cpp \
          Win32StreamBuf.cpp \
          XlFunctionRegistration.cpp \
          XlfAbstractCmdDesc.cpp \

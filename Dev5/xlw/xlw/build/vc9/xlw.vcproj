@@ -286,6 +286,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\TempMemory.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\Win32StreamBuf.cpp"
 				>
 			</File>
@@ -446,6 +450,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\include\xlw\TempMemory.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\include\xlw\Win32StreamBuf.h"
 				>
 			</File>
@@ -487,10 +495,6 @@
 			</File>
 			<File
 				RelativePath="..\..\include\xlw\XlfExcel.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\include\xlw\XlfExcel.inl"
 				>
 			</File>
 			<File

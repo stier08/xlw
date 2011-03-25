@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -124,6 +124,7 @@
     <ClCompile Include="..\..\src\FileConverter.cpp" />
     <ClCompile Include="..\..\src\MJmatrices.cpp" />
     <ClCompile Include="..\..\src\MyContainers.cpp" />
+    <ClCompile Include="..\..\src\TempMemory.cpp" />
     <ClCompile Include="..\..\src\Win32StreamBuf.cpp" />
     <ClCompile Include="..\..\src\xlarray.cpp" />
     <ClCompile Include="..\..\src\xlcall.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="..\..\include\xlw\macros.h" />
     <ClInclude Include="..\..\include\xlw\MJmatrices.h" />
     <ClInclude Include="..\..\include\xlw\MyContainers.h" />
+    <ClInclude Include="..\..\include\xlw\TempMemory.h" />
     <ClInclude Include="..\..\include\xlw\Win32StreamBuf.h" />
     <ClInclude Include="..\..\include\xlw\wrapper.h" />
     <ClInclude Include="..\..\include\xlw\xlarray.h" />
@@ -191,7 +193,6 @@
   <ItemGroup>
     <None Include="..\..\include\xlw\Win32StreamBuf.inl" />
     <None Include="..\..\include\xlw\XlfAbstractCmdDesc.inl" />
-    <None Include="..\..\include\xlw\XlfExcel.inl" />
     <None Include="..\..\include\xlw\XlfException.inl" />
     <None Include="..\..\include\xlw\XlfOper.inl" />
     <None Include="..\..\include\xlw\XlfOper12.inl" />

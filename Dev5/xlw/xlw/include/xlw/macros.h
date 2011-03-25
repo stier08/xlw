@@ -28,6 +28,7 @@
 #include <xlw/XlfException.h>
 #include <xlw/XlfExcel.h>
 #include <xlw/CellMatrix.h>
+#include <xlw/TempMemory.h>
 
 #if defined(_MSC_VER)
 #pragma once
@@ -48,7 +49,7 @@ If necessary, frees the internal buffer maintained by XlfExcel for heap memory
 that is returned to Excel.
 \sa XlfExcel
 */
-#define EXCEL_BEGIN XlfExcel::Instance().FreeMemory(); \
+#define EXCEL_BEGIN TempMemory::FreeMemory(); \
 try \
 {
 

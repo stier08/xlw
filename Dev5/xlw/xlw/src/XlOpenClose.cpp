@@ -33,8 +33,8 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 #include<string>
 
 
-xlw::Win32StreamBuf debuggerStreamBuf;
-std::streambuf * oldStreamBuf;
+static xlw::Win32StreamBuf debuggerStreamBuf;
+static std::streambuf * oldStreamBuf;
 
 extern "C"
 {
