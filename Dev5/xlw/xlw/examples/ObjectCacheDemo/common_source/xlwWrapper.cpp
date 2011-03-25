@@ -45,7 +45,10 @@ CreateObjectArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -97,7 +100,10 @@ RetrieveObjectArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -150,7 +156,10 @@ CreateDiscountCurveArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -209,7 +218,10 @@ RetrieveDiscountCurveArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -262,7 +274,10 @@ DiscountArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 

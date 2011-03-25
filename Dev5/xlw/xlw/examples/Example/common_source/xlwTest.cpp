@@ -51,7 +51,10 @@ EmptyArgFunctionArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -96,7 +99,10 @@ EchoShortArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -148,7 +154,10 @@ EchoMatArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -200,7 +209,10 @@ EchoMatrixArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -250,7 +262,10 @@ EchoArrayArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -302,7 +317,10 @@ EchoCellsArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -361,7 +379,10 @@ CircArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -417,7 +438,10 @@ ConcatArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -479,7 +503,10 @@ StatsArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -538,7 +565,10 @@ HelloWorldAgainArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -597,7 +627,10 @@ EchoULArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -654,7 +687,10 @@ EchoIntArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -712,7 +748,10 @@ EchoDoubleOrNothingArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -776,7 +815,10 @@ EchoArgListArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -837,7 +879,10 @@ SystemTimeArgs,
 ,true
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -899,7 +944,10 @@ PayOffEvaluationArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -965,7 +1013,10 @@ ContainsErrorArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -1017,7 +1068,10 @@ ContainsDivByZeroArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -1069,7 +1123,10 @@ GetThreadIdArgs,
 ,false
 ,true
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -1114,7 +1171,10 @@ typeStringArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -1171,7 +1231,10 @@ typeString2Args,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -1203,6 +1266,54 @@ time(0,0) = "time taken";
 time(0,1) = t;
 resultCells.PushBottom(time);
 return XlfOper(resultCells);
+EXCEL_END
+}
+}
+
+
+
+//////////////////////////
+
+namespace
+{
+XLRegistration::Arg
+GetNoteArgs[]=
+{
+ { "","" } 
+};
+  XLRegistration::XLFunctionRegistrationHelper
+registerGetNote("xlGetNote",
+"GetNote",
+" the text of the note attached to the calling cell ",
+LibraryName,
+GetNoteArgs,
+0
+,false
+,false
+,""
+,""
+,false
+,true
+,false
+);
+}
+
+
+
+extern "C"
+{
+LPXLFOPER EXCEL_EXPORT
+xlGetNote(
+)
+{
+EXCEL_BEGIN;
+
+	if (XlfExcel::Instance().IsCalledByFuncWiz())
+		return XlfOper(true);
+
+std::string result(
+	GetNote());
+return XlfOper(result);
 EXCEL_END
 }
 }
