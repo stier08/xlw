@@ -19,7 +19,10 @@
 #include <iostream>
 #include <sstream>
 #include <cmath>
+
+#ifdef _MSC_VER
 #pragma warning (disable : 4996)
+#endif
 
 
 std::string ulToString(unsigned long n);
