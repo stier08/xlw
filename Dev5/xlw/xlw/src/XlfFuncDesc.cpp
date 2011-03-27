@@ -39,8 +39,8 @@ struct xlw::XlfFuncDescImpl
     //! Ctor.
     XlfFuncDescImpl(xlw::XlfFuncDesc::RecalcPolicy recalcPolicy, bool Threadsafe,
                     const std::string& category, bool Asynchronous, bool MacroSheetEquivalent,
-                    bool ClusterSafe) : recalcPolicy_(recalcPolicy), Threadsafe_(Threadsafe), 
-                    category_(category), Asynchronous_(Asynchronous), MacroSheetEquivalent_(MacroSheetEquivalent),
+                    bool ClusterSafe) : recalcPolicy_(recalcPolicy), category_(category),
+                    Threadsafe_(Threadsafe), Asynchronous_(Asynchronous), MacroSheetEquivalent_(MacroSheetEquivalent),
                     ClusterSafe_(ClusterSafe)
         {}
     //! Recalculation policy.
@@ -73,7 +73,7 @@ xlw::XlfFuncDesc::XlfFuncDesc(const std::string& name, const std::string& alias,
                          const std::string& comment, const std::string& category,
                          RecalcPolicy recalcPolicy, bool Threadsafe, const std::string &returnTypeCode,
 						 const std::string &helpID,
-                         bool Asynchronous, bool MacroSheetEquivalent, 
+                         bool Asynchronous, bool MacroSheetEquivalent,
                          bool ClusterSafe)
     : XlfAbstractCmdDesc(name, alias, comment), impl_(0), returnTypeCode_(returnTypeCode), helpID_(helpID)
 {
@@ -119,7 +119,6 @@ int xlw::XlfFuncDesc::DoUnregister(const std::string& dllName) const
     //live_ = false;
 
     XlfArgDescList arguments = GetArguments();
-    size_t nbargs = arguments.size();
     std::string args(XlfExcel::Instance().xlfOperType());
     std::string argnames;
 
@@ -145,7 +144,7 @@ int xlw::XlfFuncDesc::DoUnregister(const std::string& dllName) const
 }
 
 // VERY Important :
-// In the following function we are using Excel4 instead of Excel12 ( hence also 
+// In the following function we are using Excel4 instead of Excel12 ( hence also
 // using XLOPER4 instead of XLOPER12. This is deliberate. Registering functions
 // Excel12(..) when the arguments add up to more then 255 char is problematic. the functions
 // will not register see  see BUG ID: 2834715 on sourceforge - nc
