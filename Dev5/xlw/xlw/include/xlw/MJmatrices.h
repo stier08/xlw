@@ -6,7 +6,7 @@
 /*
  Copyright (C) 2006 Mark Joshi
  Copyright (C) 2007 Tim Brunne
- Copyright (C) 2009 Narinder S Claire
+ Copyright (C) 2009 2011 Narinder S Claire
  
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -63,6 +63,7 @@ namespace xlw {
         inline const double& operator()(size_t i, size_t j) const;
         inline double& operator()(size_t i, size_t j);
 
+		inline void swap(MJMatrix& theOther);// this cannot throw !
 
 
     private:

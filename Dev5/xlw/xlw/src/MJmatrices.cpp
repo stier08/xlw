@@ -5,7 +5,7 @@
 //
 /*
  Copyright (C) 2006 Mark Joshi
- Copyright (C) 2009 Narinder S Claire
+ Copyright (C) 2009 2011 Narinder S Claire
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -81,30 +81,30 @@ xlw::MJMatrix::MJMatrix(const MJMatrix& original)
                         Columns(original.Columns)
 {
     Create();
-
-    std::copy(original.Start, original.Start+Rows*Columns, Start);
+	if(Rows && Columns &&  original.Start && Start)
+	{
+       std::copy(original.Start, original.Start+Rows*Columns, Start);
+	}
 
 }
+
+void xlw::MJMatrix::swap(MJMatrix& theOther) // this cannot throw !
+{
+	   std::swap( Rows, theOther.Rows);
+       std::swap( Columns, theOther.Columns);
+       std::swap( RowStarts, theOther.RowStarts);
+       std::swap( Start, theOther.Start);
+	
+}
+
 
 xlw::MJMatrix& xlw::MJMatrix::operator=(const MJMatrix& original)
 {
     if (this != &original)
     {
-        if (Rows != original.Rows || Columns != original.Columns)
-        {
-            if (Start>0)
-            {
-                delete[] Start;
-                delete[] RowStarts;
-            }
+       MJMatrix temp(original);
+	   swap(temp);
 
-            Rows = original.Rows;
-            Columns = original.Columns;
-
-            Create();
-        }
-
-        std::copy(original.Start, original.Start+Rows*Columns, Start);
     }
 
     return *this;
