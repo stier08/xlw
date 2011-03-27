@@ -45,7 +45,7 @@ extern "C"
 		HMODULE theHandle = NULL;
 		char theDLLPathChar [MAX_PATH + 1] = "";
 		DWORD dwRet = 0;
-		const int bufferSize=4096;
+		const size_t bufferSize=4096;
 		std::auto_ptr<char> originalPathValue;
 		bool ok=true;
 		try {
@@ -66,12 +66,12 @@ extern "C"
 				dwRet = GetEnvironmentVariable("Path", originalPathValue.get(),  bufferSize);
 				if(bufferSize < dwRet)
 				{
-					originalPathValue.reset( new char[dwRet]);   
+					originalPathValue.reset( new char[dwRet]);
 					dwRet = GetEnvironmentVariable("Path", originalPathValue.get(), dwRet);
 					if(!dwRet)
 					{
 						ok = false;
-						std::cerr << XLW__HERE__ <<" Could not get PATH Environment Variable" << std::endl; 
+						std::cerr << XLW__HERE__ <<" Could not get PATH Environment Variable" << std::endl;
 
 					}
 				}
@@ -83,7 +83,7 @@ extern "C"
 				std::cerr << XLW__HERE__ <<" Could not attain path of DLL" << std::endl;
 
 			}
-			if(ok) 
+			if(ok)
 			{
 				std::string theDLLPath(theDLLPathChar);
 				std::string newPathValue( originalPathValue.get());
@@ -91,9 +91,9 @@ extern "C"
 
 				newPathValue+= ";"+theDLLPath.substr(0,pos);
 
-				if (!SetEnvironmentVariable("Path", newPathValue.c_str())) 
+				if (!SetEnvironmentVariable("Path", newPathValue.c_str()))
 				{
-					std::cerr << XLW__HERE__ << " SetEnvironmentVariable failed to set PATH" << std::endl; 
+					std::cerr << XLW__HERE__ << " SetEnvironmentVariable failed to set PATH" << std::endl;
 					ok = false;
 				}
 				else
