@@ -28,6 +28,12 @@ namespace xlw {
 
     char* TempMemory::GetBytes(size_t bytes)
     {
+#ifndef NDEBUG
+        if(tlsIndex == TLS_OUT_OF_INDEXES)
+        {
+            throw("DllMainTls not called from DllMain, use the XLW_DLLMAIN_IMPL macro in your xll");
+        }
+#endif
         TempMemory* threadStorage = (TempMemory*)TlsGetValue(tlsIndex);
         if(!threadStorage)
         {
@@ -108,7 +114,7 @@ namespace xlw {
 
 }
 
-BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved) {
+BOOL DllMainTls(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved) {
     switch (fdwReason) {
         case DLL_PROCESS_ATTACH:
             tlsIndex = TlsAlloc();

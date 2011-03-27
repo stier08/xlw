@@ -84,6 +84,11 @@ std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& func
   AddLine(output,"xlAutoClose();");
   AddLine(output,"}");
   AddLine(output,"}");
+  AddLine(output,"");
+  AddLine(output,"// Make sure DllMain is defined");
+  AddLine(output,"// To use your own DllMain define XLW_OWN_DLLMAIN");
+  AddLine(output,"// and ensure you call DllMainTls");
+  AddLine(output,"XLW_DLLMAIN_IMPL");
 
   AddLine(output,"");
   AddLine(output,"// registrations start here");
