@@ -25,6 +25,11 @@ xlAutoClose();
 }
 }
 
+// Make sure DllMain is defined
+// To use your own DllMain define XLW_OWN_DLLMAIN
+// and ensure you call DllMainTls
+XLW_DLLMAIN_IMPL
+
 // registrations start here
 
 
@@ -45,7 +50,10 @@ MyAddressArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -93,7 +101,10 @@ MessageInStatusBarArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
@@ -143,7 +154,10 @@ GetPidArgs,
 ,false
 ,false
 ,""
-
+,""
+,false
+,false
+,false
 );
 }
 
