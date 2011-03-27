@@ -21,6 +21,7 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 #if _MSC_VER < 1250
 #pragma warning(disable:4786)
 #endif
+#pragma warning(disable:4258)
 #endif
 #include <iostream>
 #include <fstream>
