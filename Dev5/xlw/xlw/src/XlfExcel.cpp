@@ -89,7 +89,7 @@ void xlw::XlfExcel::MsgBox(const char *errmsg, const char *title) {
             NULL);
         // Process any inserts in lpMsgBuf.
         char completeMessage[255];
-        sprintf(completeMessage,"%s due to error %d :\n%s", errmsg, err, (LPCSTR)lpMsgBuf);
+        sprintf(completeMessage,"%s due to error %lu :\n%s", errmsg, err, (LPCSTR)lpMsgBuf);
         MessageBox(NULL, completeMessage,"XLL Error", MB_OK | MB_ICONINFORMATION);
         // Free the buffer.
         LocalFree(lpMsgBuf);
