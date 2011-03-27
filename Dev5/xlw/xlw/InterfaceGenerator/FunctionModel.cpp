@@ -25,8 +25,8 @@
 FunctionModel::FunctionModel(std::string ReturnType_, std::string Name, std::string Description, 
                   bool Volatile_, bool Time_, bool Threadsafe_, 
                   std::string helpID_,bool Asynchronous_,bool MacroSheet_, bool ClusterSafe_)
-: ReturnType(ReturnType_), FunctionName(Name), FunctionDescription(Description), Volatile(Volatile_),
-  Time(Time_), Threadsafe(Threadsafe_), helpID(helpID_),
+: ReturnType(ReturnType_), FunctionName(Name), FunctionDescription(Description), helpID(helpID_),
+  Volatile(Volatile_), Time(Time_), Threadsafe(Threadsafe_),
   Asynchronous(Asynchronous_),MacroSheet(MacroSheet_),ClusterSafe(ClusterSafe_)
 {
 }
