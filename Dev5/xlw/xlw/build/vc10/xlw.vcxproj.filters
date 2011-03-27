@@ -92,6 +92,9 @@
     <ClCompile Include="..\..\src\XlOpenClose.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\TempMemory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\xlw\ArgList.h">
@@ -193,15 +196,15 @@
     <ClInclude Include="..\..\include\xlw\xlw.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\xlw\TempMemory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\include\xlw\Win32StreamBuf.inl">
       <Filter>Header Files</Filter>
     </None>
     <None Include="..\..\include\xlw\XlfAbstractCmdDesc.inl">
-      <Filter>Header Files</Filter>
-    </None>
-    <None Include="..\..\include\xlw\XlfExcel.inl">
       <Filter>Header Files</Filter>
     </None>
     <None Include="..\..\include\xlw\XlfException.inl">
