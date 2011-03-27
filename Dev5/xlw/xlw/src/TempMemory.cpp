@@ -19,7 +19,9 @@
 
 #include "xlw/TempMemory.h"
 #include <iostream>
+#ifndef NOMINMAX
 #define NOMINMAX
+#endif
 #include <windows.h>
 
 static DWORD tlsIndex = TLS_OUT_OF_INDEXES;
@@ -42,7 +44,7 @@ namespace xlw {
         }
         return threadStorage->InternalGetMemory(bytes);
     }
-    
+
     void TempMemory::FreeMemory() {
         TempMemory* threadStorage = (TempMemory*)TlsGetValue(tlsIndex);
         if(threadStorage)
@@ -104,7 +106,7 @@ namespace xlw {
     }
 
     void TempMemory::ThreadDetach() {
-        TempMemory* threadStorage = (TempMemory*)TlsGetValue(tlsIndex); 
+        TempMemory* threadStorage = (TempMemory*)TlsGetValue(tlsIndex);
         if(threadStorage)
         {
             delete threadStorage;
@@ -126,11 +128,11 @@ BOOL DllMainTls(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved) {
 
         case DLL_THREAD_ATTACH:
             xlw::TempMemory::ThreadAttach();
-            break; 
+            break;
 
         case DLL_THREAD_DETACH:
             xlw::TempMemory::ThreadDetach();
-            break; 
+            break;
 
         case DLL_PROCESS_DETACH:
             xlw::TempMemory::ThreadDetach();
@@ -140,5 +142,5 @@ BOOL DllMainTls(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved) {
         default:
             break;
     }
-    return TRUE; 
+    return TRUE;
 }
