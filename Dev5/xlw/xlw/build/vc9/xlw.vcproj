@@ -20,7 +20,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="..\..\lib\"
 			IntermediateDirectory="$(ConfigurationName)\Objects\$(ProjectName)"
 			ConfigurationType="4"
 			>
@@ -45,6 +45,7 @@
 				AdditionalIncludeDirectories="..\..\include"
 				PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE"
 				RuntimeLibrary="3"
+				ProgramDataBaseFileName="$(OutDir)\xlw-vc90-mt-gd-$(ProjectName).pdb"
 				DebugInformationFormat="4"
 			/>
 			<Tool
@@ -78,7 +79,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|x64"
-			OutputDirectory="$(SolutionDir)\$(PlatformName)_$(ConfigurationName)"
+			OutputDirectory="..\..\lib\x64"
 			IntermediateDirectory="$(PlatformName)_$(ConfigurationName)\Objects\$(ProjectName)"
 			ConfigurationType="4"
 			>
@@ -104,6 +105,7 @@
 				AdditionalIncludeDirectories="..\..\include"
 				PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE"
 				RuntimeLibrary="3"
+				ProgramDataBaseFileName="$(OutDir)\xlw-vc90-mt-gd-$(ProjectName).pdb"
 				DebugInformationFormat="3"
 			/>
 			<Tool
@@ -137,7 +139,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="..\..\lib\"
 			IntermediateDirectory="$(ConfigurationName)\Objects\$(ProjectName)"
 			ConfigurationType="4"
 			>
@@ -193,7 +195,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|x64"
-			OutputDirectory="$(SolutionDir)\$(PlatformName)_$(ConfigurationName)"
+			OutputDirectory="..\..\lib\x64"
 			IntermediateDirectory="$(PlatformName)_$(ConfigurationName)\Objects\$(ProjectName)"
 			ConfigurationType="4"
 			>
