@@ -1,7 +1,7 @@
 
 
 	;!define DEV_OR_RELEASE "- This is a Beta Release"  ; uncomment on development version
-	!define DEV_OR_RELEASE "- This is a Development Snapshot 12-Mar-2011"                                ; uncomment on release version
+	!define DEV_OR_RELEASE "- This is a Development Snapshot 28-Mar-2011"                                ; uncomment on release version
 	;!define DEV_OR_RELEASE ""                        
 
 ;------------------------------------------------------------------------------------------------------------------------
@@ -58,7 +58,7 @@
 
 	!define MUI_HEADERIMAGE_BITMAP "xlw-site\images\logo.bmp"
 	!define MUI_WELCOMEFINISHPAGE_BITMAP   "xlw-site\images\header.bmp"
-	!define MUI_WELCOMEPAGE_TITLE "Welcome to the installer of xlw 5DEV - 12Mar2011"
+	!define MUI_WELCOMEPAGE_TITLE "Welcome to the installer of xlw 5DEV - 28Mar2011"
 	
 	
 
@@ -425,7 +425,7 @@ Section #
 		File "xlwLICENSE.TXT"
 		
 		SetOutPath "$INSTDIR"
-		File "Doc-${XLW_VERSION}-12Mar2011.TXT"
+		File "Doc-${XLW_VERSION}-28Mar2011.TXT"
 		
 		SetOutPath "$INSTDIR\utils"
 		File "MinGW_Installer\xlw-MinGW-Installer-gcc-4.5.2-1.exe"
@@ -437,7 +437,7 @@ Section #
 		
 		CreateDirectory "$SMPROGRAMS\XLW\${APP_VER}\xlw"
 		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\xlw\Extract XLW xll template.lnk " "$INSTDIR\TemplateExtractors\xlwTemplateExtractor.exe"
-		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\Getting Started.lnk " "$INSTDIR\Doc-${XLW_VERSION}-12Mar2011.TXT"
+		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\Getting Started.lnk " "$INSTDIR\Doc-${XLW_VERSION}-28Mar2011.TXT"
 		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\XLW License.lnk " "$INSTDIR\xlwLICENSE.TXT"
 		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\Uninstall XLW.lnk " "$INSTDIR\Uninstall.exe"
 		
