@@ -6,7 +6,7 @@
 /*
  Copyright (C) 2006 Mark Joshi
  Copyright (C) 2007 Tim Brunne
- Copyright (C) 2009 Narinder S Claire
+ Copyright (C) 2009 2011 Narinder S Claire
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -23,7 +23,7 @@
     everyone has their favoured matrix and array class
     You should alter this file to typedef your favourite of each to MyMatrix and MyVector.
 
-    For MyMatrix it is assumed that a constructor with MyMatrix(unsigned long, unsigned long) exists
+    For MyMatrix it is assumed that a constructor with MyMatrix(size_t, size_t) exists
     and that an element can be accessed via thisMatrix[i][j]
 */
 
@@ -34,7 +34,7 @@
 //#define USE_XLW_WITH_BOOST_UBLAS
 
 
-#include "MJMatrices.h"
+#include "NCMatrices.h"
 #include <vector>
 
 #ifdef USE_XLW_WITH_BOOST_UBLAS
@@ -60,7 +60,7 @@ namespace xlw {
     // uncomment the next line if your matrix class uses round brackets
     //#define USE_PARENTHESESES
     // change the typedefs to your favourite container classes
-    typedef MJMatrix MyMatrix;
+    typedef NCMatrix MyMatrix;
     typedef std::vector<double> MyArray;
     typedef MyMatrix NEMatrix;
 

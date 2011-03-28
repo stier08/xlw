@@ -26,7 +26,7 @@ LIBSRC = ArgList.cpp \
          Dispatcher.cpp \
          DoubleOrNothing.cpp \
          FileConverter.cpp \
-         MJmatrices.cpp \
+         NCmatrices.cpp \
          MyContainers.cpp \
          TempMemory.cpp \
          Win32StreamBuf.cpp \
