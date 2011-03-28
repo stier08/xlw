@@ -66,6 +66,19 @@
   </embed>
 </object>
 
+<h3>Installing the "MinGW, Code::Blocks and XLW" Combo </h3> 
+<object width="550" height="430">
+  <param name="movie" value="http://www.youtube.com/v/PvQPEWKPB1w">
+  </param>
+  <param name="wmode" value="transparent">
+  </param>
+  <embed src="http://www.youtube.com/v/PvQPEWKPB1w"
+  type="application/x-shockwave-flash" wmode="transparent"
+  width="550" height="430">
+  </embed>
+</object>
+
+
 
 
 <!--#include virtual="footer.inc"-->

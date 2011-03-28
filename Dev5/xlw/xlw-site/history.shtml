@@ -1,10 +1,22 @@
 <!--#include virtual="header.inc"-->
 <h2>Version History</h2>
 
-<h3>Release 4.0 Beta 2 - 16 Aug 2009</h3>
+
+<h3>Release 4.0 Final - 24 September 2009</h3>
+<ul>
+<li>Version 4.0.0 finally released, after 11 months in development</li>
+</ul>
+
+<h3>50,000 Downloads - 13 September 2009</h3>
+<ul>
+<li> On Sunday, 13th September 2009, the total number of downloads from XLW's project page on Sourceforge hits 50,000</li>
+<li> The month of September 2009 saw the second highest number of downloads in 7 years of XLW being hosted on Sourceforge, second only to September 2005
+</ul>
+
+<h3>Release 4.0 Beta 2 - 16 August 2009</h3>
 <ul>
 <li>Extended for .NET to allow implementing od worksheet functions in C# and VB.NET</li>
-<li>New installer able to detect supported installed developement environments</li>
+<li>New installer able to detect supported installed development environments</li>
 <li>Template projects added to allow easy creation of new XLL projects</li>
 <li>Support added for the Code::Blocks IDE (MinGW) </li>
 <li>Upgrade MinGW dependency to GCC4.4.0</li>

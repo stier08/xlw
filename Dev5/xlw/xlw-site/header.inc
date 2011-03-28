@@ -4,7 +4,7 @@
 
 <html>
 <head>
-	<title>XLW - A for the Excel API</title>
+	<title>XLW - A Wrapper for the Excel API</title>
 	<meta http-equiv='Content-Style-Type' content='text/css' />
     <!--HeaderText--><style type='text/css'><!--
   ul, ol, pre, dl, p { margin-top:0px; margin-bottom:0px; }
@@ -51,7 +51,7 @@ a.varlink { text-decoration:none; }
 <body>
     <div id='wrapper'>
         <div id='head'></div>
-        <div id='version_string'>Release v3.0 |&nbsp Dev v4.0 Beta 2</div>
+        <div id='version_string'>Release v4.0</div>
         <div id='tagline'>A Wrapper for the Excel API</div>
         <div id='content'>
             <div id='col-left'>
@@ -79,3 +79,5 @@ a.varlink { text-decoration:none; }
 <!--PageText-->
 <div id='wikitext'>
 <div style='text-align: justify;' > 
+<div style ="margin-left:5px" id="navcontainer"><table width=600 ><tr><td>
+</td></tr></table></div>
