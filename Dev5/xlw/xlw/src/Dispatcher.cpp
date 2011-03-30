@@ -17,6 +17,9 @@
 #include <clw/Dispatcher.h>
 
 #include <xlw/ArgList.h>
+
+#ifdef USE_CLW_CODE
+
 namespace
 clw
 {
@@ -53,3 +56,10 @@ clw
 
 
 }
+#else
+// avoid linker warnings
+namespace
+{
+    char dummy = 0;
+}
+#endif

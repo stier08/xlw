@@ -24,6 +24,8 @@
 #include <cstdlib>
 using namespace xlw;
 
+#ifdef USE_CLW_CODE
+
 namespace
 {
   CellValue CellFromString(const std::string value)
@@ -180,7 +182,11 @@ namespace clw
 
   }
 
-
-
-
 }
+#else
+// avoid linker warnings
+namespace
+{
+    char dummy = 0;
+}
+#endif
