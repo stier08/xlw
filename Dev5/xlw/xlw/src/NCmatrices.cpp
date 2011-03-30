@@ -13,7 +13,7 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-#include <xlw/MJmatrices.h>
+#include <xlw/NCmatrices.h>
 #include <algorithm>
 
 
