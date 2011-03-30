@@ -24,8 +24,6 @@
 #include <algorithm>
 #include <sstream>
 
-#ifdef USE_CLW_CODE
-
 namespace
 {
     template<class T>
@@ -709,10 +707,3 @@ bool xlw::ArgumentList::GetIfPresent(const std::string& ArgumentName,
     ArgumentValue = GetArgumentListArgumentValue(ArgumentName);
     return true;
 }
-#else
-// avoid linker warnings
-namespace
-{
-    char dummy = 0;
-}
-#endif
