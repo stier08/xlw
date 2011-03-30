@@ -27,7 +27,7 @@
     !define MUI_UNICON "xlw\docs\images\xlw_32x32.ico"
 	!define MUI_HEADERIMAGE
 
-	!define MUI_HEADERIMAGE_BITMAP "xlw-site\images\logo.bmp"
+	!define MUI_HEADERIMAGE_BITMAP "xlw\docs\images\logo.bmp"
 	
 	
 

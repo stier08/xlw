@@ -1,9 +1,3 @@
-
-
-	;!define DEV_OR_RELEASE "- This is a Beta Release"  ; uncomment on development version
-	!define DEV_OR_RELEASE "- This is a Development Snapshot 28-Mar-2011"                                ; uncomment on release version
-	;!define DEV_OR_RELEASE ""                        
-
 ;------------------------------------------------------------------------------------------------------------------------
 ;------------------------------------------------------------------------------------------------------------------------
 ;Include Modern UI
@@ -27,10 +21,14 @@
 
     ;Name and file
     Name "${APP}"
-    OutFile "${APP_VER}.exe"
+    !ifndef RELEASE_VERSION
+        OutFile "${APP_VER}-${SHORT_REL_DATE}.exe"
+    !else
+        OutFile "${APP_VER}.exe"
+    !endif
 
 	LicenseForceSelection radiobuttons "I Accept" "I Decline"
-	BrandingText "${APP_VER}  ${DEV_OR_RELEASE}"
+	BrandingText "${APP_VER} ${DEV_OR_RELEASE}"
 
     ;Default installation folder
     InstallDir $PROGRAMFILES\XLW\${APP_VER}
@@ -56,9 +54,9 @@
     !define MUI_UNICON "xlw\docs\images\xlw_32x32.ico"
 	!define MUI_HEADERIMAGE
 
-	!define MUI_HEADERIMAGE_BITMAP "xlw-site\images\logo.bmp"
-	!define MUI_WELCOMEFINISHPAGE_BITMAP   "xlw-site\images\header.bmp"
-	!define MUI_WELCOMEPAGE_TITLE "Welcome to the installer of xlw 5DEV - 28Mar2011"
+	!define MUI_HEADERIMAGE_BITMAP "xlw\docs\images\logo.bmp"
+	!define MUI_WELCOMEFINISHPAGE_BITMAP   "xlw\docs\images\header5.bmp"
+	!define MUI_WELCOMEPAGE_TITLE "Welcome to the installer of xlw ${RELEASE_SHORT}"
 	
 	
 
@@ -425,7 +423,7 @@ Section #
 		File "xlwLICENSE.TXT"
 		
 		SetOutPath "$INSTDIR"
-		File "Doc-${XLW_VERSION}-28Mar2011.TXT"
+		File /oname=Doc-${RELEASE_SHORT}.TXT "Doc.TXT"
 		
 		SetOutPath "$INSTDIR\utils"
 		File "MinGW_Installer\xlw-MinGW-Installer-gcc-4.5.2-1.exe"

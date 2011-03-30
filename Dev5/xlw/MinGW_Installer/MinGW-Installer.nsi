@@ -22,12 +22,12 @@
 
 
     !define MUI_ABORTWARNING
-	!define MUI_ICON "xlw_32x32.ico"
-    !define MUI_UNICON "xlw_32x32.ico"
+	!define MUI_ICON "..\xlw\docs\images\xlw_32x32.ico"
+    !define MUI_UNICON "..\xlw\docs\images\xlw_32x32.ico"
 	!define MUI_HEADERIMAGE
 
-   	!define MUI_HEADERIMAGE_BITMAP "logo.bmp"
-	!define MUI_WELCOMEFINISHPAGE_BITMAP   "header.bmp"
+   	!define MUI_HEADERIMAGE_BITMAP "..\xlw\docs\images\logo.bmp"
+	!define MUI_WELCOMEFINISHPAGE_BITMAP   "..\xlw\docs\images\header.bmp"
 	!define MUI_WELCOMEPAGE_TITLE "xlw Installer for MinGW GCC 4.5.2-1"
 	
 
