@@ -26,13 +26,11 @@
 
 #include <xlw/Win32StreamBuf.h>
 
-#ifndef NDEBUG
-#include <xlw/Win32StreamBuf.inl>
-#endif
-
 #include <cassert>
 
-#define STRICT
+#ifndef STRICT
+#define STRICT 1
+#endif
 #include <windows.h>
 
 #if !(_WIN32_WINNT >= 0x0400) && !(_WIN32_WINDOWS > 0x0400)

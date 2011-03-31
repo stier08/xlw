@@ -18,35 +18,50 @@
 */
 
 #include "xlw/TempMemory.h"
+#include "xlw/CriticalSection.h"
+#include "xlw/ThreadLocalStorage.h"
 #include <iostream>
+#include <vector>
 #ifndef NOMINMAX
 #define NOMINMAX
 #endif
 #include <windows.h>
 
-static DWORD tlsIndex = TLS_OUT_OF_INDEXES;
+static ThreadLocalStorage<xlw::TempMemory> tls;
+static CriticalSection threadInfoVector;
+//FIXME: leaks the TempMemory objects
+// waiting for shared pointer class
+static std::vector<xlw::TempMemory*> tempMemoryInstances;
+
 
 namespace xlw {
 
     char* TempMemory::GetBytes(size_t bytes)
     {
-#ifndef NDEBUG
-        if(tlsIndex == TLS_OUT_OF_INDEXES)
-        {
-            throw("DllMainTls not called from DllMain, use the XLW_DLLMAIN_IMPL macro in your xll");
-        }
-#endif
-        TempMemory* threadStorage = (TempMemory*)TlsGetValue(tlsIndex);
+        TempMemory* threadStorage = tls.GetValue();
         if(!threadStorage)
         {
-            threadStorage = new TempMemory;
-            TlsSetValue(tlsIndex, (void*)threadStorage);
+            // we want to keep the temp allocation
+            // as fast as possibel so to avoid
+            // needing a critical section around each call
+            // we use a double lock
+            ProtectInScope protecting(threadInfoVector);
+            threadStorage = tls.GetValue();
+            if(!threadStorage)
+            {
+                threadStorage = new TempMemory;
+                tls.SetValue(threadStorage);
+                tempMemoryInstances.push_back(threadStorage);
+                // FIXME:
+                // also check for dead threads and delete 
+                // memory
+            }
         }
         return threadStorage->InternalGetMemory(bytes);
     }
 
     void TempMemory::FreeMemory() {
-        TempMemory* threadStorage = (TempMemory*)TlsGetValue(tlsIndex);
+        TempMemory* threadStorage = tls.GetValue();
         if(threadStorage)
         {
             threadStorage->InternalFreeMemory(false);
@@ -104,46 +119,21 @@ namespace xlw {
         }
     }
 
-    void TempMemory::ThreadAttach() {
-        TlsSetValue(tlsIndex, 0);
+    void TempMemory::InitializeProcess() {
+        // turns out we don't need to do anything now
+        // left in case we do in the future
     }
 
-    void TempMemory::ThreadDetach() {
-        TempMemory* threadStorage = (TempMemory*)TlsGetValue(tlsIndex);
-        if(threadStorage)
+    void TempMemory::TerminateProcess() {
+        ProtectInScope protecting(threadInfoVector);
+        for(size_t i(0); i < tempMemoryInstances.size(); ++i)
         {
-            delete threadStorage;
-            TlsSetValue(tlsIndex, (void*)0);
+            tempMemoryInstances[i]->InternalFreeMemory(true);
         }
+        // FIXME:
+        // should delete the pointer and array here too
+        // but we have  the issue when excel closes and
+        // calls xlAutoClose before the user can cancel
+        // fix leak when we have a shared pointer
     }
-
-}
-
-BOOL DllMainTls(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved) {
-    switch (fdwReason) {
-        case DLL_PROCESS_ATTACH:
-            tlsIndex = TlsAlloc();
-            if (tlsIndex == TLS_OUT_OF_INDEXES) {
-                return FALSE;
-            }
-            xlw::TempMemory::ThreadAttach();
-            break;
-
-        case DLL_THREAD_ATTACH:
-            xlw::TempMemory::ThreadAttach();
-            break;
-
-        case DLL_THREAD_DETACH:
-            xlw::TempMemory::ThreadDetach();
-            break;
-
-        case DLL_PROCESS_DETACH:
-            xlw::TempMemory::ThreadDetach();
-            TlsFree(tlsIndex);
-            break;
-
-        default:
-            break;
-    }
-    return TRUE;
 }

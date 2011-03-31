@@ -2,6 +2,7 @@
 /*
  Copyright (C) 1998, 1999, 2001, 2002, 2003, 2004 Jérôme Lecomte
  Copyright (C) 2007, 2008 Eric Ehlers
+ Copyright (C) 2011 John Adcock
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -55,10 +56,10 @@ namespace xlw {
         //@{
         //! Used to obtain instance on XlfExcel object.
         static XlfExcel& Instance();
+        //! Used to delete instance in xlAutoClose.
+        static void DeleteInstance();
         //! Sends an Excel message box
         static void MsgBox(const char *, const char *title = 0);
-        //! Dtor.
-        ~XlfExcel();
         //@}
 
         //! \name Inspectors
@@ -124,6 +125,8 @@ namespace xlw {
 
         //! Ctor.
         XlfExcel();
+        //! Dtor.
+        ~XlfExcel();
         //! Copy ctor is not defined.
         XlfExcel(const XlfExcel&);
         //! Assignment operator is not defined.

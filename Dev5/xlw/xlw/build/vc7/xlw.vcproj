@@ -124,6 +124,9 @@
 				RelativePath="..\..\src\NCmatrices.cpp">
 			</File>
 			<File
+				RelativePath="..\..\src\PathUpdater.cpp">
+			</File>
+			<File
 				RelativePath="..\..\src\TempMemory.cpp">
 			</File>
 			<File
@@ -204,6 +207,9 @@
 				RelativePath="..\..\include\xlw\CellMatrix.h">
 			</File>
 			<File
+				RelativePath="..\..\include\xlw\CriticalSection.h">
+			</File>
+			<File
 				RelativePath="..\..\include\xlw\DoubleOrNothing.h">
 			</File>
 			<File
@@ -216,13 +222,13 @@
 				RelativePath="..\..\include\xlw\macros.h">
 			</File>
 			<File
-				RelativePath="..\..\include\xlw\MJmatrices.h">
-			</File>
-			<File
 				RelativePath="..\..\include\xlw\MyContainers.h">
 			</File>
 			<File
 				RelativePath="..\..\include\xlw\NCmatrices.h">
+			</File>
+			<File
+				RelativePath="..\..\src\PathUpdater.h">
 			</File>
 			<File
 				RelativePath="..\..\include\xlw\TempMemory.h">

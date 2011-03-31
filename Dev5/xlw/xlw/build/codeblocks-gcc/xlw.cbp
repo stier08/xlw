@@ -41,12 +41,14 @@
 		<Unit filename="..\..\include\xlw\ArgListFactory.h" />
 		<Unit filename="..\..\include\xlw\ArgListFactoryHelper.h" />
 		<Unit filename="..\..\include\xlw\CellMatrix.h" />
+		<Unit filename="..\..\include\xlw\CriticalSection.h" />
 		<Unit filename="..\..\include\xlw\DoubleOrNothing.h" />
 		<Unit filename="..\..\include\xlw\ERR_Macros.h" />
 		<Unit filename="..\..\include\xlw\EXCEL32_API.h" />
 		<Unit filename="..\..\include\xlw\MJmatrices.h" />
 		<Unit filename="..\..\include\xlw\MyContainers.h" />
 		<Unit filename="..\..\include\xlw\NCmatrices.h" />
+		<Unit filename="..\..\src\PathUpdater.h" />
 		<Unit filename="..\..\include\xlw\TempMemory.h" />
 		<Unit filename="..\..\include\xlw\Win32StreamBuf.h" />
 		<Unit filename="..\..\include\xlw\Win32StreamBuf.inl" />
@@ -86,6 +88,7 @@
 		<Unit filename="..\..\src\FileConverter.cpp" />
 		<Unit filename="..\..\src\MyContainers.cpp" />
 		<Unit filename="..\..\src\NCmatrices.cpp" />
+		<Unit filename="..\..\src\PathUpdater.cpp" />
 		<Unit filename="..\..\src\TempMemory.cpp" />
 		<Unit filename="..\..\src\Win32StreamBuf.cpp" />
 		<Unit filename="..\..\src\XlFunctionRegistration.cpp" />

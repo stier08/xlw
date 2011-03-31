@@ -73,6 +73,15 @@ xlw::XlfExcel& xlw::XlfExcel::Instance() {
 }
 
 /*!
+Keep destructor private and ensure that we can be
+resurected cleanly
+*/
+void xlw::XlfExcel::DeleteInstance() {
+    delete this_;
+    this_ = 0;
+}
+
+/*!
 If no title is specified, the message is assumed to be an error log
 */
 void xlw::XlfExcel::MsgBox(const char *errmsg, const char *title) {

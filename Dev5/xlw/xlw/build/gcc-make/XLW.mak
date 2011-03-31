@@ -28,6 +28,7 @@ LIBSRC = ArgList.cpp \
          FileConverter.cpp \
          NCmatrices.cpp \
          MyContainers.cpp \
+         PathUpdater.cpp \
          TempMemory.cpp \
          Win32StreamBuf.cpp \
          XlFunctionRegistration.cpp \

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -124,6 +124,7 @@
     <ClCompile Include="..\..\src\FileConverter.cpp" />
     <ClCompile Include="..\..\src\NCmatrices.cpp" />
     <ClCompile Include="..\..\src\MyContainers.cpp" />
+    <ClCompile Include="..\..\src\PathUpdater.cpp" />
     <ClCompile Include="..\..\src\TempMemory.cpp" />
     <ClCompile Include="..\..\src\Win32StreamBuf.cpp" />
     <ClCompile Include="..\..\src\xlarray.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="..\..\include\xlw\ArgListFactory.h" />
     <ClInclude Include="..\..\include\xlw\ArgListFactoryHelper.h" />
     <ClInclude Include="..\..\include\xlw\CellMatrix.h" />
+    <ClInclude Include="..\..\include\xlw\CriticalSection.h" />
     <ClInclude Include="..\..\include\xlw\DoubleOrNothing.h" />
     <ClInclude Include="..\..\include\xlw\ERR_Macros.h" />
     <ClInclude Include="..\..\include\xlw\EXCEL32_API.h" />
@@ -166,6 +168,7 @@
     <ClInclude Include="..\..\include\xlw\MJmatrices.h" />
     <ClInclude Include="..\..\include\xlw\NCmatrices.h" />
     <ClInclude Include="..\..\include\xlw\MyContainers.h" />
+    <ClInclude Include="..\..\src\PathUpdater.h" />
     <ClInclude Include="..\..\include\xlw\TempMemory.h" />
     <ClInclude Include="..\..\include\xlw\Win32StreamBuf.h" />
     <ClInclude Include="..\..\include\xlw\wrapper.h" />
