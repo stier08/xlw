@@ -46,8 +46,18 @@ namespace xlw {
 					std::fill(theArray.begin(), theArray.end(),0.0);
 				}
 			} 
-			// The Default Copy constructor is fine
-			// NCMatrixData(const NCMatrixData&);
+
+            NCMatrixData(const NCMatrixData& theOther) :
+                theArray(theOther.theArray),
+                Rows(theOther.Rows),
+                Columns(theOther.Columns),
+                theRows(theOther.Rows)
+            {
+                for (size_t i=0; i < Rows; i++)
+                {
+                    theRows[i] = theArray.begin() + i * Columns;
+                }
+            }
 
 			std::vector<std::vector<double>::iterator > theRows;
 			std::vector<double> theArray;
