@@ -48,10 +48,10 @@ namespace xlw {
 			} 
 
             NCMatrixData(const NCMatrixData& theOther) :
+                theRows(theOther.Rows),
                 theArray(theOther.theArray),
                 Rows(theOther.Rows),
-                Columns(theOther.Columns),
-                theRows(theOther.Rows)
+                Columns(theOther.Columns)
             {
                 for (size_t i=0; i < Rows; i++)
                 {
