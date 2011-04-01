@@ -31,10 +31,6 @@ xlAutoClose();
 }
 }
 
-// Make sure DllMain is defined
-// To use your own DllMain define XLW_OWN_DLLMAIN
-// and ensure you call DllMainTls
-XLW_DLLMAIN_IMPL
 
 // registrations start here
 
@@ -54,7 +50,7 @@ LibraryName,
 EmptyArgFunctionArgs,
 0
 ,false
-,false
+,true
 ,""
 ,""
 ,false
@@ -102,7 +98,7 @@ LibraryName,
 EchoShortArgs,
 1
 ,false
-,false
+,true
 ,""
 ,""
 ,false
@@ -157,7 +153,7 @@ LibraryName,
 EchoMatArgs,
 1
 ,false
-,false
+,true
 ,""
 ,""
 ,false
@@ -212,7 +208,7 @@ LibraryName,
 EchoMatrixArgs,
 1
 ,false
-,false
+,true
 ,""
 ,""
 ,false
@@ -265,7 +261,7 @@ LibraryName,
 EchoArrayArgs,
 1
 ,false
-,false
+,true
 ,""
 ,""
 ,false
@@ -320,7 +316,7 @@ LibraryName,
 EchoCellsArgs,
 1
 ,false
-,false
+,true
 ,""
 ,""
 ,false
@@ -382,7 +378,7 @@ LibraryName,
 CircArgs,
 1
 ,false
-,false
+,true
 ,""
 ,""
 ,false
@@ -441,7 +437,7 @@ LibraryName,
 ConcatArgs,
 2
 ,false
-,false
+,true
 ,""
 ,""
 ,false
@@ -506,7 +502,7 @@ LibraryName,
 StatsArgs,
 1
 ,false
-,false
+,true
 ,""
 ,""
 ,false
@@ -568,7 +564,7 @@ LibraryName,
 HelloWorldAgainArgs,
 1
 ,false
-,false
+,true
 ,""
 ,""
 ,false
@@ -630,7 +626,7 @@ LibraryName,
 EchoULArgs,
 1
 ,false
-,false
+,true
 ,""
 ,""
 ,false
@@ -690,7 +686,7 @@ LibraryName,
 EchoIntArgs,
 1
 ,false
-,false
+,true
 ,""
 ,""
 ,false
@@ -751,7 +747,7 @@ LibraryName,
 EchoDoubleOrNothingArgs,
 2
 ,false
-,false
+,true
 ,""
 ,""
 ,false
@@ -818,7 +814,7 @@ LibraryName,
 EchoArgListArgs,
 1
 ,false
-,false
+,true
 ,""
 ,""
 ,false
@@ -882,7 +878,7 @@ LibraryName,
 SystemTimeArgs,
 1
 ,true
-,false
+,true
 ,""
 ,""
 ,false
@@ -1016,7 +1012,7 @@ LibraryName,
 ContainsErrorArgs,
 1
 ,false
-,false
+,true
 ,""
 ,""
 ,false
@@ -1071,7 +1067,7 @@ LibraryName,
 ContainsDivByZeroArgs,
 1
 ,false
-,false
+,true
 ,""
 ,""
 ,false
@@ -1174,7 +1170,7 @@ LibraryName,
 typeStringArgs,
 1
 ,false
-,false
+,true
 ,""
 ,""
 ,false
@@ -1234,7 +1230,7 @@ LibraryName,
 typeString2Args,
 1
 ,false
-,false
+,true
 ,""
 ,""
 ,false
