@@ -636,6 +636,8 @@ SubSection "xlwDotNet" xlwDotNet
 			SetOutPath "$INSTDIR\xlwDotNet\lib"
 			File "xlwDotNet\lib\xlwDotNet-vc80*.dll"
 			File "xlwDotNet\lib\xlwDotNet-vc80*.pdb"
+			File "xlwDotNet\lib\x64\xlwDotNet-vc80*.dll"
+			File "xlwDotNet\lib\x64\xlwDotNet-vc80*.pdb"
 			!insertmacro DotNetInterfaceGenerator VS8
 			!insertmacro projectfiles "xlwDotNet\Template_Projects\VS8"
 			!insertmacro sourcefiles  "xlwDotNet\Template_Projects\VS8"

@@ -22,6 +22,8 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
     <gdconfig>-gd</gdconfig>
+    <dir64>
+    </dir64>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -34,6 +36,8 @@
     <PlatformTarget>x86</PlatformTarget>
     <gdconfig>
     </gdconfig>
+    <dir64>
+    </dir64>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\Release\</OutputPath>
@@ -41,13 +45,38 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <gdconfig>-gd</gdconfig>
+    <dir64>x64/</dir64>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\x64_Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <FileAlignment>512</FileAlignment>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <RegisterForComInterop>false</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <gdconfig>
+    </gdconfig>
+    <dir64>x64/</dir64>
+    <OutputPath>..\x64_Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <FileAlignment>512</FileAlignment>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <RegisterForComInterop>false</RegisterForComInterop>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
     <Reference Include="Office, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="xlwDotNet, Version=0.0.0.0, Culture=neutral, PublicKeyToken=e6c495227a9be340, processorArchitecture=x86">
-      <HintPath>$(XLW)\xlwDotNet\lib\xlwDotNet-vc80-mt$(gdconfig)-5DEV.dll</HintPath>
+      <HintPath>$(XLW)\xlwDotNet\lib\$(dir64)xlwDotNet-vc80-mt$(gdconfig)-5DEV.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
   </ItemGroup>
@@ -68,7 +97,11 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>"$(DevEnvDir)..\..\VC\vcpackages\vcbuild"   "$(SolutionDir)Addin\$(SolutionName).sln"    "$(Configuration)|Win32"</PostBuildEvent>
+    <PostBuildEvent>if $(PlatformName) == x64 "$(DevEnvDir)..\..\VC\vcpackages\vcbuild"  "$(SolutionDir)Addin\$(SolutionName).sln"    "$(Configuration)|x64"
+if $(PlatformName) == x86 "$(DevEnvDir)..\..\VC\vcpackages\vcbuild"  "$(SolutionDir)Addin\$(SolutionName).sln"    "$(Configuration)|Win32"
+if $(PlatformName) == x64 %25SystemRoot%25\Microsoft.Net\Framework64\v2.0.50727\RegAsm.exe $(OutDir)RTDExample.NET.dll /codebase
+if $(PlatformName) == x86 %25SystemRoot%25\Microsoft.Net\Framework\v2.0.50727\RegAsm.exe $(OutDir)RTDExample.NET.dll /codebase
+</PostBuildEvent>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>

@@ -10,6 +10,10 @@ set vcbuildtoolpath=C:\Program Files (x86)\Microsoft Visual Studio 8\vc\vcpackag
 "C:\WINDOWS\Microsoft.NET\Framework\v3.5\MSBuild"   "C:\Temp\xlwDotNetTemplate Projects\VisualBasic\VB2005\Template.sln"  /t:rebuild  /property:Configuration=Debug   /property:Platform=x86   >> xlwDotNetTemplate_VB_Debug_8.log 2>&1 
 "C:\WINDOWS\Microsoft.NET\Framework\v3.5\MSBuild"   "C:\Temp\xlwDotNetTemplate Projects\Hybrid_Cpp_CSharp_XLLs\VS8_PRO\HybridTemplate.sln"  /t:rebuild  /property:Configuration=Debug >> xlwDotNetTemplate_VB_Debug_8.log 2>&1 
 
+"C:\WINDOWS\Microsoft.NET\Framework\v3.5\MSBuild"   "C:\Temp\xlwDotNetTemplate Projects\VS8\Template.sln"  /t:rebuild  /property:Configuration=Debug   /property:Platform=x64   >> xlwDotNetTemplate_Debug_8.log 2>&1 
+"C:\WINDOWS\Microsoft.NET\Framework\v3.5\MSBuild"   "C:\Temp\xlwDotNetTemplate Projects\Hybrid_Cpp_CSharp_XLLs\VS8_PRO\HybridTemplate.sln"  /t:rebuild  /property:Configuration=Debug   /property:Platform=x64   >> xlwDotNetHybridTemplate_Debug_8.log 2>&1 
+"C:\WINDOWS\Microsoft.NET\Framework\v3.5\MSBuild"   "C:\Temp\xlwDotNetTemplate Projects\VisualBasic\VB2005\Template.sln"  /t:rebuild  /property:Configuration=Debug   /property:Platform=x64   >> xlwDotNetTemplate_VB_Debug_8.log 2>&1 
+
 
 
 set DevEnvDir=C:\Program Files (x86)\Microsoft Visual Studio 9.0\Common7\IDE\
@@ -38,6 +42,10 @@ set vcbuildtoolpath=C:\Program Files (x86)\Microsoft Visual Studio 8\vc\vcpackag
 "C:\WINDOWS\Microsoft.NET\Framework\v3.5\MSBuild"   "C:\Temp\xlwDotNetTemplate Projects\Hybrid_Cpp_CSharp_XLLs\VS8_PRO\HybridTemplate.sln"  /t:rebuild  /property:Configuration=Release   /property:Platform=x86   >> xlwDotNetHybridTemplate_Release_8.log 2>&1 
 "C:\WINDOWS\Microsoft.NET\Framework\v3.5\MSBuild"   "C:\Temp\xlwDotNetTemplate Projects\VisualBasic\VB2005\Template.sln"  /t:rebuild  /property:Configuration=Release   /property:Platform=x86   >> xlwDotNetTemplate_VB_Release_8.log 2>&1 
 "C:\WINDOWS\Microsoft.NET\Framework\v3.5\MSBuild"   "C:\Temp\xlwDotNetTemplate Projects\Hybrid_Cpp_CSharp_XLLs\VS8_PRO\HybridTemplate.sln"  /t:rebuild  /property:Configuration=Release >> xlwDotNetTemplate_VB_Release_8.log 2>&1 
+
+"C:\WINDOWS\Microsoft.NET\Framework\v3.5\MSBuild"   "C:\Temp\xlwDotNetTemplate Projects\VS8\Template.sln"  /t:rebuild  /property:Configuration=Release   /property:Platform=x64   >> xlwDotNetTemplate_Release_8.log 2>&1 
+"C:\WINDOWS\Microsoft.NET\Framework\v3.5\MSBuild"   "C:\Temp\xlwDotNetTemplate Projects\Hybrid_Cpp_CSharp_XLLs\VS8_PRO\HybridTemplate.sln"  /t:rebuild  /property:Configuration=Release   /property:Platform=x64   >> xlwDotNetHybridTemplate_Release_8.log 2>&1 
+"C:\WINDOWS\Microsoft.NET\Framework\v3.5\MSBuild"   "C:\Temp\xlwDotNetTemplate Projects\VisualBasic\VB2005\Template.sln"  /t:rebuild  /property:Configuration=Release   /property:Platform=x64   >> xlwDotNetTemplate_VB_Release_8.log 2>&1 
 
 set DevEnvDir=C:\Program Files (x86)\Microsoft Visual Studio 9.0\Common7\IDE\
 set vcbuildtoolpath=C:\Program Files (x86)\Microsoft Visual Studio 9.0\vc\vcpackages
