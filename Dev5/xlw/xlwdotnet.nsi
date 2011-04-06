@@ -695,8 +695,8 @@ SubSection "xlwDotNet" xlwDotNet
 			!insertmacro sourcefiles  "xlwDotNet\Template_Projects\VS10"
 		;	!insertmacro projectfiles "xlwDotNet\Template_Projects\VisualBasic\VB2010"
 		;	!insertmacro sourcefiles  "xlwDotNet\Template_Projects\VisualBasic\VB2010"
-		;	!insertmacro projectfiles "xlwDotNet\Template_Projects\Hybrid_Cpp_CSharp_XLLs\VS10_PRO"
-		;	!insertmacro sourcefiles  "xlwDotNet\Template_Projects\Hybrid_Cpp_CSharp_XLLs\VS10_PRO"
+			!insertmacro projectfiles "xlwDotNet\Template_Projects\Hybrid_Cpp_CSharp_XLLs\VS10_PRO"
+			!insertmacro sourcefiles  "xlwDotNet\Template_Projects\Hybrid_Cpp_CSharp_XLLs\VS10_PRO"
 			CreateDirectory "$SMPROGRAMS\XLW\${APP_VER}\xlwDotNet"
 			CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\xlwDotNet\Extract XLW .NET xll template.lnk " "$INSTDIR\TemplateExtractors\xlwDotNetTemplateExtractor.exe"
 		SectionEnd
@@ -757,10 +757,10 @@ SubSection "xlwDotNet" xlwDotNet
 			!insertmacro sourcefiles  "xlwDotNet\Template_Projects\VS10"
 		;	!insertmacro projectfiles "xlwDotNet\Template_Projects\VisualBasic\VB2010"
 		;	!insertmacro sourcefiles  "xlwDotNet\Template_Projects\VisualBasic\VB2010"
-		;	${If} VS2010PRO_CSharp_INST != ""  
-		;		!insertmacro projectfiles "xlwDotNet\Template_Projects\Hybrid_Cpp_CSharp_XLLs\VS10_PRO"
-		;		!insertmacro sourcefiles  "xlwDotNet\Template_Projects\Hybrid_Cpp_CSharp_XLLs\VS10_PRO"
-		;	${EndIf}
+			${If} VS2010PRO_CSharp_INST != ""  
+				!insertmacro projectfiles "xlwDotNet\Template_Projects\Hybrid_Cpp_CSharp_XLLs\VS10_PRO"
+				!insertmacro sourcefiles  "xlwDotNet\Template_Projects\Hybrid_Cpp_CSharp_XLLs\VS10_PRO"
+			${EndIf}
 		SectionEnd
 		
 
