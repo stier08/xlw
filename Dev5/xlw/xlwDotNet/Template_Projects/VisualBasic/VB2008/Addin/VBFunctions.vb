@@ -10,7 +10,7 @@ Namespace Example
 
         <ExcelExport("Special Hello from the VB world")> _
        Public Shared Function SpecialHelloWorld( _
-            <Parameter("Go on trow me a matrix !")> ByVal theMatrix As xlwTypes.CellMatrix) As xlwTypes.CellMatrix
+            <Parameter("Go on throw me a matrix !")> ByVal theMatrix As xlwTypes.CellMatrix) As xlwTypes.CellMatrix
             Return theMatrix
         End Function
     End Class

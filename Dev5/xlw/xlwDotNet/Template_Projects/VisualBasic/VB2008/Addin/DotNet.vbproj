@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -22,6 +22,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
     <gdconfig>-gd</gdconfig>
+    <dir64></dir64>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -34,6 +35,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <gdconfig>
     </gdconfig>
+    <dir64></dir64>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\Release\</OutputPath>
@@ -41,11 +43,30 @@
     <DefineTrace>true</DefineTrace>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <gdconfig>-gd</gdconfig>
+    <dir64>x64/</dir64>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>..\x64_Debug\</OutputPath>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <gdconfig></gdconfig>
+    <dir64>x64/</dir64>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>..\x64_Release\</OutputPath>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="xlwDotNet, Version=0.0.0.0, Culture=neutral, PublicKeyToken=e6c495227a9be340, processorArchitecture=x86">
-      <HintPath>$(XLW)\xlwDotNet\lib\xlwDotNet-vc90-mt$(gdconfig)-5DEV.dll</HintPath>
+      <HintPath>$(XLW)\xlwDotNet\lib\$(dir64)xlwDotNet-vc90-mt$(gdconfig)-5DEV.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
   </ItemGroup>
@@ -72,7 +93,8 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>"$(DevEnvDir)..\..\VC\vcpackages\vcbuild"  "$(SolutionDir)Addin\$(SolutionName).sln"    "$(Configuration)|Win32"</PostBuildEvent>
+    <PostBuildEvent>if $(PlatformName) == x64 "$(DevEnvDir)..\..\VC\vcpackages\vcbuild"  "$(SolutionDir)Addin\$(SolutionName).sln"    "$(Configuration)|x64"
+if $(PlatformName) == x86 "$(DevEnvDir)..\..\VC\vcpackages\vcbuild"  "$(SolutionDir)Addin\$(SolutionName).sln"    "$(Configuration)|Win32"</PostBuildEvent>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
