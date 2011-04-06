@@ -276,6 +276,19 @@
 			
 			!insertmacro DotNetHeaders
 	!macroend
+
+	!macro DotNetInterfaceGenerator64  dir
+			SetOutPath "$INSTDIR\xlwDotNet\build\${dir}\x64_Debug"
+			File  "xlwDotNet\build\${dir}\x64_Debug\*.dll"
+			File  "xlwDotNet\build\${dir}\x64_Debug\*.exe"
+			File  "xlwDotNet\build\${dir}\x64_Debug\*.pdb"
+			
+			SetOutPath "$INSTDIR\xlwDotNet\build\${dir}\x64_Release"
+			File  "xlwDotNet\build\${dir}\x64_Release\*.dll"
+			File  "xlwDotNet\build\${dir}\x64_Release\*.exe"
+			
+			!insertmacro DotNetHeaders
+	!macroend
 	
 	!macro InterfaceGenerator  dir
 			SetOutPath "$INSTDIR\xlw\build\${dir}\Debug"
@@ -639,6 +652,7 @@ SubSection "xlwDotNet" xlwDotNet
 			File "xlwDotNet\lib\x64\xlwDotNet-vc80*.dll"
 			File "xlwDotNet\lib\x64\xlwDotNet-vc80*.pdb"
 			!insertmacro DotNetInterfaceGenerator VS8
+			!insertmacro DotNetInterfaceGenerator64 VS8
 			!insertmacro projectfiles "xlwDotNet\Template_Projects\VS8"
 			!insertmacro sourcefiles  "xlwDotNet\Template_Projects\VS8"
 			!insertmacro projectfiles "xlwDotNet\Template_Projects\VisualBasic\VB2005"
@@ -654,7 +668,10 @@ SubSection "xlwDotNet" xlwDotNet
 			SetOutPath "$INSTDIR\xlwDotNet\lib"
 			File "xlwDotNet\lib\xlwDotNet-vc90*.dll"
 			File "xlwDotNet\lib\xlwDotNet-vc90*.pdb"
+			File "xlwDotNet\lib\x64\xlwDotNet-vc90*.dll"
+			File "xlwDotNet\lib\x64\xlwDotNet-vc90*.pdb"
 			!insertmacro DotNetInterfaceGenerator VS9
+			!insertmacro DotNetInterfaceGenerator64 VS9
 			!insertmacro projectfiles "xlwDotNet\Template_Projects\VS9"
 			!insertmacro sourcefiles  "xlwDotNet\Template_Projects\VS9"
 			!insertmacro projectfiles "xlwDotNet\Template_Projects\VisualBasic\VB2008"
