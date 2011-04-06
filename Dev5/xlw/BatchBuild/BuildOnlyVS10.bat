@@ -7,3 +7,6 @@
 
 "C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\msbuild.exe" /p:Configuration=Debug;Platform=x64 /t:rebuild  ..\xlw\build\vc10\xlw.sln  >> xlw10_Debug_x64.log 2>&1 
 "C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\msbuild.exe" /p:Configuration=Release;Platform=x64 /t:rebuild  ..\xlw\build\vc10\xlw.sln  >> xlw10_Release_x64.log 2>&1 
+
+"C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\msbuild.exe" /p:Configuration=Debug;Platform=x64 /t:rebuild  ..\xlwDotNet\Build\VS10\xlw.Net.sln  >> xlwDotNet10_Debug.log 2>&1 
+"C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\msbuild.exe" /p:Configuration=Release;Platform=x64 /t:rebuild  ..\xlwDotNet\Build\VS10\xlw.Net.sln  >> xlwDotNet10_Release.log 2>&1 

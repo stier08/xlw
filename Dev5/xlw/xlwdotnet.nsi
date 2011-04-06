@@ -687,7 +687,10 @@ SubSection "xlwDotNet" xlwDotNet
 			SetOutPath "$INSTDIR\xlwDotNet\lib"
 			File "xlwDotNet\lib\xlwDotNet-vc100*.dll"
 			File "xlwDotNet\lib\xlwDotNet-vc100*.pdb"
+			File "xlwDotNet\lib\x64\xlwDotNet-vc100*.dll"
+			File "xlwDotNet\lib\x64\xlwDotNet-vc100*.pdb"
 			!insertmacro DotNetInterfaceGenerator VS10
+			!insertmacro DotNetInterfaceGenerator64 VS10
 			!insertmacro projectfiles "xlwDotNet\Template_Projects\VS10"
 			!insertmacro sourcefiles  "xlwDotNet\Template_Projects\VS10"
 		;	!insertmacro projectfiles "xlwDotNet\Template_Projects\VisualBasic\VB2010"
