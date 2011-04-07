@@ -530,7 +530,7 @@ SubSection "xlw" xlw
 	
 		!insertmacro doExample "xlw\examples\Example" 1
 		!insertmacro doExample "xlw\examples\ObjectCacheDemo" 1
-		!insertmacro doExample "xlw\examples\Handwritten" 0
+		!insertmacro doExample "xlw\examples\Handwritten" 1
 		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\xlw\Examples.lnk " "$INSTDIR\xlw\Examples"
 	SectionEnd
 	
