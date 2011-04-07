@@ -200,6 +200,5 @@ namespace xlw {
     {
         return static_cast<int>(AsDouble(ErrorId, pxlret));
     }
-
 }
 

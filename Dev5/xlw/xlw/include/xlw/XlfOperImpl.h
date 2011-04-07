@@ -137,53 +137,6 @@ namespace xlw {
 
         virtual DWORD xltype(const XlfOper &xlfOper) const = 0;
 
-        // FIXME this template doesn't compile under MinGW.
-        // For the moment it is not used by the MinGW examples.
-#if defined(_MSC_VER)
-        template <class FwdIt>
-        XlfOper& Set(XlfOper& xlfOper, RW rows, COL cols, FwdIt it) const
-        {
-            if (XlfExcel::Instance().excel12()) {
-
-                xlfOper.lpxloper12_->xltype = xltypeMulti;
-                xlfOper.lpxloper12_->val.array.rows = rows;
-                xlfOper.lpxloper12_->val.array.columns = cols;
-                xlfOper.lpxloper12_->val.array.lparray = TempMemory::GetMemory<XLOPER12>(rows * cols);
-                for (int i = 0; i < rows * cols; ++i, ++it)
-                    xlfOper.lpxloper12_->val.array.lparray[i] = *(LPXLOPER12)XlfOper(*it);
-                return xlfOper;
-
-            } else {
-
-                // Excel 4 stores rows as type WORD and columns as type BYTE.
-                // Excel 12 stores rows as type RW and columns as type COL.
-                // Since this function supports both platforms, the arguments are declared with
-                // the Excel 12 types and bounds checking for Excel 4 is done at run time:
-
-                if (rows > USHRT_MAX) {
-                    std::ostringstream err;
-                    err << "Matrix row count " << rows << " exceeds Excel4 max " << USHRT_MAX;
-                    throw(err.str());
-                }
-
-                if (cols > USHRT_MAX) {
-                    std::ostringstream err;
-                    err << "Matrix col count " << cols << " exceeds Excel4 max " << USHRT_MAX;
-                    throw(err.str());
-                }
-
-                xlfOper.lpxloper4_->xltype = xltypeMulti;
-                xlfOper.lpxloper4_->val.array.rows = rows;
-                xlfOper.lpxloper4_->val.array.columns = cols;
-                xlfOper.lpxloper4_->val.array.lparray = TempMemory::GetMemory<XLOPER>(rows * cols);
-                for (int i = 0; i < rows*cols; ++i, ++it)
-                    xlfOper.lpxloper4_->val.array.lparray[i] = *(LPXLOPER)XlfOper(*it);
-                return xlfOper;
-
-            }
-        }
-#endif
-
         static XlfOperImpl *instance_;
 
     };

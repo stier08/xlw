@@ -28,6 +28,8 @@
 // $Id: XlfOper.h 538 2008-05-19 09:34:25Z ericehlers $
 
 #include <xlw/XlfOperImpl.h>
+#include <sstream>
+#include <limits.h>
 
 #if defined(_MSC_VER)
 #pragma once
@@ -299,10 +301,7 @@ namespace xlw {
         \warning Data are to be stored row-wise.
         */
         template<class FwdIt>
-        XlfOper& Set(RW rows, COL cols, FwdIt it)
-        {
-            return XlfOperImpl::instance().Set(*this, rows, cols, it);
-        }
+        XlfOper& Set(RW rows, COL cols, FwdIt it);
         //! Set to an array of the specified dimensions.
         XlfOper& Set(RW r, COL c) { return XlfOperImpl::instance().Set(*this, r, c); }
         //! Set to an error value.
@@ -384,11 +383,57 @@ namespace xlw {
         //@}
 
     };
+
+
+    template <class FwdIt>
+    XlfOper& XlfOper::Set(RW rows, COL cols, FwdIt it)
+    {
+        if (XlfExcel::Instance().excel12()) {
+
+            lpxloper12_->xltype = xltypeMulti;
+            lpxloper12_->val.array.rows = rows;
+            lpxloper12_->val.array.columns = cols;
+            lpxloper12_->val.array.lparray = TempMemory::GetMemory<XLOPER12>(rows * cols);
+            for (int i = 0; i < rows * cols; ++i, ++it)
+                lpxloper12_->val.array.lparray[i] = *(LPXLOPER12)XlfOper(*it);
+            return *this;
+
+        } else {
+
+            // Excel 4 stores rows as type WORD and columns as type BYTE.
+            // Excel 12 stores rows as type RW and columns as type COL.
+            // Since this function supports both platforms, the arguments are declared with
+            // the Excel 12 types and bounds checking for Excel 4 is done at run time:
+
+            if (rows > USHRT_MAX) {
+                std::ostringstream err;
+                err << "Matrix row count " << rows << " exceeds Excel4 max " << USHRT_MAX;
+                throw(err.str());
+            }
+
+            if (cols > USHRT_MAX) {
+                std::ostringstream err;
+                err << "Matrix col count " << cols << " exceeds Excel4 max " << USHRT_MAX;
+                throw(err.str());
+            }
+
+            lpxloper4_->xltype = xltypeMulti;
+            lpxloper4_->val.array.rows = rows;
+            lpxloper4_->val.array.columns = cols;
+            lpxloper4_->val.array.lparray = TempMemory::GetMemory<XLOPER>(rows * cols);
+            for (int i = 0; i < rows*cols; ++i, ++it)
+                lpxloper4_->val.array.lparray[i] = *(LPXLOPER)XlfOper(*it);
+            return *this;
+        }
+    }
+
 }
 
 #ifdef NDEBUG
 #include <xlw/XlfOper.inl>
 #endif
+
+
 
 #endif
 
