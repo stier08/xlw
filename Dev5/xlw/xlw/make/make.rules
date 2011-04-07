@@ -65,7 +65,7 @@ LINK_DYNAMIC := -shared
 
 CXX= g++
 
-CXXPIC= 
+CXXPIC=
 CXXSO= $(CXX)  $(LINK_DYNAMIC)
 DLLWRAP=dllwrap.exe
 
@@ -73,16 +73,18 @@ DLLWRAP=dllwrap.exe
 ifeq ($(BUILD),DEBUG)
 CPPFLAGSINC := $(INCLUDE_DIR:%=-I%)
 CPPFLAGS= $(CPPFLAGSINC)  -g3 -Wall
-endif 
+STRIP=
+endif
 ifeq ($(BUILD),RELEASE)
 CPPFLAGSINC := $(INCLUDE_DIR:%=-I%)
 CPPFLAGS= $(CPPFLAGSINC)  -O3 -Wall
-endif 
+STRIP=-s
+endif
 
 COMPILE= $(CXX)  $(CXXFLAGS) $(CPPFLAGS) -c
 
 
-LINK= $(CXX)  
+LINK= $(CXX)
 
 
 .cpp:
@@ -116,7 +118,7 @@ ifdef LIBS
 LDLIBS+=$(LIBS:%=-l%)
 endif
 
-export LDFLAGS= $(LDL) $(LDLIBS) 
+export LDFLAGS= $(LDL) $(LDLIBS) $(STRIP)
 
 
 
