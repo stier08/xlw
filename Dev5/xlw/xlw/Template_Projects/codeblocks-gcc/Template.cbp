@@ -11,15 +11,12 @@
 				<Option object_output="obj\Debug\" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option createDefFile="1" />
-				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-Wall" />
 					<Add option="-g" />
 					<Add option="-DBUILD_DLL" />
 				</Compiler>
 				<Linker>
-					<Add library="user32" />
 					<Add library='&quot;$(XLW)\xlw\lib\libxlw-gcc-s-gd-5DEV.a&quot;' />
 				</Linker>
 				<ExtraCommands>
@@ -32,8 +29,6 @@
 				<Option object_output="obj\Release\" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option createDefFile="1" />
-				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-Wall" />
@@ -41,7 +36,6 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="user32" />
 					<Add library='&quot;$(XLW)\xlw\lib\libxlw-gcc-s-5DEV.a&quot;' />
 				</Linker>
 				<ExtraCommands>
@@ -55,6 +49,9 @@
 			<Add directory=".\source" />
 		</Compiler>
 		<Linker>
+			<Add option="-static" />
+			<Add library="user32" />
+			<Add library="$(XLW)\xlw\include\xlw\xlw.def" />
 			<Add directory="..\..\..\lib" />
 		</Linker>
 		<Unit filename="source\cppinterface.h" />

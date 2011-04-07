@@ -11,14 +11,12 @@
 				<Option object_output="obj\Debug\" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option createDefFile="1" />
 				<Compiler>
 					<Add option="-Wall" />
 					<Add option="-g" />
 					<Add option="-DBUILD_DLL" />
 				</Compiler>
 				<Linker>
-					<Add library="user32" />
 					<Add library="..\..\..\lib\libxlw-gcc-s-gd-5DEV.a" />
 				</Linker>
 				<ExtraCommands>
@@ -31,8 +29,6 @@
 				<Option object_output="obj\Release\" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option createDefFile="1" />
-				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-Wall" />
@@ -40,7 +36,6 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="user32" />
 					<Add library="..\..\..\lib\libxlw-gcc-s-5DEV.a" />
 				</Linker>
 				<ExtraCommands>
@@ -53,6 +48,9 @@
 			<Add directory="..\..\..\include" />
 		</Compiler>
 		<Linker>
+			<Add option="-static" />
+			<Add library="..\..\..\include\xlw\xlw.def" />
+			<Add library="user32" />
 			<Add directory="..\..\..\lib" />
 		</Linker>
 		<Unit filename="..\common_source\PayOff.cpp" />
