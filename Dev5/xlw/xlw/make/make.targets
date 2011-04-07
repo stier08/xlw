@@ -76,11 +76,11 @@ $(IDIR)/lib$(LIBRARY).a : $(LIBOBJ)
 $(IDIR)/$(LIBPREFIX)$(LIBRARY).%ll  : $(LIBOBJ)
 	@-$(RM) $@	
 	$(CXXSO) $(CXXPIC) -o  $@ \
-    -Wl,--out-implib=$(IDIR)/$(LIBPREFIX)$(LIBRARY).lib \
-   	-Wl,--export-all-symbols \
-   	-Wl,--enable-auto-import \
+   	-Wl,$(XLW)/xlw/include/xlw/xlw.def \
+      -Wl,-static \
+      -static-libgcc \
 	 $(LIBOBJ)\
-   	-Wl,--no-whole-archive $(LDFLAGS)
+   	 $(LDFLAGS)
 
 #$(IDIR)/lib$(LIBRARY).so::$(LIBOBJ)
 #	@-$(RM) $@	
