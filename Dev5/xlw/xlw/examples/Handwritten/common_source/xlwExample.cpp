@@ -22,20 +22,6 @@
 #include <sstream>
 #include <vector>
 
-// Force export of functions implemented in XlOpenClose.h and required by Excel
-#ifndef _WIN64
-#pragma comment (linker, "/export:_xlAutoOpen")
-#pragma comment (linker, "/export:_xlAutoClose")
-#else
-#pragma comment (linker, "/export:xlAutoOpen")
-#pragma comment (linker, "/export:xlAutoClose")
-#endif
-
-// Make sure DllMain is defined
-// To use your own DllMain define XLW_OWN_DLLMAIN
-// and ensure you call DllMainTls
-XLW_DLLMAIN_IMPL;
-
 using namespace xlw;
 
 extern "C" {

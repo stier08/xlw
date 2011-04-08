@@ -76,15 +76,6 @@ std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& func
   AddLine(output,"const char* LibraryName = \""+LibraryName+"\";");
   AddLine(output,"};");
   AddLine(output,"");
-  AddLine(output,"// dummy function to force linkage");
-  AddLine(output,"namespace {");
-  AddLine(output,"void DummyFunction()");
-  AddLine(output,"{");
-  AddLine(output,"xlAutoOpen();");
-  AddLine(output,"xlAutoClose();");
-  AddLine(output,"}");
-  AddLine(output,"}");
-  AddLine(output,"");
 
   AddLine(output,"");
   AddLine(output,"// registrations start here");
