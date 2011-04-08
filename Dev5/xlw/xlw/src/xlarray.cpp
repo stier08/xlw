@@ -1,5 +1,6 @@
 /*
  Copyright (C) 2006 Mark Joshi
+ Copyright (C) 2011 John Adcock
 
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
@@ -14,19 +15,38 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 #include <xlw/xlarray.h>
+#include <xlw/xlfExcel.h>
 
 xlw::NEMatrix xlw::GetMatrix(LPXLARRAY input)
 {
-    int rows = input->rows;
-    int cols = input->columns;
+    if(xlw::XlfExcel::Instance().excel12())
+    {
+        int rows = input->fp12.rows;
+        int cols = input->fp12.columns;
 
-    NEMatrix result(rows,cols);
-    for (int i=0; i < rows; ++i)
-        for (int j=0; j < cols; ++j)
-        {
-            int k = i*cols+j;
-            double val = input->data[k];
-            result(i,j)= val;
-        }
-    return result;
+        NEMatrix result(rows,cols);
+        for (int i=0; i < rows; ++i)
+            for (int j=0; j < cols; ++j)
+            {
+                int k = i*cols+j;
+                double val = input->fp12.array[k];
+                result(i,j)= val;
+            }
+        return result;
+    }
+    else
+    {
+        int rows = input->fp.rows;
+        int cols = input->fp.columns;
+
+        NEMatrix result(rows,cols);
+        for (int i=0; i < rows; ++i)
+            for (int j=0; j < cols; ++j)
+            {
+                int k = i*cols+j;
+                double val = input->fp.array[k];
+                result(i,j)= val;
+            }
+        return result;
+    }
 }

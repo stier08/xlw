@@ -1,5 +1,6 @@
 /*
  Copyright (C) 2006 Mark Joshi
+ Copyright (C) 2011 John Adcock
 
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
@@ -21,16 +22,19 @@
 
 namespace xlw {
 
+    //! union of the 2 FP types
     struct xlarray
     {
-        WORD rows;
-        WORD columns;
-        double data[1];
+        union
+        {
+            FP fp;
+            FP12 fp12;
+        };
     };
 
 
+    //! Interpreted as FP (Excel 4) or FP12 (Excel 12).
     typedef xlarray* LPXLARRAY;
-
 
     NEMatrix GetMatrix(LPXLARRAY);
 

@@ -115,6 +115,8 @@ namespace xlw {
         std::string xlfXloperType() const { return xlfXloperType_; }
         //! The string type in use by this version of Excel
         std::string wStrType() const { return wStrType_; }
+        //! The double array type use by this version of Excel
+        std::string fpType() const { return fpArrayType_; }
         //@}
     private:
         //! Static pointer to the unique instance of XlfExcel object.
@@ -140,6 +142,7 @@ namespace xlw {
         std::string xlfOperType_;
         std::string xlfXloperType_;
         std::string wStrType_;
+        std::string fpArrayType_;
     };
 
 }

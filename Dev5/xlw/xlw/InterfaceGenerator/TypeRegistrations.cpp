@@ -51,7 +51,7 @@ TypeRegistry::Helper arrayFundamentalReg("NEMatrix", // New type
                "GetMatrix",     // Converter name, we just pass into the constructor as a declaration
                false,           // Is a method
                false,           // Takes identifier
-               "K",             // Type code
+               "XLW_FP",        // Type code
                "<xlw/xlarray.h>"// Include file
                );
 

@@ -168,11 +168,13 @@ void xlw::XlfExcel::InitLibrary() {
         xlfOperType_ = "Q";
         xlfXloperType_ = "U";
         wStrType_ = "C%";
+        fpArrayType_ = "K%";
     } else {
         static XlfOperImpl4 xlfOperImpl4;
         xlfOperType_ = "P";
         xlfXloperType_ = "R";
         wStrType_ = "C";
+        fpArrayType_ = "K";
     }
 
     impl_->handle_ = handle;

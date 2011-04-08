@@ -97,6 +97,8 @@ std::string xlw::XlfArgDesc::GetType() const
         return XlfExcel::Instance().xlfXloperType();
     } else if (type_ == "XLW_WSTR") {
         return XlfExcel::Instance().wStrType();
+    } else if (type_ == "XLW_FP") {
+        return XlfExcel::Instance().fpType();
     } else {
         return type_;
     }
