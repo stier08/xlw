@@ -475,10 +475,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\xlw\wrapper.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\include\xlw\xlarray.h"
 				>
 			</File>
@@ -507,10 +503,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\xlw\XlfExcel.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\include\xlw\XlfException.h"
 				>
 			</File>
@@ -520,10 +512,6 @@
 			</File>
 			<File
 				RelativePath="..\..\include\xlw\XlfFuncDesc.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\include\xlw\XlfMutex.h"
 				>
 			</File>
 			<File

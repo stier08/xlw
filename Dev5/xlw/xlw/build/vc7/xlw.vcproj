@@ -240,9 +240,6 @@
 				RelativePath="..\..\include\xlw\Win32StreamBuf.inl">
 			</File>
 			<File
-				RelativePath="..\..\include\xlw\wrapper.h">
-			</File>
-			<File
 				RelativePath="..\..\include\xlw\xlarray.h">
 			</File>
 			<File
@@ -274,9 +271,6 @@
 			</File>
 			<File
 				RelativePath="..\..\include\xlw\XlfFuncDesc.h">
-			</File>
-			<File
-				RelativePath="..\..\include\xlw\XlfMutex.h">
 			</File>
 			<File
 				RelativePath="..\..\include\xlw\XlfOper.h">

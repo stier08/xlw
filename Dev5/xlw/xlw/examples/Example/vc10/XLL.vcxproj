@@ -268,6 +268,7 @@
     <ClInclude Include="..\common_source\PayoffConcrete.h" />
     <ClInclude Include="..\common_source\reftest.h" />
     <ClInclude Include="..\common_source\Test.h" />
+    <ClInclude Include="..\common_source\wrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\common_source\PayOff.cpp" />

@@ -61,6 +61,7 @@
 		<Unit filename="..\common_source\Test.cpp" />
 		<Unit filename="..\common_source\Test.h" />
 		<Unit filename="..\common_source\reftest.h" />
+		<Unit filename="..\common_source\wrapper.h" />
 		<Unit filename="..\common_source\xlwTest.cpp" />
 		<Extensions>
 			<code_completion />

@@ -48,7 +48,6 @@
 		<Unit filename="..\..\include\xlw\MJmatrices.h" />
 		<Unit filename="..\..\include\xlw\MyContainers.h" />
 		<Unit filename="..\..\include\xlw\NCmatrices.h" />
-		<Unit filename="..\..\src\PathUpdater.h" />
 		<Unit filename="..\..\include\xlw\TempMemory.h" />
 		<Unit filename="..\..\include\xlw\Win32StreamBuf.h" />
 		<Unit filename="..\..\include\xlw\Win32StreamBuf.inl" />
@@ -63,7 +62,6 @@
 		<Unit filename="..\..\include\xlw\XlfException.h" />
 		<Unit filename="..\..\include\xlw\XlfException.inl" />
 		<Unit filename="..\..\include\xlw\XlfFuncDesc.h" />
-		<Unit filename="..\..\include\xlw\XlfMutex.h" />
 		<Unit filename="..\..\include\xlw\XlfOper.h" />
 		<Unit filename="..\..\include\xlw\XlfOper.inl" />
 		<Unit filename="..\..\include\xlw\XlfOper12.h" />
@@ -77,7 +75,6 @@
 		<Unit filename="..\..\include\xlw\XlfRef.inl" />
 		<Unit filename="..\..\include\xlw\XlfStr.h" />
 		<Unit filename="..\..\include\xlw\macros.h" />
-		<Unit filename="..\..\include\xlw\wrapper.h" />
 		<Unit filename="..\..\include\xlw\xlarray.h" />
 		<Unit filename="..\..\include\xlw\xlcall32.h" />
 		<Unit filename="..\..\include\xlw\xlw.h" />
@@ -89,6 +86,7 @@
 		<Unit filename="..\..\src\MyContainers.cpp" />
 		<Unit filename="..\..\src\NCmatrices.cpp" />
 		<Unit filename="..\..\src\PathUpdater.cpp" />
+		<Unit filename="..\..\src\PathUpdater.h" />
 		<Unit filename="..\..\src\TempMemory.cpp" />
 		<Unit filename="..\..\src\Win32StreamBuf.cpp" />
 		<Unit filename="..\..\src\XlFunctionRegistration.cpp" />

@@ -401,6 +401,10 @@
 				RelativePath="..\common_source\Test.h"
 				>
 			</File>
+			<File
+				RelativePath="..\common_source\wrapper.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Source Files"

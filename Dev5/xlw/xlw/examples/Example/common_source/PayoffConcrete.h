@@ -8,7 +8,7 @@
 
 #include "PayOff.h"
 #include <xlw/ArgList.h>
-#include <xlw/Wrapper.h>
+#include "wrapper.h"
 
 
 class PayOffCall : public PayOff

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -171,7 +171,6 @@
     <ClInclude Include="..\..\src\PathUpdater.h" />
     <ClInclude Include="..\..\include\xlw\TempMemory.h" />
     <ClInclude Include="..\..\include\xlw\Win32StreamBuf.h" />
-    <ClInclude Include="..\..\include\xlw\wrapper.h" />
     <ClInclude Include="..\..\include\xlw\xlarray.h" />
     <ClInclude Include="..\..\include\xlw\xlcall32.h" />
     <ClInclude Include="..\..\include\xlw\XlfAbstractCmdDesc.h" />
@@ -181,7 +180,6 @@
     <ClInclude Include="..\..\include\xlw\XlfExcel.h" />
     <ClInclude Include="..\..\include\xlw\XlfException.h" />
     <ClInclude Include="..\..\include\xlw\XlfFuncDesc.h" />
-    <ClInclude Include="..\..\include\xlw\XlfMutex.h" />
     <ClInclude Include="..\..\include\xlw\XlfOper.h" />
     <ClInclude Include="..\..\include\xlw\XlfOper12.h" />
     <ClInclude Include="..\..\include\xlw\XlfOper4.h" />

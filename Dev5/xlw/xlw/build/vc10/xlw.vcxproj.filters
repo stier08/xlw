@@ -95,6 +95,9 @@
     <ClCompile Include="..\..\src\NCmatrices.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\PathUpdater.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\xlw\ArgList.h">
@@ -127,9 +130,6 @@
     <ClInclude Include="..\..\include\xlw\Win32StreamBuf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\xlw\wrapper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\xlw\xlarray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -155,9 +155,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\xlw\XlfFuncDesc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\xlw\XlfMutex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\xlw\XlfOper.h">
@@ -200,6 +197,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\xlw\MJmatrices.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xlw\CriticalSection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\PathUpdater.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

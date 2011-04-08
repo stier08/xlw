@@ -12,7 +12,7 @@
 #include <xlw/ArgList.h>
 #include "PayOff.h"
 #include "reftest.h"
-#include <xlw/Wrapper.h>
+#include "wrapper.h"
     
 using namespace xlw;
   
