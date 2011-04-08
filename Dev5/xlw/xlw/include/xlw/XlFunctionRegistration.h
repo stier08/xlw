@@ -133,6 +133,7 @@ namespace xlw {
         static ExcelFunctionRegistrationRegistry& Instance();
 
         void DoTheRegistrations() const;
+        void DoTheDeregistrations() const;
         void AddFunction(const XLFunctionRegistrationData&);
 
     private:

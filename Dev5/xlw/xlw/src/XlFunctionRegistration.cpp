@@ -192,6 +192,28 @@ void ExcelFunctionRegistrationRegistry::DoTheRegistrations() const
     }
 
 }
+
+void ExcelFunctionRegistrationRegistry::DoTheDeregistrations() const
+{
+    for (std::list<XLFunctionRegistrationData>::const_iterator it = RegistrationData.begin(); it !=  RegistrationData.end(); ++it)
+    {
+         XlfFuncDesc::RecalcPolicy policy = it->GetVolatile() ? XlfFuncDesc::Volatile : XlfFuncDesc::NotVolatile;
+         XlfFuncDesc xlFunction(it->GetFunctionName(),
+                                                    it->GetExcelFunctionName(),
+                                                    it->GetFunctionDescription(),
+                                                    it->GetLibrary(),
+                                                    policy,
+                                                    it->GetThreadsafe(),
+                                                    it->GetReturnTypeCode(),
+                                                    it->GetHelpID(),
+                                                    it->GetAsynchronous(),
+                                                    it->GetMacroSheetEquivalent(),
+                                                    it->GetClusterSafe());
+         xlFunction.Unregister();
+    }
+
+}
+
 void ExcelFunctionRegistrationRegistry::AddFunction(const XLFunctionRegistrationData& data)
 {
     RegistrationData.push_back(data);
