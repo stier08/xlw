@@ -48,9 +48,9 @@
 // Force export of functions implemented in XlOpenClose.h and required by Excel
 // so that for msvc we don't need to use a def file
 #     ifndef _WIN64
-#         pragma comment (linker, "/export:_xlAutoOpen")
-#         pragma comment (linker, "/export:_xlAutoClose")
-#         pragma comment (linker, "/export:_xlAutoRemove")
+#        pragma comment (linker, "/export:_xlAutoOpen")
+#        pragma comment (linker, "/export:_xlAutoClose")
+#        pragma comment (linker, "/export:_xlAutoRemove")
 #    else
 #        pragma comment (linker, "/export:xlAutoOpen")
 #        pragma comment (linker, "/export:xlAutoClose")
