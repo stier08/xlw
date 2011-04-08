@@ -26,7 +26,8 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
     <gdconfig>-gd</gdconfig>
-    <dir64></dir64>
+    <dir64>
+    </dir64>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -39,7 +40,8 @@
     <PlatformTarget>x86</PlatformTarget>
     <gdconfig>
     </gdconfig>
-    <dir64></dir64>
+    <dir64>
+    </dir64>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\Release\</OutputPath>
@@ -67,7 +69,7 @@
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <gdconfig>-gd</gdconfig>
+    <gdconfig></gdconfig>
     <dir64>x64/</dir64>
     <OutputPath>..\x64_Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -111,8 +113,8 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>if $(PlatformName) == x64 "$(MSBuildBinPath)\msbuild.exe"  /p:Configuration=$(Configuration) /p:Platform=x64  $(SolutionDir)Addin\$(SolutionName).sln"
-if $(PlatformName) == x86 "$(MSBuildBinPath)\msbuild.exe"  /p:Configuration=$(Configuration) /p:Platform=Win32  $(SolutionDir)Addin\$(SolutionName).sln"</PostBuildEvent>
+    <PostBuildEvent>if $(PlatformName) == x64 "$(MSBuildBinPath)\msbuild.exe"  /p:Configuration=$(Configuration) /p:Platform=x64  "$(SolutionDir)Addin\$(SolutionName).sln"
+if $(PlatformName) == x86 "$(MSBuildBinPath)\msbuild.exe"  /p:Configuration=$(Configuration) /p:Platform=Win32 "$(SolutionDir)Addin\$(SolutionName).sln"</PostBuildEvent>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>

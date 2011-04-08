@@ -99,8 +99,6 @@
   <PropertyGroup>
     <PostBuildEvent>if $(PlatformName) == x64 "$(DevEnvDir)..\..\VC\vcpackages\vcbuild"  "$(SolutionDir)Addin\$(SolutionName).sln"    "$(Configuration)|x64"
 if $(PlatformName) == x86 "$(DevEnvDir)..\..\VC\vcpackages\vcbuild"  "$(SolutionDir)Addin\$(SolutionName).sln"    "$(Configuration)|Win32"
-if $(PlatformName) == x64 %25SystemRoot%25\Microsoft.Net\Framework64\v2.0.50727\RegAsm.exe $(OutDir)RTDExample.NET.dll /codebase
-if $(PlatformName) == x86 %25SystemRoot%25\Microsoft.Net\Framework\v2.0.50727\RegAsm.exe $(OutDir)RTDExample.NET.dll /codebase
 </PostBuildEvent>
     <PreBuildEvent>
     </PreBuildEvent>
