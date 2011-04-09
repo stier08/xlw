@@ -424,6 +424,7 @@ Section #
 		SetOutPath "$INSTDIR\xlw\include"
 		File /r "xlw\include\*.h"
 		File /r "xlw\include\*.inl"
+		File /r "xlw\include\*.def"
 		
 		SetOutPath "$INSTDIR\xlw\make"
 		File  "xlw\make\*.*"
