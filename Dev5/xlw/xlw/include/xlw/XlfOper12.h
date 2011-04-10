@@ -107,7 +107,6 @@ namespace xlw {
             RowMajor,
             ColumnMajor
         };
-        std::vector<double> AsDoubleVector(DoubleVectorConvPolicy policy = UniDimensional, int * pxlret = 0) const;
         std::vector<double> AsDoubleVector(const char* ErrorId = 0,DoubleVectorConvPolicy policy = UniDimensional, int * pxlret = 0) const;
         MyArray AsArray(DoubleVectorConvPolicy policy = UniDimensional, int * pxlret = 0) const;
         MyArray AsArray(const char* ErrorId = 0,DoubleVectorConvPolicy policy = UniDimensional, int * pxlret = 0) const;
