@@ -42,7 +42,7 @@ namespace xlw {
         if(!threadStorage)
         {
             // we want to keep the temp allocation
-            // as fast as possibel so to avoid
+            // as fast as possible, so to avoid
             // needing a critical section around each call
             // we use a double lock
             ProtectInScope protecting(threadInfoVector);
