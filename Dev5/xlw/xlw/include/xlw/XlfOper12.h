@@ -100,7 +100,7 @@ namespace xlw {
         COL columns() const;
 
         double AsDouble(int * pxlret = 0) const;
-        double AsDouble(const std::string& ErrorId, int * pxlret = 0) const;
+        double AsDouble(const char* ErrorId = 0, int * pxlret = 0) const;
         enum DoubleVectorConvPolicy
         {
             UniDimensional,
@@ -108,23 +108,17 @@ namespace xlw {
             ColumnMajor
         };
         std::vector<double> AsDoubleVector(DoubleVectorConvPolicy policy = UniDimensional, int * pxlret = 0) const;
-        std::vector<double> AsDoubleVector(const std::string& ErrorId,DoubleVectorConvPolicy policy = UniDimensional, int * pxlret = 0) const;
+        std::vector<double> AsDoubleVector(const char* ErrorId = 0,DoubleVectorConvPolicy policy = UniDimensional, int * pxlret = 0) const;
         MyArray AsArray(DoubleVectorConvPolicy policy = UniDimensional, int * pxlret = 0) const;
-        MyArray AsArray(const std::string& ErrorId,DoubleVectorConvPolicy policy = UniDimensional, int * pxlret = 0) const;
-        short AsShort(int * pxlret = 0) const;
-        short AsShort(const std::string& ErrorId, int * pxlret = 0) const;
-        bool AsBool(int * pxlret = 0) const;
-        bool AsBool(const std::string& ErrorId,int * pxlret = 0) const;
-        int AsInt(int * pxlret = 0) const;
-        int AsInt(const std::string& ErrorId,int * pxlret = 0) const;
-        char * AsString(int * pxlret = 0) const;
-        char * AsString(const std::string& ErrorId,int * pxlret = 0) const;
-        std::wstring AsWstring(int * pxlret = 0) const;
-        CellMatrix AsCellMatrix( int * pxlret=0) const;
-        CellMatrix AsCellMatrix( const std::string& ErrorId,int * pxlret=0) const;
-        MyMatrix AsMatrix( int * pxlret=0) const;
-        MyMatrix AsMatrix( const std::string& ErrorId,int * pxlret=0) const;
-        XlfRef AsRef(int * pxlret = 0) const;
+        MyArray AsArray(const char* ErrorId = 0,DoubleVectorConvPolicy policy = UniDimensional, int * pxlret = 0) const;
+        short AsShort(const char* ErrorId = 0, int * pxlret = 0) const;
+        bool AsBool(const char* ErrorId = 0,int * pxlret = 0) const;
+        int AsInt(const char* ErrorId = 0,int * pxlret = 0) const;
+        char * AsString(const char* ErrorId = 0,int * pxlret = 0) const;
+        std::wstring AsWstring(const char* ErrorId = 0,int * pxlret = 0) const;
+        CellMatrix AsCellMatrix(const char* ErrorId = 0,int * pxlret=0) const;
+        MyMatrix AsMatrix(const char* ErrorId = 0,int * pxlret=0) const;
+        XlfRef AsRef(const char* ErrorId = 0,int * pxlret = 0) const;
 
         LPXLOPER12 GetLPXLOPER() const;
 
@@ -164,8 +158,7 @@ namespace xlw {
         int Allocate();
         void Deallocate();
 
-        int ThrowOnError(int) const;
-        int ThrowOnError(int, const std::string& identifier) const;
+        int ThrowOnError(int, const char* ErrorId = 0, const char* identifier = 0) const;
 
         static int xlbitFreeAuxMem;
 

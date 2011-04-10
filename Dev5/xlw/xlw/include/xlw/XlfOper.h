@@ -164,7 +164,7 @@ namespace xlw {
         //@}
 
         /*! \name Array Accessors / Operators
-        These functions are used to access the elements of an array in an XlfOper 
+        These functions are used to access the elements of an array in an XlfOper
         whose underlying <tt>LPXLOPER/LPXLOPER12</tt> has <tt>xltype = xltypeMulti</tt>.
 
         Here is an example of how this interface can be used to inspect
@@ -207,59 +207,41 @@ namespace xlw {
 
         //! \name Conversions
         //@{
-        //! Converts to a double.
-        double AsDouble(int *pxlret = 0) const;
         //! Converts to a double with error identifer.
-        double AsDouble(const std::string& ErrorId, int *pxlret = 0) const;
+        double AsDouble(const char* ErrorId = 0, int *pxlret = 0) const;
 
         //! Converts to a std::vector<double>.
-        std::vector<double> AsDoubleVector(XlfOperImpl::DoubleVectorConvPolicy policy = XlfOperImpl::UniDimensional,
-            int *pxlret = 0) const;
         //! Converts to a std::vector<double>.
-        std::vector<double> AsDoubleVector(const std::string& ErrorId,
+        std::vector<double> AsDoubleVector(const char* ErrorId = 0,
             XlfOperImpl::DoubleVectorConvPolicy policy = XlfOperImpl::UniDimensional, int *pxlret = 0) const;
 
         //! Converts to an array.
-        MyArray AsArray(XlfOperImpl::DoubleVectorConvPolicy policy = XlfOperImpl::UniDimensional, int *pxlret = 0) const;
-        //! Converts to an array.
-        MyArray AsArray(const std::string& ErrorId,
+        MyArray AsArray(const char* ErrorId = 0,
             XlfOperImpl::DoubleVectorConvPolicy policy = XlfOperImpl::UniDimensional, int *pxlret = 0) const;
 
-        //! Converts to a short.
-        short AsShort(int *pxlret = 0) const;
         //! Converts to a short with error identifer.
-        short AsShort(const std::string& ErrorId, int *pxlret = 0) const;
+        short AsShort(const char* ErrorId = 0, int *pxlret = 0) const;
 
-        //! Converts to a bool.
-        bool AsBool(int *pxlret = 0) const;
         //! Converts to a bool with error identifer.
-        bool AsBool(const std::string& ErrorId, int *pxlret = 0) const;
+        bool AsBool(const char* ErrorId = 0, int *pxlret = 0) const;
 
-        //! Converts to an int.
-        int AsInt(int *pxlret = 0) const;
         //! Converts to an int with error identifer.
-        int AsInt(const std::string& ErrorId, int *pxlret = 0) const;
+        int AsInt(const char* ErrorId = 0, int *pxlret = 0) const;
 
-        //! Converts to a char *.
-        char *AsString(int *pxlret = 0) const;
         //! Converts to a char * with error identifer.
-        char *AsString(const std::string& ErrorId, int *pxlret = 0) const;
+        char *AsString(const char* ErrorId = 0, int *pxlret = 0) const;
 
         //! Converts to a wstring.
-        std::wstring AsWstring(int *pxlret = 0) const;
+        std::wstring AsWstring(const char* ErrorId = 0, int *pxlret = 0) const;
 
-        //! Converts to a cell Matrix.
-        CellMatrix AsCellMatrix(int *pxlret=0) const;
         //! Converts to a cell Matrix with error identifer.
-        CellMatrix AsCellMatrix(const std::string& ErrorId, int *pxlret=0) const;
+        CellMatrix AsCellMatrix(const char* ErrorId = 0, int *pxlret=0) const;
 
-        //! Converts to a matrix.
-        MyMatrix AsMatrix(int *pxlret=0) const;
         //! Converts to a matrix with error identifer.
-        MyMatrix AsMatrix(const std::string& ErrorId, int *pxlret=0) const;
+        MyMatrix AsMatrix(const char* ErrorId = 0, int *pxlret=0) const;
 
-        //! Converts to a XlfRef.
-        XlfRef AsRef(int *pxlret = 0) const;
+        //! Converts to a XlfRef with error identifer.
+        XlfRef AsRef(const char* ErrorId = 0, int *pxlret = 0) const;
         //@}
 
         //! \name Manage reference to underlying XLOPER
@@ -333,9 +315,7 @@ namespace xlw {
         //! \name Error handling
         //@{
         //! Throws an exception when critical errors occur.
-        int ThrowOnError(int value) const;
-        //! Throws an exception when critical errors occur but passes on an identifier to help track it down.
-        int ThrowOnError(int value, const std::string& identifier) const;
+        int ThrowOnError(int, const char* ErrorId = 0, const char* identifier = 0) const;
         //@}
 
         //! \name Memory management
@@ -432,7 +412,6 @@ namespace xlw {
 #ifdef NDEBUG
 #include <xlw/XlfOper.inl>
 #endif
-
 
 
 #endif

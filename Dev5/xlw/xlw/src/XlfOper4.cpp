@@ -88,25 +88,14 @@ int xlw::XlfOper4::Coerce(short type, XlfOper4& result) const
     return xlret;
 }
 
-double xlw::XlfOper4::AsDouble(int * pxlret) const
+double xlw::XlfOper4::AsDouble(const char* ErrorId, int * pxlret) const
 {
     double d;
     int xlret = ConvertToDouble(d);
     if (pxlret)
         *pxlret=xlret;
     else
-        ThrowOnError(xlret);
-    return d;
-};
-
-double xlw::XlfOper4::AsDouble(const std::string& ErrorId, int * pxlret) const
-{
-    double d;
-    int xlret = ConvertToDouble(d);
-    if (pxlret)
-        *pxlret=xlret;
-    else
-        ThrowOnError( xlret,"Conversion to double "+ErrorId);
+        ThrowOnError( xlret,ErrorId, "Conversion to double");
     return d;
 };
 
@@ -141,17 +130,7 @@ int xlw::XlfOper4::ConvertToDouble(double& d) const throw()
     return xlret;
 };
 
-xlw::MyArray xlw::XlfOper4::AsArray(DoubleVectorConvPolicy policy, int * pxlret) const
-{
-    std::vector<double> tmp(AsDoubleVector(policy,pxlret));
-    MyArray result(tmp.size());
-    for (unsigned long i=0; i < result.size(); i++)
-        result[i] = tmp[i];
-
-    return result;
-}
-
-xlw::MyArray xlw::XlfOper4::AsArray(const std::string& ErrorId,DoubleVectorConvPolicy policy, int * pxlret ) const
+xlw::MyArray xlw::XlfOper4::AsArray(const char* ErrorId,DoubleVectorConvPolicy policy, int * pxlret ) const
 {
     std::vector<double> tmp(AsDoubleVector(ErrorId,policy,pxlret));
     MyArray result(tmp.size());
@@ -161,25 +140,14 @@ xlw::MyArray xlw::XlfOper4::AsArray(const std::string& ErrorId,DoubleVectorConvP
     return result;
 }
 
-std::vector<double> xlw::XlfOper4::AsDoubleVector(DoubleVectorConvPolicy policy, int * pxlret) const
+std::vector<double> xlw::XlfOper4::AsDoubleVector(const char* ErrorId, DoubleVectorConvPolicy policy, int * pxlret) const
 {
     std::vector<double> v;
     int xlret = ConvertToDoubleVector(v, policy);
     if (pxlret)
         *pxlret=xlret;
     else
-        ThrowOnError(xlret);
-    return v;
-}
-
-std::vector<double> xlw::XlfOper4::AsDoubleVector(const std::string& ErrorId, DoubleVectorConvPolicy policy, int * pxlret) const
-{
-    std::vector<double> v;
-    int xlret = ConvertToDoubleVector(v, policy);
-    if (pxlret)
-        *pxlret=xlret;
-    else
-        ThrowOnError(xlret,ErrorId+" conversion to double vector");
+        ThrowOnError(xlret, ErrorId, "conversion to double vector");
     return v;
 }
 
@@ -278,25 +246,14 @@ int xlw::XlfOper4::ConvertToDoubleVector(std::vector<double>& v, DoubleVectorCon
     return xlret;
 };
 
-short xlw::XlfOper4::AsShort(int * pxlret) const
+short xlw::XlfOper4::AsShort(const char* ErrorId, int * pxlret) const
 {
     short s;
     int xlret = ConvertToShort(s);
     if (pxlret)
         *pxlret=xlret;
     else
-        ThrowOnError(xlret);
-    return s;
-};
-
-short xlw::XlfOper4::AsShort(const std::string& ErrorId, int * pxlret) const
-{
-    short s;
-    int xlret = ConvertToShort(s);
-    if (pxlret)
-        *pxlret=xlret;
-    else
-        ThrowOnError(xlret,ErrorId+" conversion to short failed");
+        ThrowOnError(xlret, ErrorId, "conversion to short failed");
     return s;
 };
 int xlw::XlfOper4::ConvertToShort(short& s) const throw()
@@ -325,25 +282,14 @@ int xlw::XlfOper4::ConvertToShort(short& s) const throw()
     return xlret;
 };
 
-bool xlw::XlfOper4::AsBool(int * pxlret) const
+bool xlw::XlfOper4::AsBool(const char* ErrorId, int * pxlret) const
 {
     bool b;
     int xlret = ConvertToBool(b);
     if (pxlret)
         *pxlret=xlret;
     else
-        ThrowOnError(xlret);
-    return b;
-};
-
-bool xlw::XlfOper4::AsBool(const std::string& ErrorId, int * pxlret) const
-{
-    bool b;
-    int xlret = ConvertToBool(b);
-    if (pxlret)
-        *pxlret=xlret;
-    else
-        ThrowOnError(xlret,ErrorId+" conversion to bool failed");
+        ThrowOnError(xlret, ErrorId, "conversion to bool failed");
     return b;
 };
 
@@ -371,25 +317,14 @@ int xlw::XlfOper4::ConvertToBool(bool& b) const throw()
     return xlret;
 };
 
-xlw::MyMatrix xlw::XlfOper4::AsMatrix( int * pxlret) const
+xlw::MyMatrix xlw::XlfOper4::AsMatrix( const char* ErrorId, int * pxlret) const
 {
     MyMatrix output; // will be resized anyway
     int xlret = ConvertToMatrix(output);
     if (pxlret)
         *pxlret=xlret;
     else
-        ThrowOnError(xlret," conversion to matrix failed");
-    return output;
-}
-
-xlw::MyMatrix xlw::XlfOper4::AsMatrix( const std::string& ErrorId, int * pxlret) const
-{
-    MyMatrix output; // will be resized anyway
-    int xlret = ConvertToMatrix(output);
-    if (pxlret)
-        *pxlret=xlret;
-    else
-        ThrowOnError(xlret,ErrorId+" conversion to matrix failed");
+        ThrowOnError(xlret, ErrorId, "conversion to matrix failed");
     return output;
 }
 
@@ -421,25 +356,14 @@ int xlw::XlfOper4::ConvertToMatrix(MyMatrix& value) const
     return xlretSuccess;
 }
 
-xlw::CellMatrix xlw::XlfOper4::AsCellMatrix( int * pxlret) const
+xlw::CellMatrix xlw::XlfOper4::AsCellMatrix( const char* ErrorId, int * pxlret) const
 {
     CellMatrix output(1,1); // will be resized anyway
     int xlret = ConvertToCellMatrix(output);
     if (pxlret)
         *pxlret=xlret;
     else
-        ThrowOnError(xlret," conversion to cell matrix failed");
-    return output;
-}
-
-xlw::CellMatrix xlw::XlfOper4::AsCellMatrix( const std::string& ErrorId, int * pxlret) const
-{
-    CellMatrix output(1,1); // will be resized anyway
-    int xlret = ConvertToCellMatrix(output);
-    if (pxlret)
-        *pxlret=xlret;
-    else
-        ThrowOnError(xlret,ErrorId+" conversion to cell matrix failed");
+        ThrowOnError(xlret, ErrorId, "conversion to cell matrix failed");
     return output;
 }
 
@@ -714,25 +638,14 @@ int xlw::XlfOper4::ConvertToErr(WORD& e) const throw()
     return xlret;
 };
 
-char * xlw::XlfOper4::AsString(int * pxlret) const
+char * xlw::XlfOper4::AsString(const char* ErrorId, int * pxlret) const
 {
     char * s;
     int xlret = ConvertToString(s);
     if (pxlret)
         *pxlret=xlret;
     else
-        ThrowOnError(xlret);
-    return s;
-};
-
-char * xlw::XlfOper4::AsString(const std::string& ErrorId, int * pxlret) const
-{
-    char * s;
-    int xlret = ConvertToString(s);
-    if (pxlret)
-        *pxlret=xlret;
-    else
-        ThrowOnError(xlret,ErrorId+" conversion to char* failed");
+        ThrowOnError(xlret, ErrorId, "conversion to char* failed");
     return s;
 };
 
@@ -768,7 +681,7 @@ int xlw::XlfOper4::ConvertToString(char *& s) const throw()
     return xlret;
 }
 
-xlw::XlfRef xlw::XlfOper4::AsRef(int * pxlret) const
+xlw::XlfRef xlw::XlfOper4::AsRef(const char* ErrorId, int * pxlret) const
 {
     XlfRef r;
     int xlret = ConvertToRef(r);
@@ -1015,7 +928,7 @@ xlw::XlfOper4& xlw::XlfOper4::SetError(WORD error)
     return *this;
 }
 
-int xlw::XlfOper4::ThrowOnError(int xlret) const
+int xlw::XlfOper4::ThrowOnError(int xlret, const char* ErrorId, const char* Identifier) const
 {
     if (xlret == xlretSuccess)
         return xlret;
@@ -1026,38 +939,62 @@ int xlw::XlfOper4::ThrowOnError(int xlret) const
         throw XlfExceptionAbort();
     if (xlret & xlretStackOvfl)
         throw XlfExceptionStackOverflow();
-    if (xlret & xlretInvXloper)
-        throw XlfException("invalid OPER structure (memory could be exhausted)");
-    if (xlret & xlretFailed)
-        throw std::runtime_error("command failed");
-    if (xlret & xlretInvCount)
-        throw std::runtime_error("invalid number of argument");
-    if (xlret & xlretInvXlfn)
-        throw std::runtime_error("invalid function number");
-    // should never get here.
-    assert(0);
-    return xlret;
-}
-
-int xlw::XlfOper4::ThrowOnError(int xlret, const std::string& Identifier) const
-{
-    if (xlret == xlretSuccess)
-        return xlret;
-
-    if (xlret & xlretUncalced)
-        throw XlfExceptionUncalculated();
-    if (xlret & xlretAbort)
-        throw XlfExceptionAbort();
-    if (xlret & xlretStackOvfl)
-        throw XlfExceptionStackOverflow();
-    if (xlret & xlretInvXloper)
-        throw XlfException("invalid OPER structure (memory could be exhausted),"+Identifier);
-    if (xlret & xlretFailed)
-        throw std::runtime_error("command failed, "+Identifier);
-    if (xlret & xlretInvCount)
-        throw std::runtime_error("invalid number of argument, "+Identifier);
-    if (xlret & xlretInvXlfn)
-        throw std::runtime_error("invalid function number, "+Identifier);
+    if (xlret & xlretInvXloper) {
+        std::string msg("invalid OPER structure (memory could be exhausted)");
+        if(ErrorId)
+        {
+            msg += ", ";
+            msg += ErrorId;
+        }
+        if(Identifier)
+        {
+            msg += " ";
+            msg += Identifier;
+        }
+        throw XlfException(msg);
+    }
+    if (xlret & xlretFailed) {
+        std::string msg("command failed");
+        if(ErrorId)
+        {
+            msg += ",";
+            msg += ErrorId;
+        }
+        if(Identifier)
+        {
+            msg += " ";
+            msg += Identifier;
+        }
+        throw std::runtime_error(msg);
+    }
+    if (xlret & xlretInvCount) {
+        std::string msg("invalid number of arguments");
+        if(ErrorId)
+        {
+            msg += ",";
+            msg += ErrorId;
+        }
+        if(Identifier)
+        {
+            msg += " ";
+            msg += Identifier;
+        }
+        throw std::runtime_error(msg);
+    }
+    if (xlret & xlretInvXlfn) {
+        std::string msg("invalid function number");
+        if(ErrorId)
+        {
+            msg += ",";
+            msg += ErrorId;
+        }
+        if(Identifier)
+        {
+            msg += " ";
+            msg += Identifier;
+        }
+        throw std::runtime_error(msg);
+    }
     // should never get here.
     assert(0);
     return xlret;

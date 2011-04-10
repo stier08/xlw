@@ -184,9 +184,9 @@ namespace xlw {
         return (lpxloper_->xltype & xltypeInt) == 0 ? false : true ;
     }
 
-    INLINE int XlfOper12::AsInt(int * pxlret) const
+    INLINE int XlfOper12::AsInt(const char* ErrorId, int * pxlret) const
     {
-        return static_cast<int>(AsDouble(pxlret));
+        return static_cast<int>(AsDouble(ErrorId, pxlret));
     }
 
     INLINE LPXLOPER12 XlfOper12::GetLPXLOPER() const
