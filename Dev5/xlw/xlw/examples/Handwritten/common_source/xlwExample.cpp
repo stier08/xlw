@@ -94,7 +94,7 @@ extern "C" {
         // Excel will calculate this cell and call our function again.
         // Thus we first copy all the data to avoid partially computing the
         // average for no reason since one of the cells might be uncalculated.
-        std::vector<double> temp = xlTargetRange.AsDoubleVector(XlfOperImpl::RowMajor);
+        std::vector<double> temp = xlTargetRange.AsDoubleVector("TargetRange", XlfOperImpl::RowMajor);
 
         // All cells are copied. We do the actual work.
         size_t popSize = temp.size();
