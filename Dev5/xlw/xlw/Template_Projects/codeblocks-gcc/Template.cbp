@@ -51,7 +51,7 @@
 		<Linker>
 			<Add option="-static" />
 			<Add library="user32" />
-			<Add library="$(XLW)\xlw\include\xlw\xlw.def" />
+			<Add library='&quot;$(XLW)\xlw\include\xlw\xlw.def&quot;' />
 			<Add directory="..\..\..\lib" />
 		</Linker>
 		<Unit filename="source\cppinterface.h" />
