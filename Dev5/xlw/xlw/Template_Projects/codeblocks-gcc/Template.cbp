@@ -14,7 +14,7 @@
 				<Compiler>
 					<Add option="-Wall" />
 					<Add option="-g" />
-					<Add option="-DBUILD_DLL" />
+					<Add option="-D_DEBUG" />
 				</Compiler>
 				<Linker>
 					<Add library='&quot;$(XLW)\xlw\lib\libxlw-gcc-s-gd-5DEV.a&quot;' />
@@ -32,7 +32,7 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-Wall" />
-					<Add option="-DBUILD_DLL" />
+					<Add option="-DNDEBUG" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />

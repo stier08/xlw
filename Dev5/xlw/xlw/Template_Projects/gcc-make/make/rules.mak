@@ -40,15 +40,16 @@ CXX= g++
 CPPFLAGSINC := $(INCLUDE_DIR:%=-I%)
 
 ifeq ($(BUILD),DEBUG)
-CPPFLAGS= $(CPPFLAGSINC)  -g3
+CPPFLAGS= $(CPPFLAGSINC)  -g3 -Wall -D_DEBUG
+STRIP=
 endif 
 ifeq ($(BUILD),RELEASE)
-
-CPPFLAGS= $(CPPFLAGSINC)  -O3
+CPPFLAGS= $(CPPFLAGSINC)  -O3 -Wall -DNDEBUG
+STRIP=-s
 endif 
 
 
-COMPILE= $(CXX)  $(CXXFLAGS) $(CPPFLAGS) -DBUILDING_DLL=1  -fexceptions -c
+COMPILE= $(CXX)  $(CXXFLAGS) $(CPPFLAGS) -c
 
 .cpp:
 	$(LINK) -o $@ $< $(LDLIBS) -L"$(XLW)/xlw/lib"
@@ -103,12 +104,12 @@ TARGET = $(INSTALL_DLL)/$(LIBPREFIX)$(LIBRARY).xll
 
 $(TARGET)::$(LIBOBJ)
 	@-$(RM) $@	
-	$(CXX) -fPIC -shared  -o  $@ \
-    -Wl,--out-implib=$(INSTALL_DLL)/$(LIBPREFIX)$(LIBRARY).lib \
-   	-Wl,--export-all-symbols \
-   	-Wl,--enable-auto-import \
-	 $(LIBOBJ)\
-   	-Wl,--no-whole-archive $(LDFLAGS) -L"$(XLW)/xlw/lib" $(LDFLAGS)
+	$(CXX) -shared $(CXXPIC) $(STRIP) -o  $@ \
+   	-Wl,"$(XLW)/xlw/include/xlw/xlw.def" \
+        -Wl,-static \
+        -static-libgcc \
+	$(LIBOBJ) \
+   	$(LDFLAGS) -L"$(XLW)/xlw/lib"
 
 
 

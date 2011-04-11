@@ -15,7 +15,7 @@ endif
 
 #Describes the Compiler details
 INCLUDE_DIR =../common_source  ../../../include
-CXXFLAGS = -DBUILDING_DLL=1  -fexceptions 
+CXXFLAGS = 
 
 
 #The source
