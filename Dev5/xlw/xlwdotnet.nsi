@@ -650,6 +650,7 @@ SubSection "xlwDotNet" xlwDotNet
 			SetOutPath "$INSTDIR\xlwDotNet\lib"
 			File "xlwDotNet\lib\xlwDotNet-vc80*.dll"
 			File "xlwDotNet\lib\xlwDotNet-vc80*.pdb"
+			SetOutPath "$INSTDIR\xlwDotNet\lib\x64"
 			File "xlwDotNet\lib\x64\xlwDotNet-vc80*.dll"
 			File "xlwDotNet\lib\x64\xlwDotNet-vc80*.pdb"
 			!insertmacro DotNetInterfaceGenerator VS8
@@ -669,6 +670,7 @@ SubSection "xlwDotNet" xlwDotNet
 			SetOutPath "$INSTDIR\xlwDotNet\lib"
 			File "xlwDotNet\lib\xlwDotNet-vc90*.dll"
 			File "xlwDotNet\lib\xlwDotNet-vc90*.pdb"
+			SetOutPath "$INSTDIR\xlwDotNet\lib\x64"
 			File "xlwDotNet\lib\x64\xlwDotNet-vc90*.dll"
 			File "xlwDotNet\lib\x64\xlwDotNet-vc90*.pdb"
 			!insertmacro DotNetInterfaceGenerator VS9
@@ -688,6 +690,7 @@ SubSection "xlwDotNet" xlwDotNet
 			SetOutPath "$INSTDIR\xlwDotNet\lib"
 			File "xlwDotNet\lib\xlwDotNet-vc100*.dll"
 			File "xlwDotNet\lib\xlwDotNet-vc100*.pdb"
+			SetOutPath "$INSTDIR\xlwDotNet\lib\x64"
 			File "xlwDotNet\lib\x64\xlwDotNet-vc100*.dll"
 			File "xlwDotNet\lib\x64\xlwDotNet-vc100*.pdb"
 			!insertmacro DotNetInterfaceGenerator VS10
