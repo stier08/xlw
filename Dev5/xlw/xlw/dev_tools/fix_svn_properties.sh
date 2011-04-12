@@ -24,7 +24,7 @@ find . -name '*.dev' -o -name '*.sln' \
     -o -name '*.dsw' -o -name '*.dsp' \
  | xargs -n 1 svn propset svn:eol-style CRLF
 # these should have svn:needs-lock
-find . -name '*.png' -o -name '*.jpg' -o -name '*.ico' \
+find . -name '*.ico' \
     -o -name '*.xls' -o -name '*.xla' -o -name '*.xll' \
     -o -name '*.doc' -o -name '*.pdf' \
  | xargs -n 1 svn propset svn:needs-lock 1
@@ -52,3 +52,5 @@ find . -name '*.jpg' \
 # these should have svn:mime-type image/png
 find . -name '*.png' \
  | xargs -n 1 svn propset svn:mime-type image/png
+find . -name '*.cpp' -o -name '*.h' -o -name '*.inl' \
+ | xargs -n 1 svn propset svn:keywords \"Id\"
