@@ -280,6 +280,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\HiResTimer.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\MyContainers.cpp"
 				>
 			</File>
@@ -448,6 +452,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\include\xlw\HiResTimer.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\include\xlw\macros.h"
 				>
 			</File>
@@ -465,6 +473,10 @@
 			</File>
 			<File
 				RelativePath="..\..\include\xlw\TempMemory.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\xlw\ThreadLocalStorage.h"
 				>
 			</File>
 			<File
@@ -565,6 +577,10 @@
 			</File>
 			<File
 				RelativePath="..\..\include\xlw\XlFunctionRegistration.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\xlw\XlfWindows.h"
 				>
 			</File>
 			<File

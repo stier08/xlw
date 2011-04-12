@@ -64,7 +64,7 @@ std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& func
   AddLine(output, "#include <xlw/XlFunctionRegistration.h>");
   AddLine(output, "#include <stdexcept>");
   AddLine(output,"#include <xlw/XlOpenClose.h>");
-  AddLine(output,"#include <ctime>");
+  AddLine(output,"#include <xlw/HiResTimer.h>");
 
   const std::set<std::string>& includes = IncludeRegistry::Instance().GetIncludes();
   for (std::set<std::string>::const_iterator it = includes.begin(); it!= includes.end(); ++it)
@@ -254,7 +254,7 @@ std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& func
 
     if (functionDescriptions[i].DoTime())
     {
-      AddLine(output," double t = (clock()+0.0)/CLOCKS_PER_SEC;");
+      AddLine(output," HiResTimer t;");
     }
 
     AddLine(output,functionDescriptions[i].GetReturnType()+" result(");
@@ -278,11 +278,10 @@ std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& func
 
     if (functionDescriptions[i].DoTime())
     {
-      AddLine(output,"  t = (clock()+0.0)/CLOCKS_PER_SEC-t;");
       AddLine(output,"CellMatrix resultCells(result);");
       AddLine(output,"CellMatrix time(1,2);");
       AddLine(output,"time(0,0) = \"time taken\";");
-      AddLine(output,"time(0,1) = t;");
+      AddLine(output,"time(0,1) = t.elapsed();");
       AddLine(output,"resultCells.PushBottom(time);");
       AddLine(output,"return XlfOper(resultCells);");
     }
@@ -326,7 +325,7 @@ std::vector<char> OutputFileCreatorCL(const std::vector<FunctionDescription>& fu
   AddLine(output, "#include <xlw/XlFunctionRegistration.h>");
   AddLine(output, "#include <stdexcept>");
   AddLine(output,"#include <xlw/XlOpenClose.h>");
-  AddLine(output,"#include <ctime>");
+  AddLine(output,"#include <xlw/HiResTimer.h>");
 
   const std::set<std::string>& includes = IncludeRegistry::Instance().GetIncludes();
   for (std::set<std::string>::const_iterator it = includes.begin(); it!= includes.end(); ++it)
@@ -486,7 +485,7 @@ std::vector<char> OutputFileCreatorCL(const std::vector<FunctionDescription>& fu
 
     if (functionDescriptions[i].DoTime())
     {
-      AddLine(output," double t = (clock()+0.0)/CLOCKS_PER_SEC;");
+      AddLine(output," HiResTimer t;");
     }
 
     AddLine(output,functionDescriptions[i].GetReturnType()+" result(");
@@ -510,11 +509,10 @@ std::vector<char> OutputFileCreatorCL(const std::vector<FunctionDescription>& fu
 
     if (functionDescriptions[i].DoTime())
     {
-      AddLine(output,"  t = (clock()+0.0)/CLOCKS_PER_SEC-t;");
       AddLine(output,"CellMatrix resultCells(result);");
       AddLine(output,"CellMatrix time(1,2);");
       AddLine(output,"time(0,0) = \"time taken\";");
-      AddLine(output,"time(0,1) = t;");
+      AddLine(output,"time(0,1) = t.elapsed();");
       AddLine(output,"resultCells.PushBottom(time);");
       AddLine(output,"return resultCells;");
     }

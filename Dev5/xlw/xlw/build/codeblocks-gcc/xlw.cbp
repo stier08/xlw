@@ -47,10 +47,12 @@
 		<Unit filename="..\..\include\xlw\DoubleOrNothing.h" />
 		<Unit filename="..\..\include\xlw\ERR_Macros.h" />
 		<Unit filename="..\..\include\xlw\EXCEL32_API.h" />
+		<Unit filename="..\..\include\xlw\HiResTimer.h" />
 		<Unit filename="..\..\include\xlw\MJmatrices.h" />
 		<Unit filename="..\..\include\xlw\MyContainers.h" />
 		<Unit filename="..\..\include\xlw\NCmatrices.h" />
 		<Unit filename="..\..\include\xlw\TempMemory.h" />
+		<Unit filename="..\..\include\xlw\ThreadLocalStorage.h" />
 		<Unit filename="..\..\include\xlw\Win32StreamBuf.h" />
 		<Unit filename="..\..\include\xlw\Win32StreamBuf.inl" />
 		<Unit filename="..\..\include\xlw\XlFunctionRegistration.h" />
@@ -76,6 +78,7 @@
 		<Unit filename="..\..\include\xlw\XlfRef.h" />
 		<Unit filename="..\..\include\xlw\XlfRef.inl" />
 		<Unit filename="..\..\include\xlw\XlfStr.h" />
+		<Unit filename="..\..\include\xlw\XlfWindows.h" />
 		<Unit filename="..\..\include\xlw\macros.h" />
 		<Unit filename="..\..\include\xlw\xlarray.h" />
 		<Unit filename="..\..\include\xlw\xlcall32.h" />
@@ -85,6 +88,7 @@
 		<Unit filename="..\..\src\Dispatcher.cpp" />
 		<Unit filename="..\..\src\DoubleOrNothing.cpp" />
 		<Unit filename="..\..\src\FileConverter.cpp" />
+		<Unit filename="..\..\src\HiResTimer.cpp" />
 		<Unit filename="..\..\src\MyContainers.cpp" />
 		<Unit filename="..\..\src\NCmatrices.cpp" />
 		<Unit filename="..\..\src\PathUpdater.cpp" />

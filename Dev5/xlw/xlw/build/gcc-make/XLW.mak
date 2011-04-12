@@ -26,6 +26,7 @@ LIBSRC = ArgList.cpp \
          Dispatcher.cpp \
          DoubleOrNothing.cpp \
          FileConverter.cpp \
+         HiResTimer.cpp \
          NCmatrices.cpp \
          MyContainers.cpp \
          PathUpdater.cpp \

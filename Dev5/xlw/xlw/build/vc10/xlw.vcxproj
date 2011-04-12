@@ -122,6 +122,7 @@
     <ClCompile Include="..\..\src\Dispatcher.cpp" />
     <ClCompile Include="..\..\src\DoubleOrNothing.cpp" />
     <ClCompile Include="..\..\src\FileConverter.cpp" />
+    <ClCompile Include="..\..\src\HiResTimer.cpp" />
     <ClCompile Include="..\..\src\NCmatrices.cpp" />
     <ClCompile Include="..\..\src\MyContainers.cpp" />
     <ClCompile Include="..\..\src\PathUpdater.cpp" />
@@ -164,10 +165,13 @@
     <ClInclude Include="..\..\include\xlw\DoubleOrNothing.h" />
     <ClInclude Include="..\..\include\xlw\ERR_Macros.h" />
     <ClInclude Include="..\..\include\xlw\EXCEL32_API.h" />
+    <ClInclude Include="..\..\include\xlw\HiResTimer.h" />
     <ClInclude Include="..\..\include\xlw\macros.h" />
     <ClInclude Include="..\..\include\xlw\MJmatrices.h" />
     <ClInclude Include="..\..\include\xlw\NCmatrices.h" />
     <ClInclude Include="..\..\include\xlw\MyContainers.h" />
+    <ClInclude Include="..\..\include\xlw\ThreadLocalStorage.h" />
+    <ClInclude Include="..\..\include\xlw\XlfWindows.h" />
     <ClInclude Include="..\..\src\PathUpdater.h" />
     <ClInclude Include="..\..\include\xlw\TempMemory.h" />
     <ClInclude Include="..\..\include\xlw\Win32StreamBuf.h" />
