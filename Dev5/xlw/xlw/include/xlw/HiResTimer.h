@@ -27,7 +27,7 @@
 // $Id: XlfExcel.h 478 2008-03-06 11:43:12Z ericehlers $
 
 namespace xlw {
-//! Wrapper for a windows High Resolution Timers
+//! Wrapper for a windows High Resolution Timers functions
 /*!
 Create one of these objects for each time you 
 need to accurately time something.

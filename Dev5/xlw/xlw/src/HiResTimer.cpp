@@ -1,6 +1,5 @@
 
 /*
-Copyright (C) 2009 Narinder S Claire
 Copyright (C) 2011 John Adcock
 
 This file is part of xlw, a free-software/open-source C++ wrapper of the
