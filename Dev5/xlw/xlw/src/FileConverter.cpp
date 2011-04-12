@@ -76,15 +76,15 @@ namespace clw
       switch (c)
       {
       case  ',' : // end of cell but not line
-        { 
+        {
           (*Cells.rbegin()).push_back(currentCell);
           currentCell = "";
           break;
-        } 
+        }
       case '\n' : // new line so move on;
         {
           Cells.push_back(std::vector<std::string>());
-          if (currentCell != "") 
+          if (currentCell != "")
           {
             (*Cells.rbegin()).push_back(currentCell);
             currentCell = "";
@@ -103,7 +103,7 @@ namespace clw
     std::vector<std::vector<CellValue> > cellValues(Cells.size());
     for (unsigned long i=0; i < Cells.size(); ++i)
     {
-      
+
       cellValues[i].reserve(Cells[i].size());
       for (unsigned long j=0; j < Cells[i].size(); ++j)
         cellValues[i].push_back( CellFromString(Cells[i][j]));
@@ -120,7 +120,7 @@ namespace clw
 
     while (currentRow < rows)
     {
-      while( currentRow < rows && cellValues[currentRow].size() == 0) 
+      while( currentRow < rows && cellValues[currentRow].size() == 0)
         ++currentRow;
 
       size_t startRow = currentRow;
@@ -129,17 +129,17 @@ namespace clw
       if (currentRow < rows)
       {
         size_t firstEmpty;
-        bool endNotFound = true;  
+        bool endNotFound = true;
         do
         {
-          while( currentRow < rows && cellValues[currentRow].size() != 0) 
+          while( currentRow < rows && cellValues[currentRow].size() != 0)
             ++currentRow;
 
           if (currentRow < rows)
           {
             firstEmpty = currentRow;
 
-            while( currentRow < rows && cellValues[currentRow].size() == 0) 
+            while( currentRow < rows && cellValues[currentRow].size() == 0)
               ++currentRow;
 
             if (currentRow == rows || (currentRow - firstEmpty) >=gapSize)
@@ -184,9 +184,11 @@ namespace clw
 
 }
 #else
+#ifdef _MSC_VER
 // avoid linker warnings
 namespace
 {
     char dummy = 0;
 }
+#endif
 #endif

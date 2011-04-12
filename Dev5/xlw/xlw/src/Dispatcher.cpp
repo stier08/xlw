@@ -51,15 +51,17 @@ clw
 
   DispatcherHelper::DispatcherHelper(const std::string& id, FunctionToCall function)
   {
-   Dispatcher::Instance().RegisterFunction(id,function); 
+   Dispatcher::Instance().RegisterFunction(id,function);
   }
 
 
 }
 #else
+#ifdef _MSC_VER
 // avoid linker warnings
 namespace
 {
     char dummy = 0;
 }
+#endif
 #endif
