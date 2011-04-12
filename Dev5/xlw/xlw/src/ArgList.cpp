@@ -24,15 +24,6 @@
 #include <algorithm>
 #include <sstream>
 
-namespace
-{
-    template<class T>
-    T maxi(T i, T j)
-    {
-        return i > j ? i : j;
-    }
-}
-
 void xlw::MakeLowerCase(std::string& input)
 {
    std::transform(input.begin(),input.end(),input.begin(),tolower);
@@ -322,7 +313,7 @@ xlw::ArgumentList::ArgumentList(CellMatrix cells,
                             }
 
                             cellBelow = empty;
-                            rowsDown = maxi(rowsDown,extracted.RowsInStructure()+2);
+                            rowsDown = std::max(rowsDown,extracted.RowsInStructure()+2);
                             column+= extracted.ColumnsInStructure();
                         }
                         else // ok it's an array or boring string
@@ -352,7 +343,7 @@ xlw::ArgumentList::ArgumentList(CellMatrix cells,
 
                                 add(thisName,theArray);
 
-                                rowsDown = maxi(rowsDown,size+2);
+                                rowsDown = std::max(rowsDown,size+2);
 
                                 column+=1;
                             }
@@ -575,7 +566,7 @@ xlw::CellMatrix xlw::ArgumentList::AllData() const
     {for (std::map<std::string,MyMatrix>::const_iterator it= MatrixArguments.begin();
             it != MatrixArguments.end(); it++)
     {
-         CellMatrix tmp(3+it->second.size1(),maxi(size_t(2), it->second.size2()));
+         CellMatrix tmp(3+it->second.size1(),std::max(size_t(2), it->second.size2()));
          tmp(0,0) = it->first;
          tmp(1,0) = std::string("matrix");
          tmp(2,0) = static_cast<double>(it->second.size1());
@@ -607,7 +598,7 @@ xlw::CellMatrix xlw::ArgumentList::AllData() const
     {for (std::map<std::string,CellMatrix>::const_iterator it= CellArguments.begin();
             it != CellArguments.end(); it++)
     {
-        CellMatrix tmp(3+it->second.RowsInStructure(),maxi(size_t(2),it->second.ColumnsInStructure()));
+        CellMatrix tmp(3+it->second.RowsInStructure(),std::max(size_t(2),it->second.ColumnsInStructure()));
          tmp(0,0) = it->first;
          tmp(1,0) = std::string("cells");
          tmp(2,0) = static_cast<double>(it->second.RowsInStructure());
@@ -621,7 +612,7 @@ xlw::CellMatrix xlw::ArgumentList::AllData() const
     {for (std::map<std::string,CellMatrix>::const_iterator it= ListArguments.begin();
         it != ListArguments.end(); it++)
     {
-        CellMatrix tmp(3+it->second.RowsInStructure(),maxi(size_t(2),it->second.ColumnsInStructure()));
+        CellMatrix tmp(3+it->second.RowsInStructure(),std::max(size_t(2),it->second.ColumnsInStructure()));
          tmp(0,0) = it->first;
          tmp(1,0) = std::string("list");
          tmp(2,0) = static_cast<double>(it->second.RowsInStructure());

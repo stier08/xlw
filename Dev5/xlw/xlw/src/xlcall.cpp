@@ -11,11 +11,6 @@
 **
 */
 
-#ifndef _WINDOWS_
-#include <windows.h>
-#endif
-
-//#include <xlw/xlcall.h>
 #include <xlw/xlcall32.h>
 
 /*

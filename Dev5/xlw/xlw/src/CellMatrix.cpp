@@ -23,11 +23,6 @@
 #include <xlw/CellMatrix.h>
 #include <algorithm>
 
-size_t maxi(size_t a, size_t b)
-{
-    return a > b ? a : b;
-}
-
 bool xlw::CellValue::IsAString() const
 {
     return Type == string;
@@ -306,7 +301,7 @@ size_t xlw::CellMatrix::ColumnsInStructure() const
 
 xlw::CellMatrix xlw::MergeCellMatrices(const CellMatrix& Top, const CellMatrix& Bottom)
 {
-    size_t cols = maxi(Top.ColumnsInStructure(), Bottom.ColumnsInStructure());
+    size_t cols = std::max(Top.ColumnsInStructure(), Bottom.ColumnsInStructure());
     size_t rows = Top.RowsInStructure()+Bottom.RowsInStructure();
 
     CellMatrix merged(rows,cols);
@@ -325,7 +320,7 @@ xlw::CellMatrix xlw::MergeCellMatrices(const CellMatrix& Top, const CellMatrix& 
 void xlw::CellMatrix::PushBottom(const CellMatrix& newRows)
 {
     CellMatrix newRowsResize(newRows);
-    size_t newColumns = maxi(newRows.ColumnsInStructure(),Columns);
+    size_t newColumns = std::max(newRows.ColumnsInStructure(),Columns);
 
     if (newColumns > Columns)
         for (size_t i=0; i < Rows; i++)

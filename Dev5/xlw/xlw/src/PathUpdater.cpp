@@ -15,9 +15,7 @@ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-#undef  UNICODE          // need to undefine for mingw
-#undef _UNICODE
-#include <windows.h>
+#include <xlw/XlfWindows.h>
 
 #include "PathUpdater.h"
 #include <xlw/xlw.h>

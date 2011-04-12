@@ -17,10 +17,7 @@
 #ifndef INC_CriticalSection_H
 #define INC_CriticalSection_H
 
-#ifndef NOMINMAX
-#define NOMINMAX
-#endif
-#include <windows.h>
+#include <xlw/XlfWindows.h>
 
 /*!
 \file CriticalSection.h

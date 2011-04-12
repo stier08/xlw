@@ -17,10 +17,7 @@
 #ifndef INC_ThreadLocalStorage_H
 #define INC_ThreadLocalStorage_H
 
-#ifndef NOMINMAX
-#define NOMINMAX
-#endif
-#include <windows.h>
+#include <xlw/XlfWindows.h>
 
 /*!
 \file ThreadLocalStorage.h

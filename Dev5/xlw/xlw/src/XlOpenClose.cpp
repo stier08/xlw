@@ -16,11 +16,6 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
-
-#undef  UNICODE          // need to undefine for mingw
-#undef _UNICODE
-#include <windows.h>
-
 #include <xlw/XlOpenClose.h>
 #include <vector>
 #include <xlw/Win32StreamBuf.h>

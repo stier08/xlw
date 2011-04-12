@@ -22,10 +22,7 @@
 #include "xlw/ThreadLocalStorage.h"
 #include <iostream>
 #include <vector>
-#ifndef NOMINMAX
-#define NOMINMAX
-#endif
-#include <windows.h>
+#include <xlw/XlfWindows.h>
 
 static ThreadLocalStorage<xlw::TempMemory> tls;
 static CriticalSection threadInfoVector;

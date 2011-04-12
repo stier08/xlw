@@ -20,10 +20,7 @@
 #ifndef INC_excel32_H
 #define INC_excel32_H
 
-#ifndef STRICT
-#define STRICT 1
-#endif
-#include "windows.h"
+#include <xlw/XlfWindows.h>
 
 /*
 ** XL 12 Basic Datatypes

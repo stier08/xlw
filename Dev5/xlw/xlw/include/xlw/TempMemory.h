@@ -21,10 +21,7 @@
 #ifndef INC_TempMemory_H
 #define INC_TempMemory_H
 
-#ifndef NOMINMAX
-#define NOMINMAX
-#endif
-#include <windows.h>
+#include <xlw/XlfWindows.h>
 
 /*!
 \file TempMemory.h

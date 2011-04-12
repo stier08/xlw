@@ -28,10 +28,7 @@
 
 #include <cassert>
 
-#ifndef STRICT
-#define STRICT 1
-#endif
-#include <windows.h>
+#include <xlw/XlfWindows.h>
 
 #if !(_WIN32_WINNT >= 0x0400) && !(_WIN32_WINDOWS > 0x0400)
 //! Helper method if IsDebuggerPresent is not available.

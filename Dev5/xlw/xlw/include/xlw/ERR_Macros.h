@@ -29,7 +29,8 @@
     #pragma once
 #endif
 
-#include <windows.h>
+#include <xlw/XlfWindows.h>
+
 #ifdef PORT_USE_OLD_IO_HEADERS
     #ifdef PORT_NO_LONG_FILE_NAMES
         #include <strstrea.h>
