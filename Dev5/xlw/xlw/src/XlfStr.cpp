@@ -19,7 +19,7 @@
 \brief Implements the XlfStr class.
 */
 
-// $Id: XlfRef.cpp 395 2007-11-30 15:36:29Z ericehlers $
+// $Id$
 
 #include <xlw/XlfStr.h>
 #include <xlw/XlfExcel.h>

@@ -23,7 +23,7 @@
 \brief Class XlfArgDesc - Encapsulates the argument definition
 */
 
-// $Id: XlfArgDesc.h 523 2008-04-10 16:10:03Z ericehlers $
+// $Id$
 
 #include <xlw/EXCEL32_API.h>
 #include <string>

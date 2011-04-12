@@ -23,7 +23,7 @@
 \brief Experimental treatment of long strings for Excel 2007
 */
 
-// $Id: XlfRef.h 395 2007-11-30 15:36:29Z ericehlers $
+// $Id$
 
 #include <xlw/EXCEL32_API.h>
 #include <xlw/xlcall32.h>

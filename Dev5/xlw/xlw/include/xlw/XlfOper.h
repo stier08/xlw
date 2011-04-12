@@ -25,7 +25,7 @@
 \brief Class XlfOper - Wrapper for XLOPER/XLOPER12 Excel data structure
 */
 
-// $Id: XlfOper.h 538 2008-05-19 09:34:25Z ericehlers $
+// $Id$
 
 #include <xlw/XlfOperImpl.h>
 #include <sstream>

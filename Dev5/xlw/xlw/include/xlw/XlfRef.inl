@@ -20,7 +20,7 @@
 \brief Implements inline methods of class XlfRef.
 */
 
-// $Id: XlfRef.inl 474 2008-03-05 15:40:40Z ericehlers $
+// $Id$
 
 #ifdef NDEBUG
 #define INLINE inline

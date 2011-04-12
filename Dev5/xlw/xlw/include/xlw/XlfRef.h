@@ -24,7 +24,7 @@
 \brief Class XlfRef - Encapsulate a range of cells
 */
 
-// $Id: XlfRef.h 474 2008-03-05 15:40:40Z ericehlers $
+// $Id$
 
 #include <xlw/EXCEL32_API.h>
 #include <xlw/xlcall32.h>

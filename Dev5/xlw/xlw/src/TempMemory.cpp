@@ -1,4 +1,4 @@
-// $Id: XlfExcel.inl 507 2008-03-27 13:33:20Z ericehlers $
+// $Id$
 /*
  Copyright (C) 1998, 1999, 2001, 2002, 2003, 2004 Jérôme Lecomte
  Copyright (C) 2007, 2008 Eric Ehlers

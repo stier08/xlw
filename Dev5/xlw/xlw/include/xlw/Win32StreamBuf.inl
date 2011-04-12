@@ -20,7 +20,7 @@
  * \ingroup utils
  */
 
-// $Id: Win32StreamBuf.inl 474 2008-03-05 15:40:40Z ericehlers $
+// $Id$
 
 #define INLINE inline
 

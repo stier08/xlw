@@ -24,7 +24,7 @@
 \brief Declares class CriticalSection and ProtectInScope
 */
 
-// $Id: XlfExcel.h 478 2008-03-06 11:43:12Z ericehlers $
+// $Id$
 
 namespace xlw {
 

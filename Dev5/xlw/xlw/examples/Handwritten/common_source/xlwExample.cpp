@@ -16,7 +16,7 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-// $Id: xlwExample.cpp,v 1.12 2003/03/08 22:21:02 jlecomte Exp $
+// $Id$
 
 #include <xlw/xlw.h>
 #include <sstream>

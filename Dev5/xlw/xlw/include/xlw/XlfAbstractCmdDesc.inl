@@ -14,7 +14,7 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-// $Id: XlfAbstractCmdDesc.inl 445 2008-02-29 13:18:46Z ericehlers $
+// $Id$
 
 #ifndef NDEBUG
 #define INLINE inline

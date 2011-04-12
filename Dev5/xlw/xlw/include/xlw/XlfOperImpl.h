@@ -24,7 +24,7 @@
 \brief Class XlfOperImpl - Abstract implementation of class XlfOper
 */
 
-// $Id: XlfOper.h 340 2007-10-14 15:40:31Z ericehlers $
+// $Id$
 
 #include <xlw/EXCEL32_API.h>
 #include <xlw/xlcall32.h>

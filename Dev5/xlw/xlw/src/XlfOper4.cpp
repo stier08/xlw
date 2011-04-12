@@ -23,7 +23,7 @@
 \brief Implements the XlfOper4 class.
 */
 
-// $Id: XlfOper4.cpp 383 2007-11-22 23:19:24Z ericehlers $
+// $Id$
 
 #include <xlw/XlfOper4.h>
 #include <xlw/XlfException.h>

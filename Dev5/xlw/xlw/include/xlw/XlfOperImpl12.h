@@ -25,7 +25,7 @@
 \brief Class XlfOperImpl12 - Concrete implementation of class XlfOper for Excel 12
 */
 
-// $Id: XlfOper.h 340 2007-10-14 15:40:31Z ericehlers $
+// $Id$
 
 #include <xlw/XlfOperImpl.h>
 

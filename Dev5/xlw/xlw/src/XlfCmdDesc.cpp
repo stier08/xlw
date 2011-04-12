@@ -22,7 +22,7 @@
 \brief Implements the XlfCmdDesc class.
 */
 
-// $Id: XlfCmdDesc.cpp 474 2008-03-05 15:40:40Z ericehlers $
+// $Id$
 
 #include <xlw/XlfCmdDesc.h>
 #include <xlw/XlfOper4.h>

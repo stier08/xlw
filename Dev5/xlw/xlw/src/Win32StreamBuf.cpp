@@ -20,7 +20,7 @@
  * \ingroup utils
  */
 
-// $Id: Win32StreamBuf.cpp 474 2008-03-05 15:40:40Z ericehlers $
+// $Id$
 
 #ifdef _WIN32
 

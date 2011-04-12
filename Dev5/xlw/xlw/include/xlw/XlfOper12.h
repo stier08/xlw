@@ -23,7 +23,7 @@
 \brief Class XlfOper12 - Wrapper around a pointer to the XLOPER Excel 12 data structure
 */
 
-// $Id: XlfOper12.h 340 2007-10-14 15:40:31Z ericehlers $
+// $Id$
 
 #include <xlw/EXCEL32_API.h>
 #include <xlw/xlcall32.h>

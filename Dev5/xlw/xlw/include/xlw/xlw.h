@@ -17,7 +17,7 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-// $Id: xlw.h 530 2008-05-08 14:13:40Z ericehlers $
+// $Id$
 
 #ifndef INC_Excel32_H
 #define INC_Excel32_H

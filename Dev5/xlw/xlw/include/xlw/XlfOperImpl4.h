@@ -23,7 +23,7 @@
 \brief Class XlfOperImpl4 - Concrete implementation of class XlfOper for Excel 4
 */
 
-// $Id: XlfOper.h 340 2007-10-14 15:40:31Z ericehlers $
+// $Id$
 
 #include <xlw/XlfOperImpl.h>
 #include <sstream>

@@ -20,7 +20,7 @@
 \brief Implements inline methods of XlfOper.
 */
 
-// $Id: XlfOper.inl 379 2007-11-16 12:53:30Z ericehlers $
+// $Id$
 
 #ifdef NDEBUG
 #define INLINE inline

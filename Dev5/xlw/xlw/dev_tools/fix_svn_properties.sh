@@ -53,4 +53,4 @@ find . -name '*.jpg' \
 find . -name '*.png' \
  | xargs -n 1 svn propset svn:mime-type image/png
 find . -name '*.cpp' -o -name '*.h' -o -name '*.inl' \
- | xargs -n 1 svn propset svn:keywords \"Id\"
+ | xargs -n 1 svn propset svn:keywords Id

@@ -22,7 +22,7 @@
 \brief Implements the classes XlfExcel.
 */
 
-// $Id: XlfExcel.cpp 474 2008-03-05 15:40:40Z ericehlers $
+// $Id$
 
 #include <xlw/XlfExcel.h>
 #include <cstdio>

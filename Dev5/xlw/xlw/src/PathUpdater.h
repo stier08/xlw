@@ -24,7 +24,7 @@
 \brief Declares class PathUpdater.
 */
 
-// $Id: XlfExcel.h 478 2008-03-06 11:43:12Z ericehlers $
+// $Id$
 
 #if defined(_MSC_VER)
 #pragma once

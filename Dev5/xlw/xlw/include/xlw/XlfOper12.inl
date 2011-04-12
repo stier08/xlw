@@ -21,7 +21,7 @@
 \brief Implements inline methods of XlfOper12.
 */
 
-// $Id: XlfOper12.inl 274 2006-07-13 13:55:08Z nando $
+// $Id$
 
 #ifdef NDEBUG
 #define INLINE inline
