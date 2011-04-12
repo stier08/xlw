@@ -1,8 +1,4 @@
-
-DEVELOPMENT SNAPSHOT 5DEV-28March2011
-
-
-***************  UPDATED 28 March 2011
+DEVELOPMENT SNAPSHOT 5DEV
 
 For the latest documentation and news visit http://xlw.sourceforge.net/
 
@@ -16,6 +12,7 @@ Getting Started
 
 If you have installed this from the self-extracting installer
 the should be in the menu a link to the examples. This is probably the best 
+
 place to start.
 There are also menu items for Template Extractors which you can use to create a
 new fresh xll project, either under xlw(vanilla) or xlwDotNet.
