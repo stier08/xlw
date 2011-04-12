@@ -28,6 +28,7 @@
 #include <cstdio>
 #include <iostream>
 #include <stdexcept>
+#include <stdlib.h>
 #include <xlw/XlfOper.h>
 #include <xlw/XlfOperImpl4.h>
 #include <xlw/XlfOperImpl12.h>

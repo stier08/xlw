@@ -23,6 +23,7 @@
 
 #include <xlw/XlfStr.h>
 #include <xlw/XlfExcel.h>
+#include <stdlib.h>
 
 // Stop header precompilation
 #ifdef _MSC_VER
