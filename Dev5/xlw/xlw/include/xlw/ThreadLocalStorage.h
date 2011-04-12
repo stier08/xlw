@@ -26,6 +26,8 @@
 
 // $Id: XlfExcel.h 478 2008-03-06 11:43:12Z ericehlers $
 
+namespace xlw {
+
 template<typename T>
 class ThreadLocalStorage
 {
@@ -56,5 +58,7 @@ public:
 private:
     DWORD m_tlsIndex;
 };
+
+}
 
 #endif

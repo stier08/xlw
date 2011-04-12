@@ -26,7 +26,7 @@
 
 // $Id: XlfExcel.h 478 2008-03-06 11:43:12Z ericehlers $
 
-
+namespace xlw {
 //! Wrapper for a windows critical section
 /*!
 Create one of these objects for each time you 
@@ -86,4 +86,5 @@ private:
     CriticalSection& m_criticalSection;
 };
 
+}
 #endif

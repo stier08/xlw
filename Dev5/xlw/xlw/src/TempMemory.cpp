@@ -24,8 +24,8 @@
 #include <vector>
 #include <xlw/XlfWindows.h>
 
-static ThreadLocalStorage<xlw::TempMemory> tls;
-static CriticalSection threadInfoVector;
+static xlw::ThreadLocalStorage<xlw::TempMemory> tls;
+static xlw::CriticalSection threadInfoVector;
 //FIXME: leaks the TempMemory objects
 // waiting for shared pointer class
 static std::vector<xlw::TempMemory*> tempMemoryInstances;
