@@ -74,7 +74,7 @@ char* xlw::PascalStringConversions::WStringToPascalString(const std::wstring& cS
     // and another so that the string is null terminated so that the 
     // debugger sees it correctly
     LPSTR result = TempMemory::GetMemory<char>(n + 2);
-    WideCharToMultiByte(CP_ACP, WC_NO_BEST_FIT_CHARS, &cString[1], (int)n, result + 1, (int)n, NULL, NULL);
+    WideCharToMultiByte(CP_ACP, WC_NO_BEST_FIT_CHARS, cString.c_str(), (int)n, result + 1, (int)n, NULL, NULL);
     result[n + 1] = 0;
     result[0] = static_cast<BYTE>(n);
     return result;
