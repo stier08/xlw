@@ -199,6 +199,35 @@ extern "C" {
         EXCEL_END;
     }
 
+    LPXLFOPER EXCEL_EXPORT xlMatrixTest(LPXLFOPER inRows, LPXLFOPER inCols) {
+        EXCEL_BEGIN;
+        XlfOper xlRows(inRows);
+        XlfOper xlCols(inCols);
+
+        RW nbRows(xlRows.AsInt());
+        RW nbCols(xlCols.AsInt());
+        XlfOper result(nbRows, nbCols);
+
+        for(RW row(0); row < nbRows; ++row)
+        {
+            for(RW col(0); col < nbCols; ++col)
+            {
+                if(row == col)
+                {
+                    result(row, col) = 1.0;
+                }
+                else
+                {
+                    result(row, col) = 0.0;
+                }
+            }
+        }
+
+        return result;
+        EXCEL_END;
+    }
+
+
 }
 
 namespace {
@@ -277,4 +306,14 @@ namespace {
         "xlCurrentFormula", "CurrentFormula", "Returns the formula in the current cell "
         "by calling Excel Macro functions",
         "xlw Example", 0, 0, true, false, "", "", false, true);
+
+    XLRegistration::Arg MatrixTestArgs[] = {
+        { "rows", "Number of rows", "XLF_OPER" },
+        { "cols", "Number of columns", "XLF_OPER" }
+    };
+
+    XLRegistration::XLFunctionRegistrationHelper registerMatrixTest(
+        "xlMatrixTest", "MatrixTest", "Generate an identity matrix",
+        "xlw Example", MatrixTestArgs, 2);
+
 }
