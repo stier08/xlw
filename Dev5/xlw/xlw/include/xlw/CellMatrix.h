@@ -92,14 +92,14 @@ namespace xlw {
 
         CellMatrix(size_t rows, size_t columns);
         CellMatrix();
-        CellMatrix(double x);
-        CellMatrix(std::string x);
-        CellMatrix(std::wstring x);
-        CellMatrix(const char* x);
-        CellMatrix(const MyArray& data);
-        CellMatrix(const MyMatrix& data);
-        CellMatrix(unsigned long i);
-        CellMatrix(int i);
+        explicit CellMatrix(double x);
+        explicit CellMatrix(std::string x);
+        explicit CellMatrix(std::wstring x);
+        explicit CellMatrix(const char* x);
+        explicit CellMatrix(const MyArray& data);
+        explicit CellMatrix(const MyMatrix& data);
+        explicit CellMatrix(unsigned long i);
+        explicit CellMatrix(int i);
 
         const CellValue& operator()(size_t i, size_t j) const;
         CellValue& operator()(size_t i, size_t j);
