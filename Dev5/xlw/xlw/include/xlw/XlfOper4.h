@@ -2,6 +2,7 @@
 /*
  Copyright (C) 1998, 1999, 2001, 2002 Jérôme Lecomte
  Copyright (C) 2007, 2008 Eric Ehlers
+ Copyright (C) 2011 John Adcock
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -25,12 +26,7 @@
 
 // $Id$
 
-#include <xlw/EXCEL32_API.h>
-#include <xlw/xlcall32.h>
-#include <xlw/XlfExcel.h>
-#include <xlw/XlfRef.h>
-#include <xlw/MyContainers.h>
-#include <vector>
+#include <xlw/XlfOper.h>
 
 #if defined(_MSC_VER)
 #pragma once
@@ -42,9 +38,6 @@
 
 namespace xlw {
 
-    class XlfRef;
-    class CellMatrix;
-
     //! Wrapper around a pointer to the XLOPER Excel 4 data structure.
     /*!
     XlfOper4 holds a pointer to the XLOPER datatype used by Excel 4.  This class
@@ -54,129 +47,9 @@ namespace xlw {
 
     The interface for this class is otherwise the same as that for class XlfOper.
     */
-    class EXCEL32_API XlfOper4
-    {
-    public:
-
-        XlfOper4();
-        XlfOper4(const XlfOper4& oper);
-        XlfOper4(LPXLOPER lpxloper);
-        XlfOper4(double value);
-        XlfOper4(short value);
-        XlfOper4(short value, bool Error);
-        XlfOper4(bool value);
-        XlfOper4(const char *value);
-        XlfOper4(const std::string& value);
-        XlfOper4(const CellMatrix& value);
-        XlfOper4(const MyMatrix& value);
-        XlfOper4(const MyArray& value);
-        XlfOper4(const XlfRef& range);
-        XlfOper4(WORD rows, WORD cols);
-        template <class FwdIt>
-        XlfOper4(WORD rows, WORD cols, FwdIt start)
-        {
-            Allocate();
-            Set(rows,cols,start);
-        }
-        ~XlfOper4();
-        static XlfOper4 Error(WORD);
-
-        void FreeAuxiliaryMemory() const;
-
-        XlfOper4& operator=(const XlfOper4& xloper);
-        XlfOper4 operator()(WORD row, WORD col);
-        operator LPXLOPER();
-
-        bool IsMissing() const;
-        bool IsError() const;
-        bool IsRef() const;
-        bool IsSRef() const;
-        bool IsMulti() const;
-        bool IsNumber() const;
-        bool IsString() const;
-        bool IsNil() const;
-        bool IsBool() const;
-        bool IsInt() const;
-        WORD xltype() const;
-
-        WORD rows() const;
-        WORD columns() const;
-
-        double AsDouble(const char* ErrorId = 0, int * pxlret = 0) const;
-        enum DoubleVectorConvPolicy
-        {
-            UniDimensional,
-            RowMajor,
-            ColumnMajor
-        };
-        std::vector<double> AsDoubleVector(const char* ErrorId = 0,
-            DoubleVectorConvPolicy policy = UniDimensional, int * pxlret = 0) const;
-        MyArray AsArray(const char* ErrorId = 0, DoubleVectorConvPolicy policy = UniDimensional,
-            int * pxlret = 0) const;
-        short AsShort(const char* ErrorId = 0, int * pxlret = 0) const;
-        bool AsBool(const char* ErrorId = 0,int * pxlret = 0) const;
-        int AsInt(const char* ErrorId = 0,int * pxlret = 0) const;
-        char * AsString(const char* ErrorId = 0,int * pxlret = 0) const;
-        CellMatrix AsCellMatrix( const char* ErrorId = 0,int * pxlret=0) const;
-        MyMatrix AsMatrix( const char* ErrorId = 0,int * pxlret=0) const;
-        XlfRef AsRef(const char* ErrorId = 0,int * pxlret = 0) const;
-        LPXLOPER GetLPXLOPER() const;
-
-        XlfOper4& Set(LPXLOPER lpxloper);
-        XlfOper4& Set(double value);
-        XlfOper4& Set(short value);
-        XlfOper4& Set(bool value);
-        XlfOper4& Set(const char *value);
-        XlfOper4& Set(const CellMatrix& cells);
-        XlfOper4& Set(const MyMatrix& matrix);
-        XlfOper4& Set(const MyArray& values);
-        XlfOper4& Set(const XlfRef& range);
-        XlfOper4& Set(short value, bool Error);
-        template<class FwdIt>
-        XlfOper4& Set(WORD r, WORD c, FwdIt it)
-        {
-            lpxloper_->xltype = xltypeMulti;
-            lpxloper_->val.array.rows = r;
-            lpxloper_->val.array.columns = c;
-            lpxloper_->val.array.lparray = TempMemory::GetMemory<XLOPER>(r*c);
-            for (size_t i = 0; i < size_t(r*c); ++i, ++it)
-                lpxloper_->val.array.lparray[i] = *(LPXLOPER)XlfOper4(*it);
-            return *this;
-        }
-        XlfOper4& Set(WORD r, WORD c);
-        XlfOper4& SetElement(WORD r, WORD c, const XlfOper4 &value);
-        XlfOper4& SetError(WORD error);
-
-    private:
-        LPXLOPER lpxloper_;
-
-        int Coerce(short type, XlfOper4& result) const;
-        int Allocate();
-        void Deallocate();
-
-        static int xlbitFreeAuxMem;
-
-        int ThrowOnError(int, const char* ErrorId = 0, const char* identifier = 0) const;
-
-        int ConvertToDoubleVector(std::vector<double>&, DoubleVectorConvPolicy policy = UniDimensional) const;
-        int ConvertToDouble(double&) const throw();
-        int ConvertToShort(short&) const throw();
-        int ConvertToBool(bool&) const throw();
-        int ConvertToInt(int&) const throw();
-        int ConvertToString(char *&) const throw();
-        int ConvertToCellMatrix( CellMatrix& output) const;
-        int ConvertToMatrix( MyMatrix& output) const;
-        int ConvertToRef(XlfRef&) const throw();
-        int ConvertToErr(WORD& e) const throw();
-
-        friend class XlfExcel;
-    };
+    typedef xlw::Impl::XlfOper<LPXLOPER> XlfOper4;
 
 }
-
-#ifdef NDEBUG
-#include <xlw/XlfOper4.inl>
-#endif
 
 #endif
 

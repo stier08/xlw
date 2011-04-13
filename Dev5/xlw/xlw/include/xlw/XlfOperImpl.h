@@ -3,6 +3,7 @@
  Copyright (C) 1998, 1999, 2001, 2002 Jérôme Lecomte
  Copyright (C) 2007, 2008 Eric Ehlers
  Copyright (C) 2009 Narinder S Claire
+ Copyright (C) 2011 John Adcock
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -20,53 +21,29 @@
 #define INC_XlfOperImpl_H
 
 /*!
-\file XlfOperImpl.h
-\brief Class XlfOperImpl - Abstract implementation of class XlfOper
+\file XlfOper.h
+\brief Class XlfOper - Abstract implementation of class XlfOper
 */
 
 // $Id$
 
-#include <xlw/EXCEL32_API.h>
-#include <xlw/xlcall32.h>
-#include <xlw/XlfExcel.h>
-#include <xlw/MyContainers.h>
+#include <xlw/XlfOperProperties.h>
+#include <xlw/CellMatrix.h>
+#include <xlw/XlfRef.h>
 #include <vector>
+#include <string>
 
 #if defined(_MSC_VER)
 #pragma once
 #endif
 
-#if defined(DEBUG_HEADERS)
-#pragma DEBUG_HEADERS
-#endif
-
 namespace xlw {
 
-    class XlfOper;
-    class XlfOperImpl4;
-    class XlfOperImpl12;
-    class XlfRef;
-    class CellMatrix;
-
-    //! Abstract implementation of class XlfOper.
-    /*!
-    This class defines the implementation of class XlfOper.  This class is an
-    abstract base class, and a singleton.  At startup, the application must
-    instantiate the singleton via a concrete base class specific to the version of
-    Excel that is running.  XlfOper forwards all its calls to XlfOperImpl for
-    execution by the appropriate concrete base class.
-
-    The application should never access XlfOperImpl directly.
-
-    The interface for this class is otherwise the same as that for class XlfOper.
-    */
-    class EXCEL32_API XlfOperImpl
+    class XlfOperImpl
     {
-        friend class XlfOper;
-        friend class XlfOperImpl4;
-        friend class XlfOperImpl12;
-
     public:
+        //! Internally used to flag XLOPER returned by Excel.
+        static const int xlbitFreeAuxMem = 0x8000;
 
         enum DoubleVectorConvPolicy
         {
@@ -75,73 +52,809 @@ namespace xlw {
             ColumnMajor
         };
 
+        //! Used to throw informative error messages
+        static void ThrowOnError(int, const char* ErrorId = 0, const char* identifier = 0);
+        static std::string XlTypeToString(int xlType);
+    };
+}
+
+namespace xlw { namespace Impl {
+
+    template<typename LPOPER_TYPE>
+    class EXCEL32_API XlfOper
+    {
     private:
+        //! \name Manage reference to the underlying XLOPER
+        //@{
+        //! Internal LPXLFOPER/LPXLOPER/LPXLOPER12.
+        LPOPER_TYPE lpxloper_;
+        //@}
 
-        static const XlfOperImpl &instance() { return *instance_; }
-        XlfOperImpl() { instance_ = this; }
+        typedef XlfOperProperties<LPOPER_TYPE> OperProps;
+        typedef typename XlfOperProperties<LPOPER_TYPE>::ErrorType ErrorType;
+        typedef typename XlfOperProperties<LPOPER_TYPE>::IntType IntType;
+        typedef typename XlfOperProperties<LPOPER_TYPE>::MultiRowType MultiRowType;
+        typedef typename XlfOperProperties<LPOPER_TYPE>::MultiColType MultiColType;
+        typedef typename XlfOperProperties<LPOPER_TYPE>::XlTypeType XlTypeType;
+        typedef typename XlfOperProperties<LPOPER_TYPE>::OperType OperType;
+        typedef xlw::XlfOperImpl XlfOperImpl;
 
-        virtual void destroy(const XlfOper& xlfOper) const = 0;
-        virtual void FreeAuxiliaryMemory(const XlfOper& xlfOper) const = 0;
+    public:
 
-        virtual XlfOper& operator_assignment(XlfOper &xlfOper, const XlfOper& rhs) const = 0;
-        virtual XlfOper operator_subscript(XlfOper &xlfOper, RW row, COL col) const = 0;
-        virtual LPXLOPER operator_LPXLOPER(const XlfOper &xlfOper) const = 0;
-        virtual LPXLOPER12 operator_LPXLOPER12(const XlfOper &xlfOper) const = 0;
-        virtual LPXLFOPER operator_LPXLFOPER(const XlfOper &xlfOper) const = 0;
+        template <class FwdIt>
+        void Set(RW rows, COL cols, FwdIt start)
+        {
+            OperProps::setArraySize(lpxloper_, rows, cols);
+            RW actualrows = OperProps::getRows(lpxloper_);
+            COL actualcols = OperProps::getCols(lpxloper_);
+            for(MultiRowType row(0); row < rows; ++row)
+            {
+                for(MultiRowType col(0); col < actualcols; ++col)
+                {
+                    OperProps::setDouble(OperProps::getElement(lpxloper_, row, col), *start++);
+                }
+                start += (cols - actualcols);
+            }
+        }
 
-        virtual bool IsMissing(const XlfOper &xlfOper) const = 0;
-        virtual bool IsError(const XlfOper &xlfOper) const = 0;
-        virtual bool IsRef(const XlfOper &xlfOper) const = 0;
-        virtual bool IsSRef(const XlfOper &xlfOper) const = 0;
-        virtual bool IsMulti(const XlfOper &xlfOper) const = 0;
-        virtual bool IsNumber(const XlfOper &xlfOper) const = 0;
-        virtual bool IsString(const XlfOper &xlfOper) const = 0;
-        virtual bool IsNil(const XlfOper &xlfOper) const = 0;
-        virtual bool IsBool(const XlfOper &xlfOper) const = 0;
-        virtual bool IsInt(const XlfOper &xlfOper) const = 0;
+        //! \name Structors and static members
+        //@{
+        //! Default ctor.
+        XlfOper() :
+            lpxloper_(TempMemory::GetMemory<OperType>())
+        {
+            OperProps::setXlType(lpxloper_, xltypeMissing);
+        }
+        //! Copy ctor.
+        XlfOper(const XlfOper<LPOPER_TYPE>& oper) :
+            lpxloper_(oper.oper)
+        {
+        }
 
-        virtual RW rows(const XlfOper &xlfOper) const = 0;
-        virtual COL columns(const XlfOper &xlfOper) const = 0;
+        //! LPXLOPER/LPXLOPER12 ctor.
+        XlfOper(LPOPER_TYPE lpxloper) :
+            lpxloper_(lpxloper)
+        {
+        }
+        //! double ctor.
+        XlfOper(double value) :
+            lpxloper_(TempMemory::GetMemory<OperType>())
+        {
+            OperProps::setDouble(lpxloper_, value);
+        }
+        //! short ctor.
+        XlfOper(short value) :
+            lpxloper_(TempMemory::GetMemory<OperType>())
+        {
+            OperProps::setInt(lpxloper_, value);
+        }
+        //! short or error ctor.
+        XlfOper(ErrorType value, bool Error) :
+            lpxloper_(TempMemory::GetMemory<OperType>())
+        {
+            if(Error)
+            {
+                OperProps::setError(lpxloper_, value);
+            }
+            else
+            {
+                OperProps::setInt(lpxloper_, value);
+            }
+        }
 
-        virtual LPXLFOPER GetLPXLFOPER(const XlfOper &xlfOper) const = 0;
+        //! boolean ctor.
+        XlfOper(bool value) :
+            lpxloper_(TempMemory::GetMemory<OperType>())
+        {
+            OperProps::setBool(lpxloper_, value);
+        }
 
-        virtual XlfOper& Set(XlfOper &xlfOper, LPXLFOPER lpxlfoper) const = 0;
-        virtual XlfOper& Set(XlfOper &xlfOper, double value) const = 0;
-        virtual XlfOper& Set(XlfOper &xlfOper, short value) const = 0;
-        virtual XlfOper& Set(XlfOper &xlfOper, bool value) const = 0;
-        virtual XlfOper& Set(XlfOper &xlfOper, const char *value) const = 0;
-        virtual XlfOper& Set(XlfOper &xlfOper, const std::wstring &value) const = 0;
-        virtual XlfOper& Set(XlfOper &xlfOper, const CellMatrix& cells) const = 0;
-        virtual XlfOper& Set(XlfOper &xlfOper, const XlfRef& range) const = 0;
-        virtual XlfOper& Set(XlfOper &xlfOper, short value, bool Error) const = 0;
-        virtual XlfOper& Set(XlfOper &xlfOper, RW r, COL c) const = 0;
-        virtual XlfOper& SetElement(XlfOper &xlfOper, RW r, COL c, const XlfOper &value) const = 0;
-        virtual XlfOper& SetError(XlfOper &xlfOper, WORD error) const = 0;
+        //! Cellmatrix ctor.
+        XlfOper(const CellMatrix& cellmatrix) :
+            lpxloper_(TempMemory::GetMemory<OperType>())
+        {
+            RW nbRows = (RW)cellmatrix.RowsInStructure();
+            COL nbCols = (COL)cellmatrix.ColumnsInStructure();
 
-        virtual int Coerce(const XlfOper &xlfOper, short type, XlfOper& res) const = 0;
+            OperProps::setArraySize(lpxloper_, nbRows, nbCols);
 
-        virtual int Allocate(XlfOper &xlfOper) const = 0;
+            // get actual number of rows in case of truncation
+            nbRows = OperProps::getRows(lpxloper_);
+            nbCols = OperProps::getCols(lpxloper_);
 
-        virtual int ConvertToDoubleVector(const XlfOper &xlfOper, std::vector<double>& value,
-            DoubleVectorConvPolicy policy = UniDimensional) const = 0;
-        virtual int ConvertToDouble(const XlfOper &xlfOper, double& value) const throw() = 0;
-        virtual int ConvertToShort(const XlfOper &xlfOper, short& value) const throw() = 0;
-        virtual int ConvertToBool(const XlfOper &xlfOper, bool& value) const throw() = 0;
-        virtual int ConvertToString(const XlfOper &xlfOper, char *& value) const throw() = 0;
-        virtual int ConvertToWstring(const XlfOper &xlfOper, std::wstring &value) const throw() = 0;
-        virtual int ConvertToCellMatrix(const XlfOper &xlfOper, CellMatrix& output) const = 0;
-        virtual int ConvertToMatrix(const XlfOper &xlfOper, MyMatrix& output) const = 0;
+            for (RW row(0); row < nbRows; ++row)
+            {
+                for (COL col(0); col < nbCols; ++col)
+                {
+                    LPOPER_TYPE elementOper = OperProps::getElement(lpxloper_, row, col);
+                    const CellValue& cellValue(cellmatrix(row,col));
+                    if (cellValue.IsANumber())
+                    {
+                        OperProps::setDouble(elementOper, cellValue.NumericValue());
+                    }
+                    else if (cellValue.IsAString())
+                    {
+                        OperProps::setString(elementOper, cellValue.StringValue());
+                    }
+                    else if (cellValue.IsAWstring())
+                    {
+                        OperProps::setWString(elementOper, cellValue.WstringValue());
+                    }
+                    else if (cellValue.IsBoolean())
+                    {
+                        OperProps::setBool(elementOper, cellValue.BooleanValue());
+                    }
+                    else if (cellValue.IsError())
+                    {
+                        OperProps::setError(elementOper, static_cast<short>(cellValue.ErrorValue()));
+                    }
+                    else
+                    {
+                        OperProps::setString(elementOper, "");
+                    }
+                }
+            }
+        }
 
-        virtual int ConvertToRef(const XlfOper &xlfOper, XlfRef& value) const throw() = 0;
-        virtual int ConvertToErr(const XlfOper &xlfOper, WORD& e) const throw() = 0;
+        //! MyMatrix ctor.
+        XlfOper(const MyMatrix& matrix) :
+            lpxloper_(TempMemory::GetMemory<OperType>())
+        {
+            RW nbRows = (RW)matrix.size1();
+            COL nbCols = (COL)matrix.size2();
 
-        virtual DWORD xltype(const XlfOper &xlfOper) const = 0;
+            OperProps::setArraySize(lpxloper_, nbRows, nbCols);
 
-        static XlfOperImpl *instance_;
+            // get actual number of rows in case of truncation
+            nbRows = OperProps::getRows(lpxloper_);
+            nbCols = OperProps::getCols(lpxloper_);
 
+            for (RW row(0); row < nbRows; ++row)
+            {
+                MyMatrix::const_iterator matColumn = matrix[row];
+                for (COL col(0); col < nbCols; ++col)
+                {
+                    LPOPER_TYPE elementOper = OperProps::getElement(lpxloper_, row, col);
+                    OperProps::setDouble(elementOper, matColumn[col]);
+                }
+            }
+        }
+
+        //! MyArray ctor.
+        XlfOper(const MyArray& values) :
+            lpxloper_(TempMemory::GetMemory<OperType>())
+        {
+            RW nbRows = (RW)values.size();
+
+            OperProps::setArraySize(lpxloper_, nbRows, 1);
+
+            // get actual number of rows in case of truncation
+            nbRows = OperProps::getRows(lpxloper_);
+
+            for (RW row(0); row < nbRows; ++row)
+            {
+                LPOPER_TYPE elementOper = OperProps::getElement(lpxloper_, row, 0);
+                OperProps::setDouble(elementOper, values[row]);
+            }
+        }
+        //!  string ctor.
+        XlfOper(const std::string& value) :
+            lpxloper_(TempMemory::GetMemory<OperType>())
+        {
+            OperProps::setString(lpxloper_, value);
+        }
+        //!  string ctor.
+        XlfOper(const char* value) :
+            lpxloper_(TempMemory::GetMemory<OperType>())
+        {
+            OperProps::setString(lpxloper_, value);
+        }
+        //!  wstring ctor.
+        XlfOper(const std::wstring& value) :
+            lpxloper_(TempMemory::GetMemory<OperType>())
+        {
+            OperProps::setWString(lpxloper_, value);
+        }
+        //! XlfMulti ctor.
+        XlfOper(RW rows, COL cols) :
+            lpxloper_(TempMemory::GetMemory<OperType>())
+        {
+            OperProps::setArraySize(lpxloper_, rows, cols);
+        }
+
+        //! Container ctor.
+        template <class FwdIt>
+        XlfOper(RW rows, COL cols, FwdIt start) :
+            lpxloper_(TempMemory::GetMemory<OperType>())
+        {
+            Set(rows, cols, start);
+        }
+        //! Destructor
+        ~XlfOper()
+        {
+            XlTypeType type = OperProps::getXlType(lpxloper_);
+
+            if (type & xlw::XlfOperImpl::xlbitFreeAuxMem)
+            {
+                // switch back the bit as it was originally
+                type &= ~xlw::XlfOperImpl::xlbitFreeAuxMem;
+                OperProps::setXlType(lpxloper_, type);
+                OperProps::XlFree(lpxloper_);
+            }
+        }
+        
+        //! Constructs an Excel error.
+        static XlfOper<LPOPER_TYPE> Error(ErrorType errorCode)
+        {
+            return XlfOper<LPOPER_TYPE>(errorCode, true);
+        }
+        //@}
+
+        //! \name Memory management
+        //@{
+        //! Free auxiliary memory associated with the XLOPER
+        void SetFreeOnDelete() const
+        {
+            XlTypeType type = OperProps::getXlType(lpxloper_);
+
+            if (type & xltypeStr ||
+                type & xltypeRef ||
+                type & xltypeMulti ||
+                type & xltypeBigData)
+            {
+                // switch back the bit as it was originally
+                type |= xlw::XlfOperImpl::xlbitFreeAuxMem;
+                OperProps::setXlType(lpxloper_, type);
+            }
+        }
+        //@}
+
+        //! \name Operators
+        //@{
+        //! Cast to XLOPER *.
+        operator LPOPER_TYPE() { return lpxloper_; }
+        //@}
+
+        //! \name Inspectors
+        //@{
+        //! Is the data missing ?
+        bool IsMissing() const
+        {
+            return (OperProps::getXlType(lpxloper_) & xltypeMissing) != 0 || (OperProps::getXlType(lpxloper_) & xltypeNil) != 0;
+        }
+        //! Is the data an error ?
+        bool IsError() const
+        {
+            return (OperProps::getXlType(lpxloper_) & xltypeErr) != 0;
+        }
+        //! Is the data a reference ?
+        bool IsRef() const
+        {
+            return (OperProps::getXlType(lpxloper_) & xltypeRef) != 0;
+        }
+        //! Is the data a sheet reference ?
+        bool IsSRef() const
+        {
+            return (OperProps::getXlType(lpxloper_) & xltypeSRef) != 0;
+        }
+        //! Is the data an array ?
+        bool IsMulti() const
+        {
+            return (OperProps::getXlType(lpxloper_) & xltypeMulti) != 0;
+        }
+        //! Is the data a number ?
+        bool IsNumber() const
+        {
+            return (OperProps::getXlType(lpxloper_) & xltypeNum) != 0;
+        }
+        //! Is the data a string ?
+        bool IsString() const
+        {
+            return (OperProps::getXlType(lpxloper_) & xltypeStr) != 0;
+        }
+        //! Is the data a null value ?
+        bool IsNil() const
+        {
+            return (OperProps::getXlType(lpxloper_) & xltypeNil) != 0;
+        }
+
+        //! Is the data a boolean ?
+        bool IsBool() const
+        {
+            return (OperProps::getXlType(lpxloper_) & xltypeBool) != 0;
+        }
+        //! Is the data an integer ?
+        bool IsInt() const
+        {
+            return (OperProps::getXlType(lpxloper_) & xltypeInt) != 0;
+        }
+
+        //! The Excel code for the underlying datatype
+        XlTypeType xltype() const { return OperProps::getXlType(lpxloper_);}
+
+        //! String representation of the Excel code for the underlying datatype
+        std::string xltypeName() const
+        {
+            return xlw::XlfOperImpl::XlTypeToString(OperProps::getXlType(lpxloper_));
+        }
+        //@}
+
+        /*! \name Array Accessors / Operators
+        These functions are used to access the elements of an array in an XlfOper
+        whose underlying <tt>LPXLOPER/LPXLOPER12</tt> has <tt>xltype = xltypeMulti</tt>.
+
+        Here is an example of how this interface can be used to inspect
+        a value received from Excel as an input to an addin function.
+        \code
+        LPXLFOPER EXCEL_EXPORT test_sum(XlfOper xlInput) {
+            EXCEL_BEGIN;
+
+            double sum = 0.;
+            for (RW i = 0; i < xlInput.rows(); i++)
+                for (COL j = 0; j < xlInput.columns(); j++)
+                    sum += xlInput(i, j).AsDouble();
+            return XlfOper(sum);
+
+            EXCEL_END;
+        }
+        \endcode
+
+        Here is an example of how this interface can be used to populate an array
+        to be returned to Excel from an addin function.
+        \code
+        XlfOper ret((WORD)3, (WORD)2);
+        ret.SetElement(0, 0, "abc");
+        ret.SetElement(0, 1, (short)42);
+        ret.SetElement(1, 0, 1.23);
+        ret.SetElement(1, 1, XlfOper::Error(xlerrValue));
+        ret.SetElement(2, 0, true);
+        \endcode
+        */
+        //! Number of rows in matrix.
+        MultiRowType rows() const
+        {
+            return OperProps::getRows(lpxloper_);
+        }
+
+        //! Number of columns in matrix.
+        MultiColType columns() const
+        {
+            return OperProps::getCols(lpxloper_);
+        }
+        
+        //! Function call operator, used here to subscript a two dimensional array.
+        XlfOper<LPOPER_TYPE> operator()(MultiRowType row, MultiColType col)
+        {
+            return XlfOper<LPOPER_TYPE>(OperProps::getElement(lpxloper_));
+        }
+
+        //! Set the value of array element with specified subscript.
+        void SetElement(MultiRowType r, MultiColType c, const XlfOper<LPOPER_TYPE> &value)
+        {
+            switch(OperProps::getXlType(lpxloper_) & 0xFFF)
+            {
+            case xltypeMulti:
+                OperProps::copy(value.lpxloper_, OperProps::getElement(lpxloper_, r, c));
+                break;
+
+            case xltypeNum:
+            case xltypeStr:
+            case xltypeBool:
+            case xltypeInt:
+                OperProps::copy(value.lpxloper_, lpxloper_);
+                break;
+
+            default:
+                break;
+            }
+            throw XlfException("Wrong type for element by element access ");
+        }
+        //@}
+
+        //! \name Conversions
+        //@{
+        //! Converts to a double with error identifer.
+        double AsDouble(const char* ErrorId = 0) const
+        {
+            XlTypeType type(OperProps::getXlType(lpxloper_) & 0xFFF);
+            switch(type)
+            {
+            case xltypeNum:
+                return OperProps::getDouble(lpxloper_);
+                break;
+
+            case xltypeBool:
+                return OperProps::getBool(lpxloper_);
+                break;
+
+            case xltypeInt:
+                return OperProps::getInt(lpxloper_);
+                break;
+
+            case xltypeMissing:
+            case xltypeErr:
+            case xltypeNil:
+                xlw::XlfOperImpl::ThrowOnError(xlretInvXloper, ErrorId, "Conversion to Double");
+                throw XlfNeverGetHere();
+                break;
+
+            default:
+                break;
+            }
+            OperType stackMem;
+            XlfOper<LPOPER_TYPE> result(&stackMem);
+            int xlret = OperProps::coerce(lpxloper_, xltypeNum, result);
+            if(xlret == xlretSuccess)
+            {
+                return result.AsDouble(ErrorId);
+            }
+            else
+            {
+                xlw::XlfOperImpl::ThrowOnError(xlret, ErrorId, "Conversion to Double");
+                throw XlfNeverGetHere();
+            }
+        }
+
+        XlfRef AsRef(const char* ErrorId = 0)
+        {
+            XlTypeType type(OperProps::getXlType(lpxloper_) & 0xFFF);
+            if(type == xltypeRef)
+            {
+                return OperProps::getRef(lpxloper_);
+            }
+            else
+            {
+                OperType stackMem;
+                XlfOper<LPOPER_TYPE> result(&stackMem);
+                int xlret = OperProps::coerce(lpxloper_, xltypeRef, result);
+                if(xlret == xlretSuccess)
+                {
+                    return result.AsRef(ErrorId);
+                }
+                else
+                {
+                    xlw::XlfOperImpl::ThrowOnError(xlret, ErrorId, "Conversion to String");
+                    throw XlfNeverGetHere();
+                }
+            }
+        }
+
+        //! Converts to a short with error identifer.
+        short AsShort(const char* ErrorId = 0, int *pxlret = 0) const
+        {
+            XlTypeType type(OperProps::getXlType(lpxloper_) & 0xFFF);
+            switch(type)
+            {
+            case xltypeNum:
+                return static_cast<short>(OperProps::getDouble(lpxloper_));
+                break;
+
+            case xltypeBool:
+                return static_cast<short>(OperProps::getBool(lpxloper_));
+                break;
+
+            case xltypeInt:
+                return static_cast<short>(OperProps::getInt(lpxloper_));
+                break;
+
+            case xltypeMissing:
+            case xltypeErr:
+            case xltypeNil:
+                xlw::XlfOperImpl::ThrowOnError(xlretInvXloper, ErrorId, "Conversion to Short");
+                throw XlfNeverGetHere();
+                break;
+
+            default:
+                break;
+            }
+            OperType stackMem;
+            XlfOper<LPOPER_TYPE> result(&stackMem);
+            int xlret = OperProps::coerce(lpxloper_, xltypeNum, result);
+            if(xlret == xlretSuccess)
+            {
+                return result.AsShort(ErrorId);
+            }
+            else
+            {
+                xlw::XlfOperImpl::ThrowOnError(xlret, ErrorId, "Conversion to Short");
+                throw XlfNeverGetHere();
+            }
+        }
+
+        //! Converts to a bool with error identifer.
+        bool AsBool(const char* ErrorId = 0, int *pxlret = 0) const
+        {
+            XlTypeType type(OperProps::getXlType(lpxloper_) & 0xFFF);
+            switch(type)
+            {
+            case xltypeNum:
+                return !!OperProps::getDouble(lpxloper_);
+                break;
+
+            case xltypeBool:
+                return OperProps::getBool(lpxloper_);
+                break;
+
+            case xltypeInt:
+                return !!OperProps::getInt(lpxloper_);
+                break;
+
+            case xltypeMissing:
+            case xltypeErr:
+            case xltypeNil:
+                xlw::XlfOperImpl::ThrowOnError(xlretInvXloper, ErrorId, "Conversion to Bool");
+                throw XlfNeverGetHere();
+                break;
+
+            default:
+                break;
+            }
+            OperType stackMem;
+            XlfOper<LPOPER_TYPE> result(&stackMem);
+            int xlret = OperProps::coerce(lpxloper_, xltypeBool, result);
+            if(xlret == xlretSuccess)
+            {
+                return result.AsBool(ErrorId);
+            }
+            else
+            {
+                xlw::XlfOperImpl::ThrowOnError(xlret, ErrorId, "Conversion to Bool");
+                throw XlfNeverGetHere();
+            }
+        }
+
+        //! Converts to an int with error identifer.
+        int AsInt(const char* ErrorId = 0, int *pxlret = 0) const
+        {
+            XlTypeType type(OperProps::getXlType(lpxloper_) & 0xFFF);
+            switch(type)
+            {
+            case xltypeNum:
+                return static_cast<int>(OperProps::getDouble(lpxloper_));
+                break;
+
+            case xltypeBool:
+                return static_cast<int>(OperProps::getBool(lpxloper_));
+                break;
+
+            case xltypeInt:
+                return static_cast<int>(OperProps::getInt(lpxloper_));
+                break;
+
+            case xltypeMissing:
+            case xltypeErr:
+            case xltypeNil:
+                xlw::XlfOperImpl::ThrowOnError(xlretInvXloper, ErrorId, "Conversion to int");
+                throw XlfNeverGetHere();
+                break;
+
+            default:
+                break;
+            }
+            OperType stackMem;
+            XlfOper<LPOPER_TYPE> result(&stackMem);
+            int xlret = OperProps::coerce(lpxloper_, xltypeNum, result);
+            if(xlret == xlretSuccess)
+            {
+                return result.AsInt(ErrorId);
+            }
+            else
+            {
+                xlw::XlfOperImpl::ThrowOnError(xlret, ErrorId, "Conversion to Int");
+                throw XlfNeverGetHere();
+            }
+        }
+
+        //! Converts to a char * with error identifer.
+        std::string AsString(const char* ErrorId = 0) const
+        {
+            XlTypeType type(OperProps::getXlType(lpxloper_) & 0xFFF);
+            if(type == xltypeStr)
+            {
+                return OperProps::getString(lpxloper_);
+            }
+            else
+            {
+                OperType stackMem;
+                XlfOper<LPOPER_TYPE> result(&stackMem);
+                int xlret = OperProps::coerce(lpxloper_, xltypeStr, result);
+                if(xlret == xlretSuccess)
+                {
+                    return result.AsString(ErrorId);
+                }
+                else
+                {
+                    xlw::XlfOperImpl::ThrowOnError(xlret, ErrorId, "Conversion to String");
+                    throw XlfNeverGetHere();
+                }
+            }
+        }
+
+        //! Converts to a wstring.
+        std::wstring AsWstring(const char* ErrorId = 0, int *pxlret = 0) const
+        {
+            XlTypeType type(OperProps::getXlType(lpxloper_) & 0xFFF);
+            if(type == xltypeStr)
+            {
+                return OperProps::getWString(lpxloper_);
+            }
+            else
+            {
+                OperType stackMem;
+                XlfOper<LPOPER_TYPE> result(&stackMem);
+                int xlret = OperProps::coerce(lpxloper_, xltypeStr, result);
+                if(xlret == xlretSuccess)
+                {
+                    return result.AsWstring(ErrorId);
+                }
+                else
+                {
+                    xlw::XlfOperImpl::ThrowOnError(xlret, ErrorId, "Conversion to WString");
+                    throw XlfNeverGetHere();
+                }
+            }
+        }
+
+        std::vector<double> AsDoubleVector(const char* ErrorId = 0, XlfOperImpl::DoubleVectorConvPolicy policy = XlfOperImpl::UniDimensional) const
+        {
+            std::vector<double> result;
+            MultiRowType nbRows(OperProps::getRows(lpxloper_));
+            MultiColType nbCols(OperProps::getCols(lpxloper_));
+
+            bool isUniDimRange = ( nbRows == 1 || nbCols == 1 );
+            if (policy == XlfOperImpl::UniDimensional && !isUniDimRange)
+            {
+                // not a vector we return a failure
+                xlw::XlfOperImpl::ThrowOnError(xlretInvXloper, ErrorId, "Not unidemensional");
+                throw XlfNeverGetHere();
+            }
+
+            result.resize(nbRows * nbCols);
+
+            for(MultiRowType row(0); row < nbRows; ++row)
+            {
+                for(MultiRowType col(0); col < nbCols; ++col)
+                {
+                    XlfOper<LPOPER_TYPE> element(OperProps::getElement(lpxloper_, row, col));
+                    if(policy == XlfOperImpl::RowMajor)
+                    {
+                        result[row * nbCols + col] = element.AsDouble(ErrorId);
+                    }
+                    else
+                    {
+                        result[col * nbRows + row] = element.AsDouble(ErrorId);
+                    }
+                }
+            }
+            return result;
+        }
+
+        MyArray AsArray(const char* ErrorId = 0, XlfOperImpl::DoubleVectorConvPolicy policy = XlfOperImpl::UniDimensional) const
+        {
+            MultiRowType nbRows(OperProps::getRows(lpxloper_));
+            MultiColType nbCols(OperProps::getCols(lpxloper_));
+
+            bool isUniDimRange = ( nbRows == 1 || nbCols == 1 );
+            if (policy == XlfOperImpl::UniDimensional && !isUniDimRange)
+            {
+                // not a vector we return a failure
+                xlw::XlfOperImpl::ThrowOnError(xlretInvXloper, ErrorId, "Not unidemensional");
+                throw XlfNeverGetHere();
+            }
+
+            MyArray result(nbRows * nbCols);
+
+            for(MultiRowType row(0); row < nbRows; ++row)
+            {
+                for(MultiRowType col(0); col < nbCols; ++col)
+                {
+                    XlfOper<LPOPER_TYPE> element(OperProps::getElement(lpxloper_, row, col));
+                    if(policy == XlfOperImpl::RowMajor)
+                    {
+                        result[row * nbCols + col] = element.AsDouble(ErrorId);
+                    }
+                    else
+                    {
+                        result[col * nbRows + row] = element.AsDouble(ErrorId);
+                    }
+                }
+            }
+            return result;
+        }
+
+        NCMatrix AsMatrix(const char* ErrorId = 0)
+        {
+            MultiRowType nbRows(OperProps::getRows(lpxloper_));
+            MultiColType nbCols(OperProps::getCols(lpxloper_));
+            NCMatrix result(nbRows, nbCols);
+            for(MultiRowType row(0); row < nbRows; ++row)
+            {
+                for(MultiRowType col(0); col < nbCols; ++col)
+                {
+                    XlfOper<LPOPER_TYPE> element(OperProps::getElement(lpxloper_, row, col));
+                    result[row][col] = element.AsDouble(ErrorId);
+                }
+            }
+            return result;
+        }
+
+        CellMatrix AsCellMatrix(const char* ErrorId = 0)
+        {
+            if(IsMissing())
+            {
+                CellMatrix result(1,1);
+                return result;
+            }
+            if(IsError())
+            {
+                CellMatrix result(1,1);
+                result(0, 0) = CellValue(OperProps::getError(lpxloper_), true);
+                return result;
+            }
+            MultiRowType nbRows(OperProps::getRows(lpxloper_));
+            MultiColType nbCols(OperProps::getCols(lpxloper_));
+            CellMatrix result(nbRows, nbCols);
+            for(MultiRowType row(0); row < nbRows; ++row)
+            {
+                for(MultiRowType col(0); col < nbCols; ++col)
+                {
+                    XlfOper<LPOPER_TYPE> element(OperProps::getElement(lpxloper_, row, col));
+                    if(element.IsNumber())
+                    {
+                        result(row, col) = element.AsDouble(ErrorId);
+                    }
+                    else if(element.IsString())
+                    {
+                        result(row, col) = element.AsWstring(ErrorId);
+                    }
+                    else if(element.IsBool())
+                    {
+                        result(row, col) = element.AsBool(ErrorId);
+                    }
+                    else if(element.IsInt())
+                    {
+                        result(row, col) = element.AsInt(ErrorId);
+                    }
+                    else if(element.IsError())
+                    {
+                        result(row, col) = CellValue(OperProps::getError(element.lpxloper_), true);
+                    }
+                    else if(element.IsMissing())
+                    {
+                        ; // do nothing
+                    }
+                    else
+                    {
+                        throw XlfException("Unsupported type in CellMatrix conversion");
+                    }
+                }
+            }
+            return result;
+        }
+
+        //@}
+
+
+        //! \name Set the value of the underlying reference
+        //@{
+        //! Set the underlying XLOPER * to lpxloper.
+        void Set(LPOPER_TYPE lpxloper)
+        {
+            OperProps::copy(lpxloper, lpxloper_);
+        }
+        //! Set to a string.value
+        void Set(const std::string& value)
+        {
+            OperProps::setString(lpxloper_, value);
+        }
+        //! Set to a wide string.value
+        void Set(const std::wstring& value)
+        {
+            OperProps::setWString(lpxloper_, value);
+        }
     };
 
-}
+} }
 
 #endif
 

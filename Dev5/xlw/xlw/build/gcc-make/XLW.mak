@@ -29,6 +29,7 @@ LIBSRC = ArgList.cpp \
          HiResTimer.cpp \
          NCmatrices.cpp \
          MyContainers.cpp \
+         PascalStringConversions.cpp \
          PathUpdater.cpp \
          TempMemory.cpp \
          Win32StreamBuf.cpp \
@@ -38,14 +39,9 @@ LIBSRC = ArgList.cpp \
          XlfArgDescList.cpp \
          XlfCmdDesc.cpp \
          XlfExcel.cpp \
-         XlfException.cpp \
          XlfFuncDesc.cpp \
-         XlfOper.cpp \
-         XlfOper12.cpp \
-         XlfOper4.cpp \
          XlfOperImpl.cpp \
-         XlfOperImpl12.cpp \
-         XlfOperImpl4.cpp \
+         XlfOperProperties.cpp \
          XlfRef.cpp \
          XlfStr.cpp \
          xlarray.cpp \

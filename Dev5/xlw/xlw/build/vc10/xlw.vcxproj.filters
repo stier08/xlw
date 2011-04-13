@@ -11,6 +11,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\XlfRef.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\ArgList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -26,7 +29,22 @@
     <ClCompile Include="..\..\src\FileConverter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\HiResTimer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\MyContainers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\NCmatrices.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\PascalStringConversions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\PathUpdater.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TempMemory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Win32StreamBuf.cpp">
@@ -53,31 +71,13 @@
     <ClCompile Include="..\..\src\XlfExcel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\XlfException.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\XlfFuncDesc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\XlfOper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\XlfOper12.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\XlfOper4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\XlfOperImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\XlfOperImpl12.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\XlfOperImpl4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\XlfRef.cpp">
+    <ClCompile Include="..\..\src\XlfOperProperties.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\XlfStr.cpp">
@@ -89,20 +89,11 @@
     <ClCompile Include="..\..\src\XlOpenClose.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\TempMemory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\NCmatrices.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\PathUpdater.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\HiResTimer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\PathUpdater.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\include\xlw\ArgList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -115,6 +106,9 @@
     <ClInclude Include="..\..\include\xlw\CellMatrix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\xlw\CriticalSection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\include\xlw\DoubleOrNothing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -124,10 +118,28 @@
     <ClInclude Include="..\..\include\xlw\EXCEL32_API.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\xlw\HiResTimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xlw\IXlfoperShared.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\include\xlw\macros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\xlw\MyContainers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xlw\NCmatrices.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xlw\PascalStringConversions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xlw\TempMemory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xlw\ThreadLocalStorage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\xlw\Win32StreamBuf.h">
@@ -163,19 +175,16 @@
     <ClInclude Include="..\..\include\xlw\XlfOper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\xlw\XlfOper12.h">
+    <ClInclude Include="..\..\include\xlw\XlfOper4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\xlw\XlfOper4.h">
+    <ClInclude Include="..\..\include\xlw\XlfOper12.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\xlw\XlfOperImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\xlw\XlfOperImpl12.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\xlw\XlfOperImpl4.h">
+    <ClInclude Include="..\..\include\xlw\XlfOperProperties.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\xlw\XlfRef.h">
@@ -187,34 +196,13 @@
     <ClInclude Include="..\..\include\xlw\XlFunctionRegistration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\xlw\XlfWindows.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\include\xlw\XlOpenClose.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\xlw\xlw.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\xlw\TempMemory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\xlw\NCmatrices.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\xlw\MJmatrices.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\xlw\CriticalSection.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\PathUpdater.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\xlw\HiResTimer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\xlw\ThreadLocalStorage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\xlw\XlfWindows.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -225,16 +213,13 @@
     <None Include="..\..\include\xlw\XlfAbstractCmdDesc.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="..\..\include\xlw\XlfException.inl">
+    <None Include="..\..\include\xlw\XlfOperProperties4.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="..\..\include\xlw\XlfOper.inl">
+    <None Include="..\..\include\xlw\XlfOperProperties12.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="..\..\include\xlw\XlfOper12.inl">
-      <Filter>Header Files</Filter>
-    </None>
-    <None Include="..\..\include\xlw\XlfOper4.inl">
+    <None Include="..\..\include\xlw\XlfOperPropertiesDynamic.inl">
       <Filter>Header Files</Filter>
     </None>
     <None Include="..\..\include\xlw\XlfRef.inl">

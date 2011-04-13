@@ -24,7 +24,7 @@
 
 // $Id$
 
-#include <xlw/XlfOper.h>
+#include <xlw/EXCEL32_API.h>
 #include <string>
 #include <exception>
 
@@ -37,8 +37,6 @@
 #endif
 
 namespace xlw {
-
-    class EXCEL32_API XlfOper;
 
     //! Excel emergency exceptions
     /*!
@@ -53,15 +51,15 @@ namespace xlw {
     */
     class EXCEL32_API XlfException : public std::exception
     {
-    public:
-        //! Message string ctor.
-        XlfException(const std::string& what = "");
-        //! std::exception interface
-        const char* what () const throw ();
-        //! the automatically generated destructor would not have the throw specifier.
-        ~XlfException () throw () {}
     private:
         std::string what_;
+    public:
+        //! Message string ctor.
+        XlfException(const std::string& what = "") : what_(what) {};
+        //! std::exception interface
+        const char* what () const throw () { return what_.c_str(); }
+        //! the automatically generated destructor would not have the throw specifier.
+        ~XlfException () throw () {}
     };
 
     //! Argument cell not calculated.
@@ -96,11 +94,13 @@ namespace xlw {
         XlfExceptionStackOverflow(): XlfException("stack overflow") {}
     };
 
+    //! Never get here, allows us to tell the compiler that we should have exited already
+    class EXCEL32_API XlfNeverGetHere: public XlfException
+    {
+    public:
+        XlfNeverGetHere(): XlfException("Reached a never get here point") {}
+    };
 }
-
-#ifdef NDEBUG
-#include <xlw/XlfException.inl>
-#endif
 
 #endif
 

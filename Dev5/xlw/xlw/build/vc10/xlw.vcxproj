@@ -123,8 +123,9 @@
     <ClCompile Include="..\..\src\DoubleOrNothing.cpp" />
     <ClCompile Include="..\..\src\FileConverter.cpp" />
     <ClCompile Include="..\..\src\HiResTimer.cpp" />
-    <ClCompile Include="..\..\src\NCmatrices.cpp" />
     <ClCompile Include="..\..\src\MyContainers.cpp" />
+    <ClCompile Include="..\..\src\NCmatrices.cpp" />
+    <ClCompile Include="..\..\src\PascalStringConversions.cpp" />
     <ClCompile Include="..\..\src\PathUpdater.cpp" />
     <ClCompile Include="..\..\src\TempMemory.cpp" />
     <ClCompile Include="..\..\src\Win32StreamBuf.cpp" />
@@ -135,19 +136,9 @@
     <ClCompile Include="..\..\src\XlfArgDescList.cpp" />
     <ClCompile Include="..\..\src\XlfCmdDesc.cpp" />
     <ClCompile Include="..\..\src\XlfExcel.cpp" />
-    <ClCompile Include="..\..\src\XlfException.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</DisableLanguageExtensions>
-      <DisableLanguageExtensions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</DisableLanguageExtensions>
-    </ClCompile>
     <ClCompile Include="..\..\src\XlfFuncDesc.cpp" />
-    <ClCompile Include="..\..\src\XlfOper.cpp" />
-    <ClCompile Include="..\..\src\XlfOper12.cpp" />
-    <ClCompile Include="..\..\src\XlfOper4.cpp" />
     <ClCompile Include="..\..\src\XlfOperImpl.cpp" />
-    <ClCompile Include="..\..\src\XlfOperImpl12.cpp" />
-    <ClCompile Include="..\..\src\XlfOperImpl4.cpp" />
+    <ClCompile Include="..\..\src\XlfOperProperties.cpp" />
     <ClCompile Include="..\..\src\XlfRef.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -166,14 +157,13 @@
     <ClInclude Include="..\..\include\xlw\ERR_Macros.h" />
     <ClInclude Include="..\..\include\xlw\EXCEL32_API.h" />
     <ClInclude Include="..\..\include\xlw\HiResTimer.h" />
+    <ClInclude Include="..\..\include\xlw\IXlfoperShared.h" />
     <ClInclude Include="..\..\include\xlw\macros.h" />
-    <ClInclude Include="..\..\include\xlw\MJmatrices.h" />
-    <ClInclude Include="..\..\include\xlw\NCmatrices.h" />
     <ClInclude Include="..\..\include\xlw\MyContainers.h" />
-    <ClInclude Include="..\..\include\xlw\ThreadLocalStorage.h" />
-    <ClInclude Include="..\..\include\xlw\XlfWindows.h" />
-    <ClInclude Include="..\..\src\PathUpdater.h" />
+    <ClInclude Include="..\..\include\xlw\NCmatrices.h" />
+    <ClInclude Include="..\..\include\xlw\PascalStringConversions.h" />
     <ClInclude Include="..\..\include\xlw\TempMemory.h" />
+    <ClInclude Include="..\..\include\xlw\ThreadLocalStorage.h" />
     <ClInclude Include="..\..\include\xlw\Win32StreamBuf.h" />
     <ClInclude Include="..\..\include\xlw\xlarray.h" />
     <ClInclude Include="..\..\include\xlw\xlcall32.h" />
@@ -188,21 +178,21 @@
     <ClInclude Include="..\..\include\xlw\XlfOper12.h" />
     <ClInclude Include="..\..\include\xlw\XlfOper4.h" />
     <ClInclude Include="..\..\include\xlw\XlfOperImpl.h" />
-    <ClInclude Include="..\..\include\xlw\XlfOperImpl12.h" />
-    <ClInclude Include="..\..\include\xlw\XlfOperImpl4.h" />
+    <ClInclude Include="..\..\include\xlw\XlfOperProperties.h" />
     <ClInclude Include="..\..\include\xlw\XlfRef.h" />
     <ClInclude Include="..\..\include\xlw\XlfStr.h" />
     <ClInclude Include="..\..\include\xlw\XlFunctionRegistration.h" />
+    <ClInclude Include="..\..\include\xlw\XlfWindows.h" />
     <ClInclude Include="..\..\include\xlw\XlOpenClose.h" />
     <ClInclude Include="..\..\include\xlw\xlw.h" />
+    <ClInclude Include="..\..\src\PathUpdater.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\include\xlw\Win32StreamBuf.inl" />
     <None Include="..\..\include\xlw\XlfAbstractCmdDesc.inl" />
-    <None Include="..\..\include\xlw\XlfException.inl" />
-    <None Include="..\..\include\xlw\XlfOper.inl" />
-    <None Include="..\..\include\xlw\XlfOper12.inl" />
-    <None Include="..\..\include\xlw\XlfOper4.inl" />
+    <None Include="..\..\include\xlw\XlfOperProperties12.inl" />
+    <None Include="..\..\include\xlw\XlfOperProperties4.inl" />
+    <None Include="..\..\include\xlw\XlfOperPropertiesDynamic.inl" />
     <None Include="..\..\include\xlw\XlfRef.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

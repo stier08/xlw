@@ -41,7 +41,17 @@
 namespace xlw {
 
     //! Interpreted as LPXLOPER (Excel 4) or LPXLOPER12 (Excel 12).
-    typedef void* LPXLFOPER;
+    typedef struct
+    {
+        union
+        {
+            XLOPER oper4;
+            XLOPER12 oper12;
+        };
+    } XLFOPER;
+
+    typedef XLFOPER* LPXLFOPER;
+
 
     //! Interface between excel and the framework.
     /*!

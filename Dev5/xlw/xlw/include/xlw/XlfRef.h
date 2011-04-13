@@ -36,10 +36,6 @@
 
 namespace xlw {
 
-    // Forward declaration.
-    //! Wrapper around XLOPER Excel data type.
-    class EXCEL32_API XlfOper;
-
     //! Encapsulate a range of cells.
     /*!
     A range is actually a reference to a range of cells in the spreadsheet.

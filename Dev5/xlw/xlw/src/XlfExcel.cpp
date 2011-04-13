@@ -30,8 +30,6 @@
 #include <stdexcept>
 #include <stdlib.h>
 #include <xlw/XlfOper.h>
-#include <xlw/XlfOperImpl4.h>
-#include <xlw/XlfOperImpl12.h>
 #include <xlw/macros.h>
 #include <xlw/TempMemory.h>
 // Stop header precompilation
@@ -179,14 +177,13 @@ void xlw::XlfExcel::InitLibrary() {
         throw std::runtime_error("Could not get address of Excel4v callback");
 
     excelVersion_ = get_excel_version();
+    Impl::XlfOperProperties<LPXLFOPER>::setExcel12(excel12());
     if (excel12()) {
-        static XlfOperImpl12 xlfOperImpl12;
         xlfOperType_ = "Q";
         xlfXloperType_ = "U";
         wStrType_ = "C%";
         fpArrayType_ = "K%";
     } else {
-        static XlfOperImpl4 xlfOperImpl4;
         xlfOperType_ = "P";
         xlfXloperType_ = "R";
         wStrType_ = "C";
@@ -304,7 +301,7 @@ int xlw::XlfExcel::Call4v(int xlfn, LPXLOPER pxResult, int count, LPXLOPER pxdat
                         type & xltypeMulti ||
                         type & xltypeBigData);
         if (hasAuxMem)
-            pxResult->xltype |= XlfOper::xlbitFreeAuxMem;
+            pxResult->xltype |= XlfOperImpl::xlbitFreeAuxMem;
     }
     return xlret;
 }
@@ -333,7 +330,7 @@ int xlw::XlfExcel::Call12v(int xlfn, LPXLOPER12 pxResult, int count, LPXLOPER12 
                           type & xltypeMulti ||
                           type & xltypeBigData);
         if (hasAuxMem)
-            pxResult->xltype |= XlfOper::xlbitFreeAuxMem;
+            pxResult->xltype |= XlfOperImpl::xlbitFreeAuxMem;
     }
     return xlret;
 }

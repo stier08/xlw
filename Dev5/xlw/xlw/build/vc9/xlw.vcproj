@@ -292,6 +292,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\PascalStringConversions.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\PathUpdater.cpp"
 				>
 			</File>
@@ -332,41 +336,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\XlfException.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						DisableLanguageExtensions="false"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|x64"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						DisableLanguageExtensions="false"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath="..\..\src\XlfFuncDesc.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\XlfOper.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\XlfOper12.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\XlfOper4.cpp"
 				>
 			</File>
 			<File
@@ -374,11 +344,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\XlfOperImpl12.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\XlfOperImpl4.cpp"
+				RelativePath="..\..\src\XlfOperProperties.cpp"
 				>
 			</File>
 			<File
@@ -456,6 +422,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\include\xlw\IXlfoperShared.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\include\xlw\macros.h"
 				>
 			</File>
@@ -465,6 +435,10 @@
 			</File>
 			<File
 				RelativePath="..\..\include\xlw\NCmatrices.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\xlw\PascalStringConversions.h"
 				>
 			</File>
 			<File
@@ -516,11 +490,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\xlw\XlfException.h"
+				RelativePath="..\..\include\xlw\XlfExcel.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\xlw\XlfException.inl"
+				RelativePath="..\..\include\xlw\XlfException.h"
 				>
 			</File>
 			<File
@@ -532,15 +506,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\xlw\XlfOper.inl"
-				>
-			</File>
-			<File
 				RelativePath="..\..\include\xlw\XlfOper12.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\include\xlw\XlfOper12.inl"
 				>
 			</File>
 			<File
@@ -548,7 +514,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\xlw\XlfOper4.inl"
+				RelativePath="..\..\include\xlw\XlfOperHelpers.h"
 				>
 			</File>
 			<File
@@ -556,11 +522,19 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\xlw\XlfOperImpl12.h"
+				RelativePath="..\..\include\xlw\XlfOperProperties.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\xlw\XlfOperImpl4.h"
+				RelativePath="..\..\include\xlw\XlfOperProperties12.inl"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\xlw\XlfOperProperties4.inl"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\xlw\XlfOperPropertiesDynamic.inl"
 				>
 			</File>
 			<File
