@@ -138,8 +138,25 @@ extern "C" {
 
         // Returns the reference in A1 format
         std::ostringstream ostr;
-        char colChar = 'A' + ref.GetColBegin();
-        ostr << colChar << ref.GetRowBegin() + 1 << std::ends;
+        COL col = ref.GetColBegin();
+        COL colLeft = col;
+        if(col > 26*26)
+        {
+            char colChar = 'A' + colLeft / (26 * 26) - 1;
+            colLeft %= (26 * 26);
+            ostr << colChar;
+        }
+        if(col > 26)
+        {
+            char colChar = 'A' + colLeft / 26 - 1;
+            colLeft %= 26;
+            ostr << colChar;
+        }
+        {
+            char colChar = 'A' + colLeft;
+            ostr << colChar;
+        }
+        ostr << ref.GetRowBegin() + 1 << std::ends;
         std::string address = ostr.str();
 
         return XlfOper(address.c_str());
@@ -178,7 +195,7 @@ extern "C" {
         XlfExcel::Instance().Call(xlfActiveCell, activeCell, 0);
         XlfExcel::Instance().Call(xlfGetFormula, result, 1, (LPXLFOPER)activeCell);
 
-        return XlfOper(result.AsString());
+        return XlfOper(result.AsWstring());
         EXCEL_END;
     }
 
