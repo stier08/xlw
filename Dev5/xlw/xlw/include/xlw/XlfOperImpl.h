@@ -852,6 +852,48 @@ namespace xlw { namespace Impl {
         {
             OperProps::setWString(lpxloper_, value);
         }
+
+        //! equals operator from same type
+        XlfOper<LPOPER_TYPE>& operator=(const XlfOper<LPOPER_TYPE>& rhs)
+        {
+            lpxloper_ = rhs.lpxloper_;
+            return *this;
+        }
+
+        //! equals operator from double
+        XlfOper<LPOPER_TYPE>& operator=(double rhs)
+        {
+            OperProps::setDouble(lpxloper_, rhs);
+            return *this;
+        }
+
+        //! equals operator from bool
+        XlfOper<LPOPER_TYPE>& operator=(bool rhs)
+        {
+            OperProps::setBool(lpxloper_, rhs);
+            return *this;
+        }
+
+        //! equals operator from int
+        XlfOper<LPOPER_TYPE>& operator=(int rhs)
+        {
+            OperProps::setInt(lpxloper_, rhs);
+            return *this;
+        }
+
+        //! equals operator from string
+        XlfOper<LPOPER_TYPE>& operator=(const std::string& rhs)
+        {
+            OperProps::setString(lpxloper_, rhs);
+            return *this;
+        }
+
+        //! equals operator from wide string
+        XlfOper<LPOPER_TYPE>& operator=(const std::wstring& rhs)
+        {
+            OperProps::setWString(lpxloper_, rhs);
+            return *this;
+        }
     };
 
 } }
