@@ -107,7 +107,7 @@ namespace xlw { namespace Impl {
         }
         //! Copy ctor.
         XlfOper(const XlfOper<LPOPER_TYPE>& oper) :
-            lpxloper_(oper.oper)
+            lpxloper_(oper.lpxloper_)
         {
         }
 
@@ -425,7 +425,7 @@ namespace xlw { namespace Impl {
         //! Function call operator, used here to subscript a two dimensional array.
         XlfOper<LPOPER_TYPE> operator()(MultiRowType row, MultiColType col)
         {
-            return XlfOper<LPOPER_TYPE>(OperProps::getElement(lpxloper_));
+            return XlfOper<LPOPER_TYPE>(OperProps::getElement(lpxloper_, row, col));
         }
 
         //! Set the value of array element with specified subscript.

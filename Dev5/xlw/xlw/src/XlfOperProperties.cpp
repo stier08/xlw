@@ -36,7 +36,7 @@ namespace
         }
         void setXlType(LPXLFOPER oper, DWORD newValue)
         {
-            XlfOperProperties<LPOPER_TYPE>::setXlType((LPOPER_TYPE)oper, (XlfOperProperties<LPOPER_TYPE>::XlTypeType)newValue);
+            XlfOperProperties<LPOPER_TYPE>::setXlType((LPOPER_TYPE)oper, (typename XlfOperProperties<LPOPER_TYPE>::XlTypeType)newValue);
         }
         void setDouble(LPXLFOPER oper, double newValue)
         {
@@ -104,7 +104,7 @@ namespace
         }
         int coerce(LPXLFOPER fromOper, DWORD toType, LPXLFOPER toOper)
         {
-            return XlfOperProperties<LPOPER_TYPE>::coerce((LPOPER_TYPE)fromOper, (XlfOperProperties<LPOPER_TYPE>::XlTypeType)toType,(LPOPER_TYPE)toOper);
+            return XlfOperProperties<LPOPER_TYPE>::coerce((LPOPER_TYPE)fromOper, (typename XlfOperProperties<LPOPER_TYPE>::XlTypeType)toType,(LPOPER_TYPE)toOper);
         }
         void XlFree(LPXLFOPER oper)
         {
