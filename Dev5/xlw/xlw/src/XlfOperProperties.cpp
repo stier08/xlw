@@ -18,7 +18,7 @@
 \brief Implements the singleton class that is used by XlfOper
 */
 
-// $Id: XlfOper12.cpp 920 2011-04-12 12:00:51Z adcockj $
+// $Id$
 
 #include <xlw/XlfOperProperties.h>
 

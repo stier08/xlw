@@ -22,7 +22,7 @@
 \brief defines for conversion functions used when dealing with Excel strings
 */
 
-// $Id: XlfOper.h 920 2011-04-12 12:00:51Z adcockj $
+// $Id$
 
 #include <string>
 

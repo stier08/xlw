@@ -21,7 +21,7 @@
 \brief defines interface for classes handling specific XLOPER versions
 */
 
-// $Id: XlfOper.h 920 2011-04-12 12:00:51Z adcockj $
+// $Id$
 #include <xlw/XlfExcel.h>
 #include <xlw/XlfRef.h>
 

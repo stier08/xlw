@@ -21,7 +21,7 @@
 \brief defines a traits clas for each of the XLOPER variants
 */
 
-// $Id: XlfOper.h 920 2011-04-12 12:00:51Z adcockj $
+// $Id$
 
 #include <xlw/xlcall32.h>
 #include <xlw/PascalStringConversions.h>
