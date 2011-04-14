@@ -30,173 +30,173 @@ using namespace Runtime::InteropServices;
 
 namespace xlwDotNet 
 {
-	namespace xlwTypes 
-	{
-		public ref class CellValue :public xlwTypebaseClass<xlw::CellValue>
-		{
+    namespace xlwTypes 
+    {
+        public ref class CellValue :public xlwTypebaseClass<xlw::CellValue>
+        {
 
-		public:
-			CellValue(IntPtr theRealThing):
-			  xlwTypebaseClass<xlw::CellValue>(theRealThing,false){}
+        public:
+            CellValue(IntPtr theRealThing):
+              xlwTypebaseClass<xlw::CellValue>(theRealThing,false){}
 
-			CellValue(String^ theString):
-				xlwTypebaseClass<xlw::CellValue>
-					( new xlw::CellValue(std::wstring((const wchar_t*)(Marshal::StringToHGlobalUni(theString)).ToPointer())) ,true){}
+            CellValue(String^ theString):
+                xlwTypebaseClass<xlw::CellValue>
+                    ( new xlw::CellValue(std::wstring((const wchar_t*)(Marshal::StringToHGlobalUni(theString)).ToPointer())) ,true){}
 
-			CellValue(double Number):
-				xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue(Number) ,true){}
+            CellValue(double Number):
+                xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue(Number) ,true){}
 
-		//	CellValue(int Code): //Error =  error code
-		//		xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue(Code,false) ,true){}
+        //    CellValue(int Code): //Error =  error code
+        //        xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue(Code,false) ,true){}
 
-			CellValue(int Code, bool Error) :
-				xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue(Code,Error) ,true){}
+            CellValue(int Code, bool Error) :
+                xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue(Code,Error) ,true){}
 
-			CellValue(bool TrueFalse):
-				xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue(true) ,true){}
+            CellValue(bool TrueFalse):
+                xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue(true) ,true){}
 
-			CellValue(int i):
-				xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue(i) ,true){}
+            CellValue(int i):
+                xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue(i) ,true){}
 
-			CellValue():
-				xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue() ,true){}
+            CellValue():
+                xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue() ,true){}
 
-			CellValue(const CellValue^ value):
-				xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue(*(value->theInner)) ,true){}
+            CellValue(const CellValue^ value):
+                xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue(*(value->theInner)) ,true){}
 
-		   /////      What is it 
-			property bool IsAString
-			{
-				bool get() 
-				{
-					return (theInner->IsAWstring() || theInner->IsAString());
-				}
-			}
+           /////      What is it 
+            property bool IsAString
+            {
+                bool get() 
+                {
+                    return (theInner->IsAWstring() || theInner->IsAString());
+                }
+            }
 
-			property bool IsANumber
-			{
-				bool get() 
-				{
-					return theInner->IsANumber();
-				}
-			}
-			property bool IsBoolean
-			{
-				bool get() 
-				{
-					return theInner->IsBoolean();
-				}
-			}
-			property bool IsXlfOper
-			{
-				bool get() 
-				{
-					return theInner->IsXlfOper();
-				}
-			}
+            property bool IsANumber
+            {
+                bool get() 
+                {
+                    return theInner->IsANumber();
+                }
+            }
+            property bool IsBoolean
+            {
+                bool get() 
+                {
+                    return theInner->IsBoolean();
+                }
+            }
+            property bool IsXlfOper
+            {
+                bool get() 
+                {
+                    return theInner->IsXlfOper();
+                }
+            }
 
-			property bool IsError
-			{
-				bool get() 
-				{
-					return theInner->IsError();
-				}
-			}
+            property bool IsError
+            {
+                bool get() 
+                {
+                    return theInner->IsError();
+                }
+            }
 
-			property bool IsEmpty
-			{
-				bool get() 
-				{
-					return theInner->IsEmpty();
-				}
-			}
-
-
-			 /////   Get the Value
-			String^ StringValue(){return gcnew String((theInner->StringValue()).c_str())  ;}
-			double NumericValue(){return theInner->NumericValue();}
-			bool BooleanValue(){return theInner->BooleanValue();}
-			UInt64 ErrorValue(){return theInner->ErrorValue();}
-
-			void clear(){theInner->clear();}
-			
-
-		};
+            property bool IsEmpty
+            {
+                bool get() 
+                {
+                    return theInner->IsEmpty();
+                }
+            }
 
 
+             /////   Get the Value
+            String^ StringValue(){return gcnew String((theInner->StringValue()).c_str())  ;}
+            double NumericValue(){return theInner->NumericValue();}
+            bool BooleanValue(){return theInner->BooleanValue();}
+            UInt64 ErrorValue(){return theInner->ErrorValue();}
 
-		////// CellMatrix
-		public ref class CellMatrix:public xlwTypebaseClass<xlw::CellMatrix>
-		{
+            void clear(){theInner->clear();}
+            
 
-			public:
-			CellMatrix(IntPtr theRealThing):
-			  xlwTypebaseClass<xlw::CellMatrix>(theRealThing,false){}
+        };
 
-			CellMatrix(String^ theString):
-				xlwTypebaseClass<xlw::CellMatrix>
-				( new xlw::CellMatrix((const wchar_t*)(Marshal::StringToHGlobalUni(theString)).ToPointer()) ,true){}
 
-			CellMatrix(double Number):
-				xlwTypebaseClass<xlw::CellMatrix>( new xlw::CellMatrix(Number) ,true){}
 
-			//CellMatrix(int Code): //Error =  error code
-			//	xlwTypebaseClass<xlw::CellMatrix>( new xlw::CellMatrix(Code,false) ,true){}
+        ////// CellMatrix
+        public ref class CellMatrix:public xlwTypebaseClass<xlw::CellMatrix>
+        {
 
-			CellMatrix(xlwTypes::MyArray^ theArray):
-				xlwTypebaseClass<xlw::CellMatrix>( new xlw::CellMatrix(*(theArray->theInner)) ,true){}
+            public:
+            CellMatrix(IntPtr theRealThing):
+              xlwTypebaseClass<xlw::CellMatrix>(theRealThing,false){}
 
-			CellMatrix(xlwTypes::MyMatrix^ theMatrix):
-				xlwTypebaseClass<xlw::CellMatrix>( new xlw::CellMatrix(*(theMatrix->theInner)) ,true){}
+            CellMatrix(String^ theString):
+                xlwTypebaseClass<xlw::CellMatrix>
+                ( new xlw::CellMatrix((const wchar_t*)(Marshal::StringToHGlobalUni(theString)).ToPointer()) ,true){}
 
-			CellMatrix(int i):
-				xlwTypebaseClass<xlw::CellMatrix>( new xlw::CellMatrix(i) ,true){}
+            CellMatrix(double Number):
+                xlwTypebaseClass<xlw::CellMatrix>( new xlw::CellMatrix(Number) ,true){}
 
-			CellMatrix():
-				xlwTypebaseClass<xlw::CellMatrix>( new xlw::CellMatrix() ,true){}
+            //CellMatrix(int Code): //Error =  error code
+            //    xlwTypebaseClass<xlw::CellMatrix>( new xlw::CellMatrix(Code,false) ,true){}
 
-			CellMatrix(int rows, int columns):
-				xlwTypebaseClass<xlw::CellMatrix>( new xlw::CellMatrix(rows, columns) ,true){}
+            CellMatrix(xlwTypes::MyArray^ theArray):
+                xlwTypebaseClass<xlw::CellMatrix>( new xlw::CellMatrix(*(theArray->theInner)) ,true){}
 
-			CellMatrix(CellMatrix^ theCellsMatrix):
-				xlwTypebaseClass<xlw::CellMatrix>( new xlw::CellMatrix(*theCellsMatrix->theInner) ,true){}
+            CellMatrix(xlwTypes::MyMatrix^ theMatrix):
+                xlwTypebaseClass<xlw::CellMatrix>( new xlw::CellMatrix(*(theMatrix->theInner)) ,true){}
 
-			property CellValue^ default[int,int]
-			{
-				CellValue^ get(int i,int j) 
-				{
-					CellValue^ result =  gcnew CellValue(IntPtr((void*)(&theInner->operator()(i,j))));
-					owned = true;
-					return result;
-				}
-				void set(int i, int j, CellValue^ value)
-				{
-					theInner->operator()(i,j) = *(value->theInner) ;
-				}
-			}
+            CellMatrix(int i):
+                xlwTypebaseClass<xlw::CellMatrix>( new xlw::CellMatrix(i) ,true){}
+
+            CellMatrix():
+                xlwTypebaseClass<xlw::CellMatrix>( new xlw::CellMatrix() ,true){}
+
+            CellMatrix(int rows, int columns):
+                xlwTypebaseClass<xlw::CellMatrix>( new xlw::CellMatrix(rows, columns) ,true){}
+
+            CellMatrix(CellMatrix^ theCellsMatrix):
+                xlwTypebaseClass<xlw::CellMatrix>( new xlw::CellMatrix(*theCellsMatrix->theInner) ,true){}
+
+            property CellValue^ default[int,int]
+            {
+                CellValue^ get(int i,int j) 
+                {
+                    CellValue^ result =  gcnew CellValue(IntPtr((void*)(&theInner->operator()(i,j))));
+                    owned = true;
+                    return result;
+                }
+                void set(int i, int j, CellValue^ value)
+                {
+                    theInner->operator()(i,j) = *(value->theInner) ;
+                }
+            }
 
         property int RowsInStructure
-		{
-			int get(){return (int)theInner->RowsInStructure();}
-		}
+        {
+            int get(){return (int)theInner->RowsInStructure();}
+        }
 
         property int ColumnsInStructure
-		{
-			int get(){return (int)theInner->ColumnsInStructure();}
-		}
+        {
+            int get(){return (int)theInner->ColumnsInStructure();}
+        }
 
-		void PushBottom(CellMatrix^ newRows)
-		{
-			theInner->PushBottom(*(newRows->theInner));
-		}
-
-
-		static void *getInner (CellMatrix^ theArray){return theArray->theInner;}
-
-		};
+        void PushBottom(CellMatrix^ newRows)
+        {
+            theInner->PushBottom(*(newRows->theInner));
+        }
 
 
-	}
+        static void *getInner (CellMatrix^ theArray){return theArray->theInner;}
+
+        };
+
+
+    }
 }
 
 #endif

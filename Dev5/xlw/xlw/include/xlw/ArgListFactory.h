@@ -32,8 +32,8 @@ namespace xlw {
     public:
         static ArgListFactory<T>& FactoryInstance()
         {
-	        static ArgListFactory<T> object;
-	        return object;
+            static ArgListFactory<T> object;
+            return object;
         }
         typedef T* (*CreateTFunction)(const ArgumentList& );
         void RegisterClass(std::string ClassId, CreateTFunction);

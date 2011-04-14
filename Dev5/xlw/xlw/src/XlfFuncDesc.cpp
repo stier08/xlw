@@ -72,7 +72,7 @@ XlfAbstractCmdDesc::XlfAbstractCmdDesc.
 xlw::XlfFuncDesc::XlfFuncDesc(const std::string& name, const std::string& alias,
                          const std::string& comment, const std::string& category,
                          RecalcPolicy recalcPolicy, bool Threadsafe, const std::string &returnTypeCode,
-						 const std::string &helpID,
+                         const std::string &helpID,
                          bool Asynchronous, bool MacroSheetEquivalent,
                          bool ClusterSafe)
     : XlfAbstractCmdDesc(name, alias, comment), impl_(0), returnTypeCode_(returnTypeCode), helpID_(helpID)
@@ -203,12 +203,12 @@ int xlw::XlfFuncDesc::RegisterAs(const std::string& dllName, double mode_, doubl
         (*px++) = XlfOper4((*it).GetComment());
     }
 
-	XlfOper4 res;
+    XlfOper4 res;
     int err = static_cast<int>(XlfExcel::Instance().Call4v(xlfRegister, static_cast<LPXLOPER>(res), 10 + nbargs, rgx));
 
     if(funcId != NULL)
     {
-		*funcId = res.AsDouble();
+        *funcId = res.AsDouble();
     }
 
     delete[] rgx;

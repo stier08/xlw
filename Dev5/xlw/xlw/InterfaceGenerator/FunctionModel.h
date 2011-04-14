@@ -25,7 +25,7 @@ class FunctionModel
 {
 public:
 
-	FunctionModel(std::string ReturnType_, std::string Name, std::string Description, 
+    FunctionModel(std::string ReturnType_, std::string Name, std::string Description, 
                   bool Volatile_=false, bool Time_=false, bool Threadsafe_=false, 
                   std::string helpID_="",
                   bool asynchronous=false,bool macrosheet=false, bool clustersafe=false);
@@ -44,10 +44,10 @@ public:
         return FunctionName;
     }
 
-	std::string GetHelpID() const
-	{
-		return helpID;
-	}
+    std::string GetHelpID() const
+    {
+        return helpID;
+    }
 
     std::string GetFunctionDescription() const
     {
@@ -106,7 +106,7 @@ private:
     std::string ReturnType;
     std::string FunctionName;
     std::string FunctionDescription;
-	std::string helpID;
+    std::string helpID;
     bool Volatile;
     bool Time;
     bool Threadsafe;

@@ -66,7 +66,7 @@ public:
                          bool Volatile_,
                          bool Time_, 
                          bool Threadsafe_,
-						 std::string helpID_,
+                         std::string helpID_,
                          bool Asynchronous_,
                          bool MacroSheet_, 
                          bool ClusterSafe_);
@@ -80,7 +80,7 @@ public:
      bool GetVolatile() const;
      bool DoTime() const;
      bool GetThreadsafe() const;
-	 std::string GetHelpID() const;
+     std::string GetHelpID() const;
      bool GetAsynchronous() const;
      bool GetMacroSheet() const;
      bool GetClusterSafe() const;
@@ -90,7 +90,7 @@ private:
      std::string FunctionHelpDescription;
      std::string ReturnType;
      std::string ExcelKey;
-	 std::string helpID;
+     std::string helpID;
      std::vector<FunctionArgument> Arguments;
      bool Volatile;
      bool Time;

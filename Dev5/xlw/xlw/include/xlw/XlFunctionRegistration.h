@@ -43,7 +43,7 @@ namespace xlw {
                          bool Volatile_,
                          bool Threadsafe_,
                          const std::string &ReturnTypeCode_,
-						 const std::string &HelpID_,
+                         const std::string &HelpID_,
                          bool Asynchronous_,
                          bool MacroSheetEquivalent_,
                          bool ClusterSafe_);
@@ -83,7 +83,7 @@ namespace xlw {
         }
 
         std::string GetReturnTypeCode() const;
-		std::string GetHelpID() const;
+        std::string GetHelpID() const;
     private:
 
         std::string FunctionName;
@@ -97,7 +97,7 @@ namespace xlw {
         bool Volatile;
         bool Threadsafe;
         std::string ReturnTypeCode;
-		std::string helpID;
+        std::string helpID;
         bool Asynchronous;
         bool MacroSheetEquivalent;
         bool ClusterSafe;
@@ -116,7 +116,7 @@ namespace xlw {
                          bool Volatile = false,
                          bool Threadsafe = false,
                          const std::string &ReturnTypeCode_ = "",
-						 const std::string &HelpID = "",
+                         const std::string &HelpID = "",
                          bool Asynchronous = false,
                          bool MacroSheetEquivalent = false,
                          bool ClusterSafe = false);

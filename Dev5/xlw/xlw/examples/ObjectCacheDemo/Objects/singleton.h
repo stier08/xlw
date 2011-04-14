@@ -30,10 +30,10 @@ public:
     }
     virtual ~singleton() {} 
 protected:
-	singleton(){}
+    singleton(){}
 private:
-	singleton(const singleton& theOther);
-	singleton& operator=(const singleton& theOther);
+    singleton(const singleton& theOther);
+    singleton& operator=(const singleton& theOther);
 
 } ;
 

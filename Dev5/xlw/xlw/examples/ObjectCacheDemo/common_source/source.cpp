@@ -27,48 +27,48 @@
 
 std::string ulToString(unsigned long n)
 {
-	std::ostringstream theStream;
+    std::ostringstream theStream;
 
     theStream << n;
-	return theStream.str() ;
+    return theStream.str() ;
 }
 
 std::string stripTrailingHash(const std::string &theSource)
 {
-	size_t posHash = theSource.find('#');
-	if(posHash==std::string::npos) return theSource;
-	return theSource.substr(0,posHash);
+    size_t posHash = theSource.find('#');
+    if(posHash==std::string::npos) return theSource;
+    return theSource.substr(0,posHash);
 }
 
 void check(const std::string &theName)
 {
-	if(theName.find('#')==std::string::npos)
-	{
-		throw("Character '#' not allowed in object name");
-	}
+    if(theName.find('#')==std::string::npos)
+    {
+        throw("Character '#' not allowed in object name");
+    }
 }
 
 std::string CreateObject(const CellMatrix &theObject)
 {
-	if(!theObject(0,0).IsAString() && !theObject(0,0).IsAWstring())
-	{
-		throw("Expected value to be name of the object"); 
-	}
-	std::string theName = theObject(0,0).StringValue();
+    if(!theObject(0,0).IsAString() && !theObject(0,0).IsAWstring())
+    {
+        throw("Expected value to be name of the object"); 
+    }
+    std::string theName = theObject(0,0).StringValue();
 
-	ObjectCache::instance()[theName]=theObject;
-	theName += "#";
-	return theName + (ulToString(NumberCache::instance()[theName]++));
+    ObjectCache::instance()[theName]=theObject;
+    theName += "#";
+    return theName + (ulToString(NumberCache::instance()[theName]++));
 }
 
 CellMatrix RetrieveObject(const std::string &theName)
 {
-	std::string theKey(stripTrailingHash(theName));
-	if (ObjectCache::instance().find(theKey) == ObjectCache::instance().end())
-	{
-		throw("Object not found in Cache");
-	}
-	return ObjectCache::instance()[theKey];
+    std::string theKey(stripTrailingHash(theName));
+    if (ObjectCache::instance().find(theKey) == ObjectCache::instance().end())
+    {
+        throw("Object not found in Cache");
+    }
+    return ObjectCache::instance()[theKey];
 
 }
 

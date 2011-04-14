@@ -34,8 +34,8 @@
 
 #define DLLEXPORT __declspec(dllexport)
 namespace {
-	std::string errMessage;
-	xlw::CellMatrix errCells;
+    std::string errMessage;
+    xlw::CellMatrix errCells;
 }
 
 #define DOT_NET_EXCEL_BEGIN  try {

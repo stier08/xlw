@@ -63,7 +63,7 @@ xlw::CellMatrix ExtractCells(xlw::CellMatrix& cells,
     unsigned long numberRows_UL = cells(row,column);
     unsigned long numberColumns_UL = cells(row,column+1);
 
-	size_t numberRows = static_cast<size_t>(numberRows_UL);
+    size_t numberRows = static_cast<size_t>(numberRows_UL);
     size_t numberColumns = static_cast<size_t>(numberColumns_UL);
 
     cells(row,column).clear();

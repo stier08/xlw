@@ -22,6 +22,6 @@ using namespace Runtime::InteropServices;
 
 std::string CLR2CPP(String^ clrString)
 {
-	std::string result =  (const char*)(Marshal::StringToHGlobalAnsi(clrString)).ToPointer();
-	return result;
+    std::string result =  (const char*)(Marshal::StringToHGlobalAnsi(clrString)).ToPointer();
+    return result;
 }

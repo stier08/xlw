@@ -38,7 +38,7 @@ XLFunctionRegistrationData::XLFunctionRegistrationData(const std::string& Functi
                      bool Volatile_,
                      bool Threadsafe_,
                      const std::string& ReturnTypeCode_,
-					 const std::string& HelpID_,
+                     const std::string& HelpID_,
                      bool Asynchronous_,
                      bool MacroSheetEquivalent_,
                      bool ClusterSafe_)
@@ -50,7 +50,7 @@ XLFunctionRegistrationData::XLFunctionRegistrationData(const std::string& Functi
                      Volatile(Volatile_),
                      Threadsafe(Threadsafe_),
                      ReturnTypeCode(ReturnTypeCode_),
-					 helpID(HelpID_),
+                     helpID(HelpID_),
                      Asynchronous(Asynchronous_),
                      MacroSheetEquivalent(MacroSheetEquivalent_),
                      ClusterSafe(ClusterSafe_)
@@ -94,7 +94,7 @@ std::string XLFunctionRegistrationData::GetReturnTypeCode() const
 
 std::string XLFunctionRegistrationData::GetHelpID() const
 {
-	return helpID;
+    return helpID;
 }
 
 std::string XLFunctionRegistrationData::GetLibrary() const
@@ -131,7 +131,7 @@ XLFunctionRegistrationHelper::XLFunctionRegistrationHelper(const std::string& Fu
                      bool Volatile,
                      bool Threadsafe,
                      const std::string& returnTypeCode,
-					 const std::string& helpID,
+                     const std::string& helpID,
                      bool Asynchronous,
                      bool MacroSheetEquivalent,
                      bool ClusterSafe)
@@ -145,7 +145,7 @@ XLFunctionRegistrationHelper::XLFunctionRegistrationHelper(const std::string& Fu
                                                                 Volatile,
                                                                 Threadsafe,
                                                                 returnTypeCode,
-																helpID,
+                                                                helpID,
                                                                 Asynchronous,
                                                                 MacroSheetEquivalent,
                                                                 ClusterSafe);
@@ -172,7 +172,7 @@ void ExcelFunctionRegistrationRegistry::DoTheRegistrations() const
                                                     policy,
                                                     it->GetThreadsafe(),
                                                     it->GetReturnTypeCode(),
-													it->GetHelpID(),
+                                                    it->GetHelpID(),
                                                     it->GetAsynchronous(),
                                                     it->GetMacroSheetEquivalent(),
                                                     it->GetClusterSafe());

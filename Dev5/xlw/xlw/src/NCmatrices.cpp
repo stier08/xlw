@@ -31,9 +31,9 @@ xlw::NCMatrix::NCMatrix(size_t Rows_, size_t Columns_):
 xlw::NCMatrix&
 xlw::NCMatrix::resize(size_t rows, size_t columns)
 {
-	NCMatrix temp(rows,columns);
-	swap(temp);
-	return *this;
+    NCMatrix temp(rows,columns);
+    swap(temp);
+    return *this;
  
 }
 
@@ -44,7 +44,7 @@ xlw::NCMatrix& xlw::NCMatrix::operator=(const NCMatrix& original)
     if (this != &original)
     {
        NCMatrix temp(original);
-	   swap(temp);
+       swap(temp);
 
     }
 

@@ -62,7 +62,7 @@ namespace xlw {
                     const std::string& comment, const std::string& category,
                     RecalcPolicy recalcPolicy = NotVolatile, bool Threadsafe = false,
                     const std::string &returnTypeCode = XlfExcel::Instance().xlfOperType(),
-					const std::string &helpID = "",
+                    const std::string &helpID = "",
                     bool Asynchronous = false, bool MacroSheetEquivalent = false, 
                     bool ClusterSafe = false);
         //! Dtor.
@@ -107,7 +107,7 @@ namespace xlw {
         //int index_;
         //! Excel code for the datatype of this function's return value.
         std::string returnTypeCode_;
-		std::string helpID_;
+        std::string helpID_;
     };
 
 }

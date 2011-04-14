@@ -22,23 +22,23 @@ using namespace System;
 
 namespace xlwDotNet 
 {
-	public ref class cellMatrixException :public System::Exception
-	{
-	public:
-		cellMatrixException(String^ message, xlwTypes::CellMatrix ^ matrix):
-		  System::Exception(message), theMatrix(matrix->theInner){}
+    public ref class cellMatrixException :public System::Exception
+    {
+    public:
+        cellMatrixException(String^ message, xlwTypes::CellMatrix ^ matrix):
+          System::Exception(message), theMatrix(matrix->theInner){}
 
-	    property IntPtr inner
-		{
-			IntPtr get()
-			{
-				return IntPtr(theMatrix);
-			}
+        property IntPtr inner
+        {
+            IntPtr get()
+            {
+                return IntPtr(theMatrix);
+            }
 
 
-		}
+        }
 
-		xlw::CellMatrix *theMatrix;
+        xlw::CellMatrix *theMatrix;
 
-	};
+    };
 }

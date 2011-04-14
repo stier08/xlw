@@ -48,7 +48,7 @@ FunctionModel FunctionFind(std::vector<Token>::const_iterator& it, std::vector<T
     bool asynchronous  = false;
     bool macrosheet = false;
     bool clustersafe = false;
-	std::string helpID = "";
+    std::string helpID = "";
 
     if (it == end)
         throw("function half declared at end of file");
@@ -120,14 +120,14 @@ FunctionModel FunctionFind(std::vector<Token>::const_iterator& it, std::vector<T
             if (it == end)
                 throw("function half declared at end of file");
         }
-		if (commentString.find("<xlw:help=") == 0 )
-		{
-			helpID = commentString.substr(10);
-			++it;
-			found = true;
-			if (it == end)
-				throw("function half declared at end of file");
-		}
+        if (commentString.find("<xlw:help=") == 0 )
+        {
+            helpID = commentString.substr(10);
+            ++it;
+            found = true;
+            if (it == end)
+                throw("function half declared at end of file");
+        }
         if (!found)
             throw("unknown xlw command: "+commentString);
     }

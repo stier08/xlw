@@ -14,10 +14,10 @@ using namespace xlw;
 
 CellMatrix // Obtains historial market data from yahoo 
 GetHistoricDataFromYahoo(
-	                      std::string  symbol // Yahoo Symbol 
+                          std::string  symbol // Yahoo Symbol 
                          ,double beginDate // Begin Date
                          ,double endDate //End Date
-						 );
+                         );
 
 
 

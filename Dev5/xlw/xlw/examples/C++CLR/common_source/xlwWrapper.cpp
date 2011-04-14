@@ -58,22 +58,22 @@ double endDate)
 {
 EXCEL_BEGIN;
 
-	if (XlfExcel::Instance().IsCalledByFuncWiz())
-		return XlfOper(true);
+    if (XlfExcel::Instance().IsCalledByFuncWiz())
+        return XlfOper(true);
 
 XlfOper symbolb(
-	(symbola));
+    (symbola));
 std::string symbol(
-	symbolb.AsString("symbol"));
+    symbolb.AsString("symbol"));
 
 
 
 CellMatrix result(
-	GetHistoricDataFromYahoo(
-		symbol,
-		beginDate,
-		endDate)
-	);
+    GetHistoricDataFromYahoo(
+        symbol,
+        beginDate,
+        endDate)
+    );
 return XlfOper(result);
 EXCEL_END
 }

@@ -54,11 +54,11 @@ xlCPlusPlusFunction(
 {
 EXCEL_BEGIN;
 
-	if (XlfExcel::Instance().IsCalledByFuncWiz())
-		return XlfOper(true);
+    if (XlfExcel::Instance().IsCalledByFuncWiz())
+        return XlfOper(true);
 
 std::string result(
-	CPlusPlusFunction());
+    CPlusPlusFunction());
 return XlfOper(result);
 EXCEL_END
 }

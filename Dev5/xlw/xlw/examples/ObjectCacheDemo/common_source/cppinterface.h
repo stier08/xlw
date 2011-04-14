@@ -32,26 +32,26 @@ using namespace xlw;
 
 std::string // Caches a CellMatrix. The first Cell must be the name 
 CreateObject(const CellMatrix &theObject // The Object to be cached
-			 );
+             );
 
 CellMatrix  // Retrieves an object from the cache
 RetrieveObject(const std::string &theName   // The Name of the object
-			   );
+               );
 
 
 std::string // Caches a Discount Curve. The first parameter must be a the name 
 CreateDiscountCurve(const std::string & theCurveName // The name of the Dicsount curve
-					,const MyMatrix &theDiscountCurve // A matrix of 2 columns. First column is dates and second column is discounts
-			 );
+                    ,const MyMatrix &theDiscountCurve // A matrix of 2 columns. First column is dates and second column is discounts
+             );
 
 MyMatrix  // Retrieves a Discount Curve from the cache
 RetrieveDiscountCurve(const std::string &theName   // The Name of the Discount Curve
-			   );
+               );
 
 double  // Gets the discount factor from the given curve
 Discount(const std::string &theName   // The Name of the Discount Curve
-		 ,double theDate              // The Date
-		 );
+         ,double theDate              // The Date
+         );
 
 
 

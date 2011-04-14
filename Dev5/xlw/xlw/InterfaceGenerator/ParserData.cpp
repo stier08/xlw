@@ -98,7 +98,7 @@ FunctionDescription::FunctionDescription(std::string FunctionName_,
                          bool Volatile_,
                          bool Time_,
                          bool Threadsafe_,
-						 std::string helpID_,
+                         std::string helpID_,
                          bool Asynchronous_,
                          bool MacroSheet_, 
                          bool ClusterSafe_)
@@ -107,7 +107,7 @@ FunctionDescription::FunctionDescription(std::string FunctionName_,
                          FunctionHelpDescription(FunctionHelpDescription_),
                          ReturnType(ReturnType_),
                          ExcelKey(ExcelKey_),
-						 helpID(helpID_),
+                         helpID(helpID_),
                          Arguments(Arguments_),
                          Volatile(Volatile_),
                          Time(Time_),
@@ -145,7 +145,7 @@ bool FunctionDescription::GetThreadsafe() const
 
 std::string FunctionDescription::GetHelpID() const
 {
-	return helpID;
+    return helpID;
 }
 bool FunctionDescription::GetAsynchronous() const
 {

@@ -30,29 +30,29 @@ using namespace Runtime::InteropServices;
 
 std::string CLR2CPP(String^ clrString)
 {
-	std::string result =  (const char*)(Marshal::StringToHGlobalAnsi(clrString)).ToPointer();
-	return result;
+    std::string result =  (const char*)(Marshal::StringToHGlobalAnsi(clrString)).ToPointer();
+    return result;
 }
 
 String^ CPP2CLR(const std::string &cppString)
 {
-	return gcnew String(cppString.c_str());
+    return gcnew String(cppString.c_str());
 }
 
 
 
 xlw::CellMatrix // Obtains historial market data from yahoo 
 XLLEXPORT GetHistoricDataFromYahoo(
-	                      std::string  symbol // Yahoo Symbol 
+                          std::string  symbol // Yahoo Symbol 
                          ,double beginDate // Begin Date
                          ,double endDate //End Date
-						 )
+                         )
 {
-			DateTime begin = DateTime::FromOADate(beginDate);
-			DateTime end = DateTime::FromOADate(endDate);
+            DateTime begin = DateTime::FromOADate(beginDate);
+            DateTime end = DateTime::FromOADate(endDate);
 
-			String^ yahooURL = gcnew String (
-			   CPP2CLR(std::string("http://ichart.finance.yahoo.com/table.csv?s=")) + 
+            String^ yahooURL = gcnew String (
+               CPP2CLR(std::string("http://ichart.finance.yahoo.com/table.csv?s=")) + 
                CPP2CLR(symbol) + 
                "&a=" +
                (begin.Month-1).ToString() +
@@ -85,21 +85,21 @@ XLLEXPORT GetHistoricDataFromYahoo(
             array<String^>^ rows = historicData->Split('\n');
             array<String^>^ headings = rows[0]->Split(',');
 
-			xlw::CellMatrix excelData(1,headings->Length);
+            xlw::CellMatrix excelData(1,headings->Length);
             for (int i = 0; i < headings->Length; ++i)
             {
-				excelData(0, i) = xlw::CellValue(CLR2CPP(headings[i]));
+                excelData(0, i) = xlw::CellValue(CLR2CPP(headings[i]));
             }
             for (int i = 1; i < rows->Length; ++i)
             {
                 array<String^>^ thisRow = rows[i]->Split(',');
                 if (thisRow->Length == headings->Length)
                 {
-					xlw::CellMatrix row = xlw::CellMatrix(1, headings->Length);
-					row(0, 0) = xlw::CellValue(DateTime::Parse(thisRow[0]).ToOADate());
+                    xlw::CellMatrix row = xlw::CellMatrix(1, headings->Length);
+                    row(0, 0) = xlw::CellValue(DateTime::Parse(thisRow[0]).ToOADate());
                     for (int j = 1; j < headings->Length; ++j)
                     {
-						row(0, j) = xlw::CellValue(Double::Parse(thisRow[j]));
+                        row(0, j) = xlw::CellValue(Double::Parse(thisRow[j]));
                     }
                     excelData.PushBottom(row);
                 }
