@@ -87,7 +87,7 @@ namespace xlw { namespace Impl {
             OperProps::setArraySize(lpxloper_, rows, cols);
             RW actualrows = OperProps::getRows(lpxloper_);
             COL actualcols = OperProps::getCols(lpxloper_);
-            for(MultiRowType row(0); row < rows; ++row)
+            for(MultiRowType row(0); row < actualrows; ++row)
             {
                 for(MultiRowType col(0); col < actualcols; ++col)
                 {
