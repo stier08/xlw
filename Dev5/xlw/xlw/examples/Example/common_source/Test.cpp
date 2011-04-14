@@ -2,14 +2,14 @@
 /*
  Copyright (C) 2006 Mark Joshi
  Copyright (C) 2007, 2008 Eric Ehlers
- 
+
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
- 
+
  XLW is free software: you can redistribute it and/or modify it under the
  terms of the XLW license.  You should have received a copy of the
  license along with this program; if not, please email xlw-users@lists.sf.net
- 
+
  This program is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE.  See the license for more details.
@@ -87,7 +87,7 @@ Stats(const MyArray& data       )
         total+=data[i];
         totalsq+=data[i]*data[i];
     }
-    
+
     MyArray values(2);
     values[0] = total/data.size();
     values[1] = totalsq/data.size() - values[0] *values[0] ;
@@ -100,14 +100,14 @@ std::string HelloWorldAgain(std::string name)
     return "hello "+name;
 }
 
-double // echoes an unsigned long 
+double // echoes an unsigned long
 EchoUL( unsigned long b  // number to echo
      )
 {
     return static_cast<double>(b);
 }
 
-double // echoes an int 
+double // echoes an int
 EchoInt( int b  // number to echo
      )
 {

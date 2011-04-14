@@ -33,8 +33,8 @@
 namespace xlw { namespace Impl {
 
     template <class LPOPER_TYPE>
-    struct XlfOperProperties 
-    { 
+    struct XlfOperProperties
+    {
     };
 
 } }

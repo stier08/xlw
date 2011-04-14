@@ -7,7 +7,7 @@
 #include "PayOffConcrete.h"
 #include <xlw/ArgListFactory.h>
 
-PayOffCall::PayOffCall(xlw::ArgumentList args) 
+PayOffCall::PayOffCall(xlw::ArgumentList args)
 {
     if (args.GetStructureName() != "payoff") // must be lower case here
         throw("payoff structure expected in PayOffCall class");

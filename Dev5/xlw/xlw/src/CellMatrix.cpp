@@ -235,7 +235,7 @@ xlw::CellMatrix::CellMatrix(double x): Cells(1), Rows(1), Columns(1)
 xlw::CellMatrix::CellMatrix(std::string x): Cells(1), Rows(1), Columns(1)
 {
     Cells[0].push_back(CellValue(x));
-}  
+}
 
 xlw::CellMatrix::CellMatrix(std::wstring x): Cells(1), Rows(1), Columns(1)
 {

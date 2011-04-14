@@ -3,21 +3,21 @@
 
  This file is part of XLWDOTNET, a free-software/open-source C# wrapper of the
  Excel C API - http://xlw.sourceforge.net/
- 
+
  XLWDOTNET is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
- 
+
  XLW is free software: you can redistribute it and/or modify it under the
  terms of the XLW license.  You should have received a copy of the
  license along with this program; if not, please email xlw-users@lists.sf.net
- 
+
  This program is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
 #ifndef  XLW_DOT_NET_CELLSTRUCTURE_H
-#define  XLW_DOT_NET_CELLSTRUCTURE_H 
+#define  XLW_DOT_NET_CELLSTRUCTURE_H
 
 
 using namespace System;
@@ -28,9 +28,9 @@ using namespace Runtime::InteropServices;
 #include"managedMyMatrix.h"
 #include"managedMyArray.h"
 
-namespace xlwDotNet 
+namespace xlwDotNet
 {
-    namespace xlwTypes 
+    namespace xlwTypes
     {
         public ref class CellValue :public xlwTypebaseClass<xlw::CellValue>
         {
@@ -64,10 +64,10 @@ namespace xlwDotNet
             CellValue(const CellValue^ value):
                 xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue(*(value->theInner)) ,true){}
 
-           /////      What is it 
+           /////      What is it
             property bool IsAString
             {
-                bool get() 
+                bool get()
                 {
                     return (theInner->IsAWstring() || theInner->IsAString());
                 }
@@ -75,21 +75,21 @@ namespace xlwDotNet
 
             property bool IsANumber
             {
-                bool get() 
+                bool get()
                 {
                     return theInner->IsANumber();
                 }
             }
             property bool IsBoolean
             {
-                bool get() 
+                bool get()
                 {
                     return theInner->IsBoolean();
                 }
             }
             property bool IsXlfOper
             {
-                bool get() 
+                bool get()
                 {
                     return theInner->IsXlfOper();
                 }
@@ -97,7 +97,7 @@ namespace xlwDotNet
 
             property bool IsError
             {
-                bool get() 
+                bool get()
                 {
                     return theInner->IsError();
                 }
@@ -105,7 +105,7 @@ namespace xlwDotNet
 
             property bool IsEmpty
             {
-                bool get() 
+                bool get()
                 {
                     return theInner->IsEmpty();
                 }
@@ -119,7 +119,7 @@ namespace xlwDotNet
             UInt64 ErrorValue(){return theInner->ErrorValue();}
 
             void clear(){theInner->clear();}
-            
+
 
         };
 
@@ -163,7 +163,7 @@ namespace xlwDotNet
 
             property CellValue^ default[int,int]
             {
-                CellValue^ get(int i,int j) 
+                CellValue^ get(int i,int j)
                 {
                     CellValue^ result =  gcnew CellValue(IntPtr((void*)(&theInner->operator()(i,j))));
                     owned = true;

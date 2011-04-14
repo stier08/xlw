@@ -45,7 +45,7 @@ namespace xlw {
                     }
                     std::fill(theArray.begin(), theArray.end(),0.0);
                 }
-            } 
+            }
 
             NCMatrixData(const NCMatrixData& theOther) :
                 theRows(theOther.Rows),
@@ -96,7 +96,7 @@ namespace xlw {
         inline const double& operator()(size_t i, size_t j) const;
         inline double& operator()(size_t i, size_t j);
 
-        // We have added to the interface here 28-03-2011 
+        // We have added to the interface here 28-03-2011
         // but swap is generally an accepted method in container
         // interfaces
         inline void swap(NCMatrix& theOther);// this cannot throw !
@@ -112,7 +112,7 @@ namespace xlw {
 
     };
 
-    // The following 2 methods will get dropped 
+    // The following 2 methods will get dropped
     // by the compiler optimiser anyway
     void NCMatrix::check_row(size_t i)const
     {

@@ -282,7 +282,7 @@ namespace xlw { namespace Impl {
                 OperProps::XlFree(lpxloper_);
             }
         }
-        
+
         //! Constructs an Excel error.
         static XlfOper<LPOPER_TYPE> Error(ErrorType errorCode)
         {
@@ -421,7 +421,7 @@ namespace xlw { namespace Impl {
         {
             return OperProps::getCols(lpxloper_);
         }
-        
+
         //! Function call operator, used here to subscript a two dimensional array.
         XlfOper<LPOPER_TYPE> operator()(MultiRowType row, MultiColType col)
         {

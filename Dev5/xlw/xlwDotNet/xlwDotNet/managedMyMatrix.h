@@ -3,21 +3,21 @@
 
  This file is part of XLWDOTNET, a free-software/open-source C# wrapper of the
  Excel C API - http://xlw.sourceforge.net/
- 
+
  XLWDOTNET is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
- 
+
  XLW is free software: you can redistribute it and/or modify it under the
  terms of the XLW license.  You should have received a copy of the
  license along with this program; if not, please email xlw-users@lists.sf.net
- 
+
  This program is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
 #ifndef XLW_DOT_NET_MYMATRIX_H
-#define XLW_DOT_NET_MYMATRIX_H 
+#define XLW_DOT_NET_MYMATRIX_H
 
 
 
@@ -27,9 +27,9 @@ using namespace System;
 #include"xlwTypeBaseClass.h"
 
 
-namespace xlwDotNet 
+namespace xlwDotNet
 {
-    namespace xlwTypes 
+    namespace xlwTypes
     {
         public ref class MyMatrix :public xlwTypebaseClass<xlw::MyMatrix>
         {
@@ -47,26 +47,26 @@ namespace xlwDotNet
 
             property double default[int,int]
             {
-                double get(int i,int j) 
+                double get(int i,int j)
                 {
                     return theInner->operator[](i)[j];
                 }
-                void set(int i,int j,double val) 
+                void set(int i,int j,double val)
                 {
                     theInner->operator[](i)[j]=val;
                 }
             }
-            
+
            property int rows
             {
-                int get() 
+                int get()
                 {
                     return theInner->rows();
                 }
             }
            property int columns
             {
-                int get() 
+                int get()
                 {
                     return theInner->columns();
                 }
@@ -100,5 +100,5 @@ namespace xlwDotNet
     }
 }
 
-#endif 
+#endif
 

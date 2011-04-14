@@ -17,6 +17,6 @@ public:
     virtual PayOff* clone() const=0;
 
 private:
-    
+
 };
 #endif

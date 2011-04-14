@@ -2,14 +2,14 @@
 /*
  Copyright (C) 2006 Mark Joshi
  Copyright (C) 2007, 2008 Eric Ehlers
- 
+
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
- 
+
  XLW is free software: you can redistribute it and/or modify it under the
  terms of the XLW license.  You should have received a copy of the
  license along with this program; if not, please email xlw-users@lists.sf.net
- 
+
  This program is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE.  See the license for more details.
@@ -85,7 +85,7 @@ void TypeRegistry::BuildLists() const
 {
     if (ListsBuilt)
         return;
-    
+
     for (std::map<std::string,regData>::const_iterator it = Registrations.begin();
         it != Registrations.end(); ++it)
     {
@@ -97,12 +97,12 @@ void TypeRegistry::BuildLists() const
         chain[pos] = it->second.NewType;
         while (!IsOfBaseType(chain[pos]))
         {
-            std::map<std::string,regData>::const_iterator iter 
+            std::map<std::string,regData>::const_iterator iter
                                         = Registrations.find(chain[pos]);
 
             if (iter == Registrations.end())
                 throw("broken chain "+chain[pos]+" " + it->first);
-            
+
             chain.push_back(iter->second.OldType);
             ++pos;
 
@@ -111,7 +111,7 @@ void TypeRegistry::BuildLists() const
         }
 
         DeductionChains.insert(std::make_pair(it->first,chain));
-        
+
     }
 
     ListsBuilt=true;
@@ -120,7 +120,7 @@ void TypeRegistry::BuildLists() const
 const std::vector<std::string>& TypeRegistry::GetChain(std::string x) const
 {
     BuildLists();
-    std::map<std::string,std::vector<std::string> >::const_iterator iter 
+    std::map<std::string,std::vector<std::string> >::const_iterator iter
         = DeductionChains.find(x);
 
     if (iter == DeductionChains.end())

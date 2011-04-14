@@ -50,7 +50,7 @@ namespace xlw {
                 tls.SetValue(threadStorage);
                 tempMemoryInstances.push_back(threadStorage);
                 // FIXME:
-                // also check for dead threads and delete 
+                // also check for dead threads and delete
                 // memory
             }
         }

@@ -35,12 +35,12 @@ public:
     ThreadLocalStorage()
     {
         m_tlsIndex = TlsAlloc();
-        if(m_tlsIndex == TLS_OUT_OF_INDEXES) 
+        if(m_tlsIndex == TLS_OUT_OF_INDEXES)
         {
             throw("TLS run out of TLS indices");
         }
     }
-    
+
     ~ThreadLocalStorage()
     {
         TlsFree(m_tlsIndex);

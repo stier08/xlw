@@ -52,7 +52,7 @@ char* xlw::PascalStringConversions::StringToPascalString(const std::string& cStr
         n = 255;
     }
     // One byte more for the string length (convention used by Excel)
-    // and another so that the string is null terminated so that the 
+    // and another so that the string is null terminated so that the
     // debugger sees it correctly
     LPSTR result = TempMemory::GetMemory<char>(n + 2);
     strncpy(result + 1, cString.c_str(), n);
@@ -71,7 +71,7 @@ char* xlw::PascalStringConversions::WStringToPascalString(const std::wstring& cS
         n = 255;
     }
     // One byte more for the string length (convention used by Excel)
-    // and another so that the string is null terminated so that the 
+    // and another so that the string is null terminated so that the
     // debugger sees it correctly
     LPSTR result = TempMemory::GetMemory<char>(n + 2);
     WideCharToMultiByte(CP_ACP, WC_NO_BEST_FIT_CHARS, cString.c_str(), (int)n, result + 1, (int)n, NULL, NULL);
@@ -114,7 +114,7 @@ wchar_t* xlw::PascalStringConversions::StringToWPascalString(const std::string& 
     }
 
     // One byte more for the string length (convention used by Excel)
-    // and another so that the string is null terminated so that the 
+    // and another so that the string is null terminated so that the
     // debugger sees it correctly
     wchar_t* result  = TempMemory::GetMemory<wchar_t>(n+2);
     MultiByteToWideChar(CP_ACP, 0, cString.c_str(), (int)n, result + 1, (int)n);
@@ -133,7 +133,7 @@ wchar_t* xlw::PascalStringConversions::WStringToWPascalString(const std::wstring
         n = 32766;
     }
     // One byte more for the string length (convention used by Excel)
-    // and another so that the string is null terminated so that the 
+    // and another so that the string is null terminated so that the
     // debugger sees it correctly
     wchar_t* result = TempMemory::GetMemory<wchar_t>(n + 2);
     wcsncpy(result + 1, cString.c_str(), n);

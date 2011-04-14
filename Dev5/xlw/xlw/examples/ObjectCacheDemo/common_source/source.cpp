@@ -52,7 +52,7 @@ std::string CreateObject(const CellMatrix &theObject)
 {
     if(!theObject(0,0).IsAString() && !theObject(0,0).IsAWstring())
     {
-        throw("Expected value to be name of the object"); 
+        throw("Expected value to be name of the object");
     }
     std::string theName = theObject(0,0).StringValue();
 

@@ -19,7 +19,7 @@
 #define SINGLETON_HEADER_GUARD
 
 template<class Object>
-class singleton 
+class singleton
 {
 public:
 
@@ -28,7 +28,7 @@ public:
         static Object theObject;
         return theObject;
     }
-    virtual ~singleton() {} 
+    virtual ~singleton() {}
 protected:
     singleton(){}
 private:

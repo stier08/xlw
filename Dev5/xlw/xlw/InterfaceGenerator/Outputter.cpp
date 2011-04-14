@@ -79,7 +79,7 @@ std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& func
 
   AddLine(output,"");
   AddLine(output,"// registrations start here");
-  AddLine(output,"");    
+  AddLine(output,"");
   AddLine(output,"");
 
   for (unsigned long i=0; i < functionDescriptions.size(); i++)
@@ -120,7 +120,7 @@ std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& func
     std::ostringstream s;
     s << functionDescriptions[i].NumberOfArguments();
 
-    AddLine(output,"  XLRegistration::XLFunctionRegistrationHelper"); 
+    AddLine(output,"  XLRegistration::XLFunctionRegistrationHelper");
     AddLine(output,"register"+name+"(\"xl"+name+"\",");
     AddLine(output,"\""+name+"\",");
     AddLine(output,"\""+ functionDescriptions[i].GetFunctionDescription()+" \",");
@@ -181,7 +181,7 @@ std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& func
       std::string delimiter;
       if (j +1 < functionDescriptions[i].NumberOfArguments())
         delimiter = ",";
-      else 
+      else
         delimiter = ")";
 
       std::vector<std::string> chain = functionDescriptions[i].GetArgument(j).GetTheType().GetConversionChain();
@@ -226,7 +226,7 @@ std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& func
         if (k+1 != chain.size() -1)
           newId+= id;
 
-        TypeRegistry::regData argData = TypeRegistry::Instance().GetRegistration(*it);        
+        TypeRegistry::regData argData = TypeRegistry::Instance().GetRegistration(*it);
         AddLine(output, argData.NewType+" "+newId+"(");
 
         bool specIdentifier = argData.TakesIdentifier;
@@ -241,7 +241,7 @@ std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& func
 
         if (isMethod)
           AddLine(output, "\t"+lastId+"."+argData.Converter+"("+identifierBit+"));");
-        else 
+        else
           AddLine(output, "\t"+argData.Converter+"("+lastId+identifierBit+"));");
 
         ++id;
@@ -266,7 +266,7 @@ std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& func
         std::string delimiter;
         if (j +1 < functionDescriptions[i].NumberOfArguments())
           delimiter = ",";
-        else 
+        else
           delimiter = ")";
 
         AddLine(output,"\t\t"+functionDescriptions[i].GetArgument(j).GetArgumentName()+delimiter);
@@ -357,11 +357,11 @@ std::vector<char> OutputFileCreatorCL(const std::vector<FunctionDescription>& fu
 
     for (unsigned long j=0; j < functionDescriptions[i].NumberOfArguments(); j++)
     {
-      std::vector<std::string> chain 
+      std::vector<std::string> chain
         = functionDescriptions[i].GetArgument(j).GetTheType().GetConversionChain();
 
 
-      while (chain.size() > 0 && (*chain.rbegin() == "XlfOper" || *chain.rbegin() == "LPXLFOPER" || 
+      while (chain.size() > 0 && (*chain.rbegin() == "XlfOper" || *chain.rbegin() == "LPXLFOPER" ||
         *chain.rbegin() == "LPXLARRAY"
         || *chain.rbegin() == "XLWSTR") )
         chain.pop_back(); // ditch EXCEL types
@@ -382,7 +382,7 @@ std::vector<char> OutputFileCreatorCL(const std::vector<FunctionDescription>& fu
 
       AddLine(output,fundamentalType+" "+argIdentifier+"(");
 
-     
+
       //double, NEMatrix, short, MyArray, MyMatrix, CellMatrix, string, std::string
 
       if (fundamentalType == "double")
@@ -394,27 +394,27 @@ std::vector<char> OutputFileCreatorCL(const std::vector<FunctionDescription>& fu
         {
           AddLine(output, "arguments.GetMatrixArgumentValue(\""+variableName+"\"));");
         }
-        else 
+        else
           if (fundamentalType == "short")
           {
             AddLine(output, "static_cast<short>(arguments.GetDoubleArgumentValue(\""+variableName+"\")));");
           }
-          else 
+          else
             if (fundamentalType == "MyArray")
             {
               AddLine(output, "arguments.GetArrayArgumentValue(\""+variableName+"\"));");
             }
-            else 
+            else
               if (fundamentalType == "MyMatrix")
               {
                 AddLine(output, "arguments.GetMatrixArgumentValue(\""+variableName+"\"));");
               }
-              else 
+              else
                 if (fundamentalType == "CellMatrix")
                 {
                   AddLine(output, "arguments.GetCellsArgumentValue(\""+variableName+"\"));");
                 }
-                else 
+                else
                   if (fundamentalType == "string" || fundamentalType == "std::string"  || fundamentalType == "std::wstring" )
                   {
                     AddLine(output, "arguments.GetCellsArgumentValue(\""+variableName+"\"));");
@@ -439,7 +439,7 @@ std::vector<char> OutputFileCreatorCL(const std::vector<FunctionDescription>& fu
 
       std::vector<std::string> chain = functionDescriptions[i].GetArgument(j).GetTheType().GetConversionChain();
 
-      while (chain.size() > 0 && (*chain.rbegin() == "XlfOper" || *chain.rbegin() == "LPXLFOPER" || 
+      while (chain.size() > 0 && (*chain.rbegin() == "XlfOper" || *chain.rbegin() == "LPXLFOPER" ||
         *chain.rbegin() == "LPXLARRAY"
         || *chain.rbegin() == "XLWSTR") )
         chain.pop_back(); // ditch EXCEL types
@@ -457,7 +457,7 @@ std::vector<char> OutputFileCreatorCL(const std::vector<FunctionDescription>& fu
         if (k+1 != chain.size() -1)
           newId+= id;
 
-        TypeRegistry::regData argData = TypeRegistry::Instance().GetRegistration(*it);        
+        TypeRegistry::regData argData = TypeRegistry::Instance().GetRegistration(*it);
         AddLine(output, argData.NewType+" "+newId+"(");
 
         bool specIdentifier = argData.TakesIdentifier;
@@ -472,7 +472,7 @@ std::vector<char> OutputFileCreatorCL(const std::vector<FunctionDescription>& fu
 
         if (isMethod)
           AddLine(output, "\t"+lastId+"."+argData.Converter+"("+identifierBit+"));");
-        else 
+        else
           AddLine(output, "\t"+argData.Converter+"("+lastId+identifierBit+"));");
 
         ++id;
@@ -497,7 +497,7 @@ std::vector<char> OutputFileCreatorCL(const std::vector<FunctionDescription>& fu
         std::string delimiter;
         if (j +1 < functionDescriptions[i].NumberOfArguments())
           delimiter = ",";
-        else 
+        else
           delimiter = ")";
 
         AddLine(output,"\t\t"+functionDescriptions[i].GetArgument(j).GetArgumentName()+delimiter);
@@ -534,7 +534,7 @@ std::vector<char> OutputFileCreatorCL(const std::vector<FunctionDescription>& fu
     AddLine(output,"//////////////////////////");
     AddLine(output,"");
 
-    
+
 
   }
 

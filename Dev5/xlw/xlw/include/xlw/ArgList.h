@@ -6,7 +6,7 @@
 /*
  Copyright (C) 2006 Mark Joshi
  Copyright (C) 2009 Narinder S Claire
- 
+
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
 

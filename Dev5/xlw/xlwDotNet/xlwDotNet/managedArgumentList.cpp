@@ -3,14 +3,14 @@
 
  This file is part of XLWDOTNET, a free-software/open-source C# wrapper of the
  Excel C API - http://xlw.sourceforge.net/
- 
+
  XLWDOTNET is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
- 
+
  XLW is free software: you can redistribute it and/or modify it under the
  terms of the XLW license.  You should have received a copy of the
  license along with this program; if not, please email xlw-users@lists.sf.net
- 
+
  This program is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE.  See the license for more details.
@@ -26,9 +26,9 @@ using namespace Runtime::InteropServices;
 
 std::string CLR2CPP(String^ clrString);
 
-namespace xlwDotNet 
+namespace xlwDotNet
 {
-    namespace xlwTypes 
+    namespace xlwTypes
     {
         public ref class ArgumentList :public xlwTypebaseClass<xlw::ArgumentList>
         {
@@ -59,7 +59,7 @@ namespace xlwDotNet
                  vector  = xlw::ArgumentList::vector,
                  matrix  = xlw::ArgumentList::matrix,
                  boolean = xlw::ArgumentList::boolean,
-                 list    = xlw::ArgumentList::list, 
+                 list    = xlw::ArgumentList::list,
                  cells   = xlw::ArgumentList::cells
             };
         Dictionary<String^,ArgumentType>^ GetArgumentNamesAndTypes()
@@ -118,7 +118,7 @@ namespace xlwDotNet
                 return  theInner->GetBoolArgumentValue(CLR2CPP(ArgumentName));
             }
 
-            bool IsArgumentPresent(String^ ArgumentName) 
+            bool IsArgumentPresent(String^ ArgumentName)
             {
                 return  theInner->IsArgumentPresent(CLR2CPP(ArgumentName));
             }
@@ -131,7 +131,7 @@ namespace xlwDotNet
                 theInner->add(CLR2CPP(ArgumentName),CLR2CPP(value));
             }
 
-            
+
             void add(String ^ ArgumentName, MyArray^ value)
             {
                 theInner->add(CLR2CPP(ArgumentName),*value->theInner);

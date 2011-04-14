@@ -74,9 +74,9 @@ int main(int argc, char *argv[])
     if (args.size()==2)
       outputfile = args[1];
     else
-    {   
+    {
       if (clw)
-        outputfile= "clw"; 
+        outputfile= "clw";
       else
         outputfile = "xlw";
 
@@ -122,14 +122,14 @@ int main(int argc, char *argv[])
 
     std::cout << "file has been function described\n";
 
-   
+
     std::vector<char> outputVector;
-    
+
     if (clw)
-     outputVector = OutputFileCreatorCL(functionVector,  
+     outputVector = OutputFileCreatorCL(functionVector,
                                           inputfile);
     else
-      outputVector = OutputFileCreator(functionVector,  
+      outputVector = OutputFileCreator(functionVector,
                                           inputfile,LibraryName);
 
 

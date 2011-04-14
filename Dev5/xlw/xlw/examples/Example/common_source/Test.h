@@ -13,9 +13,9 @@
 #include "PayOff.h"
 #include "reftest.h"
 #include "wrapper.h"
-    
+
 using namespace xlw;
-  
+
 //<xlw:libraryname=MyTestLibrary
 std::string // tests empty args
 //<xlw:threadsafe
@@ -72,13 +72,13 @@ std::string // says hello name
 HelloWorldAgain(std::string name // name to be echoed
            );
 
-double // echoes an unsigned long 
+double // echoes an unsigned long
 //<xlw:time
 //<xlw:threadsafe
 EchoUL( unsigned long b  // number to echo
      );
 
-double // echoes an int 
+double // echoes an int
 //<xlw:time
 //<xlw:threadsafe
 EchoInt( int b  // number to echo
@@ -128,13 +128,13 @@ GetThreadId();
 std::string // return a string indicating datatype of OPER/OPER12 input
 //<xlw:time
 //<xlw:threadsafe
-typeString(const XlfOper &input // value on which to perform type check 
+typeString(const XlfOper &input // value on which to perform type check
            );
 
 std::string // return a string indicating datatype of XLOPER/XLOPER12 input
 //<xlw:time
 //<xlw:threadsafe
-typeString2(const reftest &input // value on which to perform type check 
+typeString2(const reftest &input // value on which to perform type check
            );
 
 std::string // the text of the note attached to the calling cell

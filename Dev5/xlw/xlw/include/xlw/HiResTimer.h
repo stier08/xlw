@@ -29,7 +29,7 @@
 namespace xlw {
 //! Wrapper for a windows High Resolution Timers functions
 /*!
-Create one of these objects for each time you 
+Create one of these objects for each time you
 need to accurately time something.
 
 Call elasped to get the time in number of seconds since the object

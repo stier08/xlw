@@ -40,7 +40,7 @@ namespace
     }
 }
 
-namespace xlw 
+namespace xlw
 {
     void XlfOperImpl::ThrowOnError(int xlret, const char* ErrorId, const char* Identifier)
     {
@@ -59,7 +59,7 @@ namespace xlw
         if (xlret & xlretInvXlfn)
             throw std::runtime_error(CombineErrorString("invalid function number" , ErrorId, Identifier));
     }
-    
+
     std::string XlfOperImpl::XlTypeToString(int xlType)
     {
         DWORD type = xlType & 0xFFF;

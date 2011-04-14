@@ -6,14 +6,14 @@
 /*
  Copyright (C) 2006 Mark Joshi
  Copyright (C) 2007, 2008 Eric Ehlers
- 
+
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
- 
+
  XLW is free software: you can redistribute it and/or modify it under the
  terms of the XLW license.  You should have received a copy of the
  license along with this program; if not, please email xlw-users@lists.sf.net
- 
+
  This program is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE.  See the license for more details.
@@ -158,14 +158,14 @@ TypeRegistry::Helper DONreg("DoubleOrNothing", // New type
                "CellMatrix",    // Old type
                "DoubleOrNothing", // Converter name
                false,           // Is a method
-               true             // Takes identifier 
+               true             // Takes identifier
                );
 
 TypeRegistry::Helper arglistreg("ArgumentList", // New type
                "CellMatrix",    // Old type
                "ArgumentList",  // Converter name
                false,           // Is a method
-               true,            // Takes identifier 
+               true,            // Takes identifier
                "",              // No key
                "<xlw/ArgList.h>"// Include file
                );
@@ -174,7 +174,7 @@ TypeRegistry::Helper payoffreg("Wrapper<PayOff>", // New type
                "ArgumentList",  // Old type
                "GetFromFactory<PayOff>", // Converter name
                false,           // Is a method
-               false,           // Takes identifier 
+               false,           // Takes identifier
                "" ,             // No key
               "<xlw/ArgListFactory.h>" // Include file
                );

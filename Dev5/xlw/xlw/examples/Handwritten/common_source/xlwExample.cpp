@@ -119,7 +119,7 @@ extern "C" {
         EXCEL_END;
     }
 
-    /*! 
+    /*!
      * Demonstrates how to detect that the function is called by
      * the function wizard, and how to retrieve the coordinates
      * of the caller cell
@@ -165,8 +165,8 @@ extern "C" {
     }
 
     /*!
-     * Registered as volatile to demonstrate how functions can be 
-     * recalculated automatically even if none of the arguments 
+     * Registered as volatile to demonstrate how functions can be
+     * recalculated automatically even if none of the arguments
      * has changed.
      *
      * \return the number of times the function has been called.
@@ -181,7 +181,7 @@ extern "C" {
         EXCEL_END;
     }
 
-    /*! 
+    /*!
      * Demonstrates calling Excel macro functions from within a
      * a function, for this to work you must set the MacroSheetEquivalent
      * to true when registering.

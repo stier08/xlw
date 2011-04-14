@@ -30,7 +30,7 @@ using namespace xlw;
 
 
 
-std::string // Caches a CellMatrix. The first Cell must be the name 
+std::string // Caches a CellMatrix. The first Cell must be the name
 CreateObject(const CellMatrix &theObject // The Object to be cached
              );
 
@@ -39,7 +39,7 @@ RetrieveObject(const std::string &theName   // The Name of the object
                );
 
 
-std::string // Caches a Discount Curve. The first parameter must be a the name 
+std::string // Caches a Discount Curve. The first parameter must be a the name
 CreateDiscountCurve(const std::string & theCurveName // The name of the Dicsount curve
                     ,const MyMatrix &theDiscountCurve // A matrix of 2 columns. First column is dates and second column is discounts
              );

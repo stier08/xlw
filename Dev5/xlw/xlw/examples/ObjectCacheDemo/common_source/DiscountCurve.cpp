@@ -29,7 +29,7 @@ std::string ulToString(unsigned long n);
 std::string stripTrailingHash(const std::string &theSource);
 void check(const std::string &theName);
 
-std::string // Caches a Discount Curve. The first parameter must be a the name 
+std::string // Caches a Discount Curve. The first parameter must be a the name
 CreateDiscountCurve(const std::string & theCurveName // The name of the Dicsount curve
                     ,const MyMatrix &theDiscountCurve // A matrix of 2 columns. First column is dates and second column is discounts
              )
@@ -50,7 +50,7 @@ CreateDiscountCurve(const std::string & theCurveName // The name of the Dicsount
         }
     }
 
-    
+
     DiscountCurveCache::instance().insert(std::make_pair(theCurveName,theDiscountCurve));
     std::string theName(theCurveName);
     theName += "#";
@@ -79,7 +79,7 @@ Discount(const std::string &theName   // The Name of the Discount Curve
     {
         throw("Discount Curve not found in Cache");
     }
-    
+
     const MyMatrix &theCurve = DiscountCurveCache::instance()[theKey];
     size_t n(theCurve.rows());
     if(theDate<=theCurve[0][0]) return theDate<theCurve[0][1];

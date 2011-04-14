@@ -2,14 +2,14 @@
 /*
  Copyright (C) 2006 Mark Joshi
  Copyright (C) 2007, 2008 Eric Ehlers
- 
+
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
- 
+
  XLW is free software: you can redistribute it and/or modify it under the
  terms of the XLW license.  You should have received a copy of the
  license along with this program; if not, please email xlw-users@lists.sf.net
- 
+
  This program is distributed in the hope that it will be useful, but WITHOUT
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE.  See the license for more details.
@@ -29,13 +29,13 @@ FunctionArgumentType::FunctionArgumentType(std::string NameIdentifier_,
                           ConversionChain(ConversionChain_),
                           EXCELKey(EXCELKey_)
                           {}
-                          
-     
+
+
 const std::string& FunctionArgumentType::GetNameIdentifier() const
 {
- return NameIdentifier;           
+ return NameIdentifier;
 }
-           
+
 const std::vector<std::string>& FunctionArgumentType::GetConversionChain() const
 {
  return ConversionChain;
@@ -49,7 +49,7 @@ const std::string& FunctionArgumentType::GetEXCELKey() const
 {
     return EXCELKey;
 }
-    
+
 std::string FunctionArgument::GetArgumentName() const
 {
  return ArgumentName;
@@ -57,7 +57,7 @@ std::string FunctionArgument::GetArgumentName() const
 
 std::string FunctionArgument::GetArgumentDescription() const
 {
- return ArgumentDescription;            
+ return ArgumentDescription;
 }
 
 FunctionArgument::FunctionArgument(const FunctionArgumentType& TheType_,
@@ -100,7 +100,7 @@ FunctionDescription::FunctionDescription(std::string FunctionName_,
                          bool Threadsafe_,
                          std::string helpID_,
                          bool Asynchronous_,
-                         bool MacroSheet_, 
+                         bool MacroSheet_,
                          bool ClusterSafe_)
                          :
                          FunctionName(FunctionName_),

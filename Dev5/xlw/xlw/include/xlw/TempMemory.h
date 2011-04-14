@@ -40,7 +40,7 @@ namespace xlw {
 
     //! Helper for creating thread specific temporary memory
     /*!
-    Used by the XLOPER code to create objects that are returnable 
+    Used by the XLOPER code to create objects that are returnable
     to excel without having to deal with full memory management.
     */
     class TempMemory

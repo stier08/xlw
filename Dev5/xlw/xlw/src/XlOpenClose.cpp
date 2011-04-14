@@ -73,7 +73,7 @@ extern "C"
         xlw::XlfExcel::DeleteInstance();
 
         // clear up any temporary memory used
-        // but keep enough alive so that exel can still use 
+        // but keep enough alive so that exel can still use
         // the functions
         xlw::TempMemory::TerminateProcess();
         return 1;
@@ -83,7 +83,7 @@ extern "C"
     {
         std::cerr << XLW__HERE__ << "Addin being unloaded" << std::endl;
 
-        // we can safely unregister the functions here as the user has unloaded the 
+        // we can safely unregister the functions here as the user has unloaded the
         // xll and so won't expect to be able to use the functions
         xlw::XLRegistration::ExcelFunctionRegistrationRegistry::Instance().DoTheDeregistrations();
 

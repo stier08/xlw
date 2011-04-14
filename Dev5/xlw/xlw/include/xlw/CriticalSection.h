@@ -29,7 +29,7 @@
 namespace xlw {
 //! Wrapper for a windows critical section
 /*!
-Create one of these objects for each time you 
+Create one of these objects for each time you
 need to ensure that sections of cae cannot run at
 the same time.
 
@@ -42,7 +42,7 @@ public:
     {
         InitializeCriticalSection(&m_crit);
     }
-    
+
     ~CriticalSection()
     {
         DeleteCriticalSection(&m_crit);
@@ -74,7 +74,7 @@ public:
     ProtectInScope(CriticalSection& criticalSection) :
         m_criticalSection(criticalSection)
     {
-        
+
         m_criticalSection.lock();
     }
 

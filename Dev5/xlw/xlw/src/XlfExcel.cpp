@@ -147,7 +147,7 @@ int get_excel_version() {
     // French excel doesn't like the decimal point
     // in the version string, fall back to the unsafe looking
     // atoi, not too bad as Excel always seems to NULL terminate the
-    // version string, if we can't get anything make sure we don't 
+    // version string, if we can't get anything make sure we don't
     // return a version greater than 12
     if(xRet2.xltype == xltypeInt)
     {

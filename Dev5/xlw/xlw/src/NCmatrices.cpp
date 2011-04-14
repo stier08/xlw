@@ -34,7 +34,7 @@ xlw::NCMatrix::resize(size_t rows, size_t columns)
     NCMatrix temp(rows,columns);
     swap(temp);
     return *this;
- 
+
 }
 
 

@@ -30,7 +30,7 @@
 
 #ifndef _MSC_VER
 // need to undefine for mingw
-#undef  UNICODE          
+#undef  UNICODE
 #undef _UNICODE
 #endif
 
