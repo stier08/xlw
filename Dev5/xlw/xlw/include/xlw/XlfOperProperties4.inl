@@ -176,7 +176,7 @@ namespace xlw { namespace Impl {
         static LPXLOPER getElement(LPXLOPER oper, RW row, COL column)
         {
 #ifndef NDEBUG
-            // fasten seat belts when not in relase mode
+            // fasten seat belts when not in release mode
             if(row < 0 || row >= getRows(oper) || column < 0 || column >= getCols(oper))
             {
                 throw XlfOutOfBounds();
