@@ -100,6 +100,13 @@ namespace xlw {
     public:
         XlfNeverGetHere(): XlfException("Reached a never get here point") {}
     };
+
+    //! User attempted to access an array out of bounds
+    class EXCEL32_API XlfOutOfBounds: public XlfException
+    {
+    public:
+        XlfOutOfBounds(): XlfException("Out of bounds array access detected") {}
+    };
 }
 
 #endif
