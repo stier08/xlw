@@ -46,7 +46,8 @@
 				RuntimeLibrary="3"
 				ObjectFile="$(IntDir)\"
 				ProgramDataBaseFileName="$(TargetDir)\$(TargetName).pdb"
-				DebugInformationFormat="4"
+				WarningLevel="3"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -107,6 +108,7 @@
 				RuntimeLibrary="3"
 				ObjectFile="$(IntDir)\"
 				ProgramDataBaseFileName="$(TargetDir)\$(TargetName).pdb"
+				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
 			<Tool
@@ -164,6 +166,7 @@
 				AdditionalIncludeDirectories="..\..\include;$(PSDK)\include"
 				PreprocessorDefinitions="NDEBUG, _CRT_SECURE_NO_DEPRECATE"
 				RuntimeLibrary="2"
+				WarningLevel="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -221,6 +224,7 @@
 				AdditionalIncludeDirectories="..\..\include;$(PSDK)\include"
 				PreprocessorDefinitions="NDEBUG, _CRT_SECURE_NO_DEPRECATE"
 				RuntimeLibrary="2"
+				WarningLevel="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

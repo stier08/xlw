@@ -46,7 +46,7 @@
 				PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE"
 				RuntimeLibrary="3"
 				ProgramDataBaseFileName="$(OutDir)\xlw-vc90-mt-gd-$(ProjectName).pdb"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

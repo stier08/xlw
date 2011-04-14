@@ -48,7 +48,7 @@
 				UsePrecompiledHeader="0"
 				ProgramDataBaseFileName="$(TargetDir)\$(TargetName).pdb"
 				WarningLevel="3"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
