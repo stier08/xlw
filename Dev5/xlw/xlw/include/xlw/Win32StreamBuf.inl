@@ -41,7 +41,7 @@ namespace xlw {
     This method is called to dump stuff in the put area out to the file.
     We intercept it to send to debug window.
     */
-    INLINE int_type Win32StreamBuf::overflow(int_type ch)
+    INLINE Win32StreamBuf::int_type Win32StreamBuf::overflow(int_type ch)
     {
         if (!traits_type::eq_int_type(traits_type::eof(), ch))
         {
