@@ -68,6 +68,10 @@ XlfAbstractCmdDesc::XlfAbstractCmdDesc.
 \param recalcPolicy Policy to recalculate the cell.
 \param Threadsafe Whether this function should be registered threadsafe under Excel 12
 \param returnTypeCode The excel code for the datatype of the return value
+\param helpID the help id for the function in the chm help file
+\param Asynchronous does this function run Asynchronously
+\param MacroSheetEquivalent should calling Excel Macro function be allowed, incompatible with multi-threading
+\param ClusterSafe Can function be run on a cluster in Excel 2010
 */
 xlw::XlfFuncDesc::XlfFuncDesc(const std::string& name, const std::string& alias,
                          const std::string& comment, const std::string& category,

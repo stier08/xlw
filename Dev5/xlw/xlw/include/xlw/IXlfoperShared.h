@@ -17,7 +17,7 @@
 #define INC_IXlfOperShared_H
 
 /*!
-\file IXlfOperShared.h
+\file IXlfoperShared.h
 \brief defines interface for classes handling specific XLOPER versions
 */
 

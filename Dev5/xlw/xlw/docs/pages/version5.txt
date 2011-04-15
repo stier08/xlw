@@ -1,0 +1,30 @@
+
+/*! \page 0001_version5 XLW Version 5 - Excel 2010
+
+\section v5_summary Summary
+
+XLW is upgraded to support new features of Excel 2010 such as
+
+\li 64 bit XLLs
+\li Asynchronous functions
+
+\section v5_objectives Objectives
+
+\subsection v5_ss1 Performance
+
+The performance with large arrays has been massively improved.
+
+\subsection v5_ss2 Stability
+
+All known issues with previous versions have been fixed.
+
+\subsection v5_ss3 Compiler Support
+
+Added Visual Studio 2010 support (including Express Edition)
+
+\subsection v5_ss3 Documentation
+
+Improved documentation and example code.
+
+*/
+
