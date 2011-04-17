@@ -2,6 +2,7 @@
 /*
  Copyright (C) 2006 Mark Joshi
  Copyright (C) 2007, 2008 Eric Ehlers
+ Copyright (C) 2011 Narinder Claire
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -75,6 +76,18 @@ std::string FunctionDescription::GetFunctionName() const
 return FunctionName;
 }
 
+std::string FunctionDescription::GetDisplayName() const
+{
+return DisplayName;
+}
+
+
+void FunctionDescription::setFunctionName(const std::string &newName)
+{
+ FunctionName = newName;
+}
+
+
 std::string FunctionDescription::GetFunctionDescription() const
 {
 return FunctionHelpDescription;
@@ -114,7 +127,8 @@ FunctionDescription::FunctionDescription(std::string FunctionName_,
                          Threadsafe(Threadsafe_),
                          Asynchronous(Asynchronous_),
                          MacroSheet(MacroSheet_),
-                         ClusterSafe(ClusterSafe_)
+                         ClusterSafe(ClusterSafe_),
+						 DisplayName(FunctionName_)
 {
 }
 

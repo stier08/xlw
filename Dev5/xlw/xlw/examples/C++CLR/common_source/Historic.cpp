@@ -42,7 +42,7 @@ String^ CPP2CLR(const std::string &cppString)
 
 
 xlw::CellMatrix // Obtains historial market data from yahoo
-XLLEXPORT GetHistoricDataFromYahoo(
+GetHistoricDataFromYahoo(
                           std::string  symbol // Yahoo Symbol
                          ,double beginDate // Begin Date
                          ,double endDate //End Date

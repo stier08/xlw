@@ -566,6 +566,10 @@
 				RelativePath="..\..\include\xlw\xlw.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\include\xlw\xlwManaged.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

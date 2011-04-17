@@ -8,10 +8,9 @@
 ## to the  $(BUILDFLAG) target below
 
 BUILDFLAG=$(ENVIRON)\buildflag
-IFACE_EXE="$(XLW)\xlw\build\$(VC)\$(ENVIRON)\InterfaceGenerator.exe"
+IFACE_EXE="$(XLW)\xlw\build\$(VC)\$(ENVIRON)\InterfaceGenerator.exe -m "
 
 IFACE_INPUT=..\common_source\cppinterface.h
-IFACE_OUTPUT=..\common_source\xlwWrapper.cpp
 
 
 INPUTS = $(MAKEFILE) $(IFACE_INPUT) 
@@ -21,7 +20,7 @@ ALL : $(BUILDFLAG)
 
 
 $(BUILDFLAG) : $(INPUTS)
-    "$(IFACE_EXE)" $(IFACE_INPUT) $(IFACE_OUTPUT) 
+    $(IFACE_EXE) $(IFACE_INPUT) 
 	ECHO flagged > $@
 
 CLEAN :

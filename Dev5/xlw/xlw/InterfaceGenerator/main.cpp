@@ -5,6 +5,7 @@
 //
 /*
 Copyright (C) 2006, 2008 Mark Joshi
+Copyright (C) 2011  Narinder Claire
 
 This file is part of XLW, a free-software/open-source C++ wrapper of the
 Excel C API - http://xlw.sourceforge.net/
@@ -25,10 +26,11 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 #endif
 #include <iostream>
 #include <fstream>
-#include"Functionizer.h"
+#include "Functionizer.h"
 #include "FunctionModel.h"
 #include "FunctionType.h"
 #include "Outputter.h"
+#include "ManagedOutputter.h"
 #include "ParserData.h"
 #include "Tokenizer.h"
 #include "Strip.h"
@@ -54,40 +56,69 @@ int main(int argc, char *argv[])
     }
 
     if (args.size() < 1 || args.size() > 2)
-      throw("usage is inputfile outputfile (outputfile is optional)");
+		throw("usage is :\n "
+		      "          inputfile \n"
+		      "          inputfile outputfile \n"
+			  "      -m  inputfile ");
     std::string inputfile(args[0]);
 
     bool clw = false;
+	bool managed = false;
 
     for (std::vector<std::string>::const_iterator it = options.begin(); it != options.end(); ++it)
     {
       if (*it == "-c")
+	  {
         clw = true;
-      else
+	  }
+	  else if (*it == "-m")
+	  {
+		  managed = true;
+	  }
+	  else
+	  {
         std::cerr << "unknown option ignored: " << *it << "\n";
+	  }
 
     }
 
 
     std::string outputfile;
+	std::string managed_outputfile_h;
+	std::string managed_outputfile_cpp;
+
+	std::string dirname(getdir(inputfile));
+	
 
     if (args.size()==2)
+	{
+	 
+	  if (managed) throw ("specifying output filename not allowed for managed mode ");
       outputfile = args[1];
+	}
     else
     {
       if (clw)
         outputfile= "clw";
       else
-        outputfile = "xlw";
+	  {
 
-      for (unsigned long i=0; i < inputfile.size(); i++)
+        outputfile = "xlw";
+		managed_outputfile_h = "mxlw";
+        
+	  }
+	  std::string libName(strip(inputfile));
+      for (unsigned long i=0; i < libName.size(); i++)
       {
-        if (inputfile[i] == '.')
+        if (libName[i] == '.')
           break;
-        PushBack(outputfile,inputfile[i]);
+        PushBack(outputfile,libName[i]);
+		PushBack(managed_outputfile_h,libName[i]);
       }
 
       outputfile += ".cpp";
+	  managed_outputfile_cpp = managed_outputfile_h + ".cpp";
+	  managed_outputfile_h +=".h";
     }
 
     ifstream input(inputfile.c_str());
@@ -123,29 +154,40 @@ int main(int argc, char *argv[])
     std::cout << "file has been function described\n";
 
 
-    std::vector<char> outputVector;
+    std::vector<char> outputVector_h;
+	std::vector<char> outputVector_cpp;
+
+
+    if(managed)
+	{
+		OutputFileCreatorMan(functionVector,inputfile,LibraryName,outputVector_h,outputVector_cpp);
+		inputfile = managed_outputfile_h;
+      
+		std::cout << " .. writing " << (dirname+"/" + managed_outputfile_h) <<  "\n";
+		writeOutputFile(dirname+"/" + managed_outputfile_h,outputVector_h);
+		std::cout << " .. writing " << (dirname+"/" + managed_outputfile_cpp) <<  "\n";
+		writeOutputFile(dirname+"/" + managed_outputfile_cpp,outputVector_cpp);
+
+		outputfile = dirname+"/" + outputfile;
+
+	}
+
+
+
 
     if (clw)
-     outputVector = OutputFileCreatorCL(functionVector,
+     outputVector_cpp = OutputFileCreatorCL(functionVector,
                                           inputfile);
     else
-      outputVector = OutputFileCreator(functionVector,
+     outputVector_cpp = OutputFileCreator(functionVector,
                                           inputfile,LibraryName);
 
+	std::cout << " .. writing " << outputfile << "\n";
+    writeOutputFile(outputfile,outputVector_cpp);
 
     std::cout << "new file is a vector\n";
 
-    ofstream output(outputfile.c_str());
-    if (!output)
-      throw("output file not created");
-
-    std::vector<char>::const_iterator it= outputVector.begin();
-    while (it != outputVector.end())
-    {
-      output.put(*it);
-      ++it;
-    }
-
+   
     std::cout << "all done\n";
 
   }

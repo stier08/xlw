@@ -24,7 +24,7 @@
 			IntermediateDirectory="$(OutDir)/obj"
 			ConfigurationType="2"
 			CharacterSet="1"
-			ManagedExtensions="0"
+			ManagedExtensions="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -66,11 +66,11 @@
 			<Tool
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="true"
-				AdditionalDependencies="xlw-vc80-mt-gd-5DEV.lib $(SolutionName)C.lib odbc32.lib odbccp32.lib User32.lib"
+				AdditionalDependencies="xlw-vc80-mt-gd-5DEV.lib odbc32.lib odbccp32.lib User32.lib"
 				OutputFile="$(OutDir)/$(SolutionName).xll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="$(XLW)/xlw/lib;$(OutDir);$(PSDK)/Lib"
-				DelayLoadDLLs="$(SolutionName)C.dll"
+				DelayLoadDLLs=""
 				GenerateDebugInformation="true"
 				AssemblyDebug="1"
 				SubSystem="2"
@@ -107,7 +107,7 @@
 			IntermediateDirectory="$(PlatformName)_$(ConfigurationName)/obj"
 			ConfigurationType="2"
 			CharacterSet="1"
-			ManagedExtensions="0"
+			ManagedExtensions="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -191,6 +191,7 @@
 			IntermediateDirectory="$(OutDir)/obj"
 			ConfigurationType="2"
 			CharacterSet="1"
+			ManagedExtensions="1"
 			WholeProgramOptimization="1"
 			>
 			<Tool
@@ -231,11 +232,11 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="xlw-vc80-mt-5DEV.lib $(SolutionName)C.lib odbc32.lib odbccp32.lib User32.lib"
+				AdditionalDependencies="xlw-vc80-mt-5DEV.lib  odbc32.lib odbccp32.lib User32.lib"
 				OutputFile="$(OutDir)/$(SolutionName).xll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="$(XLW)/xlw/lib;$(OutDir);$(PSDK)/Lib"
-				DelayLoadDLLs="$(SolutionName)C.dll"
+				DelayLoadDLLs=""
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -273,6 +274,7 @@
 			IntermediateDirectory="$(PlatformName)_$(ConfigurationName)/obj"
 			ConfigurationType="2"
 			CharacterSet="1"
+			ManagedExtensions="1"
 			WholeProgramOptimization="1"
 			>
 			<Tool
@@ -314,11 +316,11 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="xlw-vc80-mt-5DEV.lib $(SolutionName)C.lib odbc32.lib odbccp32.lib User32.lib"
+				AdditionalDependencies="xlw-vc80-mt-5DEV.lib odbc32.lib odbccp32.lib User32.lib"
 				OutputFile="$(OutDir)/$(SolutionName).xll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="$(XLW)/xlw/lib/x64;$(OutDir);$(PSDK)/Lib"
-				DelayLoadDLLs="$(SolutionName)C.dll"
+				DelayLoadDLLs=""
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -352,11 +354,55 @@
 		</Configuration>
 	</Configurations>
 	<References>
+		<AssemblyReference
+			RelativePath="System.dll"
+			AssemblyName="System, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+		/>
+		<AssemblyReference
+			RelativePath="System.Data.dll"
+			AssemblyName="System.Data, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=x86"
+		/>
+		<AssemblyReference
+			RelativePath="System.Drawing.dll"
+			AssemblyName="System.Drawing, Version=2.0.0.0, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
+		/>
+		<AssemblyReference
+			RelativePath="System.Windows.Forms.dll"
+			AssemblyName="System.Windows.Forms, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+		/>
+		<AssemblyReference
+			RelativePath="System.XML.dll"
+			AssemblyName="System.Xml, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+		/>
 	</References>
 	<Files>
 		<File
-			RelativePath="..\common_source\xlwWrapper.cpp"
+			RelativePath="..\common_source\cppinterface.h"
 			>
+		</File>
+		<File
+			RelativePath="..\common_source\Historic.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\common_source\mxlwcppinterface.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\common_source\mxlwcppinterface.h"
+			>
+		</File>
+		<File
+			RelativePath="..\common_source\xlwcppinterface.cpp"
+			>
+			<FileConfiguration
+				Name="Debug|Win32"
+				>
+				<Tool
+					Name="VCCLCompilerTool"
+					CompileAsManaged="0"
+				/>
+			</FileConfiguration>
 		</File>
 	</Files>
 	<Globals>

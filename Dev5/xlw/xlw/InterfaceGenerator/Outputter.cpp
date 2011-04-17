@@ -20,32 +20,8 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 #pragma warning(disable:4503)
 #endif
 #endif
-#include "Outputter.h"
-#include "TypeRegister.h"
-#include "IncludeRegister.h"
-#include <sstream>
 
-void PushBack(std::string& str, char c)
-{
-  std::string tmp("0");
-  tmp[0]=c;
-  str.append(tmp);
-
-}
-void AddLine(std::vector<char>& file, std::string line)
-{
-  for (unsigned long i=0; i < line.size(); i++)
-    file.push_back(line[i]);
-
-  file.push_back('\n');
-}
-
-std::string strip(std::string in) {
-  for (size_t i=in.length()-1; i; --i)
-    if (in[i] == '/' || in[i] == '\\')
-      return in.substr(i + 1, in.length() - i);
-  return in;
-}
+#include"OutputterHelper.h"
 
 std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& functionDescriptions,
                                     std::string inputFileName, std::string LibraryName)
@@ -85,6 +61,7 @@ std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& func
   for (unsigned long i=0; i < functionDescriptions.size(); i++)
   {
     std::string name = functionDescriptions[i].GetFunctionName();
+	std::string display_name = functionDescriptions[i].GetDisplayName();
     //std::string keys;
     AddLine(output,"namespace");
     AddLine(output,"{");
@@ -122,7 +99,7 @@ std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& func
 
     AddLine(output,"  XLRegistration::XLFunctionRegistrationHelper");
     AddLine(output,"register"+name+"(\"xl"+name+"\",");
-    AddLine(output,"\""+name+"\",");
+    AddLine(output,"\""+display_name+"\",");
     AddLine(output,"\""+ functionDescriptions[i].GetFunctionDescription()+" \",");
     AddLine(output, "LibraryName,");
     AddLine(output,name+"Args,");
