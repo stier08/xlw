@@ -102,7 +102,7 @@ void test ( int n1, int n2, const char * str)
 	else
 	{
 		std::cout <<  "Fail : count of " << str << n1 << " expected " << n2 << "\n";
-		throw 1;
+		throw "Count Failed !\n";
 	}
 }
 
@@ -152,6 +152,6 @@ void check_splice(const T &t,int n)
 	else
 	{
 		std::cout <<  "Fail : " << names[n] << " spliced \n"; 
-		throw 1;
+		throw "Spliced !\n";
 	}
 }

@@ -10,7 +10,14 @@ namespace xlw
 		{
 			struct control_block
 			{
-				control_block(void * p_):p(p_), count(1){}
+
+				long use_count()const{return count;}// Never throws 
+				void * get()const{return p;}// Never throws 
+
+			private :
+				friend void decrement(control_block *p);// CANNOT throw;
+			    friend control_block * increment(control_block *p);// CANNOT throw;
+				
 
 				virtual void release ()throw()=0; // CANNOT throw
 				virtual control_block * operator++()throw() // CANNOT throw
@@ -26,11 +33,11 @@ namespace xlw
 					}
 					return --count;
 				}
-				long use_count()const{return count;}// Never throws 
-				void * get()const{return p;}// Never throws 
-
-				virtual ~control_block(){};
+		
+				
 			protected :
+				control_block(void * p_):p(p_), count(1){}
+				virtual ~control_block(){};
 				void *p;
 				long count;
 			};
@@ -128,6 +135,11 @@ namespace xlw
 						delete p;
 					}
 				}
+			}
+
+			control_block * increment(control_block *p)throw() // CANNOT throw;
+			{
+				return ++(*p);
 			}
 
 		}

@@ -31,17 +31,17 @@ namespace xlw
 			// template<class Y, class D, class A> shared_ptr(Y * p, D d, A a);
 
 			shared_ptr(shared_ptr const & r):
-						control_block(++(*r.control_block)){} // never throws
+						control_block(details::increment(r.control_block)){} // never throws
 				
 
 			template<class Y> shared_ptr(shared_ptr<Y> const & r):
-						control_block(++(*r.control_block)){} // never throws
+						control_block(details::increment(r.control_block)){} // never throws
 
 			//template<class Y> shared_ptr(shared_ptr<Y> const & r, T * p); // never throws
 			//template<class Y> explicit shared_ptr(weak_ptr<Y> const & r);
 
 			template<class Y> explicit shared_ptr(std::auto_ptr<Y> & r):
-			control_block( controlled_alloc(r)){} // MAY throw but if it does r still owns p
+			control_block( details::controlled_alloc(r)){} // MAY throw but if it does r still owns p
 
 			///    Destructor
 			~shared_ptr(){ details::decrement(control_block);}
