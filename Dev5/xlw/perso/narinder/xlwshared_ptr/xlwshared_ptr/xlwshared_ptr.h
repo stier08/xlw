@@ -12,7 +12,9 @@ namespace xlw
 			template<class Y>
 			friend class shared_ptr;
 
-			mutable details::control_block * control_block;
+			typedef details::control_block_policy policy;
+
+			mutable policy::control control;
 
 		public:
 
@@ -20,31 +22,31 @@ namespace xlw
 
 			///    Constructors
 
-			shared_ptr():control_block(details::controlled_alloc()){}
+			shared_ptr():control(policy::controlled_alloc()){}
 
 			template<class Y> explicit shared_ptr(Y * p): 
-			control_block(details::controlled_alloc(p)){} // MAY throw
+			control(policy::controlled_alloc(p)){} // MAY throw
 
 			template<class Y, class D> shared_ptr(Y * p, D d):
-			control_block( details::controlled_alloc(p,d)){} // MAY throw
+			control( policy::controlled_alloc(p,d)){} // MAY throw
 
 			// template<class Y, class D, class A> shared_ptr(Y * p, D d, A a);
 
 			shared_ptr(shared_ptr const & r):
-						control_block(details::increment(r.control_block)){} // never throws
+						control(policy::increment(r.control)){} // never throws
 				
 
 			template<class Y> shared_ptr(shared_ptr<Y> const & r):
-						control_block(details::increment(r.control_block)){} // never throws
+						control(policy::increment(r.control)){} // never throws
 
 			//template<class Y> shared_ptr(shared_ptr<Y> const & r, T * p); // never throws
 			//template<class Y> explicit shared_ptr(weak_ptr<Y> const & r);
 
 			template<class Y> explicit shared_ptr(std::auto_ptr<Y> & r):
-			control_block( details::controlled_alloc(r)){} // MAY throw but if it does r still owns p
+			control( policy::controlled_alloc(r)){} // MAY throw but if it does r still owns p
 
 			///    Destructor
-			~shared_ptr(){ details::decrement(control_block);}
+			~shared_ptr(){ policy::decrement(control);}
 
 
 			shared_ptr & operator=(shared_ptr const & r) // never throws
@@ -79,14 +81,14 @@ namespace xlw
 
 			//template<class Y> void reset(shared_ptr<Y> const & r, T * p); // never throws
 
-			T * get() const {return static_cast<T*>(control_block->get());} // never throws
+			T * get() const {return static_cast<T*>(policy::get(control));} // never throws
 
 			T & operator*() const {return *get();}// never throws
 			T * operator->() const {return get();} // never throws
 
 
 
-			long use_count() const{return control_block->use_count();} // never throws
+			long use_count() const{return control->use_count();} // never throws
 			bool unique() const{return use_count()==1;} // never throws
 
 			operator bool() const{return  get();}// never throws
@@ -96,7 +98,7 @@ namespace xlw
 
 			void swap(shared_ptr &p) // CANNOT THROW !
 			{
-				std::swap(control_block,p.control_block);
+				std::swap(control,p.control);
 			}
 
 
