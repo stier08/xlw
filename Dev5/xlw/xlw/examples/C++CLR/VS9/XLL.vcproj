@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8.00"
+	Version="9.00"
 	Name="XLL"
 	ProjectGUID="{DE8A087D-EF7B-4777-A464-F47096EE968C}"
 	RootNamespace="ExampleXll"
 	Keyword="Win32Proj"
+	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
 		<Platform
@@ -66,7 +67,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="true"
-				AdditionalDependencies="xlw-vc80-mt-gd-5DEV.lib odbc32.lib odbccp32.lib User32.lib"
+				AdditionalDependencies="xlw-vc90-mt-gd-5DEV.lib odbc32.lib odbccp32.lib User32.lib"
 				OutputFile="$(OutDir)/$(SolutionName).xll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="$(XLW)/xlw/lib;$(OutDir);$(PSDK)/Lib"
@@ -74,6 +75,8 @@
 				GenerateDebugInformation="true"
 				AssemblyDebug="1"
 				SubSystem="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -93,9 +96,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -150,7 +150,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="true"
-				AdditionalDependencies="xlw-vc80-mt-gd-5DEV.lib odbc32.lib odbccp32.lib User32.lib"
+				AdditionalDependencies="xlw-vc90-mt-gd-5DEV.lib odbc32.lib odbccp32.lib User32.lib"
 				OutputFile="$(OutDir)/$(SolutionName).xll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="$(XLW)/xlw/lib/x64;$(OutDir);$(PSDK)/Lib"
@@ -158,6 +158,8 @@
 				GenerateDebugInformation="true"
 				AssemblyDebug="1"
 				SubSystem="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
 				TargetMachine="17"
 			/>
 			<Tool
@@ -177,9 +179,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -232,7 +231,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="xlw-vc80-mt-5DEV.lib  odbc32.lib odbccp32.lib User32.lib"
+				AdditionalDependencies="xlw-vc90-mt-5DEV.lib  odbc32.lib odbccp32.lib User32.lib"
 				OutputFile="$(OutDir)/$(SolutionName).xll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="$(XLW)/xlw/lib;$(OutDir);$(PSDK)/Lib"
@@ -241,6 +240,8 @@
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -260,9 +261,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -316,7 +314,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="xlw-vc80-mt-5DEV.lib odbc32.lib odbccp32.lib User32.lib"
+				AdditionalDependencies="xlw-vc90-mt-5DEV.lib odbc32.lib odbccp32.lib User32.lib"
 				OutputFile="$(OutDir)/$(SolutionName).xll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="$(XLW)/xlw/lib/x64;$(OutDir);$(PSDK)/Lib"
@@ -325,6 +323,8 @@
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
 				TargetMachine="17"
 			/>
 			<Tool
@@ -346,9 +346,6 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
-				Name="VCWebDeploymentTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -357,22 +354,27 @@
 		<AssemblyReference
 			RelativePath="System.dll"
 			AssemblyName="System, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+			MinFrameworkVersion="131072"
 		/>
 		<AssemblyReference
 			RelativePath="System.Data.dll"
 			AssemblyName="System.Data, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=x86"
+			MinFrameworkVersion="131072"
 		/>
 		<AssemblyReference
 			RelativePath="System.Drawing.dll"
 			AssemblyName="System.Drawing, Version=2.0.0.0, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
+			MinFrameworkVersion="131072"
 		/>
 		<AssemblyReference
 			RelativePath="System.Windows.Forms.dll"
 			AssemblyName="System.Windows.Forms, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+			MinFrameworkVersion="131072"
 		/>
 		<AssemblyReference
 			RelativePath="System.XML.dll"
 			AssemblyName="System.Xml, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+			MinFrameworkVersion="131072"
 		/>
 	</References>
 	<Files>
