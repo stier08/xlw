@@ -152,7 +152,13 @@
 				RelativePath="..\..\InterfaceGenerator\main.cpp">
 			</File>
 			<File
+				RelativePath="..\..\InterfaceGenerator\ManagedOutputter.cpp">
+			</File>
+			<File
 				RelativePath="..\..\InterfaceGenerator\Outputter.cpp">
+			</File>
+			<File
+				RelativePath="..\..\InterfaceGenerator\OutputterHelper.cpp">
 			</File>
 			<File
 				RelativePath="..\..\InterfaceGenerator\ParserData.cpp">
@@ -186,7 +192,13 @@
 				RelativePath="..\..\InterfaceGenerator\IncludeRegister.h">
 			</File>
 			<File
+				RelativePath="..\..\InterfaceGenerator\ManagedOutputter.h">
+			</File>
+			<File
 				RelativePath="..\..\InterfaceGenerator\Outputter.h">
+			</File>
+			<File
+				RelativePath="..\..\InterfaceGenerator\OutputterHelper.h">
 			</File>
 			<File
 				RelativePath="..\..\InterfaceGenerator\ParserData.h">

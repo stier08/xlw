@@ -42,8 +42,12 @@
 		<Unit filename="..\..\InterfaceGenerator\Functionizer.h" />
 		<Unit filename="..\..\InterfaceGenerator\IncludeRegister.cpp" />
 		<Unit filename="..\..\InterfaceGenerator\IncludeRegister.h" />
+		<Unit filename="..\..\InterfaceGenerator\ManagedOutputter.cpp" />
+		<Unit filename="..\..\InterfaceGenerator\ManagedOutputter.h" />
 		<Unit filename="..\..\InterfaceGenerator\Outputter.cpp" />
 		<Unit filename="..\..\InterfaceGenerator\Outputter.h" />
+		<Unit filename="..\..\InterfaceGenerator\OutputterHelper.cpp" />
+		<Unit filename="..\..\InterfaceGenerator\OutputterHelper.h" />
 		<Unit filename="..\..\InterfaceGenerator\ParserData.cpp" />
 		<Unit filename="..\..\InterfaceGenerator\ParserData.h" />
 		<Unit filename="..\..\InterfaceGenerator\Singleton.h" />

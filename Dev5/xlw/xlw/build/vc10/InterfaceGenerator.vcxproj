@@ -92,7 +92,9 @@
     <ClCompile Include="..\..\InterfaceGenerator\FunctionType.cpp" />
     <ClCompile Include="..\..\InterfaceGenerator\IncludeRegister.cpp" />
     <ClCompile Include="..\..\InterfaceGenerator\main.cpp" />
+    <ClCompile Include="..\..\InterfaceGenerator\ManagedOutputter.cpp" />
     <ClCompile Include="..\..\InterfaceGenerator\Outputter.cpp" />
+    <ClCompile Include="..\..\InterfaceGenerator\OutputterHelper.cpp" />
     <ClCompile Include="..\..\InterfaceGenerator\ParserData.cpp" />
     <ClCompile Include="..\..\InterfaceGenerator\Strip.cpp" />
     <ClCompile Include="..\..\InterfaceGenerator\Tokenizer.cpp" />
@@ -104,7 +106,9 @@
     <ClInclude Include="..\..\InterfaceGenerator\FunctionModel.h" />
     <ClInclude Include="..\..\InterfaceGenerator\FunctionType.h" />
     <ClInclude Include="..\..\InterfaceGenerator\IncludeRegister.h" />
+    <ClInclude Include="..\..\InterfaceGenerator\ManagedOutputter.h" />
     <ClInclude Include="..\..\InterfaceGenerator\Outputter.h" />
+    <ClInclude Include="..\..\InterfaceGenerator\OutputterHelper.h" />
     <ClInclude Include="..\..\InterfaceGenerator\ParserData.h" />
     <ClInclude Include="..\..\InterfaceGenerator\Singleton.h" />
     <ClInclude Include="..\..\InterfaceGenerator\Strip.h" />

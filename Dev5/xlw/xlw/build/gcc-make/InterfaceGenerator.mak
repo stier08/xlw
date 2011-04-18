@@ -18,6 +18,8 @@ PRGSRC = FunctionModel.cpp \
          Tokenizer.cpp \
          TypeRegister.cpp \
          TypeRegistrations.cpp \
+		 ManagedOutputter.cpp\
+		 OutputterHelper.cpp\
          main.cpp \
 
 		 

@@ -44,6 +44,12 @@
     <ClCompile Include="..\..\InterfaceGenerator\TypeRegistrations.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\InterfaceGenerator\ManagedOutputter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\InterfaceGenerator\OutputterHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\InterfaceGenerator\Functionizer.h">
@@ -74,6 +80,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\InterfaceGenerator\TypeRegister.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\InterfaceGenerator\ManagedOutputter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\InterfaceGenerator\OutputterHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
