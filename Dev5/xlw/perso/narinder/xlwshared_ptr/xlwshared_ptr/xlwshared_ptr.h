@@ -51,20 +51,17 @@ namespace xlw
 
 			shared_ptr & operator=(shared_ptr const & r) // never throws
 			{
-				shared_ptr temp(r);
-				swap(temp);
+				shared_ptr(r).swap(*this);
 				return *this;
 			}
 			template<class Y> shared_ptr & operator=(shared_ptr<Y> const & r) // never throws
 			{
-				shared_ptr temp(r);
-				swap(temp);
+				shared_ptr(r).swap(*this);
 				return *this;
 			}
 			template<class Y> shared_ptr & operator=(std::auto_ptr<Y> & r) // could throw
 			{
-				shared_ptr temp(r);
-				swap(temp);
+				shared_ptr(r).swap(*this);
 				return *this;
 			}
 
@@ -98,7 +95,7 @@ namespace xlw
 
 			void swap(shared_ptr &p) // CANNOT THROW !
 			{
-				std::swap(control,p.control);
+				policy::swap(control,p.control);
 			}
 
 

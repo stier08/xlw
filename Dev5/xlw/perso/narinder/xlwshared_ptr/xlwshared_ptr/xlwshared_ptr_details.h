@@ -156,6 +156,12 @@ namespace xlw
 				{
 					return p->use_count();
 				}
+
+				static void swap(control &p, control &q)
+				{
+					std::swap(p,q);
+				}
+
 			};
 
 		}

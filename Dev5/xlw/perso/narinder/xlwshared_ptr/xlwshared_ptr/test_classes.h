@@ -8,21 +8,21 @@
 class Base {
 public:
 	Base():ch('*'){
-		Count++;
+		BCount++;
 	}
 	Base(const Base&):ch('*'){
-		Count++;
+		BCount++;
 	}
 	virtual int check_splice(){
 		return 0;
 	}
-	virtual ~Base(){Count--;}
+	virtual ~Base(){BCount--;}
 	virtual void v()const=0;
-	static unsigned long Count;
+	static unsigned long BCount;
 private:
 	char ch;
 };
-unsigned long Base::Count(0);
+unsigned long Base::BCount(0);
 
 /// this will give us lots of derived classes
 template<char ch_>
@@ -51,46 +51,46 @@ template<char ch_>
 class DerivedSquared :public Derived<ch_>{
 public:
 	DerivedSquared():ch(std::tolower(ch_)){
-		Count++;
+		SCount++;
 	}
 	DerivedSquared(const DerivedSquared<ch_>&):ch(std::tolower(ch_)){
-		Count++;
+		SCount++;
 	}
 	virtual int  check_splice(){
 		return 2;
 	}
-	virtual ~DerivedSquared(){Count--;}
+	virtual ~DerivedSquared(){SCount--;}
 	virtual void v()const{}
-	static unsigned long Count;
+	static unsigned long SCount;
 private:
 	char ch;
 
 };
 template<char ch_>
-unsigned long DerivedSquared<ch_>::Count(0);
+unsigned long DerivedSquared<ch_>::SCount(0);
 
 
 template<char ch_>
 class DerivedCubed:public DerivedSquared<ch_>{
 public:
 	DerivedCubed():ch(std::tolower(ch_)){
-		Count++;
+		CCount++;
 	}
 	DerivedCubed(const DerivedCubed<ch_>&):ch(std::tolower(ch_)){
-		Count++;
+		CCount++;
 	}
 	virtual int  check_splice(){
 		return 3;
 	}
-	virtual ~DerivedCubed(){Count--;}
+	virtual ~DerivedCubed(){CCount--;}
 	virtual void v()const{}
-	static unsigned long Count;
+	static unsigned long CCount;
 private:
 	char ch;
 
 };
 template<char ch_>
-unsigned long DerivedCubed<ch_>::Count(0);
+unsigned long DerivedCubed<ch_>::CCount(0);
 
 
 void test ( int n1, int n2, const char * str)
@@ -110,34 +110,36 @@ void test ( int n1, int n2, const char * str)
 
 void test_base(int n)
 {
-	test(n,Base::Count,"Base          ");
+	test(n,Base::BCount,"Base          ");
 }
 
 template<char ch>
 void test_derived(int n)
 {
-	test(n,Derived<ch>::Count,"Derived       ");
+	       test(n,Derived<ch>::Count,"Derived       ");
 }
 
 template<char ch>
 void test_derivedsquared(int n)
 {
-	test(n,DerivedSquared<ch>::Count,"DerivedSquared");
+	test(n,DerivedSquared<ch>::SCount,"DerivedSquared");
 }
 
 template<char ch>
 void test_derivedcubed(int n)
 {
-	test(n,DerivedCubed<ch>::Count,"DerivedCubed");
+	test(n,DerivedCubed<ch>::CCount,  "DerivedCubed  ");
 }
 
 template<char ch>
 void test_all_counts(int base_count,int derived_count, int derived_squared_count,int derived_cubed_count)
 {
+	    std::cout << "  -------- \n\n";
 		test_base(base_count);
 		test_derived<ch>(derived_count);
 		test_derivedsquared<ch>(derived_squared_count);
 		test_derivedcubed<ch>(derived_cubed_count);
+	
 }
 
 const char * names[] = {"base","derived","derived_squared","derived_cubed"};
