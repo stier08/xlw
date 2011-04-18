@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+# Visual C++ Express 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RunInterfaceGenerator", "RunInterfaceGenerator.vcxproj", "{C7C8EB2B-A31A-4219-8CF7-4F69DD4890EF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XLL", "XLL.vcxproj", "{DE8A087D-EF7B-4777-A464-F47096EE968C}"
