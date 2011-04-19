@@ -437,7 +437,7 @@ Section #
 		File "xlwLICENSE.TXT"
 		
 		SetOutPath "$INSTDIR"
-		File /oname=Doc-${RELEASE_SHORT}.TXT "Doc.TXT"
+		File /oname=Xlw-${RELEASE_SHORT}.chm "Xlw.chm"
 		
 		SetOutPath "$INSTDIR\utils"
 		File "MinGW_Installer\xlw-MinGW-Installer-gcc-4.5.2-1.exe"
@@ -449,7 +449,7 @@ Section #
 		
 		CreateDirectory "$SMPROGRAMS\XLW\${APP_VER}\xlw"
 		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\xlw\Extract XLW xll template.lnk " "$INSTDIR\TemplateExtractors\xlwTemplateExtractor.exe"
-		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\Getting Started.lnk " "$INSTDIR\Doc-${RELEASE_SHORT}.TXT"
+		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\XLW Help.lnk " "$INSTDIR\Xlw-${RELEASE_SHORT}.chm"
 		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\XLW License.lnk " "$INSTDIR\xlwLICENSE.TXT"
 		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\Uninstall XLW.lnk " "$INSTDIR\Uninstall.exe"
 		

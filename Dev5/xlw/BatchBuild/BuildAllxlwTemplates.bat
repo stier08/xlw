@@ -1,14 +1,9 @@
-"C:\Python27\python.exe" prepareTemplateProject.py
+@SETLOCAL
+@IF NOT DEFINED XLW_FOUND_PROGRAMS CALL FindPrograms.bat
+@IF ERRORLEVEL 1 ECHO Can't find all required programs & exit /b 1
 
-REM make -f xlwTemplateMakefile DEV=devcpp
-make -f xlwTemplateMakefile DEV=gcc-make
+%PYTHON% prepareTemplateProject.py
 
-"C:\Program Files (x86)\CodeBlocks\codeblocks.exe" --rebuild  --target="Debug" "C:\TEMP\xlwTemplate Projects\codeblocks-gcc\Template.workspace"  >> xlwTemplateCodeBlocksDebug.log 2>&1 
-"C:\Program Files (x86)\CodeBlocks\codeblocks.exe" --rebuild  --target="Release" "C:\TEMP\xlwTemplate Projects\codeblocks-gcc\Template.workspace"  >> xlwTemplateCodeBlocksRelease.log 2>&1 
-"C:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Common7\IDE\devenv.exe"   "C:\TEMP\xlwTemplate Projects\vc7\Template.sln"  /rebuild Debug    /out xlwTemplate7Debug.log
-"C:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Common7\IDE\devenv.exe"   "C:\TEMP\xlwTemplate Projects\vc7\Template.sln"  /rebuild Release  /out xlwTemplate7Release.log
-"C:\Program Files (x86)\Microsoft Visual Studio 8\VC\vcpackages\vcbuild.exe" /rebuild    "C:\TEMP\xlwTemplate Projects\vc8\Template.sln"  >> xlwTemplate8.log 2>&1 
-"C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcpackages\vcbuild.exe" /rebuild  "C:\TEMP\xlwTemplate Projects\vc9\Template.sln"  >> xlwTemplate9.log 2>&1 
+CALL BuildProjectCpp.bat "C:\TEMP\xlwTemplate Projects\" xlwTemplate
 
-"C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\msbuild.exe" /p:Configuration=Debug /t:rebuild  "C:\TEMP\xlwTemplate Projects\vc10\Template.sln"  >> xlwTemplate10_Debug.log 2>&1 
-"C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\msbuild.exe" /p:Configuration=Release /t:rebuild  "C:\TEMP\xlwTemplate Projects\vc10\Template.sln"  >> xlwTemplate10_Release.log 2>&1 
+@ENDLOCAL
