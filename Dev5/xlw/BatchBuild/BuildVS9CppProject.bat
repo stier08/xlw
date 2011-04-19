@@ -1,7 +1,4 @@
 @SETLOCAL
-@SET LOG_ROOT=%CD%\%2-VS9-
-%VS9VSBUILD% %1 /rebuild "Debug|Win32"  >> "%LOG_ROOT%x86-Debug.log" 2>&1 
-%VS9VSBUILD% %1 /rebuild "Release|Win32"  >> "%LOG_ROOT%x86-Release.log" 2>&1 
-%VS9VSBUILD% %1 /rebuild "Debug|x64"  >> "%LOG_ROOT%x64-Debug.log" 2>&1 
-%VS9VSBUILD% %1 /rebuild "Release|x64"  >> "%LOG_ROOT%x64-Release.log" 2>&1 
+@SET LOG_ROOT=%CD%\%2-VS9
+%VS9VSBUILD% %1 /rebuild >> "%LOG_ROOT%.log" 2>&1 
 @ENDLOCAL
