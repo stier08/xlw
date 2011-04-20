@@ -275,7 +275,7 @@ namespace xlw { namespace Impl {
                     // need to do a deep copy of each element
                     toOper->xltype = xltypeMulti;
                     toOper->val.array.lparray = TempMemory::GetMemory<XLOPER12>(fromOper->val.array.rows * fromOper->val.array.columns);
-                    for(size_t item(0) ; item < (fromOper->val.array.rows * fromOper->val.array.columns); ++item)
+                    for(size_t item(0) ; item < (size_t)(fromOper->val.array.rows * fromOper->val.array.columns); ++item)
                     {
                         copy(toOper->val.array.lparray + item, toOper->val.array.lparray + item);
                     }
