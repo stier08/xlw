@@ -23,7 +23,7 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 #endif
 
 
-std::string xlw::PascalStringConversions::PascalStringToString(char* pascalString)
+std::string xlw::PascalStringConversions::PascalStringToString(const char* pascalString)
 {
     // Must use datatype unsigned char (BYTE) to process 0th byte
     // otherwise numbers greater than 128 are incorrect
@@ -32,7 +32,7 @@ std::string xlw::PascalStringConversions::PascalStringToString(char* pascalStrin
     return result;
 }
 
-std::wstring xlw::PascalStringConversions::PascalStringToWString(char* pascalString)
+std::wstring xlw::PascalStringConversions::PascalStringToWString(const char* pascalString)
 {
     // Must use datatype unsigned char (BYTE) to process 0th byte
     // otherwise numbers greater than 128 are incorrect
@@ -80,7 +80,7 @@ char* xlw::PascalStringConversions::WStringToPascalString(const std::wstring& cS
     return result;
 }
 
-std::string xlw::PascalStringConversions::WPascalStringToString(wchar_t* pascalString)
+std::string xlw::PascalStringConversions::WPascalStringToString(const wchar_t* pascalString)
 {
     size_t n = pascalString[0];
     if(n > 0)
@@ -95,7 +95,7 @@ std::string xlw::PascalStringConversions::WPascalStringToString(wchar_t* pascalS
     }
 }
 
-std::wstring xlw::PascalStringConversions::WPascalStringToWString(wchar_t* pascalString)
+std::wstring xlw::PascalStringConversions::WPascalStringToWString(const wchar_t* pascalString)
 {
     // Must use datatype unsigned char (BYTE) to process 0th byte
     // otherwise numbers greater than 128 are incorrect
@@ -139,5 +139,24 @@ wchar_t* xlw::PascalStringConversions::WStringToWPascalString(const std::wstring
     wcsncpy(result + 1, cString.c_str(), n);
     result[n + 1] = 0;
     result[0] = static_cast<wchar_t>(n);
+    return result;
+}
+
+
+char* xlw::PascalStringConversions::PascalStringCopy(const char* pascalString)
+{
+    size_t n = static_cast<BYTE>(pascalString[0]);
+    LPSTR result = TempMemory::GetMemory<char>(n + 2);
+    memcpy(result, pascalString, n + 1);
+    result[n + 1] = 0;
+    return result;
+}
+
+wchar_t* xlw::PascalStringConversions::WPascalStringCopy(const wchar_t* pascalString)
+{
+    size_t n = static_cast<wchar_t>(pascalString[0]);
+    wchar_t* result = TempMemory::GetMemory<wchar_t>(n + 2);
+    memcpy(result, pascalString, (n + 1) * sizeof(wchar_t));
+    result[n + 1] = 0;
     return result;
 }
