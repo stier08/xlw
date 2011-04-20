@@ -107,8 +107,9 @@ namespace xlw { namespace Impl {
         }
         //! Copy ctor.
         XlfOper(const XlfOper<LPOPER_TYPE>& oper) :
-            lpxloper_(oper.lpxloper_)
+            lpxloper_(TempMemory::GetMemory<OperType>())
         {
+            OperProps::copy(lpxloper_, oper.lpxloper_);
         }
 
         //! LPXLOPER/LPXLOPER12 ctor.
@@ -128,21 +129,8 @@ namespace xlw { namespace Impl {
         {
             OperProps::setInt(lpxloper_, value);
         }
-        //! short or error ctor.
-        XlfOper(ErrorType value, bool Error) :
-            lpxloper_(TempMemory::GetMemory<OperType>())
-        {
-            if(Error)
-            {
-                OperProps::setError(lpxloper_, value);
-            }
-            else
-            {
-                OperProps::setInt(lpxloper_, value);
-            }
-        }
 
-        //! boolean ctor.
+            //! boolean ctor.
         XlfOper(bool value) :
             lpxloper_(TempMemory::GetMemory<OperType>())
         {
@@ -286,7 +274,9 @@ namespace xlw { namespace Impl {
         //! Constructs an Excel error.
         static XlfOper<LPOPER_TYPE> Error(ErrorType errorCode)
         {
-            return XlfOper<LPOPER_TYPE>(errorCode, true);
+            LPOPER_TYPE result = TempMemory::GetMemory<OperType>();
+            OperProps::setError(result, errorCode);
+            return XlfOper<LPOPER_TYPE>(result);
         }
         //@}
 
@@ -312,7 +302,22 @@ namespace xlw { namespace Impl {
         //! \name Operators
         //@{
         //! Cast to XLOPER *.
-        operator LPOPER_TYPE() { return lpxloper_; }
+        operator LPOPER_TYPE() 
+        {
+            // need to be careful if we try and return back to excel memory it
+            // has given us as a return value as we will call xlFree in destructor
+            // so take a deep copy if we need to
+            if (OperProps::getXlType(lpxloper_) & xlw::XlfOperImpl::xlbitFreeAuxMem)
+            {
+                LPOPER_TYPE result = TempMemory::GetMemory<OperType>();
+                OperProps::copy(lpxloper_, result);
+                return result;
+            }
+            else
+            {
+                return lpxloper_; 
+            }
+        }
         //@}
 
         //! \name Inspectors
@@ -386,9 +391,9 @@ namespace xlw { namespace Impl {
         Here is an example of how this interface can be used to inspect
         a value received from Excel as an input to an addin function.
         \code
-        LPXLFOPER EXCEL_EXPORT test_sum(XlfOper xlInput) {
+        LPXLFOPER EXCEL_EXPORT test_sum(LPXLFOPER operInput) {
             EXCEL_BEGIN;
-
+            XlfOper xlInput(operInput);
             double sum = 0.;
             for (RW i = 0; i < xlInput.rows(); i++)
                 for (COL j = 0; j < xlInput.columns(); j++)
@@ -402,12 +407,12 @@ namespace xlw { namespace Impl {
         Here is an example of how this interface can be used to populate an array
         to be returned to Excel from an addin function.
         \code
-        XlfOper ret((WORD)3, (WORD)2);
-        ret.SetElement(0, 0, "abc");
-        ret.SetElement(0, 1, (short)42);
-        ret.SetElement(1, 0, 1.23);
-        ret.SetElement(1, 1, XlfOper::Error(xlerrValue));
-        ret.SetElement(2, 0, true);
+        XlfOper ret(3, 2);
+        ret(0, 0) = "abc";
+        ret(0, 1) = (short)42;
+        ret(1, 0) = 1.23;
+        ret(1, 1) = XlfOper::Error(xlerrValue);
+        ret(2, 0) = true;
         \endcode
         */
         //! Number of rows in matrix.
@@ -856,7 +861,7 @@ namespace xlw { namespace Impl {
         //! equals operator from same type
         XlfOper<LPOPER_TYPE>& operator=(const XlfOper<LPOPER_TYPE>& rhs)
         {
-            lpxloper_ = rhs.lpxloper_;
+            OperProps::copy(rhs.lpxloper_, lpxloper_);
             return *this;
         }
 
@@ -890,6 +895,20 @@ namespace xlw { namespace Impl {
 
         //! equals operator from wide string
         XlfOper<LPOPER_TYPE>& operator=(const std::wstring& rhs)
+        {
+            OperProps::setWString(lpxloper_, rhs);
+            return *this;
+        }
+
+        //! equals operator from c string
+        XlfOper<LPOPER_TYPE>& operator=(const char* rhs)
+        {
+            OperProps::setString(lpxloper_, rhs);
+            return *this;
+        }
+
+        //! equals operator from wide c string
+        XlfOper<LPOPER_TYPE>& operator=(const wchar_t* rhs)
         {
             OperProps::setWString(lpxloper_, rhs);
             return *this;
