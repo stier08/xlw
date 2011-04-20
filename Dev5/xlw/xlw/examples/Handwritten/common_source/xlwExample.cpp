@@ -89,33 +89,34 @@ extern "C" {
         double averageTmp = 0.0;
         double varianceTmp = 0.0;
 
-        // XlfExcel::Coerce method (internally called) will return to Excel
-        // if one of the cells was invalidated and needs to be recalculated.
-        // Excel will calculate this cell and call our function again.
-        // Thus we first copy all the data to avoid partially computing the
-        // average for no reason since one of the cells might be uncalculated.
-        std::vector<double> temp = xlTargetRange.AsDoubleVector("TargetRange", XlfOperImpl::RowMajor);
-
-        // All cells are copied. We do the actual work.
-        size_t popSize = temp.size();
-        for (size_t i = 0; i < popSize; ++i)
+        // Iterate over the cells in the incoming matrix.
+        for (RW i = 0; i < xlTargetRange.rows(); ++i)
         {
-            // sums the values.
-            averageTmp += temp[i];
-            // sums the squared values.
-            varianceTmp += temp[i] * temp[i];
+            for (RW j = 0; j < xlTargetRange.columns(); ++j)
+            {
+                // sums the values.
+                double value(xlTargetRange(i,j).AsDouble());
+                averageTmp += value;
+                // sums the squared values.
+                varianceTmp += value * value;
+            }
         }
-        // Initialization of the resultArray.
-        double resultArray[2];
-        // compute average.
-        double& average = resultArray[0];
-        average = averageTmp / popSize;
-        // compute variance
-        double& variance = resultArray[1];
-        variance = varianceTmp / popSize - average * average;
-        // Create the XlfOper returned with the resultArray containing the values.
-        return XlfOper(1, 2, resultArray);
+        size_t popSize = xlTargetRange.rows() * xlTargetRange.columns();
 
+        // avoid divide by zero
+        if(popSize == 0)
+        {
+            throw("Can't calculate stats on empty range");
+        }
+
+        // Initialization of the results Array oper.
+        XlfOper result(1, 2);
+        // compute average.
+        double average = averageTmp / popSize;
+        result(0, 0) = average;
+        // compute variance
+        result(0, 1) = varianceTmp / popSize - average * average;
+        return result;
         EXCEL_END;
     }
 
