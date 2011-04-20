@@ -195,7 +195,7 @@ extern "C" {
         XlfExcel::Instance().Call(xlfActiveCell, activeCell, 0);
         XlfExcel::Instance().Call(xlfGetFormula, result, 1, (LPXLFOPER)activeCell);
 
-        return XlfOper(result.AsWstring());
+        return result;
         EXCEL_END;
     }
 
