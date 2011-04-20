@@ -267,7 +267,40 @@ namespace xlw { namespace Impl {
         }
         static void copy(LPXLOPER fromOper, LPXLOPER toOper)
         {
-            *toOper = *fromOper;
+            switch(fromOper->xltype & 0xFFF)
+            {
+                case xltypeMulti:
+                    // need to do a deep copy of each element
+                    toOper->xltype = xltypeMulti;
+                    toOper->val.array.lparray = TempMemory::GetMemory<XLOPER>(fromOper->val.array.rows * fromOper->val.array.columns);
+                    for(size_t item(0) ; item < (fromOper->val.array.rows * fromOper->val.array.columns); ++item)
+                    {
+                        copy(toOper->val.array.lparray + item, toOper->val.array.lparray + item);
+                    }
+                    toOper->val.array.rows = fromOper->val.array.rows;
+                    toOper->val.array.columns = fromOper->val.array.columns;
+                    break;
+                case xltypeRef:
+                    {
+                        toOper->xltype = xltypeRef;
+                        toOper->val.mref.idSheet = fromOper->val.mref.idSheet;
+                        size_t bytes(sizeof(XLMREF) + (fromOper->val.mref.lpmref->count - 1) * sizeof(XLREF));
+                        toOper->val.mref.lpmref = (XLMREF*)TempMemory::GetMemory<BYTE>(bytes);
+                        memcpy(toOper->val.mref.lpmref, fromOper->val.mref.lpmref, bytes);
+                    }
+                    break;
+                case xltypeStr:
+                    toOper->xltype = xltypeStr;
+                    toOper->val.str = PascalStringConversions::PascalStringCopy(fromOper->val.str);
+                    break;
+                case xltypeBigData:
+                    throw("can't copy a big data oper");
+                    break;
+                default:
+                    // just straight copy is fine
+                    *toOper =*fromOper;
+                    break;
+            }
         }
     };
 
