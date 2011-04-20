@@ -117,6 +117,7 @@ FunctionDescription::FunctionDescription(std::string FunctionName_,
                          bool ClusterSafe_)
                          :
                          FunctionName(FunctionName_),
+						 DisplayName(FunctionName_),
                          FunctionHelpDescription(FunctionHelpDescription_),
                          ReturnType(ReturnType_),
                          ExcelKey(ExcelKey_),
@@ -127,8 +128,7 @@ FunctionDescription::FunctionDescription(std::string FunctionName_,
                          Threadsafe(Threadsafe_),
                          Asynchronous(Asynchronous_),
                          MacroSheet(MacroSheet_),
-                         ClusterSafe(ClusterSafe_),
-						 DisplayName(FunctionName_)
+                         ClusterSafe(ClusterSafe_)
 {
 }
 
