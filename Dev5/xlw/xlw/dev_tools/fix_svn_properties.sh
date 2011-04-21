@@ -11,7 +11,8 @@ find . -name '*.[hc]pp' -o -name '*.[hc]' \
     -o -iname '*.pl' -o -name '*.scm' -o -name '*.ss' \
     -o -name '*.cs' -o -name '*.java' -o -name '*.nsi' \
     -o -name '*.tpp' -o -name '*.Makefile' -o -name '*.README' \
-    -o -name '*.configure' \
+    -o -name '*.mak' -o -name 'Makefile' -o -name '*.rules' \
+    -o -name '*.target' -o -name '*.configure' \
  | xargs -n 1 svn propset svn:eol-style native
 # these should have UNIX eol, even when extracted from a .zip
 find . -name '*.a[cm]' -o -name '*.m4' -o -name '*.in' \
