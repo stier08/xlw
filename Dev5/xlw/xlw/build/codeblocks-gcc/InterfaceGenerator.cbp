@@ -34,6 +34,9 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Linker>
+			<Add option="-static" />
+		</Linker>
 		<Unit filename="..\..\InterfaceGenerator\FunctionModel.cpp" />
 		<Unit filename="..\..\InterfaceGenerator\FunctionModel.h" />
 		<Unit filename="..\..\InterfaceGenerator\FunctionType.cpp" />
