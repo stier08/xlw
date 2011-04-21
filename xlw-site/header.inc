@@ -1,11 +1,10 @@
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html>
 <head>
-	<title>XLW - A Wrapper for the Excel API</title>
-	<meta http-equiv='Content-Style-Type' content='text/css' />
+    <title>XLW - A Wrapper for the Excel API</title>
+    <meta http-equiv='Content-Style-Type' content='text/css' />
     <!--HeaderText--><style type='text/css'><!--
   ul, ol, pre, dl, p { margin-top:0px; margin-bottom:0px; }
   code.escaped { white-space: nowrap; }
@@ -56,28 +55,36 @@ a.varlink { text-decoration:none; }
         <div id='content'>
             <div id='col-left'>
                 <!--PageLeftFmt-->
-                <div id='sidebar'><ul><li><a href='index.shtml'>Home</a>
-</li><li><a href='project.shtml'>Project</a>
-</li><li><a href='documentation.shtml'>Documentation</a>
-</li><li><a href='license.shtml'>License</a>
-</li><li><a href='history.shtml'>History</a>
-</li><li><a href='YouTube.shtml'>Video Clips</a>
-</li></ul>
-</div>
+                <div id='sidebar'>
+                    <ul>
+                        <li><a href='index.shtml'>Home</a></li>
+                        <li><a href='project.shtml'>Project</a></li>
+                        <li><a href='documentation.shtml'>Documentation</a></li>
+                        <li><a href='license.shtml'>License</a></li>
+                        <li><a href='history.shtml'>History</a></li>
+                        <li><a href='YouTube.shtml'>Video Clips</a></li>
+                    </ul>
+                </div>
 
-<div class="logolist">
-<div class="vspace"></div>
-<a class="imglink" href="http://www.nazcatech.be"><img src="images/nazcatech.jpg" width="88" height="98" border="0" alt="nazcatech"/></a>
-<div class="vspace"></div>
-<a class="imglink" href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=45222&amp;type=1" width="88" height="31" border="0" alt="SourceForge.net Logo"/></a>
-</div>
+                <div class="logolist">
+                    <div class="vspace"></div>
+                    <a class="imglink" href="http://www.nazcatech.be"><img src="images/nazcatech.jpg" width="88" height="98" border="0" alt="nazcatech"/></a>
+                    <div class="vspace"></div>
+                    <a class="imglink" href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=45222&amp;type=1" width="88" height="31" border="0" alt="SourceForge.net Logo"/></a>
+                </div>
 
                 <!--/PageLeftFmt-->
             </div>
 
             <div id='col-right'>
-<!--PageText-->
-<div id='wikitext'>
-<div style='text-align: justify;' > 
-<div style ="margin-left:5px" id="navcontainer"><table width=600 ><tr><td>
-</td></tr></table></div>
+                <!--PageText-->
+                <div id='wikitext'>
+                    <div style='text-align: justify;' > 
+                        <div style ="margin-left:5px" id="navcontainer">
+                            <table width=600 >
+                                <tr>
+                                    <td>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
