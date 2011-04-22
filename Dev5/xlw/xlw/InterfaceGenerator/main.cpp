@@ -59,7 +59,8 @@ int main(int argc, char *argv[])
 		throw("usage is :\n "
 		      "          inputfile \n"
 		      "          inputfile outputfile \n"
-			  "      -m  inputfile ");
+			  "      -m  inputfile "
+			  "      -m  inputfile outputdirectory");
     std::string inputfile(args[0]);
 
     bool clw = false;
@@ -88,16 +89,21 @@ int main(int argc, char *argv[])
 	std::string managed_outputfile_cpp;
 
 	std::string dirname(getdir(inputfile));
-	
 
-    if (args.size()==2)
+	std::string outputDir = dirname;
+
+
+    if ( !managed && args.size()==2)
 	{
-	 
-	  if (managed) throw ("specifying output filename not allowed for managed mode ");
       outputfile = args[1];
 	}
     else
     {
+	  if (managed && args.size()==2)
+	  {
+		outputDir = args[1];
+	  }
+
       if (clw)
         outputfile= "clw";
       else
@@ -163,12 +169,12 @@ int main(int argc, char *argv[])
 		OutputFileCreatorMan(functionVector,inputfile,LibraryName,outputVector_h,outputVector_cpp);
 		inputfile = managed_outputfile_h;
       
-		std::cout << " .. writing " << (dirname+"/" + managed_outputfile_h) <<  "\n";
-		writeOutputFile(dirname+"/" + managed_outputfile_h,outputVector_h);
-		std::cout << " .. writing " << (dirname+"/" + managed_outputfile_cpp) <<  "\n";
-		writeOutputFile(dirname+"/" + managed_outputfile_cpp,outputVector_cpp);
+		std::cout << " .. writing " << (outputDir+"/" + managed_outputfile_h) <<  "\n";
+		writeOutputFile(outputDir+"/" + managed_outputfile_h,outputVector_h);
+		std::cout << " .. writing " << (outputDir+"/" + managed_outputfile_cpp) <<  "\n";
+		writeOutputFile(outputDir+"/" + managed_outputfile_cpp,outputVector_cpp);
 
-		outputfile = dirname+"/" + outputfile;
+		outputfile = outputDir+"/" + outputfile;
 
 	}
 
