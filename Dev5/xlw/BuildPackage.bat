@@ -10,6 +10,7 @@ del *.log
 
 %NSIS% xlwDotNetTemplate.nsi   >> xlwDotNetTemplate.log 2>&1 
 %NSIS% xlwTemplate.nsi         >> xlwTemplate.log 2>&1 
+%NSIS% xlwCppCLITemplate.nsi   >> xlwCppCLITemplate.log 2>&1 
 %NSIS% MinGW_Installer\MinGW-Installer.nsi >> MinGW-Installer.log 2>&1
 %NSIS% xlwDotNet.nsi           >> xlwDotNet.log 2>&1 
 
