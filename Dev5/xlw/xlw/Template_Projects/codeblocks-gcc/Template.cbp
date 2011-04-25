@@ -50,6 +50,7 @@
 		</Compiler>
 		<Linker>
 			<Add option="-static" />
+			<Add option="-static-libgcc" />
 			<Add library="user32" />
 			<Add library='&quot;$(XLW)\xlw\include\xlw\xlw.def&quot;' />
 			<Add directory="..\..\..\lib" />
