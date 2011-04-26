@@ -6,6 +6,7 @@
 /*
  Copyright (C) 2006 Mark Joshi
  Copyright (C) 2009 Narinder S Claire
+ Copyright (C) 2011 John Adcock
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -29,6 +30,24 @@
 #include <vector>
 
 namespace xlw {
+
+
+    /*! isSameType<type1, type2>::value returns true if types are the same
+        used to allow optimization if no conversion is required.
+        compiler should remove unused branch in release mode
+    */
+    template<typename, typename>
+    struct isSameType
+    {
+        static const bool value = false;
+    };
+
+    template<typename _Tp>
+    struct isSameType<_Tp, _Tp>
+    {
+        static const bool value = true;
+    };
+
 
     void MakeLowerCase(std::string& input);
 
@@ -55,8 +74,8 @@ namespace xlw {
         std::string GetStringArgumentValue(const std::string& ArgumentName);
         unsigned long GetULArgumentValue(const std::string& ArgumentName);
         double GetDoubleArgumentValue(const std::string& ArgumentName);
-        MyArray GetArrayArgumentValue(const std::string& ArgumentName);
-        MyMatrix GetMatrixArgumentValue(const std::string& ArgumentName);
+        inline MyArray GetArrayArgumentValue(const std::string& ArgumentName);
+        inline MyMatrix GetMatrixArgumentValue(const std::string& ArgumentName);
         bool GetBoolArgumentValue(const std::string& ArgumentName);
         CellMatrix GetCellsArgumentValue(const std::string& ArgumentName);
         ArgumentList GetArgumentListArgumentValue(const std::string& ArgumentName);
@@ -67,9 +86,9 @@ namespace xlw {
             unsigned long& ArgumentValue);
         bool GetIfPresent(const std::string& ArgumentName,
             double& ArgumentValue);
-        bool GetIfPresent(const std::string& ArgumentName,
+        inline bool GetIfPresent(const std::string& ArgumentName,
             MyArray& ArgumentValue);
-        bool GetIfPresent(const std::string& ArgumentName,
+        inline bool GetIfPresent(const std::string& ArgumentName,
             MyMatrix& ArgumentValue);
         bool GetIfPresent(const std::string& ArgumentName,
             bool& ArgumentValue);
@@ -91,21 +110,28 @@ namespace xlw {
 
         void add(const std::string& ArgumentName, const std::string& value);
         void add(const std::string& ArgumentName, double value);
-        void add(const std::string& ArgumentName, const MyArray& value);
-        void add(const std::string& ArgumentName, const MyMatrix& value);
+        inline void add(const std::string& ArgumentName, const MyArray& value);
+        inline void add(const std::string& ArgumentName, const MyMatrix& value);
         void add(const std::string& ArgumentName, bool value);
         void add(const std::string& ArgumentName, const CellMatrix& values);
-          void addList(const std::string& ArgumentName, const CellMatrix& values);
+        void addList(const std::string& ArgumentName, const CellMatrix& values);
         void add(const std::string& ArgumentName, const ArgumentList& values);
 
     private:
-
+        inline std::vector<double> GetArrayArgumentValueInternal(const std::string& ArgumentName);
+        inline NCMatrix GetMatrixArgumentValueInternal(const std::string& ArgumentName);
+        void addArray(const std::string& ArgumentName, const std::vector<double>& value);
+        void addMatrix(const std::string& ArgumentName, const NCMatrix& value);
+        bool GetIfPresentInternal(const std::string& ArgumentName,
+            std::vector<double>& ArgumentValue);
+        bool GetIfPresentInternal(const std::string& ArgumentName,
+            NCMatrix& ArgumentValue);
         std::string StructureName;
 
         std::vector<std::pair<std::string, ArgumentType> > ArgumentNames;
         std::map<std::string,double> DoubleArguments;
-        std::map<std::string,MyArray> ArrayArguments;
-        std::map<std::string,MyMatrix> MatrixArguments;
+        std::map<std::string,std::vector<double> > ArrayArguments;
+        std::map<std::string,NCMatrix> MatrixArguments;
         std::map<std::string,std::string> StringArguments;
         std::map<std::string,CellMatrix> ListArguments;
 
@@ -121,7 +147,74 @@ namespace xlw {
         void UseArgumentName(const std::string& ArgumentName); // private as no error checking performed
         void RegisterName(const std::string& ArgumentName, ArgumentType type);
     };
+}
 
+inline void xlw::ArgumentList::add(const std::string& ArgumentName, const MyArray& value)
+{
+    if(isSameType<MyArray, std::vector<double> >::value)
+    {
+        addArray(ArgumentName, value);
+    }
+    else
+    {
+        throw("Not implemented");
+    }
+}
+
+inline void xlw::ArgumentList::add(const std::string& ArgumentName, const MyMatrix& value)
+{
+    if(isSameType<MyMatrix, NCMatrix>::value)
+    {
+        addMatrix(ArgumentName, value);
+    }
+    else
+    {
+        throw("Not implemented");
+    }
+}
+inline xlw::MyArray xlw::ArgumentList::GetArrayArgumentValue(const std::string& ArgumentName)
+{
+    if(isSameType<MyArray, std::vector<double> >::value)
+    {
+        return GetArrayArgumentValueInternal(ArgumentName);
+    }
+    else
+    {
+        throw("Not implemented");
+    }
+}
+inline xlw::MyMatrix xlw::ArgumentList::GetMatrixArgumentValue(const std::string& ArgumentName)
+{
+    if(isSameType<MyMatrix, NCMatrix>::value)
+    {
+        return GetMatrixArgumentValueInternal(ArgumentName);
+    }
+    else
+    {
+        throw("Not implemented");
+    }
+}
+inline bool xlw::ArgumentList::GetIfPresent(const std::string& ArgumentName, MyArray& ArgumentValue)
+{
+    if(isSameType<MyArray, std::vector<double> >::value)
+    {
+        return GetIfPresentInternal(ArgumentName, ArgumentValue);
+    }
+    else
+    {
+        throw("Not implemented");
+    }
+}
+inline bool xlw::ArgumentList::GetIfPresent(const std::string& ArgumentName, MyMatrix& ArgumentValue)
+{
+    if(isSameType<MyMatrix, NCMatrix>::value)
+    {
+        return GetIfPresentInternal(ArgumentName, ArgumentValue);
+    }
+    else
+    {
+        throw("Not implemented");
+    }
 }
 
 #endif

@@ -7,6 +7,7 @@
  Copyright (C) 2006 Mark Joshi
  Copyright (C) 2007 Tim Brunne
  Copyright (C) 2009 Narinder S Claire
+ Copyright (C) 2011 John Adcock
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -119,7 +120,7 @@ void xlw::ArgumentList::add(const std::string& ArgumentName, double value)
 
 }
 
-void xlw::ArgumentList::add(const std::string& ArgumentName, const MyArray& value)
+void xlw::ArgumentList::addArray(const std::string& ArgumentName, const MyArray& value)
 {
     ArgumentType thisOne = vector;
     std::pair<std::string, ArgumentType> thisPair(ArgumentName,thisOne);
@@ -129,7 +130,7 @@ void xlw::ArgumentList::add(const std::string& ArgumentName, const MyArray& valu
     RegisterName(ArgumentName, thisOne);
 }
 
-void xlw::ArgumentList::add(const std::string& ArgumentName, const MyMatrix& value)
+void xlw::ArgumentList::addMatrix(const std::string& ArgumentName, const MyMatrix& value)
 {
     ArgumentType thisOne = matrix;
     std::pair<std::string, ArgumentType> thisPair(ArgumentName,thisOne);
@@ -438,7 +439,8 @@ double xlw::ArgumentList::GetDoubleArgumentValue(const std::string& ArgumentName
     UseArgumentName(ArgumentName);
     return it->second;
 }
-xlw::MyArray xlw::ArgumentList::GetArrayArgumentValue(const std::string& ArgumentName_)
+
+std::vector<double> xlw::ArgumentList::GetArrayArgumentValueInternal(const std::string& ArgumentName_)
 {
     std::string ArgumentName(ArgumentName_);
     MakeLowerCase(ArgumentName);
@@ -452,7 +454,7 @@ xlw::MyArray xlw::ArgumentList::GetArrayArgumentValue(const std::string& Argumen
 
 }
 
-xlw::MyMatrix xlw::ArgumentList::GetMatrixArgumentValue(const std::string& ArgumentName_)
+xlw::NCMatrix xlw::ArgumentList::GetMatrixArgumentValueInternal(const std::string& ArgumentName_)
 {
     std::string ArgumentName(ArgumentName_);
     MakeLowerCase(ArgumentName);
@@ -649,8 +651,8 @@ bool xlw::ArgumentList::GetIfPresent(const std::string& ArgumentName,
     return true;
 }
 
-bool xlw::ArgumentList::GetIfPresent(const std::string& ArgumentName,
-                                MyArray& ArgumentValue)
+bool xlw::ArgumentList::GetIfPresentInternal(const std::string& ArgumentName,
+                                     std::vector<double>& ArgumentValue)
 {
     if (!IsArgumentPresent(ArgumentName))
         return false;
@@ -659,8 +661,8 @@ bool xlw::ArgumentList::GetIfPresent(const std::string& ArgumentName,
     return true;
 }
 
-bool xlw::ArgumentList::GetIfPresent(const std::string& ArgumentName,
-                                MyMatrix& ArgumentValue)
+bool xlw::ArgumentList::GetIfPresentInternal(const std::string& ArgumentName,
+                                NCMatrix& ArgumentValue)
 {
     if (!IsArgumentPresent(ArgumentName))
         return false;
