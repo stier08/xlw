@@ -24,9 +24,9 @@
 #ifndef CELL_MATRIX_H
 #define CELL_MATRIX_H
 
+#include "MyContainers.h"
 #include <string>
 #include <vector>
-#include <xlw/MyContainers.h>
 
 namespace xlw {
 
@@ -96,8 +96,8 @@ namespace xlw {
         explicit CellMatrix(std::string x);
         explicit CellMatrix(std::wstring x);
         explicit CellMatrix(const char* x);
-        explicit CellMatrix(const MyArray& data);
-        explicit CellMatrix(const MyMatrix& data);
+        explicit inline CellMatrix(const MyArray& data);
+        explicit inline CellMatrix(const MyMatrix& data);
         explicit CellMatrix(unsigned long i);
         explicit CellMatrix(int i);
 
@@ -118,6 +118,26 @@ namespace xlw {
     };
 
     CellMatrix MergeCellMatrices(const CellMatrix& Top, const CellMatrix& Bottom);
+
+    inline CellMatrix::CellMatrix(const MyArray& data) : 
+        Cells(ArrayTraits<MyArray>::size(data)),
+        Rows(ArrayTraits<MyArray>::size(data)), 
+        Columns(1)
+    {
+        for (size_t i=0; i < Rows; ++i)
+            Cells[i].push_back(CellValue(ArrayTraits<MyArray>::getAt(data, i)));
+    }
+
+    inline CellMatrix::CellMatrix(const MyMatrix& data): 
+        Cells(MatrixTraits<MyMatrix>::rows(data)),
+        Rows(MatrixTraits<MyMatrix>::rows(data)),
+        Columns(MatrixTraits<MyMatrix>::columns(data))
+    {
+        for (size_t i=0; i < Rows; ++i)
+            for (size_t j=0; j < Columns; ++j)
+                Cells[i].push_back(CellValue(MatrixTraits<MyMatrix>::getAt(data,i,j)));
+    }
+
 
 }
 

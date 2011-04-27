@@ -14,14 +14,12 @@
     <File Name="../../src/DoubleOrNothing.cpp"/>
     <File Name="../../src/FileConverter.cpp"/>
     <File Name="../../src/HiResTimer.cpp"/>
-    <File Name="../../src/MyContainers.cpp"/>
     <File Name="../../src/NCmatrices.cpp"/>
     <File Name="../../src/PascalStringConversions.cpp"/>
     <File Name="../../src/PathUpdater.cpp"/>
     <File Name="../../src/PathUpdater.h"/>
     <File Name="../../src/TempMemory.cpp"/>
     <File Name="../../src/Win32StreamBuf.cpp"/>
-    <File Name="../../src/xlarray.cpp"/>
     <File Name="../../src/xlcall.cpp"/>
     <File Name="../../src/XlfAbstractCmdDesc.cpp"/>
     <File Name="../../src/XlfArgDesc.cpp"/>

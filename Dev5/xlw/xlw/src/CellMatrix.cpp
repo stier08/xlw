@@ -247,21 +247,6 @@ xlw::CellMatrix::CellMatrix(const char* x): Cells(1), Rows(1), Columns(1)
     Cells[0].push_back(CellValue(x));
 }
 
-xlw::CellMatrix::CellMatrix(const MyArray& data) : Cells(data.size()),
-    Rows(data.size()), Columns(1)
-{
-    for (size_t i=0; i < data.size(); ++i)
-        Cells[i].push_back(CellValue(data[i]));
-}
-
-xlw::CellMatrix::CellMatrix(const MyMatrix& data): Cells(data.size1()),
-    Rows(data.size1()), Columns(data.size2())
-{
-    for (size_t i=0; i < data.size1(); ++i)
-        for (size_t j=0; j < data.size2(); ++j)
-            Cells[i].push_back(CellValue(Element(data,i,j)));
-}
-
 xlw::CellMatrix::CellMatrix(unsigned long i)
     : Cells(1), Rows(1), Columns(1)
 {

@@ -289,10 +289,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\MyContainers.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\NCmatrices.cpp"
 				>
 			</File>
@@ -310,10 +306,6 @@
 			</File>
 			<File
 				RelativePath="..\..\src\Win32StreamBuf.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\xlarray.cpp"
 				>
 			</File>
 			<File

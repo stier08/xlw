@@ -25,163 +25,144 @@
 #include <algorithm>
 #include <sstream>
 
-void xlw::MakeLowerCase(std::string& input)
+namespace
 {
-   std::transform(input.begin(),input.end(),input.begin(),tolower);
+    std::string ConvertToString(double Number)
+    {
+        std::ostringstream os;
+        os << Number;
+        return os.str();
+    }
+
+    std::string ConvertToString(unsigned long Number)
+    {
+        std::ostringstream os;
+        os << Number;
+        return os.str();
+    }
+
+
+    xlw::CellMatrix ExtractCells(xlw::CellMatrix& cells,
+                            size_t row,
+                            size_t column,
+                            std::string ErrorId,
+                            std::string thisName,
+                            bool& nonNumeric)
+    {
+        if (!cells(row,column).IsANumber())
+            throw(ErrorId+" "+thisName+" rows and columns expected.");
+        if (cells.ColumnsInStructure() <= column+1)
+            throw(ErrorId+" "+thisName+" rows and columns expected.");
+        if (!cells(row,column+1).IsANumber())
+            throw(ErrorId+" "+thisName+" rows and columns expected.");
+
+        unsigned long numberRows_UL = cells(row,column);
+        unsigned long numberColumns_UL = cells(row,column+1);
+
+        size_t numberRows = static_cast<size_t>(numberRows_UL);
+        size_t numberColumns = static_cast<size_t>(numberColumns_UL);
+
+        cells(row,column).clear();
+        cells(row,column+1).clear();
+
+        xlw::CellMatrix result(numberRows,numberColumns);
+
+        if (numberRows +row+1>cells.RowsInStructure())
+            throw(ErrorId+" "+thisName+" insufficient rows in structure");
+
+        if (numberColumns +column>cells.ColumnsInStructure())
+            throw(ErrorId+" "+thisName+" insufficient columns in structure");
+
+        for (size_t i=0; i < numberRows; i++)
+            for (size_t j=0; j < numberColumns; j++)
+            {
+                result(i,j) = cells(row+1+i,column+j);
+                cells(row+1+i,column+j).clear();
+
+                if (!result(i,j).IsANumber())
+                    nonNumeric = true;
+            }
+
+        return result;
+    }
 }
 
-std::string ConvertToString(double Number)
+namespace xlw
 {
-  std::ostringstream os;
-  os << Number;
-  return os.str();
+    void MakeLowerCase(std::string& input)
+    {
+        std::transform(input.begin(),input.end(),input.begin(),tolower);
+    }
 
+    template<typename TYPE>
+    void ArgumentList::addInternal(const std::string& ArgumentName, const TYPE& value, std::map<std::string,TYPE>& typeMap, ArgumentType type)
+    {
+        std::pair<std::string, ArgumentType> thisPair(ArgumentName,type);
+        ArgumentNames.push_back(thisPair);
+
+        std::pair<std::string,TYPE> valuePair(ArgumentName,value);
+        typeMap.insert(valuePair);
+
+        RegisterName(ArgumentName, type);
+    }
+
+    template<typename TYPE>
+    const TYPE& ArgumentList::GetArgumentValueInternal(std::string ArgumentName, std::map<std::string,TYPE>& typeMap)
+    {
+        MakeLowerCase(ArgumentName);
+        std::map<std::string, TYPE>::const_iterator it = typeMap.find(ArgumentName);
+
+        if (it == typeMap.end())
+            throw(StructureName+std::string(" unknown string argument asked for :")+ArgumentName);
+
+        UseArgumentName(ArgumentName);
+
+        return it->second;
+    }
 }
-
-std::string ConvertToString(unsigned long Number)
-{
-  std::ostringstream os;
-  os << Number;
-  return os.str();
-
-}
-
-
-xlw::CellMatrix ExtractCells(xlw::CellMatrix& cells,
-                        size_t row,
-                        size_t column,
-                        std::string ErrorId,
-                        std::string thisName,
-                        bool nonNumeric)
-{
-    if (!cells(row,column).IsANumber())
-        throw(ErrorId+" "+thisName+" rows and columns expected.");
-    if (cells.ColumnsInStructure() <= column+1)
-        throw(ErrorId+" "+thisName+" rows and columns expected.");
-    if (!cells(row,column+1).IsANumber())
-        throw(ErrorId+" "+thisName+" rows and columns expected.");
-
-    unsigned long numberRows_UL = cells(row,column);
-    unsigned long numberColumns_UL = cells(row,column+1);
-
-    size_t numberRows = static_cast<size_t>(numberRows_UL);
-    size_t numberColumns = static_cast<size_t>(numberColumns_UL);
-
-    cells(row,column).clear();
-    cells(row,column+1).clear();
-
-    xlw::CellMatrix result(numberRows,numberColumns);
-
-    if (numberRows +row+1>cells.RowsInStructure())
-        throw(ErrorId+" "+thisName+" insufficient rows in structure");
-
-    if (numberColumns +column>cells.ColumnsInStructure())
-        throw(ErrorId+" "+thisName+" insufficient columns in structure");
-
-    for (size_t i=0; i < numberRows; i++)
-        for (size_t j=0; j < numberColumns; j++)
-        {
-            result(i,j) = cells(row+1+i,column+j);
-            cells(row+1+i,column+j).clear();
-
-            if (!result(i,j).IsANumber())
-                nonNumeric = true;
-        }
-
-
-    return result;
-
-
-}
-
 
 void xlw::ArgumentList::add(const std::string& ArgumentName, const std::string& value)
 {
-    ArgumentType thisOne = string;
-    std::pair<std::string, ArgumentType> thisPair(ArgumentName,thisOne);
-    ArgumentNames.push_back(thisPair);
-
-    std::pair<std::string,std::string> valuePair(ArgumentName,value);
-    StringArguments.insert(valuePair);
-
-    RegisterName(ArgumentName, thisOne);
+    addInternal(ArgumentName, value, StringArguments, string);
 }
 
 void xlw::ArgumentList::add(const std::string& ArgumentName, double value)
 {
-    ArgumentType thisOne = number;
-    std::pair<std::string, ArgumentType> thisPair(ArgumentName,thisOne);
-    ArgumentNames.push_back(thisPair);
-
-    std::pair<std::string,double> valuePair(ArgumentName,value);
-    DoubleArguments.insert(valuePair);
-
-    RegisterName(ArgumentName, thisOne);
-
-}
-
-void xlw::ArgumentList::addArray(const std::string& ArgumentName, const MyArray& value)
-{
-    ArgumentType thisOne = vector;
-    std::pair<std::string, ArgumentType> thisPair(ArgumentName,thisOne);
-    ArgumentNames.push_back(thisPair);
-    ArrayArguments.insert(std::make_pair(ArgumentName,value));
-
-    RegisterName(ArgumentName, thisOne);
-}
-
-void xlw::ArgumentList::addMatrix(const std::string& ArgumentName, const MyMatrix& value)
-{
-    ArgumentType thisOne = matrix;
-    std::pair<std::string, ArgumentType> thisPair(ArgumentName,thisOne);
-    ArgumentNames.push_back(thisPair);
-    MatrixArguments.insert(std::make_pair(ArgumentName,value));
-
-    RegisterName(ArgumentName, thisOne);
+    addInternal(ArgumentName, value, DoubleArguments, number);
 }
 
 void xlw::ArgumentList::add(const std::string& ArgumentName, bool value)
 {
-    ArgumentType thisOne = boolean;
-    std::pair<std::string, ArgumentType> thisPair(ArgumentName,thisOne);
-    ArgumentNames.push_back(thisPair);
-    BoolArguments.insert(std::make_pair(ArgumentName,value));
-
-    RegisterName(ArgumentName, thisOne);
-
+    addInternal(ArgumentName, value, BoolArguments, boolean);
 }
 
 void xlw::ArgumentList::add(const std::string& ArgumentName, const CellMatrix& values)
 {
-    ArgumentType thisOne = cells;
-    std::pair<std::string, ArgumentType> thisPair(ArgumentName,thisOne);
-    ArgumentNames.push_back(thisPair);
-    CellArguments.insert(std::make_pair(ArgumentName,values));
-
-    RegisterName(ArgumentName, thisOne);
-
+    addInternal(ArgumentName, values, CellArguments, cells);
 }
-
 
 void xlw::ArgumentList::addList(const std::string& ArgumentName, const CellMatrix& values)
 {
-    ArgumentType thisOne = list;
-    std::pair<std::string, ArgumentType> thisPair(ArgumentName,thisOne);
-    ArgumentNames.push_back(thisPair);
-    ListArguments.insert(std::make_pair(ArgumentName,values));
+    addInternal(ArgumentName, values, ListArguments, list);
+}
 
+void xlw::ArgumentList::addArray(const std::string& ArgumentName, const CellMatrix& values)
+{
+    addInternal(ArgumentName, values, ArrayArguments, vector);
+}
 
-    RegisterName(ArgumentName, thisOne);
+void xlw::ArgumentList::addMatrix(const std::string& ArgumentName, const CellMatrix& values)
+{
+    addInternal(ArgumentName, values, MatrixArguments, matrix);
 }
 
 void xlw::ArgumentList::add(const std::string& ArgumentName, const ArgumentList& values)
 {
     CellMatrix cellValues(values.AllData());
-    addList(ArgumentName,cellValues);
+    addInternal(ArgumentName, cellValues, ListArguments, list);
 }
 
-xlw::ArgumentList::ArgumentList(CellMatrix cells,
-                           std::string ErrorId)
+xlw::ArgumentList::ArgumentList(CellMatrix cells, std::string ErrorId)
 {
     CellValue empty;
     size_t rows = cells.RowsInStructure();
@@ -303,14 +284,7 @@ xlw::ArgumentList::ArgumentList(CellMatrix cells,
                                 if (nonNumeric)
                                     throw("Non numerical value in matrix argument :"+thisName+ " "+ErrorId);
 
-                                MyMatrix value(extracted.RowsInStructure(),extracted.ColumnsInStructure());
-
-                                for (size_t i=0; i < extracted.RowsInStructure(); i++)
-                                    for (size_t j=0; j < extracted.ColumnsInStructure(); j++)
-                                        ChangingElement(value,i,j) = extracted(i,j);
-
-                                add(thisName,value);
-
+                                addInternal(thisName, extracted, MatrixArguments, matrix);
                             }
 
                             cellBelow = empty;
@@ -333,16 +307,22 @@ xlw::ArgumentList::ArgumentList(CellMatrix cells,
                                 if (row+2+size>=rows)
                                     throw(ErrorId+" more data expected below array "+thisName);
 
-
-                                MyArray theArray(size);
+                                CellMatrix theArray(size, 1);
 
                                 for (size_t i=0; i < size; i++)
                                 {
-                                    theArray[i] = cells(row+3+i,column);
-                                    cells(row+3+i,column).clear();
+                                    CellValue& theValue(cells(row+3+i,column));
+                                    if(theValue.IsANumber())
+                                    {
+                                        theArray(i, 0) = cells(row+3+i,column);
+                                    }
+                                    else
+                                    {
+                                        throw("Non numerical value in array argument :"+thisName+ " "+ErrorId);
+                                    }
                                 }
 
-                                add(thisName,theArray);
+                                addInternal(thisName, theArray, ArrayArguments, vector);
 
                                 rowsDown = std::max(rowsDown,size+2);
 
@@ -400,112 +380,46 @@ void xlw::ArgumentList::UseArgumentName(const std::string& ArgumentName)
     it->second =true;
 }
 
-std::string xlw::ArgumentList::GetStringArgumentValue(const std::string& ArgumentName_)
+std::string xlw::ArgumentList::GetStringArgumentValue(const std::string& ArgumentName)
 {
-    std::string ArgumentName(ArgumentName_);
-    MakeLowerCase(ArgumentName);
-    std::map<std::string, std::string>::const_iterator it = StringArguments.find(ArgumentName);
-
-    if (it == StringArguments.end())
-        throw(StructureName+std::string(" unknown string argument asked for :")+ArgumentName);
-
-    UseArgumentName(ArgumentName);
-
-    return it->second;
-
+    return GetArgumentValueInternal(ArgumentName, StringArguments);
 }
 
-unsigned long xlw::ArgumentList::GetULArgumentValue(const std::string& ArgumentName_)
+unsigned long xlw::ArgumentList::GetULArgumentValue(const std::string& ArgumentName)
 {
-    std::string ArgumentName(ArgumentName_);
-    MakeLowerCase(ArgumentName);
-    std::map<std::string, double>::const_iterator it = DoubleArguments.find(ArgumentName);
-
-    if (it == DoubleArguments.end())
-        throw(StructureName+std::string(" unknown unsigned long argument asked for :")+ArgumentName);
-
-    UseArgumentName(ArgumentName);
-    return static_cast<unsigned long>(it->second);
-}
-double xlw::ArgumentList::GetDoubleArgumentValue(const std::string& ArgumentName_)
-{
-    std::string ArgumentName(ArgumentName_);
-    MakeLowerCase(ArgumentName);
-    std::map<std::string, double>::const_iterator it = DoubleArguments.find(ArgumentName);
-
-    if (it == DoubleArguments.end())
-        throw(StructureName+std::string(" unknown double argument asked for :")+ArgumentName);
-
-    UseArgumentName(ArgumentName);
-    return it->second;
+    return static_cast<unsigned long>(GetArgumentValueInternal(ArgumentName, DoubleArguments));
 }
 
-std::vector<double> xlw::ArgumentList::GetArrayArgumentValueInternal(const std::string& ArgumentName_)
+double xlw::ArgumentList::GetDoubleArgumentValue(const std::string& ArgumentName)
 {
-    std::string ArgumentName(ArgumentName_);
-    MakeLowerCase(ArgumentName);
-    std::map<std::string, MyArray>::const_iterator it = ArrayArguments.find(ArgumentName);
-
-    if (it == ArrayArguments.end())
-        throw(StructureName+std::string(" unknown array argument asked for :")+ArgumentName);
-
-    UseArgumentName(ArgumentName);
-    return it->second;
-
+    return GetArgumentValueInternal(ArgumentName, DoubleArguments);
 }
 
-xlw::NCMatrix xlw::ArgumentList::GetMatrixArgumentValueInternal(const std::string& ArgumentName_)
+const xlw::CellMatrix& xlw::ArgumentList::GetArrayArgumentValueInternal(const std::string& ArgumentName)
 {
-    std::string ArgumentName(ArgumentName_);
-    MakeLowerCase(ArgumentName);
-    std::map<std::string, MyMatrix>::const_iterator it = MatrixArguments.find(ArgumentName);
-
-    if (it == MatrixArguments.end())
-        throw(StructureName+std::string(" unknown matrix argument asked for :")+ArgumentName);
-
-    UseArgumentName(ArgumentName);
-    return it->second;
-}
-bool xlw::ArgumentList::GetBoolArgumentValue(const std::string& ArgumentName_)
-{
-    std::string ArgumentName(ArgumentName_);
-    MakeLowerCase(ArgumentName);
-    std::map<std::string, bool>::const_iterator it = BoolArguments.find(ArgumentName);
-
-    if (it == BoolArguments.end())
-        throw(StructureName+std::string(" unknown bool argument asked for :")+ArgumentName);
-
-    UseArgumentName(ArgumentName);
-    return it->second;
-
+    return GetArgumentValueInternal(ArgumentName, ArrayArguments);
 }
 
-
-xlw::ArgumentList xlw::ArgumentList::GetArgumentListArgumentValue(const std::string& ArgumentName_)
+const xlw::CellMatrix& xlw::ArgumentList::GetMatrixArgumentValueInternal(const std::string& ArgumentName)
 {
-    std::string ArgumentName(ArgumentName_);
-    MakeLowerCase(ArgumentName);
-    std::map<std::string, CellMatrix>::const_iterator it = ListArguments.find(ArgumentName);
-
-    if (it == ListArguments.end())
-        throw(StructureName+std::string(" unknown ArgList argument asked for :")+ArgumentName);
-
-    UseArgumentName(ArgumentName);
-    return ArgumentList(it->second,ArgumentName);
+    return GetArgumentValueInternal(ArgumentName, MatrixArguments);
 }
 
-xlw::CellMatrix xlw::ArgumentList::GetCellsArgumentValue(const std::string& ArgumentName_)
+bool xlw::ArgumentList::GetBoolArgumentValue(const std::string& ArgumentName)
 {
-    std::string ArgumentName(ArgumentName_);
-    MakeLowerCase(ArgumentName);
-    std::map<std::string, CellMatrix>::const_iterator it = CellArguments.find(ArgumentName);
-
-    if (it == CellArguments.end())
-        throw(StructureName+std::string(" unknown Cells argument asked for :")+ArgumentName);
-
-    UseArgumentName(ArgumentName);
-    return it->second;
+    return GetArgumentValueInternal(ArgumentName, BoolArguments);
 }
+
+xlw::ArgumentList xlw::ArgumentList::GetArgumentListArgumentValue(const std::string& ArgumentName)
+{
+    return ArgumentList(GetArgumentValueInternal(ArgumentName, ListArguments),ArgumentName);
+}
+
+xlw::CellMatrix xlw::ArgumentList::GetCellsArgumentValue(const std::string& ArgumentName)
+{
+    return GetArgumentValueInternal(ArgumentName, CellArguments);
+}
+
 bool xlw::ArgumentList::IsArgumentPresent(const std::string& ArgumentName_) const
 {
     std::string ArgumentName(ArgumentName_);
@@ -553,29 +467,29 @@ xlw::CellMatrix xlw::ArgumentList::AllData() const
          results.PushBottom(tmp);
     }}
 
-    {for (std::map<std::string,MyArray>::const_iterator it= ArrayArguments.begin();
+    {for (std::map<std::string,CellMatrix>::const_iterator it= ArrayArguments.begin();
             it != ArrayArguments.end(); it++)
     {
-        CellMatrix tmp(3+it->second.size(),1);
+         CellMatrix tmp(3+it->second.RowsInStructure(),1);
          tmp(0,0) = it->first;
          tmp(1,0) = std::string("array");
-         tmp(2,0) = static_cast<double>(it->second.size());
-         for (size_t i=0; i < it->second.size(); i++)
-             tmp(i+3,0)=it->second[i];
+         tmp(2,0) = static_cast<double>(it->second.RowsInStructure());
+         for (size_t i=0; i < it->second.RowsInStructure(); i++)
+             tmp(i+3,0)=it->second(i, 0);
          results.PushBottom(tmp);
     }}
 
-    {for (std::map<std::string,MyMatrix>::const_iterator it= MatrixArguments.begin();
+    {for (std::map<std::string,CellMatrix>::const_iterator it= MatrixArguments.begin();
             it != MatrixArguments.end(); it++)
     {
-         CellMatrix tmp(3+it->second.size1(),std::max(size_t(2), it->second.size2()));
+         CellMatrix tmp(3+it->second.RowsInStructure(),std::max(size_t(2), it->second.ColumnsInStructure()));
          tmp(0,0) = it->first;
          tmp(1,0) = std::string("matrix");
-         tmp(2,0) = static_cast<double>(it->second.size1());
-         tmp(2,1) = static_cast<double>(it->second.size2());
-         for (size_t i=0; i < it->second.size1(); i++)
-             for (size_t j=0; j < it->second.size2(); j++)
-                 tmp(i+3,j)=Element(it->second,i,j);
+         tmp(2,0) = static_cast<double>(it->second.RowsInStructure());
+         tmp(2,1) = static_cast<double>(it->second.ColumnsInStructure());
+         for (size_t i=0; i < it->second.RowsInStructure(); i++)
+             for (size_t j=0; j < it->second.ColumnsInStructure(); j++)
+                 tmp(i+3,j)=it->second(i,j);
          results.PushBottom(tmp);
     }}
 
@@ -648,26 +562,6 @@ bool xlw::ArgumentList::GetIfPresent(const std::string& ArgumentName,
         return false;
 
     ArgumentValue = GetDoubleArgumentValue(ArgumentName);
-    return true;
-}
-
-bool xlw::ArgumentList::GetIfPresentInternal(const std::string& ArgumentName,
-                                     std::vector<double>& ArgumentValue)
-{
-    if (!IsArgumentPresent(ArgumentName))
-        return false;
-
-    ArgumentValue = GetArrayArgumentValue(ArgumentName);
-    return true;
-}
-
-bool xlw::ArgumentList::GetIfPresentInternal(const std::string& ArgumentName,
-                                NCMatrix& ArgumentValue)
-{
-    if (!IsArgumentPresent(ArgumentName))
-        return false;
-
-    ArgumentValue = GetMatrixArgumentValue(ArgumentName);
     return true;
 }
 

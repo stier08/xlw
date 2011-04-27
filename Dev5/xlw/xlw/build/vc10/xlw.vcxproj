@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -123,13 +123,11 @@
     <ClCompile Include="..\..\src\DoubleOrNothing.cpp" />
     <ClCompile Include="..\..\src\FileConverter.cpp" />
     <ClCompile Include="..\..\src\HiResTimer.cpp" />
-    <ClCompile Include="..\..\src\MyContainers.cpp" />
     <ClCompile Include="..\..\src\NCmatrices.cpp" />
     <ClCompile Include="..\..\src\PascalStringConversions.cpp" />
     <ClCompile Include="..\..\src\PathUpdater.cpp" />
     <ClCompile Include="..\..\src\TempMemory.cpp" />
     <ClCompile Include="..\..\src\Win32StreamBuf.cpp" />
-    <ClCompile Include="..\..\src\xlarray.cpp" />
     <ClCompile Include="..\..\src\xlcall.cpp" />
     <ClCompile Include="..\..\src\XlfAbstractCmdDesc.cpp" />
     <ClCompile Include="..\..\src\XlfArgDesc.cpp" />

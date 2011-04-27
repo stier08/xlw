@@ -27,6 +27,7 @@
 
 // $Id$
 
+#include "MyContainers.h"
 #include <xlw/XlfOperProperties.h>
 #include <xlw/CellMatrix.h>
 #include <xlw/XlfRef.h>
@@ -188,8 +189,8 @@ namespace xlw { namespace Impl {
         XlfOper(const MyMatrix& matrix) :
             lpxloper_(TempMemory::GetMemory<OperType>())
         {
-            RW nbRows = (RW)matrix.size1();
-            COL nbCols = (COL)matrix.size2();
+            RW nbRows = (RW)MatrixTraits<MyMatrix>::rows(matrix);
+            COL nbCols = (COL)MatrixTraits<MyMatrix>::columns(matrix);
 
             OperProps::setArraySize(lpxloper_, nbRows, nbCols);
 
@@ -199,11 +200,10 @@ namespace xlw { namespace Impl {
 
             for (RW row(0); row < nbRows; ++row)
             {
-                MyMatrix::const_iterator matColumn = matrix[row];
                 for (COL col(0); col < nbCols; ++col)
                 {
                     LPOPER_TYPE elementOper = OperProps::getElement(lpxloper_, row, col);
-                    OperProps::setDouble(elementOper, matColumn[col]);
+                    OperProps::setDouble(elementOper, MatrixTraits<MyMatrix>::getAt(matrix, row, col));
                 }
             }
         }
@@ -212,7 +212,7 @@ namespace xlw { namespace Impl {
         XlfOper(const MyArray& values) :
             lpxloper_(TempMemory::GetMemory<OperType>())
         {
-            RW nbRows = (RW)values.size();
+            RW nbRows = (RW)ArrayTraits<MyArray>::size(values);
 
             OperProps::setArraySize(lpxloper_, nbRows, 1);
 
@@ -222,7 +222,7 @@ namespace xlw { namespace Impl {
             for (RW row(0); row < nbRows; ++row)
             {
                 LPOPER_TYPE elementOper = OperProps::getElement(lpxloper_, row, 0);
-                OperProps::setDouble(elementOper, values[row]);
+                OperProps::setDouble(elementOper, ArrayTraits<MyArray>::getAt(values, row));
             }
         }
         //!  string ctor.
@@ -747,7 +747,7 @@ namespace xlw { namespace Impl {
                 throw XlfNeverGetHere();
             }
 
-            MyArray result(nbRows * nbCols);
+            MyArray result(ArrayTraits<MyArray>::create(nbRows * nbCols));
 
             for(MultiRowType row(0); row < nbRows; ++row)
             {
@@ -756,28 +756,28 @@ namespace xlw { namespace Impl {
                     XlfOper<LPOPER_TYPE> element(OperProps::getElement(lpxloper_, row, col));
                     if(policy == XlfOperImpl::RowMajor)
                     {
-                        result[row * nbCols + col] = element.AsDouble(ErrorId);
+                        ArrayTraits<MyArray>::setAt(result, row * nbCols + col, element.AsDouble(ErrorId));
                     }
                     else
                     {
-                        result[col * nbRows + row] = element.AsDouble(ErrorId);
+                        ArrayTraits<MyArray>::setAt(result, col * nbRows + row, element.AsDouble(ErrorId));
                     }
                 }
             }
             return result;
         }
 
-        NCMatrix AsMatrix(const char* ErrorId = 0)
+        MyMatrix AsMatrix(const char* ErrorId = 0)
         {
             MultiRowType nbRows(OperProps::getRows(lpxloper_));
             MultiColType nbCols(OperProps::getCols(lpxloper_));
-            NCMatrix result(nbRows, nbCols);
+            MyMatrix result(MatrixTraits<MyMatrix>::create(nbRows, nbCols));
             for(MultiRowType row(0); row < nbRows; ++row)
             {
                 for(MultiRowType col(0); col < nbCols; ++col)
                 {
                     XlfOper<LPOPER_TYPE> element(OperProps::getElement(lpxloper_, row, col));
-                    result[row][col] = element.AsDouble(ErrorId);
+                    MatrixTraits<MyMatrix>::setAt(result, row, col, element.AsDouble(ErrorId));
                 }
             }
             return result;

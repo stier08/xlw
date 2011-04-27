@@ -28,7 +28,6 @@ LIBSRC = ArgList.cpp \
          FileConverter.cpp \
          HiResTimer.cpp \
          NCmatrices.cpp \
-         MyContainers.cpp \
          PascalStringConversions.cpp \
          PathUpdater.cpp \
          TempMemory.cpp \
@@ -44,7 +43,6 @@ LIBSRC = ArgList.cpp \
          XlfOperProperties.cpp \
          XlfRef.cpp \
          XlfStr.cpp \
-         xlarray.cpp \
          xlcall.cpp \
          XlOpenClose.cpp   
 

@@ -23,31 +23,13 @@
 #ifndef ARG_LIST_H
 #define ARG_LIST_H
 
-#include "CellMatrix.h"
 #include "MyContainers.h"
+#include "CellMatrix.h"
 #include <map>
 #include <string>
 #include <vector>
 
 namespace xlw {
-
-
-    /*! isSameType<type1, type2>::value returns true if types are the same
-        used to allow optimization if no conversion is required.
-        compiler should remove unused branch in release mode
-    */
-    template<typename, typename>
-    struct isSameType
-    {
-        static const bool value = false;
-    };
-
-    template<typename _Tp>
-    struct isSameType<_Tp, _Tp>
-    {
-        static const bool value = true;
-    };
-
 
     void MakeLowerCase(std::string& input);
 
@@ -55,8 +37,7 @@ namespace xlw {
     {
     public:
 
-        ArgumentList(CellMatrix cells,
-                          std::string ErrorIdentifier);
+        ArgumentList(CellMatrix cells, std::string ErrorIdentifier);
 
         ArgumentList(std::string name);
 
@@ -118,20 +99,22 @@ namespace xlw {
         void add(const std::string& ArgumentName, const ArgumentList& values);
 
     private:
-        std::vector<double> GetArrayArgumentValueInternal(const std::string& ArgumentName);
-        NCMatrix GetMatrixArgumentValueInternal(const std::string& ArgumentName);
-        void addArray(const std::string& ArgumentName, const std::vector<double>& value);
-        void addMatrix(const std::string& ArgumentName, const NCMatrix& value);
-        bool GetIfPresentInternal(const std::string& ArgumentName,
-            std::vector<double>& ArgumentValue);
-        bool GetIfPresentInternal(const std::string& ArgumentName,
-            NCMatrix& ArgumentValue);
-        std::string StructureName;
+        template<typename TYPE>
+        void addInternal(const std::string& ArgumentName, const TYPE& value, std::map<std::string,TYPE>& typeMap, ArgumentType type);
+        template<typename TYPE>
+        const TYPE& GetArgumentValueInternal(std::string ArgumentName, std::map<std::string,TYPE>& typeMap);
 
+
+        void addArray(const std::string& ArgumentName, const CellMatrix& values);
+        void addMatrix(const std::string& ArgumentName, const CellMatrix& values);
+        const CellMatrix& GetArrayArgumentValueInternal(const std::string& ArgumentName);
+        const CellMatrix& GetMatrixArgumentValueInternal(const std::string& ArgumentName);
+
+        std::string StructureName;
         std::vector<std::pair<std::string, ArgumentType> > ArgumentNames;
         std::map<std::string,double> DoubleArguments;
-        std::map<std::string,std::vector<double> > ArrayArguments;
-        std::map<std::string,NCMatrix> MatrixArguments;
+        std::map<std::string,CellMatrix> ArrayArguments;
+        std::map<std::string,CellMatrix> MatrixArguments;
         std::map<std::string,std::string> StringArguments;
         std::map<std::string,CellMatrix> ListArguments;
 
@@ -151,70 +134,71 @@ namespace xlw {
 
 inline void xlw::ArgumentList::add(const std::string& ArgumentName, const MyArray& value)
 {
-    if(isSameType<MyArray, std::vector<double> >::value)
+    size_t size(ArrayTraits<MyArray>::size(value));
+    CellMatrix convertedValue(size, 1);
+    for(size_t i(0); i < size; ++i)
     {
-        addArray(ArgumentName, value);
+        convertedValue(i, 0) = ArrayTraits<MyArray>::getAt(value, i);
     }
-    else
-    {
-        throw("Not implemented");
-    }
+    addMatrix(ArgumentName, convertedValue);
 }
 
 inline void xlw::ArgumentList::add(const std::string& ArgumentName, const MyMatrix& value)
 {
-    if(isSameType<MyMatrix, NCMatrix>::value)
+    size_t rows(MatrixTraits<MyMatrix>::rows(value));
+    size_t columns(MatrixTraits<MyMatrix>::columns(value));
+    CellMatrix convertedValue(rows, columns);
+    for(size_t row(0); row < rows; ++row)
     {
-        addMatrix(ArgumentName, value);
+        for(size_t col(0); col < columns; ++col)
+        {
+            convertedValue(row, col) = MatrixTraits<MyMatrix>::getAt(value, row, col);
+        }
     }
-    else
-    {
-        throw("Not implemented");
-    }
+    addMatrix(ArgumentName, convertedValue);
 }
+
 inline xlw::MyArray xlw::ArgumentList::GetArrayArgumentValue(const std::string& ArgumentName)
 {
-    if(isSameType<MyArray, std::vector<double> >::value)
+    const CellMatrix& value(GetArrayArgumentValueInternal(ArgumentName));
+    size_t size(value.RowsInStructure());
+    MyArray returnValue(ArrayTraits<MyArray>::create(size));
+    for(size_t i(0); i < size; ++i)
     {
-        return GetArrayArgumentValueInternal(ArgumentName);
-    }
-    else
-    {
-        throw("Not implemented");
-    }
-}
-inline xlw::MyMatrix xlw::ArgumentList::GetMatrixArgumentValue(const std::string& ArgumentName)
-{
-    if(isSameType<MyMatrix, NCMatrix>::value)
-    {
-        return GetMatrixArgumentValueInternal(ArgumentName);
-    }
-    else
-    {
-        throw("Not implemented");
-    }
-}
-inline bool xlw::ArgumentList::GetIfPresent(const std::string& ArgumentName, MyArray& ArgumentValue)
-{
-    if(isSameType<MyArray, std::vector<double> >::value)
-    {
-        return GetIfPresentInternal(ArgumentName, ArgumentValue);
-    }
-    else
-    {
-        throw("Not implemented");
-    }
-}
-inline bool xlw::ArgumentList::GetIfPresent(const std::string& ArgumentName, MyMatrix& ArgumentValue)
-{
-    if(isSameType<MyMatrix, NCMatrix>::value)
-    {
-        return GetIfPresentInternal(ArgumentName, ArgumentValue);
-    }
-    else
-    {
-        throw("Not implemented");
+        ArrayTraits<MyArray>::setAt(returnValue, i, value(i, 0).NumericValue());
     }
 }
 
+inline xlw::MyMatrix xlw::ArgumentList::GetMatrixArgumentValue(const std::string& ArgumentName)
+{
+    const CellMatrix& value(GetMatrixArgumentValueInternal(ArgumentName));
+    size_t rows(value.RowsInStructure());
+    size_t columns(value.ColumnsInStructure());
+    MyMatrix returnValue(MatrixTraits<MyMatrix>::create(rows, columns));
+    for(size_t row(0); row < rows; ++row)
+    {
+        for(size_t col(0); col < columns; ++col)
+        {
+            MatrixTraits<MyMatrix>::setAt(returnValue, row, col, value(row, col).NumericValue());
+        }
+    }
+}
+
+inline bool xlw::ArgumentList::GetIfPresent(const std::string& ArgumentName, MyArray& ArgumentValue)
+{
+    if (!IsArgumentPresent(ArgumentName))
+        return false;
+
+    ArgumentValue = GetArrayArgumentValue(ArgumentName);
+    return true;
+}
+
+inline bool xlw::ArgumentList::GetIfPresent(const std::string& ArgumentName, MyMatrix& ArgumentValue)
+{
+    if (!IsArgumentPresent(ArgumentName))
+        return false;
+
+    ArgumentValue = GetMatrixArgumentValue(ArgumentName);
+    return true;
+}
 #endif

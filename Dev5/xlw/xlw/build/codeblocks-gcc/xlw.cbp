@@ -89,7 +89,6 @@
 		<Unit filename="..\..\src\DoubleOrNothing.cpp" />
 		<Unit filename="..\..\src\FileConverter.cpp" />
 		<Unit filename="..\..\src\HiResTimer.cpp" />
-		<Unit filename="..\..\src\MyContainers.cpp" />
 		<Unit filename="..\..\src\NCmatrices.cpp" />
 		<Unit filename="..\..\src\PascalStringConversions.cpp" />
 		<Unit filename="..\..\src\PathUpdater.cpp" />
@@ -108,7 +107,6 @@
 		<Unit filename="..\..\src\XlfOperProperties.cpp" />
 		<Unit filename="..\..\src\XlfRef.cpp" />
 		<Unit filename="..\..\src\XlfStr.cpp" />
-		<Unit filename="..\..\src\xlarray.cpp" />
 		<Unit filename="..\..\src\xlcall.cpp" />
 		<Extensions>
 			<code_completion />
