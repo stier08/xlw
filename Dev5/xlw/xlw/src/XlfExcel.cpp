@@ -187,8 +187,7 @@ HWND xlw::XlfExcel::GetMainWindow()
 
 HINSTANCE xlw::XlfExcel::GetExcelInstance()
 {
-    HWND hExcelWnd = GetMainWindow()
-    return (HINSTANCE)GetWindowLongPtr(hExcelWnd, GWLP_HINSTANCE);
+    return (HINSTANCE)GetWindowLongPtr(GetMainWindow(), GWLP_HINSTANCE);
 }
 
 xlw::XlfExcel::XlfExcel(): impl_(0) {
