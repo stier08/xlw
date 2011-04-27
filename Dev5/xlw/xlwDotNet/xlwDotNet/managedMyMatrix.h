@@ -61,23 +61,23 @@ namespace xlwDotNet
             {
                 int get()
                 {
-                    return theInner->rows();
+                    return (int)theInner->rows();
                 }
             }
            property int columns
             {
                 int get()
                 {
-                    return theInner->columns();
+                    return (int)theInner->columns();
                 }
             }
 
            operator array<double,2>^()
            {
-               array<double,2>^ theCSMatrix =  gcnew array<double,2>(theInner->rows(),theInner->columns());
-               for(size_t i(0);i<theInner->rows();++i)
+               array<double,2>^ theCSMatrix =  gcnew array<double,2>(rows,columns);
+               for(int i(0);i<rows;++i)
                {
-                   for(size_t j(0);j<theInner->columns();++j)
+                   for(int j(0);j<columns;++j)
                         theCSMatrix[i,j]=theInner->operator[](i)[j];
                }
                return theCSMatrix;

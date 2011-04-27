@@ -58,14 +58,14 @@ namespace xlwDotNet
             {
                 int get()
                 {
-                    return theInner->size();
+                    return (int)theInner->size();
                 }
             }
 
            operator array<double>^()
            {
-               array<double>^ theCSArray =  gcnew array<double>(theInner->size());
-               for(size_t i(0);i<theInner->size();++i)theCSArray[i]=theInner->operator[](i);
+               array<double>^ theCSArray =  gcnew array<double>(size);
+               for(int i(0);i<size;++i)theCSArray[i]=theInner->operator[](i);
                return theCSArray;
            }
            static operator MyArray^(array<double>^ theCSArray)
