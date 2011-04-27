@@ -163,7 +163,7 @@ HWND xlw::XlfExcel::GetMainWindow()
     // on Excel4 we get LOWORD of handle back
     // so we have to faff about to find the real handle
     // On excel 12 we do get an int back but this doesn't help
-    // will 64 bit so always do the search
+    // with 64 bit so always do the search
     XLOPER ret;
     if(Call4(xlGetHwnd, &ret, 0) == xlretSuccess)
     {
