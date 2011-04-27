@@ -118,8 +118,8 @@ namespace xlw {
         void add(const std::string& ArgumentName, const ArgumentList& values);
 
     private:
-        inline std::vector<double> GetArrayArgumentValueInternal(const std::string& ArgumentName);
-        inline NCMatrix GetMatrixArgumentValueInternal(const std::string& ArgumentName);
+        std::vector<double> GetArrayArgumentValueInternal(const std::string& ArgumentName);
+        NCMatrix GetMatrixArgumentValueInternal(const std::string& ArgumentName);
         void addArray(const std::string& ArgumentName, const std::vector<double>& value);
         void addMatrix(const std::string& ArgumentName, const NCMatrix& value);
         bool GetIfPresentInternal(const std::string& ArgumentName,
