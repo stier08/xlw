@@ -94,23 +94,23 @@ namespace xlw
         std::transform(input.begin(),input.end(),input.begin(),tolower);
     }
 
-    template<typename TYPE>
+    template<class TYPE>
     void ArgumentList::addInternal(const std::string& ArgumentName, const TYPE& value, std::map<std::string,TYPE>& typeMap, ArgumentType type)
     {
         std::pair<std::string, ArgumentType> thisPair(ArgumentName,type);
         ArgumentNames.push_back(thisPair);
 
-        std::pair<std::string,TYPE> valuePair(ArgumentName,value);
+        std::pair<std::string, TYPE> valuePair(ArgumentName,value);
         typeMap.insert(valuePair);
 
         RegisterName(ArgumentName, type);
     }
 
-    template<typename TYPE>
-    const TYPE& ArgumentList::GetArgumentValueInternal(std::string ArgumentName, std::map<std::string,TYPE>& typeMap)
+    template<class TYPE>
+    const TYPE& ArgumentList::GetArgumentValueInternal(std::string ArgumentName, std::map<std::string, TYPE>& typeMap)
     {
         MakeLowerCase(ArgumentName);
-        std::map<std::string, TYPE>::const_iterator it = typeMap.find(ArgumentName);
+        typename std::map<std::string, TYPE>::const_iterator it = typeMap.find(ArgumentName);
 
         if (it == typeMap.end())
             throw(StructureName+std::string(" unknown string argument asked for :")+ArgumentName);

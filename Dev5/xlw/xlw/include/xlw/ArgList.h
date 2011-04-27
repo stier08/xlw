@@ -99,10 +99,10 @@ namespace xlw {
         void add(const std::string& ArgumentName, const ArgumentList& values);
 
     private:
-        template<typename TYPE>
-        void addInternal(const std::string& ArgumentName, const TYPE& value, std::map<std::string,TYPE>& typeMap, ArgumentType type);
-        template<typename TYPE>
-        const TYPE& GetArgumentValueInternal(std::string ArgumentName, std::map<std::string,TYPE>& typeMap);
+        template<class TYPE>
+        void addInternal(const std::string& ArgumentName, const TYPE& value, std::map<std::string, TYPE>& typeMap, ArgumentType type);
+        template<class TYPE>
+        const TYPE& GetArgumentValueInternal(std::string ArgumentName, std::map<std::string, TYPE>& typeMap);
 
 
         void addArray(const std::string& ArgumentName, const CellMatrix& values);
@@ -167,6 +167,7 @@ inline xlw::MyArray xlw::ArgumentList::GetArrayArgumentValue(const std::string& 
     {
         ArrayTraits<MyArray>::setAt(returnValue, i, value(i, 0).NumericValue());
     }
+    return returnValue;
 }
 
 inline xlw::MyMatrix xlw::ArgumentList::GetMatrixArgumentValue(const std::string& ArgumentName)
@@ -182,6 +183,7 @@ inline xlw::MyMatrix xlw::ArgumentList::GetMatrixArgumentValue(const std::string
             MatrixTraits<MyMatrix>::setAt(returnValue, row, col, value(row, col).NumericValue());
         }
     }
+    return returnValue;
 }
 
 inline bool xlw::ArgumentList::GetIfPresent(const std::string& ArgumentName, MyArray& ArgumentValue)
