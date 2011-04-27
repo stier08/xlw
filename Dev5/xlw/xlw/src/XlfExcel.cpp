@@ -124,6 +124,73 @@ bool xlw::XlfExcel::IsEscPressed() const {
     return ret.AsBool();
 }
 
+// classes and structs needed for search for window with Excel 4
+namespace
+{
+    typedef struct
+    {
+        HWND hWnd;
+        unsigned short loWord;
+    } GetMainWindowStruct;
+
+    BOOL CALLBACK GetMainWindowProc(HWND hWnd, LPARAM lParam)
+    {
+        GetMainWindowStruct* pEnum = (GetMainWindowStruct*)lParam;
+        // first check the loword of the window handle
+        // as this will be fast
+        if (LOWORD(hWnd) == pEnum->loWord)
+        {
+            // then check the class of the window. Must be "XLMAIN".
+            char className[7];
+            if(GetClassName(hWnd, className, 7) == S_OK)
+            {
+                if (!lstrcmpi(className, "XLMAIN"))
+                {
+                    // We've found it stop enum.
+                    pEnum->hWnd = hWnd;
+                    return FALSE;
+                }
+            }
+        }
+        // carry on
+        return TRUE;
+    }
+}
+
+
+HWND xlw::XlfExcel::GetMainWindow()
+{
+    // on Excel4 we get LOWORD of handle back
+    // so we have to faff about to find the real handle
+    // On excel 12 we do get an int back but this doesn't help
+    // will 64 bit so always do the search
+    XLOPER ret;
+    if(Call4(xlGetHwnd, &ret, 0) == xlretSuccess)
+    {
+        GetMainWindowStruct getMainWindowStruct = { NULL, ret.val.w};
+        EnumWindows(GetMainWindowProc, (LPARAM) &getMainWindowStruct);
+
+        if (getMainWindowStruct.hWnd != NULL)
+        {
+            return getMainWindowStruct.hWnd;
+        }
+        else
+        {
+            throw("xlGetHwnd no match for partial handle");
+        }
+    }
+    else
+    {
+        throw("xlGetHwnd call failed");
+    }
+}
+
+HINSTANCE xlw::XlfExcel::GetExcelInstance()
+{
+    HWND hExcelWnd = GetMainWindow()
+    return (HINSTANCE)GetWindowLongPtr(hExcelWnd, GWLP_HINSTANCE);
+}
+
 xlw::XlfExcel::XlfExcel(): impl_(0) {
     impl_ = new XlfExcelImpl();
     return;

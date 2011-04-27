@@ -109,6 +109,10 @@ namespace xlw {
         bool IsEscPressed() const;
         //! Is the function being calculated currently called by the Function Wizard ?
         bool IsCalledByFuncWiz() const;
+        //! Gets the HWND of excel's main window
+        HWND GetMainWindow();
+        //! Gets the instance of Excel we are running under
+        HINSTANCE GetExcelInstance();
         //@}
 
         //! \name Information about the running version of Excel
