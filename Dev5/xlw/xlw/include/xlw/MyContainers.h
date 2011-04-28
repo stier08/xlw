@@ -34,7 +34,10 @@
 // Uncomment the line below to use boost matrix
 //#define USE_XLW_WITH_BOOST_UBLAS
 
+#ifndef _SCL_SECURE_NO_WARNINGS
 #define _SCL_SECURE_NO_WARNINGS
+#endif
+
 #include "NCMatrices.h"
 #include <vector>
 

@@ -9,7 +9,9 @@
 #ifndef WINVER 
 #define WINVER 0x0501
 #endif
+#ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
+#endif
 
 #include<Windows.h>
 #include<string>
