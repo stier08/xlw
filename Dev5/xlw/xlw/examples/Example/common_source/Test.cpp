@@ -100,18 +100,18 @@ std::string HelloWorldAgain(std::string name)
     return "hello "+name;
 }
 
-double // echoes an unsigned long
+unsigned long // echoes an unsigned long
 EchoUL( unsigned long b  // number to echo
      )
 {
-    return static_cast<double>(b);
+    return b;
 }
 
-double // echoes an int
+int // echoes an int
 EchoInt( int b  // number to echo
      )
 {
-    return static_cast<int>(b);
+    return b;
 }
 
 double // tests DoubleOrNothingType

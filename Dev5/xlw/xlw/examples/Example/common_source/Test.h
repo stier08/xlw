@@ -72,14 +72,12 @@ std::string // says hello name
 HelloWorldAgain(std::string name // name to be echoed
            );
 
-double // echoes an unsigned long
-//<xlw:time
+unsigned long // echoes an unsigned int
 //<xlw:threadsafe
 EchoUL( unsigned long b  // number to echo
      );
 
-double // echoes an int
-//<xlw:time
+int // echoes an int
 //<xlw:threadsafe
 EchoInt( int b  // number to echo
      );
