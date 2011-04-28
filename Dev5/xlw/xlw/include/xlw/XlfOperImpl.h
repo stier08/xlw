@@ -130,8 +130,20 @@ namespace xlw { namespace Impl {
         {
             OperProps::setInt(lpxloper_, value);
         }
+        //! int ctor.
+        XlfOper(int value) :
+            lpxloper_(TempMemory::GetMemory<OperType>())
+        {
+            OperProps::setInt(lpxloper_, value);
+        }
+        //! unsigned long ctor.
+        XlfOper(unsigned long value) :
+            lpxloper_(TempMemory::GetMemory<OperType>())
+        {
+            OperProps::setDouble(lpxloper_, static_cast<double>(value));
+        }
 
-            //! boolean ctor.
+        //! boolean ctor.
         XlfOper(bool value) :
             lpxloper_(TempMemory::GetMemory<OperType>())
         {
@@ -243,6 +255,12 @@ namespace xlw { namespace Impl {
         {
             OperProps::setWString(lpxloper_, value);
         }
+        //!  XlfRef ctor.
+        XlfOper(const XlfRef& value) :
+            lpxloper_(TempMemory::GetMemory<OperType>())
+        {
+            OperProps::setRef(lpxloper_, value);
+        }
         //! XlfMulti ctor.
         XlfOper(RW rows, COL cols) :
             lpxloper_(TempMemory::GetMemory<OperType>())
@@ -274,9 +292,9 @@ namespace xlw { namespace Impl {
         //! Constructs an Excel error.
         static XlfOper<LPOPER_TYPE> Error(ErrorType errorCode)
         {
-            LPOPER_TYPE result = TempMemory::GetMemory<OperType>();
-            OperProps::setError(result, errorCode);
-            return XlfOper<LPOPER_TYPE>(result);
+            XlfOper<LPOPER_TYPE> result;
+            result.SetError(errorCode);
+            return result;
         }
         //@}
 
@@ -650,6 +668,48 @@ namespace xlw { namespace Impl {
             }
         }
 
+        //! Converts to a unsigned long with error identifer.
+        unsigned long AsULong(const char* ErrorId = 0, int *pxlret = 0) const
+        {
+            XlTypeType type(OperProps::getXlType(lpxloper_) & 0xFFF);
+            switch(type)
+            {
+            case xltypeNum:
+                return static_cast<unsigned long>(OperProps::getDouble(lpxloper_));
+                break;
+
+            case xltypeBool:
+                return static_cast<unsigned long>(OperProps::getBool(lpxloper_));
+                break;
+
+            case xltypeInt:
+                return static_cast<unsigned long>(OperProps::getInt(lpxloper_));
+                break;
+
+            case xltypeMissing:
+            case xltypeErr:
+            case xltypeNil:
+                xlw::XlfOperImpl::ThrowOnError(xlretInvXloper, ErrorId, "Conversion to unsigned long");
+                throw XlfNeverGetHere();
+                break;
+
+            default:
+                break;
+            }
+            OperType stackMem;
+            XlfOper<LPOPER_TYPE> result(&stackMem);
+            int xlret = OperProps::coerce(lpxloper_, xltypeNum, result);
+            if(xlret == xlretSuccess)
+            {
+                return result.AsULong(ErrorId);
+            }
+            else
+            {
+                xlw::XlfOperImpl::ThrowOnError(xlret, ErrorId, "Conversion to unsigned long");
+                throw XlfNeverGetHere();
+            }
+        }
+
         //! Converts to a char * with error identifer.
         std::string AsString(const char* ErrorId = 0) const
         {
@@ -857,7 +917,70 @@ namespace xlw { namespace Impl {
         {
             OperProps::setWString(lpxloper_, value);
         }
+        //! Set to a double
+        void Set(double value)
+        {
+            OperProps::setDouble(lpxloper_, value);
+        }
+        //! Set to a short
+        void Set(short value)
+        {
+            OperProps::setInt(lpxloper_, value);
+        }
+        //! Set to an int
+        void Set(int value)
+        {
+            OperProps::setInt(lpxloper_, value);
+        }
+        //! Set to an unsigned long
+        void Set(unsigned long value)
+        {
+            OperProps::setDouble(lpxloper_, static_cast<double>(value));
+        }
+        //! Set to a bool
+        void Set(bool value)
+        {
+            OperProps::setBool(lpxloper_, value);
+        }
+        //! Set to a c string
+        void Set(const char *value)
+        {
+            OperProps::setString(lpxloper_, value);
+        }
+        //! Set to a c wide string
+        void Set(const wchar_t* &value)
+        {
+            OperProps::setWString(lpxloper_, value);
+        }
+        void Set(const CellMatrix& cells)
+        {
+            XlfOper<LPOPER_TYPE> temp(cells);
+            std::swap(temp, *this);
+        }
+        void Set(const MyMatrix& matrix)
+        {
+            XlfOper<LPOPER_TYPE> temp(matrix);
+            std::swap(temp, *this);
+        }
+        void Set(const MyArray& values)
+        {
+            XlfOper<LPOPER_TYPE> temp(values);
+            std::swap(temp, *this);
+        }
+        void Set(const XlfRef& range)
+        {
+            XlfOper<LPOPER_TYPE> temp(range);
+            std::swap(temp, *this);
+        }
+        //! Set to an error code
+        void SetError(ErrorType errorCode)
+        {
+            OperProps::setError(lpxloper_, errorCode);
+        }
+        //@}
 
+        //! \name Equality operators
+        //@{
         //! equals operator from same type
         XlfOper<LPOPER_TYPE>& operator=(const XlfOper<LPOPER_TYPE>& rhs)
         {
@@ -883,6 +1006,13 @@ namespace xlw { namespace Impl {
         XlfOper<LPOPER_TYPE>& operator=(int rhs)
         {
             OperProps::setInt(lpxloper_, rhs);
+            return *this;
+        }
+
+        //! equals operator from unsigned long
+        XlfOper<LPOPER_TYPE>& operator=(unsigned long rhs)
+        {
+            OperProps::setDouble(lpxloper_, static_cast<double>(rhs));
             return *this;
         }
 
@@ -913,6 +1043,7 @@ namespace xlw { namespace Impl {
             OperProps::setWString(lpxloper_, rhs);
             return *this;
         }
+        //@}
     };
 
 } }
