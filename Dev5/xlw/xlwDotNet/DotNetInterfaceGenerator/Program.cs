@@ -34,6 +34,8 @@ namespace DotNetInterfaceGenerator
             primitives.Add(typeof(double));
             primitives.Add(typeof(short));
             primitives.Add(typeof(int));
+            primitives.Add(typeof(UInt32));
+            primitives.Add(typeof(Boolean));
             semiprimitives.Add(typeof(string));
             semiprimitives.Add(typeof(double[]));
             semiprimitives.Add(typeof(double[,]));
@@ -129,6 +131,16 @@ namespace DotNetInterfaceGenerator
                                         headerFile.WriteLine("//<xlw:volatile");
                                     }
 
+                                    if (ExcelExportAttributeArray[0].timeFlag)
+                                    {
+                                        headerFile.WriteLine("//<xlw:time");
+                                    }
+
+                                    if (ExcelExportAttributeArray[0].threadSafeFlag)
+                                    {
+                                        headerFile.WriteLine("//<xlw:threadsafe");
+                                    }
+
 
                                     headerFile.Write(writeCMethod(method.Name) + "(");
                                     sourceFile.Write(" DLLEXPORT "+writeCMethod(method.Name) + "(");
@@ -186,9 +198,19 @@ namespace DotNetInterfaceGenerator
                 if (basicType == "int32")
                 {
                     basicType = "int";
-                    if (returnType) basicType = "double"; // something wierd in xlw, can't return an int;
                 }
-                if (basicType == "int16") basicType = "short";
+                if (basicType == "int16")
+                {
+                    basicType = "short";
+                }
+                if (basicType == "uint32")
+                {
+                    basicType = "unsigned long";
+                }
+                if (basicType == "boolean")
+                {
+                    basicType = "bool";
+                }
                 return basicType;
             }
             if(semiprimitives.Contains(CSType))
@@ -249,7 +271,7 @@ namespace DotNetInterfaceGenerator
 
                  else
                  {
-                     /////// A tring
+                     /////// A String
                      if (param.ParameterType == typeof(String))
                      {
                          sourceFile.Write(tabString + tabString + " gcnew String(" + param.Name + ".c_str())");

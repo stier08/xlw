@@ -26,17 +26,38 @@ public ref class ExcelExportAttribute: Attribute
 public:
     String^ description;
     bool volatileFlag;
+    bool timeFlag;
+    bool threadSafeFlag;
     ExcelExportAttribute(String^ description_)
     {
         description = description_;
         volatileFlag = false;
-
+        timeFlag = false;
+        threadSafeFlag = false;
     }
+
     ExcelExportAttribute(String^ description_, bool volatileFlag_)
     {
         description = description_;
         volatileFlag = volatileFlag_;
+        timeFlag = false;
+        threadSafeFlag = false;
+    }
 
+    ExcelExportAttribute(String^ description_, bool volatileFlag_, bool timeFlag_)
+    {
+        description = description_;
+        volatileFlag = volatileFlag_;
+        timeFlag = timeFlag_;
+        threadSafeFlag = false;
+    }
+
+    ExcelExportAttribute(String^ description_, bool volatileFlag_, bool timeFlag_, bool threadSafeFlag_)
+    {
+        description = description_;
+        volatileFlag = volatileFlag_;
+        timeFlag = timeFlag_;
+        threadSafeFlag = threadSafeFlag_;
     }
 };
 [AttributeUsage(AttributeTargets::Parameter)]
