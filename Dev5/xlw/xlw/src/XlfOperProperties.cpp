@@ -102,6 +102,10 @@ namespace
         {
             return XlfOperProperties<LPOPER_TYPE>::getRef((LPOPER_TYPE)oper);
         }
+        void setRef(LPXLFOPER oper, const XlfRef& newValue)
+        {
+            return XlfOperProperties<LPOPER_TYPE>::setRef((LPOPER_TYPE)oper, newValue);
+        }
         int coerce(LPXLFOPER fromOper, DWORD toType, LPXLFOPER toOper)
         {
             return XlfOperProperties<LPOPER_TYPE>::coerce((LPOPER_TYPE)fromOper, (typename XlfOperProperties<LPOPER_TYPE>::XlTypeType)toType,(LPOPER_TYPE)toOper);

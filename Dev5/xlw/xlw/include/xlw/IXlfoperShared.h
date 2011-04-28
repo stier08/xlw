@@ -48,6 +48,7 @@ namespace xlw { namespace Impl {
         virtual std::wstring getWString(LPXLFOPER oper) = 0;
         virtual void setWString(LPXLFOPER oper, const std::wstring& newValue) = 0;
         virtual XlfRef getRef(LPXLFOPER oper) = 0;
+        virtual void setRef(LPXLFOPER oper, const XlfRef& newVlaue) = 0;
         virtual int coerce(LPXLFOPER fromOper, DWORD toType, LPXLFOPER toOper) = 0;
         virtual void XlFree(LPXLFOPER oper) = 0;
         virtual void copy(LPXLFOPER fromOper, LPXLFOPER toOper) = 0;

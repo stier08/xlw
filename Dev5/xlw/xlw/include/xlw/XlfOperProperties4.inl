@@ -203,7 +203,10 @@ namespace xlw { namespace Impl {
                 if(oper->val.mref.lpmref->count == 1)
                 {
                     LPXLOPER result = TempMemory::GetMemory<XLOPER>();
-                    *result = *oper;
+                    result->xltype = xltypeRef;
+                    result->val.mref.idSheet = oper->val.mref.idSheet;
+                    result->val.mref.lpmref = TempMemory::GetMemory<XLMREF>();
+                    result->val.mref.lpmref->count = 1;
                     result->val.mref.lpmref->reftbl[0].rwFirst += row;
                     result->val.mref.lpmref->reftbl[0].rwLast = result->val.mref.lpmref->reftbl[0].rwFirst;
                     result->val.mref.lpmref->reftbl[0].colFirst += column;
@@ -253,6 +256,18 @@ namespace xlw { namespace Impl {
                             ref.rwLast,   // bottom
                             ref.colLast,  // right
                             oper->val.mref.idSheet); // sheet id
+        }
+        static void setRef(LPXLOPER oper, const XlfRef& newValue)
+        {
+            oper->xltype = xltypeRef;
+            XLMREF* pmRef = TempMemory::GetMemory<XLMREF>();
+            pmRef->count=1;
+            pmRef->reftbl[0].rwFirst = newValue.GetRowBegin();
+            pmRef->reftbl[0].rwLast = newValue.GetRowEnd()-1;
+            pmRef->reftbl[0].colFirst = newValue.GetColBegin();
+            pmRef->reftbl[0].colLast = newValue.GetColEnd()-1;
+            oper->val.mref.lpmref = pmRef;
+            oper->val.mref.idSheet = newValue.GetSheetId();
         }
         static int coerce(LPXLOPER fromOper, XlTypeType toType, LPXLOPER toOper)
         {

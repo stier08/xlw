@@ -106,6 +106,10 @@ namespace xlw { namespace Impl {
         {
             return m_version->getRef(oper);
         }
+        static void setRef(LPXLFOPER oper, const XlfRef& newValue)
+        {
+            m_version->setRef(oper, newValue);
+        }
         static int coerce(LPXLFOPER fromOper, DWORD toType, LPXLFOPER toOper)
         {
             return m_version->coerce(fromOper, toType, toOper);
