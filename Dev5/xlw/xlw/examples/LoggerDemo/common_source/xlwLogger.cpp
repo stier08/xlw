@@ -46,7 +46,7 @@ xlwLogger::xlwLogger(){
 void xlwLogger::Display(){
 	WriteConsole(theScreenHandel,
 				 theInnerStream.str().c_str(),
-				 theInnerStream.str().size(),
+				 (DWORD)theInnerStream.str().size(),
 				 &CharsWritten, 0);
 	theInnerStream.str(EmptyString);
 	
@@ -54,13 +54,13 @@ void xlwLogger::Display(){
 void xlwLogger::Display(const std::string& theLog ){
 	WriteConsole(theScreenHandel,
 				 theLog.c_str(),
-				 theLog.size(),
+				 (DWORD)theLog.size(),
 				 &CharsWritten, 0);
 }
 double xlwLogger::GetTau() {
 	theTimeIndex = 1-theTimeIndex;
 	time(&theTime[theTimeIndex]);
-	return (theTime[theTimeIndex]-theTime[1-theTimeIndex]);
+	return difftime(theTime[theTimeIndex],theTime[1-theTimeIndex]);
 }
 
 const char* const xlwLogger::GetTime() {

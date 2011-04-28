@@ -29,7 +29,7 @@ crand()
 {
 	_LOGGER << "Called crand()";
     int r = std::rand();
-	_LOGGER << "Generated randomg number " << r;
+	_LOGGER << "Generated random number " << r;
 	return double(r);
 }
 

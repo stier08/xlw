@@ -16,8 +16,8 @@
 
 
 
-#ifndef PAPA_LOGGER_HEADER_FILE
-#define PAPA_LOGGER_HEADER_FILE
+#ifndef LOGGER_HEADER_FILE
+#define LOGGER_HEADER_FILE
 
 #ifdef WIN32
 
@@ -27,6 +27,8 @@
 #ifndef WINVER 
 #define WINVER 0x0501
 #endif
+#define _CRT_SECURE_NO_WARNINGS
+
 #include<Windows.h>
 #include<string>
 #include<sstream>
