@@ -45,7 +45,7 @@ void xlwLogger::Display(const std::string& theLog ){
 double xlwLogger::GetTau() {
 	theTimeIndex = 1-theTimeIndex;
 	time(&theTime[theTimeIndex]);
-	return (theTime[theTimeIndex]-theTime[1-theTimeIndex]);
+	return difftime(theTime[theTimeIndex],theTime[1-theTimeIndex]);
 }
 
 const char* const xlwLogger::GetTime() {
