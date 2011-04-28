@@ -24,22 +24,33 @@ xlwLogger::xlwLogger(){
 	if(theConsoleHandel)FreeConsole();
 
 	BOOL flag = AllocConsole();
+	if(flag == 0)
+	{
+        throw("can't create console window");
+	}
     theConsoleHandel= GetConsoleWindow();
 	theScreenHandel = GetStdHandle(STD_OUTPUT_HANDLE);
 	char titlePtr[]=" xlwLogger Window \0";
-	
+
 	SetConsoleTitle(titlePtr);
 
+    // try and stop the user from being able to close the logging window
+    HWND hWnd = FindWindow(NULL, titlePtr);
+    if(hWnd)
+    {
+        RemoveMenu(GetSystemMenu(hWnd, FALSE), SC_CLOSE, MF_BYCOMMAND);
+    }
+
 	time(&theTime[0]);
-	theInnerStream << " xlwLogger Initiated    " 
+	theInnerStream << " xlwLogger Initiated    "
 				   << ctime(&theTime[0])
-				   << " \n Code Compiled " 
+				   << " \n Code Compiled "
 				   << __TIME__  << "  "
 				   << __DATE__;
 	Display();
-	
+
 	theTimeIndex=0;
-	
+
 }
 
 
@@ -49,7 +60,7 @@ void xlwLogger::Display(){
 				 (DWORD)theInnerStream.str().size(),
 				 &CharsWritten, 0);
 	theInnerStream.str(EmptyString);
-	
+
 }
 void xlwLogger::Display(const std::string& theLog ){
 	WriteConsole(theScreenHandel,
