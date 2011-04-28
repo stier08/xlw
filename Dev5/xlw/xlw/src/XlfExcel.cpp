@@ -142,7 +142,7 @@ namespace
         {
             // then check the class of the window. Must be "XLMAIN".
             char className[7];
-            if(GetClassName(hWnd, className, 7) == S_OK)
+            if(GetClassName(hWnd, className, 7) != 0)
             {
                 if (!lstrcmpi(className, "XLMAIN"))
                 {
