@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -153,6 +153,8 @@
     <ClInclude Include="..\..\include\xlw\CriticalSection.h" />
     <ClInclude Include="..\..\include\xlw\DoubleOrNothing.h" />
     <ClInclude Include="..\..\include\xlw\ERR_Macros.h" />
+    <ClInclude Include="..\..\include\xlw\eshared_ptr.h" />
+    <ClInclude Include="..\..\include\xlw\eshared_ptr_details.h" />
     <ClInclude Include="..\..\include\xlw\EXCEL32_API.h" />
     <ClInclude Include="..\..\include\xlw\HiResTimer.h" />
     <ClInclude Include="..\..\include\xlw\IXlfoperShared.h" />
@@ -183,6 +185,9 @@
     <ClInclude Include="..\..\include\xlw\XlfWindows.h" />
     <ClInclude Include="..\..\include\xlw\XlOpenClose.h" />
     <ClInclude Include="..\..\include\xlw\xlw.h" />
+    <ClInclude Include="..\..\include\xlw\xlwManaged.h" />
+    <ClInclude Include="..\..\include\xlw\xlwshared_ptr.h" />
+    <ClInclude Include="..\..\include\xlw\xlwshared_ptr_details.h" />
     <ClInclude Include="..\..\src\PathUpdater.h" />
   </ItemGroup>
   <ItemGroup>

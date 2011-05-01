@@ -7,6 +7,9 @@
     <Filter Include="include">
       <UniqueIdentifier>{098b436e-cbe1-47b6-8161-9ab4ace8c895}</UniqueIdentifier>
     </Filter>
+    <Filter Include="smart_ptr">
+      <UniqueIdentifier>{6e1ce7d3-a7b5-4d3d-adc1-287a1d6634d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\xlw\src\ArgList.cpp">
@@ -199,6 +202,21 @@
     </ClInclude>
     <ClInclude Include="..\..\..\xlw\include\xlw\xlwManaged.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\xlw\include\xlw\Singleton.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\xlw\include\xlw\xlwshared_ptr.h">
+      <Filter>smart_ptr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\xlw\include\xlw\xlwshared_ptr_details.h">
+      <Filter>smart_ptr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\xlw\include\xlw\eshared_ptr.h">
+      <Filter>smart_ptr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\xlw\include\xlw\eshared_ptr_details.h">
+      <Filter>smart_ptr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

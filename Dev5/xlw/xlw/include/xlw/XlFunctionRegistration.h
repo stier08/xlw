@@ -2,6 +2,7 @@
 /*
  Copyright (C) 2006 Mark Joshi
  Copyright (C) 2007, 2008 Eric Ehlers
+ Copyright (C) 2011 Narinder S Claire
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -23,6 +24,7 @@
 #include <vector>
 #include <list>
 #include <xlw/XlfExcel.h>
+#include <xlw/Singleton.h>
 
 namespace xlw {
 
@@ -126,20 +128,16 @@ namespace xlw {
 
 
     // singleton pattern, cf the Factory
-    class ExcelFunctionRegistrationRegistry
+    class ExcelFunctionRegistrationRegistry: public singleton<ExcelFunctionRegistrationRegistry>
     {
+	friend class singleton<ExcelFunctionRegistrationRegistry>;
     public:
-
-        static ExcelFunctionRegistrationRegistry& Instance();
-
         void DoTheRegistrations() const;
         void DoTheDeregistrations() const;
         void AddFunction(const XLFunctionRegistrationData&);
 
     private:
-        ExcelFunctionRegistrationRegistry();
-        ExcelFunctionRegistrationRegistry(const ExcelFunctionRegistrationRegistry& original);
-
+        ExcelFunctionRegistrationRegistry(){}
         std::list<XLFunctionRegistrationData> RegistrationData;
 
     };

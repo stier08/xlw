@@ -2,7 +2,7 @@
 /*
 Copyright (C) 1998, 1999, 2001, 2002 Jérôme Lecomte
 Copyright (C) 2006 Mark Joshi
-Copyright (C) 2009 Narinder S Claire
+Copyright (C) 2009 2011 Narinder S Claire
 Copyright (C) 2011 John Adcock
 
 This file is part of xlw, a free-software/open-source C++ wrapper of the
@@ -31,6 +31,44 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 // but Excel still can call the functions
 static xlw::CerrBufferRedirector redirectCerr;
 
+namespace xlw
+{
+	template<>
+	void MacroCache<open>::RegisterMacro(eshared_ptr<IMacro> theMacro)
+	{
+		m_macros.push_back(theMacro);
+	}
+
+	template<>
+	void MacroCache<close>::RegisterMacro(eshared_ptr<IMacro> theMacro)
+	{
+		m_macros.push_back(theMacro);
+	}
+
+	void executer(const std::list<eshared_ptr<IMacro> > & m_macros)
+	{
+		std::list<eshared_ptr<IMacro> >::const_iterator theIterator;
+		for(theIterator = m_macros.begin(); theIterator!=m_macros.end(); ++theIterator)
+		{
+			theIterator->get()->operator()();
+		}
+
+	}
+
+	template<>
+	void MacroCache<open>::ExecuteMacros()
+	{
+	   executer(m_macros);
+	}
+	template<>
+	void MacroCache<close>::ExecuteMacros()
+	{
+	   executer(m_macros);
+	}
+
+}
+
+
 extern "C"
 {
 
@@ -52,6 +90,8 @@ extern "C"
 
             xlw::XLRegistration::ExcelFunctionRegistrationRegistry::Instance().DoTheRegistrations();
 
+			xlw::MacroCache<xlw::open>::Instance().ExecuteMacros();
+
             // Clears the status bar.
             xlw::XlfExcel::Instance().SendMessage();
             return 1;
@@ -72,6 +112,7 @@ extern "C"
         // have enough state to come back to life
         xlw::XlfExcel::DeleteInstance();
 
+		xlw::MacroCache<xlw::close>::Instance().ExecuteMacros();
         // clear up any temporary memory used
         // but keep enough alive so that exel can still use
         // the functions
@@ -82,6 +123,8 @@ extern "C"
     long EXCEL_EXPORT xlAutoRemove()
     {
         std::cerr << XLW__HERE__ << "Addin being unloaded" << std::endl;
+
+
 
         // we can safely unregister the functions here as the user has unloaded the
         // xll and so won't expect to be able to use the functions

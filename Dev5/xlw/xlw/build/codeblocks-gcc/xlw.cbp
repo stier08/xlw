@@ -79,10 +79,14 @@
 		<Unit filename="..\..\include\xlw\XlfRef.inl" />
 		<Unit filename="..\..\include\xlw\XlfStr.h" />
 		<Unit filename="..\..\include\xlw\XlfWindows.h" />
+		<Unit filename="..\..\include\xlw\eshared_ptr.h" />
+		<Unit filename="..\..\include\xlw\eshared_ptr_details.h" />
 		<Unit filename="..\..\include\xlw\macros.h" />
 		<Unit filename="..\..\include\xlw\xlarray.h" />
 		<Unit filename="..\..\include\xlw\xlcall32.h" />
 		<Unit filename="..\..\include\xlw\xlw.h" />
+		<Unit filename="..\..\include\xlw\xlwshared_ptr.h" />
+		<Unit filename="..\..\include\xlw\xlwshared_ptr_details.h" />
 		<Unit filename="..\..\src\ArgList.cpp" />
 		<Unit filename="..\..\src\CellMatrix.cpp" />
 		<Unit filename="..\..\src\Dispatcher.cpp" />

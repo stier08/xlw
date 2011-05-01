@@ -74,6 +74,10 @@
     <File Name="../../include/xlw/XlOpenClose.h"/>
     <File Name="../../include/xlw/xlw.h"/>
     <File Name="../../include/xlw/xlwManaged.h"/>
+    <File Name="../../include/xlw/eshared_ptr.h"/>
+    <File Name="../../include/xlw/eshared_ptr_details.h"/>
+    <File Name="../../include/xlw/xlwshared_ptr.h"/>
+    <File Name="../../include/xlw/xlwshared_ptr_details.h"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>

@@ -411,6 +411,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\include\xlw\eshared_ptr.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\xlw\eshared_ptr_details.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\include\xlw\EXCEL32_API.h"
 				>
 			</File>
@@ -560,6 +568,14 @@
 			</File>
 			<File
 				RelativePath="..\..\include\xlw\xlwManaged.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\xlw\xlwshared_ptr.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\xlw\xlwshared_ptr_details.h"
 				>
 			</File>
 		</Filter>

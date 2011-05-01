@@ -1,5 +1,6 @@
 /*
  Copyright (C) 2005 Mark Joshi
+ Copyright (C) 2011 Narinder S Claire
 
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
@@ -18,23 +19,16 @@
 #define ARG_LIST_FACTORY_H
 
 #include <xlw/ArgList.h>
+#include <xlw/Singleton.h>
 #include <map>
 #include <string>
 
 namespace xlw {
 
-    template<class T>
-    class ArgListFactory;
-
     template<typename T>
-    class ArgListFactory
+    class ArgListFactory :public singleton<ArgListFactory<T> >
     {
     public:
-        static ArgListFactory<T>& FactoryInstance()
-        {
-            static ArgListFactory<T> object;
-            return object;
-        }
         typedef T* (*CreateTFunction)(const ArgumentList& );
         void RegisterClass(std::string ClassId, CreateTFunction);
         T* CreateT(ArgumentList args);
@@ -43,9 +37,6 @@ namespace xlw {
     private:
         std::map<std::string, CreateTFunction> TheCreatorFunctions;
         std::string KnownTypes;
-        ArgListFactory(){}
-        ArgListFactory(const ArgListFactory&){}
-        ArgListFactory& operator=(const ArgListFactory&){ return *this;}
 
     };
 

@@ -7,5 +7,6 @@ CALL BuildProjectCpp.bat ..\xlw\examples\Handwritten ExampleHandwritten
 CALL BuildProjectCpp.bat ..\xlw\examples\ObjectCacheDemo ObjectCacheDemo
 CALL BuildProjectCpp.bat ..\xlw\examples\C++CLR C++CLR
 CALL BuildProjectCpp.bat ..\xlw\examples\LoggerDemo LoggerDemo
+CALL BuildProjectCpp.bat ..\xlw\examples\AutoOpenInterception AutoOpenInterception
 
 @ENDLOCAL

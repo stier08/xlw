@@ -153,12 +153,6 @@ XLFunctionRegistrationHelper::XLFunctionRegistrationHelper(const std::string& Fu
     ExcelFunctionRegistrationRegistry::Instance().AddFunction(tmp);
 }
 
-ExcelFunctionRegistrationRegistry& ExcelFunctionRegistrationRegistry::Instance()
-{
-    static ExcelFunctionRegistrationRegistry SingleInstance;
-    return SingleInstance;
-}
-
 void ExcelFunctionRegistrationRegistry::DoTheRegistrations() const
 {
 
@@ -217,13 +211,5 @@ void ExcelFunctionRegistrationRegistry::DoTheDeregistrations() const
 void ExcelFunctionRegistrationRegistry::AddFunction(const XLFunctionRegistrationData& data)
 {
     RegistrationData.push_back(data);
-}
-
-ExcelFunctionRegistrationRegistry::ExcelFunctionRegistrationRegistry()
-{
-}
-
-ExcelFunctionRegistrationRegistry::ExcelFunctionRegistrationRegistry(const ExcelFunctionRegistrationRegistry& original)
-{ // declared to make private
 }
 

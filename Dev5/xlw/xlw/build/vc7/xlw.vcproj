@@ -165,11 +165,6 @@
 			<File
 				RelativePath="..\..\src\XlfRef.cpp">
 				<FileConfiguration
-					Name="Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"/>
-				</FileConfiguration>
-				<FileConfiguration
 					Name="Release|Win32"
 					ExcludedFromBuild="TRUE">
 					<Tool
@@ -210,6 +205,12 @@
 			</File>
 			<File
 				RelativePath="..\..\include\xlw\ERR_Macros.h">
+			</File>
+			<File
+				RelativePath="..\..\include\xlw\eshared_ptr.h">
+			</File>
+			<File
+				RelativePath="..\..\include\xlw\eshared_ptr_details.h">
 			</File>
 			<File
 				RelativePath="..\..\include\xlw\EXCEL32_API.h">
@@ -321,6 +322,15 @@
 			</File>
 			<File
 				RelativePath="..\..\include\xlw\xlw.h">
+			</File>
+			<File
+				RelativePath="..\..\include\xlw\xlwManaged.h">
+			</File>
+			<File
+				RelativePath="..\..\include\xlw\xlwshared_ptr.h">
+			</File>
+			<File
+				RelativePath="..\..\include\xlw\xlwshared_ptr_details.h">
 			</File>
 		</Filter>
 	</Files>
