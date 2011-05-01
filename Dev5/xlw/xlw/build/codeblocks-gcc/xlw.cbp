@@ -40,8 +40,6 @@
 			<Add directory="..\..\include" />
 		</Compiler>
 		<Unit filename="..\..\include\xlw\ArgList.h" />
-		<Unit filename="..\..\include\xlw\ArgListFactory.h" />
-		<Unit filename="..\..\include\xlw\ArgListFactoryHelper.h" />
 		<Unit filename="..\..\include\xlw\CellMatrix.h" />
 		<Unit filename="..\..\include\xlw\CriticalSection.h" />
 		<Unit filename="..\..\include\xlw\DoubleOrNothing.h" />

@@ -37,8 +37,6 @@
   <VirtualDirectory Name="include"/>
   <VirtualDirectory Name="xlw">
     <File Name="../../include/xlw/ArgList.h"/>
-    <File Name="../../include/xlw/ArgListFactory.h"/>
-    <File Name="../../include/xlw/ArgListFactoryHelper.h"/>
     <File Name="../../include/xlw/CellMatrix.h"/>
     <File Name="../../include/xlw/CriticalSection.h"/>
     <File Name="../../include/xlw/DoubleOrNothing.h"/>

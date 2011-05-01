@@ -176,7 +176,7 @@ TypeRegistry::Helper payoffreg("Wrapper<PayOff>", // New type
                false,           // Is a method
                false,           // Takes identifier
                "" ,             // No key
-              "<xlw/ArgListFactory.h>" // Include file
+              "\"ArgListFactory.h\"" // Include file
                );
 
 }

@@ -147,8 +147,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\xlw\ArgList.h" />
-    <ClInclude Include="..\..\include\xlw\ArgListFactory.h" />
-    <ClInclude Include="..\..\include\xlw\ArgListFactoryHelper.h" />
     <ClInclude Include="..\..\include\xlw\CellMatrix.h" />
     <ClInclude Include="..\..\include\xlw\CriticalSection.h" />
     <ClInclude Include="..\..\include\xlw\DoubleOrNothing.h" />
