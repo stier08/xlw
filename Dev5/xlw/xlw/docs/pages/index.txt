@@ -2,7 +2,7 @@
 /*!
 \mainpage XLW - A C++ Wrapper for Excel
 
-\b Authors: J&eacute;r&ocirc;me Lecomte, Mark Joshi, Eric Ehlers, Narinder Claire, John Adcock
+\b Authors: J&eacute;r&ocirc;me Lecomte, Mark Joshi, Eric Ehlers, Narinder S Claire, John Adcock
 
 \b Contributors: Ferdinando Ametrano, Luigi Ballabio, Tim Brunne, Jos&eacute;
 Fonseca, Winfried Kromen
