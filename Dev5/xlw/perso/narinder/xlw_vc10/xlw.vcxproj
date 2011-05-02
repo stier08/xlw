@@ -95,7 +95,6 @@
     <None Include="..\..\..\xlw\include\xlw\XlfOperProperties4.inl" />
     <None Include="..\..\..\xlw\include\xlw\XlfOperPropertiesDynamic.inl" />
     <None Include="..\..\..\xlw\include\xlw\XlfRef.inl" />
-    <None Include="..\..\..\xlw\include\xlw\xlw.def" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>5DEV</ProjectName>

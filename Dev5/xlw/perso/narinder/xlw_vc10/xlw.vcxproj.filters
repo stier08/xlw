@@ -232,8 +232,5 @@
     <None Include="..\..\..\xlw\include\xlw\XlfRef.inl">
       <Filter>include</Filter>
     </None>
-    <None Include="..\..\..\xlw\include\xlw\xlw.def">
-      <Filter>include</Filter>
-    </None>
   </ItemGroup>
 </Project>
