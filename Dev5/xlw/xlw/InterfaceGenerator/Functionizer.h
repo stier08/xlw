@@ -21,6 +21,7 @@
 #include "FunctionModel.h"
 #include <vector>
 
+void splitWords(const std::string&theSentence, std::vector<std::string> & theWords);
 std::vector<FunctionModel> ConvertToFunctionModel(const std::vector<Token>& input,
 	                                              std::string& LibraryName,
 						      std::vector<std::string> &openMethods, 

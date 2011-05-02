@@ -32,5 +32,6 @@ std::vector<char> OutputFileCreatorCL(const std::vector<FunctionDescription>& fu
                                     std::string inputfileName
                                     );
 
+
 #endif
 

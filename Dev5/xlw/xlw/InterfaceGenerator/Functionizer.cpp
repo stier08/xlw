@@ -36,6 +36,40 @@ std::string LeftString(std::string input, unsigned long i)
 	std::string ret(input.begin(), input.begin()+i);
 	return ret;
 }
+void advance(std::string::const_iterator &theIterator, const std::string::const_iterator &theEnd)
+{
+
+		while(theIterator!=theEnd && (*theIterator == ' ' || *theIterator == '\t'))
+		{
+			++theIterator;
+		}
+
+}
+
+void splitWords(const std::string  &theSentence, std::vector<std::string> &theWords)
+{
+	std::string::const_iterator theIterator = theSentence.begin();
+	
+	while(theIterator!=theSentence.end())
+	{
+		advance(theIterator, theSentence.end());
+		std::string theWord;
+
+			while( theIterator!=theSentence.end() && *theIterator != ' ' && *theIterator != '\t' )
+			{
+				theWord.push_back(*theIterator);
+				//std::cout << (*theIterator) << "\n";
+				++theIterator;
+			}
+			if(!theWord.empty())
+			{
+				//std::cout << theWord;
+				theWords.push_back(theWord);
+			}
+	}
+	//std::cout << theWords.size() << "\n";
+}
+
 
 FunctionModel FunctionFind(std::vector<Token>::const_iterator& it, std::vector<Token>::const_iterator end, bool TimeDefault)
 {
@@ -273,7 +307,13 @@ std::vector<FunctionModel> ConvertToFunctionModel(
 						if(methodName[methodName.size()-1]!=')')
 							throw("missing )  for <xlw:onopen");
 						methodName.resize(methodName.size()-1);
-						openMethods.push_back(methodName);
+						std::vector<std::string>  allWords;
+						splitWords(methodName,allWords);
+						if(allWords.size()!=1)
+						{
+							throw("expected function name for parameter of <xlw:onopen");
+						}
+						openMethods.push_back(allWords[0]);
 						found =true;
 
 					}
@@ -283,7 +323,13 @@ std::vector<FunctionModel> ConvertToFunctionModel(
 						if(methodName[methodName.size()-1]!=')')
 							throw("missing )  for <xlw:onclose");
 						methodName.resize(methodName.size()-1);
-						closeMethods.push_back(methodName);
+						std::vector<std::string>  allWords;
+						splitWords(methodName,allWords);
+						if(allWords.size()!=1)
+						{
+							throw("expected function name for parameter of <xlw:onopen");
+						}
+						closeMethods.push_back(allWords[0]);
 						found =true;
 					}
 
