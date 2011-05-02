@@ -12,6 +12,9 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
+#ifndef XLW_SHARED_PTR_DETAILS_HEADER_GUARD
+#define XLW_SHARED_PTR_DETAILS_HEADER_GUARD 
+
 #include<list>
 #include<memory>
 
@@ -198,3 +201,6 @@ namespace xlw
 		}
 	}
 }
+
+
+#endif // #define XLW_SHARED_PTR_DETAILS_HEADER_GUARD 
