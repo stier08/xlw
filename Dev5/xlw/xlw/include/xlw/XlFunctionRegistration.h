@@ -25,6 +25,10 @@
 #include <list>
 #include <xlw/XlfExcel.h>
 #include <xlw/Singleton.h>
+#include <xlw/eshared_ptr.h>
+#include <xlw/XlfFuncDesc.h>
+#include <xlw/XlfCmdDesc.h>
+
 
 namespace xlw {
 
@@ -117,7 +121,7 @@ namespace xlw {
             return ClusterSafe;
         }
 
-        std::string  GetReturnTypeCode() const;
+        const std::string & GetReturnTypeCode() const;
         const std::string & GetHelpID() const;
     private:
 
@@ -182,9 +186,11 @@ namespace xlw {
 		void AddCommand(const XLCommandRegistrationData&);
 
     private:
+		typedef std::map<std::string,xlw_tr1::shared_ptr<xlw::XlfFuncDesc> > functionCache;
+		typedef std::map<std::string,xlw_tr1::shared_ptr<XlfCmdDesc> > commandCache;
         ExcelFunctionRegistrationRegistry(){}
-        std::list<XLFunctionRegistrationData> RegistrationFunctionData;
-		std::list<XLCommandRegistrationData>  RegistrationCommandData;
+        std::map<std::string,xlw_tr1::shared_ptr<XlfFuncDesc> > Functions;
+		std::map<std::string,xlw_tr1::shared_ptr<XlfCmdDesc> >  Commands;
 
     };
 

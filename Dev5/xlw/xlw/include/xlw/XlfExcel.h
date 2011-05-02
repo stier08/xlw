@@ -3,6 +3,7 @@
  Copyright (C) 1998, 1999, 2001, 2002, 2003, 2004 Jérôme Lecomte
  Copyright (C) 2007, 2008 Eric Ehlers
  Copyright (C) 2011 John Adcock
+ Copyright (C) 2011 Narinder S Claire
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -124,13 +125,13 @@ namespace xlw {
         //! Returns Excel version number e.g. 12 is 2007
         int excelVersion() const { return excelVersion_; }
         //! The OPER type in use by this version of Excel
-        std::string xlfOperType() const { return xlfOperType_; }
+        const std::string & xlfOperType() const { return xlfOperType_; }
         //! The XLOPER type in use by this version of Excel
-        std::string xlfXloperType() const { return xlfXloperType_; }
+        const std::string & xlfXloperType() const { return xlfXloperType_; }
         //! The string type in use by this version of Excel
-        std::string wStrType() const { return wStrType_; }
+        const std::string & wStrType() const { return wStrType_; }
         //! The double array type use by this version of Excel
-        std::string fpType() const { return fpArrayType_; }
+        const std::string & fpType() const { return fpArrayType_; }
         //@}
     private:
         //! Static pointer to the unique instance of XlfExcel object.

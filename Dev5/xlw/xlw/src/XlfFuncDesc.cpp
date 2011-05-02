@@ -2,7 +2,7 @@
 /*
  Copyright (C) 1998, 1999, 2001, 2002, 2003, 2004 Jérôme Lecomte
  Copyright (C) 2007, 2008 Eric Ehlers
- Copyright (C) 2009 Narinder S Claire
+ Copyright (C) 2009 2011 Narinder S Claire
 
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
@@ -33,31 +33,7 @@
 #pragma hdrstop
 #endif
 
-//! Internal implementation of XlfFuncDesc.
-struct xlw::XlfFuncDescImpl
-{
-    //! Ctor.
-    XlfFuncDescImpl(xlw::XlfFuncDesc::RecalcPolicy recalcPolicy, bool Threadsafe,
-                    const std::string& category, bool Asynchronous, bool MacroSheetEquivalent,
-                    bool ClusterSafe) : recalcPolicy_(recalcPolicy), category_(category),
-                    Threadsafe_(Threadsafe), Asynchronous_(Asynchronous), MacroSheetEquivalent_(MacroSheetEquivalent),
-                    ClusterSafe_(ClusterSafe)
-        {}
-    //! Recalculation policy.
-    xlw::XlfFuncDesc::RecalcPolicy recalcPolicy_;
-    //! Category where the function is displayed in the function wizard.
-    std::string category_;
-    //! List of the argument descriptions of the function.
-    XlfArgDescList arguments_;
-    //! Flag indicating whether this function is threadsafe in Excel 2007.
-    bool Threadsafe_;
-    //! Flag indicating whether this function is can be called Asynchronously in Excel 2010.
-    bool Asynchronous_;
-    //! Flag indicating whether this function get uncaled cells and can call XLM macro functions.
-    bool MacroSheetEquivalent_;
-    //! Flag indicating whether this function is can be called over a cluster in Excel 2010.
-    bool ClusterSafe_;
-};
+
 
 /*!
 \param name
@@ -79,14 +55,13 @@ xlw::XlfFuncDesc::XlfFuncDesc(const std::string& name, const std::string& alias,
                          const std::string &helpID,
                          bool Asynchronous, bool MacroSheetEquivalent,
                          bool ClusterSafe)
-    : XlfAbstractCmdDesc(name, alias, comment), impl_(0), returnTypeCode_(returnTypeCode), helpID_(helpID)
+    : XlfAbstractCmdDesc(name, alias, comment),returnTypeCode_(returnTypeCode),helpID_(helpID),
+	impl_(new XlfFuncDescImpl(recalcPolicy,Threadsafe,category, Asynchronous, MacroSheetEquivalent, ClusterSafe))
 {
-    impl_ = new XlfFuncDescImpl(recalcPolicy,Threadsafe,category, Asynchronous, MacroSheetEquivalent, ClusterSafe);
 }
 
 xlw::XlfFuncDesc::~XlfFuncDesc()
 {
-    delete impl_;
 }
 
 /*!
@@ -115,6 +90,9 @@ Registers the function as a function in excel.
 int xlw::XlfFuncDesc::DoRegister(const std::string& dllName) const
 {
     //live_ = true;
+
+	if (returnTypeCode_.empty())
+		returnTypeCode_= XlfExcel::Instance().xlfOperType();
     return RegisterAs(dllName, 1);
 }
 

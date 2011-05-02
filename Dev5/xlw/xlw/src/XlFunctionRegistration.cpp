@@ -80,16 +80,9 @@ const std::string & XLFunctionRegistrationData::GetFunctionDescription() const
 	return FunctionDescription;
 }
 
-std::string  XLFunctionRegistrationData::GetReturnTypeCode() const
+const std::string &  XLFunctionRegistrationData::GetReturnTypeCode() const
 {
-	// Would prefer to specify XlfExcel::Instance().xlfOperType() as the
-	// default value of parameter ReturnTypeCode in the XLFunctionRegistrationHelper
-	// constructor but that doesn't work as the object may be constructed during
-	// static initialization before the XlfExcel singleton can be instantiated.
-	if (ReturnTypeCode.empty())
-		return XlfExcel::Instance().xlfOperType();
-	else
-		return ReturnTypeCode;
+	return ReturnTypeCode;
 }
 
 const std::string & XLFunctionRegistrationData::GetHelpID() const
@@ -201,47 +194,15 @@ XLCommandRegistrationHelper::XLCommandRegistrationHelper(const std::string& Comm
 void ExcelFunctionRegistrationRegistry::DoTheRegistrations() const
 {
 
-	for (std::list<XLFunctionRegistrationData>::const_iterator it = RegistrationFunctionData.begin(); it !=  RegistrationFunctionData.end(); ++it)
+	for (functionCache::const_iterator it = Functions.begin(); it !=  Functions.end(); ++it)
 	{
-		XlfFuncDesc::RecalcPolicy policy = it->GetVolatile() ? XlfFuncDesc::Volatile : XlfFuncDesc::NotVolatile;
-		XlfFuncDesc xlFunction(it->GetFunctionName(),
-			it->GetExcelFunctionName(),
-			it->GetFunctionDescription(),
-			it->GetLibrary(),
-			policy,
-			it->GetThreadsafe(),
-			it->GetReturnTypeCode(),
-			it->GetHelpID(),
-			it->GetAsynchronous(),
-			it->GetMacroSheetEquivalent(),
-			it->GetClusterSafe());
-		XlfArgDescList xlFunctionArgs;
-
-		for (int i=0; i < it->GetNoOfArguments(); ++i)
-		{
-			XlfArgDesc ThisArgumentDescription(it->GetArgumentNames()[i],
-				it->GetArgumentDescriptions()[i],
-				it->GetArgumentTypes()[i]);
-			xlFunctionArgs + ThisArgumentDescription;
-			//+ is a push_back operation
-		}
-
-		xlFunction.SetArguments(xlFunctionArgs);
-		xlFunction.Register();
+		it->second->Register();
 	}
 
 
-	for (std::list<XLCommandRegistrationData>::const_iterator it = RegistrationCommandData.begin(); it !=  RegistrationCommandData.end(); ++it)
+	for (commandCache::const_iterator it = Commands.begin(); it !=  Commands.end(); ++it)
 	{
-		XlfCmdDesc theCommand(it->GetCommandName(),
-			it->GetExcelCommandName(),
-			it->GetCommandComment(),
-			true);
-
-		theCommand.Register();
-		theCommand.AddToMenuBar(it->GetMenu(),it->GetMenuText());
-
-
+		it->second->Register();
 	}
 
 
@@ -250,30 +211,59 @@ void ExcelFunctionRegistrationRegistry::DoTheRegistrations() const
 
 void ExcelFunctionRegistrationRegistry::DoTheDeregistrations() const
 {
-	for (std::list<XLFunctionRegistrationData>::const_iterator it = RegistrationFunctionData.begin(); it !=  RegistrationFunctionData.end(); ++it)
+	for (functionCache::const_iterator it = Functions.begin(); it !=  Functions.end(); ++it)
 	{
-		XlfFuncDesc::RecalcPolicy policy = it->GetVolatile() ? XlfFuncDesc::Volatile : XlfFuncDesc::NotVolatile;
-		XlfFuncDesc xlFunction(it->GetFunctionName(),
-			it->GetExcelFunctionName(),
-			it->GetFunctionDescription(),
-			it->GetLibrary(),
-			policy,
-			it->GetThreadsafe(),
-			it->GetReturnTypeCode(),
-			it->GetHelpID(),
-			it->GetAsynchronous(),
-			it->GetMacroSheetEquivalent(),
-			it->GetClusterSafe());
-		xlFunction.Unregister();
+		it->second->Unregister();
 	}
+
+
+	for (commandCache::const_iterator it = Commands.begin(); it !=  Commands.end(); ++it)
+	{
+		it->second->Unregister();
+	}
+
 
 }
 
 void ExcelFunctionRegistrationRegistry::AddFunction(const XLFunctionRegistrationData& data)
 {
-	RegistrationFunctionData.push_back(data);
+	
+	XlfFuncDesc::RecalcPolicy policy = data.GetVolatile() ? XlfFuncDesc::Volatile : XlfFuncDesc::NotVolatile;
+	xlw_tr1::shared_ptr<XlfFuncDesc>  xlFunction( new XlfFuncDesc(
+		    data.GetFunctionName(),
+			data.GetExcelFunctionName(),
+			data.GetFunctionDescription(),
+			data.GetLibrary(),
+			policy,
+			data.GetThreadsafe(),
+			data.GetReturnTypeCode(),
+			data.GetHelpID(),
+			data.GetAsynchronous(),
+			data.GetMacroSheetEquivalent(),
+			data.GetClusterSafe()));
+		XlfArgDescList xlFunctionArgs;
+
+		for (int i=0; i < data.GetNoOfArguments(); ++i)
+		{
+			XlfArgDesc ThisArgumentDescription(data.GetArgumentNames()[i],
+				data.GetArgumentDescriptions()[i],
+				data.GetArgumentTypes()[i]);
+			xlFunctionArgs + ThisArgumentDescription;
+			
+		}
+ 
+	xlFunction->SetArguments(xlFunctionArgs);
+	Functions[data.GetExcelFunctionName()] = xlFunction;
 }
 void ExcelFunctionRegistrationRegistry::AddCommand(const XLCommandRegistrationData& data)
 {
-	RegistrationCommandData.push_back(data);
+	
+		xlw_tr1::shared_ptr<XlfCmdDesc>  
+			theCommand(new XlfCmdDesc(data.GetCommandName(),
+			data.GetExcelCommandName(),
+			data.GetCommandComment(),
+			true));
+
+		Commands[data.GetExcelCommandName()] = theCommand;
+
 }
