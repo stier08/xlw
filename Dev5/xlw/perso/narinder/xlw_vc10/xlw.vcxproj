@@ -46,8 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\xlw\include\xlw\ArgList.h" />
-    <ClInclude Include="..\..\..\xlw\include\xlw\ArgListFactory.h" />
-    <ClInclude Include="..\..\..\xlw\include\xlw\ArgListFactoryHelper.h" />
     <ClInclude Include="..\..\..\xlw\include\xlw\CellMatrix.h" />
     <ClInclude Include="..\..\..\xlw\include\xlw\CriticalSection.h" />
     <ClInclude Include="..\..\..\xlw\include\xlw\DoubleOrNothing.h" />
@@ -150,7 +148,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\xlw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include;..\..\..\xlw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <Optimization>Disabled</Optimization>

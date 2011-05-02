@@ -92,12 +92,6 @@
     <ClInclude Include="..\..\..\xlw\include\xlw\ArgList.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\xlw\include\xlw\ArgListFactory.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\xlw\include\xlw\ArgListFactoryHelper.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\xlw\include\xlw\CellMatrix.h">
       <Filter>include</Filter>
     </ClInclude>

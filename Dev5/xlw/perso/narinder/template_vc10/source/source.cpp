@@ -13,10 +13,12 @@ EchoShort(short x // number to be echoed
 #include<xlw/XlfExcel.h>
 #include<xlw/XlOpenClose.h>
 
+
 void my_open_func()
 {
 	xlw::XlfExcel::MsgBox("Thanks for Opening me!","Welcome");
 }
+
 MacroCache<open>::MacroRegistra my_open_func_r("my_open_func","my_open_func",my_open_func);
 
 void my_close_func()
@@ -25,3 +27,12 @@ void my_close_func()
 }
 MacroCache<close>::MacroRegistra my_close_func_r("my_close_func","my_close_func",my_close_func);
 
+extern "C"
+{
+	int __declspec(dllexport) func()
+	{
+		xlw::XlfExcel::MsgBox("Thanks for calling the menu item","Menu");
+		return 0;
+	}
+}
+xlw::XLRegistration::XLCommandRegistrationHelper theItem("func","func","comment","File","func");

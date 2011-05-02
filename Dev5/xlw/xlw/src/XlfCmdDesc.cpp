@@ -36,7 +36,7 @@
 
 /*! \e see XlfAbstractCmdDesc::XlfAbstractCmdDesc(const std::string&, const std::string&, const std::string&)
 */
-xlw::XlfCmdDesc::XlfCmdDesc(const std::string& name, const std::string& alias, const std::string& comment, const bool hidden)
+xlw::XlfCmdDesc::XlfCmdDesc(const std::string& name, const std::string& alias, const std::string& comment, bool hidden)
     :XlfAbstractCmdDesc(name, alias, comment), menu_(), hidden_(hidden)
 {}
 

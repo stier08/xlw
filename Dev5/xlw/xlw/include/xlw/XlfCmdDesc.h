@@ -47,7 +47,7 @@ namespace xlw {
         //! \name Structors
         //@{
         //! Ctor.
-        XlfCmdDesc(const std::string& name, const std::string& alias, const std::string& comment, const bool hidden);
+        XlfCmdDesc(const std::string& name, const std::string& alias, const std::string& comment, bool hidden);
         //! Dtor.
         ~XlfCmdDesc();
         //@}

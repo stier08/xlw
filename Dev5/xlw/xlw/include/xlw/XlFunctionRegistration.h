@@ -33,6 +33,39 @@ namespace xlw {
 
     struct Arg { const char * ArgumentName; const char * ArgumentDescription; const char * ArgumentType; };
 
+	class XLCommandRegistrationData
+	{
+	public:
+		XLCommandRegistrationData(const std::string& CommandName_,
+			                      const std::string& ExcelCommandName_,
+								  const std::string& Comment_,
+								  const std::string& Menu_,
+								  const std::string& MenuText_):
+		                          CommandName(CommandName_),
+								  ExcelCommandName(ExcelCommandName_),
+								  Comment(Comment_),
+								  Menu(Menu_),
+								  MenuText(MenuText_){}
+		
+
+		const std::string& GetCommandName() const;
+        const std::string& GetExcelCommandName() const;
+        const std::string& GetCommandComment() const;
+		const std::string& GetMenu() const;
+		const std::string& GetMenuText() const;
+
+
+	private:
+		std::string CommandName;
+		std::string ExcelCommandName;
+		std::string Comment;
+		std::string Menu;
+		std::string MenuText;
+
+	
+	};
+	
+
     class XLFunctionRegistrationData
     {
     public:
@@ -50,14 +83,14 @@ namespace xlw {
                          bool MacroSheetEquivalent_,
                          bool ClusterSafe_);
 
-        std::string GetFunctionName() const;
-        std::string GetExcelFunctionName() const;
-        std::string GetFunctionDescription() const;
-        std::string GetLibrary() const;
+        const std::string&  GetFunctionName() const;
+        const std::string&  GetExcelFunctionName() const;
+        const std::string&  GetFunctionDescription() const;
+        const std::string&  GetLibrary() const;
         int GetNoOfArguments() const;
-        std::vector<std::string> GetArgumentNames() const;
-        std::vector<std::string> GetArgumentDescriptions() const;
-        std::vector<std::string> GetArgumentTypes() const;
+        const std::vector<std::string>&  GetArgumentNames() const;
+        const std::vector<std::string>&  GetArgumentDescriptions() const;
+        const std::vector<std::string>&  GetArgumentTypes() const;
 
         bool GetVolatile() const
         {
@@ -84,8 +117,8 @@ namespace xlw {
             return ClusterSafe;
         }
 
-        std::string GetReturnTypeCode() const;
-        std::string GetHelpID() const;
+        std::string  GetReturnTypeCode() const;
+        const std::string & GetHelpID() const;
     private:
 
         std::string FunctionName;
@@ -122,7 +155,18 @@ namespace xlw {
                          bool Asynchronous = false,
                          bool MacroSheetEquivalent = false,
                          bool ClusterSafe = false);
-    private:
+
+    };
+
+	 class XLCommandRegistrationHelper
+    {
+    public:
+
+        XLCommandRegistrationHelper(const std::string& CommandName_,
+			                      const std::string& ExcelCommandName_,
+								  const std::string& Comment_,
+								  const std::string& Menu_,
+								  const std::string& MenuText_);
 
     };
 
@@ -135,10 +179,12 @@ namespace xlw {
         void DoTheRegistrations() const;
         void DoTheDeregistrations() const;
         void AddFunction(const XLFunctionRegistrationData&);
+		void AddCommand(const XLCommandRegistrationData&);
 
     private:
         ExcelFunctionRegistrationRegistry(){}
-        std::list<XLFunctionRegistrationData> RegistrationData;
+        std::list<XLFunctionRegistrationData> RegistrationFunctionData;
+		std::list<XLCommandRegistrationData>  RegistrationCommandData;
 
     };
 
