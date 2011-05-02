@@ -2,6 +2,7 @@
 /*
 Copyright (C) 2006 Mark Joshi
 Copyright (C) 2007, 2008 Eric Ehlers
+Copyright (C) 2011 Narinder S Claire
 
 This file is part of XLW, a free-software/open-source C++ wrapper of the
 Excel C API - http://xlw.sourceforge.net/
@@ -24,7 +25,9 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 #include"OutputterHelper.h"
 
 std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& functionDescriptions,
-                                    std::string inputFileName, std::string LibraryName)
+                                    std::string inputFileName, std::string LibraryName, 
+									const std::vector<std::string> &openMethods, 
+									const std::vector<std::string> &closeMethods)
 {
   std::vector<char> output;
   AddLine(output, "//// ");
@@ -279,6 +282,44 @@ std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& func
     AddLine(output,"");
 
   }
+  // The Methods that will get registered to execute in AutoOpen
+  AddLine(output,"//////////////////////////");
+  AddLine(output,"// Methods that will get registered to execute in AutoOpen ");
+  AddLine(output,"//////////////////////////");
+  AddLine(output,"");
+
+  for(size_t i(0); i<openMethods.size(); ++i)
+  {
+	  AddLine(output,"void " + openMethods[i] + "();");
+	  std::string quotedName = "\""+openMethods[i]+"\"";
+	  AddLine(output,"namespace {");
+	  AddLine(output,"\tMacroCache<open>::MacroRegistra " + openMethods[i]+"_registra" +
+		              "(" + quotedName + "," + quotedName + "," + openMethods[i] + ");");
+	  AddLine(output,"}");
+	  AddLine(output,"");
+      AddLine(output,"");
+
+  }
+
+   // The Methods that will get registered to execute in AutoClose
+  AddLine(output,"//////////////////////////");
+  AddLine(output,"// Methods that will get registered to execute in AutoClose ");
+  AddLine(output,"//////////////////////////");
+  AddLine(output,"");
+
+  for(size_t i(0); i<closeMethods.size(); ++i)
+  {
+	  AddLine(output,"void " + closeMethods[i] + "();");
+	  std::string quotedName = "\""+closeMethods[i]+"\"";
+	  AddLine(output,"namespace {");
+	  AddLine(output,"\tMacroCache<close>::MacroRegistra " + closeMethods[i]+"_registra" +
+		              "(" + quotedName + "," + quotedName + "," + closeMethods[i] + ");");
+	  AddLine(output,"}");
+	  AddLine(output,"");
+      AddLine(output,"");
+
+  }
+
   return output;
 
 }

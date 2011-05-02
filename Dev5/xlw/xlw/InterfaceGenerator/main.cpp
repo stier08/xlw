@@ -151,7 +151,10 @@ int main(int argc, char *argv[])
 
     std::string LibraryName(inputfile);// use input file name as default library name
 
-    std::vector<FunctionModel> modelVector(ConvertToFunctionModel(tokenVector2,LibraryName));
+	std::vector<std::string> openMethods;
+	std::vector<std::string> closeMethods;
+
+    std::vector<FunctionModel> modelVector(ConvertToFunctionModel(tokenVector2,LibraryName,openMethods,closeMethods));
 
     std::cout << "file has been function modeled\n";
 
@@ -186,7 +189,9 @@ int main(int argc, char *argv[])
                                           inputfile);
     else
      outputVector_cpp = OutputFileCreator(functionVector,
-                                          inputfile,LibraryName);
+                                          inputfile,LibraryName,openMethods,closeMethods);
+
+
 
 	std::cout << " .. writing " << outputfile << "\n";
     writeOutputFile(outputfile,outputVector_cpp);

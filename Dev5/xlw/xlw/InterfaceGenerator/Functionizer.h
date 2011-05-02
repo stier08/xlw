@@ -1,5 +1,6 @@
 /*
  Copyright (C) 2006 Mark Joshi
+ Copyright (C) 2011 Narinder S Claire
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -20,6 +21,9 @@
 #include "FunctionModel.h"
 #include <vector>
 
-std::vector<FunctionModel> ConvertToFunctionModel(const std::vector<Token>& input, std::string& LibraryName);
+std::vector<FunctionModel> ConvertToFunctionModel(const std::vector<Token>& input,
+	                                              std::string& LibraryName,
+						      std::vector<std::string> &openMethods, 
+	                                              std::vector<std::string> &closeMethods);
 
 #endif

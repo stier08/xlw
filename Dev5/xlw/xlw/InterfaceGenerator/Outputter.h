@@ -1,5 +1,6 @@
 /*
  Copyright (C) 2006 Mark Joshi
+ Copyright (C) 2011 Narinder S Claire
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -22,7 +23,9 @@
 void PushBack(std::string& str, char c);
 std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& functionDescriptions,
                                     std::string inputfileName,
-                                    std::string LibraryName);
+                                    std::string LibraryName,
+									const std::vector<std::string> &openMethodse,
+									const std::vector<std::string> &closeMethods);
 
 
 std::vector<char> OutputFileCreatorCL(const std::vector<FunctionDescription>& functionDescriptions,
