@@ -20,24 +20,36 @@
 #include "xlw/TempMemory.h"
 #include "xlw/CriticalSection.h"
 #include "xlw/ThreadLocalStorage.h"
-#include "xlw/xlwshared_ptr.h"
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include <xlw/XlfWindows.h>
 
-static xlw::ThreadLocalStorage<xlw::TempMemory> tls;
-static xlw::CriticalSection threadInfoVector;
 typedef xlw_tr1::shared_ptr<xlw::TempMemory> TempMemoryPtr;
-static std::vector<TempMemoryPtr> tempMemoryInstances;
 
 
+namespace 
+{
+     xlw::ThreadLocalStorage<xlw::TempMemory> tls;
+     xlw::CriticalSection threadInfoVector;
+     std::vector<TempMemoryPtr> tempMemoryInstances;
+}
 namespace
 {
     bool threadIsDead(const TempMemoryPtr& tempMemory)
     {
         return tempMemory->isThreadDead();
     }
+
+	struct charArrayDeleter
+	{
+		void operator()(char *ptr)const
+		{
+			delete[] ptr;
+		}
+
+	};
+
 }
 
 namespace xlw {
@@ -91,7 +103,7 @@ namespace xlw {
         if (finished)
             nbBuffersToKeep = 0;
         while (freeList_.size() > nbBuffersToKeep) {
-            delete[] freeList_.back().start;
+           // delete[] freeList_.back().start; shouldn't need this anymore
             freeList_.pop_back();
         }
         offset_ = 0;
@@ -100,7 +112,7 @@ namespace xlw {
     void TempMemory::PushNewBuffer(size_t size) {
         XlfBuffer newBuffer;
         newBuffer.size = size;
-        newBuffer.start = new char[size];
+        newBuffer.start = shared_char_ptr(new char[size],charArrayDeleter());;
         freeList_.push_front(newBuffer);
         offset_=0;
     #if !defined(NDEBUG)
@@ -119,13 +131,13 @@ namespace xlw {
             // space, whichever is greater
             PushNewBuffer(std::max((buffer.size * 3) / 2, (offset_ + bytes) + 4096));
             offset_ = bytes;
-            return freeList_.front().start;
+            return freeList_.front().start.get();
         }
         else
         {
             size_t temp = offset_;
             offset_ += bytes;
-            return buffer.start + temp;
+            return buffer.start.get() + temp;
         }
     }
 

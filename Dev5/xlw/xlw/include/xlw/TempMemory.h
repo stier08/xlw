@@ -22,7 +22,7 @@
 #define INC_TempMemory_H
 
 #include <xlw/XlfWindows.h>
-
+#include "xlw/xlwshared_ptr.h"
 /*!
 \file TempMemory.h
 \brief Declares class TempMemory.
@@ -76,6 +76,7 @@ namespace xlw {
         //@}
 
     private:
+		typedef xlw_tr1::shared_ptr<char> shared_char_ptr;
         //! \name Structors and static members
         //@{
         //! Ctor.
@@ -109,7 +110,7 @@ namespace xlw {
             //! Size of the buffer.
             size_t size;
             //! Start address.
-            char * start;
+            shared_char_ptr start;
         };
 
         //! A list of buffers.
