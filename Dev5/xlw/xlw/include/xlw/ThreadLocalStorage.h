@@ -28,6 +28,8 @@
 
 namespace xlw {
 
+// This is essential a smart pointer .. when
+// thinking in terms of resource allocation
 template<typename T>
 class ThreadLocalStorage
 {
@@ -56,6 +58,8 @@ public:
     }
 
 private:
+	ThreadLocalStorage(const ThreadLocalStorage &);
+	ThreadLocalStorage & operator=(const ThreadLocalStorage&);
     DWORD m_tlsIndex;
 };
 
