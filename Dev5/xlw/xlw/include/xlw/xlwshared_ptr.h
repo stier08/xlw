@@ -15,6 +15,14 @@
 #ifndef XLW_SHARED_PTR_HEADER_GUARD
 #define XLW_SHARED_PTR_HEADER_GUARD 
 
+#include<memory>
+
+// use tr1 version of shared_ptr if we have it
+// MSVC headers define _HAS_TR1
+// and the recommended install of gcc sets _GLIBCXX_TR1
+#if defined(_HAS_TR1) || defined(_GLIBCXX_TR1)
+namespace xlw_tr1 = std::tr1;
+#else
 #include<xlw/xlwshared_ptr_details.h>
 
 namespace xlw
@@ -130,7 +138,7 @@ namespace xlw
 }
 
 namespace xlw_tr1 = xlw::impl;
-
+#endif
 
 #endif // XLW_SHARED_PTR_HEADER_GUARD 
 
