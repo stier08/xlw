@@ -39,7 +39,18 @@
 #define WIN32_LEAN_AND_MEAN
 #endif
 
-#include <windows.h>
+#ifndef _MSC_VER
+// shouldn't really be required
+// but the mingw headers set OpenThread as 0x0500
+// minimum
+#ifndef WINVER
+#define WINVER 0x0500
+#endif
+#else
+// with msvc allow standard 2000 minimum
+#define WINVER 0x0400
+#endif
 
+#include <windows.h>
 
 #endif
