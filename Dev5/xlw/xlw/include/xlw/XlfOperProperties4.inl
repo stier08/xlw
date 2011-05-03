@@ -113,10 +113,10 @@ namespace xlw { namespace impl {
         {
             if(rows > 0 && cols > 0)
             {
-                if(cols > 255)
+                if(cols > 256)
                 {
-                    std::cerr << "Truncating columns to 255" << std::endl;
-                    cols = 255;
+                    std::cerr << "Truncating columns to 256" << std::endl;
+                    cols = 256;
                 }
                 if(rows > 65536)
                 {

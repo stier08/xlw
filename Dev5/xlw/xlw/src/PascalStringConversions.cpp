@@ -108,9 +108,9 @@ wchar_t* xlw::PascalStringConversions::StringToWPascalString(const std::string& 
 {
     size_t n(cString.length());
 
-    if (n > 32766) {
-        std::cerr << XLW__HERE__ << "String truncated to 32766 bytes" << std::endl;
-        n = 32766;
+    if (n > 32767) {
+        std::cerr << XLW__HERE__ << "String truncated to 32767 bytes" << std::endl;
+        n = 32767;
     }
 
     // One byte more for the string length (convention used by Excel)
