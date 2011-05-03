@@ -141,13 +141,13 @@ namespace xlw {
         // NOTE:
         // we deliberately don't call tempMemoryInstances.clear()
         // here as we can't remove the TLS info from other threads
-        // and it's posible for our addin to be reloaded and to reuse 
+        // and it's possible for our addin to be reloaded and to reuse 
         // calculation threads
     }
     
     bool TempMemory::isThreadDead() const
     {
-        HANDLE threadHandle(OpenThread(THREAD_QUERY_LIMITED_INFORMATION, FALSE, threadId_));
+        HANDLE threadHandle(OpenThread(THREAD_QUERY_INFORMATION, FALSE, threadId_));
         if(threadHandle) {
             DWORD exitCode(0);
             BOOL result = GetExitCodeThread(threadHandle, &exitCode);
