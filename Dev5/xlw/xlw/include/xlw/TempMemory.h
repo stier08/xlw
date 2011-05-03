@@ -46,6 +46,12 @@ namespace xlw {
     class TempMemory
     {
     public:
+        //! \name Structors and static members
+        //@{
+        //! Dtor.
+        ~TempMemory();
+        //@}
+
         //! \name Memory management
         //@{
         //! Allocates memory in the framework temporary buffer
@@ -63,13 +69,17 @@ namespace xlw {
         static void TerminateProcess();
         //@}
 
+        //! \name Utilities
+        //@{
+        //! Has this thread stopped
+        bool isThreadDead() const;
+        //@}
+
     private:
         //! \name Structors and static members
         //@{
         //! Ctor.
         TempMemory();
-        //! Dtor.
-        ~TempMemory();
         //@}
 
         //! Allocates memory in the framework temporary buffer
@@ -108,6 +118,8 @@ namespace xlw {
         BufferList freeList_;
         //! Pointer to next free area (excluded from the pimpl to allow inlining).
         size_t offset_;
+        //! Thread Id that this object belongs to
+        DWORD threadId_;
 
         //! Create a new static buffer and add it to the free list.
         void PushNewBuffer(size_t);

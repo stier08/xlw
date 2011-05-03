@@ -20,16 +20,25 @@
 #include "xlw/TempMemory.h"
 #include "xlw/CriticalSection.h"
 #include "xlw/ThreadLocalStorage.h"
+#include "xlw/xlwshared_ptr.h"
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <xlw/XlfWindows.h>
 
 static xlw::ThreadLocalStorage<xlw::TempMemory> tls;
 static xlw::CriticalSection threadInfoVector;
-//FIXME: leaks the TempMemory objects
-// waiting for shared pointer class
-static std::vector<xlw::TempMemory*> tempMemoryInstances;
+typedef xlw_tr1::shared_ptr<xlw::TempMemory> TempMemoryPtr;
+static std::vector<TempMemoryPtr> tempMemoryInstances;
 
+
+namespace
+{
+    bool threadIsDead(const TempMemoryPtr& tempMemory)
+    {
+        return tempMemory->isThreadDead();
+    }
+}
 
 namespace xlw {
 
@@ -46,12 +55,14 @@ namespace xlw {
             threadStorage = tls.GetValue();
             if(!threadStorage)
             {
+                // see if any of the existing threads have died
+                // since we where last called
+                tempMemoryInstances.erase(std::remove_if(tempMemoryInstances.begin(), tempMemoryInstances.end(), threadIsDead), tempMemoryInstances.end());
+
+                // create the new memory object
                 threadStorage = new TempMemory;
                 tls.SetValue(threadStorage);
-                tempMemoryInstances.push_back(threadStorage);
-                // FIXME:
-                // also check for dead threads and delete
-                // memory
+                tempMemoryInstances.push_back(TempMemoryPtr(threadStorage));
             }
         }
         return threadStorage->InternalGetMemory(bytes);
@@ -66,7 +77,8 @@ namespace xlw {
     }
 
     TempMemory::TempMemory() :
-        offset_(0) {
+        offset_(0),
+        threadId_(GetCurrentThreadId()) {
     }
 
     TempMemory::~TempMemory() {
@@ -123,14 +135,41 @@ namespace xlw {
 
     void TempMemory::TerminateProcess() {
         ProtectInScope protecting(threadInfoVector);
-        for(size_t i(0); i < tempMemoryInstances.size(); ++i)
-        {
+        for(size_t i(0); i < tempMemoryInstances.size(); ++i) {
             tempMemoryInstances[i]->InternalFreeMemory(true);
         }
-        // FIXME:
-        // should delete the pointer and array here too
-        // but we have  the issue when excel closes and
-        // calls xlAutoClose before the user can cancel
-        // fix leak when we have a shared pointer
+        // NOTE:
+        // we deliberately don't call tempMemoryInstances.clear()
+        // here as we can't remove the TLS info from other threads
+        // and it's posible for our addin to be reloaded and to reuse 
+        // calculation threads
+    }
+    
+    bool TempMemory::isThreadDead() const
+    {
+        HANDLE threadHandle(OpenThread(THREAD_QUERY_LIMITED_INFORMATION, FALSE, threadId_));
+        if(threadHandle) {
+            DWORD exitCode(0);
+            BOOL result = GetExitCodeThread(threadHandle, &exitCode);
+            CloseHandle(threadHandle);
+            if(result != 0) {
+                if(exitCode == STILL_ACTIVE) {
+                    // still running
+                    return false;
+                }
+                else {
+                    // it's gone
+                    return true;
+                }
+            }
+            else {
+                // fail safe and don't delete in this case
+                return false;
+            }
+        }
+        else {
+            // fail safe and don't delete in this case
+            return false;
+        }
     }
 }
