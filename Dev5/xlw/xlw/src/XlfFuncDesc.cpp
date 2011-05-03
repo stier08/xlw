@@ -55,7 +55,7 @@ xlw::XlfFuncDesc::XlfFuncDesc(const std::string& name, const std::string& alias,
                          const std::string &helpID,
                          bool Asynchronous, bool MacroSheetEquivalent,
                          bool ClusterSafe)
-    : XlfAbstractCmdDesc(name, alias, comment),returnTypeCode_(returnTypeCode),helpID_(helpID),
+    : XlfAbstractCmdDesc(name, alias, comment),helpID_(helpID),returnTypeCode_(returnTypeCode),
 	impl_(new XlfFuncDescImpl(recalcPolicy,Threadsafe,category, Asynchronous, MacroSheetEquivalent, ClusterSafe))
 {
 }

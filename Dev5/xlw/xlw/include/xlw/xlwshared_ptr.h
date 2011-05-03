@@ -105,7 +105,7 @@ namespace xlw
 			long use_count() const{return control->use_count();} // never throws
 			bool unique() const{return use_count()==1;} // never throws
 
-			operator bool() const{return  get();}// never throws
+			operator bool() const{return get()!=0;}// never throws
 
 			void swap(shared_ptr &p) // CANNOT THROW !
 			{

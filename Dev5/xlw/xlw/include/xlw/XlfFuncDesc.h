@@ -123,8 +123,7 @@ namespace xlw {
 		XlfFuncDesc(const XlfFuncDesc&);
 		//! Assignment operator is declared private but not defined.
 		XlfFuncDesc& operator=(const XlfFuncDesc&);
-		//! Pointer to implementation (pimpl idiom, see \ref HS).
-		xlw_tr1::shared_ptr<XlfFuncDescImpl> impl_;
+
 		//! Shared registration code
 		int RegisterAs(const std::string& dllName, double mode_, double* funcId = NULL) const;
 		// Is this function currently live, or has it been faux-unregistered?
@@ -132,9 +131,16 @@ namespace xlw {
 		//bool live_;
 		// Index into our list of UDFs (not used?).
 		//int index_;
-		//! Excel code for the datatype of this function's return value.
-		mutable std::string returnTypeCode_;
 		std::string helpID_;
+		//! Excel code for the datatype of this function's return value.
+		// I know it's mutable .. and it's not angelic BUT we may only
+		// be able to get the returnType AFTER XlfExcel instance has been initialised
+		// so not at the static constructor level.
+		mutable std::string returnTypeCode_;
+		//! Pointer to implementation (pimpl idiom, see \ref HS).
+		xlw_tr1::shared_ptr<XlfFuncDescImpl> impl_;
+
+
 	};
 
 }
