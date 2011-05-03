@@ -24,7 +24,7 @@
 
 namespace
 {
-    using namespace xlw::Impl;
+    using namespace xlw::impl;
     using namespace xlw;
 
     template<class LPOPER_TYPE>
@@ -121,9 +121,9 @@ namespace
     };
 }
 
-xlw::Impl::IXlfOperShared* xlw::Impl::XlfOperProperties<LPXLFOPER>::m_version = 0;
+xlw::impl::IXlfOperShared* xlw::impl::XlfOperProperties<LPXLFOPER>::m_version = 0;
 
-void xlw::Impl::XlfOperProperties<LPXLFOPER>::setExcel12(bool isExcel12)
+void xlw::impl::XlfOperProperties<LPXLFOPER>::setExcel12(bool isExcel12)
 {
     if(isExcel12)
     {
@@ -135,7 +135,7 @@ void xlw::Impl::XlfOperProperties<LPXLFOPER>::setExcel12(bool isExcel12)
     }
 }
 
-void xlw::Impl::XlfOperProperties<LPXLFOPER>::clearMemory()
+void xlw::impl::XlfOperProperties<LPXLFOPER>::clearMemory()
 {
     delete m_version;
     m_version = 0;

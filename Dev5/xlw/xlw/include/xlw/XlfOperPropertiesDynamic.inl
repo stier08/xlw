@@ -15,7 +15,7 @@
 
 #include <xlw/IXlfOperShared.h>
 
-namespace xlw { namespace Impl {
+namespace xlw { namespace impl {
 
     template <>
     struct XlfOperProperties<LPXLFOPER>

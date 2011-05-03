@@ -61,7 +61,7 @@ namespace xlw {
     values of those types received from Excel to be interpreted by the library
     as instances of XlfOper.
     */
-    typedef Impl::XlfOper<LPXLFOPER> XlfOper;
+    typedef impl::XlfOper<LPXLFOPER> XlfOper;
 
 }
 

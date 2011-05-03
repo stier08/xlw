@@ -47,7 +47,7 @@ namespace xlw {
 
     The interface for this class is otherwise the same as that for class XlfOper.
     */
-    typedef xlw::Impl::XlfOper<LPXLOPER> XlfOper4;
+    typedef xlw::impl::XlfOper<LPXLOPER> XlfOper4;
 
 }
 

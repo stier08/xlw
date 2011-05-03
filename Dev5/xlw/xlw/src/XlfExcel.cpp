@@ -243,7 +243,7 @@ void xlw::XlfExcel::InitLibrary() {
         throw std::runtime_error("Could not get address of Excel4v callback");
 
     excelVersion_ = get_excel_version();
-    Impl::XlfOperProperties<LPXLFOPER>::setExcel12(excel12());
+    impl::XlfOperProperties<LPXLFOPER>::setExcel12(excel12());
     if (excel12()) {
         xlfOperType_ = "Q";
         xlfXloperType_ = "U";

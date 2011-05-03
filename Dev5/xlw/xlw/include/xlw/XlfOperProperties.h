@@ -30,7 +30,7 @@
 #include <xlw/XlfException.h>
 #include <string>
 
-namespace xlw { namespace Impl {
+namespace xlw { namespace impl {
 
     template <class LPOPER_TYPE>
     struct XlfOperProperties

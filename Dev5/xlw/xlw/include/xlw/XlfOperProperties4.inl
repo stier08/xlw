@@ -13,7 +13,7 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-namespace xlw { namespace Impl {
+namespace xlw { namespace impl {
 
     template <>
     struct XlfOperProperties<LPXLOPER>

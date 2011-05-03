@@ -59,7 +59,7 @@ namespace xlw {
     };
 }
 
-namespace xlw { namespace Impl {
+namespace xlw { namespace impl {
 
     template<typename LPOPER_TYPE>
     class EXCEL32_API XlfOper

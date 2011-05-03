@@ -25,7 +25,7 @@
 #include <xlw/XlfExcel.h>
 #include <xlw/XlfRef.h>
 
-namespace xlw { namespace Impl {
+namespace xlw { namespace impl {
 
     class IXlfOperShared
     {
