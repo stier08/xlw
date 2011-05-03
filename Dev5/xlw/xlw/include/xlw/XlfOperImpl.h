@@ -340,10 +340,10 @@ namespace xlw { namespace impl {
 
         //! \name Inspectors
         //@{
-        //! Is the data missing ?
+        //! Is the data missing, used by Excel to flag a paramter that hasn't been supplied ?
         bool IsMissing() const
         {
-            return (OperProps::getXlType(lpxloper_) & xltypeMissing) != 0 || (OperProps::getXlType(lpxloper_) & xltypeNil) != 0;
+            return (OperProps::getXlType(lpxloper_) & xltypeMissing) != 0;
         }
         //! Is the data an error ?
         bool IsError() const
@@ -845,7 +845,7 @@ namespace xlw { namespace impl {
 
         CellMatrix AsCellMatrix(const char* ErrorId = 0)
         {
-            if(IsMissing())
+            if(IsMissing() || IsNil())
             {
                 CellMatrix result(1,1);
                 return result;
@@ -884,7 +884,7 @@ namespace xlw { namespace impl {
                     {
                         result(row, col) = CellValue(OperProps::getError(element.lpxloper_), true);
                     }
-                    else if(element.IsMissing())
+                    else if(element.IsNil())
                     {
                         ; // do nothing
                     }
