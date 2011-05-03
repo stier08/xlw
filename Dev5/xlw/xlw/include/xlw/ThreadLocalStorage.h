@@ -50,11 +50,11 @@ public:
 
     T* GetValue()
     {
-        return reinterpret_cast<T*>(TlsGetValue(m_tlsIndex));
+        return static_cast<T*>(TlsGetValue(m_tlsIndex));
     }
     void SetValue(T* newValue)
     {
-        TlsSetValue(m_tlsIndex, reinterpret_cast<void*>(newValue));
+        TlsSetValue(m_tlsIndex, static_cast<void*>(newValue));
     }
 
 private:
