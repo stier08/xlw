@@ -81,7 +81,7 @@
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)\$(SolutionName).pdb"
 				RandomizedBaseAddress="1"
-				ImportLibrary="$(OutDir)$(SolutionName).lib"
+				ImportLibrary="$(OutDir)\$(SolutionName).lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -171,7 +171,7 @@
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)\$(SolutionName).pdb"
 				RandomizedBaseAddress="1"
-				ImportLibrary="$(OutDir)$(SolutionName).lib"
+				ImportLibrary="$(OutDir)\$(SolutionName).lib"
 				TargetMachine="17"
 			/>
 			<Tool
@@ -262,7 +262,7 @@
 				AdditionalLibraryDirectories="$(XLW)\xlw\lib"
 				ProgramDatabaseFile="$(OutDir)\$(SolutionName).pdb"
 				RandomizedBaseAddress="1"
-				ImportLibrary="$(OutDir)$(SolutionName).lib"
+				ImportLibrary="$(OutDir)\$(SolutionName).lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -353,7 +353,7 @@
 				AdditionalLibraryDirectories="$(XLW)\xlw\lib\x64"
 				ProgramDatabaseFile="$(OutDir)\$(SolutionName).pdb"
 				RandomizedBaseAddress="1"
-				ImportLibrary="$(OutDir)$(SolutionName).lib"
+				ImportLibrary="$(OutDir)\$(SolutionName).lib"
 				TargetMachine="17"
 			/>
 			<Tool
