@@ -22,6 +22,8 @@
 #include "Test.h"
 #include <ctime>
 #include <windows.h>
+#include<xlw/XlfExcel.h>
+#include<xlw/XlOpenClose.h>
 
 std::string // tests empty args
 EmptyArgFunction()
@@ -198,3 +200,17 @@ GetNote() {
     return result.AsString();
 }
 
+
+void welcome()
+{
+	xlw::XlfExcel::MsgBox("This is the XLW Example Project, Enjoy !!\n"
+		                  "Email any questions to xlw-users@lists.sourceforge.net. ","Welcome");
+}
+
+
+
+void goodbye()
+{
+	xlw::XlfExcel::MsgBox("Thanks for choosing XLW. \n"
+		                  "Email any questions to xlw-users@lists.sourceforge.net. ","Bye-Bye");
+}

@@ -16,6 +16,9 @@
 
 using namespace xlw;
 
+//<xlw:onopen( welcome)
+//<xlw:onclose(goodbye)
+
 //<xlw:libraryname=MyTestLibrary
 std::string // tests empty args
 //<xlw:threadsafe
