@@ -55,8 +55,8 @@ namespace xlw
 		MacroFPtr m_fptr;
 	};
 
-	struct open{};
-	struct close{};
+	struct Open{};
+	struct Close{};
 
 	template<class policy>
 	class MacroCache : public singleton<MacroCache<policy> >

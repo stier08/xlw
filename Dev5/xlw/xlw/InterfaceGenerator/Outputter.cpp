@@ -24,6 +24,32 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 
 #include"OutputterHelper.h"
 
+void WriteMacrosInitialisation(std::vector<char> &output, 
+	                          const std::string & policy, 
+							  const std::vector<std::string> &theMethods)
+{
+	AddLine(output,"//////////////////////////");
+	AddLine(output,"// Methods that will get registered to execute in Auto" + policy);
+	AddLine(output,"//////////////////////////");
+	AddLine(output,"");
+
+	for(size_t i(0); i<theMethods.size(); ++i)
+	{
+		AddLine(output,"void " + theMethods[i] + "();");
+		std::string quotedName = "\""+theMethods[i]+"\"";
+		AddLine(output,"namespace {");
+		AddLine(output,"\tMacroCache<xlw::" + policy + ">::MacroRegistra " + theMethods[i]+"_registra" +
+			"(" + quotedName + "," + quotedName + "," + theMethods[i] + ");");
+		AddLine(output,"}");
+		AddLine(output,"");
+		AddLine(output,"");
+
+	}
+}
+
+
+
+
 std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& functionDescriptions,
                                     std::string inputFileName, std::string LibraryName, 
 									const std::vector<std::string> &openMethods, 
@@ -283,42 +309,10 @@ std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& func
 
   }
   // The Methods that will get registered to execute in AutoOpen
-  AddLine(output,"//////////////////////////");
-  AddLine(output,"// Methods that will get registered to execute in AutoOpen ");
-  AddLine(output,"//////////////////////////");
-  AddLine(output,"");
+   WriteMacrosInitialisation(output,"Open",openMethods);
 
-  for(size_t i(0); i<openMethods.size(); ++i)
-  {
-	  AddLine(output,"void " + openMethods[i] + "();");
-	  std::string quotedName = "\""+openMethods[i]+"\"";
-	  AddLine(output,"namespace {");
-	  AddLine(output,"\tMacroCache<open>::MacroRegistra " + openMethods[i]+"_registra" +
-		              "(" + quotedName + "," + quotedName + "," + openMethods[i] + ");");
-	  AddLine(output,"}");
-	  AddLine(output,"");
-      AddLine(output,"");
-
-  }
-
-   // The Methods that will get registered to execute in AutoClose
-  AddLine(output,"//////////////////////////");
-  AddLine(output,"// Methods that will get registered to execute in AutoClose ");
-  AddLine(output,"//////////////////////////");
-  AddLine(output,"");
-
-  for(size_t i(0); i<closeMethods.size(); ++i)
-  {
-	  AddLine(output,"void " + closeMethods[i] + "();");
-	  std::string quotedName = "\""+closeMethods[i]+"\"";
-	  AddLine(output,"namespace {");
-	  AddLine(output,"\tMacroCache<close>::MacroRegistra " + closeMethods[i]+"_registra" +
-		              "(" + quotedName + "," + quotedName + "," + closeMethods[i] + ");");
-	  AddLine(output,"}");
-	  AddLine(output,"");
-      AddLine(output,"");
-
-  }
+   // The Methods that will get registered to execute in AutoClose * AutoRemove
+   WriteMacrosInitialisation(output,"Close",closeMethods);
 
   return output;
 

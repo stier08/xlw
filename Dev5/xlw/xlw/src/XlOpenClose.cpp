@@ -34,13 +34,13 @@ static xlw::CerrBufferRedirector redirectCerr;
 namespace xlw
 {
 	template<>
-	void MacroCache<open>::RegisterMacro(eshared_ptr<IMacro> theMacro)
+	void MacroCache<Open>::RegisterMacro(eshared_ptr<IMacro> theMacro)
 	{
 		m_macros.push_back(theMacro);
 	}
 
 	template<>
-	void MacroCache<close>::RegisterMacro(eshared_ptr<IMacro> theMacro)
+	void MacroCache<Close>::RegisterMacro(eshared_ptr<IMacro> theMacro)
 	{
 		m_macros.push_back(theMacro);
 	}
@@ -56,12 +56,12 @@ namespace xlw
 	}
 
 	template<>
-	void MacroCache<open>::ExecuteMacros()
+	void MacroCache<Open>::ExecuteMacros()
 	{
 	   executer(m_macros);
 	}
 	template<>
-	void MacroCache<close>::ExecuteMacros()
+	void MacroCache<Close>::ExecuteMacros()
 	{
 	   executer(m_macros);
 	}
@@ -90,7 +90,7 @@ extern "C"
 
             xlw::XLRegistration::ExcelFunctionRegistrationRegistry::Instance().DoTheRegistrations();
 
-			xlw::MacroCache<xlw::open>::Instance().ExecuteMacros();
+			xlw::MacroCache<xlw::Open>::Instance().ExecuteMacros();
 
             // Clears the status bar.
             xlw::XlfExcel::Instance().SendMessage();
@@ -105,6 +105,7 @@ extern "C"
     long EXCEL_EXPORT xlAutoClose()
     {
         std::cerr << XLW__HERE__ << "Releasing resources" << std::endl;
+		xlw::MacroCache<xlw::Close>::Instance().ExecuteMacros();
         // note that we don't unregister the functions here
         // excel has some strange behaviour when exiting and can
         // call xlAutoClose before the user has been asked about the close
@@ -112,7 +113,7 @@ extern "C"
         // have enough state to come back to life
         xlw::XlfExcel::DeleteInstance();
 
-		xlw::MacroCache<xlw::close>::Instance().ExecuteMacros();
+		
         // clear up any temporary memory used
         // but keep enough alive so that exel can still use
         // the functions
@@ -129,9 +130,9 @@ extern "C"
         // we can safely unregister the functions here as the user has unloaded the
         // xll and so won't expect to be able to use the functions
         xlw::XLRegistration::ExcelFunctionRegistrationRegistry::Instance().DoTheDeregistrations();
-
+		xlw::MacroCache<xlw::Close>::Instance().ExecuteMacros();
         xlw::XlfExcel::DeleteInstance();
-
+		
         // clear up any temporary memory used
         xlw::TempMemory::TerminateProcess();
         return 1;
