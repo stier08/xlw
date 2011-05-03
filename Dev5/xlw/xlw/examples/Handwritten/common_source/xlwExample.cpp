@@ -3,6 +3,7 @@
  Copyright (C) 1998, 1999, 2001, 2002 Jérôme Lecomte
  Copyright (C) 2007, 2008 Eric Ehlers
  Copyright (C) 2011 John Adcock
+ Copyright (C) 2011 Narinder S Claire
 
  This file is part of xlw, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -21,8 +22,39 @@
 #include <xlw/xlw.h>
 #include <sstream>
 #include <vector>
-
+#include<xlw/XlOpenClose.h>
 using namespace xlw;
+
+
+void welcome()
+{
+	xlw::XlfExcel::MsgBox("This is the XLW Handwritten Project, Enjoy !!\n"
+		                  "Email any questions to xlw-users@lists.sourceforge.net. ","Welcome");
+}
+
+// Registers welcome() to be executed by xlAutoOpen
+// method must have return type void and take no parameters.
+// You can register as many functions as you like.
+namespace 
+{
+	MacroCache<open>::MacroRegistra welcome_registra("welcome","welcome",welcome);
+}
+
+void goodbye()
+{
+	xlw::XlfExcel::MsgBox("Thanks for choosing XLW. \n"
+		                  "Email any questions to xlw-users@lists.sourceforge.net. ","Bye-Bye");
+}
+// Registers goodbye() to be executed by xlAutoClose
+// method must have return type void and take no parameters.
+// You can register as many functions as you like.
+namespace 
+{
+	MacroCache<close>::MacroRegistra goodbye_registra("goodbye","goodbye",goodbye);
+}
+
+
+
 
 extern "C" {
 
