@@ -31,34 +31,6 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 // but Excel still can call the functions
 static xlw::CerrBufferRedirector redirectCerr;
 
-namespace xlw
-{
-	
-	void executer(const std::list<eshared_ptr<IMacro> > & m_macros)
-	{
-		std::list<eshared_ptr<IMacro> >::const_iterator theIterator;
-		for(theIterator = m_macros.begin(); theIterator!=m_macros.end(); ++theIterator)
-		{
-			theIterator->get()->operator()();
-		}
-
-	}
-
-	template<>
-	void MacroCache<xlw::Open>::ExecuteMacros()
-	{
-	   executer(m_macros);
-	}
-	template<>
-	void MacroCache<xlw::Close>::ExecuteMacros()
-	{
-	   executer(m_macros);
-	}
-
-}
-
-
-
 extern "C"
 {
 

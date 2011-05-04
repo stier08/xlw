@@ -61,27 +61,42 @@ namespace xlw
 	template<class policy>
 	class MacroCache : public singleton<MacroCache<policy> >
 	{
+	private:
 		friend class singleton<MacroCache<policy> >;
 	public:
+		// FIXME: code used to use eshared_ptr here
+		// fails on VC7.1 for no obvious reason
+		// probbaly to do with earlier VC versions issues 
+		// with partial templates
+		typedef xlw_tr1::shared_ptr<IMacro> IMacroPtr;
+		//typedef eshared_ptr<IMacro> IMacroPtr;
+
 		struct MacroRegistra
 		{
 			typedef void (*MacroFPtr)();
 			MacroRegistra(const std::string &name_,const std::string & description_, const MacroFPtr fptr_)
 			{
-				eshared_ptr<IMacro> theMacro(new MacroFromFPtr(name_,description_,fptr_));
-				MacroCache<policy>::Instance().RegisterMacro(theMacro);
+				IMacroPtr theMacro2(new MacroFromFPtr(name_,description_,fptr_));
+				MacroCache<policy>::Instance().RegisterMacro(theMacro2);
 			}
 		};
 
-		void RegisterMacro(const eshared_ptr<IMacro> &theMacro)
+		void RegisterMacro(const IMacroPtr &theMacro)
 		{
 			m_macros.push_back(theMacro);
 		}
-		void ExecuteMacros();
+		void ExecuteMacros()
+        {
+            std::list<IMacroPtr>::const_iterator theIterator;
+            for(theIterator = m_macros.begin(); theIterator!=m_macros.end(); ++theIterator)
+            {
+                (*theIterator)->operator()();
+            }
+        }
 	protected:
 		MacroCache(){}
 	private:
-		std::list<eshared_ptr<IMacro> > m_macros;
+		std::list<IMacroPtr> m_macros;
 	};
 
 
