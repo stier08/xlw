@@ -33,18 +33,7 @@ static xlw::CerrBufferRedirector redirectCerr;
 
 namespace xlw
 {
-	template<>
-		void MacroCache<xlw::Open>::RegisterMacro(const eshared_ptr<IMacro> &theMacro)
-	{
-		m_macros.push_back(theMacro); // VC7.1 build is breaking on this line 
-	}
-
-	template<>
-	void MacroCache<xlw::Close>::RegisterMacro(const eshared_ptr<IMacro> &theMacro)
-	{
-		m_macros.push_back(theMacro); // and on this line .. have no idea why ! 4 May 2011
-	} 
-
+	
 	void executer(const std::list<eshared_ptr<IMacro> > & m_macros)
 	{
 		std::list<eshared_ptr<IMacro> >::const_iterator theIterator;

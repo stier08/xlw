@@ -73,7 +73,10 @@ namespace xlw
 			}
 		};
 
-		void RegisterMacro(const eshared_ptr<IMacro> &theMacro);
+		void RegisterMacro(const eshared_ptr<IMacro> &theMacro)
+		{
+			m_macros.push_back(theMacro);
+		}
 		void ExecuteMacros();
 	protected:
 		MacroCache(){}
