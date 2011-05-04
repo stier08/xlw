@@ -321,6 +321,13 @@ extern "C" {
         return result;
         EXCEL_END_12;
     }
+
+    int EXCEL_EXPORT xlTestCmd() {
+        EXCEL_BEGIN;
+        xlw::XlfExcel::MsgBox("This is the TestCmd function\n"
+                                  "Email any questions to xlw-users@lists.sourceforge.net. ","Test Command");
+        EXCEL_END_CMD;
+    }
 }
 
 namespace {
@@ -426,4 +433,8 @@ namespace {
     XLRegistration::XLFunctionRegistrationHelper registerMatrixTest12(
         "xlMatrixTest12", "MatrixTest12", "Generate an identity matrix",
         "xlw Example", MatrixTest12Args, 2, false, false, "Q");
+
+    XLRegistration::XLCommandRegistrationHelper registerTestCmd(
+        "xlTestCmd", "TestCmd", "A Test Command",
+        "Handwritten", "Test Command");
 }
