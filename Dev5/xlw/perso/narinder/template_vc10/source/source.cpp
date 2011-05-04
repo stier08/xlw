@@ -16,14 +16,14 @@ EchoShort(short x // number to be echoed
 
 void my_open_func()
 {
-	xlw::XlfExcel::MsgBox("Thanks for Opening me!","Welcome");
+    std::cerr << "Thanks for opening me" << std::endl;
 }
 
 
 
 void my_close_func()
 {
-	xlw::XlfExcel::MsgBox("Bye-Bye ..see you next time!","Bye-Bye");
+    std::cerr << "Bye-Bye ..see you next time!" << std::endl;
 }
 
 

@@ -199,8 +199,8 @@ GetNote() {
 
 void welcome()
 {
-	xlw::XlfExcel::MsgBox("This is the XLW Example Project, Enjoy !!\n"
-		                  "Email any questions to xlw-users@lists.sourceforge.net. ","Welcome");
+    std::cerr << "This is the XLW Example Project, Enjoy !!" << std::endl;
+    std::cerr << "Email any questions to xlw-users@lists.sourceforge.net. " << std::endl;
 }
 
 

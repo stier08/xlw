@@ -28,8 +28,8 @@ using namespace xlw;
 
 void welcome()
 {
-	xlw::XlfExcel::MsgBox("This is the XLW Handwritten Project, Enjoy !!\n"
-		                  "Email any questions to xlw-users@lists.sourceforge.net. ","Welcome");
+    std::cerr << "This is the XLW Handwritten Project, Enjoy !!" << std::endl;
+    std::cerr << "Email any questions to xlw-users@lists.sourceforge.net. " << std::endl;
 }
 
 // Registers welcome() to be executed by xlAutoOpen
