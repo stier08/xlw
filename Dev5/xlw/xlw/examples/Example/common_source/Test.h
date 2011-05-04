@@ -142,4 +142,7 @@ std::string // the text of the note attached to the calling cell
 //<xlw:macrosheet
 GetNote();
 
+void // Test Menu Command
+testCommand();
+
 #endif

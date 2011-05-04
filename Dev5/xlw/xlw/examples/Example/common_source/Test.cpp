@@ -207,6 +207,13 @@ void welcome()
 
 void goodbye()
 {
-	xlw::XlfExcel::MsgBox("Thanks for choosing XLW. \n"
-		                  "Email any questions to xlw-users@lists.sourceforge.net. ","Bye-Bye");
+    xlw::XlfExcel::MsgBox("Thanks for choosing XLW. \n"
+                          "Email any questions to xlw-users@lists.sourceforge.net. ","Bye-Bye");
+}
+
+
+void testCommand()
+{
+    xlw::XlfExcel::MsgBox("This is the XLW Example Project, testCommand function !!\n"
+                          "Email any questions to xlw-users@lists.sourceforge.net. ","Bye-Bye");
 }
