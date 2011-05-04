@@ -29,6 +29,13 @@
 namespace
 {
 // fundamental types
+TypeRegistry::Helper voidReg("void", // New type
+               "void",          // Old type
+               "",              // Converter name, we just pass into the constructor as a declaration
+               false,           // Is a method
+               false,           // Takes identifier
+               "#ERR"           // Type code
+               );
 
 TypeRegistry::Helper XlfOperReg("XlfOper", // New type
                "LPXLFOPER",     // Old type

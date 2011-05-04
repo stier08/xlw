@@ -89,217 +89,262 @@ std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& func
 
   for (unsigned long i=0; i < functionDescriptions.size(); i++)
   {
+    bool isCommand(functionDescriptions[i].GetReturnType() == "void");
     std::string name = functionDescriptions[i].GetFunctionName();
-	std::string display_name = functionDescriptions[i].GetDisplayName();
+    std::string display_name = functionDescriptions[i].GetDisplayName();
     //std::string keys;
     AddLine(output,"namespace");
     AddLine(output,"{");
 
-    AddLine(output,"XLRegistration::Arg");
-    AddLine(output,name+"Args[]=");
-
-    AddLine(output,"{");
-
-    {for (unsigned long j=0; j < functionDescriptions[i].NumberOfArguments(); j++)
-    {
-      //PushBack(keys,functionDescriptions[i].GetArgument(j).GetTheType().GetEXCELKey());
-      std::string thisLine = "{ \"";
-      thisLine+= functionDescriptions[i].GetArgument(j).GetArgumentName();
-      thisLine+= "\",\"";
-      thisLine+= functionDescriptions[i].GetArgument(j).GetArgumentDescription();
-      thisLine+= " \",\"";
-      thisLine+= functionDescriptions[i].GetArgument(j).GetTheType().GetEXCELKey();
-      thisLine+="\"}";
-
-      if (j+1< functionDescriptions[i].NumberOfArguments())
-        thisLine+=",";
-
-      AddLine(output,thisLine);
-    }}
-
-    if (functionDescriptions[i].NumberOfArguments() == 0)
-      AddLine(output, " { \"\",\"\" } ");
-
-    AddLine(output,"};");
     // ok arg list is now set up
 
     std::ostringstream s;
     s << functionDescriptions[i].NumberOfArguments();
 
-    AddLine(output,"  XLRegistration::XLFunctionRegistrationHelper");
-    AddLine(output,"register"+name+"(\"xl"+name+"\",");
-    AddLine(output,"\""+display_name+"\",");
-    AddLine(output,"\""+ functionDescriptions[i].GetFunctionDescription()+" \",");
-    AddLine(output, "LibraryName,");
-    AddLine(output,name+"Args,");
-    AddLine(output,s.str());
-    //AddLine(output,"\""+keys+"\"");
-    if ( functionDescriptions[i].GetVolatile())
-      AddLine(output,",true");
-    else
-      AddLine(output,",false");
-    if ( functionDescriptions[i].GetThreadsafe())
-      AddLine(output,",true");
-    else
-      AddLine(output,",false");
-    AddLine(output,",\"\"");
-    if ( functionDescriptions[i].GetHelpID().length() > 0 )
+    if(isCommand)
     {
-        std::string helpline(",");
-        helpline += functionDescriptions[i].GetHelpID();
-        AddLine(output,helpline);
+        AddLine(output,"  XLRegistration::XLCommandRegistrationHelper");
+        AddLine(output,"register"+name+"(\"xl"+name+"\",");
+        AddLine(output,"\""+display_name+"\",");
+        AddLine(output,"\""+ functionDescriptions[i].GetFunctionDescription()+" \",");
+        AddLine(output, "LibraryName,");
+        AddLine(output, "\""+ functionDescriptions[i].GetFunctionDescription()+" \");");
+        AddLine(output,"}");
+
+        AddLine(output,"");
+        AddLine(output,"");
+        AddLine(output,"");
+
+
+        AddLine(output,"extern \"C\"");
+        AddLine(output,"{");
+
+        AddLine(output,"int EXCEL_EXPORT");
+        AddLine(output,"xl"+name+"()");
+        AddLine(output,"{");
+        AddLine(output,"EXCEL_BEGIN;");
+        AddLine(output,"\t"+functionDescriptions[i].GetFunctionName()+"();");
+        AddLine(output,"EXCEL_END_CMD;");
+        AddLine(output,"}");
+        AddLine(output,"}");
     }
     else
-      AddLine(output,",\"\"");
-    if ( functionDescriptions[i].GetAsynchronous())
-      AddLine(output,",true");
-    else
-      AddLine(output,",false");
-    if ( functionDescriptions[i].GetMacroSheet())
-      AddLine(output,",true");
-    else
-      AddLine(output,",false");
-    if ( functionDescriptions[i].GetClusterSafe())
-      AddLine(output,",true");
-    else
-      AddLine(output,",false");
-
-    AddLine(output, ");");
-    AddLine(output,"}");
-
-    // ok we've done the registration, we still need to do the function
-
-    AddLine(output,"");
-    AddLine(output,"");
-    AddLine(output,"");
-
-
-    AddLine(output,"extern \"C\"");
-    AddLine(output,"{");
-
-    //AddLine(output,"LPXLOPER EXCEL_EXPORT");
-    AddLine(output,"LPXLFOPER EXCEL_EXPORT");
-    AddLine(output,"xl"+name+"(");
-
-
-    {for (unsigned long j=0; j < functionDescriptions[i].NumberOfArguments(); j++)
     {
-      std::string delimiter;
-      if (j +1 < functionDescriptions[i].NumberOfArguments())
-        delimiter = ",";
-      else
-        delimiter = ")";
+        if (functionDescriptions[i].NumberOfArguments() > 0)
+        {
+            AddLine(output,"XLRegistration::Arg");
+            AddLine(output,name+"Args[]=");
 
-      std::vector<std::string> chain = functionDescriptions[i].GetArgument(j).GetTheType().GetConversionChain();
-      std::vector<std::string>::const_iterator it = chain.begin()+chain.size()-1;
+            AddLine(output,"{");
 
-      std::string uniqifier("a");
-      if (chain.size() ==1)
-        uniqifier ="";
+            for (unsigned long j=0; j < functionDescriptions[i].NumberOfArguments(); j++)
+            {
+                std::string thisLine = "{ \"";
+                thisLine+= functionDescriptions[i].GetArgument(j).GetArgumentName();
+                thisLine+= "\",\"";
+                thisLine+= functionDescriptions[i].GetArgument(j).GetArgumentDescription();
+                thisLine+= " \",\"";
+                thisLine+= functionDescriptions[i].GetArgument(j).GetTheType().GetEXCELKey();
+                thisLine+="\"}";
 
-      AddLine(output,*it+" "+functionDescriptions[i].GetArgument(j).GetArgumentName()+uniqifier+delimiter);
+                if (j+1< functionDescriptions[i].NumberOfArguments())
+                    thisLine+=",";
 
-    }}
+                AddLine(output,thisLine);
+            }
 
-    if (functionDescriptions[i].NumberOfArguments()==0)
-      AddLine(output, ")");
+            AddLine(output,"};");
+        }
 
-
-
-    AddLine(output,"{");
-    AddLine(output,"EXCEL_BEGIN;");
-    AddLine(output,"");
-    AddLine( output, "\tif (XlfExcel::Instance().IsCalledByFuncWiz())");
-    AddLine(output,"\t\treturn XlfOper(true);");
-    AddLine(output,"");
-
-    {for (unsigned long j=0; j < functionDescriptions[i].NumberOfArguments(); j++)
-    {
-
-      // we converted to XlfOper now we have to go through our conversion chain
-
-      std::vector<std::string> chain = functionDescriptions[i].GetArgument(j).GetTheType().GetConversionChain();
-      char id = 'a';
-
-      std::string lastId = functionDescriptions[i].GetArgument(j).GetArgumentName()+id;
-      ++id;
-
-      for (unsigned long k=0; k < chain.size() -1; k++)
-      {
-        std::vector<std::string>::const_iterator it = chain.begin()+chain.size()-2-k;
-        std::string newId = functionDescriptions[i].GetArgument(j).GetArgumentName();
-
-        if (k+1 != chain.size() -1)
-          newId+= id;
-
-        TypeRegistry::regData argData = TypeRegistry::Instance().GetRegistration(*it);
-        AddLine(output, argData.NewType+" "+newId+"(");
-
-        bool specIdentifier = argData.TakesIdentifier;
-        std::string identifierBit;
-        bool isMethod = argData.IsAMethod;
-
-        if (specIdentifier && !isMethod)
-          identifierBit = ",\""+newId+"\"";
-        if (specIdentifier && isMethod)
-          identifierBit = "\""+newId+"\"";
-
-
-        if (isMethod)
-          AddLine(output, "\t"+lastId+"."+argData.Converter+"("+identifierBit+"));");
+        AddLine(output,"  XLRegistration::XLFunctionRegistrationHelper");
+        AddLine(output,"register"+name+"(\"xl"+name+"\",");
+        AddLine(output,"\""+display_name+"\",");
+        AddLine(output,"\""+ functionDescriptions[i].GetFunctionDescription()+" \",");
+        AddLine(output, "LibraryName,");
+        if (functionDescriptions[i].NumberOfArguments() > 0)
+        {
+            AddLine(output,name+"Args,");
+        }
         else
-          AddLine(output, "\t"+argData.Converter+"("+lastId+identifierBit+"));");
-
-        ++id;
-        lastId=newId;
-      }
-
-      AddLine(output,"");
-
-    }}
-
-    if (functionDescriptions[i].DoTime())
-    {
-      AddLine(output," HiResTimer t;");
-    }
-
-    AddLine(output,functionDescriptions[i].GetReturnType()+" result(");
-    if (functionDescriptions[i].NumberOfArguments() >0)
-    {
-      AddLine(output,'\t'+functionDescriptions[i].GetFunctionName()+"(");
-      for (unsigned long j=0; j < functionDescriptions[i].NumberOfArguments(); j++)
-      {
-        std::string delimiter;
-        if (j +1 < functionDescriptions[i].NumberOfArguments())
-          delimiter = ",";
+        {
+            AddLine(output,"0,");
+        }
+        AddLine(output,s.str());
+        //AddLine(output,"\""+keys+"\"");
+        if ( functionDescriptions[i].GetVolatile())
+          AddLine(output,",true");
         else
-          delimiter = ")";
+          AddLine(output,",false");
+        if ( functionDescriptions[i].GetThreadsafe())
+          AddLine(output,",true");
+        else
+          AddLine(output,",false");
+        AddLine(output,",\"\"");
+        if ( functionDescriptions[i].GetHelpID().length() > 0 )
+        {
+            std::string helpline(",");
+            helpline += functionDescriptions[i].GetHelpID();
+            AddLine(output,helpline);
+        }
+        else
+          AddLine(output,",\"\"");
+        if ( functionDescriptions[i].GetAsynchronous())
+          AddLine(output,",true");
+        else
+          AddLine(output,",false");
+        if ( functionDescriptions[i].GetMacroSheet())
+          AddLine(output,",true");
+        else
+          AddLine(output,",false");
+        if ( functionDescriptions[i].GetClusterSafe())
+          AddLine(output,",true");
+        else
+          AddLine(output,",false");
 
-        AddLine(output,"\t\t"+functionDescriptions[i].GetArgument(j).GetArgumentName()+delimiter);
-      }
-      AddLine(output,"\t);");
+        AddLine(output, ");");
+        AddLine(output,"}");
+
+        // ok we've done the registration, we still need to do the function
+
+        AddLine(output,"");
+        AddLine(output,"");
+        AddLine(output,"");
+
+
+        AddLine(output,"extern \"C\"");
+        AddLine(output,"{");
+
+        //AddLine(output,"LPXLOPER EXCEL_EXPORT");
+        AddLine(output,"LPXLFOPER EXCEL_EXPORT");
+        AddLine(output,"xl"+name+"(");
+
+
+        {for (unsigned long j=0; j < functionDescriptions[i].NumberOfArguments(); j++)
+        {
+          std::string delimiter;
+          if (j +1 < functionDescriptions[i].NumberOfArguments())
+            delimiter = ",";
+          else
+            delimiter = ")";
+
+          std::vector<std::string> chain = functionDescriptions[i].GetArgument(j).GetTheType().GetConversionChain();
+          std::vector<std::string>::const_iterator it = chain.begin()+chain.size()-1;
+
+          std::string uniqifier("a");
+          if (chain.size() ==1)
+            uniqifier ="";
+
+          AddLine(output,*it+" "+functionDescriptions[i].GetArgument(j).GetArgumentName()+uniqifier+delimiter);
+
+        }}
+
+        if (functionDescriptions[i].NumberOfArguments()==0)
+          AddLine(output, ")");
+
+
+
+        AddLine(output,"{");
+        AddLine(output,"EXCEL_BEGIN;");
+        AddLine(output,"");
+        if(functionDescriptions[i].GetReturnType() != "void")
+        {
+            AddLine( output, "\tif (XlfExcel::Instance().IsCalledByFuncWiz())");
+            AddLine(output,"\t\treturn XlfOper(true);");
+            AddLine(output,"");
+
+            {for (unsigned long j=0; j < functionDescriptions[i].NumberOfArguments(); j++)
+            {
+
+              // we converted to XlfOper now we have to go through our conversion chain
+
+              std::vector<std::string> chain = functionDescriptions[i].GetArgument(j).GetTheType().GetConversionChain();
+              char id = 'a';
+
+              std::string lastId = functionDescriptions[i].GetArgument(j).GetArgumentName()+id;
+              ++id;
+
+              for (unsigned long k=0; k < chain.size() -1; k++)
+              {
+                std::vector<std::string>::const_iterator it = chain.begin()+chain.size()-2-k;
+                std::string newId = functionDescriptions[i].GetArgument(j).GetArgumentName();
+
+                if (k+1 != chain.size() -1)
+                  newId+= id;
+
+                TypeRegistry::regData argData = TypeRegistry::Instance().GetRegistration(*it);
+                AddLine(output, argData.NewType+" "+newId+"(");
+
+                bool specIdentifier = argData.TakesIdentifier;
+                std::string identifierBit;
+                bool isMethod = argData.IsAMethod;
+
+                if (specIdentifier && !isMethod)
+                  identifierBit = ",\""+newId+"\"";
+                if (specIdentifier && isMethod)
+                  identifierBit = "\""+newId+"\"";
+
+
+                if (isMethod)
+                  AddLine(output, "\t"+lastId+"."+argData.Converter+"("+identifierBit+"));");
+                else
+                  AddLine(output, "\t"+argData.Converter+"("+lastId+identifierBit+"));");
+
+                ++id;
+                lastId=newId;
+              }
+
+              AddLine(output,"");
+
+            }}
+
+            if (functionDescriptions[i].DoTime())
+            {
+              AddLine(output," HiResTimer t;");
+            }
+
+            AddLine(output,functionDescriptions[i].GetReturnType()+" result(");
+            if (functionDescriptions[i].NumberOfArguments() >0)
+            {
+              AddLine(output,'\t'+functionDescriptions[i].GetFunctionName()+"(");
+              for (unsigned long j=0; j < functionDescriptions[i].NumberOfArguments(); j++)
+              {
+                std::string delimiter;
+                if (j +1 < functionDescriptions[i].NumberOfArguments())
+                  delimiter = ",";
+                else
+                  delimiter = ")";
+
+                AddLine(output,"\t\t"+functionDescriptions[i].GetArgument(j).GetArgumentName()+delimiter);
+              }
+              AddLine(output,"\t);");
+            }
+            else
+              AddLine(output,'\t'+functionDescriptions[i].GetFunctionName()+"());");
+
+            if (functionDescriptions[i].DoTime())
+            {
+              AddLine(output,"CellMatrix resultCells(result);");
+              AddLine(output,"CellMatrix time(1,2);");
+              AddLine(output,"time(0,0) = \"time taken\";");
+              AddLine(output,"time(0,1) = t.elapsed();");
+              AddLine(output,"resultCells.PushBottom(time);");
+              AddLine(output,"return XlfOper(resultCells);");
+            }
+            else
+            {
+              AddLine(output,"return XlfOper(result);");
+            }
+        }
+        else
+        {
+            AddLine(output,'\t'+functionDescriptions[i].GetFunctionName()+"();");
+        }
+        AddLine(    output,"EXCEL_END");
+
+        AddLine(output,"}");
+
+        AddLine(output,"}");
     }
-    else
-      AddLine(output,'\t'+functionDescriptions[i].GetFunctionName()+"());");
-
-    if (functionDescriptions[i].DoTime())
-    {
-      AddLine(output,"CellMatrix resultCells(result);");
-      AddLine(output,"CellMatrix time(1,2);");
-      AddLine(output,"time(0,0) = \"time taken\";");
-      AddLine(output,"time(0,1) = t.elapsed();");
-      AddLine(output,"resultCells.PushBottom(time);");
-      AddLine(output,"return XlfOper(resultCells);");
-    }
-    else
-    {
-      AddLine(output,"return XlfOper(result);");
-    }
-    AddLine(    output,"EXCEL_END");
-
-    AddLine(output,"}");
-
-    AddLine(output,"}");
 
     AddLine(output,"");
     AddLine(output,"");
