@@ -34,16 +34,16 @@ static xlw::CerrBufferRedirector redirectCerr;
 namespace xlw
 {
 	template<>
-	void MacroCache<Open>::RegisterMacro(eshared_ptr<IMacro> theMacro)
+		void MacroCache<xlw::Open>::RegisterMacro(const eshared_ptr<IMacro> &theMacro)
 	{
-		m_macros.push_back(theMacro);
+		m_macros.push_back(theMacro); // VC7.1 build is breaking on this line 
 	}
 
 	template<>
-	void MacroCache<Close>::RegisterMacro(eshared_ptr<IMacro> theMacro)
+	void MacroCache<xlw::Close>::RegisterMacro(const eshared_ptr<IMacro> &theMacro)
 	{
-		m_macros.push_back(theMacro);
-	}
+		m_macros.push_back(theMacro); // and on this line .. have no idea why ! 4 May 2011
+	} 
 
 	void executer(const std::list<eshared_ptr<IMacro> > & m_macros)
 	{
@@ -56,17 +56,18 @@ namespace xlw
 	}
 
 	template<>
-	void MacroCache<Open>::ExecuteMacros()
+	void MacroCache<xlw::Open>::ExecuteMacros()
 	{
 	   executer(m_macros);
 	}
 	template<>
-	void MacroCache<Close>::ExecuteMacros()
+	void MacroCache<xlw::Close>::ExecuteMacros()
 	{
 	   executer(m_macros);
 	}
 
 }
+
 
 
 extern "C"
@@ -125,12 +126,12 @@ extern "C"
     {
         std::cerr << XLW__HERE__ << "Addin being unloaded" << std::endl;
 
-
+        xlw::MacroCache<xlw::Close>::Instance().ExecuteMacros();
 
         // we can safely unregister the functions here as the user has unloaded the
         // xll and so won't expect to be able to use the functions
         xlw::XLRegistration::ExcelFunctionRegistrationRegistry::Instance().DoTheDeregistrations();
-		xlw::MacroCache<xlw::Close>::Instance().ExecuteMacros();
+
         xlw::XlfExcel::DeleteInstance();
 		
         // clear up any temporary memory used
@@ -139,4 +140,5 @@ extern "C"
     }
 
 }
+
 

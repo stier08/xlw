@@ -55,8 +55,8 @@ namespace xlw
 		MacroFPtr m_fptr;
 	};
 
-	struct Open{};
-	struct Close{};
+	struct Open;
+	struct Close;
 
 	template<class policy>
 	class MacroCache : public singleton<MacroCache<policy> >
@@ -73,7 +73,7 @@ namespace xlw
 			}
 		};
 
-		void RegisterMacro(eshared_ptr<IMacro> theMacro);
+		void RegisterMacro(const eshared_ptr<IMacro> &theMacro);
 		void ExecuteMacros();
 	protected:
 		MacroCache(){}
