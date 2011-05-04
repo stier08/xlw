@@ -22,7 +22,7 @@
 #include <xlw/xlw.h>
 #include <sstream>
 #include <vector>
-#include<xlw/XlOpenClose.h>
+#include <xlw/XlOpenClose.h>
 using namespace xlw;
 
 
@@ -37,7 +37,7 @@ void welcome()
 // You can register as many functions as you like.
 namespace 
 {
-	MacroCache<open>::MacroRegistra welcome_registra("welcome","welcome",welcome);
+	MacroCache<Open>::MacroRegistra welcome_registra("welcome","welcome",welcome);
 }
 
 void goodbye()
@@ -50,7 +50,7 @@ void goodbye()
 // You can register as many functions as you like.
 namespace 
 {
-	MacroCache<close>::MacroRegistra goodbye_registra("goodbye","goodbye",goodbye);
+	MacroCache<Close>::MacroRegistra goodbye_registra("goodbye","goodbye",goodbye);
 }
 
 
