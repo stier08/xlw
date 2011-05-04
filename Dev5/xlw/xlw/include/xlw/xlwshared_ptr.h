@@ -142,5 +142,21 @@ namespace xlw
 namespace xlw_tr1 = xlw::impl;
 #endif
 
+namespace xlw
+{
+	template<class T>
+	struct CustomArrayDeleter
+	{
+		void operator()(T *ptr)const
+		{
+			delete[] ptr;
+		}
+
+	};
+
+}
+
+
+
 #endif // XLW_SHARED_PTR_HEADER_GUARD 
 
