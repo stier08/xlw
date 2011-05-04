@@ -249,6 +249,12 @@ namespace xlw { namespace impl {
         {
             OperProps::setString(lpxloper_, value);
         }
+        //!  wide string ctor.
+        XlfOper(const wchar_t* value) :
+            lpxloper_(TempMemory::GetMemory<OperType>())
+        {
+            OperProps::setWString(lpxloper_, value);
+        }
         //!  wstring ctor.
         XlfOper(const std::wstring& value) :
             lpxloper_(TempMemory::GetMemory<OperType>())
@@ -948,7 +954,7 @@ namespace xlw { namespace impl {
             OperProps::setString(lpxloper_, value);
         }
         //! Set to a c wide string
-        void Set(const wchar_t* &value)
+        void Set(const wchar_t* value)
         {
             OperProps::setWString(lpxloper_, value);
         }
