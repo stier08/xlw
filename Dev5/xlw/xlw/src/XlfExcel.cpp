@@ -285,7 +285,7 @@ std::string xlw::XlfExcel::GetName() const {
 template<typename XLOPER_TYPE>
 XLOPER_TYPE* varArgsToArray(int count, va_list& vargs)
 {
-    // on 64 bit the parameters aren't being passed on the stack a useful
+    // on 64 bit the parameters aren't being passed on the stack in a useful
     // enough way so we can't do the pointer trick used on 32 bits
     // We just copy them into a temporary array
     XLOPER_TYPE* args = xlw::TempMemory::GetMemory<XLOPER_TYPE>(count);
