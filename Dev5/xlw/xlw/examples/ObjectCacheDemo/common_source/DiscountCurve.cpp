@@ -20,11 +20,6 @@
 #include <sstream>
 #include <cmath>
 
-#ifdef _MSC_VER
-#pragma warning (disable : 4996)
-#endif
-
-
 std::string ulToString(unsigned long n);
 std::string stripTrailingHash(const std::string &theSource);
 void check(const std::string &theName);

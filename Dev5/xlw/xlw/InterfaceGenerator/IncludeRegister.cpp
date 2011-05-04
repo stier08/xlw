@@ -17,11 +17,6 @@
  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
-#ifdef _MSC_VER
-#if _MSC_VER < 1250
-#pragma warning(disable:4786)
-#endif
-#endif
 #include "IncludeRegister.h"
 
 void IncludeRegistry::Register(const std::string& arg, const std::string& include)
