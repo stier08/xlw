@@ -52,9 +52,10 @@ namespace xlw {
 
         CellValue();
 
-        std::string StringValue() const;
+        const std::string & StringValue() const;
         const std::wstring& WstringValue() const;
-        const char* CharPtrValue() const;
+        //const char* CharPtrValue() const;
+		//const wchar_t* WCharPtrValue() const;
         double NumericValue() const;
         bool BooleanValue() const;
         unsigned long ErrorValue() const;
@@ -83,6 +84,10 @@ namespace xlw {
         double ValueAsNumeric;
         bool ValueAsBool;
         unsigned long ValueAsErrorCode;
+
+		mutable std::string  TempString;
+
+
 
     };
 

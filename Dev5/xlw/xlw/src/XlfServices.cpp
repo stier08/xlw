@@ -25,6 +25,8 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 namespace xlw
 {
 
+	/// I am not sure whether we need the following at all 
+
 	/*!
 	If no title is specified, the message is assumed to be an error log
 	*/

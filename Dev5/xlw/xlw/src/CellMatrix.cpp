@@ -7,7 +7,7 @@
  Copyright (C) 2006 Mark Joshi
  Copyright (C) 2007 Tim Brunne
  Copyright (C) 2007, 2008 Eric Ehlers
- Copyright (C) 2009 Narinder S Claire
+ Copyright (C) 2009 2011 Narinder S Claire
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -152,12 +152,13 @@ ValueAsString(""), ValueAsWstring(L""), ValueAsNumeric(0.0), ValueAsBool(false),
 {
 }
 
-std::string xlw::CellValue::StringValue() const
+const  std::string & xlw::CellValue::StringValue() const
 {
     if (Type == string) {
         return ValueAsString;
     } else if (Type == wstring) {
-        return std::string(ValueAsWstring.begin(), ValueAsWstring.end());
+		TempString = std::string(ValueAsWstring.begin(), ValueAsWstring.end());
+		return TempString;
     } else {
         throw("non string cell asked to be a string");
     }
