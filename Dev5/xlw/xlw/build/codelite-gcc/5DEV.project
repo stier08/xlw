@@ -33,8 +33,11 @@
     <File Name="../../src/XlfStr.cpp"/>
     <File Name="../../src/XlFunctionRegistration.cpp"/>
     <File Name="../../src/XlOpenClose.cpp"/>
+    <File Name="../../src/XlfServices.cpp"/>
   </VirtualDirectory>
-  <VirtualDirectory Name="include"/>
+  <VirtualDirectory Name="include">
+    <File Name="../../include/xlw/XlfServices.h"/>
+  </VirtualDirectory>
   <VirtualDirectory Name="xlw">
     <File Name="../../include/xlw/ArgList.h"/>
     <File Name="../../include/xlw/CellMatrix.h"/>

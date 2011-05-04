@@ -34,6 +34,7 @@
 #include <map>
 #include <string>
 #include <xlw/TempMemory.h>
+#include <xlw/XlfServices.h>
 
 #if defined(_MSC_VER)
 #pragma once
@@ -69,8 +70,7 @@ namespace xlw {
         static XlfExcel& Instance();
         //! Used to delete instance in xlAutoClose.
         static void DeleteInstance();
-        //! Sends an Excel message box
-        static void MsgBox(const char *, const char *title = 0);
+       
         //@}
 
         //! \name Inspectors
@@ -104,8 +104,7 @@ namespace xlw {
         /*!
         Wrapped functions that are often needed and/or painful to code
         */
-        //! Sends a message in Excel status bar.
-        void SendMessage(const char * msg=0);
+
         //! Was the Esc key pressed ?
         bool IsEscPressed() const;
         //! Is the function being calculated currently called by the Function Wizard ?
@@ -133,6 +132,13 @@ namespace xlw {
         //! The double array type use by this version of Excel
         const std::string & fpType() const { return fpArrayType_; }
         //@}
+
+		//Services 
+		//These are services that are for delivery for
+		//the end user as opposed to for prdeominantly internal use
+		//for xlw
+		StatusBar_t status_bar;
+
     private:
         //! Static pointer to the unique instance of XlfExcel object.
         static XlfExcel *this_;
@@ -158,6 +164,8 @@ namespace xlw {
         std::string xlfXloperType_;
         std::string wStrType_;
         std::string fpArrayType_;
+
+		
     };
 
 }

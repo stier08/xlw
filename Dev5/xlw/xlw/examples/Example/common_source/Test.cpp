@@ -199,21 +199,21 @@ GetNote() {
 
 void welcome()
 {
-    std::cerr << "This is the XLW Example Project, Enjoy !!" << std::endl;
-    std::cerr << "Email any questions to xlw-users@lists.sourceforge.net. " << std::endl;
+	xlw::XlfExcel::Instance().status_bar= "This is the XLW Example Project, Enjoy !!    "
+                                           "Email any questions to xlw-users@lists.sourceforge.net. ";
 }
 
 
 
 void goodbye()
 {
-    xlw::XlfExcel::MsgBox("Thanks for choosing XLW. \n"
+    xlw::MsgBox("Thanks for choosing XLW. \n"
                           "Email any questions to xlw-users@lists.sourceforge.net. ","Bye-Bye");
 }
 
 
 void testCommand()
 {
-    xlw::XlfExcel::MsgBox("This is the XLW Example Project, testCommand function !!\n"
+    xlw::MsgBox("This is the XLW Example Project, testCommand function !!\n"
                           "Email any questions to xlw-users@lists.sourceforge.net. ","Bye-Bye");
 }

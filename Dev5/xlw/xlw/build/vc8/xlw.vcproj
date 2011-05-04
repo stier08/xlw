@@ -365,6 +365,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="..\..\src\XlfServices.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\XlfStr.cpp"
 				>
 			</File>
@@ -536,6 +540,10 @@
 			</File>
 			<File
 				RelativePath="..\..\include\xlw\XlfRef.inl"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\xlw\XlfServices.h"
 				>
 			</File>
 			<File

@@ -141,6 +141,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\src\XlfServices.cpp" />
     <ClCompile Include="..\..\src\XlfStr.cpp" />
     <ClCompile Include="..\..\src\XlFunctionRegistration.cpp" />
     <ClCompile Include="..\..\src\XlOpenClose.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="..\..\include\xlw\XlfOperImpl.h" />
     <ClInclude Include="..\..\include\xlw\XlfOperProperties.h" />
     <ClInclude Include="..\..\include\xlw\XlfRef.h" />
+    <ClInclude Include="..\..\include\xlw\XlfServices.h" />
     <ClInclude Include="..\..\include\xlw\XlfStr.h" />
     <ClInclude Include="..\..\include\xlw\XlFunctionRegistration.h" />
     <ClInclude Include="..\..\include\xlw\XlfWindows.h" />

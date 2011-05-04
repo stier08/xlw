@@ -28,8 +28,8 @@ using namespace xlw;
 
 void welcome()
 {
-    std::cerr << "This is the XLW Handwritten Project, Enjoy !!" << std::endl;
-    std::cerr << "Email any questions to xlw-users@lists.sourceforge.net. " << std::endl;
+	XlfExcel::Instance().status_bar = "This is the XLW Handwritten Project, Enjoy !!       " 
+                                      "Email any questions to xlw-users@lists.sourceforge.net. " ;
 }
 
 // Registers welcome() to be executed by xlAutoOpen
@@ -42,7 +42,7 @@ namespace
 
 void goodbye()
 {
-	xlw::XlfExcel::MsgBox("Thanks for choosing XLW. \n"
+	xlw::MsgBox("Thanks for choosing XLW. \n"
 		                  "Email any questions to xlw-users@lists.sourceforge.net. ","Bye-Bye");
 }
 // Registers goodbye() to be executed by xlAutoClose
@@ -324,7 +324,7 @@ extern "C" {
 
     int EXCEL_EXPORT xlTestCmd() {
         EXCEL_BEGIN;
-        xlw::XlfExcel::MsgBox("This is the TestCmd function\n"
+        xlw::MsgBox("This is the TestCmd function\n"
                                   "Email any questions to xlw-users@lists.sourceforge.net. ","Test Command");
         EXCEL_END_CMD;
     }

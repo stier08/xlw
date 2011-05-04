@@ -48,14 +48,15 @@ extern "C"
             static xlw::PathUpdater updatePath;
 
             // Displays a message in the status bar.
-            xlw::XlfExcel::Instance().SendMessage("Registering library...");
+			xlw::XlfExcel::Instance().status_bar="Registering library...";
 
             xlw::XLRegistration::ExcelFunctionRegistrationRegistry::Instance().DoTheRegistrations();
 
+			// Clears the status bar.
+			xlw::XlfExcel::Instance().status_bar.clear();
+
 			xlw::MacroCache<xlw::Open>::Instance().ExecuteMacros();
 
-            // Clears the status bar.
-            xlw::XlfExcel::Instance().SendMessage();
             return 1;
         }
         catch(...)

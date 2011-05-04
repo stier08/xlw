@@ -83,6 +83,9 @@
     <ClCompile Include="..\..\src\XlOpenClose.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\XlfServices.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\PathUpdater.h">
@@ -206,6 +209,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\xlw\xlwManaged.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\xlw\XlfServices.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

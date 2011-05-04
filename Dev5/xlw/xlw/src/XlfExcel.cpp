@@ -28,7 +28,7 @@
 #include <cstdio>
 #include <iostream>
 #include <stdexcept>
-#include <stdlib.h>
+#include <cstdlib>
 #include <xlw/XlfOper.h>
 #include <xlw/macros.h>
 #include <xlw/TempMemory.h>
@@ -80,43 +80,7 @@ void xlw::XlfExcel::DeleteInstance() {
     this_ = 0;
 }
 
-/*!
-If no title is specified, the message is assumed to be an error log
-*/
-void xlw::XlfExcel::MsgBox(const char *errmsg, const char *title) {
-    LPVOID lpMsgBuf;
-    // retrieve message error from system err code
-    if (!title) {
-        DWORD err = GetLastError();
-        FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
-            NULL,
-            err,
-            MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
-            (LPTSTR) &lpMsgBuf,
-            0,
-            NULL);
-        // Process any inserts in lpMsgBuf.
-        char completeMessage[255];
-        sprintf(completeMessage,"%s due to error %lu :\n%s", errmsg, err, (LPCSTR)lpMsgBuf);
-        MessageBox(NULL, completeMessage,"XLL Error", MB_OK | MB_ICONINFORMATION);
-        // Free the buffer.
-        LocalFree(lpMsgBuf);
-    } else {
-        MessageBox(NULL, errmsg, title, MB_OK | MB_ICONINFORMATION);
-    }
-    return;
-}
 
-/*!
-If msg is 0, the status bar is cleared.
-*/
-void xlw::XlfExcel::SendMessage(const char *msg) {
-    if (msg)
-        Call(xlcMessage, 0, 2, (LPXLFOPER)XlfOper(true), (LPXLFOPER)XlfOper(msg));
-    else
-        Call(xlcMessage, 0, 1, (LPXLFOPER)XlfOper(false));
-    return;
-}
 
 bool xlw::XlfExcel::IsEscPressed() const {
     XlfOper ret;
