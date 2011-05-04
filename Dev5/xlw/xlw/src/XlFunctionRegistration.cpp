@@ -262,7 +262,7 @@ void ExcelFunctionRegistrationRegistry::AddCommand(const XLCommandRegistrationDa
 			theCommand(new XlfCmdDesc(data.GetCommandName(),
 			data.GetExcelCommandName(),
 			data.GetCommandComment(),
-			true));
+			!data.GetMenu().empty()));
 
 		Commands[data.GetExcelCommandName()] = theCommand;
 
