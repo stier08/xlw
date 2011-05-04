@@ -21,6 +21,7 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 
 #include <cstddef>
 #include <vector>
+#include <xlw/eshared_ptr.h>
 
 using std::size_t;
 
@@ -101,14 +102,14 @@ namespace xlw {
         // interfaces
         inline void swap(NCMatrix& theOther);// this cannot throw !
 
-        ~NCMatrix(){ delete theData;}
+        ~NCMatrix(){}
 
     private:
         inline void check_row(size_t j)const;
         inline void check_column(size_t i)const;
 
 
-        NCMatrixData *theData;
+        eshared_ptr<NCMatrixData> theData;
 
     };
 
@@ -200,7 +201,7 @@ namespace xlw {
 
     void NCMatrix::swap(NCMatrix& theOther) // this cannot throw !
     {
-        std::swap(theData,theOther.theData);
+		theData.swap(theOther.theData);
     }
 
 }

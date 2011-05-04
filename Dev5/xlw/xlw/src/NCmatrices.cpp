@@ -20,7 +20,7 @@
 // This will not leak. If the new throws it gets cleaned up and the
 // NCMatrix is never created.
 xlw::NCMatrix::NCMatrix(const NCMatrix& original):
-                        theData( new NCMatrixData(*(original.theData)))
+         theData(original.theData.copy())
 {}
 
 xlw::NCMatrix::NCMatrix(size_t Rows_, size_t Columns_):
