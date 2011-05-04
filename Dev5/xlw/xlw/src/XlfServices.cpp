@@ -1,19 +1,19 @@
 /*
- Copyright (C) 1998, 1999, 2001, 2002, 2003, 2004 Jérôme Lecomte
- Copyright (C) 2007, 2008 Eric Ehlers
- Copyright (C) 2009 Narinder S Claire
- Copyright (C) 2011 John Adcock
+Copyright (C) 1998, 1999, 2001, 2002, 2003, 2004 Jérôme Lecomte
+Copyright (C) 2007, 2008 Eric Ehlers
+Copyright (C) 2009 2011 Narinder S Claire
+Copyright (C) 2011 John Adcock
 
- This file is part of XLW, a free-software/open-source C++ wrapper of the
- Excel C API - http://xlw.sourceforge.net/
+This file is part of XLW, a free-software/open-source C++ wrapper of the
+Excel C API - http://xlw.sourceforge.net/
 
- XLW is free software: you can redistribute it and/or modify it under the
- terms of the XLW license.  You should have received a copy of the
- license along with this program; if not, please email xlw-users@lists.sf.net
+XLW is free software: you can redistribute it and/or modify it under the
+terms of the XLW license.  You should have received a copy of the
+license along with this program; if not, please email xlw-users@lists.sf.net
 
- This program is distributed in the hope that it will be useful, but WITHOUT
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- FOR A PARTICULAR PURPOSE.  See the license for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
 #include <xlw/XlfServices.h>
@@ -67,6 +67,18 @@ namespace xlw
 	void StatusBar_t::clear()
 	{
 		XlfExcel::Instance().  Call(xlcMessage, 0, 1, (LPXLFOPER)XlfOper(false));
+	}
+
+	std::string Reflection_t::GetNote() {
+		XlfOper callingCell;
+		XlfOper startChars(short(1));
+		XlfOper numChars(short(255));
+		XlfOper result;
+
+		XlfExcel::Instance().Call(xlfCaller, callingCell, 0);
+		XlfExcel::Instance().Call(xlfGetNote, result, 3, (LPXLFOPER)callingCell, (LPXLFOPER)startChars, (LPXLFOPER)numChars);
+
+		return result.AsString();
 	}
 
 

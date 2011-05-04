@@ -1,16 +1,16 @@
 /*
- Copyright (C) 2011 Narinder S Claire
+Copyright (C) 2011 Narinder S Claire
 
- This file is part of XLW, a free-software/open-source C++ wrapper of the
- Excel C API - http://xlw.sourceforge.net/
+This file is part of XLW, a free-software/open-source C++ wrapper of the
+Excel C API - http://xlw.sourceforge.net/
 
- XLW is free software: you can redistribute it and/or modify it under the
- terms of the XLW license.  You should have received a copy of the
- license along with this program; if not, please email xlw-users@lists.sf.net
+XLW is free software: you can redistribute it and/or modify it under the
+terms of the XLW license.  You should have received a copy of the
+license along with this program; if not, please email xlw-users@lists.sf.net
 
- This program is distributed in the hope that it will be useful, but WITHOUT
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- FOR A PARTICULAR PURPOSE.  See the license for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 #ifndef XLFSERVICES_HEADER_GUARD
 #define XLFSERVICES_HEADER_GUARD 
@@ -18,8 +18,8 @@
 
 namespace xlw
 {
-	 //! Sends an Excel message box
-    void MsgBox(const char *, const char *title = 0);
+	//! Sends an Excel message box
+	void MsgBox(const char *, const char *title = 0);
 
 	struct StatusBar_t
 	{
@@ -27,6 +27,13 @@ namespace xlw
 		StatusBar_t & operator=(const std::wstring &message);
 		void clear();
 
+	};
+
+	struct Reflection_t
+	{
+		// the text of the note attached to the calling cell
+		std::string GetNote();
+		
 	};
 }
 

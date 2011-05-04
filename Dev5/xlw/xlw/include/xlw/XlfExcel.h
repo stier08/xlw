@@ -138,6 +138,7 @@ namespace xlw {
 		//the end user as opposed to for prdeominantly internal use
 		//for xlw
 		StatusBar_t status_bar;
+		Reflection_t reflection;
 
     private:
         //! Static pointer to the unique instance of XlfExcel object.

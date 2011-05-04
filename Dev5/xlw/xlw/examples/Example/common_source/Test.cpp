@@ -2,6 +2,8 @@
 /*
  Copyright (C) 2006 Mark Joshi
  Copyright (C) 2007, 2008 Eric Ehlers
+ Copyright (C) 2011 John Adcock
+ Copyright (C) 2011 Narunder S Claire
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -185,15 +187,7 @@ typeString2(const reftest &input) {
 
 std::string // the text of the note attached to the calling cell
 GetNote() {
-    XlfOper callingCell;
-    XlfOper startChars(short(1));
-    XlfOper numChars(short(255));
-    XlfOper result;
-
-    XlfExcel::Instance().Call(xlfCaller, callingCell, 0);
-    XlfExcel::Instance().Call(xlfGetNote, result, 3, (LPXLFOPER)callingCell, (LPXLFOPER)startChars, (LPXLFOPER)numChars);
-
-    return result.AsString();
+    return XlfExcel::Instance().reflection.GetNote();
 }
 
 
