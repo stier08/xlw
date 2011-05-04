@@ -130,13 +130,13 @@ functions.
 #define EXCEL_END_CMD \
 } catch (XlfException&) { \
     return 0; \
-} catch (std::exception& error){\
+} catch (std::exception&){\
     return 0;\
-} catch (std::string& error){\
+} catch (std::string&){\
     return 0;\
-} catch (const char* error){\
+} catch (const char*){\
     return 0;\
-} catch (const CellMatrix& error){\
+} catch (const CellMatrix&){\
     return 0;\
 } catch (...) { \
     return 0; \
