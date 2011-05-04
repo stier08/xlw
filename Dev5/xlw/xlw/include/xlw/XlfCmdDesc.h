@@ -47,7 +47,12 @@ namespace xlw {
         //! \name Structors
         //@{
         //! Ctor.
-        XlfCmdDesc(const std::string& name, const std::string& alias, const std::string& comment, bool hidden);
+        XlfCmdDesc(const std::string& name,
+                   const std::string& alias,
+                   const std::string& comment,
+                   const std::string& menu,
+                   const std::string& menuText,
+                   bool hidden);
         //! Dtor.
         ~XlfCmdDesc();
         //@}
@@ -55,11 +60,12 @@ namespace xlw {
         //! \name Management of command properties
         //@{
         //! Adds the command to an Excel menu bar.
-        int AddToMenuBar(const std::string& menu, const std::string& text);
+        int AddToMenuBar(const char* menu = 0, const char* text = 0);
         //! Is the command already in a menu bar?
         bool IsAddedToMenuBar();
         //! Activates/Deactivates the check box next to the command menu.
         int Check(bool) const;
+        void RemoveFromMenuBar();
         //@}
     protected:
         //! \name Registration

@@ -37,8 +37,16 @@
 
 /*! \e see XlfAbstractCmdDesc::XlfAbstractCmdDesc(const std::string&, const std::string&, const std::string&)
 */
-xlw::XlfCmdDesc::XlfCmdDesc(const std::string& name, const std::string& alias, const std::string& comment, bool hidden)
-    :XlfAbstractCmdDesc(name, alias, comment), menu_(), hidden_(hidden)
+xlw::XlfCmdDesc::XlfCmdDesc(const std::string& name,
+                            const std::string& alias,
+                            const std::string& comment,
+                            const std::string& menu,
+                            const std::string& menuText,
+                            bool hidden) :
+       XlfAbstractCmdDesc(name, alias, comment), 
+       menu_(menu),
+       text_(menuText),
+       hidden_(hidden)
 {}
 
 xlw::XlfCmdDesc::~XlfCmdDesc()
@@ -51,43 +59,52 @@ bool xlw::XlfCmdDesc::IsAddedToMenuBar()
 
 /// This function is using a naked XLOPER
 /// It needs updating for Excel 2007 - nc
-int xlw::XlfCmdDesc::AddToMenuBar(const std::string& menu, const std::string& text)
+int xlw::XlfCmdDesc::AddToMenuBar(const char* menu, const char* text)
 {
-    XLOPER xMenu;
-    LPXLOPER pxMenu;
-    LPXLOPER px;
+    // allow user to override stored values
+    if(menu)
+    {
+        menu_ = menu;
+    }
+    if(text)
+    {
+        text_ = text;
+    }
 
-    menu_ = menu;
-    text_ = text;
+    // we can only proceed if we have both
+    if(menu_.empty() || text_.empty())
+    {
+        return 0;
+    }
 
-    // This is a small trick to allocate an array of XlfOpers
-    // One must first allocate the array with XLOPERs...
-    //px = pxMenu = (LPXLOPER)new XLOPER[5];
+    //first check that the menu exists
+    XlfOper4 menuLocation;
+    int err = XlfExcel::Instance().Call4(xlfGetBar, (LPXLOPER)menuLocation, 3, (LPXLOPER)XlfOper4(10), (LPXLOPER)XlfOper4(menu_), (LPXLOPER)XlfOper4(0));
+    if (err || menuLocation.IsError())
+    {
+        XlfOper4 menuDesc(1,5);
+        menuDesc(0,0) = menu_;
+        menuDesc(0,1) = "";
+        menuDesc(0,2) = "";
+        menuDesc(0,3) = "";
+        menuDesc(0,4) = "";
+        err = XlfExcel::Instance().Call4(xlfAddMenu, (LPXLOPER)menuLocation, 2, (LPXLOPER)XlfOper4(10), (LPXLOPER)menuDesc);
+        if(err)
+        {
+            throw("problem creating menu");
+        }
+    }
 
-   // px = pxMenu = new XLOPER[5];
+    XlfOper4 command(1,5);
+    command(0,0) = text_;
+    command(0,1) = GetAlias();
+    command(0,2) = "";
+    command(0,3) = GetComment();
+    command(0,4) = "";
 
-	xlw_tr1::shared_ptr<XLOPER> smart_px(new XLOPER[5],CustomArrayDeleter<XLOPER>());
-	px = pxMenu = smart_px.get();
-
-    // ...and then assign the XLOPERs to XlfOpers, specifying false to tell the
-    // Framework that the data is not owned by Excel and not to call xlFree
-    // during destruction
-    XlfOper4(px++).Set(text_);
-    XlfOper4(px++).Set(GetAlias());
-    XlfOper4(px++).Set("");
-    XlfOper4(px++).Set(GetComment());
-    XlfOper4(px++).Set("");
-
-    xMenu.xltype = xltypeMulti;
-    xMenu.val.array.lparray = pxMenu;
-    xMenu.val.array.rows = 1;
-    xMenu.val.array.columns = 5;
-
-    //int err = XlfExcel::Instance().Call(xlfAddCommand, 0, 3, (LPXLOPER)XlfOper(1.0), (LPXLOPER)XlfOper(menu_.c_str()), (LPXLOPER)&xMenu);
-    int err = XlfExcel::Instance().Call4(xlfAddCommand, 0, 3, (LPXLOPER)XlfOper4(1.0), (LPXLOPER)XlfOper4(menu_), (LPXLOPER)&xMenu);
+    err = XlfExcel::Instance().Call4(xlfAddCommand, 0, 3, (LPXLOPER)XlfOper4(10), (LPXLOPER)menuLocation, (LPXLOPER)command);
     if (err != xlretSuccess)
-    std::cerr << XLW__HERE__ << "Add command " << GetName().c_str() << " to " << menu_.c_str() << " failed" << std::endl;
-    // delete[] pxMenu; no thankyou .. not anymore 
+        std::cerr << XLW__HERE__ << "Add command " << GetName().c_str() << " to " << menu_.c_str() << " failed" << std::endl;
     return err;
 }
 
@@ -107,6 +124,11 @@ int xlw::XlfCmdDesc::Check(bool ERR_CHECK) const
     }
     return xlretSuccess;
 }
+
+void xlw::XlfCmdDesc::RemoveFromMenuBar()
+{
+}
+
 
 /*!
 Registers the command as a macro in excel.

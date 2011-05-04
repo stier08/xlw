@@ -2,6 +2,7 @@
 Copyright (C) 2006 Mark Joshi
 Copyright (C) 2007, 2008 Eric Ehlers
 Copyright (C) 2011 Narinder S Claire
+Copyright (C) 2011 John Adcock
 
 This file is part of XLW, a free-software/open-source C++ wrapper of the
 Excel C API - http://xlw.sourceforge.net/
@@ -203,10 +204,8 @@ void ExcelFunctionRegistrationRegistry::DoTheRegistrations() const
 	for (commandCache::const_iterator it = Commands.begin(); it !=  Commands.end(); ++it)
 	{
 		it->second->Register();
+        it->second->AddToMenuBar();
 	}
-
-
-
 }
 
 void ExcelFunctionRegistrationRegistry::DoTheDeregistrations() const
@@ -219,6 +218,7 @@ void ExcelFunctionRegistrationRegistry::DoTheDeregistrations() const
 
 	for (commandCache::const_iterator it = Commands.begin(); it !=  Commands.end(); ++it)
 	{
+        it->second->RemoveFromMenuBar();
 		it->second->Unregister();
 	}
 
@@ -262,6 +262,8 @@ void ExcelFunctionRegistrationRegistry::AddCommand(const XLCommandRegistrationDa
 			theCommand(new XlfCmdDesc(data.GetCommandName(),
 			data.GetExcelCommandName(),
 			data.GetCommandComment(),
+            data.GetMenu(),
+            data.GetMenuText(),
 			!data.GetMenu().empty()));
 
 		Commands[data.GetExcelCommandName()] = theCommand;
