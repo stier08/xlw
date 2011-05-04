@@ -58,7 +58,6 @@ bool xlw::XlfCmdDesc::IsAddedToMenuBar()
 }
 
 /// This function is using a naked XLOPER
-/// It needs updating for Excel 2007 - nc
 int xlw::XlfCmdDesc::AddToMenuBar(const char* menu, const char* text)
 {
     // allow user to override stored values
@@ -78,31 +77,30 @@ int xlw::XlfCmdDesc::AddToMenuBar(const char* menu, const char* text)
     }
 
     //first check that the menu exists
-    XlfOper4 menuLocation;
-    int err = XlfExcel::Instance().Call4(xlfGetBar, (LPXLOPER)menuLocation, 3, (LPXLOPER)XlfOper4(10), (LPXLOPER)XlfOper4(menu_), (LPXLOPER)XlfOper4(0));
+    XlfOper barNum(10);
+    XlfOper menuLocation;
+    int err = XlfExcel::Instance().Call(xlfGetBar, (LPXLFOPER)menuLocation, 3, (LPXLFOPER)barNum, (LPXLFOPER)XlfOper(menu_), (LPXLFOPER)XlfOper(0));
     if (err || menuLocation.IsError())
     {
-        XlfOper4 menuDesc(1,5);
+        XlfOper menuDesc(1,5);
         menuDesc(0,0) = menu_;
         menuDesc(0,1) = "";
         menuDesc(0,2) = "";
         menuDesc(0,3) = "";
         menuDesc(0,4) = "";
-        err = XlfExcel::Instance().Call4(xlfAddMenu, (LPXLOPER)menuLocation, 2, (LPXLOPER)XlfOper4(10), (LPXLOPER)menuDesc);
-        if(err)
-        {
-            throw("problem creating menu");
-        }
+        err = XlfExcel::Instance().Call(xlfAddMenu, (LPXLFOPER)menuLocation, 2, (LPXLFOPER)barNum, (LPXLFOPER)menuDesc);
+        if(err != xlretSuccess)
+            std::cerr << XLW__HERE__ << "Add Menu " <<  menu_.c_str() << " failed" << std::endl;
     }
 
-    XlfOper4 command(1,5);
+    XlfOper command(1,5);
     command(0,0) = text_;
     command(0,1) = GetAlias();
     command(0,2) = "";
     command(0,3) = GetComment();
     command(0,4) = "";
 
-    err = XlfExcel::Instance().Call4(xlfAddCommand, 0, 3, (LPXLOPER)XlfOper4(10), (LPXLOPER)menuLocation, (LPXLOPER)command);
+    err = XlfExcel::Instance().Call(xlfAddCommand, 0, 3, (LPXLFOPER)barNum, (LPXLFOPER)menuLocation, (LPXLFOPER)command);
     if (err != xlretSuccess)
         std::cerr << XLW__HERE__ << "Add command " << GetName().c_str() << " to " << menu_.c_str() << " failed" << std::endl;
     return err;
@@ -115,8 +113,7 @@ int xlw::XlfCmdDesc::Check(bool ERR_CHECK) const
         std::cerr << XLW__HERE__ << "No menu specified for the command \"" << GetName().c_str() << "\"" << std::endl;
         return xlretFailed;
     }
-    //int err = XlfExcel::Instance().Call(xlfCheckCommand, 0, 4, (LPXLOPER)XlfOper(1.0), (LPXLOPER)XlfOper(menu_.c_str()), (LPXLOPER)XlfOper(text_.c_str()), (LPXLOPER)XlfOper(ERR_CHECK));
-    int err = XlfExcel::Instance().Call(xlfCheckCommand, 0, 4, (LPXLFOPER)XlfOper(1.0), (LPXLFOPER)XlfOper(menu_), (LPXLFOPER)XlfOper(text_), (LPXLFOPER)XlfOper(ERR_CHECK));
+    int err = XlfExcel::Instance().Call(xlfCheckCommand, 0, 4, (LPXLFOPER)XlfOper(10), (LPXLFOPER)XlfOper(menu_), (LPXLFOPER)XlfOper(text_), (LPXLFOPER)XlfOper(ERR_CHECK));
     if (err != xlretSuccess)
     {
         std::cerr << XLW__HERE__ << "Registration of " << GetAlias().c_str() << " failed" << std::endl;
@@ -127,6 +124,28 @@ int xlw::XlfCmdDesc::Check(bool ERR_CHECK) const
 
 void xlw::XlfCmdDesc::RemoveFromMenuBar()
 {
+    // first check that the menu exists and then delete this command
+    XlfOper barNum(10);
+    XlfOper menu(menu_);
+    XlfOper menuLocation;
+    int err = XlfExcel::Instance().Call(xlfGetBar, (LPXLFOPER)menuLocation, 3, (LPXLFOPER)barNum, (LPXLFOPER)menu, (LPXLFOPER)XlfOper(0));
+    if (!err && !menuLocation.IsError())
+    {
+        err = XlfExcel::Instance().Call(xlfDeleteCommand, 0, 3, (LPXLFOPER)barNum, (LPXLFOPER)menu, (LPXLFOPER)XlfOper(text_));
+        if(err != xlretSuccess) 
+            std::cerr << XLW__HERE__ << "Delete Command " << GetName().c_str() << " from " << menu_.c_str() <<  " failed" << std::endl;
+
+        // check if the menu is now empty, if it is then delete it
+        // if it is empty then the first item won't exist
+        XlfOper firstItemLocation;
+        err = XlfExcel::Instance().Call(xlfGetBar, (LPXLFOPER)firstItemLocation, 3, (LPXLFOPER)XlfOper(10), (LPXLFOPER)menu, (LPXLFOPER)XlfOper(1));
+        if(!err && firstItemLocation.IsError())
+        {
+            err = XlfExcel::Instance().Call(xlfDeleteMenu, 0, 2, (LPXLFOPER)barNum, (LPXLFOPER)menu);
+            if(err != xlretSuccess)
+                std::cerr << XLW__HERE__ << "Delete Menu " << menu_.c_str() <<  " failed" << std::endl;
+        }
+    }
 }
 
 
