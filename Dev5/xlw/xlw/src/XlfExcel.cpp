@@ -185,10 +185,20 @@ HWND xlw::XlfExcel::GetMainWindow()
     }
 }
 
+// tell VS7 to shut up
+#if _MSC_VER < 1400
+#pragma warning(push)
+#pragma warning(disable:4312)
+#endif
+
 HINSTANCE xlw::XlfExcel::GetExcelInstance()
 {
     return (HINSTANCE)GetWindowLongPtr(GetMainWindow(), GWLP_HINSTANCE);
 }
+
+#if _MSC_VER < 1400
+#pragma warning(pop)
+#endif
 
 xlw::XlfExcel::XlfExcel(): impl_(0) {
     impl_ = new XlfExcelImpl();
