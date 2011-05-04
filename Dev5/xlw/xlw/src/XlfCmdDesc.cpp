@@ -2,7 +2,7 @@
 /*
  Copyright (C) 1998, 1999, 2001, 2002, 2003, 2004 Jérôme Lecomte
  Copyright (C) 2007, 2008 Eric Ehlers
- Copyright (C) 2009 Narinder S Claire
+ Copyright (C) 2009 2011 Narinder S Claire
 
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
@@ -29,6 +29,7 @@
 #include <xlw/XlfException.h>
 #include <iostream>
 #include <xlw/macros.h>
+#include <xlw/xlwshared_ptr.h>
 // Stop header precompilation
 #ifdef _MSC_VER
 #pragma hdrstop
@@ -62,7 +63,12 @@ int xlw::XlfCmdDesc::AddToMenuBar(const std::string& menu, const std::string& te
     // This is a small trick to allocate an array of XlfOpers
     // One must first allocate the array with XLOPERs...
     //px = pxMenu = (LPXLOPER)new XLOPER[5];
-    px = pxMenu = new XLOPER[5];
+
+   // px = pxMenu = new XLOPER[5];
+
+	xlw_tr1::shared_ptr<XLOPER> smart_px(new XLOPER[5],CustomArrayDeleter<XLOPER>());
+	px = pxMenu = smart_px.get();
+
     // ...and then assign the XLOPERs to XlfOpers, specifying false to tell the
     // Framework that the data is not owned by Excel and not to call xlFree
     // during destruction
@@ -81,7 +87,7 @@ int xlw::XlfCmdDesc::AddToMenuBar(const std::string& menu, const std::string& te
     int err = XlfExcel::Instance().Call4(xlfAddCommand, 0, 3, (LPXLOPER)XlfOper4(1.0), (LPXLOPER)XlfOper4(menu_), (LPXLOPER)&xMenu);
     if (err != xlretSuccess)
     std::cerr << XLW__HERE__ << "Add command " << GetName().c_str() << " to " << menu_.c_str() << " failed" << std::endl;
-    delete[] pxMenu;
+    // delete[] pxMenu; no thankyou .. not anymore 
     return err;
 }
 
@@ -151,7 +157,8 @@ int xlw::XlfCmdDesc::DoRegister(const std::string& dllName) const
             argnames+=", ";
     }
 
-    LPXLFOPER *rgx = new LPXLFOPER[10 + nbargs];
+	xlw_tr1::shared_ptr<LPXLFOPER> smart_px(new LPXLFOPER[10 + nbargs],CustomArrayDeleter<LPXLFOPER>());
+	LPXLFOPER *rgx = smart_px.get();
     LPXLFOPER *px = rgx;
 
     (*px++) = XlfOper(dllName);
@@ -170,7 +177,7 @@ int xlw::XlfCmdDesc::DoRegister(const std::string& dllName) const
     }
 
     int err = static_cast<int>(XlfExcel::Instance().Callv(xlfRegister, NULL, 10 + nbargs, rgx));
-    delete[] rgx;
+    // delete[] rgx; no thankyou .. not anymore 
     return err;
 
 }

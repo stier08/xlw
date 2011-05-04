@@ -41,15 +41,6 @@ namespace
         return tempMemory->isThreadDead();
     }
 
-	struct charArrayDeleter
-	{
-		void operator()(char *ptr)const
-		{
-			delete[] ptr;
-		}
-
-	};
-
 }
 
 namespace xlw {
@@ -112,7 +103,7 @@ namespace xlw {
     void TempMemory::PushNewBuffer(size_t size) {
         XlfBuffer newBuffer;
         newBuffer.size = size;
-        newBuffer.start = shared_char_ptr(new char[size],charArrayDeleter());;
+        newBuffer.start = shared_char_ptr(new char[size],CustomArrayDeleter<char>());;
         freeList_.push_front(newBuffer);
         offset_=0;
     #if !defined(NDEBUG)

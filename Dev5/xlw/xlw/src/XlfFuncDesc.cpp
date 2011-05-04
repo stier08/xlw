@@ -168,8 +168,10 @@ int xlw::XlfFuncDesc::RegisterAs(const std::string& dllName, double mode_, doubl
 
     args+='\0'; // null termination for C string
 
-    LPXLOPER *rgx = new LPXLOPER[10 + nbargs];
+	xlw_tr1::shared_ptr<LPXLOPER> smart_px(new LPXLOPER[10 + nbargs],CustomArrayDeleter<LPXLOPER>());
+    LPXLOPER *rgx = smart_px.get();
     LPXLOPER *px = rgx;
+
     (*px++) = XlfOper4(dllName);
     (*px++) = XlfOper4(GetName());
     (*px++) = XlfOper4(args);
@@ -193,7 +195,7 @@ int xlw::XlfFuncDesc::RegisterAs(const std::string& dllName, double mode_, doubl
         *funcId = res.AsDouble();
     }
 
-    delete[] rgx;
+    // delete[] rgx; using shared_ptr now .. .don't need it anymore
     return err;
 }
 
