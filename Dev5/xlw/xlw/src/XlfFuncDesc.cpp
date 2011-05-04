@@ -168,7 +168,7 @@ int xlw::XlfFuncDesc::RegisterAs(const std::string& dllName, double mode_, doubl
 
     args+='\0'; // null termination for C string
 
-	xlw_tr1::shared_ptr<LPXLOPER> smart_px(new LPXLOPER[10 + nbargs],CustomArrayDeleter<LPXLOPER>());
+    xlw_tr1::shared_ptr<LPXLOPER> smart_px(new LPXLOPER[10 + nbargs],CustomArrayDeleter<LPXLOPER>());
     LPXLOPER *rgx = smart_px.get();
     LPXLOPER *px = rgx;
 
@@ -182,9 +182,20 @@ int xlw::XlfFuncDesc::RegisterAs(const std::string& dllName, double mode_, doubl
     (*px++) = XlfOper4(""); // shortcut
     (*px++) = XlfOper4(helpID_); // help context
     (*px++) = XlfOper4(GetComment());
+    int counter(0);
     for (it = arguments.begin(); it != arguments.end(); ++it)
     {
-        (*px++) = XlfOper4((*it).GetComment());
+        ++counter;
+        if(counter < nbargs)
+        {
+            (*px++) = XlfOper4((*it).GetComment());
+        }
+        else
+        {
+            // add spaces to last comment to work around known excel bug
+            // see http://msdn.microsoft.com/en-us/library/bb687841.aspx
+            (*px++) = XlfOper4((*it).GetComment() + "  ");
+        }
     }
 
     XlfOper4 res;

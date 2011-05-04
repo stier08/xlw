@@ -212,9 +212,20 @@ int xlw::XlfCmdDesc::DoRegister(const std::string& dllName) const
     (*px++) = XlfOper("");
     (*px++) = XlfOper("");
     (*px++) = XlfOper(GetComment());
+    int counter(0);
     for (it = arguments.begin(); it != arguments.end(); ++it)
     {
-        (*px++) = XlfOper((*it).GetComment());
+        ++counter;
+        if(counter < nbargs)
+        {
+            (*px++) = XlfOper((*it).GetComment());
+        }
+        else
+        {
+            // add spaces to last comment to work around known excel bug
+            // see http://msdn.microsoft.com/en-us/library/bb687841.aspx
+            (*px++) = XlfOper((*it).GetComment() + "  ");
+        }
     }
 
     int err = static_cast<int>(XlfExcel::Instance().Callv(xlfRegister, NULL, 10 + nbargs, rgx));
