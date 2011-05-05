@@ -210,6 +210,8 @@ void goodbye()
 
 void testCommand()
 {
-    xlw::XlfServices.Commands.Alert("This is the XLW Example Project, testCommand function !!\n"
-                                    "Email any questions to xlw-users@lists.sourceforge.net. ");
+    // show off the macro commands - who needs VBA :)
+    XlfOper cellRef = xlw::XlfServices.Commands.InputReference("Give me a cell and I'll tell you its formula", "Test Command");
+    std::string formula(xlw::XlfServices.Information.GetFormula(cellRef));
+    xlw::XlfServices.Commands.Alert(formula);
 }
