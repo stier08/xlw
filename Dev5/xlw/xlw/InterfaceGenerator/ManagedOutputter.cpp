@@ -35,10 +35,10 @@ void writePreamble(std::vector<char> &outputVector)
 
 void OutputFileCreatorMan(std::vector<FunctionDescription>& functionDescriptions,
                                       std::string inputFileName,
-									  std::string LibraryName,
-									  std::vector<char> &outputVector_h,
-									  std::vector<char> &outputVector_cpp
-									   )
+                                      std::string LibraryName,
+                                      std::vector<char> &outputVector_h,
+                                      std::vector<char> &outputVector_cpp
+                                       )
 
 {
   writePreamble(outputVector_h);
@@ -55,7 +55,7 @@ void OutputFileCreatorMan(std::vector<FunctionDescription>& functionDescriptions
   for (std::set<std::string>::const_iterator it = includes.begin(); it!= includes.end(); ++it)
   {
     AddLine(outputVector_cpp, "#include "+*it+"\n");
-	AddLine(outputVector_h, "#include "+*it+"\n");
+    AddLine(outputVector_h, "#include "+*it+"\n");
   }
 
   AddLine(outputVector_cpp, "\n\n\n\n");
@@ -63,15 +63,15 @@ void OutputFileCreatorMan(std::vector<FunctionDescription>& functionDescriptions
 
   for (unsigned long i=0; i < functionDescriptions.size(); i++)
   {
-	std::string returnType = functionDescriptions[i].GetReturnType();
+    std::string returnType = functionDescriptions[i].GetReturnType();
     std::string name       = functionDescriptions[i].GetFunctionName();
-	std::string mxlw_name  = "mxlw_" + name;
-	functionDescriptions[i].setFunctionName(mxlw_name);
-	AddLine(outputVector_cpp,returnType + " " + mxlw_name + "(");
-	AddLine(outputVector_h,returnType + " " + mxlw_name + "(");
+    std::string mxlw_name  = "mxlw_" + name;
+    functionDescriptions[i].setFunctionName(mxlw_name);
+    AddLine(outputVector_cpp,returnType + " " + mxlw_name + "(");
+    AddLine(outputVector_h,returnType + " " + mxlw_name + "(");
 
-	std::string passingParamString = "(";
-	 for (unsigned long j=0; j < functionDescriptions[i].NumberOfArguments(); j++)
+    std::string passingParamString = "(";
+     for (unsigned long j=0; j < functionDescriptions[i].NumberOfArguments(); j++)
     {
       std::vector<std::string> chain
         = functionDescriptions[i].GetArgument(j).GetTheType().GetConversionChain();
@@ -85,28 +85,28 @@ void OutputFileCreatorMan(std::vector<FunctionDescription>& functionDescriptions
       if (chain.size() ==0)
         throw("Managed interface not compatible with custom types. Broke on "+name+" "+functionDescriptions[i].GetArgument(j).GetArgumentName());
 
-	  std::string paramString = functionDescriptions[i].GetArgument(j).GetTheType().GetNameIdentifier()
-		                        + " " + functionDescriptions[i].GetArgument(j).GetArgumentName();
-	  passingParamString += functionDescriptions[i].GetArgument(j).GetArgumentName();
-	  paramString = "\t\t" + paramString;
-	  std::string termChar = ",";
-	  std::string colon = "";
-	  if(j==functionDescriptions[i].NumberOfArguments()-1)
-	  {
-		  termChar=")";
-		  colon = ";";
-	  }
-	  passingParamString +=termChar+colon;
-	  paramString+=termChar;
-	  AddLine(outputVector_cpp,paramString);
-	  AddLine(outputVector_h,paramString+colon);
-	 }
+      std::string paramString = functionDescriptions[i].GetArgument(j).GetTheType().GetNameIdentifier()
+                                + " " + functionDescriptions[i].GetArgument(j).GetArgumentName();
+      passingParamString += functionDescriptions[i].GetArgument(j).GetArgumentName();
+      paramString = "\t\t" + paramString;
+      std::string termChar = ",";
+      std::string colon = "";
+      if(j==functionDescriptions[i].NumberOfArguments()-1)
+      {
+          termChar=")";
+          colon = ";";
+      }
+      passingParamString +=termChar+colon;
+      paramString+=termChar;
+      AddLine(outputVector_cpp,paramString);
+      AddLine(outputVector_h,paramString+colon);
+     }
 
-	  AddLine(outputVector_cpp,"\t{");
-	  AddLine(outputVector_cpp,"\tMANAGED_EXECL_BEGIN");
-	  AddLine(outputVector_cpp,"\t\treturn " + name + passingParamString);
-	  AddLine(outputVector_cpp,"\tMANAGED_EXECL_END");
-	  AddLine(outputVector_cpp,+"\t}");
+      AddLine(outputVector_cpp,"\t{");
+      AddLine(outputVector_cpp,"\tMANAGED_EXECL_BEGIN");
+      AddLine(outputVector_cpp,"\t\treturn " + name + passingParamString);
+      AddLine(outputVector_cpp,"\tMANAGED_EXECL_END");
+      AddLine(outputVector_cpp,+"\t}");
 
 
   }

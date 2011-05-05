@@ -58,8 +58,8 @@ public:
     }
 
 private:
-	ThreadLocalStorage(const ThreadLocalStorage &);
-	ThreadLocalStorage & operator=(const ThreadLocalStorage&);
+    ThreadLocalStorage(const ThreadLocalStorage &);
+    ThreadLocalStorage & operator=(const ThreadLocalStorage&);
     DWORD m_tlsIndex;
 };
 

@@ -28,13 +28,6 @@
 #include <xlw/XlfException.h>
 #include <xlw/XlfOper4.h>
 
-// Stop header precompilation
-#ifdef _MSC_VER
-#pragma hdrstop
-#endif
-
-
-
 /*!
 \param name
 \param alias
@@ -56,7 +49,7 @@ xlw::XlfFuncDesc::XlfFuncDesc(const std::string& name, const std::string& alias,
                          bool Asynchronous, bool MacroSheetEquivalent,
                          bool ClusterSafe)
     : XlfAbstractCmdDesc(name, alias, comment),helpID_(helpID),returnTypeCode_(returnTypeCode),
-	impl_(new XlfFuncDescImpl(recalcPolicy,Threadsafe,category, Asynchronous, MacroSheetEquivalent, ClusterSafe))
+    impl_(new XlfFuncDescImpl(recalcPolicy,Threadsafe,category, Asynchronous, MacroSheetEquivalent, ClusterSafe))
 {
 }
 
@@ -91,8 +84,8 @@ int xlw::XlfFuncDesc::DoRegister(const std::string& dllName) const
 {
     //live_ = true;
 
-	if (returnTypeCode_.empty())
-		returnTypeCode_= XlfExcel::Instance().xlfOperType();
+    if (returnTypeCode_.empty())
+        returnTypeCode_= XlfExcel::Instance().xlfOperType();
     return RegisterAs(dllName, 1);
 }
 

@@ -18,12 +18,6 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
-#ifdef _MSC_VER
-#if _MSC_VER < 1250
-#pragma warning(disable:4786)
-#endif
-#pragma warning(disable:4258)
-#endif
 #include <iostream>
 #include <fstream>
 #include "Functionizer.h"
@@ -56,75 +50,75 @@ int main(int argc, char *argv[])
     }
 
     if (args.size() < 1 || args.size() > 2)
-		throw("usage is :\n "
-		      "          inputfile \n"
-		      "          inputfile outputfile \n"
-			  "      -m  inputfile "
-			  "      -m  inputfile outputdirectory");
+        throw("usage is :\n "
+              "          inputfile \n"
+              "          inputfile outputfile \n"
+              "      -m  inputfile "
+              "      -m  inputfile outputdirectory");
     std::string inputfile(args[0]);
 
     bool clw = false;
-	bool managed = false;
+    bool managed = false;
 
     for (std::vector<std::string>::const_iterator it = options.begin(); it != options.end(); ++it)
     {
       if (*it == "-c")
-	  {
+      {
         clw = true;
-	  }
-	  else if (*it == "-m")
-	  {
-		  managed = true;
-	  }
-	  else
-	  {
+      }
+      else if (*it == "-m")
+      {
+          managed = true;
+      }
+      else
+      {
         std::cerr << "unknown option ignored: " << *it << "\n";
-	  }
+      }
 
     }
 
 
     std::string outputfile;
-	std::string managed_outputfile_h;
-	std::string managed_outputfile_cpp;
+    std::string managed_outputfile_h;
+    std::string managed_outputfile_cpp;
 
-	std::string dirname(getdir(inputfile));
+    std::string dirname(getdir(inputfile));
 
-	std::string outputDir = dirname;
+    std::string outputDir = dirname;
 
 
     if ( !managed && args.size()==2)
-	{
+    {
       outputfile = args[1];
-	}
+    }
     else
     {
-	  if (managed && args.size()==2)
-	  {
-		outputDir = args[1];
-	  }
+      if (managed && args.size()==2)
+      {
+        outputDir = args[1];
+      }
 
       if (clw)
         outputfile= "clw";
       else
-	  {
+      {
 
         outputfile = "xlw";
-		managed_outputfile_h = "mxlw";
+        managed_outputfile_h = "mxlw";
         
-	  }
-	  std::string libName(strip(inputfile));
+      }
+      std::string libName(strip(inputfile));
       for (unsigned long i=0; i < libName.size(); i++)
       {
         if (libName[i] == '.')
           break;
         PushBack(outputfile,libName[i]);
-		PushBack(managed_outputfile_h,libName[i]);
+        PushBack(managed_outputfile_h,libName[i]);
       }
 
       outputfile += ".cpp";
-	  managed_outputfile_cpp = managed_outputfile_h + ".cpp";
-	  managed_outputfile_h +=".h";
+      managed_outputfile_cpp = managed_outputfile_h + ".cpp";
+      managed_outputfile_h +=".h";
     }
 
     ifstream input(inputfile.c_str());
@@ -151,8 +145,8 @@ int main(int argc, char *argv[])
 
     std::string LibraryName(inputfile);// use input file name as default library name
 
-	std::vector<std::string> openMethods;
-	std::vector<std::string> closeMethods;
+    std::vector<std::string> openMethods;
+    std::vector<std::string> closeMethods;
 
     std::vector<FunctionModel> modelVector(ConvertToFunctionModel(tokenVector2,LibraryName,openMethods,closeMethods));
 
@@ -164,22 +158,22 @@ int main(int argc, char *argv[])
 
 
     std::vector<char> outputVector_h;
-	std::vector<char> outputVector_cpp;
+    std::vector<char> outputVector_cpp;
 
 
     if(managed)
-	{
-		OutputFileCreatorMan(functionVector,inputfile,LibraryName,outputVector_h,outputVector_cpp);
-		inputfile = managed_outputfile_h;
+    {
+        OutputFileCreatorMan(functionVector,inputfile,LibraryName,outputVector_h,outputVector_cpp);
+        inputfile = managed_outputfile_h;
       
-		std::cout << " .. writing " << (outputDir+"/" + managed_outputfile_h) <<  "\n";
-		writeOutputFile(outputDir+"/" + managed_outputfile_h,outputVector_h);
-		std::cout << " .. writing " << (outputDir+"/" + managed_outputfile_cpp) <<  "\n";
-		writeOutputFile(outputDir+"/" + managed_outputfile_cpp,outputVector_cpp);
+        std::cout << " .. writing " << (outputDir+"/" + managed_outputfile_h) <<  "\n";
+        writeOutputFile(outputDir+"/" + managed_outputfile_h,outputVector_h);
+        std::cout << " .. writing " << (outputDir+"/" + managed_outputfile_cpp) <<  "\n";
+        writeOutputFile(outputDir+"/" + managed_outputfile_cpp,outputVector_cpp);
 
-		outputfile = outputDir+"/" + outputfile;
+        outputfile = outputDir+"/" + outputfile;
 
-	}
+    }
 
 
 
@@ -193,7 +187,7 @@ int main(int argc, char *argv[])
 
 
 
-	std::cout << " .. writing " << outputfile << "\n";
+    std::cout << " .. writing " << outputfile << "\n";
     writeOutputFile(outputfile,outputVector_cpp);
 
     std::cout << "new file is a vector\n";

@@ -28,7 +28,7 @@ using namespace xlw;
 
 void welcome()
 {
-	XlfExcel::Instance().status_bar = "This is the XLW Handwritten Project, Enjoy !!       " 
+    XlfExcel::Instance().status_bar = "This is the XLW Handwritten Project, Enjoy !!       " 
                                       "Email any questions to xlw-users@lists.sourceforge.net. " ;
 }
 
@@ -37,20 +37,20 @@ void welcome()
 // You can register as many functions as you like.
 namespace 
 {
-	MacroCache<Open>::MacroRegistra welcome_registra("welcome","welcome",welcome);
+    MacroCache<Open>::MacroRegistra welcome_registra("welcome","welcome",welcome);
 }
 
 void goodbye()
 {
-	xlw::MsgBox("Thanks for choosing XLW. \n"
-		                  "Email any questions to xlw-users@lists.sourceforge.net. ","Bye-Bye");
+    xlw::MsgBox("Thanks for choosing XLW. \n"
+                          "Email any questions to xlw-users@lists.sourceforge.net. ","Bye-Bye");
 }
 // Registers goodbye() to be executed by xlAutoClose
 // method must have return type void and take no parameters.
 // You can register as many functions as you like.
 namespace 
 {
-	MacroCache<Close>::MacroRegistra goodbye_registra("goodbye","goodbye",goodbye);
+    MacroCache<Close>::MacroRegistra goodbye_registra("goodbye","goodbye",goodbye);
 }
 
 

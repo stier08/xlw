@@ -193,7 +193,7 @@ GetNote() {
 
 void welcome()
 {
-	xlw::XlfExcel::Instance().status_bar= "This is the XLW Example Project, Enjoy !!    "
+    xlw::XlfExcel::Instance().status_bar= "This is the XLW Example Project, Enjoy !!    "
                                            "Email any questions to xlw-users@lists.sourceforge.net. ";
 }
 

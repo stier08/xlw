@@ -26,10 +26,6 @@
 #include <xlw/XlfExcel.h>
 #include <iostream>
 #include <xlw/macros.h>
-// Stop header precompilation
-#ifdef _MSC_VER
-#pragma hdrstop
-#endif
 
 void xlw::XlfArgDesc::CheckNameLength()
 {

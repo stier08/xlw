@@ -29,10 +29,6 @@ typedef int (PASCAL *EXCEL12PROC) (int xlfn, int coper, LPXLOPER12 *rgpxloper12,
 HMODULE hmodule;
 EXCEL12PROC pexcel12;
 
-//__forceinline void FetchExcel12EntryPt(void)
-#if defined(_MSC_VER)
-__forceinline
-#endif
 void FetchExcel12EntryPt(void)
 {
     if (pexcel12 == NULL)

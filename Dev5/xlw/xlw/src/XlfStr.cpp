@@ -1,4 +1,3 @@
-
 /*
  Copyright (C) 2007, 2008 Eric Ehlers
 
@@ -24,11 +23,6 @@
 #include <xlw/XlfStr.h>
 #include <xlw/XlfExcel.h>
 #include <stdlib.h>
-
-// Stop header precompilation
-#ifdef _MSC_VER
-#pragma hdrstop
-#endif
 
 std::wstring xlw::voidToWstr(XLWSTR xlwstr) {
     if (XlfExcel::Instance().excel12()) {

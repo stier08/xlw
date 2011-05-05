@@ -23,11 +23,6 @@
 
 #include <xlw/XlfArgDescList.h>
 
-// Stop header precompilation
-#ifdef _MSC_VER
-#pragma hdrstop
-#endif
-
 xlw::XlfArgDescList::XlfArgDescList()
 {}
 

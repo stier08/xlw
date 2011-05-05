@@ -48,14 +48,14 @@ extern "C"
             static xlw::PathUpdater updatePath;
 
             // Displays a message in the status bar.
-			xlw::XlfExcel::Instance().status_bar="Registering library...";
+            xlw::XlfExcel::Instance().status_bar="Registering library...";
 
             xlw::XLRegistration::ExcelFunctionRegistrationRegistry::Instance().DoTheRegistrations();
 
-			// Clears the status bar.
-			xlw::XlfExcel::Instance().status_bar.clear();
+            // Clears the status bar.
+            xlw::XlfExcel::Instance().status_bar.clear();
 
-			xlw::MacroCache<xlw::Open>::Instance().ExecuteMacros();
+            xlw::MacroCache<xlw::Open>::Instance().ExecuteMacros();
 
             return 1;
         }
@@ -68,7 +68,7 @@ extern "C"
     long EXCEL_EXPORT xlAutoClose()
     {
         std::cerr << XLW__HERE__ << "Releasing resources" << std::endl;
-		xlw::MacroCache<xlw::Close>::Instance().ExecuteMacros();
+        xlw::MacroCache<xlw::Close>::Instance().ExecuteMacros();
         // note that we don't unregister the functions here
         // excel has some strange behaviour when exiting and can
         // call xlAutoClose before the user has been asked about the close
@@ -76,7 +76,7 @@ extern "C"
         // have enough state to come back to life
         xlw::XlfExcel::DeleteInstance();
 
-		
+        
         // clear up any temporary memory used
         // but keep enough alive so that exel can still use
         // the functions
@@ -95,7 +95,7 @@ extern "C"
         xlw::XLRegistration::ExcelFunctionRegistrationRegistry::Instance().DoTheDeregistrations();
 
         xlw::XlfExcel::DeleteInstance();
-		
+        
         // clear up any temporary memory used
         xlw::TempMemory::TerminateProcess();
         return 1;

@@ -18,23 +18,23 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 
 namespace xlw
 {
-	//! Sends an Excel message box
-	void MsgBox(const char *, const char *title = 0);
+    //! Sends an Excel message box
+    void MsgBox(const char *, const char *title = 0);
 
-	struct StatusBar_t
-	{
-		StatusBar_t & operator=(const std::string &message);
-		StatusBar_t & operator=(const std::wstring &message);
-		void clear();
+    struct StatusBar_t
+    {
+        StatusBar_t & operator=(const std::string &message);
+        StatusBar_t & operator=(const std::wstring &message);
+        void clear();
 
-	};
+    };
 
-	struct Reflection_t
-	{
-		// the text of the note attached to the calling cell
-		std::string GetNote();
-		
-	};
+    struct Reflection_t
+    {
+        // the text of the note attached to the calling cell
+        std::string GetNote();
+        
+    };
 }
 
 #endif //  XLFSERVICES_HEADER_GUARD

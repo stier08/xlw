@@ -20,10 +20,10 @@
 
 void OutputFileCreatorMan(std::vector<FunctionDescription>& functionVector,
                                       std::string inputFileName,
-									  std::string LibraryName,
-									  std::vector<char> &outputVector_h,
-									  std::vector<char> &outputVector_cpp
-									   );
+                                      std::string LibraryName,
+                                      std::vector<char> &outputVector_h,
+                                      std::vector<char> &outputVector_cpp
+                                       );
 
 
 

@@ -29,10 +29,10 @@ void my_close_func()
 
 extern "C"
 {
-	int __declspec(dllexport) func()
-	{
-		xlw::XlfExcel::MsgBox("Thanks for calling the menu item","Menu");
-		return 0;
-	}
+    int __declspec(dllexport) func()
+    {
+        xlw::XlfExcel::MsgBox("Thanks for calling the menu item","Menu");
+        return 0;
+    }
 }
 xlw::XLRegistration::XLCommandRegistrationHelper theItem("func","func","comment","File","func");

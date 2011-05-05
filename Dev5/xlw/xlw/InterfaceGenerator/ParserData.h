@@ -72,7 +72,7 @@ public:
                          bool ClusterSafe_);
 
      std::string GetFunctionName() const;
-	 std::string GetDisplayName() const;
+     std::string GetDisplayName() const;
      std::string GetFunctionDescription() const;
      std::string GetExcelKey() const;
      std::string GetReturnType() const;
@@ -85,11 +85,11 @@ public:
      bool GetAsynchronous() const;
      bool GetMacroSheet() const;
      bool GetClusterSafe() const;
-	 void setFunctionName(const std::string &newName);
+     void setFunctionName(const std::string &newName);
 
 private:
      std::string FunctionName;
-	 std::string DisplayName;
+     std::string DisplayName;
      std::string FunctionHelpDescription;
      std::string ReturnType;
      std::string ExcelKey;

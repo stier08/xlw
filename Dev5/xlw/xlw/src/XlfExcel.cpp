@@ -32,10 +32,6 @@
 #include <xlw/XlfOper.h>
 #include <xlw/macros.h>
 #include <xlw/TempMemory.h>
-// Stop header precompilation
-#ifdef _MSC_VER
-#pragma hdrstop
-#endif
 
 extern "C"
 {

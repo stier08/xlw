@@ -157,8 +157,8 @@ const  std::string & xlw::CellValue::StringValue() const
     if (Type == string) {
         return ValueAsString;
     } else if (Type == wstring) {
-		TempString = std::string(ValueAsWstring.begin(), ValueAsWstring.end());
-		return TempString;
+        TempString = std::string(ValueAsWstring.begin(), ValueAsWstring.end());
+        return TempString;
     } else {
         throw("non string cell asked to be a string");
     }

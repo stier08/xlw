@@ -23,9 +23,9 @@
 double // tests logger
 crand()
 {
-	_LOGGER << "Called crand()";
+    _LOGGER << "Called crand()";
     int r = std::rand();
-	_LOGGER << "Generated random number " << r;
-	return double(r);
+    _LOGGER << "Generated random number " << r;
+    return double(r);
 }
 

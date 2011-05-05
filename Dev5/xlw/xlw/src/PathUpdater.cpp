@@ -39,7 +39,7 @@ xlw::PathUpdater::PathUpdater()
     {
         theHandle = ((HMODULE) (theInfo.AllocationBase));
         GetModuleFileName (theHandle, theDLLPathChar , MAX_PATH);
-		xlw::XlfExcel::Instance().status_bar=theDLLPathChar;
+        xlw::XlfExcel::Instance().status_bar=theDLLPathChar;
 
         originalPathValue.reset(new char[bufferSize]);
         dwRet = GetEnvironmentVariable("Path", originalPathValue.get(),  bufferSize);

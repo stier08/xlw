@@ -20,19 +20,19 @@
 #include<ctime>
 
 xlwLogger::xlwLogger(){
-	theConsoleHandel= GetConsoleWindow();
-	if(theConsoleHandel)FreeConsole();
-
-	BOOL flag = AllocConsole();
-	if(flag == 0)
-	{
-        throw("can't create console window");
-	}
     theConsoleHandel= GetConsoleWindow();
-	theScreenHandel = GetStdHandle(STD_OUTPUT_HANDLE);
-	char titlePtr[]=" xlwLogger Window \0";
+    if(theConsoleHandel)FreeConsole();
 
-	SetConsoleTitle(titlePtr);
+    BOOL flag = AllocConsole();
+    if(flag == 0)
+    {
+        throw("can't create console window");
+    }
+    theConsoleHandel= GetConsoleWindow();
+    theScreenHandel = GetStdHandle(STD_OUTPUT_HANDLE);
+    char titlePtr[]=" xlwLogger Window \0";
+
+    SetConsoleTitle(titlePtr);
 
     // try and stop the user from being able to close the logging window
     HWND hWnd = FindWindow(NULL, titlePtr);
@@ -41,45 +41,45 @@ xlwLogger::xlwLogger(){
         RemoveMenu(GetSystemMenu(hWnd, FALSE), SC_CLOSE, MF_BYCOMMAND);
     }
 
-	time(&theTime[0]);
-	theInnerStream << " xlwLogger Initiated    "
-				   << ctime(&theTime[0])
-				   << " \n Code Compiled "
-				   << __TIME__  << "  "
-				   << __DATE__;
-	Display();
+    time(&theTime[0]);
+    theInnerStream << " xlwLogger Initiated    "
+                   << ctime(&theTime[0])
+                   << " \n Code Compiled "
+                   << __TIME__  << "  "
+                   << __DATE__;
+    Display();
 
-	theTimeIndex=0;
+    theTimeIndex=0;
 
 }
 
 
 void xlwLogger::Display(){
-	WriteConsole(theScreenHandel,
-				 theInnerStream.str().c_str(),
-				 (DWORD)theInnerStream.str().size(),
-				 &CharsWritten, 0);
-	theInnerStream.str(EmptyString);
+    WriteConsole(theScreenHandel,
+                 theInnerStream.str().c_str(),
+                 (DWORD)theInnerStream.str().size(),
+                 &CharsWritten, 0);
+    theInnerStream.str(EmptyString);
 
 }
 void xlwLogger::Display(const std::string& theLog ){
-	WriteConsole(theScreenHandel,
-				 theLog.c_str(),
-				 (DWORD)theLog.size(),
-				 &CharsWritten, 0);
+    WriteConsole(theScreenHandel,
+                 theLog.c_str(),
+                 (DWORD)theLog.size(),
+                 &CharsWritten, 0);
 }
 double xlwLogger::GetTau() {
-	theTimeIndex = 1-theTimeIndex;
-	time(&theTime[theTimeIndex]);
-	return difftime(theTime[theTimeIndex],theTime[1-theTimeIndex]);
+    theTimeIndex = 1-theTimeIndex;
+    time(&theTime[theTimeIndex]);
+    return difftime(theTime[theTimeIndex],theTime[1-theTimeIndex]);
 }
 
 const char* const xlwLogger::GetTime() {
-	time_t tem(time(&theTime[2]));
-	char * timePtr = asctime(gmtime(&tem));
-	for(unsigned long i(0);i<8;i++)timeTemp[i]=char(timePtr[i+11]);
-	timeTemp[8]=0;
-	return timeTemp;
+    time_t tem(time(&theTime[2]));
+    char * timePtr = asctime(gmtime(&tem));
+    for(unsigned long i(0);i<8;i++)timeTemp[i]=char(timePtr[i+11]);
+    timeTemp[8]=0;
+    return timeTemp;
 }
 
 

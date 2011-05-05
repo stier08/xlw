@@ -23,10 +23,10 @@
 
 namespace xlw
 {
-	namespace impl
-	{
-		namespace details
-		{
+    namespace impl
+    {
+        namespace details
+        {
     ///////////////// These Cloners
 
     // These are the cloners. The are wrappeed in std::tr1::functions
@@ -38,11 +38,11 @@ namespace xlw
     // Assuming we want a new derived class allocated by the standard new operator
 
 
-	struct eshared_ptr_new
-	{
-		virtual xlw_tr1::shared_ptr<void> operator()( const xlw_tr1::shared_ptr<void> &p)=0;
-		virtual ~eshared_ptr_new(){}
-	};
+    struct eshared_ptr_new
+    {
+        virtual xlw_tr1::shared_ptr<void> operator()( const xlw_tr1::shared_ptr<void> &p)=0;
+        virtual ~eshared_ptr_new(){}
+    };
 
     template<class Y>
     struct vanilla_new:public eshared_ptr_new
@@ -167,11 +167,11 @@ namespace xlw
         A a;
     };
 
-	} // namespace details
+    } // namespace details
 
-	}//	namespace impl
+    }//    namespace impl
 
 
-}//	namespace xlw
+}//    namespace xlw
 
 #endif

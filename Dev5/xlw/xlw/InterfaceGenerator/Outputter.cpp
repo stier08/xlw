@@ -15,36 +15,30 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
-#ifdef _MSC_VER
-#if _MSC_VER < 1250
-#pragma warning(disable:4786)
-#pragma warning(disable:4503)
-#endif
-#endif
 
 #include"OutputterHelper.h"
 
 void WriteMacrosInitialisation(std::vector<char> &output, 
-	                          const std::string & policy, 
-							  const std::vector<std::string> &theMethods)
+                              const std::string & policy, 
+                              const std::vector<std::string> &theMethods)
 {
-	AddLine(output,"//////////////////////////");
-	AddLine(output,"// Methods that will get registered to execute in Auto" + policy);
-	AddLine(output,"//////////////////////////");
-	AddLine(output,"");
+    AddLine(output,"//////////////////////////");
+    AddLine(output,"// Methods that will get registered to execute in Auto" + policy);
+    AddLine(output,"//////////////////////////");
+    AddLine(output,"");
 
-	for(size_t i(0); i<theMethods.size(); ++i)
-	{
-		AddLine(output,"void " + theMethods[i] + "();");
-		std::string quotedName = "\""+theMethods[i]+"\"";
-		AddLine(output,"namespace {");
-		AddLine(output,"\tMacroCache<xlw::" + policy + ">::MacroRegistra " + theMethods[i]+"_registra" +
-			"(" + quotedName + "," + quotedName + "," + theMethods[i] + ");");
-		AddLine(output,"}");
-		AddLine(output,"");
-		AddLine(output,"");
+    for(size_t i(0); i<theMethods.size(); ++i)
+    {
+        AddLine(output,"void " + theMethods[i] + "();");
+        std::string quotedName = "\""+theMethods[i]+"\"";
+        AddLine(output,"namespace {");
+        AddLine(output,"\tMacroCache<xlw::" + policy + ">::MacroRegistra " + theMethods[i]+"_registra" +
+            "(" + quotedName + "," + quotedName + "," + theMethods[i] + ");");
+        AddLine(output,"}");
+        AddLine(output,"");
+        AddLine(output,"");
 
-	}
+    }
 }
 
 
@@ -52,8 +46,8 @@ void WriteMacrosInitialisation(std::vector<char> &output,
 
 std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& functionDescriptions,
                                     std::string inputFileName, std::string LibraryName, 
-									const std::vector<std::string> &openMethods, 
-									const std::vector<std::string> &closeMethods)
+                                    const std::vector<std::string> &openMethods, 
+                                    const std::vector<std::string> &closeMethods)
 {
   std::vector<char> output;
   AddLine(output, "//// ");

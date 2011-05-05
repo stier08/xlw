@@ -201,7 +201,7 @@ namespace xlw {
 
     void NCMatrix::swap(NCMatrix& theOther) // this cannot throw !
     {
-		theData.swap(theOther.theData);
+        theData.swap(theOther.theData);
     }
 
 }

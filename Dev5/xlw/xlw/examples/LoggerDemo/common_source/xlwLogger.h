@@ -41,29 +41,29 @@
 
 class xlwLogger {
 public :
-	static xlwLogger & instance(){static xlwLogger theLogger ;return theLogger;}
+    static xlwLogger & instance(){static xlwLogger theLogger ;return theLogger;}
 
-	template<class type>
-		xlwLogger & operator<<(type theLog){theInnerStream << theLog;Display();return *this;} 
+    template<class type>
+        xlwLogger & operator<<(type theLog){theInnerStream << theLog;Display();return *this;} 
 
-	double GetTau();
-	const char* const GetTime();
-	
+    double GetTau();
+    const char* const GetTime();
+    
 private:
-	xlwLogger();
-	xlwLogger(const xlwLogger& pl){}
-	void Display();
-	void Display(const std::string &);
+    xlwLogger();
+    xlwLogger(const xlwLogger& pl){}
+    void Display();
+    void Display(const std::string &);
 
-	std::ostringstream theInnerStream;
-	std::string theInnerString;
-	HWND theConsoleHandel;
-	HANDLE theScreenHandel;
-	DWORD CharsWritten;
-	time_t theTime[3];
-	char timeTemp[26];
-	unsigned long theTimeIndex;
-	std::string EmptyString;
+    std::ostringstream theInnerStream;
+    std::string theInnerString;
+    HWND theConsoleHandel;
+    HANDLE theScreenHandel;
+    DWORD CharsWritten;
+    time_t theTime[3];
+    char timeTemp[26];
+    unsigned long theTimeIndex;
+    std::string EmptyString;
 
 };
 
@@ -71,7 +71,7 @@ private:
 
 // THE MACROS
 #define LOGHEADER  << "\n\n  " << (xlwLogger::instance().GetTime()) << " - " \
-				    __FILE__ << "   " << __LINE__ << "\n"
+                    __FILE__ << "   " << __LINE__ << "\n"
   
 #define _LOGGER  xlwLogger::instance() LOGHEADER
 

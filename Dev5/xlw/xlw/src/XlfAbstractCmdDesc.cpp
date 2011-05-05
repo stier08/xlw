@@ -28,10 +28,6 @@
 #include <iostream>
 #include <stdexcept>
 #include <xlw/macros.h>
-// Stop header precompilation
-#ifdef _MSC_VER
-#pragma hdrstop
-#endif
 
 /*!
 \param name Name of the command.

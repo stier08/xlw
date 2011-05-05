@@ -63,7 +63,7 @@ namespace xlw {
                 tempMemoryInstances.erase(std::remove_if(tempMemoryInstances.begin(), tempMemoryInstances.end(), threadIsDead), tempMemoryInstances.end());
 
                 // create the new memory object
-				TempMemoryPtr smartThreadStorage(new TempMemory);
+                TempMemoryPtr smartThreadStorage(new TempMemory);
                 threadStorage = smartThreadStorage.get();
                 tls.SetValue(threadStorage);
                 tempMemoryInstances.push_back(smartThreadStorage);

@@ -8,10 +8,10 @@ using namespace std;
 
 int main()
 {
-	cout << "Hello World\n";
+    cout << "Hello World\n";
 
-	_LOGGER << "Hello World\n";
+    _LOGGER << "Hello World\n";
 
-	char ch;
-	cin >> ch;
+    char ch;
+    cin >> ch;
 }

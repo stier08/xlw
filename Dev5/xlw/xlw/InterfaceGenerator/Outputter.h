@@ -24,8 +24,8 @@ void PushBack(std::string& str, char c);
 std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& functionDescriptions,
                                     std::string inputfileName,
                                     std::string LibraryName,
-									const std::vector<std::string> &openMethodse,
-									const std::vector<std::string> &closeMethods);
+                                    const std::vector<std::string> &openMethodse,
+                                    const std::vector<std::string> &closeMethods);
 
 
 std::vector<char> OutputFileCreatorCL(const std::vector<FunctionDescription>& functionDescriptions,

@@ -30,10 +30,6 @@
 #include <iostream>
 #include <xlw/macros.h>
 #include <xlw/xlwshared_ptr.h>
-// Stop header precompilation
-#ifdef _MSC_VER
-#pragma hdrstop
-#endif
 
 /*! \e see XlfAbstractCmdDesc::XlfAbstractCmdDesc(const std::string&, const std::string&, const std::string&)
 */
@@ -198,8 +194,8 @@ int xlw::XlfCmdDesc::DoRegister(const std::string& dllName) const
             argnames+=", ";
     }
 
-	xlw_tr1::shared_ptr<LPXLFOPER> smart_px(new LPXLFOPER[10 + nbargs],CustomArrayDeleter<LPXLFOPER>());
-	LPXLFOPER *rgx = smart_px.get();
+    xlw_tr1::shared_ptr<LPXLFOPER> smart_px(new LPXLFOPER[10 + nbargs],CustomArrayDeleter<LPXLFOPER>());
+    LPXLFOPER *rgx = smart_px.get();
     LPXLFOPER *px = rgx;
 
     (*px++) = XlfOper(dllName);

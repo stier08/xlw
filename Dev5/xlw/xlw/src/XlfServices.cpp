@@ -25,63 +25,63 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 namespace xlw
 {
 
-	/// I am not sure whether we need the following at all 
+    /// I am not sure whether we need the following at all 
 
-	/*!
-	If no title is specified, the message is assumed to be an error log
-	*/
-	void MsgBox(const char *errmsg, const char *title) {
-		LPVOID lpMsgBuf;
-		// retrieve message error from system err code
-		if (!title) {
-			DWORD err = GetLastError();
-			FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
-				NULL,
-				err,
-				MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
-				(LPTSTR) &lpMsgBuf,
-				0,
-				NULL);
-			// Process any inserts in lpMsgBuf.
-			char completeMessage[255];
-			std::sprintf(completeMessage,"%s due to error %lu :\n%s", errmsg, err, (LPCSTR)lpMsgBuf);
-			MessageBox(NULL, completeMessage,"XLL Error", MB_OK | MB_ICONINFORMATION);
-			// Free the buffer.
-			LocalFree(lpMsgBuf);
-		} else {
-			MessageBox(NULL, errmsg, title, MB_OK | MB_ICONINFORMATION);
-		}
-		return;
-	}
+    /*!
+    If no title is specified, the message is assumed to be an error log
+    */
+    void MsgBox(const char *errmsg, const char *title) {
+        LPVOID lpMsgBuf;
+        // retrieve message error from system err code
+        if (!title) {
+            DWORD err = GetLastError();
+            FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+                NULL,
+                err,
+                MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
+                (LPTSTR) &lpMsgBuf,
+                0,
+                NULL);
+            // Process any inserts in lpMsgBuf.
+            char completeMessage[255];
+            std::sprintf(completeMessage,"%s due to error %lu :\n%s", errmsg, err, (LPCSTR)lpMsgBuf);
+            MessageBox(NULL, completeMessage,"XLL Error", MB_OK | MB_ICONINFORMATION);
+            // Free the buffer.
+            LocalFree(lpMsgBuf);
+        } else {
+            MessageBox(NULL, errmsg, title, MB_OK | MB_ICONINFORMATION);
+        }
+        return;
+    }
 
 
-	StatusBar_t & StatusBar_t::operator=(const std::string &message)
-	{
-		XlfExcel::Instance().Call(xlcMessage, 0, 2, (LPXLFOPER)XlfOper(true), (LPXLFOPER)XlfOper(message));
-		return *this;
-	}
+    StatusBar_t & StatusBar_t::operator=(const std::string &message)
+    {
+        XlfExcel::Instance().Call(xlcMessage, 0, 2, (LPXLFOPER)XlfOper(true), (LPXLFOPER)XlfOper(message));
+        return *this;
+    }
 
-	StatusBar_t & StatusBar_t::operator=(const std::wstring &message)
-	{
-		XlfExcel::Instance().Call(xlcMessage, 0, 2, (LPXLFOPER)XlfOper(true), (LPXLFOPER)XlfOper(message));
-		return *this;
-	}
-	void StatusBar_t::clear()
-	{
-		XlfExcel::Instance().  Call(xlcMessage, 0, 1, (LPXLFOPER)XlfOper(false));
-	}
+    StatusBar_t & StatusBar_t::operator=(const std::wstring &message)
+    {
+        XlfExcel::Instance().Call(xlcMessage, 0, 2, (LPXLFOPER)XlfOper(true), (LPXLFOPER)XlfOper(message));
+        return *this;
+    }
+    void StatusBar_t::clear()
+    {
+        XlfExcel::Instance().  Call(xlcMessage, 0, 1, (LPXLFOPER)XlfOper(false));
+    }
 
-	std::string Reflection_t::GetNote() {
-		XlfOper callingCell;
-		XlfOper startChars(short(1));
-		XlfOper numChars(short(255));
-		XlfOper result;
+    std::string Reflection_t::GetNote() {
+        XlfOper callingCell;
+        XlfOper startChars(short(1));
+        XlfOper numChars(short(255));
+        XlfOper result;
 
-		XlfExcel::Instance().Call(xlfCaller, callingCell, 0);
-		XlfExcel::Instance().Call(xlfGetNote, result, 3, (LPXLFOPER)callingCell, (LPXLFOPER)startChars, (LPXLFOPER)numChars);
+        XlfExcel::Instance().Call(xlfCaller, callingCell, 0);
+        XlfExcel::Instance().Call(xlfGetNote, result, 3, (LPXLFOPER)callingCell, (LPXLFOPER)startChars, (LPXLFOPER)numChars);
 
-		return result.AsString();
-	}
+        return result.AsString();
+    }
 
 
 }

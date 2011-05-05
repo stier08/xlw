@@ -51,7 +51,7 @@ std::string getdir(std::string in) {
 
 void writeOutputFile(const std::string & outputfile, const std::vector<char> &theData)
 {
-	std::ofstream output(outputfile.c_str());
+    std::ofstream output(outputfile.c_str());
     if (!output)
       throw("output file not created");
 

@@ -30,62 +30,62 @@ extern "C"
 
 namespace xlw
 {
-	struct IMacro
-	{
-		IMacro(const std::string &name_,const std::string & description_):
-	           m_name(name_), m_description(description_){}
-		virtual void operator()()const =0;
-		const std::string &GetName()const{return m_name;}
-		const std::string &GetDescription()const{return m_description;}
-		virtual ~IMacro(){}
-	private:
-		std::string m_name;
-		std::string m_description;
-	};
+    struct IMacro
+    {
+        IMacro(const std::string &name_,const std::string & description_):
+               m_name(name_), m_description(description_){}
+        virtual void operator()()const =0;
+        const std::string &GetName()const{return m_name;}
+        const std::string &GetDescription()const{return m_description;}
+        virtual ~IMacro(){}
+    private:
+        std::string m_name;
+        std::string m_description;
+    };
 
-	struct MacroFromFPtr: public IMacro
-	{
-		typedef void (*MacroFPtr)();
-		MacroFromFPtr(const std::string &name_,const std::string & description_, const MacroFPtr fptr_):
-	            IMacro(name_,description_),m_fptr(fptr_){}
-		
-		void operator()()const{m_fptr();}
+    struct MacroFromFPtr: public IMacro
+    {
+        typedef void (*MacroFPtr)();
+        MacroFromFPtr(const std::string &name_,const std::string & description_, const MacroFPtr fptr_):
+                IMacro(name_,description_),m_fptr(fptr_){}
+        
+        void operator()()const{m_fptr();}
 
-	private:
-		MacroFPtr m_fptr;
-	};
+    private:
+        MacroFPtr m_fptr;
+    };
 
-	struct Open;
-	struct Close;
+    struct Open;
+    struct Close;
 
-	template<class policy>
-	class MacroCache : public singleton<MacroCache<policy> >
-	{
-	private:
-		friend class singleton<MacroCache<policy> >;
-	public:
-		// FIXME: code used to use eshared_ptr here
-		// fails on VC7.1 for no obvious reason
-		// probbaly to do with earlier VC versions issues 
-		// with partial templates
-		typedef xlw_tr1::shared_ptr<IMacro> IMacroPtr;
-		//typedef eshared_ptr<IMacro> IMacroPtr;
+    template<class policy>
+    class MacroCache : public singleton<MacroCache<policy> >
+    {
+    private:
+        friend class singleton<MacroCache<policy> >;
+    public:
+        // FIXME: code used to use eshared_ptr here
+        // fails on VC7.1 for no obvious reason
+        // probbaly to do with earlier VC versions issues 
+        // with partial templates
+        typedef xlw_tr1::shared_ptr<IMacro> IMacroPtr;
+        //typedef eshared_ptr<IMacro> IMacroPtr;
 
-		struct MacroRegistra
-		{
-			typedef void (*MacroFPtr)();
-			MacroRegistra(const std::string &name_,const std::string & description_, const MacroFPtr fptr_)
-			{
-				IMacroPtr theMacro2(new MacroFromFPtr(name_,description_,fptr_));
-				MacroCache<policy>::Instance().RegisterMacro(theMacro2);
-			}
-		};
+        struct MacroRegistra
+        {
+            typedef void (*MacroFPtr)();
+            MacroRegistra(const std::string &name_,const std::string & description_, const MacroFPtr fptr_)
+            {
+                IMacroPtr theMacro2(new MacroFromFPtr(name_,description_,fptr_));
+                MacroCache<policy>::Instance().RegisterMacro(theMacro2);
+            }
+        };
 
-		void RegisterMacro(const IMacroPtr &theMacro)
-		{
-			m_macros.push_back(theMacro);
-		}
-		void ExecuteMacros()
+        void RegisterMacro(const IMacroPtr &theMacro)
+        {
+            m_macros.push_back(theMacro);
+        }
+        void ExecuteMacros()
         {
             std::list<IMacroPtr>::const_iterator theIterator;
             for(theIterator = m_macros.begin(); theIterator!=m_macros.end(); ++theIterator)
@@ -93,11 +93,11 @@ namespace xlw
                 (*theIterator)->operator()();
             }
         }
-	protected:
-		MacroCache(){}
-	private:
-		std::list<IMacroPtr> m_macros;
-	};
+    protected:
+        MacroCache(){}
+    private:
+        std::list<IMacroPtr> m_macros;
+    };
 
 
 }

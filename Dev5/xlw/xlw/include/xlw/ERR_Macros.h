@@ -46,7 +46,7 @@
 You can customize the output of the error message (currently a message box) and
 use your own error handling mechanism.
 */
-#if defined(NDEBUG) || !defined(_MSC_VER)
+#if defined(NDEBUG)
     #define ERR_LOG_INTERNAL(msg) ::MessageBox(0,msg,"C++ Excel32 wrapper Log",MB_OK)
 #else
     #define ERR_LOG_INTERNAL(msg) OutputDebugString(msg)

@@ -37,38 +37,38 @@ namespace xlw {
 
     struct Arg { const char * ArgumentName; const char * ArgumentDescription; const char * ArgumentType; };
 
-	class XLCommandRegistrationData
-	{
-	public:
-		XLCommandRegistrationData(const std::string& CommandName_,
-			                      const std::string& ExcelCommandName_,
-								  const std::string& Comment_,
-								  const std::string& Menu_,
-								  const std::string& MenuText_):
-		                          CommandName(CommandName_),
-								  ExcelCommandName(ExcelCommandName_),
-								  Comment(Comment_),
-								  Menu(Menu_),
-								  MenuText(MenuText_){}
-		
+    class XLCommandRegistrationData
+    {
+    public:
+        XLCommandRegistrationData(const std::string& CommandName_,
+                                  const std::string& ExcelCommandName_,
+                                  const std::string& Comment_,
+                                  const std::string& Menu_,
+                                  const std::string& MenuText_):
+                                  CommandName(CommandName_),
+                                  ExcelCommandName(ExcelCommandName_),
+                                  Comment(Comment_),
+                                  Menu(Menu_),
+                                  MenuText(MenuText_){}
+        
 
-		const std::string& GetCommandName() const;
+        const std::string& GetCommandName() const;
         const std::string& GetExcelCommandName() const;
         const std::string& GetCommandComment() const;
-		const std::string& GetMenu() const;
-		const std::string& GetMenuText() const;
+        const std::string& GetMenu() const;
+        const std::string& GetMenuText() const;
 
 
-	private:
-		std::string CommandName;
-		std::string ExcelCommandName;
-		std::string Comment;
-		std::string Menu;
-		std::string MenuText;
+    private:
+        std::string CommandName;
+        std::string ExcelCommandName;
+        std::string Comment;
+        std::string Menu;
+        std::string MenuText;
 
-	
-	};
-	
+    
+    };
+    
 
     class XLFunctionRegistrationData
     {
@@ -162,15 +162,15 @@ namespace xlw {
 
     };
 
-	 class XLCommandRegistrationHelper
+     class XLCommandRegistrationHelper
     {
     public:
 
         XLCommandRegistrationHelper(const std::string& CommandName_,
-			                      const std::string& ExcelCommandName_,
-								  const std::string& Comment_,
-								  const std::string& Menu_,
-								  const std::string& MenuText_);
+                                  const std::string& ExcelCommandName_,
+                                  const std::string& Comment_,
+                                  const std::string& Menu_,
+                                  const std::string& MenuText_);
 
     };
 
@@ -178,19 +178,19 @@ namespace xlw {
     // singleton pattern, cf the Factory
     class ExcelFunctionRegistrationRegistry: public singleton<ExcelFunctionRegistrationRegistry>
     {
-	friend class singleton<ExcelFunctionRegistrationRegistry>;
+    friend class singleton<ExcelFunctionRegistrationRegistry>;
     public:
         void DoTheRegistrations() const;
         void DoTheDeregistrations() const;
         void AddFunction(const XLFunctionRegistrationData&);
-		void AddCommand(const XLCommandRegistrationData&);
+        void AddCommand(const XLCommandRegistrationData&);
 
     private:
-		typedef std::map<std::string,xlw_tr1::shared_ptr<xlw::XlfFuncDesc> > functionCache;
-		typedef std::map<std::string,xlw_tr1::shared_ptr<XlfCmdDesc> > commandCache;
+        typedef std::map<std::string,xlw_tr1::shared_ptr<xlw::XlfFuncDesc> > functionCache;
+        typedef std::map<std::string,xlw_tr1::shared_ptr<XlfCmdDesc> > commandCache;
         ExcelFunctionRegistrationRegistry(){}
         std::map<std::string,xlw_tr1::shared_ptr<XlfFuncDesc> > Functions;
-		std::map<std::string,xlw_tr1::shared_ptr<XlfCmdDesc> >  Commands;
+        std::map<std::string,xlw_tr1::shared_ptr<XlfCmdDesc> >  Commands;
 
     };
 

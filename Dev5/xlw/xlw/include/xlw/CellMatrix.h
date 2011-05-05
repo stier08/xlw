@@ -55,7 +55,7 @@ namespace xlw {
         const std::string & StringValue() const;
         const std::wstring& WstringValue() const;
         //const char* CharPtrValue() const;
-		//const wchar_t* WCharPtrValue() const;
+        //const wchar_t* WCharPtrValue() const;
         double NumericValue() const;
         bool BooleanValue() const;
         unsigned long ErrorValue() const;
@@ -85,7 +85,7 @@ namespace xlw {
         bool ValueAsBool;
         unsigned long ValueAsErrorCode;
 
-		mutable std::string  TempString;
+        mutable std::string  TempString;
 
 
 

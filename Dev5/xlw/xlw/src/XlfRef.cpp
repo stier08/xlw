@@ -1,4 +1,3 @@
-
 /*
  Copyright (C) 1998, 1999, 2001, 2002, 2003, 2004 Jérôme Lecomte
  Copyright (C) 2007, 2008 Eric Ehlers
@@ -25,11 +24,6 @@
 #include <xlw/XlfRef.h>
 #include <xlw/XlfOper.h>
 #include <iostream>
-
-// Stop header precompilation
-#ifdef _MSC_VER
-#pragma hdrstop
-#endif
 
 #ifndef NDEBUG
 #include <xlw/XlfRef.inl>

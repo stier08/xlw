@@ -133,12 +133,12 @@ namespace xlw {
         const std::string & fpType() const { return fpArrayType_; }
         //@}
 
-		//Services 
-		//These are services that are for delivery for
-		//the end user as opposed to for prdeominantly internal use
-		//for xlw
-		StatusBar_t status_bar;
-		Reflection_t reflection;
+        //Services 
+        //These are services that are for delivery for
+        //the end user as opposed to for prdeominantly internal use
+        //for xlw
+        StatusBar_t status_bar;
+        Reflection_t reflection;
 
     private:
         //! Static pointer to the unique instance of XlfExcel object.
@@ -166,7 +166,7 @@ namespace xlw {
         std::string wStrType_;
         std::string fpArrayType_;
 
-		
+        
     };
 
 }

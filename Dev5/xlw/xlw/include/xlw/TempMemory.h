@@ -76,7 +76,7 @@ namespace xlw {
         //@}
 
     private:
-		typedef xlw_tr1::shared_ptr<char> shared_char_ptr;
+        typedef xlw_tr1::shared_ptr<char> shared_char_ptr;
         //! \name Structors and static members
         //@{
         //! Ctor.

@@ -33,10 +33,10 @@ public:
     virtual ~singleton() {} 
 
 protected:
-	singleton(){}
+    singleton(){}
 private:
-	singleton(const singleton &);
-	singleton & operator=(const singleton &);
+    singleton(const singleton &);
+    singleton & operator=(const singleton &);
 } ;
 }
 

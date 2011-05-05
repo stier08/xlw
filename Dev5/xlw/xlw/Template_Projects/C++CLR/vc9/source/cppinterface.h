@@ -21,12 +21,12 @@ using namespace xlw;
 double // Adds number of days to given date
 AddDays(double date // date to which to add 
        ,double days // number of days to add 
-	   );
+       );
 
 double // Adds hours to given date
 AddHours(double date // date to which to add 
        , double hours // hours to add 
-	   );
+       );
 
 
 
