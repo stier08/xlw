@@ -22,6 +22,7 @@
 #include <windows.h>
 #include<xlw/XlfExcel.h>
 #include<xlw/XlOpenClose.h>
+#include<xlw/XlfServices.h>
 
 std::string // tests empty args
 EmptyArgFunction()
@@ -187,27 +188,28 @@ typeString2(const reftest &input) {
 
 std::string // the text of the note attached to the calling cell
 GetNote() {
-    return XlfExcel::Instance().reflection.GetNote();
+    XlfOper callingCell(XlfServices.Information.GetCallingCell());
+    return XlfServices.Notes.GetNote(callingCell).AsString();
 }
 
 
 void welcome()
 {
-    xlw::XlfExcel::Instance().status_bar= "This is the XLW Example Project, Enjoy !!    "
-                                           "Email any questions to xlw-users@lists.sourceforge.net. ";
+    xlw::XlfServices.StatusBar= "This is the XLW Example Project, Enjoy !!    "
+                                "Email any questions to xlw-users@lists.sourceforge.net. ";
 }
 
 
 
 void goodbye()
 {
-    xlw::MsgBox("Thanks for choosing XLW. \n"
-                          "Email any questions to xlw-users@lists.sourceforge.net. ","Bye-Bye");
+    xlw::XlfServices.Commands.Alert("Thanks for choosing XLW. \n"
+                                    "Email any questions to xlw-users@lists.sourceforge.net. ");
 }
 
 
 void testCommand()
 {
-    xlw::MsgBox("This is the XLW Example Project, testCommand function !!\n"
-                          "Email any questions to xlw-users@lists.sourceforge.net. ","Bye-Bye");
+    xlw::XlfServices.Commands.Alert("This is the XLW Example Project, testCommand function !!\n"
+                                    "Email any questions to xlw-users@lists.sourceforge.net. ");
 }

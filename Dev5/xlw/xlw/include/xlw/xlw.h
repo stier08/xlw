@@ -19,8 +19,8 @@
 
 // $Id$
 
-#ifndef INC_Excel32_H
-#define INC_Excel32_H
+#ifndef INC_XLW_H
+#define INC_XLW_H
 
 /*!
 \file xlw.h
@@ -28,7 +28,6 @@
 */
 
 // Package files
-
 #include <xlw/XlfArgDescList.h>
 #include <xlw/XlfCmdDesc.h>
 #include <xlw/XlfFuncDesc.h>
@@ -40,10 +39,8 @@
 #include <xlw/XlfStr.h>
 #include <xlw/XlFunctionRegistration.h>
 #include <xlw/XlfExcel.h>
+#include <xlw/XlfServices.h>
 #include <xlw/macros.h>
-#ifdef PORT_PRAGMA_ONCE
-#pragma once
-#endif
 
 #if defined(_MSC_VER)
 // Force export of functions implemented in XlOpenClose.h and required by Excel

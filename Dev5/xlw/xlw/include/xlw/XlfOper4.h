@@ -26,15 +26,12 @@
 
 // $Id$
 
-#include <xlw/XlfOper.h>
+#include <xlw/XlfOperImpl.h>
 
 #if defined(_MSC_VER)
 #pragma once
 #endif
 
-#if defined(DEBUG_HEADERS)
-#pragma DEBUG_HEADERS
-#endif
 
 namespace xlw {
 

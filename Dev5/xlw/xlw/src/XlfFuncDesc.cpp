@@ -27,6 +27,7 @@
 #include <xlw/XlfFuncDesc.h>
 #include <xlw/XlfException.h>
 #include <xlw/XlfOper4.h>
+#include <xlw/XlfOper.h>
 
 /*!
 \param name

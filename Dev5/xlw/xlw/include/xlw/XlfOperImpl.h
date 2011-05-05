@@ -28,6 +28,7 @@
 // $Id$
 
 #include "MyContainers.h"
+#include <xlw/xlcall32.h>
 #include <xlw/XlfOperProperties.h>
 #include <xlw/CellMatrix.h>
 #include <xlw/XlfRef.h>
@@ -110,7 +111,7 @@ namespace xlw { namespace impl {
         XlfOper(const XlfOper<LPOPER_TYPE>& oper) :
             lpxloper_(TempMemory::GetMemory<OperType>())
         {
-            OperProps::copy(lpxloper_, oper.lpxloper_);
+            OperProps::copy(oper.lpxloper_, lpxloper_);
         }
 
         //! LPXLOPER/LPXLOPER12 ctor.
@@ -342,6 +343,11 @@ namespace xlw { namespace impl {
                 return lpxloper_; 
             }
         }
+        //! Cast to const XLOPER *.
+        operator const LPOPER_TYPE() const
+        {
+            return lpxloper_; 
+        }
         //@}
 
         //! \name Inspectors
@@ -511,10 +517,10 @@ namespace xlw { namespace impl {
                 break;
             }
             OperType stackMem;
-            XlfOper<LPOPER_TYPE> result(&stackMem);
-            int xlret = OperProps::coerce(lpxloper_, xltypeNum, result);
+            int xlret = OperProps::coerce(lpxloper_, xltypeNum, &stackMem);
             if(xlret == xlretSuccess)
             {
+                XlfOper<LPOPER_TYPE> result(&stackMem);
                 return result.AsDouble(ErrorId);
             }
             else
@@ -534,10 +540,10 @@ namespace xlw { namespace impl {
             else
             {
                 OperType stackMem;
-                XlfOper<LPOPER_TYPE> result(&stackMem);
-                int xlret = OperProps::coerce(lpxloper_, xltypeRef, result);
+                int xlret = OperProps::coerce(lpxloper_, xltypeRef, &stackMem);
                 if(xlret == xlretSuccess)
                 {
+                    XlfOper<LPOPER_TYPE> result(&stackMem);
                     return result.AsRef(ErrorId);
                 }
                 else
@@ -577,10 +583,10 @@ namespace xlw { namespace impl {
                 break;
             }
             OperType stackMem;
-            XlfOper<LPOPER_TYPE> result(&stackMem);
-            int xlret = OperProps::coerce(lpxloper_, xltypeNum, result);
+            int xlret = OperProps::coerce(lpxloper_, xltypeNum, &stackMem);
             if(xlret == xlretSuccess)
             {
+                XlfOper<LPOPER_TYPE> result(&stackMem);
                 return result.AsShort(ErrorId);
             }
             else
@@ -619,10 +625,10 @@ namespace xlw { namespace impl {
                 break;
             }
             OperType stackMem;
-            XlfOper<LPOPER_TYPE> result(&stackMem);
-            int xlret = OperProps::coerce(lpxloper_, xltypeBool, result);
+            int xlret = OperProps::coerce(lpxloper_, xltypeBool, &stackMem);
             if(xlret == xlretSuccess)
             {
+                XlfOper<LPOPER_TYPE> result(&stackMem);
                 return result.AsBool(ErrorId);
             }
             else
@@ -661,10 +667,10 @@ namespace xlw { namespace impl {
                 break;
             }
             OperType stackMem;
-            XlfOper<LPOPER_TYPE> result(&stackMem);
-            int xlret = OperProps::coerce(lpxloper_, xltypeNum, result);
+            int xlret = OperProps::coerce(lpxloper_, xltypeNum, &stackMem);
             if(xlret == xlretSuccess)
             {
+                XlfOper<LPOPER_TYPE> result(&stackMem);
                 return result.AsInt(ErrorId);
             }
             else
@@ -703,10 +709,10 @@ namespace xlw { namespace impl {
                 break;
             }
             OperType stackMem;
-            XlfOper<LPOPER_TYPE> result(&stackMem);
-            int xlret = OperProps::coerce(lpxloper_, xltypeNum, result);
+            int xlret = OperProps::coerce(lpxloper_, xltypeNum, &stackMem);
             if(xlret == xlretSuccess)
             {
+                XlfOper<LPOPER_TYPE> result(&stackMem);
                 return result.AsULong(ErrorId);
             }
             else
@@ -727,10 +733,10 @@ namespace xlw { namespace impl {
             else
             {
                 OperType stackMem;
-                XlfOper<LPOPER_TYPE> result(&stackMem);
-                int xlret = OperProps::coerce(lpxloper_, xltypeStr, result);
+                int xlret = OperProps::coerce(lpxloper_, xltypeStr, &stackMem);
                 if(xlret == xlretSuccess)
                 {
+                    XlfOper<LPOPER_TYPE> result(&stackMem);
                     return result.AsString(ErrorId);
                 }
                 else
@@ -752,10 +758,10 @@ namespace xlw { namespace impl {
             else
             {
                 OperType stackMem;
-                XlfOper<LPOPER_TYPE> result(&stackMem);
-                int xlret = OperProps::coerce(lpxloper_, xltypeStr, result);
+                int xlret = OperProps::coerce(lpxloper_, xltypeStr, &stackMem);
                 if(xlret == xlretSuccess)
                 {
+                    XlfOper<LPOPER_TYPE> result(&stackMem);
                     return result.AsWstring(ErrorId);
                 }
                 else

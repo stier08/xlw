@@ -22,6 +22,7 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 #include <xlw/XlFunctionRegistration.h>
 #include <xlw/CellMatrix.h>
 #include <xlw/TempMemory.h>
+#include <xlw/XlfServices.h>
 #include "PathUpdater.h"
 #include<memory>
 #include<string>
@@ -38,6 +39,7 @@ extern "C"
     {
         try
         {
+            xlw::XlfExcel::Instance();
             // ensure temporary memory can be created
             xlw::TempMemory::InitializeProcess();
 
@@ -48,12 +50,12 @@ extern "C"
             static xlw::PathUpdater updatePath;
 
             // Displays a message in the status bar.
-            xlw::XlfExcel::Instance().status_bar="Registering library...";
+            xlw::XlfServices.StatusBar="Registering library...";
 
             xlw::XLRegistration::ExcelFunctionRegistrationRegistry::Instance().DoTheRegistrations();
 
             // Clears the status bar.
-            xlw::XlfExcel::Instance().status_bar.clear();
+            xlw::XlfServices.StatusBar.clear();
 
             xlw::MacroCache<xlw::Open>::Instance().ExecuteMacros();
 

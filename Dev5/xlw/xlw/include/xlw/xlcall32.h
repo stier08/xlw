@@ -17,8 +17,8 @@
 
 //#pragma once
 
-#ifndef INC_excel32_H
-#define INC_excel32_H
+#ifndef INC_xlcall32_H
+#define INC_xlcall32_H
 
 #include <xlw/XlfWindows.h>
 

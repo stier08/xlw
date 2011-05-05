@@ -25,6 +25,7 @@
 // $Id$
 
 #include <xlw/XlfCmdDesc.h>
+#include <xlw/XlfOper.h>
 #include <xlw/XlfOper4.h>
 #include <xlw/XlfException.h>
 #include <iostream>

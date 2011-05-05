@@ -31,7 +31,7 @@ extern "C"
 {
     int __declspec(dllexport) func()
     {
-        xlw::XlfExcel::MsgBox("Thanks for calling the menu item","Menu");
+        xlw::XlfServices.Commands.Alert("Thanks for calling the menu item");
         return 0;
     }
 }

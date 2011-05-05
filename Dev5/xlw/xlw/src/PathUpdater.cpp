@@ -21,6 +21,7 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 #include <xlw/xlw.h>
 #include <vector>
 #include <xlw/TempMemory.h>
+#include <xlw/XlfServices.h>
 #include<memory>
 #include<string>
 
@@ -39,7 +40,7 @@ xlw::PathUpdater::PathUpdater()
     {
         theHandle = ((HMODULE) (theInfo.AllocationBase));
         GetModuleFileName (theHandle, theDLLPathChar , MAX_PATH);
-        xlw::XlfExcel::Instance().status_bar=theDLLPathChar;
+        xlw::XlfServices.StatusBar=theDLLPathChar;
 
         originalPathValue.reset(new char[bufferSize]);
         dwRet = GetEnvironmentVariable("Path", originalPathValue.get(),  bufferSize);

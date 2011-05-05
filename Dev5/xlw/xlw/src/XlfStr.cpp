@@ -22,6 +22,7 @@
 
 #include <xlw/XlfStr.h>
 #include <xlw/XlfExcel.h>
+#include <xlw/PascalStringConversions.h>
 #include <stdlib.h>
 
 std::wstring xlw::voidToWstr(XLWSTR xlwstr) {

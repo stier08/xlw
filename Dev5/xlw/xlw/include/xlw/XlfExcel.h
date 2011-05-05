@@ -34,7 +34,6 @@
 #include <map>
 #include <string>
 #include <xlw/TempMemory.h>
-#include <xlw/XlfServices.h>
 
 #if defined(_MSC_VER)
 #pragma once
@@ -53,7 +52,6 @@ namespace xlw {
     } XLFOPER;
 
     typedef XLFOPER* LPXLFOPER;
-
 
     //! Interface between excel and the framework.
     /*!
@@ -155,13 +153,6 @@ namespace xlw {
         //! The double array type use by this version of Excel
         const std::string & fpType() const { return fpArrayType_; }
         //@}
-
-        //Services 
-        //These are services that are for delivery for
-        //the end user as opposed to for prdeominantly internal use
-        //for xlw
-        StatusBar_t status_bar;
-        Reflection_t reflection;
 
     private:
         //! Static pointer to the unique instance of XlfExcel object.

@@ -23,13 +23,14 @@
 #include <sstream>
 #include <vector>
 #include <xlw/XlOpenClose.h>
+#include <xlw/XlfServices.h>
 using namespace xlw;
 
 
 void welcome()
 {
-    XlfExcel::Instance().status_bar = "This is the XLW Handwritten Project, Enjoy !!       " 
-                                      "Email any questions to xlw-users@lists.sourceforge.net. " ;
+    XlfServices.StatusBar = "This is the XLW Handwritten Project, Enjoy !!       " 
+                            "Email any questions to xlw-users@lists.sourceforge.net. " ;
 }
 
 // Registers welcome() to be executed by xlAutoOpen
@@ -42,8 +43,8 @@ namespace
 
 void goodbye()
 {
-    xlw::MsgBox("Thanks for choosing XLW. \n"
-                          "Email any questions to xlw-users@lists.sourceforge.net. ","Bye-Bye");
+    xlw::XlfServices.Commands.Alert("Thanks for choosing XLW. \n"
+                                    "Email any questions to xlw-users@lists.sourceforge.net. ");
 }
 // Registers goodbye() to be executed by xlAutoClose
 // method must have return type void and take no parameters.
@@ -165,9 +166,7 @@ extern "C" {
             return XlfOper(true);
 
         // Gets reference of the called cell
-        XlfOper res;
-        XlfExcel::Instance().Call(xlfCaller,res);
-        XlfRef ref = res.AsRef();
+        XlfRef ref = XlfServices.Information.GetCallingCell().AsRef();
 
         // Returns the reference in A1 format
         std::ostringstream ostr;
@@ -215,20 +214,15 @@ extern "C" {
     }
 
     /*!
-     * Demonstrates calling Excel macro functions from within a
+     * Demonstrates calling Excel Service functions from within a
      * a function, for this to work you must set the MacroSheetEquivalent
      * to true when registering.
      * This function gets the formula in the current cell when calculated
      */
     LPXLFOPER EXCEL_EXPORT xlCurrentFormula() {
         EXCEL_BEGIN;
-        XlfOper activeCell;
-        XlfOper result;
-
-        XlfExcel::Instance().Call(xlfActiveCell, activeCell);
-        XlfExcel::Instance().Call(xlfGetFormula, result, activeCell);
-
-        return result;
+        XlfOper activeCell(XlfServices.Information.GetActiveCell());
+        return XlfServices.Information.GetFormula(activeCell);
         EXCEL_END;
     }
 
@@ -324,8 +318,8 @@ extern "C" {
 
     int EXCEL_EXPORT xlTestCmd() {
         EXCEL_BEGIN;
-        xlw::MsgBox("This is the TestCmd function\n"
-                                  "Email any questions to xlw-users@lists.sourceforge.net. ","Test Command");
+        xlw::XlfServices.Commands.Alert("This is the TestCmd function\n"
+                                        "Email any questions to xlw-users@lists.sourceforge.net. ");
         EXCEL_END_CMD;
     }
 }

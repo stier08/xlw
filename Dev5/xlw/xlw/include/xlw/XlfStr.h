@@ -36,9 +36,7 @@
 namespace xlw {
 
     //! Experimental treatment of long strings for Excel 2007.
-
     typedef void* XLWSTR;
-
     std::wstring voidToWstr(XLWSTR xlwstr);
 
 }
