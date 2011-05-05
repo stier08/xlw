@@ -78,8 +78,7 @@ void OutputFileCreatorMan(std::vector<FunctionDescription>& functionDescriptions
 
 
       while (chain.size() > 0 && (*chain.rbegin() == "XlfOper" || *chain.rbegin() == "LPXLFOPER" ||
-        *chain.rbegin() == "LPXLARRAY"
-        || *chain.rbegin() == "XLWSTR") )
+        *chain.rbegin() == "LPXLARRAY") )
         chain.pop_back(); // ditch EXCEL types
 
       if (chain.size() ==0)

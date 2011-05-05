@@ -76,7 +76,6 @@
 		<Unit filename="..\..\include\xlw\XlfRef.h" />
 		<Unit filename="..\..\include\xlw\XlfRef.inl" />
 		<Unit filename="..\..\include\xlw\XlfServices.h" />
-		<Unit filename="..\..\include\xlw\XlfStr.h" />
 		<Unit filename="..\..\include\xlw\XlfWindows.h" />
 		<Unit filename="..\..\include\xlw\eshared_ptr.h" />
 		<Unit filename="..\..\include\xlw\eshared_ptr_details.h" />
@@ -110,7 +109,6 @@
 		<Unit filename="..\..\src\XlfOperProperties.cpp" />
 		<Unit filename="..\..\src\XlfRef.cpp" />
 		<Unit filename="..\..\src\XlfServices.cpp" />
-		<Unit filename="..\..\src\XlfStr.cpp" />
 		<Unit filename="..\..\src\xlcall.cpp" />
 		<Extensions>
 			<code_completion />

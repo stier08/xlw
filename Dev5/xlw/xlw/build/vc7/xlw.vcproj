@@ -175,9 +175,6 @@
 				RelativePath="..\..\src\XlfServices.cpp">
 			</File>
 			<File
-				RelativePath="..\..\src\XlfStr.cpp">
-			</File>
-			<File
 				RelativePath="..\..\src\XlFunctionRegistration.cpp">
 			</File>
 			<File
@@ -307,9 +304,6 @@
 			</File>
 			<File
 				RelativePath="..\..\include\xlw\XlfServices.h">
-			</File>
-			<File
-				RelativePath="..\..\include\xlw\XlfStr.h">
 			</File>
 			<File
 				RelativePath="..\..\include\xlw\XlFunctionRegistration.h">

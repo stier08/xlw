@@ -43,7 +43,6 @@ LIBSRC = ArgList.cpp \
          XlfOperProperties.cpp \
          XlfRef.cpp \
          XlfServices.cpp \
-         XlfStr.cpp \
          xlcall.cpp \
          XlOpenClose.cpp   
 

@@ -36,7 +36,6 @@
 #include <xlw/XlfOper12.h>
 #include <xlw/XlfRef.h>
 #include <xlw/CellMatrix.h>
-#include <xlw/XlfStr.h>
 #include <xlw/XlFunctionRegistration.h>
 #include <xlw/XlfExcel.h>
 #include <xlw/XlfServices.h>

@@ -105,15 +105,6 @@ TypeRegistry::Helper sstringreg("std::string", // New type
                "XLF_OPER"       // Type code
                );
 
-// Special processing of std::wstring depending on Excel version
-TypeRegistry::Helper swstringreg("XLWSTR", // New type - a typedef to void*
-               "XLWSTR",        // Old type
-               "",              // Converter name
-               false,           // Is a method
-               false,           // Takes identifier
-               "XLW_WSTR"       // Type code
-               );
-
 TypeRegistry::Helper boolreg("bool", // New type
                "XlfOper",       // Old type
                "AsBool",        // Converter name
@@ -150,11 +141,11 @@ TypeRegistry::Helper intreg("int", // New type
 
 // Special processing of std::wstring depending on Excel version
 TypeRegistry::Helper wstrreg("std::wstring", // New type
-               "XLWSTR",        // Old type
-               "voidToWstr",    // Converter name
-               false,           // Is a method
-               false            // Takes identifier
-               );
+               "XlfOper",       // Old type
+               "AsWstring",      // Converter name
+               true,            // Is a method
+               true,            // Takes identifier
+               "XLF_OPER");
 
 TypeRegistry::Helper DONreg("DoubleOrNothing", // New type
                "CellMatrix",    // Old type

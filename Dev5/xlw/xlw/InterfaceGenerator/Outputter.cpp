@@ -413,8 +413,7 @@ std::vector<char> OutputFileCreatorCL(const std::vector<FunctionDescription>& fu
 
 
       while (chain.size() > 0 && (*chain.rbegin() == "XlfOper" || *chain.rbegin() == "LPXLFOPER" ||
-        *chain.rbegin() == "LPXLARRAY"
-        || *chain.rbegin() == "XLWSTR") )
+        *chain.rbegin() == "LPXLARRAY") )
         chain.pop_back(); // ditch EXCEL types
 
       if (chain.size() ==0)
@@ -491,8 +490,7 @@ std::vector<char> OutputFileCreatorCL(const std::vector<FunctionDescription>& fu
       std::vector<std::string> chain = functionDescriptions[i].GetArgument(j).GetTheType().GetConversionChain();
 
       while (chain.size() > 0 && (*chain.rbegin() == "XlfOper" || *chain.rbegin() == "LPXLFOPER" ||
-        *chain.rbegin() == "LPXLARRAY"
-        || *chain.rbegin() == "XLWSTR") )
+        *chain.rbegin() == "LPXLARRAY") )
         chain.pop_back(); // ditch EXCEL types
 
       char id = 'a';
