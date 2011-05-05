@@ -40,7 +40,6 @@
     <ClCompile Include="..\..\..\xlw\src\XlfOperImpl.cpp" />
     <ClCompile Include="..\..\..\xlw\src\XlfOperProperties.cpp" />
     <ClCompile Include="..\..\..\xlw\src\XlfRef.cpp" />
-    <ClCompile Include="..\..\..\xlw\src\XlfStr.cpp" />
     <ClCompile Include="..\..\..\xlw\src\XlFunctionRegistration.cpp" />
     <ClCompile Include="..\..\..\xlw\src\XlOpenClose.cpp" />
   </ItemGroup>
@@ -78,7 +77,6 @@
     <ClInclude Include="..\..\..\xlw\include\xlw\XlfOperImpl.h" />
     <ClInclude Include="..\..\..\xlw\include\xlw\XlfOperProperties.h" />
     <ClInclude Include="..\..\..\xlw\include\xlw\XlfRef.h" />
-    <ClInclude Include="..\..\..\xlw\include\xlw\XlfStr.h" />
     <ClInclude Include="..\..\..\xlw\include\xlw\XlFunctionRegistration.h" />
     <ClInclude Include="..\..\..\xlw\include\xlw\XlfWindows.h" />
     <ClInclude Include="..\..\..\xlw\include\xlw\XlOpenClose.h" />
