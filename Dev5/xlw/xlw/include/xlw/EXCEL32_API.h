@@ -47,10 +47,6 @@
 //! global trace level (may be superseded locally by a greater value)
 #define XLW_TRACE_LEVEL 0
 
-#if defined(DEBUG_HEADERS)
-    #pragma DEBUG_HEADERS
-#endif
-
 //! Place holder for import/export declaration
 #if defined (_DLL) && defined(XLW_IMPORTEXPORT)
     #ifdef EXCEL32_EXPORTS

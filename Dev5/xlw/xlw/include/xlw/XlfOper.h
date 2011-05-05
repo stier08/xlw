@@ -33,10 +33,6 @@
 #pragma once
 #endif
 
-#if defined(DEBUG_HEADERS)
-#pragma DEBUG_HEADERS
-#endif
-
 //! Namespace for the classes in the xlw (Excel Wrapper) library
 /*!
 xlw is a wrapper for the Excel C API.  xlw implements an object oriented interface

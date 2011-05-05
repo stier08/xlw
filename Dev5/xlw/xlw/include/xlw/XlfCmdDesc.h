@@ -31,10 +31,6 @@
 #pragma once
 #endif
 
-#if defined(DEBUG_HEADERS)
-#pragma DEBUG_HEADERS
-#endif
-
 namespace xlw {
 
     //! Encapsulates Excel C macro command.
