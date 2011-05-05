@@ -46,7 +46,7 @@ namespace xlw
             //! gets the reference of the active cell
             XlfOper GetActiveCell();
             //! gets the formula in the supplied cell ref
-            XlfOper GetFormula(const XlfOper& cellRef);
+            std::string GetFormula(const XlfOper& cellRef);
         };
 
         struct Commands_t

@@ -194,9 +194,9 @@ namespace xlw
             return CallFunction(xlfActiveCell, "Get Active Cell failed");
         }
 
-        XlfOper Information_t::GetFormula(const XlfOper& cellRef)
+        std::string Information_t::GetFormula(const XlfOper& cellRef)
         {
-            return CallFunction(xlfGetFormula, cellRef, "Get Formula failed");
+            return CallFunction(xlfGetFormula, cellRef, "Get Formula failed").AsString();
         }
 
         void Commands_t::Alert(const std::string& message)
