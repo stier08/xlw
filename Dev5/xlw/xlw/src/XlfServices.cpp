@@ -24,7 +24,7 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 
 namespace xlw
 {
-    struct impl::Services_t XlfServices;
+    struct Services_t XlfServices;
 
     /// I am not sure whether we need the following at all 
 
@@ -55,183 +55,180 @@ namespace xlw
         return;
     }
 
-    namespace impl
+    namespace
     {
-        namespace
+        inline XlfOper CallFunction(int xlfn, const char* errorString)
         {
-            inline XlfOper CallFunction(int xlfn, const char* errorString)
+            XlfOper result;
+            int err = XlfExcel::Instance().Call(xlfn, result);
+            if(err != xlretSuccess)
             {
-                XlfOper result;
-                int err = XlfExcel::Instance().Call(xlfn, result);
-                if(err != xlretSuccess)
-                {
-                    throw std::logic_error(errorString);
-                }
-                return result;
+                throw std::logic_error(errorString);
             }
+            return result;
+        }
 
-            inline XlfOper CallFunction(int xlfn, const XlfOper& param1, const char* errorString)
+        inline XlfOper CallFunction(int xlfn, const XlfOper& param1, const char* errorString)
+        {
+            XlfOper result;
+            int err = XlfExcel::Instance().Call(xlfn, result, param1);
+            if(err != xlretSuccess)
             {
-                XlfOper result;
-                int err = XlfExcel::Instance().Call(xlfn, result, param1);
-                if(err != xlretSuccess)
-                {
-                    throw std::logic_error(errorString);
-                }
-                return result;
+                throw std::logic_error(errorString);
             }
+            return result;
+        }
 
-            inline XlfOper CallFunction(int xlfn, const XlfOper& param1, const XlfOper& param2, const char* errorString)
+        inline XlfOper CallFunction(int xlfn, const XlfOper& param1, const XlfOper& param2, const char* errorString)
+        {
+            XlfOper result;
+            int err = XlfExcel::Instance().Call(xlfn, result, param1, param2);
+            if(err != xlretSuccess)
             {
-                XlfOper result;
-                int err = XlfExcel::Instance().Call(xlfn, result, param1, param2);
-                if(err != xlretSuccess)
-                {
-                    throw std::logic_error(errorString);
-                }
-                return result;
+                throw std::logic_error(errorString);
             }
+            return result;
+        }
 
-            inline XlfOper CallFunction(int xlfn, const XlfOper& param1, const XlfOper& param2, const XlfOper& param3, const char* errorString)
+        inline XlfOper CallFunction(int xlfn, const XlfOper& param1, const XlfOper& param2, const XlfOper& param3, const char* errorString)
+        {
+            XlfOper result;
+            int err = XlfExcel::Instance().Call(xlfn, result, param1, param2, param3);
+            if(err != xlretSuccess)
             {
-                XlfOper result;
-                int err = XlfExcel::Instance().Call(xlfn, result, param1, param2, param3);
-                if(err != xlretSuccess)
-                {
-                    throw std::logic_error(errorString);
-                }
-                return result;
+                throw std::logic_error(errorString);
             }
+            return result;
+        }
 
-            inline XlfOper CallFunction(int xlfn, const XlfOper& param1, const XlfOper& param2, const XlfOper& param3, const XlfOper& param4, const char* errorString)
+        inline XlfOper CallFunction(int xlfn, const XlfOper& param1, const XlfOper& param2, const XlfOper& param3, const XlfOper& param4, const char* errorString)
+        {
+            XlfOper result;
+            int err = XlfExcel::Instance().Call(xlfn, result, param1, param2, param3, param4);
+            if(err != xlretSuccess)
             {
-                XlfOper result;
-                int err = XlfExcel::Instance().Call(xlfn, result, param1, param2, param3, param4);
-                if(err != xlretSuccess)
-                {
-                    throw std::logic_error(errorString);
-                }
-                return result;
+                throw std::logic_error(errorString);
             }
+            return result;
+        }
 
-            inline void CallCommand(int xlcmd, const char* errorString)
+        inline void CallCommand(int xlcmd, const char* errorString)
+        {
+            int err = XlfExcel::Instance().Call(xlcmd, 0);
+            if(err != xlretSuccess)
             {
-                int err = XlfExcel::Instance().Call(xlcmd, 0);
-                if(err != xlretSuccess)
-                {
-                    throw std::logic_error(errorString);
-                }
-            }
-
-            inline void CallCommand(int xlcmd, const XlfOper& param1, const char* errorString)
-            {
-                int err = XlfExcel::Instance().Call(xlcmd, 0, param1);
-                if(err != xlretSuccess)
-                {
-                    throw std::logic_error(errorString);
-                }
-            }
-
-            inline void CallCommand(int xlcmd, const XlfOper& param1, const XlfOper& param2, const char* errorString)
-            {
-                int err = XlfExcel::Instance().Call(xlcmd, 0, param1, param2);
-                if(err != xlretSuccess)
-                {
-                    throw std::logic_error(errorString);
-                }
-            }
-
-            inline void CallCommand(int xlcmd, const XlfOper& param1, const XlfOper& param2, const XlfOper& param3, const char* errorString)
-            {
-                int err = XlfExcel::Instance().Call(xlcmd, 0, param1, param2, param3);
-                if(err != xlretSuccess)
-                {
-                    throw std::logic_error(errorString);
-                }
-            }
-
-            inline void CallCommand(int xlcmd, const XlfOper& param1, const XlfOper& param2, const XlfOper& param3, const XlfOper& param4, const char* errorString)
-            {
-                int err = XlfExcel::Instance().Call(xlcmd, 0, param1, param2, param3, param4);
-                if(err != xlretSuccess)
-                {
-                    throw std::logic_error(errorString);
-                }
+                throw std::logic_error(errorString);
             }
         }
 
-
-        StatusBar_t & StatusBar_t::operator=(const std::string &message)
+        inline void CallCommand(int xlcmd, const XlfOper& param1, const char* errorString)
         {
-            CallCommand(xlcMessage, true, message, "Set Status Bar failed");
-            return *this;
-        }
-
-        void StatusBar_t::clear()
-        {
-            CallCommand(xlcMessage, 0, false, "Clear Status Bar Failed");
-        }
-
-        XlfOper Notes_t::GetNote(const XlfOper& cellRef, int startCharacter, int numChars)
-        {
-            if(numChars == 0)
+            int err = XlfExcel::Instance().Call(xlcmd, 0, param1);
+            if(err != xlretSuccess)
             {
-                return CallFunction(xlfGetNote, cellRef, startCharacter + 1, "Get Note Failed");
-            }
-            else
-            {
-                return CallFunction(xlfGetNote, cellRef, startCharacter + 1, numChars, "Get Note Failed");
+                throw std::logic_error(errorString);
             }
         }
 
-        XlfOper Information_t::GetCallingCell()
+        inline void CallCommand(int xlcmd, const XlfOper& param1, const XlfOper& param2, const char* errorString)
         {
-            return CallFunction(xlfCaller, "Calling Cell Failed");
+            int err = XlfExcel::Instance().Call(xlcmd, 0, param1, param2);
+            if(err != xlretSuccess)
+            {
+                throw std::logic_error(errorString);
+            }
         }
 
-        XlfOper Information_t::GetActiveCell()
+        inline void CallCommand(int xlcmd, const XlfOper& param1, const XlfOper& param2, const XlfOper& param3, const char* errorString)
         {
-            return CallFunction(xlfActiveCell, "Get Active Cell failed");
+            int err = XlfExcel::Instance().Call(xlcmd, 0, param1, param2, param3);
+            if(err != xlretSuccess)
+            {
+                throw std::logic_error(errorString);
+            }
         }
 
-        std::string Information_t::GetFormula(const XlfOper& cellRef)
+        inline void CallCommand(int xlcmd, const XlfOper& param1, const XlfOper& param2, const XlfOper& param3, const XlfOper& param4, const char* errorString)
         {
-            return CallFunction(xlfGetFormula, cellRef, "Get Formula failed").AsString();
+            int err = XlfExcel::Instance().Call(xlcmd, 0, param1, param2, param3, param4);
+            if(err != xlretSuccess)
+            {
+                throw std::logic_error(errorString);
+            }
         }
+    }
 
-        void Commands_t::Alert(const std::string& message)
-        {
-            CallCommand(xlcAlert, message, "Alert Command failed");
-        }
 
-        std::string Commands_t::InputFormula(const std::string& message, const std::string& title)
-        {
-            return CallFunction(xlfInput, message, 0, title, "Input failed").AsString();
-        }
+    StatusBar_t & StatusBar_t::operator=(const std::string &message)
+    {
+        CallCommand(xlcMessage, true, message, "Set Status Bar failed");
+        return *this;
+    }
 
-        double Commands_t::InputNumber(const std::string& message, const std::string& title)
-        {
-            return CallFunction(xlfInput, message, 1, title, "Input failed").AsDouble();
-        }
+    void StatusBar_t::clear()
+    {
+        CallCommand(xlcMessage, 0, false, "Clear Status Bar Failed");
+    }
 
-        std::string Commands_t::InputText(const std::string& message, const std::string& title)
+    XlfOper Notes_t::GetNote(const XlfOper& cellRef, int startCharacter, int numChars)
+    {
+        if(numChars == 0)
         {
-            return CallFunction(xlfInput, message, 2, title, "Input failed").AsString();
+            return CallFunction(xlfGetNote, cellRef, startCharacter + 1, "Get Note Failed");
         }
+        else
+        {
+            return CallFunction(xlfGetNote, cellRef, startCharacter + 1, numChars, "Get Note Failed");
+        }
+    }
 
-        bool Commands_t::InputBool(const std::string& message, const std::string& title)
-        {
-            return CallFunction(xlfInput, message, 4, title, "Input failed").AsBool();
-        }
+    XlfOper Information_t::GetCallingCell()
+    {
+        return CallFunction(xlfCaller, "Calling Cell Failed");
+    }
 
-        XlfOper Commands_t::InputReference(const std::string& message, const std::string& title)
-        {
-            return CallFunction(xlfInput, message, 8, title, "Input failed");
-        }
+    XlfOper Information_t::GetActiveCell()
+    {
+        return CallFunction(xlfActiveCell, "Get Active Cell failed");
+    }
 
-        XlfOper Commands_t::InputArray(const std::string& message, const std::string& title)
-        {
-            return CallFunction(xlfInput, message, 64, title, "Input failed");
-        }
+    std::string Information_t::GetFormula(const XlfOper& cellRef)
+    {
+        return CallFunction(xlfGetFormula, cellRef, "Get Formula failed").AsString();
+    }
+
+    void Commands_t::Alert(const std::string& message)
+    {
+        CallCommand(xlcAlert, message, "Alert Command failed");
+    }
+
+    std::string Commands_t::InputFormula(const std::string& message, const std::string& title)
+    {
+        return CallFunction(xlfInput, message, 0, title, "Input failed").AsString();
+    }
+
+    double Commands_t::InputNumber(const std::string& message, const std::string& title)
+    {
+        return CallFunction(xlfInput, message, 1, title, "Input failed").AsDouble();
+    }
+
+    std::string Commands_t::InputText(const std::string& message, const std::string& title)
+    {
+        return CallFunction(xlfInput, message, 2, title, "Input failed").AsString();
+    }
+
+    bool Commands_t::InputBool(const std::string& message, const std::string& title)
+    {
+        return CallFunction(xlfInput, message, 4, title, "Input failed").AsBool();
+    }
+
+    XlfOper Commands_t::InputReference(const std::string& message, const std::string& title)
+    {
+        return CallFunction(xlfInput, message, 8, title, "Input failed");
+    }
+
+    XlfOper Commands_t::InputArray(const std::string& message, const std::string& title)
+    {
+        return CallFunction(xlfInput, message, 64, title, "Input failed");
     }
 }
