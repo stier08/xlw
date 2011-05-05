@@ -166,7 +166,7 @@ extern "C" {
 
         // Gets reference of the called cell
         XlfOper res;
-        XlfExcel::Instance().Call(xlfCaller,res,0);
+        XlfExcel::Instance().Call(xlfCaller,res);
         XlfRef ref = res.AsRef();
 
         // Returns the reference in A1 format
@@ -225,8 +225,8 @@ extern "C" {
         XlfOper activeCell;
         XlfOper result;
 
-        XlfExcel::Instance().Call(xlfActiveCell, activeCell, 0);
-        XlfExcel::Instance().Call(xlfGetFormula, result, 1, (LPXLFOPER)activeCell);
+        XlfExcel::Instance().Call(xlfActiveCell, activeCell);
+        XlfExcel::Instance().Call(xlfGetFormula, result, activeCell);
 
         return result;
         EXCEL_END;

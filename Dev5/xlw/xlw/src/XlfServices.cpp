@@ -57,18 +57,18 @@ namespace xlw
 
     StatusBar_t & StatusBar_t::operator=(const std::string &message)
     {
-        XlfExcel::Instance().Call(xlcMessage, 0, 2, (LPXLFOPER)XlfOper(true), (LPXLFOPER)XlfOper(message));
+        XlfExcel::Instance().Call(xlcMessage, 0, XlfOper(true), XlfOper(message));
         return *this;
     }
 
     StatusBar_t & StatusBar_t::operator=(const std::wstring &message)
     {
-        XlfExcel::Instance().Call(xlcMessage, 0, 2, (LPXLFOPER)XlfOper(true), (LPXLFOPER)XlfOper(message));
+        XlfExcel::Instance().Call(xlcMessage, 0, XlfOper(true), XlfOper(message));
         return *this;
     }
     void StatusBar_t::clear()
     {
-        XlfExcel::Instance().  Call(xlcMessage, 0, 1, (LPXLFOPER)XlfOper(false));
+        XlfExcel::Instance().  Call(xlcMessage, 0, XlfOper(false));
     }
 
     std::string Reflection_t::GetNote() {
@@ -78,7 +78,7 @@ namespace xlw
         XlfOper result;
 
         XlfExcel::Instance().Call(xlfCaller, callingCell, 0);
-        XlfExcel::Instance().Call(xlfGetNote, result, 3, (LPXLFOPER)callingCell, (LPXLFOPER)startChars, (LPXLFOPER)numChars);
+        XlfExcel::Instance().Call(xlfGetNote, result, callingCell, startChars, numChars);
 
         return result.AsString();
     }

@@ -111,9 +111,7 @@ int xlw::XlfFuncDesc::DoUnregister(const std::string& dllName) const
     int err = RegisterAs(dllName, 0, &funcId);
 
     XlfOper unreg;
-    //err = Excel4(xlfUnregister, unreg, 1, XlfOper(funcId));
-    //err = static_cast<int>(XlfExcel::Instance().Call4(xlfUnregister, unreg, 1, XlfOper(funcId)));
-    err = static_cast<int>(XlfExcel::Instance().Call(xlfUnregister, unreg, 1, static_cast<LPXLFOPER>(XlfOper(funcId))));
+    err = XlfExcel::Instance().Call(xlfUnregister, unreg, XlfOper(funcId));
 
     return err;
 }

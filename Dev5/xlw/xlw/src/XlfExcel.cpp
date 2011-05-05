@@ -80,7 +80,7 @@ void xlw::XlfExcel::DeleteInstance() {
 
 bool xlw::XlfExcel::IsEscPressed() const {
     XlfOper ret;
-    Call(xlAbort, ret, 1, (LPXLFOPER)XlfOper(false));
+    Call(xlAbort, ret, XlfOper(false));
     return ret.AsBool();
 }
 
@@ -241,60 +241,88 @@ std::string xlw::XlfExcel::GetName() const {
     return ret;
 }
 
-#ifdef _WIN64
-template<typename XLOPER_TYPE>
-XLOPER_TYPE* varArgsToArray(int count, va_list& vargs)
+int xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult) const
 {
-    // on 64 bit the parameters aren't being passed on the stack in a useful
-    // enough way so we can't do the pointer trick used on 32 bits
-    // We just copy them into a temporary array
-    XLOPER_TYPE* args = xlw::TempMemory::GetMemory<XLOPER_TYPE>(count);
-    for(int i(0); i < count; ++i)
-    {
-        args[i] = va_arg(vargs, XLOPER_TYPE);
-    }
-    return args;
-}
-#else
-template<typename XLOPER_TYPE>
-XLOPER_TYPE* varArgsToArray(int& count, va_list& vargs)
-{
-    // on 32 bit the parameters are passed in order as an array
-    return (XLOPER_TYPE *)(&count + 1);
-}
-#endif
-
-int __cdecl xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, int count, ...) const
-{
-    va_list vargs;
-    va_start(vargs, count);
-    int ret;
-    if (excel12())
-    {
-        ret = Call12v(xlfn, (LPXLOPER12)pxResult, count, varArgsToArray<LPXLOPER12>(count, vargs));
-    }
-    else
-    {
-        ret = Call4v(xlfn, (LPXLOPER)pxResult, count, varArgsToArray<LPXLOPER>(count, vargs));
-    }
-    va_end(vargs);
-    return ret;
+    return Call4v(xlfn, pxResult, 0, 0);
 }
 
-int __cdecl xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult, int count, ...) const {
-    va_list vargs;
-    va_start(vargs, count);
-    int ret = Call4v(xlfn, pxResult, count, varArgsToArray<LPXLOPER>(count, vargs));
-    va_end(vargs);
-    return ret;
+int xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult, const LPXLOPER& param1) const
+{
+    return Call4v(xlfn, pxResult, 1, const_cast<LPXLOPER*>(&param1));
 }
 
-int __cdecl xlw::XlfExcel::Call12(int xlfn, LPXLOPER12 pxResult, int count, ...) const {
-    va_list vargs;
-    va_start(vargs, count);
-    int ret = Call12v(xlfn, pxResult, count, varArgsToArray<LPXLOPER12>(count, vargs));
-    va_end(vargs);
-    return ret;
+int xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult, const LPXLOPER& param1, const LPXLOPER& param2) const
+{
+    LPXLOPER paramArray[2] = {param1, param2};
+    return Call4v(xlfn, pxResult, 2, paramArray);
+}
+
+int xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult, const LPXLOPER& param1, const LPXLOPER& param2, const LPXLOPER& param3) const
+{
+    LPXLOPER paramArray[3] = {param1, param2, param3};
+    return Call4v(xlfn, pxResult, 3, paramArray);
+}
+
+int xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult, const LPXLOPER& param1, const LPXLOPER& param2, const LPXLOPER& param3, const LPXLOPER& param4) const
+{
+    LPXLOPER paramArray[4] = {param1, param2, param3, param4};
+    return Call4v(xlfn, pxResult, 4, paramArray);
+}
+
+int xlw::XlfExcel::Call12(int xlfn, LPXLOPER12 pxResult) const
+{
+    return Call12v(xlfn, pxResult, 0, 0);
+}
+
+int xlw::XlfExcel::Call12(int xlfn, LPXLOPER12 pxResult, const LPXLOPER12& param1) const
+{
+    return Call12v(xlfn, pxResult, 1, const_cast<LPXLOPER12*>(&param1));
+}
+
+int xlw::XlfExcel::Call12(int xlfn, LPXLOPER12 pxResult, const LPXLOPER12& param1, const LPXLOPER12& param2) const
+{
+    LPXLOPER12 paramArray[2] = {param1, param2};
+    return Call12v(xlfn, pxResult, 2, paramArray);
+}
+
+int xlw::XlfExcel::Call12(int xlfn, LPXLOPER12 pxResult, const LPXLOPER12& param1, const LPXLOPER12& param2, const LPXLOPER12& param3) const
+{
+    LPXLOPER12 paramArray[3] = {param1, param2, param3};
+    return Call12v(xlfn, pxResult, 3, paramArray);
+}
+
+int xlw::XlfExcel::Call12(int xlfn, LPXLOPER12 pxResult, const LPXLOPER12& param1, const LPXLOPER12& param2, const LPXLOPER12& param3, const LPXLOPER12& param4) const
+{
+    LPXLOPER12 paramArray[4] = {param1, param2, param3, param4};
+    return Call12v(xlfn, pxResult, 4, paramArray);
+}
+
+int xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult) const
+{
+    return Callv(xlfn, pxResult, 0, 0);
+}
+
+int xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, const LPXLFOPER& param1) const
+{
+    return Callv(xlfn, pxResult, 1, const_cast<LPXLFOPER*>(&param1));
+}
+
+int xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, const LPXLFOPER& param1, const LPXLFOPER& param2) const
+{
+    LPXLFOPER paramArray[2] = {param1, param2};
+    return Callv(xlfn, pxResult, 2, paramArray);
+}
+
+int xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, const LPXLFOPER& param1, const LPXLFOPER& param2, const LPXLFOPER& param3) const
+{
+    LPXLFOPER paramArray[3] = {param1, param2, param3};
+    return Callv(xlfn, pxResult, 3, paramArray);
+}
+
+int xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, const LPXLFOPER& param1, const LPXLFOPER& param2, const LPXLFOPER& param3, const LPXLFOPER& param4) const
+{
+    LPXLFOPER paramArray[4] = {param1, param2, param3, param4};
+    return Callv(xlfn, pxResult, 4, paramArray);
 }
 
 /*!

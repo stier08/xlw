@@ -276,11 +276,11 @@ namespace xlw { namespace impl {
             XLOPER12 typeOper;
             typeOper.val.w = toType;
             typeOper.xltype = xltypeInt;
-            return XlfExcel::Instance().Call12(xlCoerce, toOper, 2, fromOper, &typeOper);
+            return XlfExcel::Instance().Call12(xlCoerce, toOper, fromOper, &typeOper);
         }
         static void XlFree(LPXLOPER12 oper)
         {
-            XlfExcel::Instance().Call12(xlFree, 0, 1, oper);
+            XlfExcel::Instance().Call12(xlFree, 0, oper);
         }
         static void copy(LPXLOPER12 fromOper, LPXLOPER12 toOper)
         {

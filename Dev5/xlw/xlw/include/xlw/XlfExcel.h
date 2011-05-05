@@ -80,17 +80,40 @@ namespace xlw {
         //@}
 
         /** \name Wrappers for Excel Call function
-        Interface to Excel (perform ERR_CHECKs before passing XlfOper to Excel).\n
-        The Call() functions accept a variable length argument list,
+        The Call() functions accept up to 4 arguments
         the Callv() functions accept an argument array.
         */
         //@{
-        //! Wrap the Call function for Excel version 4.
-        int __cdecl Call4(int xlfn, LPXLOPER pxResult, int count, ...) const;
-        //! Wrap the Call function for Excel version 12.
-        int __cdecl Call12(int xlfn, LPXLOPER12 pxResult, int count, ...) const;
-        //! Invoke Call4 or Call12 depending on which version of Excel is running.
-        int __cdecl Call(int xlfn, LPXLFOPER pxResult, int count, ...) const;
+        //! Wrap the Callv4 or Callv12 depending on which version of Excel is running that take no parameters
+        int Call(int xlfn, LPXLFOPER pxResult) const;
+        //! Wrap the Callv4 or Callv12 depending on which version of Excel is running that takes 1 parameter
+        int Call(int xlfn, LPXLFOPER pxResult, const LPXLFOPER& param1) const;
+        //! Wrap the Callv4 or Callv12 depending on which version of Excel is running that takes 2 parameters
+        int Call(int xlfn, LPXLFOPER pxResult, const LPXLFOPER& param1, const LPXLFOPER& param2) const;
+        //! Wrap the Callv4 or Callv12 depending on which version of Excel is running that takes 3 parameters
+        int Call(int xlfn, LPXLFOPER pxResult, const LPXLFOPER& param1, const LPXLFOPER& param2, const LPXLFOPER& param3) const;
+        //! Wrap the Callv4 or Callv12 depending on which version of Excel is running that takes 4 parameters
+        int Call(int xlfn, LPXLFOPER pxResult, const LPXLFOPER& param1, const LPXLFOPER& param2, const LPXLFOPER& param3, const LPXLFOPER& param4) const;
+        //! Wrap the Call function for Excel version 4 functions that take no parameters
+        int Call4(int xlfn, LPXLOPER pxResult) const;
+        //! Wrap the Call function for Excel version 4 functions that takes 1 parameter
+        int Call4(int xlfn, LPXLOPER pxResult, const LPXLOPER& param1) const;
+        //! Wrap the Call function for Excel version 4 functions that takes 2 parameters
+        int Call4(int xlfn, LPXLOPER pxResult, const LPXLOPER& param1, const LPXLOPER& param2) const;
+        //! Wrap the Call function for Excel version 4 functions that takes 3 parameters
+        int Call4(int xlfn, LPXLOPER pxResult, const LPXLOPER& param1, const LPXLOPER& param2, const LPXLOPER& param3) const;
+        //! Wrap the Call function for Excel version 4 functions that takes 4 parameters
+        int Call4(int xlfn, LPXLOPER pxResult, const LPXLOPER& param1, const LPXLOPER& param2, const LPXLOPER& param3, const LPXLOPER& param4) const;
+        //! Wrap the Call function for Excel version 12 functions that take no parameters
+        int Call12(int xlfn, LPXLOPER12 pxResult) const;
+        //! Wrap the Call function for Excel version 12 functions that takes 1 parameter
+        int Call12(int xlfn, LPXLOPER12 pxResult, const LPXLOPER12& param1) const;
+        //! Wrap the Call function for Excel version 12 functions that takes 2 parameters
+        int Call12(int xlfn, LPXLOPER12 pxResult, const LPXLOPER12& param1, const LPXLOPER12& param2) const;
+        //! Wrap the Call function for Excel version 12 functions that takes 3 parameters
+        int Call12(int xlfn, LPXLOPER12 pxResult, const LPXLOPER12& param1, const LPXLOPER12& param2, const LPXLOPER12& param3) const;
+        //! Wrap the Call function for Excel version 12 functions that takes 4 parameters
+        int Call12(int xlfn, LPXLOPER12 pxResult, const LPXLOPER12& param1, const LPXLOPER12& param2, const LPXLOPER12& param3, const LPXLOPER12& param4) const;
         //! Wrap the Callv function for Excel version 4.
         int Call4v(int xlfn, LPXLOPER pxResult, int count, LPXLOPER pxdata[]) const;
         //! Wrap the Callv function for Excel version 12.
