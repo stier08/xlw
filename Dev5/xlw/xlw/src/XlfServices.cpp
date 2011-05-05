@@ -21,12 +21,13 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 #include <xlw/XlfOper.h>
 #include <string>
 #include <cstdio>
+#include <stdexcept>
 
 namespace xlw
 {
     struct Services_t XlfServices;
 
-    /// I am not sure whether we need the following at all 
+    /// I am not sure whether we need the following at all
 
     /*!
     If no title is specified, the message is assumed to be an error log
