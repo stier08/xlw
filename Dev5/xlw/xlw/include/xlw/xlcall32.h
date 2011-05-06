@@ -298,15 +298,18 @@ typedef struct xloper12
 ** These values can be returned from Excel4(), Excel4v(), Excel12() or Excel12v().
 */
 
-#define xlretSuccess        0    /* success */
-#define xlretAbort          1    /* macro halted */
-#define xlretInvXlfn        2    /* invalid function number */
-#define xlretInvCount       4    /* invalid number of arguments */
-#define xlretInvXloper      8    /* invalid OPER structure */
-#define xlretStackOvfl      16   /* stack overflow */
-#define xlretFailed         32   /* command failed */
-#define xlretUncalced       64   /* uncalced cell */
-#define xlretNotThreadSafe  128  /* not allowed during multi-threaded calc */
+#define xlretSuccess                    0       /* success */
+#define xlretAbort                      1       /* macro halted */
+#define xlretInvXlfn                    2       /* invalid function number */
+#define xlretInvCount                   4       /* invalid number of arguments */
+#define xlretInvXloper                  8       /* invalid OPER structure */
+#define xlretStackOvfl                  16      /* stack overflow */
+#define xlretFailed                     32      /* command failed */
+#define xlretUncalced                   64      /* uncalced cell */
+#define xlretNotThreadSafe              128     /* not allowed during multi-threaded calc */
+#define xlretNotThreadSafe              128     /* not allowed during multi-threaded calc */
+#define xlRetInvAsynchronousContext     256     /* the async handle is inavlid */
+#define xlretNotClusterSafe             512     /* The call is not supported on clusters */
 
 
 /*

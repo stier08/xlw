@@ -58,6 +58,10 @@ namespace xlw
             throw std::runtime_error(CombineErrorString("invalid number of arguments" , ErrorId, Identifier));
         if (xlret & xlretInvXlfn)
             throw std::runtime_error(CombineErrorString("invalid function number" , ErrorId, Identifier));
+        if (xlret & xlRetInvAsynchronousContext)
+            throw std::runtime_error(CombineErrorString("invalid asynch conext" , ErrorId, Identifier));
+        if (xlret & xlretNotClusterSafe)
+            throw std::runtime_error(CombineErrorString("function not cluster safe" , ErrorId, Identifier));
     }
 
     std::string XlfOperImpl::XlTypeToString(int xlType)
