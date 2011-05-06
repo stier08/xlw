@@ -292,7 +292,7 @@ extern "C"
     // only do documentation in the debug build to avoid bloating up the released xlls
     void EXCEL_EXPORT xlwGenDoc(const char* xmlFileName)
     {
-#ifdef NDEBUG
+#ifndef NDEBUG
         ExcelFunctionRegistrationRegistry::Instance().GenerateDocumentation(xmlFileName);
 #endif
     }

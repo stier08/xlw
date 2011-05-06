@@ -51,7 +51,6 @@
 #        ifndef NDEBUG
 #            pragma comment (linker, "/export:_xlwGenDoc")
 #        endif
-XlwGenerateDocumentation
 #    else
 #        pragma comment (linker, "/export:xlAutoOpen")
 #        pragma comment (linker, "/export:xlAutoClose")
