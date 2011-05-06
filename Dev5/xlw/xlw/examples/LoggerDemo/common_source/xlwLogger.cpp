@@ -16,20 +16,33 @@
 
 #ifdef WIN32
 #include "xlwLogger.h"
-
 #include<ctime>
+#include <iostream>
 
 xlwLogger::xlwLogger(){
-    theConsoleHandel= GetConsoleWindow();
-    if(theConsoleHandel)FreeConsole();
+    theConsoleHandle= GetConsoleWindow();
+    if(theConsoleHandle)
+    {
+        if(!FreeConsole())
+        {
+            // FIXME: lets see if problems is here
+            std::cerr << "can't free console window" << std::endl;
+        }
+    }
 
     BOOL flag = AllocConsole();
     if(flag == 0)
     {
-        throw("can't create console window");
+        // FIXME: update logic so that failure here is a real error
+        std::cerr << "can't create console window" << std::endl;
     }
-    theConsoleHandel= GetConsoleWindow();
-    theScreenHandel = GetStdHandle(STD_OUTPUT_HANDLE);
+    theConsoleHandle= GetConsoleWindow();
+    if(theConsoleHandle)
+    {
+        // FIXME: should throw here if we can't find a console by the time we get here
+        std::cerr << "haven't got a console window" << std::endl;
+    }
+    theScreenHandle = GetStdHandle(STD_OUTPUT_HANDLE);
     char titlePtr[]=" xlwLogger Window \0";
 
     SetConsoleTitle(titlePtr);
@@ -55,7 +68,7 @@ xlwLogger::xlwLogger(){
 
 
 void xlwLogger::Display(){
-    WriteConsole(theScreenHandel,
+    WriteConsole(theScreenHandle,
                  theInnerStream.str().c_str(),
                  (DWORD)theInnerStream.str().size(),
                  &CharsWritten, 0);
@@ -63,7 +76,7 @@ void xlwLogger::Display(){
 
 }
 void xlwLogger::Display(const std::string& theLog ){
-    WriteConsole(theScreenHandel,
+    WriteConsole(theScreenHandle,
                  theLog.c_str(),
                  (DWORD)theLog.size(),
                  &CharsWritten, 0);

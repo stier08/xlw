@@ -57,8 +57,8 @@ private:
 
     std::ostringstream theInnerStream;
     std::string theInnerString;
-    HWND theConsoleHandel;
-    HANDLE theScreenHandel;
+    HWND theConsoleHandle;
+    HANDLE theScreenHandle;
     DWORD CharsWritten;
     time_t theTime[3];
     char timeTemp[26];
