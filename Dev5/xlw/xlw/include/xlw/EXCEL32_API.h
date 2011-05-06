@@ -31,16 +31,16 @@
 
 
 //! version hexadecimal number
-#define XLW_HEX_VERSION 0x040000f0
+#define XLW_HEX_VERSION 0x050000a0
 //! version string for output lib name
 #define XLW_LIB_VERSION "5_0_0"
 
 //! version string
 #ifndef NDEBUG
-   // #define XLW_VERSION "5.0.0f0-debug"
+   // #define XLW_VERSION "5.0.0a0-debug"
       #define XLW_VERSION "5DEV-debug"
 #else
-   // #define XLW_VERSION "5.0.0f0"
+   // #define XLW_VERSION "5.0.0a0"
       #define XLW_VERSION "5DEV"
 #endif
 
