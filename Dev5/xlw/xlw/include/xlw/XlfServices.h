@@ -44,6 +44,20 @@ namespace xlw
         XlfOper GetActiveCell();
         //! gets the formula in the supplied cell ref
         std::string GetFormula(const XlfOper& cellRef);
+        //! convert a formula from A1 to R1C1 notation
+        std::string ConvertA1FormulaToR1C1(std::string a1Formula);
+        //! convert a formula from R1C1 to A1 notation
+        std::string ConvertR1C1FormulaToA1(std::string r1c1Formula, bool fixRows = false, bool fixColums = false);
+        //! convert A1 style string to a reference
+        XlfOper GetCellRefA1(std::string a1Location);
+        //! convert R1C1 string to a reference
+        XlfOper GetCellRefR1C1(std::string r1c1Location);
+        //! convert R[-1]C[1] string to a reference given another cell
+        XlfOper GetCellRefR1C1(XlfOper referenceCell, std::string r1c1RelativeLocation);
+        //! convert a reference to A1 style text
+        std::string GetRefTextA1(const XlfOper& ref);
+        //! convert a reference to R1C1 style text
+        std::string GetRefTextR1C1(const XlfOper& ref);
     };
 
     struct Commands_t

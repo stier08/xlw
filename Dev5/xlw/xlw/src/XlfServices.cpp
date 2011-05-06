@@ -183,6 +183,16 @@ namespace xlw
         }
     }
 
+    void Notes_t::SetNote(const XlfOper& cellRef, const std::string& note)
+    {
+        CallCommand(xlcNote, note, cellRef, "Set Note failed");
+    }
+    
+    void Notes_t::ClearNote(const XlfOper& cellRef)
+    {
+        CallCommand(xlcNote, XlfOper(), cellRef, "Clear Note failed");
+    }
+
     XlfOper Information_t::GetCallingCell()
     {
         return CallFunction(xlfCaller, "Calling Cell Failed");
@@ -196,6 +206,42 @@ namespace xlw
     std::string Information_t::GetFormula(const XlfOper& cellRef)
     {
         return CallFunction(xlfGetFormula, cellRef, "Get Formula failed").AsString();
+    }
+
+    std::string Information_t::ConvertA1FormulaToR1C1(std::string a1Formula)
+    {
+        return CallFunction(xlfFormulaConvert, a1Formula, true, false, 1, "Formula Convert failed").AsString();
+    }
+
+    std::string Information_t::ConvertR1C1FormulaToA1(std::string r1c1Formula, bool fixRows, bool fixColums)
+    {
+        int toRefType(4 - fixRows?2:0 - fixColums?1:0);
+        return CallFunction(xlfFormulaConvert, r1c1Formula, false, true, toRefType, "Formula Convert failed").AsString();
+    }
+
+    XlfOper Information_t::GetCellRefA1(std::string a1Location)
+    {
+        return CallFunction(xlfTextref, a1Location, true, "Text Ref failed");
+    }
+
+    XlfOper Information_t::GetCellRefR1C1(std::string r1c1Location)
+    {
+        return CallFunction(xlfTextref, r1c1Location, false, "Text Ref failed");
+    }
+
+    XlfOper Information_t::GetCellRefR1C1(XlfOper referenceCell, std::string r1c1RelativeLocation)
+    {
+        return CallFunction(xlfAbsref, r1c1RelativeLocation, referenceCell, "Abs Ref failed");
+    }
+
+    std::string Information_t::GetRefTextA1(const XlfOper& ref)
+    {
+        return CallFunction(xlfReftext, ref, true, "Ref Text failed").AsString();
+    }
+    
+    std::string Information_t::GetRefTextR1C1(const XlfOper& ref)
+    {
+        return CallFunction(xlfReftext, ref, false, "Ref Text failed").AsString();
     }
 
     void Commands_t::Alert(const std::string& message)
