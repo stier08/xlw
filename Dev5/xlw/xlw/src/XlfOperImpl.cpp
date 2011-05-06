@@ -2,6 +2,7 @@
 /*
  Copyright (C) 1998, 1999, 2001, 2002 Jérôme Lecomte
  Copyright (C) 2007, 2008 Eric Ehlers
+ Copyright (C) 2011 John Adcock
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
