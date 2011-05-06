@@ -21,8 +21,8 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 #include <xlw/xlfFuncDesc.h>
 #include <xlw/xlfCmdDesc.h>
 #include <xlw/xlfArgDescList.h>
-
 #include <stdio.h>
+#include <fstream>
 
 using namespace xlw;
 using namespace XLRegistration;
@@ -267,5 +267,35 @@ void ExcelFunctionRegistrationRegistry::AddCommand(const XLCommandRegistrationDa
             !data.GetMenu().empty()));
 
         Commands[data.GetExcelCommandName()] = theCommand;
-
 }
+
+void ExcelFunctionRegistrationRegistry::GenerateDocumentation(const char* xmlFileName)
+{
+    // not real yet, just output something for early testing
+    std::ofstream outFile(xmlFileName);
+
+    outFile << "Functions" << std::endl;
+    for (functionCache::const_iterator it = Functions.begin(); it !=  Functions.end(); ++it)
+    {
+        outFile << it->second->GetName() << std::endl;
+    }
+
+    outFile << "Commands" << std::endl;
+    for (commandCache::const_iterator it = Commands.begin(); it !=  Commands.end(); ++it)
+    {
+        outFile << it->second->GetName() << std::endl;
+    }
+}
+
+extern "C"
+{
+    // only do documentation in the debug build to avoid bloating up the released xlls
+    void EXCEL_EXPORT xlwGenDoc(const char* xmlFileName)
+    {
+#ifdef NDEBUG
+        ExcelFunctionRegistrationRegistry::Instance().GenerateDocumentation(xmlFileName);
+#endif
+    }
+}
+
+

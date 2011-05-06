@@ -2,4 +2,4 @@ EXPORTS
    xlAutoOpen    @1
    xlAutoClose   @2
    xlAutoRemove  @3
-   
+   xlwGenDoc     @4

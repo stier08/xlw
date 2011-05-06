@@ -48,10 +48,17 @@
 #        pragma comment (linker, "/export:_xlAutoOpen")
 #        pragma comment (linker, "/export:_xlAutoClose")
 #        pragma comment (linker, "/export:_xlAutoRemove")
+#        ifndef NDEBUG
+#            pragma comment (linker, "/export:_xlwGenDoc")
+#        endif
+XlwGenerateDocumentation
 #    else
 #        pragma comment (linker, "/export:xlAutoOpen")
 #        pragma comment (linker, "/export:xlAutoClose")
 #        pragma comment (linker, "/export:xlAutoRemove")
+#        ifndef NDEBUG
+#            pragma comment (linker, "/export:xlwGenDoc")
+#        endif
 #    endif
 #endif
 

@@ -184,7 +184,7 @@ namespace xlw {
         void DoTheDeregistrations() const;
         void AddFunction(const XLFunctionRegistrationData&);
         void AddCommand(const XLCommandRegistrationData&);
-
+        void GenerateDocumentation(const char* xmlFileName);
     private:
         typedef std::map<std::string,xlw_tr1::shared_ptr<xlw::XlfFuncDesc> > functionCache;
         typedef std::map<std::string,xlw_tr1::shared_ptr<XlfCmdDesc> > commandCache;
