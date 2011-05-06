@@ -22,12 +22,7 @@
 // $Id$
 
 #include <xlw/XlfRef.h>
-#include <xlw/XlfOper.h>
 #include <sstream>
-
-#ifndef NDEBUG
-#include <xlw/XlfRef.inl>
-#endif
 
 namespace
 {

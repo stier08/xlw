@@ -132,9 +132,7 @@ namespace xlw {
 
 }
 
-#ifdef NDEBUG
 #include <xlw/XlfRef.inl>
-#endif
 
 #endif
 
