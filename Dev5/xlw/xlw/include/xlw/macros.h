@@ -144,10 +144,5 @@ functions.
 return 1;
 //@}
 
-
-#define XLW__HERE__ __FILE__ "(" _MAKESTRING(__LINE__) "): "
-#define _MAKESTRING(a) __MAKESTRING(a)
-#define __MAKESTRING(a) #a
-
 #endif
 

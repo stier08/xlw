@@ -27,10 +27,17 @@
 #include <xlw/EXCEL32_API.h>
 #include <string>
 #include <exception>
+#include <stdexcept>
+#include <iostream>
+#include <sstream>
 
 #if defined(_MSC_VER)
 #pragma once
 #endif
+
+#define XLW__HERE__ __FILE__ "(" _MAKESTRING(__LINE__) "): "
+#define _MAKESTRING(a) __MAKESTRING(a)
+#define __MAKESTRING(a) #a
 
 namespace xlw {
 
@@ -103,7 +110,37 @@ namespace xlw {
     public:
         XlfOutOfBounds(): XlfException("Out of bounds array access detected") {}
     };
+
+    //! Other Xlw Exceptions
+    /*!
+        These error can be thrown from anywhere
+        in the code.
+        This is a proposal for replacing use of raw strings,
+        std:strings, CellMatrix as exception types in the code
+    */
+    class XlfGeneralException : public std::runtime_error
+    {
+    public:
+        XlfGeneralException(const std::string& what) :
+                std::runtime_error(what)
+        {
+        }
+
+        XlfGeneralException(const std::ostringstream& what) :
+                std::runtime_error(what.str())
+        {
+        }
+    };
 }
+
+//! Used to simplify the throwing of formatted exceptions
+#define THROW_XLW(ERROR_MSG_PARTS) \
+    { \
+        std::ostringstream ostr; \
+        ostr << ERROR_MSG_PARTS; \
+        std::cerr << XLW__HERE__ << ostr.str(); \
+        throw xlw::XlfGeneralException(ostr); \
+    }
 
 #endif
 
