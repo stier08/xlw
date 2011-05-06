@@ -58,6 +58,8 @@ namespace xlw
         std::string GetRefTextA1(const XlfOper& ref);
         //! convert a reference to R1C1 style text
         std::string GetRefTextR1C1(const XlfOper& ref);
+        //! get sheet name for a reference
+        std::string GetSheetName(const XlfOper& ref);
     };
 
     struct Commands_t

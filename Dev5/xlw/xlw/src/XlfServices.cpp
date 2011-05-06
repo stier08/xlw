@@ -244,6 +244,10 @@ namespace xlw
         return CallFunction(xlfReftext, ref, false, "Ref Text failed").AsString();
     }
 
+    std::string Information_t::GetSheetName(const XlfOper& ref)
+    {
+        return CallFunction(xlSheetNm, ref, "Get Sheet Name failed").AsString();
+    }
     void Commands_t::Alert(const std::string& message)
     {
         CallCommand(xlcAlert, message, "Alert Command failed");
