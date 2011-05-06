@@ -23,25 +23,60 @@
 
 #include <xlw/XlfRef.h>
 #include <xlw/XlfOper.h>
-#include <iostream>
+#include <sstream>
 
 #ifndef NDEBUG
 #include <xlw/XlfRef.inl>
 #endif
 
-/*!
-\note In debug build, generates a message if the request is not in the range.
-*/
-//XlfOper XlfRef::operator()(INT32 r, INT32 c) const
-//{
-//#if !defined(NDEBUG)
-//    if (rowbegin_ + r > rowend_ || colbegin_ + c > colend_)
-//  {
-//    std::cerr << "XlfRef access out of range" << std::endl;
-//  }
-//#endif
-//    XlfOper res;
-//    res.Set(XlfRef(rowbegin_ + r, colbegin_ + c, sheetId_));
-//    return res;
-//}
+namespace
+{
+    std::string RowColToA1(RW row, COL col)
+    {
+        std::ostringstream ostr;
+        COL colLeft = col;
+        if(col > 26*26)
+        {
+            char colChar = 'A' + colLeft / (26 * 26) - 1;
+            colLeft %= (26 * 26);
+            ostr << colChar;
+        }
+        if(col > 26)
+        {
+            char colChar = 'A' + colLeft / 26 - 1;
+            colLeft %= 26;
+            ostr << colChar;
+        }
+        {
+            char colChar = 'A' + colLeft;
+            ostr << colChar;
+        }
+        ostr << row + 1;
+        return ostr.str();
+    }
+}
 
+namespace xlw
+{
+    std::string XlfRef::GetTextA1()
+    {
+        std::string result = RowColToA1(rowbegin_, colbegin_);
+        if(colend_ > colbegin_ + 1 || rowend_ > rowbegin_ + 1)
+        {
+            result += ":";
+            result += RowColToA1(rowend_ - 1, colend_ - 1);
+        }
+        return result;
+    }
+
+    std::string XlfRef::GetTextR1C1()
+    {
+        std::ostringstream ostr;
+        ostr << "R" << rowbegin_ + 1 << "C" << colbegin_ + 1;
+        if(colend_ > colbegin_ + 1 || rowend_ > rowbegin_ + 1)
+        {
+            ostr << ":" << "R" << rowend_ << "C" << colend_;
+        }
+        return ostr.str();
+    }
+}

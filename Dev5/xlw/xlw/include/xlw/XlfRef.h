@@ -29,6 +29,7 @@
 #include <xlw/EXCEL32_API.h>
 #include <xlw/xlcall32.h>
 #include <iostream>
+#include <string>
 
 #if defined(_MSC_VER)
 #pragma once
@@ -93,6 +94,10 @@ namespace xlw {
         void SetColEnd(INT32 colend);
         //! Sets MS Excel sheet identifier of the range.
         void SetSheetId(DWORD);
+        //! get the reference as a string in A1 notation
+        std::string GetTextA1();
+        //! get the reference as a string in R1C1 notation
+        std::string GetTextR1C1();
         //@}
 
         //! \name Access operator

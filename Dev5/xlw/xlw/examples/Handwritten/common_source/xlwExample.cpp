@@ -20,7 +20,6 @@
 // $Id$
 
 #include <xlw/xlw.h>
-#include <sstream>
 #include <vector>
 #include <xlw/XlOpenClose.h>
 #include <xlw/XlfServices.h>
@@ -169,29 +168,10 @@ extern "C" {
         XlfRef ref = XlfServices.Information.GetCallingCell().AsRef();
 
         // Returns the reference in A1 format
-        std::ostringstream ostr;
-        COL col = ref.GetColBegin();
-        COL colLeft = col;
-        if(col > 26*26)
-        {
-            char colChar = 'A' + colLeft / (26 * 26) - 1;
-            colLeft %= (26 * 26);
-            ostr << colChar;
-        }
-        if(col > 26)
-        {
-            char colChar = 'A' + colLeft / 26 - 1;
-            colLeft %= 26;
-            ostr << colChar;
-        }
-        {
-            char colChar = 'A' + colLeft;
-            ostr << colChar;
-        }
-        ostr << ref.GetRowBegin() + 1 << std::ends;
-        std::string address = ostr.str();
-
-        return XlfOper(address.c_str());
+        // note that we avoid using the functions in XlfServices
+        // to do this as most of them require the function to be defined
+        // as a macro sheet function
+        return XlfOper(ref.GetTextA1());
 
         EXCEL_END;
     }
