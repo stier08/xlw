@@ -342,22 +342,6 @@
 			<File
 				RelativePath="..\..\src\XlfRef.cpp"
 				>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|x64"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\..\src\XlfServices.cpp"
@@ -462,10 +446,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\xlw\XlfAbstractCmdDesc.inl"
-				>
-			</File>
-			<File
 				RelativePath="..\..\include\xlw\XlfArgDesc.h"
 				>
 			</File>
@@ -499,10 +479,6 @@
 			</File>
 			<File
 				RelativePath="..\..\include\xlw\XlfOper4.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\include\xlw\XlfOperHelpers.h"
 				>
 			</File>
 			<File

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -137,10 +137,7 @@
     <ClCompile Include="..\..\src\XlfFuncDesc.cpp" />
     <ClCompile Include="..\..\src\XlfOperImpl.cpp" />
     <ClCompile Include="..\..\src\XlfOperProperties.cpp" />
-    <ClCompile Include="..\..\src\XlfRef.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="..\..\src\XlfRef.cpp" />
     <ClCompile Include="..\..\src\XlfServices.cpp" />
     <ClCompile Include="..\..\src\XlFunctionRegistration.cpp" />
     <ClCompile Include="..\..\src\XlOpenClose.cpp" />
@@ -164,7 +161,6 @@
     <ClInclude Include="..\..\include\xlw\Win32StreamBuf.h" />
     <ClInclude Include="..\..\include\xlw\xlarray.h" />
     <ClInclude Include="..\..\include\xlw\xlcall32.h" />
-    <ClInclude Include="..\..\include\xlw\XlfAbstractCmdDesc.h" />
     <ClInclude Include="..\..\include\xlw\XlfArgDesc.h" />
     <ClInclude Include="..\..\include\xlw\XlfArgDescList.h" />
     <ClInclude Include="..\..\include\xlw\XlfCmdDesc.h" />
