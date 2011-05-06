@@ -222,7 +222,7 @@ extern "C" {
     LPXLFOPER EXCEL_EXPORT xlCurrentFormula() {
         EXCEL_BEGIN;
         XlfOper activeCell(XlfServices.Information.GetActiveCell());
-        return XlfServices.Information.GetFormula(activeCell);
+        return XlfOper(XlfServices.Information.GetFormula(activeCell));
         EXCEL_END;
     }
 
