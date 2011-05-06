@@ -399,10 +399,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\xlw\ERR_Macros.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\include\xlw\eshared_ptr.h"
 				>
 			</File>

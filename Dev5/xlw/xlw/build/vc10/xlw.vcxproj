@@ -150,7 +150,6 @@
     <ClInclude Include="..\..\include\xlw\CellMatrix.h" />
     <ClInclude Include="..\..\include\xlw\CriticalSection.h" />
     <ClInclude Include="..\..\include\xlw\DoubleOrNothing.h" />
-    <ClInclude Include="..\..\include\xlw\ERR_Macros.h" />
     <ClInclude Include="..\..\include\xlw\eshared_ptr.h" />
     <ClInclude Include="..\..\include\xlw\eshared_ptr_details.h" />
     <ClInclude Include="..\..\include\xlw\EXCEL32_API.h" />

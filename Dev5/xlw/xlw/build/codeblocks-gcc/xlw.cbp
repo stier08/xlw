@@ -43,7 +43,6 @@
 		<Unit filename="..\..\include\xlw\CellMatrix.h" />
 		<Unit filename="..\..\include\xlw\CriticalSection.h" />
 		<Unit filename="..\..\include\xlw\DoubleOrNothing.h" />
-		<Unit filename="..\..\include\xlw\ERR_Macros.h" />
 		<Unit filename="..\..\include\xlw\EXCEL32_API.h" />
 		<Unit filename="..\..\include\xlw\HiResTimer.h" />
 		<Unit filename="..\..\include\xlw\IXlfoperShared.h" />
