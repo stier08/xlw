@@ -16,7 +16,7 @@
 
 #ifndef XL_OPEN_CLOSE
 #define XL_OPEN_CLOSE
-#include<xlw/xlw.h>
+#include<xlw/EXCEL32_API.h>
 #include<xlw/Singleton.h>
 #include<xlw/eshared_ptr.h>
 #include<list>

@@ -58,6 +58,7 @@
     #define EXCEL32_API
 #endif
 
+#define EXCEL_EXPORT __declspec(dllexport)
 
 /*! @}  */
 
