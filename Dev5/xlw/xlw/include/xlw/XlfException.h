@@ -138,7 +138,7 @@ namespace xlw {
     { \
         std::ostringstream ostr; \
         ostr << ERROR_MSG_PARTS; \
-        std::cerr << XLW__HERE__ << ostr.str(); \
+        std::cerr << XLW__HERE__ << ostr.str() << std::endl; \
         throw xlw::XlfGeneralException(ostr); \
     }
 
