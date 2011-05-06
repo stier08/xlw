@@ -13,18 +13,15 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
+// To avoid name clashes with windows headers need
+// to include the c++ stuff first
+#include <xlw/Xlw.h>
 
 using namespace System;
 using namespace System::Collections::Generic;
 using namespace System::Text;
 using namespace System::Net;
 using namespace Runtime::InteropServices;
-
-#include <xlw/MyContainers.h>
-#include <xlw/CellMatrix.h>
-#include <xlw/DoubleOrNothing.h>
-#include <xlw/ArgList.h>
-#include <string>
 
 
 
@@ -107,3 +104,5 @@ GetHistoricDataFromYahoo(
 
             return excelData;
 }
+
+
