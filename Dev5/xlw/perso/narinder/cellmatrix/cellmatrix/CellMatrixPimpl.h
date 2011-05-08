@@ -19,9 +19,11 @@ namespace xlw {
 		virtual CellValue& operator()(size_t i, size_t j)=0;
 		virtual size_t RowsInStructure() const=0;
 		virtual size_t ColumnsInStructure() const=0;
+		virtual void PushBottom(const CellMatrix_pimpl_abstract& newRows)=0;
 
 	};
 
 }
 
 #endif // CELL_MATRIX_PIMPL_I_H
+

@@ -86,11 +86,13 @@
   <ItemGroup>
     <ClCompile Include="CellMatrix.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MJCellMatrix.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CellMatrix.h" />
     <ClInclude Include="CellMatrixPimpl.h" />
     <ClInclude Include="CellValue.h" />
+    <ClInclude Include="MJCellMatrix.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

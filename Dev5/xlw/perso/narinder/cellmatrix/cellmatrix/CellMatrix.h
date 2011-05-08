@@ -2,15 +2,17 @@
 #ifndef CELL_MATRIX_H
 #define CELL_MATRIX_H
 
-#include "CellMatrixPimpl.h"
+
 #include "CellValue.h"
+#include "MJCellMatrix.h"
 #include <xlw/MyContainers.h>
 #include <string>
 #include <vector>
 
 namespace xlw {
 
-   
+	typedef impl::MJCellMatrix defaultCellMatrixImpl;
+    
     class CellMatrix
     {
     public:
@@ -19,23 +21,21 @@ namespace xlw {
 		CellMatrix(const CellMatrix &theOther):pimpl(theOther.pimpl.copy()){}
 
 
-		CellMatrix():pimpl(new MJCellMatrix()){}
-		CellMatrix(size_t rows, size_t columns ):pimpl(new CellMatrixImpl(rows,cols)){}
+		CellMatrix():pimpl(new impl::MJCellMatrix()){}
 
-        explicit CellMatrix(double x):pimpl(new CellMatrixImpl(1,1))
-		{	
-			
-		}
-        explicit CellMatrix(const std::string & x):pimpl(new MJCellMatrix(x)){}
-        explicit CellMatrix(const std::wstring & x):pimpl(new MJCellMatrix(x)){}
-        explicit CellMatrix(const char* x):pimpl(new MJCellMatrix(std::string (x))){}
-        explicit CellMatrix(const MyArray& data):pimpl(new MJCellMatrix(data)){}
-        explicit CellMatrix(const MyMatrix& data):pimpl(new MJCellMatrix(data)){}
-        explicit CellMatrix(unsigned long i):pimpl(new MJCellMatrix(i)){}
-        explicit CellMatrix(int i):pimpl(new MJCellMatrix(i)){}
+		CellMatrix(size_t rows, size_t columns ):pimpl(new defaultCellMatrixImpl(rows,columns)){}
+        explicit CellMatrix(double );
+        explicit CellMatrix(const std::string & );
+        explicit CellMatrix(const std::wstring & );
+        explicit CellMatrix(const char* );
+        explicit CellMatrix(const MyArray& );
+        explicit CellMatrix(const MyMatrix& );
+        explicit CellMatrix(unsigned long );
+        explicit CellMatrix(int i);
 
+	    CellMatrix & operator=(const CellMatrix &theOther);
 
-
+	
         const CellValue& operator()(size_t i, size_t j) const
 		{
 			return pimpl->operator()(i,j);
@@ -54,13 +54,25 @@ namespace xlw {
 			return pimpl->ColumnsInStructure();
 		}
 
-        //void PushBottom(const CellMatrix& newRows);
+        void PushBottom(const CellMatrix& newRows)
+		{
+			CellMatrix temp(*this);
+			temp.pimpl->PushBottom(*(newRows.pimpl));
+			temp.swap(*this);
+
+		}
+
+		void swap(CellMatrix &theOther)
+		{
+			pimpl.swap(theOther.pimpl);
+		}
 		
 	private:
-		CellMatrix_pimpl_abstract::pimpl pimpl;
-
+		eshared_ptr<CellMatrix_pimpl_abstract> pimpl;
 
     };
+
+	CellMatrix MergeCellMatrices(const CellMatrix& Top, const CellMatrix& Bottom);
 
 }
 
