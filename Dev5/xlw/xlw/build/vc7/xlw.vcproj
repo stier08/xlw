@@ -106,9 +106,6 @@
 				RelativePath="..\..\src\ArgList.cpp">
 			</File>
 			<File
-				RelativePath="..\..\src\CellMatrix.cpp">
-			</File>
-			<File
 				RelativePath="..\..\src\Dispatcher.cpp">
 			</File>
 			<File
@@ -119,6 +116,9 @@
 			</File>
 			<File
 				RelativePath="..\..\src\HiResTimer.cpp">
+			</File>
+			<File
+				RelativePath="..\..\src\MJCellMatrix.cpp">
 			</File>
 			<File
 				RelativePath="..\..\src\NCmatrices.cpp">
@@ -186,6 +186,12 @@
 				RelativePath="..\..\include\xlw\CellMatrix.h">
 			</File>
 			<File
+				RelativePath="..\..\include\xlw\CellMatrixPimpl.h">
+			</File>
+			<File
+				RelativePath="..\..\include\xlw\CellValue.h">
+			</File>
+			<File
 				RelativePath="..\..\include\xlw\CriticalSection.h">
 			</File>
 			<File
@@ -208,6 +214,9 @@
 			</File>
 			<File
 				RelativePath="..\..\include\xlw\macros.h">
+			</File>
+			<File
+				RelativePath="..\..\include\xlw\MJCellMatrix.h">
 			</File>
 			<File
 				RelativePath="..\..\include\xlw\MyContainers.h">

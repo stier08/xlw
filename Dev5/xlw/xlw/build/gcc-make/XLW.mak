@@ -22,11 +22,11 @@ CXXFLAGS = -DBUILDING_DLL=1  -fexceptions
 
 SRC_DIR = ../../src
 LIBSRC = ArgList.cpp \
-         CellMatrix.cpp \
          Dispatcher.cpp \
          DoubleOrNothing.cpp \
          FileConverter.cpp \
          HiResTimer.cpp \
+         MJCellMatrix.cpp \
          NCmatrices.cpp \
          PascalStringConversions.cpp \
          PathUpdater.cpp \

@@ -6,7 +6,7 @@
 /*
  Copyright (C) 2006 Mark Joshi
  Copyright (C) 2007 Tim Brunne
- Copyright (C) 2009 Narinder S Claire
+ Copyright (C) 2009 2011 Narinder S Claire
  Copyright (C) 2011 John Adcock
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
@@ -24,7 +24,7 @@
 #include <xlw/ArgList.h>
 #include <algorithm>
 #include <sstream>
-
+#include <cctype>
 namespace
 {
     std::string ConvertToString(double Number)
@@ -85,6 +85,23 @@ namespace
 
         return result;
     }
+
+    struct tolower_functor
+    {
+        int operator()(int ch)
+        {
+            return std::tolower(ch);
+        }
+    };
+
+
+	std::string StringValueLowerCase(const std::string &theSource)
+	{
+		std::string temp(theSource);
+		std::transform(temp.begin(), temp.end(), temp.begin(),tolower_functor());
+		return temp;
+
+	}
 }
 
 namespace xlw
@@ -164,7 +181,7 @@ void xlw::ArgumentList::add(const std::string& ArgumentName, const ArgumentList&
 
 xlw::ArgumentList::ArgumentList(CellMatrix cells, std::string ErrorId)
 {
-    CellValue empty;
+
     size_t rows = cells.RowsInStructure();
     size_t columns = cells.ColumnsInStructure();
 
@@ -176,8 +193,8 @@ xlw::ArgumentList::ArgumentList(CellMatrix cells, std::string ErrorId)
         throw(std::string("a structure name must be specified for argument list class ")+ErrorId);
     else
     {
-        StructureName = cells(0,0).StringValueLowerCase();
-        cells(0,0) = empty;
+		StructureName = StringValueLowerCase(cells(0,0).StringValue());
+		cells(0,0).clear();
     }
 
 
@@ -219,7 +236,7 @@ xlw::ArgumentList::ArgumentList(CellMatrix cells, std::string ErrorId)
                 if (!cells(row,column).IsAString() && !cells(row,column).IsAWstring())//FIXME
                     GenerateThrow("data  where name expected.", row, column);
 
-                std::string thisName(cells(row,column).StringValueLowerCase());
+                std::string thisName(StringValueLowerCase(cells(row,column).StringValue()));
 
                 if (thisName =="")
                     GenerateThrow("empty name not permissible.", row, column);
@@ -242,7 +259,7 @@ xlw::ArgumentList::ArgumentList(CellMatrix cells, std::string ErrorId)
 
                     column++;
 
-                    cellBelow=empty;
+					cellBelow.clear();
                 }
                 else
                     if (cellBelow.IsBoolean())
@@ -251,21 +268,21 @@ xlw::ArgumentList::ArgumentList(CellMatrix cells, std::string ErrorId)
 
                         column++;
 
-                        cellBelow=empty;
+						cellBelow.clear();
                     }
                     else // ok it's a string
                     {
-                        std::string stringVal = cellBelow.StringValueLowerCase();
+                        std::string stringVal = StringValueLowerCase(cellBelow.StringValue());
 
-                        if ( (cellBelow.StringValueLowerCase() == "list") ||
-                            (cellBelow.StringValueLowerCase() == "matrix") ||
-                            (cellBelow.StringValueLowerCase() == "cells") )
+                        if ( (stringVal == "list") ||
+                            (stringVal == "matrix") ||
+                            (stringVal == "cells") )
                         {
                             bool nonNumeric = false;
                             CellMatrix extracted(ExtractCells(cells,row+2,column,ErrorId,thisName,nonNumeric));
 
 
-                            if (cellBelow.StringValueLowerCase() == "list")
+                            if (stringVal == "list")
                             {
                                 ArgumentList value(extracted,ErrorId+":"+thisName);
 
@@ -273,13 +290,13 @@ xlw::ArgumentList::ArgumentList(CellMatrix cells, std::string ErrorId)
 
                             }
 
-                            if (cellBelow.StringValueLowerCase() == "cells")
+                            if (stringVal == "cells")
                             {
                                 add(thisName,extracted);
                             }
 
 
-                            if (cellBelow.StringValueLowerCase() == "matrix")
+                            if (stringVal == "matrix")
                             {
                                 if (nonNumeric)
                                     throw("Non numerical value in matrix argument :"+thisName+ " "+ErrorId);
@@ -287,14 +304,14 @@ xlw::ArgumentList::ArgumentList(CellMatrix cells, std::string ErrorId)
                                 addInternal(thisName, extracted, MatrixArguments, matrix);
                             }
 
-                            cellBelow = empty;
+                            cellBelow.clear();
                             rowsDown = std::max(rowsDown,extracted.RowsInStructure()+2);
                             column+= extracted.ColumnsInStructure();
                         }
                         else // ok it's an array or boring string
                         {
-                            if (cellBelow.StringValueLowerCase() == "array"
-                                ||cellBelow.StringValueLowerCase() == "vector" )
+                            if (stringVal == "array"
+                                ||stringVal == "vector" )
                             {
                                 cellBelow.clear();
 
@@ -330,11 +347,11 @@ xlw::ArgumentList::ArgumentList(CellMatrix cells, std::string ErrorId)
                             }
                             else
                             {
-                                std::string value = cellBelow.StringValueLowerCase();
+                                std::string value = stringVal;
                                 add(thisName,value);
                                 column++;
 
-                                cellBelow=empty;
+								cellBelow.clear();
                             }
                         }
 

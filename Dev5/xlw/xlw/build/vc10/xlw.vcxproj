@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -118,11 +118,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\ArgList.cpp" />
-    <ClCompile Include="..\..\src\CellMatrix.cpp" />
     <ClCompile Include="..\..\src\Dispatcher.cpp" />
     <ClCompile Include="..\..\src\DoubleOrNothing.cpp" />
     <ClCompile Include="..\..\src\FileConverter.cpp" />
     <ClCompile Include="..\..\src\HiResTimer.cpp" />
+    <ClCompile Include="..\..\src\MJCellMatrix.cpp" />
     <ClCompile Include="..\..\src\NCmatrices.cpp" />
     <ClCompile Include="..\..\src\PascalStringConversions.cpp" />
     <ClCompile Include="..\..\src\PathUpdater.cpp" />
@@ -145,6 +145,8 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\xlw\ArgList.h" />
     <ClInclude Include="..\..\include\xlw\CellMatrix.h" />
+    <ClInclude Include="..\..\include\xlw\CellMatrixPimpl.h" />
+    <ClInclude Include="..\..\include\xlw\CellValue.h" />
     <ClInclude Include="..\..\include\xlw\CriticalSection.h" />
     <ClInclude Include="..\..\include\xlw\DoubleOrNothing.h" />
     <ClInclude Include="..\..\include\xlw\eshared_ptr.h" />
@@ -153,6 +155,7 @@
     <ClInclude Include="..\..\include\xlw\HiResTimer.h" />
     <ClInclude Include="..\..\include\xlw\IXlfoperShared.h" />
     <ClInclude Include="..\..\include\xlw\macros.h" />
+    <ClInclude Include="..\..\include\xlw\MJCellMatrix.h" />
     <ClInclude Include="..\..\include\xlw\MyContainers.h" />
     <ClInclude Include="..\..\include\xlw\NCmatrices.h" />
     <ClInclude Include="..\..\include\xlw\PascalStringConversions.h" />
