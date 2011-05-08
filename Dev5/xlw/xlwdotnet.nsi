@@ -201,6 +201,11 @@
 			SetOutPath "$INSTDIR\xlw\InterfaceGenerator"
 			File /r "xlw\InterfaceGenerator\*.cpp"
 			File /r "xlw\InterfaceGenerator\*.h"
+			SetOutPath "$INSTDIR\xlw\xlcall32stub"
+			File /r "xlw\xlcall32stub\*.cpp"
+			File /r "xlw\xlcall32stub\*.def"
+			SetOutPath "$INSTDIR\xlw\XlwDocGen"
+			File /r "xlw\XlwDocGen\*.cpp"
 	!macroend
 	
 
