@@ -3,7 +3,7 @@
 find . -name '*.[hc]pp' -o -name '*.[hc]' \
     -o -name '*.xhtml' -o -name '*.html' -o -name '*.htm' -o -name '*.css' \
     -o -name '*.docs' -o -name '*.doxy' -o -name '*.qbk' \
-    -o -name '*.el' -o -name '*.cmake' \
+    -o -name '*.el' -o -name '*.cmake' -o -name '*.vb' \
     -o -name '*.ipp' -o -name '*.jam' -o -name '*.tpp' \
     -o -iname '*.txt' -o -name '*.tex' -o -name '*.dtd' \
     -o -name '*.xml' -o -name 'stub.*' -o -name '*.rst' \
@@ -12,7 +12,7 @@ find . -name '*.[hc]pp' -o -name '*.[hc]' \
     -o -name '*.cs' -o -name '*.java' -o -name '*.nsi' \
     -o -name '*.tpp' -o -name '*.Makefile' -o -name '*.README' \
     -o -name '*.mak' -o -name 'Makefile' -o -name '*.rules' \
-    -o -name '*.target' -o -name '*.configure' \
+    -o -name '*.target' -o -name '*.configure' -o -name '*.nmake' \
  | xargs -n 1 svn propset svn:eol-style native
 # these should have UNIX eol, even when extracted from a .zip
 find . -name '*.a[cm]' -o -name '*.m4' -o -name '*.in' \
@@ -21,6 +21,7 @@ find . -name '*.a[cm]' -o -name '*.m4' -o -name '*.in' \
 # these should have Windows eol, even when extracted from a .tar.gz
 find . -name '*.dev' -o -name '*.sln' \
     -o -name '*.vcproj' -o -name '*.csproj' \
+    -o -name '*.vcxproj' -o -name '*.vbproj' \
     -o -name '*.cmd' -o -name '*.bat' \
     -o -name '*.dsw' -o -name '*.dsp' \
  | xargs -n 1 svn propset svn:eol-style CRLF
