@@ -521,6 +521,8 @@ SubSection "xlw" xlw
 		Section "Code::Blocks(mingw)" CODEBLOCKS
 			SetOutPath "$INSTDIR\xlw\lib"
 			File  "xlw\lib\libxlw-gcc*.a"
+			SetOutPath "$INSTDIR\xlw\lib\x64"
+			File  "xlw\lib\x64\libxlw-gcc*.a"
 			SetOutPath "$INSTDIR\xlw\build\codeblocks-gcc\bin"
 			File /r "xlw\build\codeblocks-gcc\bin\*.exe"
 		SectionEnd
@@ -528,6 +530,8 @@ SubSection "xlw" xlw
 		Section "make(mingw)" GCCMAKE
 			SetOutPath "$INSTDIR\xlw\lib"
 			File  "xlw\lib\libxlw-gcc*.a"
+			SetOutPath "$INSTDIR\xlw\lib\x64"
+			File  "xlw\lib\x64\libxlw-gcc*.a"
 			SetOutPath "$INSTDIR\xlw\build\gcc-make"
 			File /r "xlw\build\gcc-make\*.exe"
 		SectionEnd
