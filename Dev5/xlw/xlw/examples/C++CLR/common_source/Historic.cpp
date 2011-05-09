@@ -85,7 +85,7 @@ GetHistoricDataFromYahoo(
             xlw::CellMatrix excelData(1,headings->Length);
             for (int i = 0; i < headings->Length; ++i)
             {
-                excelData(0, i) = xlw::CellValue(CLR2CPP(headings[i]));
+                excelData(0, i) = CLR2CPP(headings[i]);
             }
             for (int i = 1; i < rows->Length; ++i)
             {
@@ -93,10 +93,10 @@ GetHistoricDataFromYahoo(
                 if (thisRow->Length == headings->Length)
                 {
                     xlw::CellMatrix row = xlw::CellMatrix(1, headings->Length);
-                    row(0, 0) = xlw::CellValue(DateTime::Parse(thisRow[0]).ToOADate());
+                    row(0, 0) = DateTime::Parse(thisRow[0]).ToOADate();
                     for (int j = 1; j < headings->Length; ++j)
                     {
-                        row(0, j) = xlw::CellValue(Double::Parse(thisRow[j]));
+                        row(0, j) = Double::Parse(thisRow[j]);
                     }
                     excelData.PushBottom(row);
                 }
