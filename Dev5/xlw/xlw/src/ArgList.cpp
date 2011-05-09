@@ -86,22 +86,7 @@ namespace
         return result;
     }
 
-    struct tolower_functor
-    {
-        int operator()(int ch)
-        {
-            return std::tolower(ch);
-        }
-    };
 
-
-	std::string StringValueLowerCase(const std::string &theSource)
-	{
-		std::string temp(theSource);
-		std::transform(temp.begin(), temp.end(), temp.begin(),tolower_functor());
-		return temp;
-
-	}
 }
 
 namespace xlw
@@ -110,6 +95,13 @@ namespace xlw
     {
         std::transform(input.begin(),input.end(),input.begin(),tolower);
     }
+	std::string StringValueLowerCase(const std::string &theSource)
+	{
+		std::string temp(theSource);
+		MakeLowerCase(temp);
+		return temp;
+
+	}
 
     template<class TYPE>
     void ArgumentList::addInternal(const std::string& ArgumentName, const TYPE& value, std::map<std::string,TYPE>& typeMap, ArgumentType type)
