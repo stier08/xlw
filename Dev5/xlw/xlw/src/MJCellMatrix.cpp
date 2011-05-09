@@ -191,34 +191,6 @@ unsigned long xlw::impl::MJCellValue::ErrorValue() const
     return ValueAsErrorCode;
 }
 
-std::string xlw::impl::MJCellValue::StringValueLowerCase() const
-{
-    if (Type == string) {
-        std::string tmp(*ValueAsString);
-        std::transform(tmp.begin(),tmp.end(),tmp.begin(),tolower);
-        return tmp;
-    } else if (Type == wstring) {
-        std::wstring w(WstringValueLowerCase());
-        return std::string(w.begin(), w.end());
-    } else {
-        throw("non string cell asked to be a string");
-    }
-}
-
-std::wstring xlw::impl::MJCellValue::WstringValueLowerCase() const
-{
-    if (Type == string) {
-        std::string s(StringValueLowerCase());
-        return std::wstring(s.begin(), s.end());
-    } else if (Type == wstring) {
-        std::wstring tmp(*ValueAsWstring);
-        std::transform(tmp.begin(),tmp.end(),tmp.begin(),tolower);
-        return tmp;
-    } else {
-        throw("non string cell asked to be a string");
-    }
-}
-
 xlw::impl::MJCellMatrix::MJCellMatrix() : Cells(0), Rows(0), Columns(0)
 {
 }

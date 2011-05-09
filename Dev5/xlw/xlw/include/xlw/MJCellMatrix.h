@@ -81,10 +81,6 @@ namespace xlw {
 			bool BooleanValue() const;
 			unsigned long ErrorValue() const;
 
-			std::string StringValueLowerCase() const;
-			std::wstring WstringValueLowerCase() const;
-
-
 			operator std::string() const;
 			operator std::wstring() const;
 			operator bool() const;
