@@ -102,6 +102,20 @@
 !define TERMCAP              "termcap-0.20050421_1-2-msys-1.0.13-bin.tar.lzma"
 !define TERMCAP_DIR          "MSYS/BaseSystem/termcap/termcap-0.20050421_1-2/"
 
+!define DIFFUTILS            "diffutils-2.8.7.20071206cvs-3-msys-1.0.13-bin.tar.lzma"
+!define DIFFUTILS_DIR        "MSYS/BaseSystem/diffutils/diffutils-2.8.7.20071206cvs-3/"
+
+!define GAWK                 "gawk-3.1.7-2-msys-1.0.13-bin.tar.lzma"
+!define GAWK_DIR             "MSYS/BaseSystem/gawk/gawk-3.1.7-2/"
+
+!define GREP                 "grep-2.5.4-2-msys-1.0.13-bin.tar.lzma"
+!define GREP_DIR             "MSYS/BaseSystem/grep/grep-2.5.4-2/"
+
+!define SED                  "sed-4.2.1-2-msys-1.0.13-bin.tar.lzma"
+!define SED_DIR              "MSYS/BaseSystem/sed/sed-4.2.1-2/"
+
+!define FINDUTILS            "findutils-4.4.2-2-msys-1.0.13-bin.tar.lzma"
+!define FINDUTILS_DIR        "MSYS/findutils/findutils-4.4.2-2/"
 
 !define GETTEXT_DLL          "libgettextpo-0.17-2-msys-dll-0.tar.lzma"
 !define INTL_DLL             "libintl-0.17-2-msys-dll-8.tar.lzma"

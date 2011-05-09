@@ -213,6 +213,12 @@ Section
 	   !insertmacro Download ${TAR_EXT} ${TAR_DIR}	
 	   !insertmacro Download ${GZIP} ${GZIP_DIR}	
 	   !insertmacro Download ${BZIP2} ${BZIP2_DIR}	
+
+	   !insertmacro Download ${DIFFUTILS} ${DIFFUTILS_DIR}	
+	   !insertmacro Download ${GAWK} ${GAWK_DIR}	
+	   !insertmacro Download ${GREP} ${GREP_DIR}	
+	   !insertmacro Download ${SED} ${SED_DIR}	
+	   !insertmacro Download ${FINDUTILS} ${FINDUTILS_DIR}	
 	   
 	   !insertmacro Download ${TERMCAP} ${TERMCAP_DIR}	
 	   !insertmacro Download ${TERMCAP_DLL} ${TERMCAP_DIR}	
@@ -236,8 +242,8 @@ Section
        !insertmacro Download ${MPC} ${MPC_DIR} 
  	   
 	   SetOutPath "$INSTDIR\MinGW"
-	   !insertmacro Extract ${CORE_BIN}
-       !insertmacro Extract ${CORE_DLL}   
+;       !insertmacro Extract ${CORE_BIN}
+;       !insertmacro Extract ${CORE_DLL}   
        !insertmacro Extract ${MINGW_MAKE}
        !insertmacro Extract ${MINGW_RUNTIME_DLL}
        !insertmacro Extract ${MINGW_RUNTIME_DEV}
@@ -245,9 +251,9 @@ Section
        !insertmacro Extract ${PTHREADS} 
        !insertmacro Extract ${GMP} 
        !insertmacro Extract ${W32API} 	   
-       !insertmacro Extract ${GPP_BIN} 
-       !insertmacro Extract ${GPP_DLL} 
-       !insertmacro Extract ${BINUTILS} 
+;       !insertmacro Extract ${GPP_BIN} 
+;       !insertmacro Extract ${GPP_DLL} 
+;       !insertmacro Extract ${BINUTILS} 
        !insertmacro Extract ${LIBICONV_DLL}
        !insertmacro Extract ${LIBICONV_BIN}
        !insertmacro Extract ${LIBICONV_DEV}
@@ -279,6 +285,12 @@ Section
 	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${TAR}"
 	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${GZIP}"
 	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${BZIP2}"
+
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${DIFFUTILS}"
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${GAWK}"
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${GREP}"
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${SED}"
+	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${FINDUTILS}"
 	   
 	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${TERMCAP}"
 	   untgz::extract  -d "$INSTDIR\MSYS" "$INSTDIR\Download\$Mirror\${TERMCAP_DLL}"
