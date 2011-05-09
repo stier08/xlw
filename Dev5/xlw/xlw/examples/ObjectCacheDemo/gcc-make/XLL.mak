@@ -6,7 +6,12 @@ LIBPREFIX=
 EXT_SHARE=xll
 
 #Describes the Linker details
+ifeq ($(PLATFORM), x64)
+LIBDIRS = ../../../lib/x64
+else
 LIBDIRS = ../../../lib
+endif
+
 ifeq ($(BUILD),DEBUG)
 LIBS=xlw-gcc-s-gd-5DEV
 else

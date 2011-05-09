@@ -65,7 +65,7 @@ TARGET = $(IDIR)/$(LIBPREFIX)$(LIBRARY).$(LIBP)
 
 $(IDIR)/lib$(LIBRARY).a : $(LIBOBJ)
 	@-$(RM) $@
-	ar -rs $@  $(LIBOBJ) 
+	$(CROSS_PREFIX)ar $(ARTARGET) -rs $@  $(LIBOBJ) 
 	
 #$(TARGET)::$(LIBOBJ)
 #	$(DLLWRAP) --output-def $(IDIR)/$(LIBPREFIX)$(LIBRARY).def \
