@@ -36,33 +36,34 @@ namespace xlwDotNet
         {
 
         public:
+			
             CellValue(IntPtr theRealThing):
               xlwTypebaseClass<xlw::CellValue>(theRealThing,false){}
 
             CellValue(String^ theString):
                 xlwTypebaseClass<xlw::CellValue>
-                    ( new xlw::CellValue(std::wstring((const wchar_t*)(Marshal::StringToHGlobalUni(theString)).ToPointer())) ,true){}
+                    ( new xlw::impl::MJCellValue(std::wstring((const wchar_t*)(Marshal::StringToHGlobalUni(theString)).ToPointer())) ,true){}
 
             CellValue(double Number):
-                xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue(Number) ,true){}
+                xlwTypebaseClass<xlw::CellValue>( new xlw::impl::MJCellValue(Number) ,true){}
 
         //    CellValue(int Code): //Error =  error code
         //        xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue(Code,false) ,true){}
 
             CellValue(int Code, bool Error) :
-                xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue(Code,Error) ,true){}
+                xlwTypebaseClass<xlw::CellValue>( new xlw::impl::MJCellValue(Code,Error) ,true){}
 
             CellValue(bool TrueFalse):
-                xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue(true) ,true){}
+                xlwTypebaseClass<xlw::CellValue>( new xlw::impl::MJCellValue(true) ,true){}
 
             CellValue(int i):
-                xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue(i) ,true){}
+                xlwTypebaseClass<xlw::CellValue>( new xlw::impl::MJCellValue(i) ,true){}
 
             CellValue():
-                xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue() ,true){}
+                xlwTypebaseClass<xlw::CellValue>( new xlw::impl::MJCellValue() ,true){}
 
             CellValue(const CellValue^ value):
-                xlwTypebaseClass<xlw::CellValue>( new xlw::CellValue(*(value->theInner)) ,true){}
+                xlwTypebaseClass<xlw::CellValue>( new xlw::impl::MJCellValue(*static_cast<xlw::impl::MJCellValue*>((value->theInner))) ,true){}
 
            /////      What is it
             property bool IsAString
@@ -87,13 +88,13 @@ namespace xlwDotNet
                     return theInner->IsBoolean();
                 }
             }
-            property bool IsXlfOper
-            {
-                bool get()
-                {
-                    return theInner->IsXlfOper();
-                }
-            }
+       //     property bool IsXlfOper
+       //     {
+       //         bool get()
+       //         {
+       //             return theInner->IsXlfOper();
+       //         }
+       //     }
 
             property bool IsError
             {
