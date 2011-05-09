@@ -33,6 +33,8 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+    cout << "XLW InterfaceGenerator" << endl;
+    cout << "Copyright (c) XLW Project 2006-2011" << endl;
   try
   {
 

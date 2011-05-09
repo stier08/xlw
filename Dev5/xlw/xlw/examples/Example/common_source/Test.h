@@ -29,11 +29,15 @@
 #include "PayOff.h"
 #include "reftest.h"
 #include "wrapper.h"
+#include "ArgListFactory.h"
 
 using namespace xlw;
 
 //<xlw:onopen( welcome)
 //<xlw:onclose(goodbye)
+
+//<xlw:typeregister(Wrapper<PayOff> ArgumentList GetFromFactory<PayOff>)
+
 
 //<xlw:libraryname=MyTestLibrary
 std::string // tests empty args

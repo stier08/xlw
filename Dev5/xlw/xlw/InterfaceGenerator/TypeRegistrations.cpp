@@ -163,13 +163,4 @@ TypeRegistry::Helper arglistreg("ArgumentList", // New type
                "<xlw/ArgList.h>"// Include file
                );
 
-TypeRegistry::Helper payoffreg("Wrapper<PayOff>", // New type
-               "ArgumentList",  // Old type
-               "GetFromFactory<PayOff>", // Converter name
-               false,           // Is a method
-               false,           // Takes identifier
-               "" ,             // No key
-              "\"ArgListFactory.h\"" // Include file
-               );
-
 }

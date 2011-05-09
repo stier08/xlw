@@ -14,6 +14,7 @@ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 #include "Functionizer.h"
+#include "TypeRegister.h"
 #include <iostream>
 
 
@@ -327,6 +328,31 @@ std::vector<FunctionModel> ConvertToFunctionModel(
                         closeMethods.push_back(allWords[0]);
                         found =true;
                     }
+					if (LeftString(val,18) == "<xlw:typeregister(")
+                    {
+                        std::string methodName = val.substr(18,val.size());
+                        if(methodName[methodName.size()-1]!=')')
+                            throw("missing )  for <xlw:typeregister");
+                        methodName.resize(methodName.size()-1);
+                        std::vector<std::string>  allWords;
+                        splitWords(methodName,allWords);
+                        
+						if(allWords.size() !=3)
+						{
+							throw("syntax error expected <xlw:typeregister(new_type old_type converter)");
+						}
+						std::cout << "Registering type :" << allWords[0] << std::endl;
+						TypeRegistry::Helper reg(allWords[0], // New type
+							allWords[1],  // Old type
+							allWords[2], // Converter name
+							false,           // Is a method
+							false           // Takes identifier
+							);
+
+
+						found =true;
+                    }
+
 
 
 
