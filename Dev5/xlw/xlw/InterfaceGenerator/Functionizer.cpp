@@ -300,8 +300,8 @@ std::vector<FunctionModel> ConvertToFunctionModel(
                     if (LeftString(val,12) == "<xlw:onopen(")
                     {
                         std::string methodName = val.substr(12,val.size());
-                        if(methodName[methodName.size()-1]!=')')
-                            throw("missing )  for <xlw:onopen");
+                        if(methodName.size()<2 || methodName[methodName.size()-1]!=')')
+                            throw("missing function name or ')'  for <xlw:onopen");
                         methodName.resize(methodName.size()-1);
                         std::vector<std::string>  allWords;
                         splitWords(methodName,allWords);
@@ -316,8 +316,8 @@ std::vector<FunctionModel> ConvertToFunctionModel(
                     if (LeftString(val,13) == "<xlw:onclose(")
                     {
                         std::string methodName = val.substr(13,val.size());
-                        if(methodName[methodName.size()-1]!=')')
-                            throw("missing )  for <xlw:onclose");
+						if(methodName.size()<2 || methodName[methodName.size()-1]!=')')
+                            throw("missing function name or ')'  for <xlw:onclose");
                         methodName.resize(methodName.size()-1);
                         std::vector<std::string>  allWords;
                         splitWords(methodName,allWords);
@@ -331,8 +331,8 @@ std::vector<FunctionModel> ConvertToFunctionModel(
 					if (LeftString(val,18) == "<xlw:typeregister(")
                     {
                         std::string methodName = val.substr(18,val.size());
-                        if(methodName[methodName.size()-1]!=')')
-                            throw("missing )  for <xlw:typeregister");
+                        if(methodName.size()<2 || methodName[methodName.size()-1]!=')')
+                            throw("syntax error  for <xlw:typeregister");
                         methodName.resize(methodName.size()-1);
                         std::vector<std::string>  allWords;
                         splitWords(methodName,allWords);
