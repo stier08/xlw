@@ -54,7 +54,7 @@ namespace xlwDotNet
                 xlwTypebaseClass<xlw::CellValue>( new xlw::impl::MJCellValue(Code,Error) ,true){}
 
             CellValue(bool TrueFalse):
-                xlwTypebaseClass<xlw::CellValue>( new xlw::impl::MJCellValue(true) ,true){}
+                xlwTypebaseClass<xlw::CellValue>( new xlw::impl::MJCellValue(TrueFalse) ,true){}
 
             CellValue(int i):
                 xlwTypebaseClass<xlw::CellValue>( new xlw::impl::MJCellValue(i) ,true){}
