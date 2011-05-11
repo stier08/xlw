@@ -236,3 +236,7 @@ int xlw::XlfCmdDesc::DoUnregister(const std::string& dllName) const
     return xlretSuccess;
 }
 
+void xlw::XlfCmdDesc::DoMamlDocs(std::ostream& ostr) const
+{
+    ostr << "<para>" << GetComment() << "</para>" << std::endl;
+}

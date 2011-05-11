@@ -25,7 +25,7 @@ bool checkUsage(int argc, char *argv[])
     if(argc != 2 && argc != 3)
     {
         cerr << "    Usage:" << endl;
-        cerr << "        " << argv[0] << " fullPathToXllFile [xlmOuputFile]" << endl;
+        cerr << "        " << argv[0] << " fullPathToXllFile [OutputDir]" << endl;
         return false;
     }
     return true;
@@ -41,15 +41,22 @@ int main(int argc, char *argv[])
         }
 
         string xllFileName(argv[1]);
-        string xmlFileName;
+        string outputDir;
         if(argc == 3)
         {
-            xmlFileName = argv[2];
+            outputDir = argv[2];
         }
         else
         {
-            xmlFileName = xllFileName;
-            xmlFileName[xllFileName.length() - 2] = 'm';
+            string::size_type lastSlashPos = xllFileName.find_last_of("\\/");
+            if(lastSlashPos != string::npos)
+            {
+                outputDir = xllFileName.substr(0, lastSlashPos);
+            }
+            else
+            {
+                outputDir = ".";
+            }
         }
 
         typedef void (_cdecl *GenDocFunc)(const char*);
@@ -75,10 +82,10 @@ int main(int argc, char *argv[])
             throw std::runtime_error("No export xlwGenDoc found");
         }
 
-        cout << "Start Generating file " << xmlFileName << endl;
+        cout << "Start Generating files in " << outputDir << endl;
 
         // generate the xml
-        genDocFunc(xmlFileName.c_str());
+        genDocFunc(outputDir.c_str());
 
         // clean up
         FreeLibrary(xllInstance);

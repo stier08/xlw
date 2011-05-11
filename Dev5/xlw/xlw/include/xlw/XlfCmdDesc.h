@@ -70,6 +70,8 @@ namespace xlw {
         int DoRegister(const std::string& dllName) const;
         //! Unregisters the command with Excel.
         int DoUnregister(const std::string& dllName) const;
+        //!Generates the documentation in Sandcastle format
+        virtual void DoMamlDocs(std::ostream& ostream) const;
         //@}
     private:
       //! Menu in which the command is to be displayed.

@@ -26,6 +26,7 @@
 
 #include <xlw/EXCEL32_API.h>
 #include <string>
+#include <ostream>
 #include <xlw/XlfArgDescList.h>
 
 #if defined(_MSC_VER)
@@ -72,12 +73,15 @@ namespace xlw {
         void SetArguments(const XlfArgDescList& arguments);
         //! Gets the arguments definition.
         const XlfArgDescList& GetArguments() const;
+        //!Generates the documentation in Sandcastle format
+        void GenerateMamlDocs(const std::string outputDir, int itemId) const;
         //@}
     protected:
         //! Actually registers the command (see template method in \ref DP)
         virtual int DoRegister(const std::string& dllName) const = 0;
         //! Actually unregisters the command (see template method in \ref DP)
         virtual int DoUnregister(const std::string& dllName) const = 0;
+        virtual void DoMamlDocs(std::ostream& ostream) const = 0;
         //! Name of the command in the XLL.
         std::string name_;
         //! Alias for the command in Excel.

@@ -336,7 +336,7 @@ namespace {
 
     XLRegistration::XLFunctionRegistrationHelper registerConcat4(
         "xlConcat4", "Concat4", "Concatenate two strings",
-        "xlw Example", Concat4Args, 2, false, false, "P");
+        "xlw Example", Concat4Args, 2, false, false, "P", "C:\\Source\\xlw\\perso\\john\\Sandcastle\\test\\chm\\test.chm!10002");
 
     // Register the function Concat12.
 

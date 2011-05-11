@@ -26,6 +26,8 @@
 #include <xlw/XlfExcel.h>
 #include <xlw/XlfException.h>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <stdexcept>
 #include <xlw/macros.h>
 
@@ -119,3 +121,19 @@ const xlw::XlfArgDescList& xlw::XlfAbstractCmdDesc::GetArguments() const
   return arguments_;
 }
 
+void xlw::XlfAbstractCmdDesc::GenerateMamlDocs(const std::string outputDir, int itemId) const
+{
+    std::ostringstream oss;
+    oss << outputDir << "\\" << itemId << ".maml";
+    std::ofstream outFile(oss.str().c_str());
+
+    outFile << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << std::endl;
+    outFile << "<topic id=\""<< itemId << "\" revisionNumber=\"9\">" << std::endl;
+    outFile << "<developerHowToDocument xmlns=\"http://ddue.schemas.microsoft.com/authoring/2003/5\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">" << std::endl;
+    outFile << "<title>"<< GetAlias() << "</title>" << std::endl;
+    outFile << "<introduction>" << std::endl;
+    DoMamlDocs(outFile);
+    outFile << "</introduction>" << std::endl;
+    outFile << "</developerHowToDocument>" << std::endl;
+    outFile << "</topic>" << std::endl;
+}

@@ -202,3 +202,28 @@ int xlw::XlfFuncDesc::RegisterAs(const std::string& dllName, double mode_, doubl
     return err;
 }
 
+void xlw::XlfFuncDesc::DoMamlDocs(std::ostream& ostr) const
+{
+    XlfArgDescList& arguments = impl_->arguments_;
+    ostr << "<para>" << GetComment() << "</para>" << std::endl;
+    std::string argnames;
+
+    XlfArgDescList::const_iterator it = arguments.begin();
+    while (it != arguments.end())
+    {
+        argnames += (*it).GetName();
+        ++it;
+        if (it != arguments.end())
+            argnames+=", ";
+    }
+
+    ostr << "<code>=" << GetAlias() << "(" << argnames << ")</code>" << std::endl;
+    for (it = arguments.begin(); it != arguments.end(); ++it)
+    {
+        ostr << "<para>";
+        ostr << (*it).GetName() << " " << (*it).GetType() << " ";
+        ostr << (*it).GetComment();
+        ostr << "</para>" << std::endl;
+    }
+}
+

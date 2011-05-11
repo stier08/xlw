@@ -23,6 +23,7 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 #include <xlw/xlfArgDescList.h>
 #include <stdio.h>
 #include <fstream>
+#include <sstream>
 
 using namespace xlw;
 using namespace XLRegistration;
@@ -269,31 +270,109 @@ void ExcelFunctionRegistrationRegistry::AddCommand(const XLCommandRegistrationDa
         Commands[data.GetExcelCommandName()] = theCommand;
 }
 
-void ExcelFunctionRegistrationRegistry::GenerateDocumentation(const char* xmlFileName)
+void ExcelFunctionRegistrationRegistry::GenerateChmBuilderConfig(const std::string& fileName)
 {
-    // not real yet, just output something for early testing
-    std::ofstream outFile(xmlFileName);
+    std::ofstream outFile(fileName.c_str());
 
-    outFile << "Functions" << std::endl;
+    outFile << "<?xml version=\"1.0\" encoding=\"utf-8\" ?>" << std::endl;
+    outFile << "<configuration>" << std::endl;
+    outFile << "<languages>" << std::endl;
+    outFile << "<language id=\"1033\" codepage=\"65001\" name=\"0x409 English (United States)\" />" << std::endl;
+    outFile << "</languages>" << std::endl;
+    outFile << "<chmTitles>" << std::endl;
+    outFile << "<title projectName=\"Xlw\">Add-in Help</title>" << std::endl;
+    outFile << "</chmTitles>" << std::endl;
+    outFile << "<hhpTemplate>" << std::endl;
+    outFile << "<line>[OPTIONS]</line>" << std::endl;
+    outFile << "<line>Compatibility=1.1 or later</line>" << std::endl;
+    outFile << "<line>Compiled file={0}.chm</line>" << std::endl;
+    outFile << "<line>Contents file={0}.hhc</line>" << std::endl;
+    outFile << "<line>Default Topic={1}</line>" << std::endl;
+    outFile << "<line>Full-text search=Yes</line>" << std::endl;
+    outFile << "<line>Language={2}</line>" << std::endl;
+    outFile << "<line>Title={3}</line>" << std::endl;
+    outFile << "<line>[FILES]</line>" << std::endl;
+    outFile << "<line>icons\\*.gif</line>" << std::endl;
+    outFile << "<line>art\\*.gif</line>" << std::endl;
+    outFile << "<line>media\\*.gif</line>" << std::endl;
+    outFile << "<line>scripts\\*.js</line>" << std::endl;
+    outFile << "<line>styles\\*.css</line>" << std::endl;
+    outFile << "<line>html\\*.htm</line>" << std::endl;
+    outFile << "<line>[ALIAS]</line>" << std::endl;
+    int counter(1);
     for (functionCache::const_iterator it = Functions.begin(); it !=  Functions.end(); ++it)
     {
-        outFile << it->second->GetName() << std::endl;
+        outFile << "<line>A" << counter << "=html\\" << counter << ".htm</line>" << std::endl;
+        ++counter;
     }
-
-    outFile << "Commands" << std::endl;
     for (commandCache::const_iterator it = Commands.begin(); it !=  Commands.end(); ++it)
     {
-        outFile << it->second->GetName() << std::endl;
+        outFile << "<line>A" << counter << "=html\\" << counter << ".htm</line>" << std::endl;
+        ++counter;
+    }
+    outFile << "<line>[MAP]</line>" << std::endl;
+    outFile << "<line>#include alias.h</line>" << std::endl;
+    outFile << "<line>[INFOTYPES]</line>" << std::endl;
+    outFile << "</hhpTemplate>" << std::endl;
+    outFile << "</configuration>" << std::endl;
+}
+
+void ExcelFunctionRegistrationRegistry::GenerateToc(const std::string& fileName)
+{
+    std::ofstream outFile(fileName.c_str());
+
+    outFile << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << std::endl;
+    outFile << "<topics>" << std::endl;
+    int counter(1);
+    if(Functions.size() > 0)
+    {
+        outFile << "<topic id=\"Functions\" file=\"Functions\">" << std::endl;
+        for (functionCache::const_iterator it = Functions.begin(); it !=  Functions.end(); ++it)
+        {
+            outFile << "<topic id=\"" << counter << "\" file=\"" << counter << "\" />" << std::endl;
+            ++counter;
+        }
+        outFile << "</topic>" << std::endl;
+    }
+    if(Commands.size() > 0)
+    {
+        outFile << "<topic id=\"Commands\" file=\"Commands\">" << std::endl;
+        for (commandCache::const_iterator it = Commands.begin(); it !=  Commands.end(); ++it)
+        {
+            outFile << "<topic id=\"" << counter << "\" file=\"" << counter << "\" />" << std::endl;
+            ++counter;
+        }
+        outFile << "</topic>" << std::endl;
+    }
+    outFile << "</topics>" << std::endl;
+
+}
+
+void ExcelFunctionRegistrationRegistry::GenerateDocumentation(const std::string& outputDir)
+{
+    GenerateChmBuilderConfig(outputDir + "\\ChmBuilder.config");
+    GenerateToc(outputDir + "\\toc.xml");
+    int counter(1);
+    for (functionCache::const_iterator it = Functions.begin(); it !=  Functions.end(); ++it)
+    {
+        it->second->GenerateMamlDocs(outputDir, counter);
+        ++counter;
+    }
+
+    for (commandCache::const_iterator it = Commands.begin(); it !=  Commands.end(); ++it)
+    {
+        it->second->GenerateMamlDocs(outputDir, counter);
+        ++counter;
     }
 }
 
 extern "C"
 {
     // only do documentation in the debug build to avoid bloating up the released xlls
-    void EXCEL_EXPORT xlwGenDoc(const char* xmlFileName)
+    void EXCEL_EXPORT xlwGenDoc(const char* outputDir)
     {
 #ifndef NDEBUG
-        ExcelFunctionRegistrationRegistry::Instance().GenerateDocumentation(xmlFileName);
+        ExcelFunctionRegistrationRegistry::Instance().GenerateDocumentation(outputDir);
 #endif
     }
 }
