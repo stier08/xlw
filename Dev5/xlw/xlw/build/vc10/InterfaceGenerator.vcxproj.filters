@@ -17,12 +17,6 @@
     <ClCompile Include="..\..\InterfaceGenerator\FunctionModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\InterfaceGenerator\FunctionType.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\InterfaceGenerator\IncludeRegister.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\InterfaceGenerator\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

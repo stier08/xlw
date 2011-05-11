@@ -39,11 +39,9 @@
 		</Linker>
 		<Unit filename="..\..\InterfaceGenerator\FunctionModel.cpp" />
 		<Unit filename="..\..\InterfaceGenerator\FunctionModel.h" />
-		<Unit filename="..\..\InterfaceGenerator\FunctionType.cpp" />
 		<Unit filename="..\..\InterfaceGenerator\FunctionType.h" />
 		<Unit filename="..\..\InterfaceGenerator\Functionizer.cpp" />
 		<Unit filename="..\..\InterfaceGenerator\Functionizer.h" />
-		<Unit filename="..\..\InterfaceGenerator\IncludeRegister.cpp" />
 		<Unit filename="..\..\InterfaceGenerator\IncludeRegister.h" />
 		<Unit filename="..\..\InterfaceGenerator\ManagedOutputter.cpp" />
 		<Unit filename="..\..\InterfaceGenerator\ManagedOutputter.h" />

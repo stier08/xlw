@@ -41,13 +41,11 @@ String^ CPP2CLR(const std::string &cppString)
 xlw::CellMatrix // Obtains historial market data from yahoo
 GetHistoricDataFromYahoo(
                           std::string  symbol // Yahoo Symbol
-                         ,double beginDate // Begin Date
-                         ,double endDate //End Date
+                         ,DateTime begin // Begin Date
+                         ,DateTime end //End Date
                          )
 {
-            DateTime begin = DateTime::FromOADate(beginDate);
-            DateTime end = DateTime::FromOADate(endDate);
-
+    
             String^ yahooURL = gcnew String (
                CPP2CLR(std::string("http://ichart.finance.yahoo.com/table.csv?s=")) +
                CPP2CLR(symbol) +

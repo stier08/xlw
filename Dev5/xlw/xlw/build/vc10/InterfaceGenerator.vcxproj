@@ -89,8 +89,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\InterfaceGenerator\Functionizer.cpp" />
     <ClCompile Include="..\..\InterfaceGenerator\FunctionModel.cpp" />
-    <ClCompile Include="..\..\InterfaceGenerator\FunctionType.cpp" />
-    <ClCompile Include="..\..\InterfaceGenerator\IncludeRegister.cpp" />
     <ClCompile Include="..\..\InterfaceGenerator\main.cpp" />
     <ClCompile Include="..\..\InterfaceGenerator\ManagedOutputter.cpp" />
     <ClCompile Include="..\..\InterfaceGenerator\Outputter.cpp" />

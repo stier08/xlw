@@ -13,9 +13,7 @@
     <File Name="../../InterfaceGenerator/Functionizer.h"/>
     <File Name="../../InterfaceGenerator/FunctionModel.cpp"/>
     <File Name="../../InterfaceGenerator/FunctionModel.h"/>
-    <File Name="../../InterfaceGenerator/FunctionType.cpp"/>
     <File Name="../../InterfaceGenerator/FunctionType.h"/>
-    <File Name="../../InterfaceGenerator/IncludeRegister.cpp"/>
     <File Name="../../InterfaceGenerator/IncludeRegister.h"/>
     <File Name="../../InterfaceGenerator/main.cpp"/>
     <File Name="../../InterfaceGenerator/ManagedOutputter.cpp"/>

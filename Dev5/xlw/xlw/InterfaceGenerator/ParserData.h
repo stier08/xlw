@@ -2,6 +2,7 @@
 /*
  Copyright (C) 2006 Mark Joshi
  Copyright (C) 2007, 2008 Eric Ehlers
+ Copyright (C) 2011 Narinder S Claire
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -87,6 +88,11 @@ public:
      bool GetClusterSafe() const;
      void setFunctionName(const std::string &newName);
 
+	 static void Transit(const std::vector<FunctionDescription> &source, 
+			 std::vector<FunctionDescription> & destination);
+
+
+
 private:
      std::string FunctionName;
      std::string DisplayName;
@@ -102,5 +108,9 @@ private:
      bool MacroSheet;
      bool ClusterSafe;
 };
+
+
+
+
 
 #endif

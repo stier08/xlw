@@ -143,12 +143,6 @@
 				RelativePath="..\..\InterfaceGenerator\FunctionModel.cpp">
 			</File>
 			<File
-				RelativePath="..\..\InterfaceGenerator\FunctionType.cpp">
-			</File>
-			<File
-				RelativePath="..\..\InterfaceGenerator\IncludeRegister.cpp">
-			</File>
-			<File
 				RelativePath="..\..\InterfaceGenerator\main.cpp">
 			</File>
 			<File

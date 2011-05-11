@@ -33,10 +33,14 @@
 #include <string>
 #include "Singleton.h"
 
-class IncludeRegistry : public Singleton<IncludeRegistry>
+struct native;
+struct managed;
+
+template<class T>
+class IncludeRegistry : public Singleton<IncludeRegistry<T> >
 {
 public:
-    friend class Singleton<IncludeRegistry>;
+    friend class Singleton<IncludeRegistry<T> >;
 
     void Register(const std::string& arg, const std::string& include);
     void UseArg(const std::string& arg);
@@ -44,13 +48,42 @@ public:
     std::set<std::string> GetIncludes() const;
 
 private:
-    IncludeRegistry()
-    {}
-    IncludeRegistry(const IncludeRegistry&)
-    {}
 
     std::map<std::string,std::string> ArgInclude;
     std::map<std::string, bool> ArgUsed;
 
 };
+
+template<class T>
+void IncludeRegistry<T>::Register(const std::string& arg, const std::string& include)
+{
+    if (include =="")
+        return;
+
+    ArgInclude.insert(std::make_pair(arg,include));
+    ArgUsed.insert(std::make_pair(arg,false));
+}
+
+template<class T>
+std::set<std::string> IncludeRegistry<T>::GetIncludes() const
+{
+    std::set<std::string> includes;
+
+    for (std::map<std::string,bool>::const_iterator it = ArgUsed.begin(); it!=ArgUsed.end(); ++it)
+    {
+        if (it->second)
+            includes.insert(ArgInclude.find(it->first)->second);
+    }
+
+    return includes;
+}
+
+template<class T>
+void IncludeRegistry<T>::UseArg(const std::string& arg)
+{
+    std::map<std::string,bool>::iterator it = ArgUsed.find(arg);
+    if (it != ArgUsed.end())
+        it->second =true;
+}
+
 #endif

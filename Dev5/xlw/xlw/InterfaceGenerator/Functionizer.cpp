@@ -342,7 +342,7 @@ std::vector<FunctionModel> ConvertToFunctionModel(
 							throw("syntax error expected <xlw:typeregister(new_type old_type converter)");
 						}
 						std::cout << "Registering type :" << allWords[0] << std::endl;
-						TypeRegistry::Helper reg(allWords[0], // New type
+						TypeRegistry<native>::Helper reg(allWords[0], // New type
 							allWords[1],  // Old type
 							allWords[2], // Converter name
 							false,           // Is a method

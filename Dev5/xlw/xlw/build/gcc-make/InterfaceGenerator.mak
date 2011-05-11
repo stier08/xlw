@@ -9,9 +9,7 @@ INCLUDE_DIR = ../../InterfaceGenerator
 
 SRC_DIR = ../../InterfaceGenerator
 PRGSRC = FunctionModel.cpp \
-         FunctionType.cpp \
          Functionizer.cpp \
-         IncludeRegister.cpp \
          Outputter.cpp \
          ParserData.cpp \
          Strip.cpp \

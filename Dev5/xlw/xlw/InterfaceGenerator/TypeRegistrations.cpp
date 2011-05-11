@@ -6,6 +6,7 @@
 /*
  Copyright (C) 2006 Mark Joshi
  Copyright (C) 2007, 2008 Eric Ehlers
+ Copyright (C) 2011 Narinder S Claire
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -24,7 +25,7 @@
 namespace
 {
 // fundamental types
-TypeRegistry::Helper voidReg("void", // New type
+TypeRegistry<native>::Helper voidReg("void", // New type
                "void",          // Old type
                "",              // Converter name, we just pass into the constructor as a declaration
                false,           // Is a method
@@ -32,7 +33,7 @@ TypeRegistry::Helper voidReg("void", // New type
                "#ERR"           // Type code
                );
 
-TypeRegistry::Helper XlfOperReg("XlfOper", // New type
+TypeRegistry<native>::Helper XlfOperReg("XlfOper", // New type
                "LPXLFOPER",     // Old type
                "",              // Converter name, we just pass into the constructor as a declaration
                false,           // Is a method
@@ -40,7 +41,7 @@ TypeRegistry::Helper XlfOperReg("XlfOper", // New type
                "XLF_OPER"       // Type code
                );
 
-TypeRegistry::Helper doubleFundamentalReg("double", // New type
+TypeRegistry<native>::Helper doubleFundamentalReg("double", // New type
                "double",        // Old type, EXCEL understands doubles so this is simply a copy
                "",              // Converter name, we just pass into the constructor as a declaration
                false,           // Is a method
@@ -48,7 +49,7 @@ TypeRegistry::Helper doubleFundamentalReg("double", // New type
                "B"              // Type code
                );
 
-TypeRegistry::Helper arrayFundamentalReg("NEMatrix", // New type
+TypeRegistry<native>::Helper arrayFundamentalReg("NEMatrix", // New type
                "LPXLARRAY",     // Old type
                "GetMatrix",     // Converter name, we just pass into the constructor as a declaration
                false,           // Is a method
@@ -57,7 +58,7 @@ TypeRegistry::Helper arrayFundamentalReg("NEMatrix", // New type
                "<xlw/xlarray.h>"// Include file
                );
 
-TypeRegistry::Helper shortreg("short", // New type
+TypeRegistry<native>::Helper shortreg("short", // New type
                "XlfOper",       // Old type
                "AsShort",       // Converter name
                true,            // Is a method
@@ -65,7 +66,7 @@ TypeRegistry::Helper shortreg("short", // New type
                "XLF_OPER"       // Type code
                );
 
-TypeRegistry::Helper arrayreg("MyArray", // New type
+TypeRegistry<native>::Helper arrayreg("MyArray", // New type
                "XlfOper",       // Old type
                "AsArray",       // Converter name
                true,            // Is a method
@@ -73,7 +74,7 @@ TypeRegistry::Helper arrayreg("MyArray", // New type
                "XLF_OPER"       // Type code
                );
 
-TypeRegistry::Helper matrixreg("MyMatrix", // New type
+TypeRegistry<native>::Helper matrixreg("MyMatrix", // New type
                "XlfOper",       // Old type
                "AsMatrix",      // Converter name
                true,            // Is a method
@@ -81,7 +82,7 @@ TypeRegistry::Helper matrixreg("MyMatrix", // New type
                "XLF_OPER"       // Type code
                );
 
-TypeRegistry::Helper cellsreg("CellMatrix", // New type
+TypeRegistry<native>::Helper cellsreg("CellMatrix", // New type
                "XlfOper",       // Old type
                "AsCellMatrix",  // Converter name
                true,            // Is a method
@@ -89,7 +90,7 @@ TypeRegistry::Helper cellsreg("CellMatrix", // New type
                "XLF_OPER"       // Type code
                );
 
-TypeRegistry::Helper stringreg("string", // New type
+TypeRegistry<native>::Helper stringreg("string", // New type
                "XlfOper",       // Old type
                "AsString",      // Converter name
                true,            // Is a method
@@ -97,7 +98,7 @@ TypeRegistry::Helper stringreg("string", // New type
                "XLF_OPER"       // Type code
                );
 
-TypeRegistry::Helper sstringreg("std::string", // New type
+TypeRegistry<native>::Helper sstringreg("std::string", // New type
                "XlfOper",       // Old type
                "AsString",      // Converter name
                true,            // Is a method
@@ -105,7 +106,7 @@ TypeRegistry::Helper sstringreg("std::string", // New type
                "XLF_OPER"       // Type code
                );
 
-TypeRegistry::Helper boolreg("bool", // New type
+TypeRegistry<native>::Helper boolreg("bool", // New type
                "XlfOper",       // Old type
                "AsBool",        // Converter name
                true,            // Is a method
@@ -115,7 +116,7 @@ TypeRegistry::Helper boolreg("bool", // New type
 
 // Usually XlfOper is registered as type XLF_OPER   which equates to either P (OPER)   or Q (OPER12)
 // Here    XlfOper is registered as type XLF_XLOPER which equates to either R (XLOPER) or U (XLOPER12)
-TypeRegistry::Helper RefTestReg("reftest", // New type
+TypeRegistry<native>::Helper RefTestReg("reftest", // New type
                "LPXLFOPER",     // Old type
                "",              // Converter name, we just pass into the constructor as a declaration
                false,           // Is a method
@@ -125,14 +126,14 @@ TypeRegistry::Helper RefTestReg("reftest", // New type
 
 // extended types
 
-TypeRegistry::Helper ULreg("unsigned long", // New type
+TypeRegistry<native>::Helper ULreg("unsigned long", // New type
                "double",        // Old type
                "static_cast<unsigned long>", // Converter name
                false,           // Is a method
                false            // Takes identifier
                );
 
-TypeRegistry::Helper intreg("int", // New type
+TypeRegistry<native>::Helper intreg("int", // New type
                "double",        // Old type
                "static_cast<int>", // Converter name
                false,           // Is a method
@@ -140,21 +141,21 @@ TypeRegistry::Helper intreg("int", // New type
                );
 
 // Special processing of std::wstring depending on Excel version
-TypeRegistry::Helper wstrreg("std::wstring", // New type
+TypeRegistry<native>::Helper wstrreg("std::wstring", // New type
                "XlfOper",       // Old type
                "AsWstring",      // Converter name
                true,            // Is a method
                true,            // Takes identifier
                "XLF_OPER");
 
-TypeRegistry::Helper DONreg("DoubleOrNothing", // New type
+TypeRegistry<native>::Helper DONreg("DoubleOrNothing", // New type
                "CellMatrix",    // Old type
                "DoubleOrNothing", // Converter name
                false,           // Is a method
                true             // Takes identifier
                );
 
-TypeRegistry::Helper arglistreg("ArgumentList", // New type
+TypeRegistry<native>::Helper arglistreg("ArgumentList", // New type
                "CellMatrix",    // Old type
                "ArgumentList",  // Converter name
                false,           // Is a method
@@ -163,4 +164,22 @@ TypeRegistry::Helper arglistreg("ArgumentList", // New type
                "<xlw/ArgList.h>"// Include file
                );
 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////    Managed Types
+namespace Managed
+{
+TypeRegistry<managed>::Helper datetimereg("DateTime", // New type
+               "double",    // Old type
+               "DateTime::FromOADate",// Converter name
+               false,        // Is a method
+               false,        // Takes identifier
+               ""           // No key
+               "",        // "<xlw/ArgList.h>"// Include file,
+			   "System" // .NET namespace 
+               );
+
+
+}
 }

@@ -65,7 +65,7 @@ std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& func
   AddLine(output,"#include <xlw/XlOpenClose.h>");
   AddLine(output,"#include <xlw/HiResTimer.h>");
 
-  const std::set<std::string>& includes = IncludeRegistry::Instance().GetIncludes();
+  const std::set<std::string>& includes = IncludeRegistry<native>::Instance().GetIncludes();
   for (std::set<std::string>::const_iterator it = includes.begin(); it!= includes.end(); ++it)
   {
     AddLine(output, "#include "+*it+"\n");
@@ -265,7 +265,7 @@ std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& func
                 if (k+1 != chain.size() -1)
                   newId+= id;
 
-                TypeRegistry::regData argData = TypeRegistry::Instance().GetRegistration(*it);
+                TypeRegistry<native>::regData argData = TypeRegistry<native>::Instance().GetRegistration(*it);
                 AddLine(output, argData.NewType+" "+newId+"(");
 
                 bool specIdentifier = argData.TakesIdentifier;
@@ -378,7 +378,7 @@ std::vector<char> OutputFileCreatorCL(const std::vector<FunctionDescription>& fu
   AddLine(output,"#include <xlw/XlOpenClose.h>");
   AddLine(output,"#include <xlw/HiResTimer.h>");
 
-  const std::set<std::string>& includes = IncludeRegistry::Instance().GetIncludes();
+  const std::set<std::string>& includes = IncludeRegistry<native>::Instance().GetIncludes();
   for (std::set<std::string>::const_iterator it = includes.begin(); it!= includes.end(); ++it)
   {
     AddLine(output, "#include "+*it+"\n");
@@ -506,7 +506,7 @@ std::vector<char> OutputFileCreatorCL(const std::vector<FunctionDescription>& fu
         if (k+1 != chain.size() -1)
           newId+= id;
 
-        TypeRegistry::regData argData = TypeRegistry::Instance().GetRegistration(*it);
+        TypeRegistry<native>::regData argData = TypeRegistry<native>::Instance().GetRegistration(*it);
         AddLine(output, argData.NewType+" "+newId+"(");
 
         bool specIdentifier = argData.TakesIdentifier;

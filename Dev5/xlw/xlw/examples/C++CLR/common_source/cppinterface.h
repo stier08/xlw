@@ -7,6 +7,8 @@
 #include <xlw/DoubleOrNothing.h>
 #include <xlw/ArgList.h>
 #include <string>
+
+using namespace System;
              
 using namespace xlw;
   
@@ -15,11 +17,15 @@ using namespace xlw;
 CellMatrix // Obtains historial market data from yahoo 
 GetHistoricDataFromYahoo(
                           std::string  symbol // Yahoo Symbol 
-                         ,double beginDate // Begin Date
-                         ,double endDate //End Date
+                         ,DateTime beginDate // Begin Date
+                         ,DateTime endDate //End Date
                          );
 
-
+double // Echoes Date
+//<xlw:time
+EchoDate(
+		 DateTime date // the Date
+		 );
 
 
 #endif

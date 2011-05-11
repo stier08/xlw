@@ -25,15 +25,4 @@ void OutputFileCreatorMan(std::vector<FunctionDescription>& functionVector,
                                       std::vector<char> &outputVector_cpp
                                        );
 
-
-
-
-
-
-
-
-
-
-
-
 #endif //MANAGED_OUTPUTTER_H

@@ -21,6 +21,7 @@
 #endif
 #endif
 #include "ParserData.h"
+#include <vector>
 
 FunctionArgumentType::FunctionArgumentType(std::string NameIdentifier_,
                           const std::vector<std::string>& ConversionChain_,
@@ -174,4 +175,35 @@ bool FunctionDescription::GetMacroSheet() const
 bool FunctionDescription::GetClusterSafe() const
 {
     return ClusterSafe;
+}
+
+#include<iostream>
+void FunctionDescription::Transit(const std::vector<FunctionDescription> &source, 
+			 std::vector<FunctionDescription> & destination)
+{
+	if(source.size()!=destination.size())
+	{
+		throw("number of managed functions and native wrappers not the same");
+	}
+	for(size_t i(0); i <destination.size(); ++i)
+	{
+		destination[i].Asynchronous             = source[i].Asynchronous;
+		destination[i].ClusterSafe              = source[i].ClusterSafe  ;
+		destination[i].DisplayName              = source[i].DisplayName  ;
+		destination[i].FunctionHelpDescription  = source[i].FunctionHelpDescription  ;
+		destination[i].helpID                   = source[i].helpID  ;
+		destination[i].MacroSheet               = source[i].MacroSheet  ;
+		destination[i].Threadsafe               = source[i].Threadsafe  ;
+		destination[i].Time                     = source[i].Time  ;
+		destination[i].Volatile                 = source[i].Volatile  ;
+
+		if(destination[i].FunctionName != source[i].FunctionName)
+		{
+			std::cout << destination[i].FunctionName << " : " << source[i].FunctionName << "\n";
+			throw("unmanaged wrappers must be in same order as manged function");
+
+		}
+
+	}
+
 }
