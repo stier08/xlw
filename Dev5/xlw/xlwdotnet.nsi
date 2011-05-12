@@ -553,6 +553,11 @@ SubSection "xlw" xlw
 		!insertmacro doExample "xlw\examples\C++CLR" 0 0
 		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\xlw\Examples.lnk " "$INSTDIR\xlw\Examples"
 	SectionEnd
+
+	Section "Sandcastle" sandcastle
+			SetOutPath "$INSTDIR\xlw\build\sandcastle"
+			File "xlw\build\sandcastle\*.*"
+	SectionEnd
 	
 	; vanilla xlw sources
 	SectionGroup "Source" Source
@@ -1159,6 +1164,7 @@ Function SetUpInfo
 	SectionSetFlags ${VS2008DotNet} 0
 	
 	SectionSetFlags ${xlwExamples} 0
+	SectionSetFlags ${sandcastle} 0
 
 	
 	${If} $VS2010PRO_CPP_INST != "" 
@@ -1262,6 +1268,7 @@ Function SetUpInfo
 	
 	${If}  $CPP_DETECTED ==  "1"
 		SectionSetFlags ${xlwExamples} 1
+		SectionSetFlags ${sandcastle} 1
 	${EndIf}
 	
 	
