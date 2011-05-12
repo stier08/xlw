@@ -36,6 +36,7 @@
 		</Compiler>
 		<Linker>
 			<Add option="-static" />
+			<Add option="-static-libgcc" />
 		</Linker>
 		<Unit filename="..\..\InterfaceGenerator\FunctionModel.cpp" />
 		<Unit filename="..\..\InterfaceGenerator\FunctionModel.h" />
