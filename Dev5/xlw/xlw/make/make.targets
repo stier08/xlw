@@ -61,7 +61,9 @@ LIBOBJ := $(LIBSRC:%.cpp=$(INSTALL_OBJ)/%.o)
 OBJECTS += $(LIBSRC:%.cpp=$(INSTALL_OBJ)/%.o)
 TARGET = $(IDIR)/$(LIBPREFIX)$(LIBRARY).$(LIBP) 
 
-
+ifndef DEFFILE
+DEFFILE="$(XLW)/xlw/include/xlw/xlw.def"
+endif
 
 $(IDIR)/lib$(LIBRARY).a : $(LIBOBJ)
 	@-$(RM) $@
@@ -76,7 +78,7 @@ $(IDIR)/lib$(LIBRARY).a : $(LIBOBJ)
 $(IDIR)/$(LIBPREFIX)$(LIBRARY).%ll  : $(LIBOBJ)
 	@-$(RM) $@	
 	$(CXXSO) $(CXXPIC) -o  $@ \
-   	-Wl,"$(XLW)/xlw/include/xlw/xlw.def" \
+   	-Wl,$(DEFFILE) \
       -Wl,-static \
       -static-libgcc \
 	 $(LIBOBJ)\

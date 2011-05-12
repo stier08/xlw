@@ -55,10 +55,10 @@ export EXT_SHARE = dll
 endif
 export EXT_STATIC= a
 
-ifeq ($(EXT_SHARE),xll)
-LIBPREFIX=
-else
+ifeq ($(LIBTYPE),STATIC)
 LIBPREFIX=lib
+else
+LIBPREFIX=
 endif
 
 
