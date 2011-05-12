@@ -1,6 +1,13 @@
 @if "%~1" == "" goto usage
-@if not exist "%XLW%\xlw\build\%2" goto usage
 @if not exist "Debug\%~1.xll" goto usage
+@SET DOCGEN=Invalid
+@if "%2"=="codeblocks-gcc" SET SUBDIR=bin\Debug
+@if "%2"=="gcc-make" SET SUBDIR=Debug\bin
+@if "%2"=="vc7" SET SUBDIR=Debug
+@if "%2"=="vc8" SET SUBDIR=Debug
+@if "%2"=="vc9" SET SUBDIR=Debug
+@if "%2"=="vc10" SET SUBDIR=Debug
+@if not exist "%SUBDIR%" goto usage
 REM ********** Set path for .net framework2.0, sandcastle,hhc ****************************
 REM assumes default install location for Html Help Workshop
 set TOOLSPATH=%ProgramFiles%
@@ -12,9 +19,9 @@ if not exist "%windir%\Microsoft.NET\Framework\v2.0.50727" goto prereqs
 
 set PATH=%windir%\Microsoft.NET\Framework\v2.0.50727;%DXROOT%\ProductionTools;%TOOLSPATH%\HTML Help Workshop;%PATH%
 
-cd Debug
+pushd %SUBDIR%
 
-%XLW%\xlw\build\%2\Debug\XlwDocGen.exe "%~1.xll"
+"XLW%\xlw\build\%2\%SubDir%\XlwDocGen.exe" "%~1.xll"
 
 if exist output rmdir output /s /q
 
@@ -45,7 +52,7 @@ hhc "chm\%~1.hhp"
 
 copy "chm\%~1.chm" ..
 
-cd ..
+popd
 
 exit /b 0
 
@@ -75,6 +82,6 @@ exit /b 2
 @echo BuildChmHelp.bat ProjectName BuildEnvironment
 @echo ProjectName: should be the name of the xll without extension
 @echo              and the debug version of the xll must have been built
-@echo BuildEnvironment: one of gcc, codeblocks, vc7, vc8, vc9, vc10
+@echo BuildEnvironment: one of gcc-make, codeblocks-gcc, vc7, vc8, vc9, vc10
 @echo **********************************************************************
 exit /b 1
