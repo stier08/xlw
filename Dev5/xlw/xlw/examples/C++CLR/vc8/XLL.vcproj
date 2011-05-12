@@ -432,6 +432,10 @@
 			RelativePath="..\common_source\Historic.cpp"
 			>
 		</File>
+		<File
+			RelativePath="..\common_source\Test.cpp"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
