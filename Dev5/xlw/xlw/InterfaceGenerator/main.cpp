@@ -141,6 +141,9 @@ int main(int argc, char *argv[])
 		std::vector<FunctionDescription> managedFunctionVector;
 		std::string LibraryName(inputfile);
 
+		std::vector<std::string> openMethods;
+		std::vector<std::string> closeMethods;
+
 		if(managed_flag)
 		{
 			std::cout << "manged file has been read in\n";
@@ -153,8 +156,7 @@ int main(int argc, char *argv[])
 
 			LibraryName = inputfile;// use input file name as default library name
 
-			std::vector<std::string> openMethods;
-			std::vector<std::string> closeMethods;
+
 
 			std::vector<FunctionModel> managedModelVector( ConvertToFunctionModel(tokenVector2,LibraryName,openMethods,closeMethods));
 
@@ -205,10 +207,7 @@ int main(int argc, char *argv[])
 			std::vector<Token> tokenVector2(Strip(tokenVector1));
 			std::cout << "file has been stripped\n";
 
-			;// use input file name as default library name
-
-			std::vector<std::string> openMethods;
-			std::vector<std::string> closeMethods;
+			// use input file name as default library name
 
 			std::vector<FunctionModel> modelVector(ConvertToFunctionModel(tokenVector2,LibraryName,openMethods,closeMethods));
 
