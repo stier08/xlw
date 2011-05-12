@@ -17,6 +17,8 @@
 #ifndef XLW_SHARED_PTR_HEADER_GUARD
 #define XLW_SHARED_PTR_HEADER_GUARD 
 
+#pragma managed(push, off)
+
 #include<memory>
 
 // use tr1 version of shared_ptr if we have it
@@ -156,7 +158,7 @@ namespace xlw
 
 }
 
-
+#pragma managed(pop)
 
 #endif // XLW_SHARED_PTR_HEADER_GUARD 
 
