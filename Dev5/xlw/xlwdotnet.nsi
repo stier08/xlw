@@ -299,9 +299,11 @@
 			SetOutPath "$INSTDIR\xlw\build\${dir}\Debug"
 			File  "xlw\build\${dir}\Debug\*.exe"
 			File  "xlw\build\${dir}\Debug\*.pdb"
+			File  "xlw\build\${dir}\Debug\*.dll"
 			
 			SetOutPath "$INSTDIR\xlw\build\${dir}\Release"
 			File  "xlw\build\${dir}\Release\*.exe"
+			File  "xlw\build\${dir}\Release\*.dll"
 			
 	!macroend
 	
@@ -525,6 +527,7 @@ SubSection "xlw" xlw
 			File  "xlw\lib\x64\libxlw-gcc*.a"
 			SetOutPath "$INSTDIR\xlw\build\codeblocks-gcc\bin"
 			File /r "xlw\build\codeblocks-gcc\bin\*.exe"
+			File /r "xlw\build\codeblocks-gcc\bin\*.dll"
 		SectionEnd
 		
 		Section "make(mingw)" GCCMAKE
@@ -534,6 +537,7 @@ SubSection "xlw" xlw
 			File  "xlw\lib\x64\libxlw-gcc*.a"
 			SetOutPath "$INSTDIR\xlw\build\gcc-make"
 			File /r "xlw\build\gcc-make\*.exe"
+			File /r "xlw\build\gcc-make\bin\*.dll"
 		SectionEnd
 		
 
