@@ -537,7 +537,7 @@ SubSection "xlw" xlw
 			File  "xlw\lib\x64\libxlw-gcc*.a"
 			SetOutPath "$INSTDIR\xlw\build\gcc-make"
 			File /r "xlw\build\gcc-make\*.exe"
-			File /r "xlw\build\gcc-make\bin\*.dll"
+			File /r "xlw\build\gcc-make\*.dll"
 		SectionEnd
 		
 
