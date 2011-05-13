@@ -1,5 +1,5 @@
 
-/*! \page version4 XLW Version 4 - Support for .NET Addins
+/*! \page a01_version4 XLW Version 4 - Support for .NET Addins
 
 \section v4_summary Summary
 

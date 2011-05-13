@@ -1,0 +1,37 @@
+
+/*! \page a04_gcc gcc Command line setup
+
+\section summary Summary
+
+Recently <a href="http://www.mingw.org/" target="_blank">MinGW</a> has updated its GCC compiler suite to GCC 4.5.2 This version 5 of XLW has been updated to reflect this change in MinGW. 
+
+When version 4 of XLWwas released the MinGW automatic installer was not updated to install the then 
+most current compiler suite and if used for installation would still have installed the older GCC, with which that version of 
+XLW  would not have worked ( unless compiled from source). In this case the normal way around would have been to install 
+MinGW manualy without the automatic installer.
+
+In order to keep the installation, usage and overall experience of XLW simple and painless we built a MinGW
+installer that was able to download and install all the necessary MinGW components required for C/C++ compilation and
+to resolve XLW's dependency.
+
+Since then a much more upto date Mingw installer has been released by the MingW project and made available here:
+
+<a href="http://sourceforge.net/projects/mingw/files/Automated%20MinGW%20Installer/" target="_blank">http://sourceforge.net/projects/mingw/files/Automated%20MinGW%20Installer/</a>
+
+In the meantime we have also updated our Mingw installer to install GCC 4.5.2. Our updated installer installs a more complete system
+than before, more than just bare minimal reuired to compile C++. However it does not install any other language other than C & C++.
+you can download the latest snapshot version here :
+
+<a href="http://sourceforge.net/projects/xlw/files/xlw-mingw-installer/MINGW_GCC4.5.2-1/" target="_blank">http://sourceforge.net/projects/xlw/files/xlw-mingw-installer/MINGW_GCC4.5.2-1/</a>
+
+Either method of installing MingW should be fine and install the necessary tools to compile xlls with gcc. At present only the installation resulting from the xlw installer has been tested by the development team.
+
+\section x64 64-bit compilation
+
+It is now possible compile 64-bit xlls using the gcc comamnd line
+
+\todo finish documenting 64 bit gcc
+
+
+*/
+
