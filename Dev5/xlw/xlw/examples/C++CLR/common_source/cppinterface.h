@@ -27,5 +27,9 @@ EchoDate(
 		 DateTime date // the Date
 		 );
 
+std::string //  Computes the SHA1 hash of the input string
+SHA1Hash(
+			const std::string &value // The data 
+			);
 
 #endif

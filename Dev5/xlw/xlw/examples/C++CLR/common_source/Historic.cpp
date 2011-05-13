@@ -24,19 +24,9 @@ using namespace System::Net;
 using namespace Runtime::InteropServices;
 
 
+std::string CLR2CPP(String^ clrString);
 
-std::string CLR2CPP(String^ clrString)
-{
-    std::string result =  (const char*)(Marshal::StringToHGlobalAnsi(clrString)).ToPointer();
-    return result;
-}
-
-String^ CPP2CLR(const std::string &cppString)
-{
-    return gcnew String(cppString.c_str());
-}
-
-
+String^ CPP2CLR(const std::string &cppString);
 
 xlw::CellMatrix // Obtains historial market data from yahoo
 GetHistoricDataFromYahoo(
