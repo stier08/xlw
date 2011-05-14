@@ -21,7 +21,10 @@ namespace {
 
 #define MANAGED_EXECL_BEGIN  try {
 #define MANAGED_EXECL_END \
-} catch (System::Exception^ theError ) { \
+} catch (System::Runtime::InteropServices::SEHException^ theError ) { \
+	throw; \
+}\
+catch (System::Exception^ theError ) { \
     String^ ErrorType = theError->GetType()->ToString() + " : ";\
         String^ ErrorMessage = theError->Message;\
         String^ StackTrace = theError->StackTrace;\
