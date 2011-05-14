@@ -551,6 +551,7 @@ SubSection "xlw" xlw
 		!insertmacro doExample "xlw\examples\Commands and Attributes" 1 1
 		!insertmacro doExample "xlw\examples\ObjectCacheDemo" 1 1
 		!insertmacro doExample "xlw\examples\Handwritten" 1 1
+		!insertmacro doExample "xlw\examples\MJ - Design Patterns" 1 1
 		!insertmacro doExample "xlw\examples\LoggerDemo" 1 1
 		!insertmacro doExample "xlw\examples\C++CLR" 0 0
 		!insertmacro doExample "xlw\examples\C++CLR_password" 0 0
