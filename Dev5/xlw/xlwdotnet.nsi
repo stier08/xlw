@@ -331,6 +331,7 @@
 			SetOutPath "$INSTDIR\${dir}\common_source"
 			File  /nonfatal /r "${dir}\common_source\*.cpp"
 			File  /nonfatal /r "${dir}\common_source\*.h"
+			File  /nonfatal /r "${dir}\common_source\*.resx"
 			
 			SetOutPath "$INSTDIR\${dir}\Objects"
 			File  /nonfatal /r "${dir}\Objects\*.cpp"
@@ -546,11 +547,13 @@ SubSection "xlw" xlw
 
 	Section "Examples" xlwExamples
 	
-		!insertmacro doExample "xlw\examples\Example" 1 1
+		!insertmacro doExample "xlw\examples\Start Here - Example" 1 1
+		!insertmacro doExample "xlw\examples\Commands and Attributes" 1 1
 		!insertmacro doExample "xlw\examples\ObjectCacheDemo" 1 1
 		!insertmacro doExample "xlw\examples\Handwritten" 1 1
 		!insertmacro doExample "xlw\examples\LoggerDemo" 1 1
 		!insertmacro doExample "xlw\examples\C++CLR" 0 0
+		!insertmacro doExample "xlw\examples\C++CLR_password" 0 0
 		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\xlw\Examples.lnk " "$INSTDIR\xlw\Examples"
 	SectionEnd
 
