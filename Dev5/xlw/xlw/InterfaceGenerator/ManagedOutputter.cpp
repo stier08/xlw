@@ -73,6 +73,17 @@ void OutputFileCreatorMan(std::vector<FunctionDescription>& functionDescriptions
 
   for (unsigned long i=0; i < functionDescriptions.size(); i++)
   {
+	bool isCommand(functionDescriptions[i].GetReturnType() == "void");
+
+	if (isCommand)
+	{
+		AddLine(outputVector_h, "void //" + functionDescriptions[i].GetFunctionDescription());
+		AddLine(outputVector_h,  functionDescriptions[i].GetFunctionName() +"();");
+		AddLine(outputVector_h, "\n\n\n\n");
+	}
+	else
+	{
+
     std::vector<std::string> body;
     std::string returnType = functionDescriptions[i].GetReturnType();
     std::string name       = functionDescriptions[i].GetFunctionName();
@@ -178,7 +189,7 @@ void OutputFileCreatorMan(std::vector<FunctionDescription>& functionDescriptions
 	  AddLine(outputVector_cpp,"////////////////////////////////////");
 	  AddLine(outputVector_cpp,"");
 
-
+	  }
   }
 
 
