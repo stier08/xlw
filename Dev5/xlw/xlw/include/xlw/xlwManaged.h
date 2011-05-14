@@ -21,7 +21,7 @@ namespace {
 
 #define MANAGED_EXECL_BEGIN  try {
 #define MANAGED_EXECL_END \
-} catch (System::Runtime::InteropServices::SEHException^ theError ) { \
+} catch (System::Runtime::InteropServices::SEHException^ ) { \
 	throw; \
 }\
 catch (System::Exception^ theError ) { \
