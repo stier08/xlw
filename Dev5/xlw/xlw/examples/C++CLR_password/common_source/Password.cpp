@@ -14,31 +14,36 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-#ifndef NATIVE_H
-#define NATIVE_H
-            
-#include <xlw/MyContainers.h>
-#include <xlw/CellMatrix.h>
-#include <xlw/DoubleOrNothing.h>
-#include <xlw/ArgList.h>
-#include <string>
-
-using namespace System;
-             
-using namespace xlw;
-  
-//<xlw:libraryname=password_example
-
-//<xlw:onopen(authenticate)
-
-void // Authenticate
-authenticate();
-
-double // Echoes Date
-//<xlw:time
-EchoDate(
-		 DateTime date // the Date
-		 );
+#include "Password.h"
 
 
-#endif
+namespace 
+{
+	bool IsAuthenticated_flag = false;
+}
+bool IsAuthenticated()
+{
+	return IsAuthenticated_flag;
+}
+
+void authenticate()
+{
+
+	ExampleXll::Password^ theForm = gcnew ExampleXll::Password();
+	theForm->ShowDialog();
+	IsAuthenticated_flag = false;
+	if(theForm->DialogResult == System::Windows::Forms::DialogResult::OK)
+	{
+		if (theForm->getUserName() == L"XLW")
+		{
+			if (theForm->getPassWord() == L"XLW")
+			{
+				IsAuthenticated_flag=true;
+			}
+		}
+	}
+
+	theForm->Close();
+
+}
+
