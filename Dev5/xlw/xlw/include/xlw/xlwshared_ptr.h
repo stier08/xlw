@@ -17,7 +17,12 @@
 #ifndef XLW_SHARED_PTR_HEADER_GUARD
 #define XLW_SHARED_PTR_HEADER_GUARD 
 
-#pragma managed(push, off)
+#if defined(_MSC_VER)
+  #if(_MSC_VER >= 1400)
+    #pragma managed(push, off)
+  #endif
+#endif
+
 
 #include<memory>
 
@@ -158,7 +163,11 @@ namespace xlw
 
 }
 
-#pragma managed(pop)
+#if defined(_MSC_VER)
+  #if(_MSC_VER >= 1400)
+    #pragma managed(pop)
+  #endif 
+#endif 
 
 #endif // XLW_SHARED_PTR_HEADER_GUARD 
 
