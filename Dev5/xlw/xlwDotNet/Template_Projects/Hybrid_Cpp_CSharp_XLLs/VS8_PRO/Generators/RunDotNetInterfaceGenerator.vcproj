@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="RunDotNetInterfaceGenerator"
+	Name="_RunDotNetInterfaceGenerator"
 	ProjectGUID="{1115BBB6-8140-40EF-8805-DF2E41D1330E}"
 	RootNamespace="RunInterfaceGenerator"
 	Keyword="MakeFileProj"
@@ -39,26 +39,6 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="Release|Win32"
-			OutputDirectory="$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="0"
-			>
-			<Tool
-				Name="VCNMakeTool"
-				BuildCommandLine="NMAKE /f &quot;$(XLW)\xlwDotNet\vc_common\RunDotNetInterfaceGenerator.nmake&quot;  ENVIRON=$(ConfigurationName)  LibraryName=$(SolutionName)  SolutionDir=&quot;$(SolutionDir)./&quot; VSVERSION=VS8 ALL"
-				ReBuildCommandLine="NMAKE /f &quot;$(XLW)\xlwDotNet\vc_common\RunDotNetInterfaceGenerator.nmake&quot;  ENVIRON=$(ConfigurationName)  LibraryName=$(SolutionName)  SolutionDir=&quot;$(SolutionDir)./&quot; VSVERSION=VS8 REBUILD"
-				CleanCommandLine="NMAKE /f &quot;$(XLW)\xlwDotNet\vc_common\RunDotNetInterfaceGenerator.nmake&quot;  ENVIRON=$(ConfigurationName)  LibraryName=$(SolutionName)  SolutionDir=&quot;$(SolutionDir)./&quot; VSVERSION=VS8 CLEAN"
-				Output=""
-				PreprocessorDefinitions="WIN32;NDEBUG"
-				IncludeSearchPath=""
-				ForcedIncludes=""
-				AssemblySearchPath=""
-				ForcedUsingAssemblies=""
-				CompileAsManaged=""
-			/>
-		</Configuration>
-		<Configuration
 			Name="Debug|x64"
 			OutputDirectory="$(PlatformName)_$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)_$(ConfigurationName)"
@@ -76,6 +56,26 @@
 				AssemblySearchPath=""
 				ForcedUsingAssemblies=""
 				CompileAsManaged="1"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="0"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="NMAKE /f &quot;$(XLW)\xlwDotNet\vc_common\RunDotNetInterfaceGenerator.nmake&quot;  ENVIRON=$(ConfigurationName)  LibraryName=$(SolutionName)  SolutionDir=&quot;$(SolutionDir)./&quot; VSVERSION=VS8 ALL"
+				ReBuildCommandLine="NMAKE /f &quot;$(XLW)\xlwDotNet\vc_common\RunDotNetInterfaceGenerator.nmake&quot;  ENVIRON=$(ConfigurationName)  LibraryName=$(SolutionName)  SolutionDir=&quot;$(SolutionDir)./&quot; VSVERSION=VS8 REBUILD"
+				CleanCommandLine="NMAKE /f &quot;$(XLW)\xlwDotNet\vc_common\RunDotNetInterfaceGenerator.nmake&quot;  ENVIRON=$(ConfigurationName)  LibraryName=$(SolutionName)  SolutionDir=&quot;$(SolutionDir)./&quot; VSVERSION=VS8 CLEAN"
+				Output=""
+				PreprocessorDefinitions="WIN32;NDEBUG"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
 			/>
 		</Configuration>
 		<Configuration
