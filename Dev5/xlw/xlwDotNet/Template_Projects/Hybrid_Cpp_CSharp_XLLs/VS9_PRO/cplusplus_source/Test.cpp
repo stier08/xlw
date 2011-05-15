@@ -7,7 +7,7 @@
 using namespace xlw;
 
 std::string  // C++ Function
-XLLEXPORT CPlusPlusFunction()
+CPlusPlusFunction()
 {
     return "Hello from the Native C++ World !";
 }

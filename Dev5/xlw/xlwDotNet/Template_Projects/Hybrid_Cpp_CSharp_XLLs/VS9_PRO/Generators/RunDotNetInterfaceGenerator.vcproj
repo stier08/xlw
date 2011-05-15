@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="RunDotNetInterfaceGenerator"
+	Name="_RunDotNetInterfaceGenerator"
 	ProjectGUID="{1115BBB6-8140-40EF-8805-DF2E41D1330E}"
 	RootNamespace="RunInterfaceGenerator"
 	Keyword="MakeFileProj"
