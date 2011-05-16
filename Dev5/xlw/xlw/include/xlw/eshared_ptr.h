@@ -15,12 +15,6 @@
 #ifndef DEEP_COPY_PTR
 #define DEEP_COPY_PTR
 
-#if defined(_MSC_VER)
-  #if(_MSC_VER >= 1400)
-    #pragma managed(push, off)
-  #endif
-#endif
-
 // STD INCLUDES
 #include <ostream>
 
@@ -311,14 +305,6 @@ namespace std
         }
     }
 }
-
-
-#if defined(_MSC_VER)
-  #if(_MSC_VER >= 1400)
-    #pragma managed(pop)
-  #endif
-#endif
-
 
 #endif // DEEP_COPY_PTR
 
