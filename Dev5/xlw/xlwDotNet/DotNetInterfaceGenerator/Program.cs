@@ -1,5 +1,5 @@
 ﻿/*
- Copyright (C) 2008 2009  Narinder S Claire
+ Copyright (C) 2008 2009 2011 Narinder S Claire
 
  This file is part of XLWDOTNET, a free-software/open-source C# wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -79,6 +79,7 @@ namespace DotNetInterfaceGenerator
 
                 headerFile.WriteLine("#ifndef " + fileName.ToUpper() + "_H");
                 headerFile.WriteLine("#define " + fileName.ToUpper() + "_H"); headerFile.WriteLine();
+                headerFile.WriteLine("#define ERRCELLS_NOT_REQUIRED"); headerFile.WriteLine();
                 headerFile.WriteLine("#include <xlwDotNet.h>"); headerFile.WriteLine();
                 headerFile.WriteLine("//<xlw:libraryname=" + args[1]); headerFile.WriteLine();
 

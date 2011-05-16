@@ -1,5 +1,5 @@
 /*
- Copyright (C) 2008 2009  Narinder S Claire
+ Copyright (C) 2008 2009 2011 Narinder S Claire
 
  This file is part of XLWDOTNET, a free-software/open-source C# wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -33,10 +33,13 @@
 
 
 #define DLLEXPORT __declspec(dllexport)
+
+#ifndef  ERRCELLS_NOT_REQUIRED
 namespace {
     std::string errMessage;
     xlw::CellMatrix errCells;
 }
+#endif 
 
 #define DOT_NET_EXCEL_BEGIN  try {
 #define DOT_NET_EXCEL_END \
