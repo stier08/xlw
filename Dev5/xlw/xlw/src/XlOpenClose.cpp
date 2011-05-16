@@ -90,16 +90,10 @@ extern "C"
     {
         std::cerr << XLW__HERE__ << "Addin being unloaded" << std::endl;
 
-        xlw::MacroCache<xlw::Close>::Instance().ExecuteMacros();
-
         // we can safely unregister the functions here as the user has unloaded the
         // xll and so won't expect to be able to use the functions
         xlw::XLRegistration::ExcelFunctionRegistrationRegistry::Instance().DoTheDeregistrations();
 
-        xlw::XlfExcel::DeleteInstance();
-        
-        // clear up any temporary memory used
-        xlw::TempMemory::TerminateProcess();
         return 1;
     }
 
