@@ -109,6 +109,7 @@
 			ConfigurationType="2"
 			CharacterSet="1"
 			ManagedExtensions="1"
+			WholeProgramOptimization="0"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -278,7 +279,7 @@
 			ConfigurationType="2"
 			CharacterSet="1"
 			ManagedExtensions="1"
-			WholeProgramOptimization="1"
+			WholeProgramOptimization="0"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
