@@ -122,6 +122,14 @@ namespace xlw { namespace impl {
         {
             m_version->copy(fromOper, toOper);
         }
+        static void copyUsingNew(LPXLFOPER fromOper, LPXLFOPER toOper)
+        {
+            m_version->copyUsingNew(fromOper, toOper);
+        }
+        static void freeCreatedUsingNew(LPXLFOPER oper)
+        {
+            m_version->freeCreatedUsingNew(oper);
+        }
     };
 
 } }
