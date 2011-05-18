@@ -129,11 +129,7 @@ FunctionModel FunctionFind(std::vector<Token>::const_iterator& it, std::vector<T
         }
         if (commentString == "<xlw:asynchronous")
         {
-            asynchronous = true;
-            ++it;
-            found = true;
-            if (it == end)
-                throw("function half declared at end of file");
+            throw("asynchronous not yet implemented");
         }
         if (commentString == "<xlw:macrosheet")
         {
