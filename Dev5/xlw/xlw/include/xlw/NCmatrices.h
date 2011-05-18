@@ -120,7 +120,7 @@ namespace xlw {
     {
 #ifdef _DEBUG
         if (i >= theData->Rows)
-            THROW_XLW("row index " << i << " out of bounds, num Rows " << theData->Rows);
+            throw XlfOutOfBounds();
 #endif
     }
 
@@ -128,7 +128,7 @@ namespace xlw {
     {
 #ifdef _DEBUG
         if (j >= theData->Columns)
-            THROW_XLW("column index " << j << " out of bounds, num columns " << theData->Columns);
+            throw XlfOutOfBounds();
 #endif
     }
 
@@ -184,8 +184,8 @@ namespace xlw {
     NCMatrix& NCMatrix::operator+=(const NCMatrix& addend)
     {
 #ifdef _DEBUG
-        if (addend.rows() != rows() || addend.columns() != columns())
-            THROW_XLW("bad matrix addition");
+        //if (addend.rows() != rows() || addend.columns() != columns())
+        //    THROW_XLW("bad matrix addition");
 #endif
 
         NCMatrix::iterator i = theData->theArray.begin();
