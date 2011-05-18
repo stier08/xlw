@@ -345,9 +345,6 @@ namespace xlw { namespace impl {
                     toOper->xltype = xltypeStr;
                     toOper->val.str = PascalStringConversions::PascalStringCopyUsingNew(fromOper->val.str);
                     break;
-                case xltypeBigData:
-                    THROW_XLW("can't copy a big data oper");
-                    break;
                 default:
                     // just straight copy is fine
                     *toOper =*fromOper;
@@ -370,9 +367,6 @@ namespace xlw { namespace impl {
                     break;
                 case xltypeStr:
                     TempMemory::FreeMemoryCreatedUsingNew(oper->val.str);
-                    break;
-                case xltypeBigData:
-                    THROW_XLW("can't free a big data oper");
                     break;
                 default:
                     // do nothing
