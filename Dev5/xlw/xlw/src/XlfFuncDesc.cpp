@@ -3,6 +3,7 @@
  Copyright (C) 1998, 1999, 2001, 2002, 2003, 2004 Jérôme Lecomte
  Copyright (C) 2007, 2008 Eric Ehlers
  Copyright (C) 2009 2011 Narinder S Claire
+ Copyright (C) 2011 John Adcock
 
 
  This file is part of XLW, a free-software/open-source C++ wrapper of the
@@ -129,8 +130,14 @@ int xlw::XlfFuncDesc::RegisterAs(const std::string& dllName, double mode_, doubl
     XlfArgDescList& arguments = impl_->arguments_;
 
     int nbargs = static_cast<int>(arguments.size());
-    std::string args = returnTypeCode_;
+    std::string args(returnTypeCode_);
     std::string argnames;
+
+    // the synchronous part of an asynchronous function returns void
+    if (XlfExcel::Instance().excel14() && impl_->Asynchronous_)
+    {
+        args = ">";
+    }
 
     XlfArgDescList::const_iterator it = arguments.begin();
     while (it != arguments.end())
@@ -140,6 +147,13 @@ int xlw::XlfFuncDesc::RegisterAs(const std::string& dllName, double mode_, doubl
         ++it;
         if (it != arguments.end())
             argnames+=", ";
+    }
+
+    // the synchronous part of an asynchronous function have an extra 
+    // bigdata xloper on the end containing the handle
+    if (XlfExcel::Instance().excel14() && impl_->Asynchronous_)
+    {
+        args += "X";
     }
     if (impl_->recalcPolicy_ == xlw::XlfFuncDesc::Volatile)
     {
@@ -163,9 +177,20 @@ int xlw::XlfFuncDesc::RegisterAs(const std::string& dllName, double mode_, doubl
     xlw_tr1::shared_ptr<LPXLOPER> smart_px(new LPXLOPER[10 + nbargs],CustomArrayDeleter<LPXLOPER>());
     LPXLOPER *rgx = smart_px.get();
     LPXLOPER *px = rgx;
+    std::string functionName(GetName());
+
+    // We need to have 2 functions exposed one for less than
+    // version 14 and that it the normal function, we also need
+    // the Synchronous part that returns void and takes an extra int
+    // By convension this is the same as the normal function but with 
+    // Sync on teh end
+    if (XlfExcel::Instance().excel14() && impl_->Asynchronous_)
+    {
+        functionName += "Sync";
+    }
 
     (*px++) = XlfOper4(dllName);
-    (*px++) = XlfOper4(GetName());
+    (*px++) = XlfOper4(functionName);
     (*px++) = XlfOper4(args);
     (*px++) = XlfOper4(GetAlias());
     (*px++) = XlfOper4(argnames);
