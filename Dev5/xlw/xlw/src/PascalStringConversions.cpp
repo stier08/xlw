@@ -160,3 +160,22 @@ wchar_t* xlw::PascalStringConversions::WPascalStringCopy(const wchar_t* pascalSt
     result[n + 1] = 0;
     return result;
 }
+
+char* xlw::PascalStringConversions::PascalStringCopyUsingNew(const char* pascalString)
+{
+    size_t n = static_cast<BYTE>(pascalString[0]);
+    LPSTR result = TempMemory::GetMemoryUsingNew<char>(n + 2);
+    memcpy(result, pascalString, n + 1);
+    result[n + 1] = 0;
+    return result;
+}
+
+wchar_t* xlw::PascalStringConversions::WPascalStringCopyUsingNew(const wchar_t* pascalString)
+{
+    size_t n = static_cast<wchar_t>(pascalString[0]);
+    wchar_t* result = TempMemory::GetMemoryUsingNew<wchar_t>(n + 2);
+    memcpy(result, pascalString, (n + 1) * sizeof(wchar_t));
+    result[n + 1] = 0;
+    return result;
+}
+

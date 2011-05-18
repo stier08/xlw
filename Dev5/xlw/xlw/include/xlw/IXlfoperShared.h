@@ -52,6 +52,8 @@ namespace xlw { namespace impl {
         virtual int coerce(LPXLFOPER fromOper, DWORD toType, LPXLFOPER toOper) = 0;
         virtual void XlFree(LPXLFOPER oper) = 0;
         virtual void copy(LPXLFOPER fromOper, LPXLFOPER toOper) = 0;
+        virtual void copyUsingNew(LPXLFOPER fromOper, LPXLFOPER toOper) = 0;
+        virtual void freeCreatedUsingNew(LPXLFOPER oper) = 0;
     };
 
 } }

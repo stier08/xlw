@@ -118,6 +118,14 @@ namespace
         {
             return XlfOperProperties<LPOPER_TYPE>::copy((LPOPER_TYPE)fromOper, (LPOPER_TYPE)toOper);
         }
+        void copyUsingNew(LPXLFOPER fromOper, LPXLFOPER toOper)
+        {
+            return XlfOperProperties<LPOPER_TYPE>::copyUsingNew((LPOPER_TYPE)fromOper, (LPOPER_TYPE)toOper);
+        }
+        void freeCreatedUsingNew(LPXLFOPER oper)
+        {
+            return XlfOperProperties<LPOPER_TYPE>::freeCreatedUsingNew((LPOPER_TYPE)oper);
+        }
     };
 }
 

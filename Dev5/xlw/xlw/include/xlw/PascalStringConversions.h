@@ -45,6 +45,8 @@ namespace xlw {
         static wchar_t* WStringToWPascalString(const std::wstring& cString);
         static char* PascalStringCopy(const char* pascalString);
         static wchar_t* WPascalStringCopy(const wchar_t* pascalString);
+        static char* PascalStringCopyUsingNew(const char* pascalString);
+        static wchar_t* WPascalStringCopyUsingNew(const wchar_t* pascalString);
     };
 }
 

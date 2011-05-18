@@ -319,6 +319,68 @@ namespace xlw { namespace impl {
                     break;
             }
         }
+        static void copyUsingNew(LPXLOPER12 fromOper, LPXLOPER12 toOper)
+        {
+            switch(fromOper->xltype & 0xFFF)
+            {
+                case xltypeMulti:
+                    // need to do a deep copy of each element
+                    toOper->xltype = xltypeMulti;
+                    toOper->val.array.lparray = TempMemory::GetMemoryUsingNew<XLOPER12>(fromOper->val.array.rows * fromOper->val.array.columns);
+                    for(size_t item(0) ; item < (size_t)(fromOper->val.array.rows * fromOper->val.array.columns); ++item)
+                    {
+                        copyUsingNew(toOper->val.array.lparray + item, toOper->val.array.lparray + item);
+                    }
+                    toOper->val.array.rows = fromOper->val.array.rows;
+                    toOper->val.array.columns = fromOper->val.array.columns;
+                    break;
+                case xltypeRef:
+                    {
+                        toOper->xltype = xltypeRef;
+                        toOper->val.mref.idSheet = fromOper->val.mref.idSheet;
+                        size_t bytes(sizeof(XLMREF12) + (fromOper->val.mref.lpmref->count - 1) * sizeof(XLREF12));
+                        toOper->val.mref.lpmref = (XLMREF12*)TempMemory::GetMemoryUsingNew<BYTE>(bytes);
+                        memcpy(toOper->val.mref.lpmref, fromOper->val.mref.lpmref, bytes);
+                    }
+                    break;
+                case xltypeStr:
+                    toOper->xltype = xltypeStr;
+                    toOper->val.str = PascalStringConversions::WPascalStringCopyUsingNew(fromOper->val.str);
+                    break;
+                case xltypeBigData:
+                    THROW_XLW("can't copy a big data oper");
+                    break;
+                default:
+                    // just straight copy is fine
+                    *toOper =*fromOper;
+                    break;
+            }
+        }
+        static void freeCreatedUsingNew(LPXLOPER12 oper)
+        {
+            switch(oper->xltype & 0xFFF)
+            {
+                case xltypeMulti:
+                    for(size_t item(0) ; item < (size_t)(oper->val.array.rows * oper->val.array.columns); ++item)
+                    {
+                        freeCreatedUsingNew(oper->val.array.lparray + item);
+                    }
+                    TempMemory::FreeMemoryCreatedUsingNew(oper->val.array.lparray);
+                    break;
+                case xltypeRef:
+                    TempMemory::FreeMemoryCreatedUsingNew(oper->val.mref.lpmref);
+                    break;
+                case xltypeStr:
+                    TempMemory::FreeMemoryCreatedUsingNew(oper->val.str);
+                    break;
+                case xltypeBigData:
+                    THROW_XLW("can't free a big data oper");
+                    break;
+                default:
+                    // do nothing
+                    break;
+            }
+		}
     };
 
 } }

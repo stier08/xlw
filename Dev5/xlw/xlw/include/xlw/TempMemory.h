@@ -60,8 +60,23 @@ namespace xlw {
         {
             return reinterpret_cast<TYPE*>(GetBytes(numItems * sizeof(TYPE)));
         }
+
+		//! Allocates memory using new operator
+        template<typename TYPE>
+		static TYPE* GetMemoryUsingNew(size_t numItems = 1)
+        {
+            return new TYPE[numItems];
+        }
+
         //! Frees temporary memory used by the current thread
         static void FreeMemory();
+
+		//! frees memory allocated using GetMemoryUsingNew operator
+        template<typename TYPE>
+		static void FreeMemoryCreatedUsingNew(TYPE* pointerToFree)
+        {
+            delete [] pointerToFree;
+        }
 
         //! To be called to setup TempMemory
         static void InitializeProcess();
