@@ -58,35 +58,35 @@ bool xlw::impl::MJCellValue::IsEmpty() const
 xlw::impl::MJCellValue::operator std::string() const
 {
     if (Type != string)
-        throw("non string cell asked to be a string");
+        THROW_XLW("non string cell asked to be a string");
     return *ValueAsString;
 }
 
 xlw::impl::MJCellValue::operator std::wstring() const
 {
     if (Type != wstring)
-        throw("non string cell asked to be a string");
+        THROW_XLW("non string cell asked to be a string");
     return *ValueAsWstring;
 }
 
 xlw::impl::MJCellValue::operator bool() const
 {
     if (Type != boolean)
-        throw("non boolean cell asked to be a bool");
+        THROW_XLW("non boolean cell asked to be a bool");
     return ValueAsBool;
 }
 
 xlw::impl::MJCellValue::operator double() const
 {
     if (Type != number)
-        throw("non number cell asked to be a number");
+        THROW_XLW("non number cell asked to be a number");
     return ValueAsNumeric;
 }
 
 xlw::impl::MJCellValue::operator unsigned long() const
 {
     if (Type != number)
-        throw("non number cell asked to be a number");
+        THROW_XLW("non number cell asked to be a number");
     return static_cast<unsigned long>(ValueAsNumeric);
 }
 
@@ -155,14 +155,14 @@ const  std::string & xlw::impl::MJCellValue::StringValue() const
         TempString = std::string(ValueAsWstring->begin(), ValueAsWstring->end());
         return TempString;
     } else {
-        throw("non string cell asked to be a string");
+        THROW_XLW("non string cell asked to be a string");
     }
 }
 
 const std::wstring& xlw::impl::MJCellValue::WstringValue() const
 {
     if (Type != wstring)
-        throw("non wstring cell asked to be a wstring");
+        THROW_XLW("non wstring cell asked to be a wstring");
     return *ValueAsWstring;
 }
 
@@ -170,7 +170,7 @@ double xlw::impl::MJCellValue::NumericValue() const
 {
 
     if (Type != number)
-        throw("non number cell asked to be a number");
+        THROW_XLW("non number cell asked to be a number");
     return ValueAsNumeric;
 }
 
@@ -178,7 +178,7 @@ bool xlw::impl::MJCellValue::BooleanValue() const
 {
 
     if (Type != boolean)
-        throw("non boolean cell asked to be a bool");
+        THROW_XLW("non boolean cell asked to be a bool");
 
     return ValueAsBool;
 }
@@ -186,7 +186,7 @@ bool xlw::impl::MJCellValue::BooleanValue() const
 unsigned long xlw::impl::MJCellValue::ErrorValue() const
 {
     if (Type != error)
-        throw("non error cell asked to be an error");
+        THROW_XLW("non error cell asked to be an error");
 
     return ValueAsErrorCode;
 }

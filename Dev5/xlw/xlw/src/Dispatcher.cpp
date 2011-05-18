@@ -31,8 +31,7 @@ clw
     xlw::MakeLowerCase(Id);
     if  (DispatchMap.find(Id) == DispatchMap.end())
     {
-      std::string message(Id+" is an unknown function. Known functions are "+KnownFunctions);
-      throw message;
+      THROW_XLW(Id << " is an unknown function. Known functions are " << KnownFunctions);
     }
 
     return (DispatchMap.find(Id)->second)(args);

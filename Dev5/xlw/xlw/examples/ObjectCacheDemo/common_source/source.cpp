@@ -44,7 +44,7 @@ void check(const std::string &theName)
 {
     if(theName.find('#')==std::string::npos)
     {
-        throw("Character '#' not allowed in object name");
+        THROW_XLW("Character '#' not allowed in object name");
     }
 }
 
@@ -52,7 +52,7 @@ std::string CreateObject(const CellMatrix &theObject)
 {
     if(!theObject(0,0).IsAString() && !theObject(0,0).IsAWstring())
     {
-        throw("Expected value to be name of the object");
+        THROW_XLW("Expected value to be name of the object");
     }
     std::string theName = theObject(0,0).StringValue();
 
@@ -66,7 +66,7 @@ CellMatrix RetrieveObject(const std::string &theName)
     std::string theKey(stripTrailingHash(theName));
     if (ObjectCache::instance().find(theKey) == ObjectCache::instance().end())
     {
-        throw("Object not found in Cache");
+        THROW_XLW("Object not found in Cache");
     }
     return ObjectCache::instance()[theKey];
 

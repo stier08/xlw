@@ -64,7 +64,7 @@ namespace xlw
             int err = XlfExcel::Instance().Call(xlfn, result);
             if(err != xlretSuccess)
             {
-                throw std::logic_error(errorString);
+                THROW_XLW(errorString);
             }
             return result;
         }
@@ -75,7 +75,7 @@ namespace xlw
             int err = XlfExcel::Instance().Call(xlfn, result, param1);
             if(err != xlretSuccess)
             {
-                throw std::logic_error(errorString);
+                THROW_XLW(errorString);
             }
             return result;
         }
@@ -86,7 +86,7 @@ namespace xlw
             int err = XlfExcel::Instance().Call(xlfn, result, param1, param2);
             if(err != xlretSuccess)
             {
-                throw std::logic_error(errorString);
+                THROW_XLW(errorString);
             }
             return result;
         }
@@ -97,7 +97,7 @@ namespace xlw
             int err = XlfExcel::Instance().Call(xlfn, result, param1, param2, param3);
             if(err != xlretSuccess)
             {
-                throw std::logic_error(errorString);
+                THROW_XLW(errorString);
             }
             return result;
         }
@@ -108,7 +108,7 @@ namespace xlw
             int err = XlfExcel::Instance().Call(xlfn, result, param1, param2, param3, param4);
             if(err != xlretSuccess)
             {
-                throw std::logic_error(errorString);
+                THROW_XLW(errorString);
             }
             return result;
         }
@@ -118,7 +118,7 @@ namespace xlw
             int err = XlfExcel::Instance().Call(xlcmd, 0);
             if(err != xlretSuccess)
             {
-                throw std::logic_error(errorString);
+                THROW_XLW(errorString);
             }
         }
 
@@ -127,7 +127,7 @@ namespace xlw
             int err = XlfExcel::Instance().Call(xlcmd, 0, param1);
             if(err != xlretSuccess)
             {
-                throw std::logic_error(errorString);
+                THROW_XLW(errorString);
             }
         }
 
@@ -136,7 +136,7 @@ namespace xlw
             int err = XlfExcel::Instance().Call(xlcmd, 0, param1, param2);
             if(err != xlretSuccess)
             {
-                throw std::logic_error(errorString);
+                THROW_XLW(errorString);
             }
         }
 
@@ -145,7 +145,7 @@ namespace xlw
             int err = XlfExcel::Instance().Call(xlcmd, 0, param1, param2, param3);
             if(err != xlretSuccess)
             {
-                throw std::logic_error(errorString);
+                THROW_XLW(errorString);
             }
         }
 
@@ -154,7 +154,7 @@ namespace xlw
             int err = XlfExcel::Instance().Call(xlcmd, 0, param1, param2, param3, param4);
             if(err != xlretSuccess)
             {
-                throw std::logic_error(errorString);
+                THROW_XLW(errorString);
             }
         }
     }

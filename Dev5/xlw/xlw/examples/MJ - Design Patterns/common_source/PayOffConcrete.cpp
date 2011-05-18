@@ -10,10 +10,10 @@
 PayOffCall::PayOffCall(xlw::ArgumentList args)
 {
     if (args.GetStructureName() != "payoff") // must be lower case here
-        throw("payoff structure expected in PayOffCall class");
+        THROW_XLW("payoff structure expected in PayOffCall class");
 
     if (args.GetStringArgumentValue("name") != "call")
-        throw("payoff list not for call passed to PayOffCall : got "+args.GetStringArgumentValue("name"));
+        THROW_XLW("payoff list not for call passed to PayOffCall : got " << args.GetStringArgumentValue("name"));
 
     Strike = args.GetDoubleArgumentValue("strike");
 
@@ -39,11 +39,11 @@ double PayOffPut::operator () (double Spot) const
 
 PayOffPut::PayOffPut(xlw::ArgumentList args)
 {
-        if (args.GetStructureName() != "payoff") // must be lower case here
-        throw("payoff structure expected in PayOffCall class");
+    if (args.GetStructureName() != "payoff") // must be lower case here
+        THROW_XLW("payoff structure expected in PayOffCall class");
 
     if (args.GetStringArgumentValue("name") != "put")
-        throw("payoff list not for put passed to PayOffPut : got "+args.GetStringArgumentValue("name"));
+        THROW_XLW("payoff list not for put passed to PayOffPut : got " << args.GetStringArgumentValue("name"));
 
     Strike = args.GetDoubleArgumentValue("strike");
 
@@ -64,11 +64,11 @@ double PayOffSpread::operator () (double Spot) const
 
 PayOffSpread::PayOffSpread(xlw::ArgumentList args)
 {
-        if (args.GetStructureName() != "payoff") // must be lower case here
-        throw("payoff structure expected in PayOffCall class");
+    if (args.GetStructureName() != "payoff") // must be lower case here
+        THROW_XLW("payoff structure expected in PayOffCall class");
 
     if (args.GetStringArgumentValue("name") != "spread")
-        throw("payoff list not for spread passed to payoffspread : got "+args.GetStringArgumentValue("name"));
+        THROW_XLW("payoff list not for spread passed to payoffspread : got " << args.GetStringArgumentValue("name"));
 
     if (!args.GetIfPresent("Volume1",Volume1))
         Volume1= 1.0;

@@ -60,7 +60,7 @@ namespace xlw {
 
         if  (TheCreatorFunctions.find(Id) == TheCreatorFunctions.end())
         {
-            throw(Id+" is an unknown class. Known types are "+KnownTypes);
+            THROW_XLW(Id << " is an unknown class. Known types are " << KnownTypes);
         }
 
         return (TheCreatorFunctions.find(Id)->second)(args);

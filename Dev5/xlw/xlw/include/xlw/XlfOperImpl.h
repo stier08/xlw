@@ -482,7 +482,7 @@ namespace xlw { namespace impl {
             default:
                 break;
             }
-            throw XlfException("Wrong type for element by element access ");
+            throw THROW_XLW("Wrong type for element by element access ");
         }
         //@}
 
@@ -902,7 +902,7 @@ namespace xlw { namespace impl {
                     }
                     else
                     {
-                        throw XlfException("Unsupported type in CellMatrix conversion");
+                        throw THROW_XLW("Unsupported type in CellMatrix conversion");
                     }
                 }
             }

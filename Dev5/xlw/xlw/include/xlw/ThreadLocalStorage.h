@@ -18,6 +18,7 @@
 #define INC_ThreadLocalStorage_H
 
 #include <xlw/XlfWindows.h>
+#include <xlw/XlfException.h>
 
 /*!
 \file ThreadLocalStorage.h
@@ -39,7 +40,7 @@ public:
         m_tlsIndex = TlsAlloc();
         if(m_tlsIndex == TLS_OUT_OF_INDEXES)
         {
-            throw("TLS run out of TLS indices");
+            THROW_XLW("TLS run out of TLS indices");
         }
     }
 

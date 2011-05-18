@@ -22,6 +22,7 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 #include <cstddef>
 #include <vector>
 #include <xlw/eshared_ptr.h>
+#include <xlw/XlfException.h>
 
 using std::size_t;
 
@@ -119,7 +120,7 @@ namespace xlw {
     {
 #ifdef _DEBUG
         if (i >= theData->Rows)
-            throw("row index out of bounds");
+            THROW_XLW("row index " << i << " out of bounds, num Rows " << theData->Rows);
 #endif
     }
 
@@ -127,7 +128,7 @@ namespace xlw {
     {
 #ifdef _DEBUG
         if (j >= theData->Columns)
-            throw("column index out of bounds");
+            THROW_XLW("column index " << j << " out of bounds, num columns " << theData->Columns);
 #endif
     }
 
@@ -184,7 +185,7 @@ namespace xlw {
     {
 #ifdef _DEBUG
         if (addend.rows() != rows() || addend.columns() != columns())
-            throw("bad matrix addition");
+            THROW_XLW("bad matrix addition");
 #endif
 
         NCMatrix::iterator i = theData->theArray.begin();

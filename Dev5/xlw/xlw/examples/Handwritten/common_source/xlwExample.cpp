@@ -138,7 +138,7 @@ extern "C" {
         // avoid divide by zero
         if(popSize == 0)
         {
-            throw("Can't calculate stats on empty range");
+            THROW_XLW("Can't calculate stats on empty range");
         }
 
         // Initialization of the results Array oper.

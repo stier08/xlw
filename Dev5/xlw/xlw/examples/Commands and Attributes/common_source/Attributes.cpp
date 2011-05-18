@@ -81,7 +81,7 @@ Stats(const MyArray& data       )
     double totalsq=0.0;
 
     if (data.size() < 2)
-        throw("At least data points are needed");
+        THROW_XLW("At least data points are needed");
 
     for (unsigned long i=0; i < data.size(); i++)
     {

@@ -50,11 +50,11 @@ namespace
                             bool& nonNumeric)
     {
         if (!cells(row,column).IsANumber())
-            throw(ErrorId+" "+thisName+" rows and columns expected.");
+            THROW_XLW(ErrorId << " " << thisName << " rows and columns expected.");
         if (cells.ColumnsInStructure() <= column+1)
-            throw(ErrorId+" "+thisName+" rows and columns expected.");
+            THROW_XLW(ErrorId << " " << thisName << " rows and columns expected.");
         if (!cells(row,column+1).IsANumber())
-            throw(ErrorId+" "+thisName+" rows and columns expected.");
+            THROW_XLW(ErrorId << " " << thisName << " rows and columns expected.");
 
         unsigned long numberRows_UL = cells(row,column);
         unsigned long numberColumns_UL = cells(row,column+1);
@@ -122,7 +122,7 @@ namespace xlw
         typename std::map<std::string, TYPE>::const_iterator it = typeMap.find(ArgumentName);
 
         if (it == typeMap.end())
-            throw(StructureName+std::string(" unknown string argument asked for :")+ArgumentName);
+            THROW_XLW(StructureName << " unknown string argument asked for :" << ArgumentName);
 
         UseArgumentName(ArgumentName);
 
@@ -178,11 +178,11 @@ xlw::ArgumentList::ArgumentList(CellMatrix cells, std::string ErrorId)
     size_t columns = cells.ColumnsInStructure();
 
     if (rows == 0)
-        throw(std::string("Argument List requires non empty cell matix ")+ErrorId);
+        THROW_XLW("Argument List requires non empty cell matix " << ErrorId);
 
     //if (!cells(0,0).IsAString())
     if (!cells(0,0).IsAString() && !cells(0,0).IsAWstring())//FIXME
-        throw(std::string("a structure name must be specified for argument list class ")+ErrorId);
+        THROW_XLW("a structure name must be specified for argument list class " << ErrorId);
     else
     {
 		StructureName = StringValueLowerCase(cells(0,0).StringValue());
@@ -192,7 +192,7 @@ xlw::ArgumentList::ArgumentList(CellMatrix cells, std::string ErrorId)
 
     {for (size_t i=1; i < columns; i++)
         if (!cells(0,i).IsEmpty() )
-            throw("An argument list should only have the structure name on the first line: "+StructureName+ " " + ErrorId);
+            THROW_XLW("An argument list should only have the structure name on the first line: " << StructureName+ " " << ErrorId);
     }
 
     ErrorId +=" "+StructureName;
@@ -291,7 +291,7 @@ xlw::ArgumentList::ArgumentList(CellMatrix cells, std::string ErrorId)
                             if (stringVal == "matrix")
                             {
                                 if (nonNumeric)
-                                    throw("Non numerical value in matrix argument :"+thisName+ " "+ErrorId);
+                                    THROW_XLW("Non numerical value in matrix argument :" << thisName <<  " " << ErrorId);
 
                                 addInternal(thisName, extracted, MatrixArguments, matrix);
                             }
@@ -308,13 +308,13 @@ xlw::ArgumentList::ArgumentList(CellMatrix cells, std::string ErrorId)
                                 cellBelow.clear();
 
                                 if (row+2>= rows)
-                                    throw(ErrorId+" data expected below array "+thisName);
+                                    THROW_XLW(ErrorId << " data expected below array " << thisName);
 
                                 size_t size = static_cast<size_t>((unsigned long)cells(row+2,column));
                                 cells(row+2,column).clear();
 
                                 if (row+2+size>=rows)
-                                    throw(ErrorId+" more data expected below array "+thisName);
+                                    THROW_XLW(ErrorId << " more data expected below array " << thisName);
 
                                 CellMatrix theArray(size, 1);
 
@@ -327,7 +327,7 @@ xlw::ArgumentList::ArgumentList(CellMatrix cells, std::string ErrorId)
                                     }
                                     else
                                     {
-                                        throw("Non numerical value in array argument :"+thisName+ " "+ErrorId);
+                                        THROW_XLW("Non numerical value in array argument :" << thisName+ " " << ErrorId);
                                     }
                                 }
 
@@ -367,7 +367,7 @@ void xlw::ArgumentList::RegisterName(const std::string& ArgumentName, ArgumentTy
 {
     ArgumentNames.push_back(std::make_pair(ArgumentName,type));
     if (!(Names.insert(*ArgumentNames.rbegin()).second) )
-                throw("Same argument name used twice "+ArgumentName);
+                THROW_XLW("Same argument name used twice " << ArgumentName);
 
     ArgumentsUsed.insert(std::pair<std::string,bool>(ArgumentName,false));
 
@@ -448,13 +448,13 @@ void xlw::ArgumentList::CheckAllUsed(const std::string& ErrorId) const
     }
 
     if (unusedList !="")
-        throw("Unused arguments in "+ErrorId+" "+StructureName+" "+unusedList);
+        THROW_XLW("Unused arguments in " << ErrorId << " " << StructureName << " " << unusedList);
 
 }
 
 void xlw::ArgumentList::GenerateThrow(std::string message, size_t row, size_t column)
 {
-    throw(StructureName+" "+message+" row:"+ConvertToString(static_cast<unsigned long>(row))+"; column:"+ConvertToString(static_cast<unsigned long>(column))+".");
+    THROW_XLW(StructureName << " " << message << " row:" << row << "; column:" << column);
 }
 
 xlw::ArgumentList::ArgumentList(std::string name) : StructureName(name)

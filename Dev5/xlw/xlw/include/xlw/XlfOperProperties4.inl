@@ -107,7 +107,7 @@ namespace xlw { namespace impl {
             default:
                 break;
             }
-            throw XlfException("No implementation on XlfOper rows");
+            THROW_XLW("No implementation on XlfOper rows");
         }
         static void setArraySize(LPXLOPER oper, RW rows, COL cols)
         {
@@ -309,7 +309,7 @@ namespace xlw { namespace impl {
                     toOper->val.str = PascalStringConversions::PascalStringCopy(fromOper->val.str);
                     break;
                 case xltypeBigData:
-                    throw("can't copy a big data oper");
+                    THROW_XLW("can't copy a big data oper");
                     break;
                 default:
                     // just straight copy is fine

@@ -54,7 +54,7 @@ void xlw::XlfAbstractCmdDesc::Register() const
 {
   std::string dllName = XlfExcel::Instance().GetName();
   if (dllName.empty())
-    throw std::runtime_error("Could not get library name");
+    THROW_XLW("Could not get library name");
   int err = DoRegister(dllName);
   if (err != xlretSuccess)
     std::cerr << XLW__HERE__ << "Error " << err << " while registering " << GetAlias().c_str() << std::endl;
@@ -70,7 +70,7 @@ void xlw::XlfAbstractCmdDesc::Unregister() const
 {
   std::string dllName = XlfExcel::Instance().GetName();
   if (dllName.empty())
-    throw std::runtime_error("Could not get library name");
+    THROW_XLW("Could not get library name");
   int err = DoUnregister(dllName);
   if (err != xlretSuccess)
     std::cerr << XLW__HERE__ << "Error " << err << " while registering " << GetAlias().c_str() << std::endl;

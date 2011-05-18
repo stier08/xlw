@@ -52,17 +52,17 @@ namespace xlw
         if (xlret & xlretStackOvfl)
             throw XlfExceptionStackOverflow();
         if (xlret & xlretInvXloper)
-            throw XlfException(CombineErrorString("invalid OPER structure (memory could be exhausted)" , ErrorId, Identifier));
+            THROW_XLW(CombineErrorString("invalid OPER structure (memory could be exhausted)" , ErrorId, Identifier));
         if (xlret & xlretFailed)
-            throw std::runtime_error(CombineErrorString("command failed" , ErrorId, Identifier));
+            THROW_XLW(CombineErrorString("command failed" , ErrorId, Identifier));
         if (xlret & xlretInvCount)
-            throw std::runtime_error(CombineErrorString("invalid number of arguments" , ErrorId, Identifier));
+            THROW_XLW(CombineErrorString("invalid number of arguments" , ErrorId, Identifier));
         if (xlret & xlretInvXlfn)
-            throw std::runtime_error(CombineErrorString("invalid function number" , ErrorId, Identifier));
+            THROW_XLW(CombineErrorString("invalid function number" , ErrorId, Identifier));
         if (xlret & xlRetInvAsynchronousContext)
-            throw std::runtime_error(CombineErrorString("invalid asynch conext" , ErrorId, Identifier));
+            THROW_XLW(CombineErrorString("invalid asynch conext" , ErrorId, Identifier));
         if (xlret & xlretNotClusterSafe)
-            throw std::runtime_error(CombineErrorString("function not cluster safe" , ErrorId, Identifier));
+            THROW_XLW(CombineErrorString("function not cluster safe" , ErrorId, Identifier));
     }
 
     std::string XlfOperImpl::XlTypeToString(int xlType)

@@ -31,17 +31,17 @@ CreateDiscountCurve(const std::string & theCurveName // The name of the Dicsount
 {
     if(theDiscountCurve.columns()!=2)
     {
-        throw("Discount curve must have 2 columns");
+        THROW_XLW("Discount curve must have 2 columns");
     }
     if(theDiscountCurve[0][0]<0.0)
     {
-        throw("Discount curve dates must be non-negative");
+        THROW_XLW("Discount curve dates must be non-negative");
     }
     for(size_t i(1);i<theDiscountCurve.rows(); ++i)
     {
         if(theDiscountCurve[i][0]<=theDiscountCurve[i-1][0])
         {
-            throw("Dates in Discount Curve must be strictly increasing");
+            THROW_XLW("Dates in Discount Curve must be strictly increasing");
         }
     }
 
@@ -59,7 +59,7 @@ RetrieveDiscountCurve(const std::string &theName   // The Name of the Discount C
     std::string theKey(stripTrailingHash(theName));
     if (DiscountCurveCache::instance().find(theKey) == DiscountCurveCache::instance().end())
     {
-        throw("Discount Curve not found in Cache");
+        THROW_XLW("Discount Curve not found in Cache");
     }
     return DiscountCurveCache::instance()[theKey];
 }
@@ -72,7 +72,7 @@ Discount(const std::string &theName   // The Name of the Discount Curve
     std::string theKey(stripTrailingHash(theName));
     if (DiscountCurveCache::instance().find(theKey) == DiscountCurveCache::instance().end())
     {
-        throw("Discount Curve not found in Cache");
+        THROW_XLW("Discount Curve not found in Cache");
     }
 
     const MyMatrix &theCurve = DiscountCurveCache::instance()[theKey];

@@ -136,12 +136,12 @@ HWND xlw::XlfExcel::GetMainWindow()
         }
         else
         {
-            throw("xlGetHwnd no match for partial handle");
+            THROW_XLW("xlGetHwnd no match for partial handle");
         }
     }
     else
     {
-        throw("xlGetHwnd call failed");
+        THROW_XLW("xlGetHwnd call failed");
     }
 }
 
@@ -204,13 +204,13 @@ and link it to the XLL.
 void xlw::XlfExcel::InitLibrary() {
     HINSTANCE handle = LoadLibrary("XLCALL32.DLL");
     if (handle == 0)
-        throw std::runtime_error("Could not load library XLCALL32.DLL");
+        THROW_XLW("Could not load library XLCALL32.DLL");
     Excel4_ = (int (__cdecl *)(int, struct xloper *, int, ...))GetProcAddress(handle, "Excel4");
     if (Excel4_ == 0)
-        throw std::runtime_error("Could not get address of Excel4 callback");
+        THROW_XLW("Could not get address of Excel4 callback");
     Excel4v_ = (int (__stdcall *)(int, struct xloper *, int, struct xloper *[]))GetProcAddress(handle, "Excel4v");
     if (Excel4v_ == 0)
-        throw std::runtime_error("Could not get address of Excel4v callback");
+        THROW_XLW("Could not get address of Excel4v callback");
 
     excelVersion_ = get_excel_version();
     impl::XlfOperProperties<LPXLFOPER>::setExcel12(excel12());
