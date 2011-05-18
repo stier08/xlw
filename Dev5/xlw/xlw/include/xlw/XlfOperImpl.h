@@ -327,7 +327,7 @@ namespace xlw { namespace impl {
         //! \name Operators
         //@{
         //! Cast to XLOPER *.
-        operator LPOPER_TYPE() 
+        operator LPOPER_TYPE()
         {
             // need to be careful if we try and return back to excel memory it
             // has given us as a return value as we will call xlFree in destructor
@@ -340,13 +340,13 @@ namespace xlw { namespace impl {
             }
             else
             {
-                return lpxloper_; 
+                return lpxloper_;
             }
         }
         //! Cast to const XLOPER *.
         operator const LPOPER_TYPE() const
         {
-            return lpxloper_; 
+            return lpxloper_;
         }
         //@}
 
@@ -482,7 +482,7 @@ namespace xlw { namespace impl {
             default:
                 break;
             }
-            throw THROW_XLW("Wrong type for element by element access ");
+            THROW_XLW("Wrong type for element by element access ");
         }
         //@}
 
@@ -902,7 +902,7 @@ namespace xlw { namespace impl {
                     }
                     else
                     {
-                        throw THROW_XLW("Unsupported type in CellMatrix conversion");
+                        THROW_XLW("Unsupported type in CellMatrix conversion");
                     }
                 }
             }
