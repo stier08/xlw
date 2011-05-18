@@ -6,12 +6,11 @@ using namespace System::Text;
 using namespace Runtime::InteropServices;
 
 
-
-
-
 std::string CLR2CPP(String^ clrString)
 {
-    std::string result =  (const char*)(Marshal::StringToHGlobalAnsi(clrString)).ToPointer();
+    System::IntPtr memHandle = Marshal::StringToHGlobalAnsi(clrString);
+    std::string result =  (const char*)(memHandle.ToPointer());
+    Marshal::FreeHGlobal(memHandle);
     return result;
 }
 

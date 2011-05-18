@@ -1,5 +1,6 @@
 /*
  Copyright (C) 2008 2009  Narinder S Claire
+ Copyright (C) 2011 John Adcock
 
  This file is part of XLWDOTNET, a free-software/open-source C# wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -22,6 +23,8 @@ using namespace Runtime::InteropServices;
 
 std::string CLR2CPP(String^ clrString)
 {
-    std::string result =  (const char*)(Marshal::StringToHGlobalAnsi(clrString)).ToPointer();
+    System::IntPtr memHandle = Marshal::StringToHGlobalAnsi(clrString);
+    std::string result =  (const char*)(memHandle.ToPointer());
+    Marshal::FreeHGlobal(memHandle);
     return result;
 }

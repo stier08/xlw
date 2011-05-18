@@ -1,5 +1,6 @@
 ﻿/*
  Copyright (C) 2008 2009 2011 Narinder S Claire
+ Copyright (C) 2011 John Adcock
 
  This file is part of XLWDOTNET, a free-software/open-source C# wrapper of the
  Excel C API - http://xlw.sourceforge.net/
@@ -91,6 +92,13 @@ namespace DotNetInterfaceGenerator
                 sourceFile.WriteLine("using namespace System;");
                 sourceFile.WriteLine("using namespace Runtime::InteropServices;");
                 sourceFile.WriteLine("using namespace xlwDotNet;"); sourceFile.WriteLine();
+
+                sourceFile.WriteLine("inline std::wstring CLR2WCPP(String^ clrString) {");
+                sourceFile.WriteLine("    System::IntPtr memHandle = Marshal::StringToHGlobalUni(clrString);");
+                sourceFile.WriteLine("    std::wstring result =  (const wchar_t*)(memHandle.ToPointer());");
+                sourceFile.WriteLine("    Marshal::FreeHGlobal(memHandle);");
+                sourceFile.WriteLine("    return result;");
+                sourceFile.WriteLine("}"); sourceFile.WriteLine();
 
                 foreach (Type t in sourceTypes)
                 {
@@ -250,7 +258,7 @@ namespace DotNetInterfaceGenerator
              }
              if (theMethod.ReturnType == typeof(String))
              {
-                 castString = "(const wchar_t*)(Marshal::StringToHGlobalUni(";
+                 castString = "(CLR2WCPP(";
                  
              }
 
@@ -293,14 +301,9 @@ namespace DotNetInterfaceGenerator
                  sourceFile.WriteLine();
              }
              sourceFile.Write(tabString + ")");
-             if (!primitives.Contains(theMethod.ReturnType) && !(theMethod.ReturnType == typeof(String)))
+             if (!primitives.Contains(theMethod.ReturnType))
              {
                  sourceFile.Write("))");
-             }
-             else if (theMethod.ReturnType == typeof(String))
-             {
-                 sourceFile.Write(").ToPointer())");
-
              }
              sourceFile.WriteLine(";");
              sourceFile.WriteLine("DOT_NET_EXCEL_END");
