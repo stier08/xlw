@@ -88,7 +88,7 @@ namespace xlw { namespace impl {
                 }
                 else
                 {
-                    XlfException("No implementation for multiple Refs");
+                    THROW_XLW("No implementation for multiple Refs");
                 }
                 break;
 
@@ -152,7 +152,7 @@ namespace xlw { namespace impl {
                 }
                 else
                 {
-                    XlfException("No implementation for multiple Refs");
+                    THROW_XLW("No implementation for multiple Refs");
                 }
                 break;
 
@@ -171,7 +171,7 @@ namespace xlw { namespace impl {
             default:
                 break;
             }
-            throw XlfException("No implementation on XlfOper rows");
+            THROW_XLW("No implementation on XlfOper rows");
         }
         static LPXLOPER getElement(LPXLOPER oper, RW row, COL column)
         {
@@ -214,7 +214,7 @@ namespace xlw { namespace impl {
                 }
                 else
                 {
-                    XlfException("No implementation for multiple Refs");
+                    THROW_XLW("No implementation for multiple Refs");
                 }
                 break;
 
@@ -228,7 +228,7 @@ namespace xlw { namespace impl {
             default:
                 break;
             }
-            throw XlfException("Wrong type for element by element access ");
+            THROW_XLW("Wrong type for element by element access ");
         }
         static std::string getString(LPXLOPER oper)
         {

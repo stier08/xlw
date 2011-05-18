@@ -153,7 +153,7 @@ namespace xlw { namespace impl {
                 }
                 else
                 {
-                    XlfException("No implementation for multiple Refs");
+                    THROW_XLW("No implementation for multiple Refs");
                 }
                 break;
 
@@ -172,7 +172,7 @@ namespace xlw { namespace impl {
             default:
                 break;
             }
-            throw XlfException("No implementation on XlfOper rows");
+            THROW_XLW("No implementation on XlfOper rows");
         }
         static LPXLOPER12 getElement(LPXLOPER12 oper, RW row, COL column)
         {
@@ -215,7 +215,7 @@ namespace xlw { namespace impl {
                 }
                 else
                 {
-                    XlfException("No implementation for multiple Refs");
+                    THROW_XLW("No implementation for multiple Refs");
                 }
                 break;
 
