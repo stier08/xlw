@@ -454,7 +454,7 @@ void xlw::ArgumentList::CheckAllUsed(const std::string& ErrorId) const
 
 void xlw::ArgumentList::GenerateThrow(std::string message, size_t row, size_t column)
 {
-    THROW_XLW(StructureName << " " << message << " row:" << row << "; column:" << column);
+    THROW_XLW(StructureName << " " << message << " row:" << static_cast<unsigned long>(row) << "; column:" << static_cast<unsigned long>(column));
 }
 
 xlw::ArgumentList::ArgumentList(std::string name) : StructureName(name)
