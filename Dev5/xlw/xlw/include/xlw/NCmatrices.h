@@ -184,8 +184,8 @@ namespace xlw {
     NCMatrix& NCMatrix::operator+=(const NCMatrix& addend)
     {
 #ifdef _DEBUG
-        //if (addend.rows() != rows() || addend.columns() != columns())
-        //    THROW_XLW("bad matrix addition");
+        if (addend.rows() != rows() || addend.columns() != columns())
+            throw XlfGeneralException("bad matrix addition");
 #endif
 
         NCMatrix::iterator i = theData->theArray.begin();
