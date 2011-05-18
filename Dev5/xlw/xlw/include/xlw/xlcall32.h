@@ -307,8 +307,7 @@ typedef struct xloper12
 #define xlretFailed                     32      /* command failed */
 #define xlretUncalced                   64      /* uncalced cell */
 #define xlretNotThreadSafe              128     /* not allowed during multi-threaded calc */
-#define xlretNotThreadSafe              128     /* not allowed during multi-threaded calc */
-#define xlRetInvAsynchronousContext     256     /* the async handle is inavlid */
+#define xlRetInvAsynchronousContext     256     /* the async handle is invalid */
 #define xlretNotClusterSafe             512     /* The call is not supported on clusters */
 
 
@@ -383,6 +382,9 @@ int pascal Excel12v(int xlfn, LPXLOPER12 operRes, int count, LPXLOPER12 opers[])
 /* GetFooInfo are valid only for calls to LPenHelper */
 #define xlGetFmlaInfo    (14 | xlSpecial)
 #define xlGetMouseInfo    (15 | xlSpecial)
+#define xlAsyncReturn     (16 | xlSpecial)
+#define xlEventRegister    (17 | xlSpecial)
+#define xlRunningOnCluster (18 | xlSpecial)
 
 /* edit modes */
 #define xlModeReady    0    // not in edit mode
