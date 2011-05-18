@@ -98,17 +98,17 @@ namespace xlw {
     };
 
     //! Never get here, allows us to tell the compiler that we should have exited already
-    class EXCEL32_API XlfNeverGetHere: public XlfException
+    class EXCEL32_API XlfNeverGetHere: public std::runtime_error
     {
     public:
-        XlfNeverGetHere(): XlfException("Reached a never get here point") {}
+        XlfNeverGetHere(): std::runtime_error("Reached a never get here point") {}
     };
 
     //! User attempted to access an array out of bounds
-    class EXCEL32_API XlfOutOfBounds: public XlfException
+    class EXCEL32_API XlfOutOfBounds: public std::runtime_error
     {
     public:
-        XlfOutOfBounds(): XlfException("Out of bounds array access detected") {}
+        XlfOutOfBounds(): std::runtime_error("Out of bounds array access detected") {}
     };
 
     //! Other Xlw Exceptions
@@ -135,12 +135,12 @@ namespace xlw {
 
 //! Used to simplify the throwing of formatted exceptions
 #define THROW_XLW(ERROR_MSG_PARTS) \
-    { \
+    do { \
         std::ostringstream ostr; \
         ostr << ERROR_MSG_PARTS; \
         std::cerr << XLW__HERE__ << ostr.str() << std::endl; \
         throw xlw::XlfGeneralException(ostr); \
-    }
+    } while(0)
 
 #endif
 
