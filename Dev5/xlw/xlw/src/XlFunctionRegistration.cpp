@@ -195,17 +195,20 @@ XLCommandRegistrationHelper::XLCommandRegistrationHelper(const std::string& Comm
 
 void ExcelFunctionRegistrationRegistry::DoTheRegistrations() const
 {
+    int counter(1);
 
     for (functionCache::const_iterator it = Functions.begin(); it !=  Functions.end(); ++it)
     {
-        it->second->Register();
+        it->second->Register(counter);
+        ++counter;
     }
 
 
     for (commandCache::const_iterator it = Commands.begin(); it !=  Commands.end(); ++it)
     {
-        it->second->Register();
+        it->second->Register(counter);
         it->second->AddToMenuBar();
+        ++counter;
     }
 }
 

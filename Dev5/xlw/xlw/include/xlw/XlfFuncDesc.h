@@ -88,7 +88,7 @@ namespace xlw {
         //! \name Concrete implementation of function registration
         //@{
         //! Registers the function.
-        int DoRegister(const std::string& dllName) const;
+        int DoRegister(const std::string& dllName, const std::string& suggestedHelpId) const;
         //! Unregisters the function.
         int DoUnregister(const std::string& dllName) const;
         //!Generates the documentation in Sandcastle format
@@ -127,7 +127,7 @@ namespace xlw {
         XlfFuncDesc& operator=(const XlfFuncDesc&);
 
         //! Shared registration code
-        int RegisterAs(const std::string& dllName, double mode_, double* funcId = NULL) const;
+        int RegisterAs(const std::string& dllName, const std::string& suggestedHelpId, double mode_, double* funcId = NULL) const;
         // Is this function currently live, or has it been faux-unregistered?
         // commented out - seems unused, forces DoRegister/DoUnregister to be non-const.
         //bool live_;

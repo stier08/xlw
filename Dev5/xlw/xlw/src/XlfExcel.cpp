@@ -32,6 +32,7 @@
 #include <xlw/XlfOper.h>
 #include <xlw/macros.h>
 #include <xlw/TempMemory.h>
+#include <sys/stat.h>
 
 extern "C"
 {
@@ -39,6 +40,16 @@ extern "C"
     static int (__cdecl *Excel4_)(int xlfn, LPXLOPER operRes, int count, ...);
     //! Main API function to Excel, passing the argument as an array.
     static int (__stdcall *Excel4v_)(int xlfn, LPXLOPER operRes, int count, LPXLOPER far opers[]);
+}
+
+namespace
+{
+    // wrap up CRT way of checking for file existance
+    bool doesFileExist(const std::string& fileName)
+    {
+        struct _stat st;
+        return (_stat(fileName.c_str(), &st) == 0);
+    }
 }
 
 xlw::XlfExcel *xlw::XlfExcel::this_ = 0;
@@ -227,19 +238,67 @@ void xlw::XlfExcel::InitLibrary() {
     }
 
     impl_->handle_ = handle;
-    return;
-}
 
-std::string xlw::XlfExcel::GetName() const {
-    std::string ret;
+
+    // get the file name
     XlfOper xName;
     int err = Call(xlGetName, (LPXLFOPER)xName, 0);
-    if (err != xlretSuccess)
-        std::cerr << XLW__HERE__ << "Could not get DLL name" << std::endl;
+    if (err == xlretSuccess)
+    {
+        xllFileName_ = xName.AsString();
+    }
     else
-        ret=xName.AsString();
-    return ret;
+    {
+        std::cerr << XLW__HERE__ << "Could not get DLL name" << std::endl;
+    }
+
+    LookForHelp();
 }
+
+const std::string& xlw::XlfExcel::GetName() const {
+    return xllFileName_;
+}
+
+const std::string& xlw::XlfExcel::GetHelpName() const {
+    return helpFileName_;
+}
+
+void xlw::XlfExcel::LookForHelp() {
+    helpFileName_.clear();
+    // first look for the file with the extension chm 
+    // this will work as long as xll has extension .???
+    size_t nameLen(xllFileName_.length());
+    if(nameLen < 5 || xllFileName_[nameLen - 4] != '.')
+    {
+        return;
+    }
+    std::string testFile = xllFileName_;
+    testFile[nameLen - 3] = 'c';
+    testFile[nameLen - 2] = 'h';
+    testFile[nameLen - 1] = 'm';
+
+    if(doesFileExist(testFile))
+    {
+        helpFileName_ = testFile;
+        return;
+    }
+
+    // try the directory one up
+    // by inserting .. into the path
+    std::string dir;
+    size_t slashPos(testFile.find_last_of("\\/"));
+    if(slashPos == std::string::npos)
+    {
+        return;
+    }
+
+    testFile = testFile.substr(0, slashPos) + "\\.." + testFile.substr(slashPos);
+    if(doesFileExist(testFile))
+    {
+        helpFileName_ = testFile;
+    }
+}
+
 
 int xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult) const
 {

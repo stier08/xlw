@@ -82,13 +82,13 @@ void xlw::XlfFuncDesc::SetArguments(const XlfArgDescList& arguments)
 Registers the function as a function in excel.
 \sa XlfExcel, XlfCmdDesc.
 */
-int xlw::XlfFuncDesc::DoRegister(const std::string& dllName) const
+int xlw::XlfFuncDesc::DoRegister(const std::string& dllName, const std::string& suggestedHelpId) const
 {
     //live_ = true;
 
     if (returnTypeCode_.empty())
         returnTypeCode_= XlfExcel::Instance().xlfOperType();
-    return RegisterAs(dllName, 1);
+    return RegisterAs(dllName, suggestedHelpId, 1);
 }
 
 int xlw::XlfFuncDesc::DoUnregister(const std::string& dllName) const
@@ -110,7 +110,7 @@ int xlw::XlfFuncDesc::DoUnregister(const std::string& dllName) const
     }
 
     double funcId;
-    int err = RegisterAs(dllName, 0, &funcId);
+    int err = RegisterAs(dllName, "", 0, &funcId);
 
     XlfOper unreg;
     err = XlfExcel::Instance().Call(xlfUnregister, unreg, XlfOper(funcId));
@@ -123,7 +123,7 @@ int xlw::XlfFuncDesc::DoUnregister(const std::string& dllName) const
 // using XLOPER4 instead of XLOPER12. This is deliberate. Registering functions
 // Excel12(..) when the arguments add up to more then 255 char is problematic. the functions
 // will not register see  see BUG ID: 2834715 on sourceforge - nc
-int xlw::XlfFuncDesc::RegisterAs(const std::string& dllName, double mode_, double* funcId) const
+int xlw::XlfFuncDesc::RegisterAs(const std::string& dllName, const std::string& suggestedHelpId, double mode_, double* funcId) const
 {
 
     // alias arguments
@@ -183,7 +183,7 @@ int xlw::XlfFuncDesc::RegisterAs(const std::string& dllName, double mode_, doubl
     // version 14 and that it the normal function, we also need
     // the Synchronous part that returns void and takes an extra int
     // By convension this is the same as the normal function but with 
-    // Sync on teh end
+    // Sync on the end
     if (XlfExcel::Instance().excel14() && impl_->Asynchronous_)
     {
         functionName += "Sync";
@@ -197,7 +197,15 @@ int xlw::XlfFuncDesc::RegisterAs(const std::string& dllName, double mode_, doubl
     (*px++) = XlfOper4(mode_);
     (*px++) = XlfOper4(impl_->category_);
     (*px++) = XlfOper4(""); // shortcut
-    (*px++) = XlfOper4(helpID_); // help context
+    // use best help context
+    if(!helpID_.empty() && helpID_ != "auto")
+    {
+        (*px++) = XlfOper4(helpID_);
+    }
+    else
+    {
+        (*px++) = XlfOper4(suggestedHelpId); 
+    }
     (*px++) = XlfOper4(GetComment());
     int counter(0);
     for (it = arguments.begin(); it != arguments.end(); ++it)

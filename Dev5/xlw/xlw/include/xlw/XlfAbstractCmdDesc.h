@@ -50,7 +50,7 @@ namespace xlw {
         //! \name Registration
         //@{
         //! Registers the command to Excel.
-        void Register() const;
+        void Register(int functionId) const;
         //! Unregister the command from Excel.
         void Unregister() const;
         //@}
@@ -78,7 +78,7 @@ namespace xlw {
         //@}
     protected:
         //! Actually registers the command (see template method in \ref DP)
-        virtual int DoRegister(const std::string& dllName) const = 0;
+        virtual int DoRegister(const std::string& dllName, const std::string& suggestedHelpId) const = 0;
         //! Actually unregisters the command (see template method in \ref DP)
         virtual int DoUnregister(const std::string& dllName) const = 0;
         virtual void DoMamlDocs(std::ostream& ostream) const = 0;

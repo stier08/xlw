@@ -150,7 +150,7 @@ void xlw::XlfCmdDesc::RemoveFromMenuBar()
 Registers the command as a macro in excel.
 \sa XlfExcel, XlfFuncDesc.
 */
-int xlw::XlfCmdDesc::DoRegister(const std::string& dllName) const
+int xlw::XlfCmdDesc::DoRegister(const std::string& dllName, const std::string& suggestedHelpId) const
 {
 
     XlfArgDescList arguments = GetArguments();

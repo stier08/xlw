@@ -72,8 +72,10 @@ namespace xlw {
 
         //! \name Inspectors
         //@{
-        //! Gets XLL name
-        std::string GetName() const;
+        //! Gets XLL file name
+        const std::string& GetName() const;
+        //! Gets help file name or empty string
+        const std::string& GetHelpName() const;
         //@}
 
         /** \name Wrappers for Excel Call function
@@ -172,14 +174,16 @@ namespace xlw {
         void InitLibrary();
         //! Create a new static buffer and add it to the free list.
         void PushNewBuffer(size_t);
+        //! looks for a help file and sets helpFileName_ if we find one
+        void LookForHelp();
 
         int excelVersion_;
         std::string xlfOperType_;
         std::string xlfXloperType_;
         std::string wStrType_;
         std::string fpArrayType_;
-
-        
+        std::string xllFileName_;
+        std::string helpFileName_;
     };
 
 }

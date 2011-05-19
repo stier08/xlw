@@ -67,7 +67,7 @@ namespace xlw {
         //! \name Registration
         //@{
         //! Registers the command with Excel.
-        int DoRegister(const std::string& dllName) const;
+        int DoRegister(const std::string& dllName, const std::string& suggestedHelpId) const;
         //! Unregisters the command with Excel.
         int DoUnregister(const std::string& dllName) const;
         //!Generates the documentation in Sandcastle format

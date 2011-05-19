@@ -50,15 +50,30 @@ Performs the parts of the Registration that are common to all the subclasses of
 XlfAbstractCmdDesc. It then calls the pure virtual method DoRegister for the
 subclass dependant parts of the algorithm.
 */
-void xlw::XlfAbstractCmdDesc::Register() const
+void xlw::XlfAbstractCmdDesc::Register(int functionId) const
 {
-  std::string dllName = XlfExcel::Instance().GetName();
-  if (dllName.empty())
-    THROW_XLW("Could not get library name");
-  int err = DoRegister(dllName);
-  if (err != xlretSuccess)
-    std::cerr << XLW__HERE__ << "Error " << err << " while registering " << GetAlias().c_str() << std::endl;
-  return;
+    std::string dllName = XlfExcel::Instance().GetName();
+    if (dllName.empty())
+    {
+        THROW_XLW("Could not get library name");
+    }
+
+    // generate the default helpId if we have found a
+    // suitable help file
+    std::string helpName = XlfExcel::Instance().GetHelpName();
+    std::string suggestedHelpId;
+    if(!helpName.empty())
+    {
+        std::ostringstream oss;
+        oss << helpName << "!" << functionId;
+        suggestedHelpId = oss.str();
+    }
+    int err = DoRegister(dllName, suggestedHelpId);
+    if (err != xlretSuccess)
+    {
+        std::cerr << XLW__HERE__ << "Error " << err << " while registering " << GetAlias().c_str() << std::endl;
+    }
+    return;
 }
 
 /*!
