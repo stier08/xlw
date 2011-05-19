@@ -24,7 +24,12 @@ CXXFLAGS =
 
 #The source
 SRC_DIR=../common_source
-LIBSRC = xlwExample.cpp 
+LIBSRC = xlwAsynchExample.cpp \
+	xlwCommands.cpp \
+	xlwExample.cpp \
+	xlwMatrixTest.cpp \
+	xlwXlmMacros.cpp
+  
 		
 MAKEDIR = ../../../make
 include $(MAKEDIR)/make.rules

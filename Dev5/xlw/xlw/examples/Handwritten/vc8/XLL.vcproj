@@ -396,7 +396,23 @@
 	</References>
 	<Files>
 		<File
+			RelativePath="..\common_source\xlwAsynchExample.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\common_source\xlwCommands.cpp"
+			>
+		</File>
+		<File
 			RelativePath="..\common_source\xlwExample.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\common_source\xlwMatrixTest.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\common_source\xlwXlmMacros.cpp"
 			>
 		</File>
 	</Files>
