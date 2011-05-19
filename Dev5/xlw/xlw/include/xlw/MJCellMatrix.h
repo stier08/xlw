@@ -24,9 +24,9 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 #ifndef MJ_CELL_MATRIX_H
 #define MJ_CELL_MATRIX_H
 
-#include <xlw/MyContainers.h>
-#include "CellValue.h"
-#include "CellMatrixPimpl.h"
+
+#include <xlw/CellValue.h>
+#include <xlw/CellMatrixPimpl.h>
 #include <string>
 #include <vector>
 

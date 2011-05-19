@@ -4,8 +4,6 @@ Copyright (C) 2007, 2008 Eric Ehlers
 Copyright (C) 2009 2011 Narinder S Claire
 Copyright (C) 2011 John Adcock
 
-
-
 This file is part of XLW, a free-software/open-source C++ wrapper of the
 Excel C API - http://xlw.sourceforge.net/
 
@@ -21,55 +19,49 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 #define CELL_MATRIX_H
 
 
-#include "CellValue.h"
-#include "MJCellMatrix.h"
+#include <xlw/CellValue.h>
 #include <xlw/MyContainers.h>
 #include <string>
 #include <vector>
 
 namespace xlw {
 
-	typedef impl::MJCellMatrix defaultGenericCellMatrixImpl;
 
-	template<class inner_impl = impl::MJCellMatrix>
-	class GenericCellMatrix
+	class CellMatrix
 	{
 	public:
 
 		//Copy Constructor
-		GenericCellMatrix(const GenericCellMatrix &theOther):pimpl(theOther.pimpl.copy()){}
-
-		template<class T>
-		GenericCellMatrix(const GenericCellMatrix<T> &theOther):pimpl(theOther.pimpl.copy()){}
+		CellMatrix(const CellMatrix &theOther):pimpl(theOther.pimpl.copy()){}
 
 
-		GenericCellMatrix(size_t rows, size_t columns):pimpl(new inner_impl(rows, columns)){}
+		CellMatrix(size_t rows, size_t columns):pimpl(new CellMatrixImpl(rows, columns)){}
 
-		GenericCellMatrix():pimpl(new inner_impl()){}
+		CellMatrix():pimpl(new CellMatrixImpl()){}
 
 
-		GenericCellMatrix(double data):pimpl(new inner_impl(1,1))
+		CellMatrix(double data):pimpl(new CellMatrixImpl(1,1))
 		{
 			(*pimpl)(0,0)=data;
 		}
 
-		GenericCellMatrix(const std::string &  data):pimpl(new inner_impl(1,1))
+		CellMatrix(const std::string &  data):pimpl(new CellMatrixImpl(1,1))
 		{
 			(*pimpl)(0,0)=data;
 		}
 
-		GenericCellMatrix(const std::wstring &  data):pimpl(new inner_impl(1,1))
+		CellMatrix(const std::wstring &  data):pimpl(new CellMatrixImpl(1,1))
 		{
 			(*pimpl)(0,0)=data;
 		}
 		
-		GenericCellMatrix(const char* data):pimpl(new inner_impl(1,1))
+		CellMatrix(const char* data):pimpl(new CellMatrixImpl(1,1))
 		{
 			(*pimpl)(0,0)=std::string(data);
 		}
 		
-		GenericCellMatrix(const MyArray& data):
-		pimpl(new defaultGenericCellMatrixImpl(ArrayTraits<MyArray>::size(data),1))
+		CellMatrix(const MyArray& data):
+		pimpl(new CellMatrixImpl(ArrayTraits<MyArray>::size(data),1))
 		{
 			for(size_t i(0); i < ArrayTraits<MyArray>::size(data); ++i)
 			{
@@ -77,8 +69,8 @@ namespace xlw {
 			}
 		}
 		
-		GenericCellMatrix(const MyMatrix& data):
-		pimpl(new defaultGenericCellMatrixImpl(MatrixTraits<MyMatrix>::rows(data),MatrixTraits<MyMatrix>::columns(data)))
+		CellMatrix(const MyMatrix& data):
+		pimpl(new CellMatrixImpl(MatrixTraits<MyMatrix>::rows(data),MatrixTraits<MyMatrix>::columns(data)))
 		{
 
 			for(size_t i(0); i < MatrixTraits<MyMatrix>::rows(data); ++i)
@@ -91,27 +83,19 @@ namespace xlw {
 
 		}
 		
-		GenericCellMatrix(unsigned long data):pimpl(new inner_impl(1,1))
+		CellMatrix(unsigned long data):pimpl(new CellMatrixImpl(1,1))
 		{
 			(*pimpl)(0,0)=data;
 		}
 		
-		GenericCellMatrix(int data):pimpl(new inner_impl(1,1))
+		CellMatrix(int data):pimpl(new CellMatrixImpl(1,1))
 		{
 			(*pimpl)(0,0)=data;
 		}
 
-		GenericCellMatrix & operator=(const GenericCellMatrix<inner_impl> &theOther)
+		CellMatrix & operator=(const CellMatrix &theOther)
 		{
-            GenericCellMatrix<inner_impl> temp(theOther);
-			temp.swap(*this);
-			return *this;
-		}
-
-		template<class T>
-	    GenericCellMatrix & operator=(const GenericCellMatrix<T> &theOther)
-		{
-			GenericCellMatrix<T> temp(theOther);
+            CellMatrix temp(theOther);
 			temp.swap(*this);
 			return *this;
 		}
@@ -134,17 +118,15 @@ namespace xlw {
 			return pimpl->ColumnsInStructure();
 		}
 
-		template<class T>
-		void PushBottom(const GenericCellMatrix<T> & newRows)
+		void PushBottom(const CellMatrix & newRows)
 		{
-			GenericCellMatrix temp(*this);
+			CellMatrix temp(*this);
 			temp.pimpl->PushBottom(*(newRows.pimpl));
 			temp.swap(*this);
 
 		}
 
-		template<class T>
-		void swap(GenericCellMatrix<T> &theOther)
+		void swap(CellMatrix &theOther)
 		{
 			pimpl.swap(theOther.pimpl);
 		}
@@ -154,15 +136,14 @@ namespace xlw {
 
 	};
 
-	template<class T, class U>
-	GenericCellMatrix<T> MergeCellMatrices(const GenericCellMatrix<T>& Top, const GenericCellMatrix<U>& Bottom)
+	inline CellMatrix MergeCellMatrices(const CellMatrix& Top, const CellMatrix& Bottom)
 	{
-		GenericCellMatrix<T> temp(Top);
+		CellMatrix temp(Top);
 		temp.PushBottom(Bottom);
 		return temp;
 	}
 
-	typedef GenericCellMatrix<defaultGenericCellMatrixImpl> CellMatrix;
+
 
 }
 

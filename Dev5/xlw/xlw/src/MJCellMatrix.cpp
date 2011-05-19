@@ -21,6 +21,7 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 #include <xlw/MJCellMatrix.h>
+#include <xlw/XlfException.h>
 #include <algorithm>
 
 bool xlw::impl::MJCellValue::IsAString() const

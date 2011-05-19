@@ -27,7 +27,8 @@
 
 // $Id$
 
-#include "MyContainers.h"
+//uncommenting the following line cause an INTERNAL COMPILER ERROR in VC7.1
+//#include "MyContainers.h"
 #include <xlw/xlcall32.h>
 #include <xlw/XlfOperProperties.h>
 #include <xlw/CellMatrix.h>

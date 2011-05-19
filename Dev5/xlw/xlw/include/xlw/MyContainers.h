@@ -38,7 +38,8 @@
 #define _SCL_SECURE_NO_WARNINGS
 #endif
 
-#include "NCMatrices.h"
+#include <xlw/NCMatrices.h>
+#include <xlw/MJCellMatrix.h>
 #include <vector>
 
 #ifdef USE_XLW_WITH_BOOST_UBLAS
@@ -68,6 +69,10 @@ namespace xlw {
     typedef MyMatrix NEMatrix;
 
 #endif
+
+
+	typedef impl::MJCellMatrix CellMatrixImpl;
+
 
     template<typename MatrixType>
     struct MatrixTraits
@@ -130,7 +135,12 @@ namespace xlw {
         }
     };
 
+
 }
 
+
 #endif
+
+
+
 

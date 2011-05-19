@@ -17,8 +17,7 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 #ifndef CELL_MATRIX_PIMPL_I_H
 #define CELL_MATRIX_PIMPL_I_H
 
-#include "CellValue.h"
-#include <xlw/MyContainers.h>
+#include <xlw/CellValue.h>
 #include <xlw/eshared_ptr.h>
 #include <string>
 #include <vector>

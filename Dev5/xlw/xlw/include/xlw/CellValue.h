@@ -3,9 +3,6 @@ Copyright (C) 2006 Mark Joshi
 Copyright (C) 2007, 2008 Eric Ehlers
 Copyright (C) 2009 2011 Narinder S Claire
 
-
-
-
 This file is part of XLW, a free-software/open-source C++ wrapper of the
 Excel C API - http://xlw.sourceforge.net/
 
@@ -21,7 +18,7 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 #ifndef CELLVALUE_HEADER_GUARD
 #define CELLVALUE_HEADER_GUARD
 
-#include <xlw/MyContainers.h>
+
 #include <string>
 #include <vector>
 
