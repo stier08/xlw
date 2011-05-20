@@ -56,7 +56,7 @@ std::vector<char> OutputFileCreator(const std::vector<FunctionDescription>& func
   AddLine(output, "//// by InterfaceGenerator ");
   AddLine(output, "////");
   AddLine(output,"");
-  AddLine(output,"#include <xlw/MyContainers.h>");
+  AddLine(output,"#include \"xlw/MyContainers.h\"");
   AddLine(output,"#include <xlw/CellMatrix.h>");
   AddLine(output, "#include \""+strip(inputFileName)+"\"");
   AddLine(output, "#include <xlw/xlw.h>");
@@ -369,7 +369,7 @@ std::vector<char> OutputFileCreatorCL(const std::vector<FunctionDescription>& fu
   AddLine(output,"");
 
   AddLine(output,"#include <clw/Dispatcher.h>");
-  AddLine(output,"#include <xlw/MyContainers.h>");
+  AddLine(output,"#include \"xlw/MyContainers.h\"");
   AddLine(output,"#include <xlw/CellMatrix.h>");
   AddLine(output, "#include \""+strip(inputFileName)+"\"");
   AddLine(output, "#include <xlw/xlw.h>");

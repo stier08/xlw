@@ -24,7 +24,7 @@ void writePreamble(std::vector<char> &outputVector)
   AddLine(outputVector, "//// by InterfaceGenerator ");
   AddLine(outputVector, "////");
   AddLine(outputVector,"");
-  AddLine(outputVector,"#include <xlw/MyContainers.h>");
+  AddLine(outputVector,"#include \"xlw/MyContainers.h\"");
   AddLine(outputVector,"#include <xlw/CellMatrix.h>");
   AddLine(outputVector,"#include <stdexcept>");
 

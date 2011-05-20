@@ -18,7 +18,7 @@
 #define XL_ARRAY_H
 
 #include "xlcall32.h"
-#include "MyContainers.h"
+#include "xlw/MyContainers.h"
 #include <xlw/xlfExcel.h>
 
 namespace xlw {

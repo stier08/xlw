@@ -20,7 +20,7 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 
 
 #include <xlw/CellValue.h>
-#include <xlw/MyContainers.h>
+#include "xlw/MyContainers.h"
 #include <string>
 #include <vector>
 
