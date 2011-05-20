@@ -1,14 +1,14 @@
 #Describes the xll 
-LIBRARY = ublas
+LIBRARY = uBLAS
 LIBTYPE=SHARE
 LIBPREFIX=
 EXT_SHARE=xll
 
 #Describes the Linker details
 ifeq ($(PLATFORM), x64)
-LIBDIRS = $(XLW)/xlw/lib/x64
+LIBDIRS = $(subst $(strip \),/,$(XLW))/xlw/lib/x64
 else
-LIBDIRS = $(XLW)/xlw/lib
+LIBDIRS = $(subst $(strip \),/,$(XLW))/xlw/lib
 endif
 ifeq ($(BUILD),DEBUG)
 LIBS=xlw-gcc-s-gd-5DEV
@@ -17,7 +17,7 @@ LIBS=xlw-gcc-s-5DEV
 endif 
 
 #Describes the Compiler details
-INCLUDE_DIR =../common_source  $(XLW)/xlw/include
+INCLUDE_DIR =../common_source  $(subst $(strip \),/,$(XLW))/xlw/include
 CXXFLAGS = 
 
 
@@ -26,6 +26,6 @@ SRC_DIR=../common_source
 LIBSRC = Test.cpp \
 		 xlwTest.cpp 
 		
-MAKEDIR = $(XLW)/xlw/make
+MAKEDIR = $(subst $(strip \),/,$(XLW))/xlw/make
 include $(MAKEDIR)/make.rules
 include $(MAKEDIR)/make.targets
