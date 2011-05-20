@@ -18,7 +18,7 @@
 #include "Test.h"
 
 MyMatrix // Returns the Cholesky Decomposition of the matrix
-ublas_cholesky(const MyMatrix& inMat // matrix to decompose
+ublas_cholesky(const MyMatrix& inMat) // matrix to decompose
 {
     return inMat;
 }
