@@ -59,7 +59,7 @@ MyMatrix & choelsky(const MyMatrix  &sym, MyMatrix  &upp){
 MyMatrix // Returns the Cholesky Decomposition of the matrix
 	cholesky(const MyMatrix& inMat) // matrix to decompose
 {
-	MyMatrix upperMatrix(mtraits::rows(inMat),mtraits::rows(inMat));
+	MyMatrix upperMatrix = mtraits::create(mtraits::rows(inMat),mtraits::rows(inMat));
 	return choelsky(inMat,upperMatrix);
 }
 
