@@ -9,12 +9,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\common_source\reftest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\common_source\Test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\common_source\xlw\MyContainers.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\common_source\Test.cpp">
