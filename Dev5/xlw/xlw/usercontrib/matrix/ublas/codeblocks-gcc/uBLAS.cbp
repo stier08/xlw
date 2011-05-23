@@ -46,6 +46,7 @@
 		</Build>
 		<Compiler>
 			<Add directory="$(XLW)\xlw\include" />
+			<Add directory="$(BOOST_INCLUDE)" />
 		</Compiler>
 		<Linker>
 			<Add option="-static" />
@@ -56,8 +57,8 @@
 		</Linker>
 		<Unit filename="..\common_source\Test.cpp" />
 		<Unit filename="..\common_source\Test.h" />
-		<Unit filename="..\common_source\xlw\MyContainers.h" />
 		<Unit filename="..\common_source\xlwTest.cpp" />
+		<Unit filename="..\common_source\xlw\MyContainers.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

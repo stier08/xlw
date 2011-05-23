@@ -17,7 +17,7 @@ LIBS=xlw-gcc-s-5DEV
 endif 
 
 #Describes the Compiler details
-INCLUDE_DIR =../common_source  $(subst $(strip \),/,$(XLW))/xlw/include
+INCLUDE_DIR =../common_source  $(subst $(strip \),/,$(XLW))/xlw/include $(subst $(strip \),/,$(BOOST_INCLUDE))
 CXXFLAGS = 
 
 
