@@ -28,12 +28,14 @@ using namespace xlw;
 //<xlw:libraryname=uBLAS
 
 MyMatrix // Returns the Cholesky Decomposition of the matrix
-cholesky(const MyMatrix& inMat // matrix to decompose
-        );
+//<xlw:threadsafe
+    ublas_cholesky(const MyMatrix& sym // matrix to decompose
+                    ); 
 
 double // computes the inner product of two vectors
-inner_product(const MyArray &x // First Vector
+//<xlw:threadsafe
+ublas_inner(const MyArray &x // First Vector
             , const MyArray &y // Second Vector
-			);
+            );
 
 #endif
