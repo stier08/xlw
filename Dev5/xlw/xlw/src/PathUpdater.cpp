@@ -31,7 +31,6 @@ xlw::PathUpdater::PathUpdater()
     HMODULE theHandle = NULL;
     char theDLLPathChar [MAX_PATH + 1] = "";
     DWORD dwRet = 0;
-    const size_t bufferSize=4096;
     std::string originalPathValue(StringUtilities::getEnvironmentVariable("PATH"));
     bool ok(!originalPathValue.empty());
 
