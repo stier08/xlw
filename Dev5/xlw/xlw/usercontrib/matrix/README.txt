@@ -14,9 +14,10 @@ dlib - Dlib
 http://dlib.net/
 
 
-newmat - NewMat
+Fortran - BLAS/LAPACK
 ===============
 
-http://www.robertnz.net/nm_intro.htm
+This xll wraps exposes fortran function from the BLAS and LAPACK
+libraies.  It can be used with any of the major implementations.
 
 
