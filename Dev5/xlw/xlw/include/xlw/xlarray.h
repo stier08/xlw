@@ -20,6 +20,7 @@
 #include "xlcall32.h"
 #include "xlw/MyContainers.h"
 #include <xlw/xlfExcel.h>
+#include <xlw/TempMemory.h>
 
 namespace xlw {
 
@@ -69,7 +70,41 @@ namespace xlw {
         return result;
     }
 
+    inline void extractArrayInfo(const LPXLARRAY input, int& rows, int& cols, double*& arrayData)
+    {
+        if(XlfExcel::Instance().excel12())
+        {
+            rows = input->fp12.rows;
+            cols = input->fp12.columns;
+            arrayData = input->fp12.array;
+        }
+        else
+        {
+            rows = input->fp.rows;
+            cols = input->fp.columns;
+            arrayData = input->fp.array;
+        }
+    }
 
+    inline LPXLARRAY createTempFpArray(int rows, int cols, double*& arrayData)
+    {
+        LPXLARRAY result = 0;
+        if(XlfExcel::Instance().excel12())
+        {
+            result = (LPXLARRAY)TempMemory::GetMemory<BYTE>(sizeof(FP12) + (rows * cols - 1) * sizeof(double));
+            result->fp12.rows = rows;
+            result->fp12.columns = cols;
+            arrayData = result->fp12.array;
+        }
+        else
+        {
+            result = (LPXLARRAY)TempMemory::GetMemory<BYTE>(sizeof(FP) + (rows * cols - 1) * sizeof(double));
+            result->fp.rows = rows;
+            result->fp.columns = cols;
+            arrayData = result->fp.array;
+        }
+        return result;
+    }
 }
 
 #endif
