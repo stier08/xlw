@@ -19,6 +19,7 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 #include <iostream>
 #include <algorithm>
 #include <cctype>
+#include <locale>
 
 #ifndef WC_NO_BEST_FIT_CHARS
 #define WC_NO_BEST_FIT_CHARS 0x00000400
@@ -201,7 +202,6 @@ std::string xlw::StringUtilities::getEnvironmentVariable(const std::string& vari
 
 std::string xlw::StringUtilities::getCurrentDirectory()
 {
-    const DWORD bufferSize=0;
     std::vector<char> result;
     DWORD dwRet = GetCurrentDirectory(0, 0);
     if(dwRet)
@@ -233,11 +233,11 @@ std::string xlw::StringUtilities::toLower(std::string inputString)
 
 void xlw::StringUtilities::makeUpper(std::string& stringToChange)
 {
-    std::transform(stringToChange.begin(),stringToChange.end(),stringToChange.begin(),std::toupper);
+    std::transform(stringToChange.begin(),stringToChange.end(),stringToChange.begin(),(int(*)(int))std::toupper);
 }
 
 void xlw::StringUtilities::makeLower(std::string& stringToChange)
 {
-    std::transform(stringToChange.begin(),stringToChange.end(),stringToChange.begin(),std::tolower);
+    std::transform(stringToChange.begin(),stringToChange.end(),stringToChange.begin(),(int(*)(int))std::tolower);
 }
 
