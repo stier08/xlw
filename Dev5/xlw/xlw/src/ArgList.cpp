@@ -22,26 +22,11 @@
 */
 
 #include <xlw/ArgList.h>
-#include <algorithm>
 #include <sstream>
-#include <cctype>
+#include <xlw/PascalStringConversions.h>
+
 namespace
 {
-    std::string ConvertToString(double Number)
-    {
-        std::ostringstream os;
-        os << Number;
-        return os.str();
-    }
-
-    std::string ConvertToString(unsigned long Number)
-    {
-        std::ostringstream os;
-        os << Number;
-        return os.str();
-    }
-
-
     xlw::CellMatrix ExtractCells(xlw::CellMatrix& cells,
                             size_t row,
                             size_t column,
@@ -91,18 +76,6 @@ namespace
 
 namespace xlw
 {
-    void MakeLowerCase(std::string& input)
-    {
-        std::transform(input.begin(),input.end(),input.begin(),tolower);
-    }
-	std::string StringValueLowerCase(const std::string &theSource)
-	{
-		std::string temp(theSource);
-		MakeLowerCase(temp);
-		return temp;
-
-	}
-
     template<class TYPE>
     void ArgumentList::addInternal(const std::string& ArgumentName, const TYPE& value, std::map<std::string,TYPE>& typeMap, ArgumentType type)
     {
@@ -118,7 +91,7 @@ namespace xlw
     template<class TYPE>
     const TYPE& ArgumentList::GetArgumentValueInternal(std::string ArgumentName, std::map<std::string, TYPE>& typeMap)
     {
-        MakeLowerCase(ArgumentName);
+        StringUtilities::toLower(ArgumentName);
         typename std::map<std::string, TYPE>::const_iterator it = typeMap.find(ArgumentName);
 
         if (it == typeMap.end())
@@ -185,7 +158,7 @@ xlw::ArgumentList::ArgumentList(CellMatrix cells, std::string ErrorId)
         THROW_XLW("a structure name must be specified for argument list class " << ErrorId);
     else
     {
-		StructureName = StringValueLowerCase(cells(0,0).StringValue());
+        StructureName = StringUtilities::toLower(cells(0,0).StringValue());
 		cells(0,0).clear();
     }
 
@@ -228,7 +201,7 @@ xlw::ArgumentList::ArgumentList(CellMatrix cells, std::string ErrorId)
                 if (!cells(row,column).IsAString() && !cells(row,column).IsAWstring())//FIXME
                     GenerateThrow("data  where name expected.", row, column);
 
-                std::string thisName(StringValueLowerCase(cells(row,column).StringValue()));
+                std::string thisName(StringUtilities::toLower(cells(row,column).StringValue()));
 
                 if (thisName =="")
                     GenerateThrow("empty name not permissible.", row, column);
@@ -264,7 +237,7 @@ xlw::ArgumentList::ArgumentList(CellMatrix cells, std::string ErrorId)
                     }
                     else // ok it's a string
                     {
-                        std::string stringVal = StringValueLowerCase(cellBelow.StringValue());
+                        std::string stringVal = StringUtilities::toLower(cellBelow.StringValue());
 
                         if ( (stringVal == "list") ||
                             (stringVal == "matrix") ||
@@ -431,9 +404,7 @@ xlw::CellMatrix xlw::ArgumentList::GetCellsArgumentValue(const std::string& Argu
 
 bool xlw::ArgumentList::IsArgumentPresent(const std::string& ArgumentName_) const
 {
-    std::string ArgumentName(ArgumentName_);
-    MakeLowerCase(ArgumentName);
-    return (Names.find(ArgumentName) != Names.end());
+    return (Names.find(StringUtilities::toLower(ArgumentName_)) != Names.end());
 }
 
 void xlw::ArgumentList::CheckAllUsed(const std::string& ErrorId) const

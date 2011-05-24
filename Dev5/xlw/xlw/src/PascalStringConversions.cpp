@@ -17,6 +17,8 @@ FOR A PARTICULAR PURPOSE.  See the license for more details.
 #include <xlw/TempMemory.h>
 #include <xlw/macros.h>
 #include <iostream>
+#include <algorithm>
+#include <cctype>
 
 #ifndef WC_NO_BEST_FIT_CHARS
 #define WC_NO_BEST_FIT_CHARS 0x00000400
@@ -177,5 +179,46 @@ wchar_t* xlw::PascalStringConversions::WPascalStringCopyUsingNew(const wchar_t* 
     memcpy(result, pascalString, (n + 1) * sizeof(wchar_t));
     result[n + 1] = 0;
     return result;
+}
+
+std::string xlw::StringUtilities::getEnvironmentVariable(const std::string& variableName)
+{
+    const DWORD bufferSize=4096;
+    std::vector<char> result(bufferSize);
+    DWORD dwRet = GetEnvironmentVariable(variableName.c_str(), &result[0], bufferSize);
+    if(bufferSize < dwRet)
+    {
+        result.resize(dwRet);
+        dwRet = GetEnvironmentVariable(variableName.c_str(), &result[0], dwRet);
+    }
+    if(!dwRet)
+    {
+        std::cerr << XLW__HERE__ <<" Could not obtain " << variableName << " Environment variable " <<  std::endl;
+        return "";
+    }
+    return &result[0];
+}
+
+std::string xlw::StringUtilities::toUpper(std::string inputString)
+{
+    makeUpper(inputString);
+    return inputString;
+}
+
+std::string xlw::StringUtilities::toLower(std::string inputString)
+{
+    makeLower(inputString);
+    return inputString;
+}
+
+
+void xlw::StringUtilities::makeUpper(std::string& stringToChange)
+{
+    std::transform(stringToChange.begin(),stringToChange.end(),stringToChange.begin(),std::toupper);
+}
+
+void xlw::StringUtilities::makeLower(std::string& stringToChange)
+{
+    std::transform(stringToChange.begin(),stringToChange.end(),stringToChange.begin(),std::tolower);
 }
 

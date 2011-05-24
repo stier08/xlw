@@ -31,8 +31,6 @@
 
 namespace xlw {
 
-    void MakeLowerCase(std::string& input);
-
     class ArgumentList
     {
     public:

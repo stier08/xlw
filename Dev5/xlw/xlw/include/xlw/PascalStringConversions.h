@@ -48,6 +48,16 @@ namespace xlw {
         static char* PascalStringCopyUsingNew(const char* pascalString);
         static wchar_t* WPascalStringCopyUsingNew(const wchar_t* pascalString);
     };
+
+    class StringUtilities
+    {
+    public:
+        static std::string getEnvironmentVariable(const std::string& variableName);
+        static std::string toUpper(std::string inputString);
+        static std::string toLower(std::string inputString);
+        static void makeUpper(std::string& stringToChange);
+        static void makeLower(std::string& stringToChange);
+    };
 }
 
 #endif

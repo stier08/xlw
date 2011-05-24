@@ -32,28 +32,15 @@ xlw::PathUpdater::PathUpdater()
     char theDLLPathChar [MAX_PATH + 1] = "";
     DWORD dwRet = 0;
     const size_t bufferSize=4096;
-    std::auto_ptr<char> originalPathValue;
-    bool ok=true;
+    std::string originalPathValue(StringUtilities::getEnvironmentVariable("PATH"));
+    bool ok(!originalPathValue.empty());
 
     dwRet = static_cast<DWORD>(VirtualQuery (((LPCVOID)this), &theInfo,(static_cast<DWORD> (sizeof (MEMORY_BASIC_INFORMATION)))));
     if (dwRet)
     {
         theHandle = ((HMODULE) (theInfo.AllocationBase));
         GetModuleFileName (theHandle, theDLLPathChar , MAX_PATH);
-        xlw::XlfServices.StatusBar=theDLLPathChar;
-
-        originalPathValue.reset(new char[bufferSize]);
-        dwRet = GetEnvironmentVariable("Path", originalPathValue.get(),  bufferSize);
-        if(bufferSize < dwRet)
-        {
-            originalPathValue.reset( new char[dwRet]);
-            dwRet = GetEnvironmentVariable("Path", originalPathValue.get(), dwRet);
-            if(!dwRet)
-            {
-                ok = false;
-                std::cerr << XLW__HERE__ <<" Could not get PATH Environment Variable" << std::endl;
-            }
-        }
+        xlw::XlfServices.StatusBar = theDLLPathChar;
     }
     else
     {
@@ -63,7 +50,7 @@ xlw::PathUpdater::PathUpdater()
     if(ok)
     {
         std::string theDLLPath(theDLLPathChar);
-        std::string newPathValue( originalPathValue.get());
+        std::string newPathValue(originalPathValue);
         std::string::size_type pos = theDLLPath.find_last_of("\\");
         newPathValue+= ";"+theDLLPath.substr(0,pos);
 
