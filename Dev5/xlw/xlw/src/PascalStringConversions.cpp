@@ -199,6 +199,25 @@ std::string xlw::StringUtilities::getEnvironmentVariable(const std::string& vari
     return &result[0];
 }
 
+std::string xlw::StringUtilities::getCurrentDirectory()
+{
+    const DWORD bufferSize=0;
+    std::vector<char> result;
+    DWORD dwRet = GetCurrentDirectory(0, 0);
+    if(dwRet)
+    {
+        result.resize(dwRet);
+        dwRet = GetCurrentDirectory(dwRet, &result[0]);
+    }
+    if(!dwRet)
+    {
+        std::cerr << XLW__HERE__ <<" Could not obtain Current directory " <<  std::endl;
+        return "";
+    }
+    return &result[0];
+}
+
+
 std::string xlw::StringUtilities::toUpper(std::string inputString)
 {
     makeUpper(inputString);

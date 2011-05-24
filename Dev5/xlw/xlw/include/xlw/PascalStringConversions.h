@@ -53,6 +53,7 @@ namespace xlw {
     {
     public:
         static std::string getEnvironmentVariable(const std::string& variableName);
+        static std::string getCurrentDirectory();
         static std::string toUpper(std::string inputString);
         static std::string toLower(std::string inputString);
         static void makeUpper(std::string& stringToChange);
