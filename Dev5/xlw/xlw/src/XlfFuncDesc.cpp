@@ -88,6 +88,8 @@ int xlw::XlfFuncDesc::DoRegister(const std::string& dllName, const std::string& 
 
     if (returnTypeCode_.empty())
         returnTypeCode_= XlfExcel::Instance().xlfOperType();
+    if(returnTypeCode_ == "XLW_FP")
+        returnTypeCode_= XlfExcel::Instance().fpType();
     return RegisterAs(dllName, suggestedHelpId, 1);
 }
 
