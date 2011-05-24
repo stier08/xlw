@@ -76,6 +76,8 @@ namespace xlw {
         const std::string& GetName() const;
         //! Gets help file name or empty string
         const std::string& GetHelpName() const;
+        //! Gets XLL directory
+        std::string GetXllDirectory() const;
         //@}
 
         /** \name Wrappers for Excel Call function

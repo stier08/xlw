@@ -263,6 +263,19 @@ const std::string& xlw::XlfExcel::GetHelpName() const {
     return helpFileName_;
 }
 
+std::string xlw::XlfExcel::GetXllDirectory() const {
+    // find the last slash in the xll file name
+    size_t slashPos(xllFileName_.find_last_of("\\/"));
+    if(slashPos == std::string::npos)
+    {
+        return ".";
+    }
+    else
+    {
+        return xllFileName_.substr(0, slashPos);
+    }
+}
+
 void xlw::XlfExcel::LookForHelp() {
     helpFileName_.clear();
     // first look for the file with the extension chm 
@@ -285,7 +298,6 @@ void xlw::XlfExcel::LookForHelp() {
 
     // try the directory one up
     // by inserting .. into the path
-    std::string dir;
     size_t slashPos(testFile.find_last_of("\\/"));
     if(slashPos == std::string::npos)
     {
