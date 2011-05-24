@@ -116,6 +116,10 @@ namespace
         // using win32 api
         void findPossibleDlls(const std::string& directory)
         {
+            // set the current directory to the directory being searched
+            // so that dlls dependent on others in th edirectory load
+            // properly
+            std::string oldCurentDirectory(StringUtilities::getCurrentDirectory());
             SetCurrentDirectory(directory.c_str());
             std::string searchPath(directory + "\\*.dll");
             WIN32_FIND_DATA findData;
@@ -133,6 +137,8 @@ namespace
                 carryOn = FindNextFile(findHandle, &findData);
             }
             FindClose(findHandle);
+            // be tidy, set back the directory to what it was afterwards
+            SetCurrentDirectory(oldCurentDirectory.c_str());
         }
         
         FARPROC findFunction(std::string functionToFind)
