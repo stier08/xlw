@@ -94,6 +94,8 @@ extern "C"
         // xll and so won't expect to be able to use the functions
         xlw::XLRegistration::ExcelFunctionRegistrationRegistry::Instance().DoTheDeregistrations();
 
+        xlw::MacroCache<xlw::Remove>::Instance().ExecuteMacros();
+
         return 1;
     }
 

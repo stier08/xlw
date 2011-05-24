@@ -57,6 +57,7 @@ namespace xlw
 
     struct Open;
     struct Close;
+    struct Remove;
 
     template<class policy>
     class MacroCache : public singleton<MacroCache<policy> >
