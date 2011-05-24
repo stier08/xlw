@@ -126,7 +126,7 @@ functions.
 } catch (...) { \
     return XlfOper12::Error(xlerrValue); \
 }
-//! Cleanup macro for command with return type void
+//! Cleanup macro for command with return type int
 #define EXCEL_END_CMD \
 } catch (XlfException&) { \
     return 0; \
@@ -142,7 +142,22 @@ functions.
     return 0; \
 } \
 return 1;
-//@}
+
+//! Cleanup macro for command with return type LPXLARRAY
+#define EXCEL_END_ARRAY \
+} catch (XlfException&) { \
+    return 0; \
+} catch (std::exception&){\
+    return 0;\
+} catch (std::string&){\
+    return 0;\
+} catch (const char*){\
+    return 0;\
+} catch (const CellMatrix&){\
+    return 0;\
+} catch (...) { \
+    return 0; \
+} \
 
 #endif
 
