@@ -1,4 +1,3 @@
-
 /*
  Copyright (C) 2011 John Adcock
 
@@ -84,8 +83,7 @@ namespace
         {
             // The supported libraries use the following different methods:
             //
-            // 1) Intel's MKL: LAPACK functions exported as lower case with prefix
-            //    mkl_lapack_ BLAS functions as lower case with prefix mkl_blas_
+            // 1) Intel's MKL custom : upper case
             //
             // 2) ATI ACML: Fortran functions as upper case (note C function 
             //    variants are also exported as lower case)
@@ -95,14 +93,10 @@ namespace
             // So for each function we need to try the following exports in order
             // 1) All uppercase
             // 2) All lowercase with underline at end
-            // 3) lowercase with mkl_lapack_ prefix
-            // 4) lowercase with mkl_blas_prefix
-            // 5) All lowercase
-            // 6) All uppercase with underscrore
+            // 3) All lowercase
+            // 4) All uppercase with underscrore at end
             functionNameTransforms_.push_back(NameTransformPtr(new NameTransform("","", true)));
             functionNameTransforms_.push_back(NameTransformPtr(new NameTransform("","_")));
-            functionNameTransforms_.push_back(NameTransformPtr(new NameTransform("mkl_lapack_","")));
-            functionNameTransforms_.push_back(NameTransformPtr(new NameTransform("mkl_blas_","")));
             functionNameTransforms_.push_back(NameTransformPtr(new NameTransform("","")));
             functionNameTransforms_.push_back(NameTransformPtr(new NameTransform("","_", true)));
         }
