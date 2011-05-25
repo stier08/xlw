@@ -556,6 +556,12 @@ SubSection "xlw" xlw
 		!insertmacro doExample "xlw\examples\C++CLR" 0 0
 		!insertmacro doExample "xlw\examples\C++CLR_password" 0 0
 		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\xlw\Examples.lnk " "$INSTDIR\xlw\Examples"
+		SetOutPath "$INSTDIR\xlw\usercontrib"
+		File  /r "xlw\usercontrib\*.txt"
+		!insertmacro doExample "xlw\usercontrib\matrices\ublas" 1 1
+		!insertmacro doExample "xlw\usercontrib\matrices\dlib" 1 1
+		!insertmacro doExample "xlw\usercontrib\matrices\fortran" 1 1
+		CreateShortCut  "$SMPROGRAMS\XLW\${APP_VER}\xlw\User Contributed Examples.lnk " "$INSTDIR\xlw\usercontrib"
 	SectionEnd
 
 	Section "Sandcastle" sandcastle
