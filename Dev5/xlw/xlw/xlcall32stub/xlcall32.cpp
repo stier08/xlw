@@ -37,7 +37,7 @@ extern "C"
 
     int __stdcall XLCallVer(void)
     {
-        return 12;
+        return 0x0C00;
     }
 
     long __stdcall LPenHelper(int wCode, void* lpv)
