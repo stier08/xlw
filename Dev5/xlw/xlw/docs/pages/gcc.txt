@@ -3,35 +3,46 @@
 
 \section summary Summary
 
-Recently <a href="http://www.mingw.org/" target="_blank">MinGW</a> has updated its GCC compiler suite to GCC 4.5.2 This version 5 of XLW has been updated to reflect this change in MinGW. 
 
-When version 4 of XLWwas released the MinGW automatic installer was not updated to install the then 
-most current compiler suite and if used for installation would still have installed the older GCC, with which that version of 
-XLW  would not have worked ( unless compiled from source). In this case the normal way around would have been to install 
-MinGW manualy without the automatic installer.
+\subsection required Required Software
 
-In order to keep the installation, usage and overall experience of XLW simple and painless we built a MinGW
-installer that was able to download and install all the necessary MinGW components required for C/C++ compilation and
-to resolve XLW's dependency.
+The prebuilt libraries were built with GCC 4.5.2.
 
-Since then a much more upto date Mingw installer has been released by the MingW project and made available here:
+There are 2 supported ways of installing MinGW with gcc 4.5.2 for use with Xlw:
 
-<a href="http://sourceforge.net/projects/mingw/files/Automated%20MinGW%20Installer/" target="_blank">http://sourceforge.net/projects/mingw/files/Automated%20MinGW%20Installer/</a>
+- <a href="http://sourceforge.net/projects/mingw/files/Automated%20MinGW%20Installer/mingw-get-inst/" target="_blank">The MinGW Automated Installer</a> - Get the most recent installer and install the C++ compiler and the MinGW developer toolkit.
 
-In the meantime we have also updated our Mingw installer to install GCC 4.5.2. Our updated installer installs a more complete system
-than before, more than just bare minimal reuired to compile C++. However it does not install any other language other than C & C++.
-you can download the latest snapshot version here :
+- <a href="http://sourceforge.net/projects/xlw/files/xlw-mingw-installer/MINGW_GCC4.5.2-1/" target="_blank">The Xlw MinGw Installer</a>
 
-<a href="http://sourceforge.net/projects/xlw/files/xlw-mingw-installer/MINGW_GCC4.5.2-1/" target="_blank">http://sourceforge.net/projects/xlw/files/xlw-mingw-installer/MINGW_GCC4.5.2-1/</a>
+Either method of installing MingW should be fine and install the necessary tools to compile xlls with gcc. The installation resulting from the xlw installer is more regularly testedby the development team.
 
-Either method of installing MingW should be fine and install the necessary tools to compile xlls with gcc. At present only the installation resulting from the xlw installer has been tested by the development team.
+\subsection other Using Other Versions of gcc
+
+If you are not using one of the install methods mentioned above then it may be possible to use Xlw with your existing installation however 
+you will probably need to rebuild the library files to avoid linking issues.
+
+Please conatct the mailing list xlw-users@lists.sourceforge.com for more information.
 
 \section x64 64-bit compilation
 
-It is now possible compile 64-bit xlls using the gcc comamnd line
+It is now possible compile 64-bit xlls using gcc from the command line.
 
-\todo finish documenting 64 bit gcc
+\subsection required Required Software
 
+A recent build of a 64-bit cross compiler from the <a href="http://mingw-w64.sourceforge.net/" target="_blank">MinGW-64</a> project.
+
+Get the most recent package from <a href="https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Automated%20Builds/" target="_blank">here</a>, you want the package named mingw-w64-bin_i686-mingw_201?????.zip
+
+After downloading the package unpack it and copy the contents to your MinGw directory.  By default this is c:\\MinGW for method 1 above and c:\\GNU\\MinGW for method 2.
+
+\subsection commands Building 64-bit Xlls
+
+To build your 64 bit xlls use the following commands for debug and release.
+
+\code
+make BUILD=DEBUG PLATFORM=x64
+make BUILD=RELEASE PLATFORM=x64
+\endcode
 
 */
 
