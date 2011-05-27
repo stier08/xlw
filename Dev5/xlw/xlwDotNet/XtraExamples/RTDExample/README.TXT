@@ -15,9 +15,9 @@ see
 
 To build this demo, you need to make sure that the DotNet project
 references 
- Microsoft.Office.Core ( Microsodt 1x.x Object Library) founf under COM in th references 
+ Microsoft.Office.Core ( Microsoft 1x.x Object Library) found under COM in the references 
 &
- Microsft.Office,Interop.Excel (Microsft.Office,Interop.Excel   under .NET refernces )
+ Microsoft.Office.Interop.Excel (Microsoft.Office.Interop.Excel under .NET references )
 
 
 You may need to remove my references in the project as I may have different versions to you and
@@ -26,10 +26,10 @@ You may need to remove my references in the project as I may have different vers
 
 
 
-PS THIS WILL NOT WORK WITH TWO INSTANCE OF EXCEL.
+PS THIS WILL NOT WORK WITH TWO INSTANCES OF EXCEL.
    If you open a second instance of excel, this 
    addin will only work on the first one. This 
-   is NOT a bug, its a limitation. Maybe some one can 
+   is NOT a bug, its a limitation. Maybe someone can 
    remove this limitation.
 
 
