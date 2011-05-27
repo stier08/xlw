@@ -12,7 +12,9 @@ XLW is upgraded to support new features of Excel 2010 such as
 
 \subsection v5_ss1 Performance
 
-The performance with large arrays has been massively improved.
+The performance of temporary memory has been massively improved.
+
+The performance of access to large arrays has been improved.
 
 \subsection v5_ss2 Stability
 
@@ -23,6 +25,8 @@ All known issues with previous versions have been fixed.
 Added Visual Studio 2010 support (including Express Edition)
 
 \subsection v5_ss4 Documentation
+
+Added the ability to generate help files automatically.
 
 Improved documentation and example code.
 
