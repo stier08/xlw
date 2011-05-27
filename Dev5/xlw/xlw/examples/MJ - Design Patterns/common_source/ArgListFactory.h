@@ -46,7 +46,7 @@ namespace xlw {
     template<typename T>
     void ArgListFactory<T>::RegisterClass(std::string ClassId, CreateTFunction CreatorFunction)
     {
-         MakeLowerCase(ClassId);
+         StringUtilities::makeLower(ClassId);
          TheCreatorFunctions.insert(std::pair<std::string,CreateTFunction>(ClassId,CreatorFunction));
          KnownTypes+=" "+ClassId;
     }

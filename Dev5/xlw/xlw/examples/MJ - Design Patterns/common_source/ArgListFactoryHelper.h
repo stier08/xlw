@@ -19,6 +19,8 @@
 #include "ArgListFactory.h"
 #include <map>
 #include <string>
+#include <xlw/PascalStringConversions.h>
+
 
 namespace xlw {
 
@@ -35,7 +37,7 @@ namespace xlw {
     template<class TBase, class TDerived>
     FactoryHelper<TBase,TDerived>::FactoryHelper(std::string id)
     {
-        MakeLowerCase(id);
+        StringUtilities::makeLower(id);
         ArgListFactory<TBase>::Instance().RegisterClass(id, FactoryHelper<TBase,TDerived>::create);
     }
 
