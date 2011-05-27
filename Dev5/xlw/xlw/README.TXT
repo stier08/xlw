@@ -14,4 +14,4 @@ of xlls in C#. Also added Template projects for easy creating of new
 projects by users. Created new installer for extraction of 
 template projects
 
-John Adcock added 64 bit support
+John Adcock added 64 bit support and Automatic Help Generation
