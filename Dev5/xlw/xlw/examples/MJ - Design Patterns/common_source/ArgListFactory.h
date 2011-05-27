@@ -20,6 +20,7 @@
 
 #include <xlw/ArgList.h>
 #include <xlw/Singleton.h>
+#include <xlw/PascalStringConversions.h>
 #include <map>
 #include <string>
 
