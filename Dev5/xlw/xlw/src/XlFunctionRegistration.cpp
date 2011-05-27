@@ -305,12 +305,12 @@ void ExcelFunctionRegistrationRegistry::GenerateChmBuilderConfig(const std::stri
     int counter(1);
     for (functionCache::const_iterator it = Functions.begin(); it !=  Functions.end(); ++it)
     {
-        outFile << "<line>A" << counter << "=html\\" << counter << ".htm</line>" << std::endl;
+        outFile << "<line>A" << counter << "=html\\" << it->second->GetAlias() << ".htm</line>" << std::endl;
         ++counter;
     }
     for (commandCache::const_iterator it = Commands.begin(); it !=  Commands.end(); ++it)
     {
-        outFile << "<line>A" << counter << "=html\\" << counter << ".htm</line>" << std::endl;
+        outFile << "<line>A" << counter << "=html\\" << it->second->GetAlias() << ".htm</line>" << std::endl;
         ++counter;
     }
     outFile << "<line>[MAP]</line>" << std::endl;
@@ -332,7 +332,7 @@ void ExcelFunctionRegistrationRegistry::GenerateToc(const std::string& fileName)
         outFile << "<topic id=\"Functions\" file=\"Functions\">" << std::endl;
         for (functionCache::const_iterator it = Functions.begin(); it !=  Functions.end(); ++it)
         {
-            outFile << "<topic id=\"" << counter << "\" file=\"" << counter << "\" />" << std::endl;
+            outFile << "<topic id=\"" << it->second->GetAlias() << "\" file=\"" << it->second->GetAlias() << "\" />" << std::endl;
             ++counter;
         }
         outFile << "</topic>" << std::endl;
@@ -342,7 +342,7 @@ void ExcelFunctionRegistrationRegistry::GenerateToc(const std::string& fileName)
         outFile << "<topic id=\"Commands\" file=\"Commands\">" << std::endl;
         for (commandCache::const_iterator it = Commands.begin(); it !=  Commands.end(); ++it)
         {
-            outFile << "<topic id=\"" << counter << "\" file=\"" << counter << "\" />" << std::endl;
+            outFile << "<topic id=\"" << it->second->GetAlias() << "\" file=\"" << it->second->GetAlias() << "\" />" << std::endl;
             ++counter;
         }
         outFile << "</topic>" << std::endl;

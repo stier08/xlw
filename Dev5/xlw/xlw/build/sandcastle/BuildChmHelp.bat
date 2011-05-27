@@ -21,7 +21,7 @@ set PATH=%windir%\Microsoft.NET\Framework\v2.0.50727;%DXROOT%\ProductionTools;%T
 
 pushd %SUBDIR%
 
-"XLW%\xlw\build\%2\%SubDir%\XlwDocGen.exe" "%~1.xll"
+"%XLW%\xlw\build\%2\%SubDir%\XlwDocGen.exe" "%~1.xll"
 
 if exist output rmdir output /s /q
 
