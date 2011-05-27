@@ -8,5 +8,8 @@ CALL BuildProjectCpp.bat ..\xlw\examples\ObjectCacheDemo ObjectCacheDemo
 CALL BuildProjectCpp.bat ..\xlw\examples\C++CLR C++CLR
 CALL BuildProjectCpp.bat ..\xlw\examples\LoggerDemo LoggerDemo
 CALL BuildProjectCpp.bat ..\xlw\examples\C++CLR_password C++CLR_password
+CALL BuildProjectCpp.bat "..\xlw\examples\Start Here - Example" StartHere
+CALL BuildProjectCpp.bat "..\xlw\examples\MJ - Design Patterns" DesignPatterns
+CALL BuildProjectCpp.bat "..\xlw\examples\Commands and Attributes" CommandsAttributes
 
 @ENDLOCAL
