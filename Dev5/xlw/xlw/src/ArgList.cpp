@@ -103,6 +103,11 @@ namespace xlw
     }
 }
 
+void xlw::ArgumentList::add(const std::string& ArgumentName, const char * value)
+{
+	add(ArgumentName, std::string(value));
+}
+
 void xlw::ArgumentList::add(const std::string& ArgumentName, const std::string& value)
 {
     addInternal(ArgumentName, value, StringArguments, string);

@@ -88,6 +88,7 @@ namespace xlw {
         // data insertions
 
         void add(const std::string& ArgumentName, const std::string& value);
+		void add(const std::string& ArgumentName, const char * value);
         void add(const std::string& ArgumentName, double value);
         inline void add(const std::string& ArgumentName, const MyArray& value);
         inline void add(const std::string& ArgumentName, const MyMatrix& value);
