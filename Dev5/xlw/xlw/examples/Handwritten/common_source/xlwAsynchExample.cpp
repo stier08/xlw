@@ -49,17 +49,17 @@ extern "C" {
         try
         {
             LPXLFOPER result = xlSlowConcat(&opers[1], &opers[2]);
-            XlfExcel::Instance().Call(xlAsyncReturn, 0, &opers[0], result);
+            XlfExcel::Instance().Call(xlAsyncReturn, 0, 2, &opers[0], result);
         }
         catch(std::exception& e)
         {
             XlfOper result(e.what());
-            XlfExcel::Instance().Call(xlAsyncReturn, 0, &opers[0], result);
+            XlfExcel::Instance().Call(xlAsyncReturn, 0, 2, &opers[0], result);
         }
         catch(...)
         {
             XlfOper result(XlfOper::Error(xlerrNA));
-            XlfExcel::Instance().Call(xlAsyncReturn, 0, &opers[0], result);
+            XlfExcel::Instance().Call(xlAsyncReturn, 0, 2, &opers[0], result);
         }
 
         xlw::impl::XlfOperProperties<LPXLFOPER>::freeCreatedUsingNew(&opers[1]);
@@ -95,13 +95,13 @@ extern "C" {
         {
             XlfOper result(e.what());
             XlfOper asyncIdOper(asyncId);
-            XlfExcel::Instance().Call(xlAsyncReturn, 0, asyncIdOper, result);
+            XlfExcel::Instance().Call(xlAsyncReturn, 0, 2, asyncIdOper, result);
         }
         catch(...)
         {
             XlfOper result(XlfOper::Error(xlerrNA));
             XlfOper asyncIdOper(asyncId);
-            XlfExcel::Instance().Call(xlAsyncReturn, 0, asyncIdOper, result);
+            XlfExcel::Instance().Call(xlAsyncReturn, 0, 2, asyncIdOper, result);
         }
     }
 
