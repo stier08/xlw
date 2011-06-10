@@ -61,7 +61,7 @@ namespace xlw
         inline XlfOper CallFunction(int xlfn, const char* errorString)
         {
             XlfOper result;
-            int err = XlfExcel::Instance().Call(xlfn, result);
+            int err = XlfExcel::Instance().Callv(xlfn, result, 0, 0);
             if(err != xlretSuccess)
             {
                 THROW_XLW(errorString);
@@ -72,7 +72,8 @@ namespace xlw
         inline XlfOper CallFunction(int xlfn, const XlfOper& param1, const char* errorString)
         {
             XlfOper result;
-            int err = XlfExcel::Instance().Call(xlfn, result, param1);
+            LPXLFOPER params[] = {param1};
+            int err = XlfExcel::Instance().Callv(xlfn, result, 1, params);
             if(err != xlretSuccess)
             {
                 THROW_XLW(errorString);
@@ -83,7 +84,8 @@ namespace xlw
         inline XlfOper CallFunction(int xlfn, const XlfOper& param1, const XlfOper& param2, const char* errorString)
         {
             XlfOper result;
-            int err = XlfExcel::Instance().Call(xlfn, result, param1, param2);
+            LPXLFOPER params[] = {param1, param2};
+            int err = XlfExcel::Instance().Callv(xlfn, result, 2, params);
             if(err != xlretSuccess)
             {
                 THROW_XLW(errorString);
@@ -94,7 +96,8 @@ namespace xlw
         inline XlfOper CallFunction(int xlfn, const XlfOper& param1, const XlfOper& param2, const XlfOper& param3, const char* errorString)
         {
             XlfOper result;
-            int err = XlfExcel::Instance().Call(xlfn, result, param1, param2, param3);
+            LPXLFOPER params[] = {param1, param2, param3};
+            int err = XlfExcel::Instance().Callv(xlfn, result, 3, params);
             if(err != xlretSuccess)
             {
                 THROW_XLW(errorString);
@@ -105,7 +108,8 @@ namespace xlw
         inline XlfOper CallFunction(int xlfn, const XlfOper& param1, const XlfOper& param2, const XlfOper& param3, const XlfOper& param4, const char* errorString)
         {
             XlfOper result;
-            int err = XlfExcel::Instance().Call(xlfn, result, param1, param2, param3, param4);
+            LPXLFOPER params[] = {param1, param2, param3, param4};
+            int err = XlfExcel::Instance().Callv(xlfn, result, 4, params);
             if(err != xlretSuccess)
             {
                 THROW_XLW(errorString);
@@ -115,7 +119,7 @@ namespace xlw
 
         inline void CallCommand(int xlcmd, const char* errorString)
         {
-            int err = XlfExcel::Instance().Call(xlcmd, 0);
+            int err = XlfExcel::Instance().Callv(xlcmd, 0, 0, 0);
             if(err != xlretSuccess)
             {
                 THROW_XLW(errorString);
@@ -124,7 +128,8 @@ namespace xlw
 
         inline void CallCommand(int xlcmd, const XlfOper& param1, const char* errorString)
         {
-            int err = XlfExcel::Instance().Call(xlcmd, 0, param1);
+            LPXLFOPER params[] = {param1};
+            int err = XlfExcel::Instance().Callv(xlcmd, 0, 1, params);
             if(err != xlretSuccess)
             {
                 THROW_XLW(errorString);
@@ -133,7 +138,8 @@ namespace xlw
 
         inline void CallCommand(int xlcmd, const XlfOper& param1, const XlfOper& param2, const char* errorString)
         {
-            int err = XlfExcel::Instance().Call(xlcmd, 0, param1, param2);
+            LPXLFOPER params[] = {param1, param2};
+            int err = XlfExcel::Instance().Callv(xlcmd, 0, 2, params);
             if(err != xlretSuccess)
             {
                 THROW_XLW(errorString);
@@ -142,7 +148,8 @@ namespace xlw
 
         inline void CallCommand(int xlcmd, const XlfOper& param1, const XlfOper& param2, const XlfOper& param3, const char* errorString)
         {
-            int err = XlfExcel::Instance().Call(xlcmd, 0, param1, param2, param3);
+            LPXLFOPER params[] = {param1, param2, param3};
+            int err = XlfExcel::Instance().Callv(xlcmd, 0, 3, params);
             if(err != xlretSuccess)
             {
                 THROW_XLW(errorString);
@@ -151,7 +158,8 @@ namespace xlw
 
         inline void CallCommand(int xlcmd, const XlfOper& param1, const XlfOper& param2, const XlfOper& param3, const XlfOper& param4, const char* errorString)
         {
-            int err = XlfExcel::Instance().Call(xlcmd, 0, param1, param2, param3, param4);
+            LPXLFOPER params[] = {param1, param2, param3, param4};
+            int err = XlfExcel::Instance().Callv(xlcmd, 0, 4, params);
             if(err != xlretSuccess)
             {
                 THROW_XLW(errorString);
