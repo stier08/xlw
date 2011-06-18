@@ -159,6 +159,16 @@ namespace xlw
         }
     };
 
+    //! RAII class to disable calculation while varaible in scope
+    class DisableCalculation
+    {
+    public:
+        DisableCalculation();
+        ~DisableCalculation();
+    private:
+        short calulationState_;
+    };
+
 }
 
 #endif //  XLFSERVICES_HEADER_GUARD

@@ -66,8 +66,11 @@ extern "C"
     {
         EXCEL_BEGIN;
 
+        // Have to use when adding formulas as we are not reentrant
+        xlw::DisableCalculation whileInScope;
+
         // Use when adding data to speed things up
-        xlw::DisableScreenUpdates whileInScope;
+        xlw::DisableScreenUpdates whileInScope2;
 
         xlw::XlfServices.Commands.InsertWorkSheet();
         // first way of refering to cells is to convert names to cell refs

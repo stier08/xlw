@@ -47,7 +47,7 @@ namespace xlw
         inline XlfOper CallFunction(int xlfn, const XlfOper& param1, const char* errorString)
         {
             XlfOper result;
-            LPXLFOPER params[] = {param1};
+            const LPXLFOPER params[] = {param1};
             int err = XlfExcel::Instance().Callv(xlfn, result, 1, params);
             if(err != xlretSuccess)
             {
@@ -59,7 +59,7 @@ namespace xlw
         inline XlfOper CallFunction(int xlfn, const XlfOper& param1, const XlfOper& param2, const char* errorString)
         {
             XlfOper result;
-            LPXLFOPER params[] = {param1, param2};
+            const LPXLFOPER params[] = {param1, param2};
             int err = XlfExcel::Instance().Callv(xlfn, result, 2, params);
             if(err != xlretSuccess)
             {
@@ -71,7 +71,7 @@ namespace xlw
         inline XlfOper CallFunction(int xlfn, const XlfOper& param1, const XlfOper& param2, const XlfOper& param3, const char* errorString)
         {
             XlfOper result;
-            LPXLFOPER params[] = {param1, param2, param3};
+            const LPXLFOPER params[] = {param1, param2, param3};
             int err = XlfExcel::Instance().Callv(xlfn, result, 3, params);
             if(err != xlretSuccess)
             {
@@ -83,7 +83,7 @@ namespace xlw
         inline XlfOper CallFunction(int xlfn, const XlfOper& param1, const XlfOper& param2, const XlfOper& param3, const XlfOper& param4, const char* errorString)
         {
             XlfOper result;
-            LPXLFOPER params[] = {param1, param2, param3, param4};
+            const LPXLFOPER params[] = {param1, param2, param3, param4};
             int err = XlfExcel::Instance().Callv(xlfn, result, 4, params);
             if(err != xlretSuccess)
             {
@@ -105,7 +105,7 @@ namespace xlw
         inline void CallCommand(int xlcmd, const XlfOper& param1, const char* errorString)
         {
             XlfOper result;
-            LPXLFOPER params[] = {param1};
+            const LPXLFOPER params[] = {param1};
             int err = XlfExcel::Instance().Callv(xlcmd, result, 1, params);
             if(err != xlretSuccess)
             {
@@ -116,7 +116,7 @@ namespace xlw
         inline void CallCommand(int xlcmd, const XlfOper& param1, const XlfOper& param2, const char* errorString)
         {
             XlfOper result;
-            LPXLFOPER params[] = {param1, param2};
+            const LPXLFOPER params[] = {param1, param2};
             int err = XlfExcel::Instance().Callv(xlcmd, result, 2, params);
             if(err != xlretSuccess)
             {
@@ -127,7 +127,7 @@ namespace xlw
         inline void CallCommand(int xlcmd, const XlfOper& param1, const XlfOper& param2, const XlfOper& param3, const char* errorString)
         {
             XlfOper result;
-            LPXLFOPER params[] = {param1, param2, param3};
+            const LPXLFOPER params[] = {param1, param2, param3};
             int err = XlfExcel::Instance().Callv(xlcmd, result, 3, params);
             if(err != xlretSuccess)
             {
@@ -138,7 +138,7 @@ namespace xlw
         inline void CallCommand(int xlcmd, const XlfOper& param1, const XlfOper& param2, const XlfOper& param3, const XlfOper& param4, const char* errorString)
         {
             XlfOper result;
-            LPXLFOPER params[] = {param1, param2, param3, param4};
+            const LPXLFOPER params[] = {param1, param2, param3, param4};
             int err = XlfExcel::Instance().Callv(xlcmd, result, 4, params);
             if(err != xlretSuccess)
             {
@@ -289,7 +289,7 @@ namespace xlw
             XlfServices.Commands.Select(ref);
 
             XlfOper missingValue;
-            LPXLFOPER params[] = {
+            const LPXLFOPER params[] = {
                                     fontName, missingValue,
                                     fontSize, missingValue, missingValue, missingValue,
                                     missingValue, missingValue, missingValue, missingValue,
@@ -387,5 +387,22 @@ namespace xlw
     void Commands_t::SetScreenUpdates(bool doesScreenUpdate)
     {
         CallCommand(xlcEcho, doesScreenUpdate, "Echo");
+    }
+
+    DisableCalculation::DisableCalculation()
+    {
+        calulationState_ = CallFunction(xlfGetDocument, 14, "Get Document properies for calculation").AsInt();
+        if(calulationState_ < 3)
+        {
+            CallCommand(xlcOptionsCalculation, 3, "Set calculation optiosn");
+        }
+    }
+
+    DisableCalculation::~DisableCalculation()
+    {
+        if(calulationState_ < 3)
+        {
+            CallCommand(xlcOptionsCalculation, calulationState_, "Set calculation optiosn");
+        }
     }
 }
