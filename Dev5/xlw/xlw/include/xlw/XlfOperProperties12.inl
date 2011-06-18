@@ -257,11 +257,15 @@ namespace xlw { namespace impl {
                             ref.rwLast,   // bottom
                             ref.colLast,  // right
                             oper->val.mref.idSheet); // sheet id
-            return XlfRef();
         }
         static void setRef(LPXLOPER12 oper, const XlfRef& newValue)
         {
             oper->xltype = xltypeRef;
+            oper->val.mref.idSheet = newValue.GetSheetId();
+            if(oper->val.mref.idSheet == 0)
+            {
+                XlfExcel::Instance().Call12(xlSheetId, oper, 0);
+            }
             XLMREF12* pmRef = TempMemory::GetMemory<XLMREF12>();
             pmRef->count=1;
             pmRef->reftbl[0].rwFirst = newValue.GetRowBegin();
@@ -269,7 +273,6 @@ namespace xlw { namespace impl {
             pmRef->reftbl[0].colFirst = newValue.GetColBegin();
             pmRef->reftbl[0].colLast = newValue.GetColEnd()-1;
             oper->val.mref.lpmref = pmRef;
-            oper->val.mref.idSheet = newValue.GetSheetId();
         }
         static int coerce(LPXLOPER12 fromOper, XlTypeType toType, LPXLOPER12 toOper)
         {

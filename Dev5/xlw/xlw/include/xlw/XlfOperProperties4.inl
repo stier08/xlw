@@ -260,6 +260,11 @@ namespace xlw { namespace impl {
         static void setRef(LPXLOPER oper, const XlfRef& newValue)
         {
             oper->xltype = xltypeRef;
+            oper->val.mref.idSheet = newValue.GetSheetId();
+            if(oper->val.mref.idSheet == 0)
+            {
+                XlfExcel::Instance().Call4(xlSheetId, oper, 0);
+            }
             XLMREF* pmRef = TempMemory::GetMemory<XLMREF>();
             pmRef->count=1;
             pmRef->reftbl[0].rwFirst = newValue.GetRowBegin();
@@ -267,7 +272,6 @@ namespace xlw { namespace impl {
             pmRef->reftbl[0].colFirst = newValue.GetColBegin();
             pmRef->reftbl[0].colLast = newValue.GetColEnd()-1;
             oper->val.mref.lpmref = pmRef;
-            oper->val.mref.idSheet = newValue.GetSheetId();
         }
         static int coerce(LPXLOPER fromOper, XlTypeType toType, LPXLOPER toOper)
         {
