@@ -70,7 +70,7 @@ namespace xlw { namespace impl {
         //! \name Manage reference to the underlying XLOPER
         //@{
         //! Internal LPXLFOPER/LPXLOPER/LPXLOPER12.
-        LPOPER_TYPE lpxloper_;
+        mutable LPOPER_TYPE lpxloper_;
         //@}
 
         typedef XlfOperProperties<LPOPER_TYPE> OperProps;
@@ -332,21 +332,35 @@ namespace xlw { namespace impl {
         {
             // need to be careful if we try and return back to excel memory it
             // has given us as a return value as we will call xlFree in destructor
-            // so take a deep copy if we need to
-            if (OperProps::getXlType(lpxloper_) & xlw::XlfOperImpl::xlbitFreeAuxMem)
+            // so take a deep copy and free the Excel version
+            XlTypeType type = OperProps::getXlType(lpxloper_);
+            if (type & xlw::XlfOperImpl::xlbitFreeAuxMem)
             {
                 LPOPER_TYPE result = TempMemory::GetMemory<OperType>();
+                type &= ~xlw::XlfOperImpl::xlbitFreeAuxMem;
+                OperProps::setXlType(lpxloper_, type);
                 OperProps::copy(lpxloper_, result);
-                return result;
+                OperProps::XlFree(lpxloper_);
+                lpxloper_ = result;
             }
-            else
-            {
-                return lpxloper_;
-            }
+            return lpxloper_;
         }
         //! Cast to const XLOPER *.
         operator const LPOPER_TYPE() const
         {
+            // need to be careful if we try and return back to excel memory it
+            // has given us as a return value as we will call xlFree in destructor
+            // so take a deep copy and free the Excel version
+            XlTypeType type = OperProps::getXlType(lpxloper_);
+            if (type & xlw::XlfOperImpl::xlbitFreeAuxMem)
+            {
+                LPOPER_TYPE result = TempMemory::GetMemory<OperType>();
+                type &= ~xlw::XlfOperImpl::xlbitFreeAuxMem;
+                OperProps::setXlType(lpxloper_, type);
+                OperProps::copy(lpxloper_, result);
+                OperProps::XlFree(lpxloper_);
+                lpxloper_ = result;
+            }
             return lpxloper_;
         }
         //@}
