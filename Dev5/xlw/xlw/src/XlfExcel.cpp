@@ -40,7 +40,7 @@ extern "C"
     //! Main API function to Excel.
     static int (__cdecl *Excel4_)(int xlfn, LPXLOPER operRes, int count, ...);
     //! Main API function to Excel, passing the argument as an array.
-    static int (__stdcall *Excel4v_)(int xlfn, LPXLOPER operRes, int count, LPXLOPER far opers[]);
+    static int (__stdcall *Excel4v_)(int xlfn, LPXLOPER operRes, int count, const LPXLOPER far opers[]);
 }
 
 namespace
@@ -220,7 +220,7 @@ void xlw::XlfExcel::InitLibrary() {
     Excel4_ = (int (__cdecl *)(int, struct xloper *, int, ...))GetProcAddress(handle, "Excel4");
     if (Excel4_ == 0)
         THROW_XLW("Could not get address of Excel4 callback");
-    Excel4v_ = (int (__stdcall *)(int, struct xloper *, int, struct xloper *[]))GetProcAddress(handle, "Excel4v");
+    Excel4v_ = (int (__stdcall *)(int, LPXLOPER, int, const LPXLOPER[]))GetProcAddress(handle, "Excel4v");
     if (Excel4v_ == 0)
         THROW_XLW("Could not get address of Excel4v callback");
 
@@ -318,38 +318,38 @@ int xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult, int count) const
     return Call4v(xlfn, pxResult, 0, 0);
 }
 
-int xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult, int count, LPXLOPER param1) const
+int xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult, int count, const LPXLOPER param1) const
 {
     assert(count == 1);
     return Call4v(xlfn, pxResult, 1, &param1);
 }
 
-int xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult, int count, LPXLOPER param1, LPXLOPER param2) const
+int xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult, int count, const LPXLOPER param1, const LPXLOPER param2) const
 {
     assert(count == 2);
-    LPXLOPER paramArray[2] = {param1, param2};
+    const LPXLOPER paramArray[2] = {param1, param2};
     return Call4v(xlfn, pxResult, 2, paramArray);
 }
 
-int xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult, int count, LPXLOPER param1, LPXLOPER param2, LPXLOPER param3) const
+int xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult, int count, const LPXLOPER param1, const LPXLOPER param2, const LPXLOPER param3) const
 {
     assert(count == 3);
-    LPXLOPER paramArray[3] = {param1, param2, param3};
+    const LPXLOPER paramArray[3] = {param1, param2, param3};
     return Call4v(xlfn, pxResult, 3, paramArray);
 }
 
-int xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult, int count, LPXLOPER param1, LPXLOPER param2, LPXLOPER param3, LPXLOPER param4) const
+int xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult, int count, const LPXLOPER param1, const LPXLOPER param2, const LPXLOPER param3, const LPXLOPER param4) const
 {
     assert(count == 4);
-    LPXLOPER paramArray[4] = {param1, param2, param3, param4};
+    const LPXLOPER paramArray[4] = {param1, param2, param3, param4};
     return Call4v(xlfn, pxResult, 4, paramArray);
 }
 
-int xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult, int count, LPXLOPER param1, LPXLOPER param2, LPXLOPER param3, LPXLOPER param4, 
-         LPXLOPER param5, LPXLOPER param6, LPXLOPER param7, LPXLOPER param8, LPXLOPER param9, LPXLOPER param10) const
+int xlw::XlfExcel::Call4(int xlfn, LPXLOPER pxResult, int count, const LPXLOPER param1, const LPXLOPER param2, const LPXLOPER param3, const LPXLOPER param4, 
+         const LPXLOPER param5, const LPXLOPER param6, const LPXLOPER param7, const LPXLOPER param8, const LPXLOPER param9, const LPXLOPER param10) const
 {
     assert(count >= 5 && count <= 10);
-    LPXLOPER paramArray[10] = {param1, param2, param3, param4, param5, param6, param7, param8, param9, param10};
+    const LPXLOPER paramArray[10] = {param1, param2, param3, param4, param5, param6, param7, param8, param9, param10};
     return Call4v(xlfn, pxResult, count, paramArray);
 }
 
@@ -359,38 +359,38 @@ int xlw::XlfExcel::Call12(int xlfn, LPXLOPER12 pxResult, int count) const
     return Call12v(xlfn, pxResult, 0, 0);
 }
 
-int xlw::XlfExcel::Call12(int xlfn, LPXLOPER12 pxResult, int count, LPXLOPER12 param1) const
+int xlw::XlfExcel::Call12(int xlfn, LPXLOPER12 pxResult, int count, const LPXLOPER12 param1) const
 {
     assert(count == 1);
     return Call12v(xlfn, pxResult, 1, &param1);
 }
 
-int xlw::XlfExcel::Call12(int xlfn, LPXLOPER12 pxResult, int count, LPXLOPER12 param1, LPXLOPER12 param2) const
+int xlw::XlfExcel::Call12(int xlfn, LPXLOPER12 pxResult, int count, const LPXLOPER12 param1, const LPXLOPER12 param2) const
 {
     assert(count == 2);
-    LPXLOPER12 paramArray[2] = {param1, param2};
+    const LPXLOPER12 paramArray[2] = {param1, param2};
     return Call12v(xlfn, pxResult, 2, paramArray);
 }
 
-int xlw::XlfExcel::Call12(int xlfn, LPXLOPER12 pxResult, int count, LPXLOPER12 param1, LPXLOPER12 param2, LPXLOPER12 param3) const
+int xlw::XlfExcel::Call12(int xlfn, LPXLOPER12 pxResult, int count, const LPXLOPER12 param1, const LPXLOPER12 param2, const LPXLOPER12 param3) const
 {
     assert(count == 3);
-    LPXLOPER12 paramArray[3] = {param1, param2, param3};
+    const LPXLOPER12 paramArray[3] = {param1, param2, param3};
     return Call12v(xlfn, pxResult, 3, paramArray);
 }
 
-int xlw::XlfExcel::Call12(int xlfn, LPXLOPER12 pxResult, int count, LPXLOPER12 param1, LPXLOPER12 param2, LPXLOPER12 param3, LPXLOPER12 param4) const
+int xlw::XlfExcel::Call12(int xlfn, LPXLOPER12 pxResult, int count, const LPXLOPER12 param1, const LPXLOPER12 param2, const LPXLOPER12 param3, const LPXLOPER12 param4) const
 {
     assert(count == 4);
-    LPXLOPER12 paramArray[4] = {param1, param2, param3, param4};
+    const LPXLOPER12 paramArray[4] = {param1, param2, param3, param4};
     return Call12v(xlfn, pxResult, 4, paramArray);
 }
 
-int xlw::XlfExcel::Call12(int xlfn, LPXLOPER12 pxResult, int count, LPXLOPER12 param1, LPXLOPER12 param2, LPXLOPER12 param3, LPXLOPER12 param4, 
-         LPXLOPER12 param5, LPXLOPER12 param6, LPXLOPER12 param7, LPXLOPER12 param8, LPXLOPER12 param9, LPXLOPER12 param10) const
+int xlw::XlfExcel::Call12(int xlfn, LPXLOPER12 pxResult, int count, const LPXLOPER12 param1, const LPXLOPER12 param2, const LPXLOPER12 param3, const LPXLOPER12 param4, 
+         const LPXLOPER12 param5, const LPXLOPER12 param6, const LPXLOPER12 param7, const LPXLOPER12 param8, const LPXLOPER12 param9, const LPXLOPER12 param10) const
 {
     assert(count >= 5 && count <= 10);
-    LPXLOPER12 paramArray[10] = {param1, param2, param3, param4, param5, param6, param7, param8, param9, param10};
+    const LPXLOPER12 paramArray[10] = {param1, param2, param3, param4, param5, param6, param7, param8, param9, param10};
     return Call12v(xlfn, pxResult, count, paramArray);
 }
 
@@ -400,38 +400,38 @@ int xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, int count) const
     return Callv(xlfn, pxResult, 0, 0);
 }
 
-int xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, int count, LPXLFOPER param1) const
+int xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, int count, const LPXLFOPER param1) const
 {
     assert(count == 1);
     return Callv(xlfn, pxResult, 1, &param1);
 }
 
-int xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, int count, LPXLFOPER param1, LPXLFOPER param2) const
+int xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, int count, const LPXLFOPER param1, const LPXLFOPER param2) const
 {
     assert(count == 2);
-    LPXLFOPER paramArray[2] = {param1, param2};
+    const LPXLFOPER paramArray[2] = {param1, param2};
     return Callv(xlfn, pxResult, 2, paramArray);
 }
 
-int xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, int count, LPXLFOPER param1, LPXLFOPER param2, LPXLFOPER param3) const
+int xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, int count, const LPXLFOPER param1, const LPXLFOPER param2, const LPXLFOPER param3) const
 {
     assert(count == 3);
-    LPXLFOPER paramArray[3] = {param1, param2, param3};
+    const LPXLFOPER paramArray[3] = {param1, param2, param3};
     return Callv(xlfn, pxResult, 3, paramArray);
 }
 
-int xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, int count, LPXLFOPER param1, LPXLFOPER param2, LPXLFOPER param3, LPXLFOPER param4) const
+int xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, int count, const LPXLFOPER param1, const LPXLFOPER param2, const LPXLFOPER param3, const LPXLFOPER param4) const
 {
     assert(count == 4);
-    LPXLFOPER paramArray[4] = {param1, param2, param3, param4};
+    const LPXLFOPER paramArray[4] = {param1, param2, param3, param4};
     return Callv(xlfn, pxResult, 4, paramArray);
 }
 
-int xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, int count, LPXLFOPER param1, LPXLFOPER param2, LPXLFOPER param3, LPXLFOPER param4, 
-         LPXLFOPER param5, LPXLFOPER param6, LPXLFOPER param7, LPXLFOPER param8, LPXLFOPER param9, LPXLFOPER param10) const
+int xlw::XlfExcel::Call(int xlfn, LPXLFOPER pxResult, int count, const LPXLFOPER param1, const LPXLFOPER param2, const LPXLFOPER param3, const LPXLFOPER param4, 
+         const LPXLFOPER param5, const LPXLFOPER param6, const LPXLFOPER param7, const LPXLFOPER param8, const LPXLFOPER param9, const LPXLFOPER param10) const
 {
     assert(count >= 5 && count <= 10);
-    LPXLFOPER paramArray[10] = {param1, param2, param3, param4, param5, param6, param7, param8, param9, param10};
+    const LPXLFOPER paramArray[10] = {param1, param2, param3, param4, param5, param6, param7, param8, param9, param10};
     return Callv(xlfn, pxResult, count, paramArray);
 }
 
@@ -444,14 +444,14 @@ with XlfOper::xlbitCallFreeAuxMem.
 
 \sa XlfOper::~XlfOper
 */
-int xlw::XlfExcel::Callv(int xlfn, LPXLFOPER pxResult, int count, LPXLFOPER pxdata[]) const {
+int xlw::XlfExcel::Callv(int xlfn, LPXLFOPER pxResult, int count, const LPXLFOPER pxdata[]) const {
     if (excel12())
-        return Call12v(xlfn, (LPXLOPER12)pxResult, count, (LPXLOPER12*)pxdata);
+        return Call12v(xlfn, (LPXLOPER12)pxResult, count, (const LPXLOPER12*)pxdata);
     else
-        return Call4v(xlfn, (LPXLOPER)pxResult, count, (LPXLOPER*)pxdata);
+        return Call4v(xlfn, (LPXLOPER)pxResult, count, (const LPXLOPER*)pxdata);
 }
 
-int xlw::XlfExcel::Call4v(int xlfn, LPXLOPER pxResult, int count, LPXLOPER pxdata[]) const {
+int xlw::XlfExcel::Call4v(int xlfn, LPXLOPER pxResult, int count, const LPXLOPER pxdata[]) const {
 #ifndef NDEBUG
     for (int i = 0; i<count;++i)
     if (!pxdata[i]) {
@@ -480,7 +480,7 @@ int xlw::XlfExcel::Call4v(int xlfn, LPXLOPER pxResult, int count, LPXLOPER pxdat
     return xlret;
 }
 
-int xlw::XlfExcel::Call12v(int xlfn, LPXLOPER12 pxResult, int count, LPXLOPER12 pxdata[]) const {
+int xlw::XlfExcel::Call12v(int xlfn, LPXLOPER12 pxResult, int count, const LPXLOPER12 pxdata[]) const {
 #ifndef NDEBUG
     for (int i = 0; i<count; ++i)
         if (!pxdata[i]) {

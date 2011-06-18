@@ -24,7 +24,7 @@
 #define cxloper12Max 255
 #define EXCEL12ENTRYPT "MdCallBack12"
 
-typedef int (PASCAL *EXCEL12PROC) (int xlfn, int coper, LPXLOPER12 *rgpxloper12, LPXLOPER12 xloper12Res);
+typedef int (PASCAL *EXCEL12PROC) (int xlfn, int coper, const LPXLOPER12 *rgpxloper12, LPXLOPER12 xloper12Res);
 
 HMODULE hmodule;
 EXCEL12PROC pexcel12;
@@ -70,7 +70,7 @@ int _cdecl Excel12(int xlfn, LPXLOPER12 operRes, int count, ...)
     return(mdRet);
 }
 
-int pascal Excel12v(int xlfn, LPXLOPER12 operRes, int count, LPXLOPER12 opers[])
+int pascal Excel12v(int xlfn, LPXLOPER12 operRes, int count, const LPXLOPER12 opers[])
 {
     int mdRet;
 

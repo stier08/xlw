@@ -330,7 +330,7 @@ extern int (_cdecl *Excel4)(int xlfn, LPXLOPER operRes, int count,... );
 /* followed by count LPXLOPERs */
 
 //int pascal Excel4v(int xlfn, LPXLOPER operRes, int count, LPXLOPER opers[]);
-extern int (pascal *Excel4v)(int xlfn, LPXLOPER operRes, int count, LPXLOPER opers[]);
+extern int (pascal *Excel4v)(int xlfn, LPXLOPER operRes, int count, const LPXLOPER opers[]);
 
 int pascal XLCallVer(void);
 
@@ -340,7 +340,7 @@ int _cdecl Excel12(int xlfn, LPXLOPER12 operRes, int count,... );
 //extern int (_cdecl *Excel12)(int xlfn, LPXLOPER12 operRes, int count,... );
 /* followed by count LPXLOPER12s */
 
-int pascal Excel12v(int xlfn, LPXLOPER12 operRes, int count, LPXLOPER12 opers[]);
+int pascal Excel12v(int xlfn, LPXLOPER12 operRes, int count, const LPXLOPER12 opers[]);
 //extern int (pascal *Excel12v)(int xlfn, LPXLOPER12 operRes, int count, LPXLOPER12 opers[]);
 
 #ifdef __cplusplus
