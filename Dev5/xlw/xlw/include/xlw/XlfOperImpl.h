@@ -46,7 +46,7 @@ namespace xlw {
     {
     public:
         //! Internally used to flag XLOPER returned by Excel.
-        static const int xlbitFreeAuxMem = 0x8000;
+        static const int xlbitFreeAuxMem = xlbitXLFree;
 
         enum DoubleVectorConvPolicy
         {
@@ -348,19 +348,6 @@ namespace xlw { namespace impl {
         //! Cast to const XLOPER *.
         operator const LPOPER_TYPE() const
         {
-            // need to be careful if we try and return back to excel memory it
-            // has given us as a return value as we will call xlFree in destructor
-            // so take a deep copy and free the Excel version
-            XlTypeType type = OperProps::getXlType(lpxloper_);
-            if (type & xlw::XlfOperImpl::xlbitFreeAuxMem)
-            {
-                LPOPER_TYPE result = TempMemory::GetMemory<OperType>();
-                type &= ~xlw::XlfOperImpl::xlbitFreeAuxMem;
-                OperProps::setXlType(lpxloper_, type);
-                OperProps::copy(lpxloper_, result);
-                OperProps::XlFree(lpxloper_);
-                lpxloper_ = result;
-            }
             return lpxloper_;
         }
         //@}
