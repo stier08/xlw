@@ -60,6 +60,38 @@ extern "C"
                                         "Email any questions to xlw-users@lists.sourceforge.net. ");
         EXCEL_END_CMD;
     }
+
+    // demonstrates creating a new sheet and getting data onto it
+    int EXCEL_EXPORT xlModifySheet() 
+    {
+        EXCEL_BEGIN;
+
+        // Use when adding data to speed things up
+        xlw::DisableScreenUpdates whileInScope;
+
+        xlw::XlfServices.Commands.InsertWorkSheet();
+        // first way of refering to cells is to convert names to cell refs
+        // remember to prefix names with ! to avoid getting references to missing
+        // macro sheet
+        XlfOper topRight(xlw::XlfServices.Information.GetCellRefA1("!A1"));
+        xlw::XlfServices.Cell.SetContents(topRight, "Hello Xlw User");
+        xlw::XlfServices.Cell.SetFont(topRight, "Times New Roman");
+        xlw::XlfServices.Cell.SetFontSize(topRight, 20.0);
+        xlw::XlfServices.Cell.SetHeight(topRight, 25.0);
+
+        // next way is to use strings in R1C1 format
+        xlw::XlfServices.Cell.SetContents("R2C1", "Number");
+        xlw::XlfServices.Cell.SetContents("R2C2", "Square");
+
+        for(int i(0); i < 1001; ++i)
+        {
+            // last way is to use XlfRef objects
+            xlw::XlfServices.Cell.SetContents(XlfRef(i+2, 0), i);
+            // can add formulas using relative notation
+            xlw::XlfServices.Cell.SetContents(XlfRef(i+2, 1), "=R[0]C[-1]^2");
+        }
+        EXCEL_END_CMD;
+    }
 }
 
 namespace 
@@ -68,5 +100,9 @@ namespace
     XLRegistration::XLCommandRegistrationHelper registerTestCmd(
         "xlTestCmd", "TestCmd", "A Test Command",
         "Handwritten", "Test Command");
+
+    XLRegistration::XLCommandRegistrationHelper modifySheetCmd(
+        "xlModifySheet", "ModifySheet", "A Test Command that modifies the sheet",
+        "Handwritten", "Modify Sheet");
 
 }
