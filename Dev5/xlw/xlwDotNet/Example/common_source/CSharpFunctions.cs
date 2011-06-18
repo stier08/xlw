@@ -63,6 +63,7 @@ namespace Example
                              [Parameter(" argument to be echoed")] CellMatrix Echoee
                             )
         {
+            CellValue.ValueTypeEnum type = Echoee[0, 0].ValueType;
             return Echoee;
         }
 
