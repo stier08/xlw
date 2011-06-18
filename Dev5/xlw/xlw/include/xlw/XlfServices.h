@@ -22,7 +22,9 @@ namespace xlw
 {
     struct StatusBar_t
     {
+        //! sets the status bar text
         StatusBar_t & operator=(const std::string &message);
+        //! resets the status bar text
         void clear();
     };
 
@@ -42,7 +44,9 @@ namespace xlw
         XlfOper GetCallingCell();
         //! gets the reference of the active cell
         XlfOper GetActiveCell();
-        //! gets the formula in the supplied cell ref
+        //! sets the reference of the active cell
+        void SetActiveCell(const XlfOper& ref);
+        //! gets the formula in the supplied cell ref in R1C1 notation
         std::string GetFormula(const XlfOper& cellRef);
         //! convert a formula from A1 to R1C1 notation
         std::string ConvertA1FormulaToR1C1(std::string a1Formula);
@@ -60,6 +64,32 @@ namespace xlw
         std::string GetRefTextR1C1(const XlfOper& ref);
         //! get sheet name for a reference
         std::string GetSheetName(const XlfOper& ref);
+        //! get current sheet id
+        int GetCurrentSheetId();
+    };
+
+    struct Cell_t
+    {
+        //! get Cell's contents
+        XlfOper GetContents(const XlfOper& ref);
+        //! set Cell's contents
+        void SetContents(const XlfOper& ref, const XlfOper& newValue);
+        //! get Cell's height in points
+        double GetHeight(const XlfOper& ref);
+        //! set Cell's height in points
+        void SetHeight(const XlfOper& ref, double newPoints);
+        //! get Cell's width in points
+        double GetWidth(const XlfOper& ref);
+        //! set Cell's width in points
+        void SetWidth(const XlfOper& ref, double newPoints);
+        //! get Cell's font name
+        std::string GetFont(const XlfOper& ref);
+        //! set Cell's font name
+        void SetFont(const XlfOper& ref, const std::string& newFont);
+        //! get Cell's font size in points
+        double GetFontSize(const XlfOper& ref);
+        //! set Cell's font size in points
+        void SetFontSize(const XlfOper& ref, double newFontSize);
     };
 
     struct Commands_t
@@ -76,8 +106,28 @@ namespace xlw
         bool InputBool(const std::string& message, const std::string& title);
         //! Asks the user to input a reference
         XlfOper InputReference(const std::string& message, const std::string& title);
+        //! Sets the current selection
+        void Select(const XlfOper& ref);
         //! Asks the user to input an array
         XlfOper InputArray(const std::string& message, const std::string& title);
+        /** Display a Dialog Box
+            Uses array in the format required for the Xlm DIALOG.BOX function.
+            For more details on this function see MacroFun.hlp 
+            http://support.microsoft.com/kb/128185
+            The value in the dialog items are returned in the 7th column
+        */
+        XlfOper ShowDialogBox(const XlfOper& dialogData);
+        //! Inserts a new worksheet to left of current selection
+        void InsertWorkSheet();
+        //! Inserts a XL 2.0 Macro Sheet
+        void InsertMacroWorkSheet();
+        //! Select Previous Worksheet
+        void SelectPreviousSheet();
+        //! Select Next Worksheet
+        void SelectNextSheet();
+        //! Sets screen updates status
+        void SetScreenUpdates(bool doesScreenUpdate);
+
     };
 
     struct Services_t
@@ -85,6 +135,7 @@ namespace xlw
         StatusBar_t StatusBar;
         Notes_t Notes;
         Information_t Information;
+        Cell_t Cell;
         Commands_t Commands;
     };
 
@@ -93,6 +144,21 @@ namespace xlw
     //! are callable from commands or functions defined as 
     //! macros sheet functions
     extern struct Services_t XlfServices;
+
+    //! RAII class to disable screen updates while variable in scope
+    class DisableScreenUpdates
+    {
+    public:
+        DisableScreenUpdates()
+        {
+            XlfServices.Commands.SetScreenUpdates(false);
+        }
+        ~DisableScreenUpdates()
+        {
+            XlfServices.Commands.SetScreenUpdates(true);
+        }
+    };
+
 }
 
 #endif //  XLFSERVICES_HEADER_GUARD
