@@ -121,12 +121,14 @@ namespace xlw {
             // or enough to hold all the of data used on previous buffer and this data and a bit of spare
             // space, whichever is greater
             PushNewBuffer(std::max((buffer.size * 3) / 2, (offset_ + bytes) + 4096));
+            memset(buffer.start.get(), 0, bytes);
             offset_ = bytes;
             return freeList_.front().start.get();
         }
         else
         {
             size_t temp = offset_;
+            memset(buffer.start.get() + temp, 0, bytes);
             offset_ += bytes;
             return buffer.start.get() + temp;
         }
