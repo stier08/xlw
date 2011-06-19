@@ -66,7 +66,8 @@ extern "C"
     {
         EXCEL_BEGIN;
 
-        // Have to use when adding formulas as we are not reentrant
+        // Have to use when adding formulas as not all
+        // functions seem to be reentrant
         xlw::DisableCalculation whileInScope;
 
         // Use when adding data to speed things up

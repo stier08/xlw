@@ -49,9 +49,10 @@ If necessary, frees the internal buffer maintained by XlfExcel for heap memory
 that is returned to Excel.
 \sa XlfExcel
 */
-#define EXCEL_BEGIN TempMemory::FreeMemory(); \
+#define EXCEL_BEGIN \
 try \
-{
+{ \
+    UsesTempMemory whileInScopeUseTempMemory;
 
 /*! \defgroup cleanup_macros Cleanup Macros
 Use a cleanup macro at the end of each user defined function implemented in the

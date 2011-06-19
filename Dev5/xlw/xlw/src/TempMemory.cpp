@@ -50,39 +50,33 @@ namespace xlw {
         TempMemory* threadStorage = tls.GetValue();
         if(!threadStorage)
         {
-            // we want to keep the temp allocation
-            // as fast as possible, so to avoid
-            // needing a critical section around each call
-            // we use a double lock
-            ProtectInScope protecting(threadInfoVector);
-            threadStorage = tls.GetValue();
-            if(!threadStorage)
-            {
-                // see if any of the existing threads have died
-                // since we where last called
-                tempMemoryInstances.erase(std::remove_if(tempMemoryInstances.begin(), tempMemoryInstances.end(), threadIsDead), tempMemoryInstances.end());
-
-                // create the new memory object
-                TempMemoryPtr smartThreadStorage(new TempMemory);
-                threadStorage = smartThreadStorage.get();
-                tls.SetValue(threadStorage);
-                tempMemoryInstances.push_back(smartThreadStorage);
-            }
+            threadStorage = CreateTempMemory();
         }
         return threadStorage->InternalGetMemory(bytes);
     }
 
-    void TempMemory::FreeMemory() {
+    void TempMemory::EnterExportedFunction() {
+        TempMemory* threadStorage = tls.GetValue();
+        if(!threadStorage)
+        {
+            threadStorage = CreateTempMemory();
+        }
+        threadStorage->InternalEnterExportedFunction();
+    }
+
+
+    void TempMemory::LeaveExportedFunction() {
         TempMemory* threadStorage = tls.GetValue();
         if(threadStorage)
         {
-            threadStorage->InternalFreeMemory(false);
+            threadStorage->InternalLeaveExportedFunction();
         }
     }
 
     TempMemory::TempMemory() :
         offset_(0),
-        threadId_(GetCurrentThreadId()) {
+        threadId_(GetCurrentThreadId()),
+        depth_(0){
     }
 
     TempMemory::~TempMemory() {
@@ -99,6 +93,41 @@ namespace xlw {
         }
         offset_ = 0;
     }
+
+    void TempMemory::InternalEnterExportedFunction() {
+        if(depth_ == 0)
+        {
+            InternalFreeMemory(false);
+        }
+        ++depth_;
+    }
+
+    void TempMemory::InternalLeaveExportedFunction() {
+        --depth_;
+    }
+
+    TempMemory* TempMemory::CreateTempMemory() {
+        // we want to keep function entry
+        // as fast as possible, so to avoid
+        // needing a critical section around each call
+        // we use a double lock
+        ProtectInScope protecting(threadInfoVector);
+        TempMemory* threadStorage = tls.GetValue();
+        if(!threadStorage)
+        {
+            // see if any of the existing threads have died
+            // since we where last called
+            tempMemoryInstances.erase(std::remove_if(tempMemoryInstances.begin(), tempMemoryInstances.end(), threadIsDead), tempMemoryInstances.end());
+
+            // create the new memory object
+            TempMemoryPtr smartThreadStorage(new TempMemory);
+            threadStorage = smartThreadStorage.get();
+            tls.SetValue(threadStorage);
+            tempMemoryInstances.push_back(smartThreadStorage);
+        }
+        return threadStorage;
+    }
+
 
     void TempMemory::PushNewBuffer(size_t size) {
         XlfBuffer newBuffer;

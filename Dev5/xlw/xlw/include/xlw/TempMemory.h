@@ -63,17 +63,20 @@ namespace xlw {
 
 		//! Allocates memory using new operator
         template<typename TYPE>
-		static TYPE* GetMemoryUsingNew(size_t numItems = 1)
+        static TYPE* GetMemoryUsingNew(size_t numItems = 1)
         {
             return new TYPE[numItems];
         }
 
-        //! Frees temporary memory used by the current thread
-        static void FreeMemory();
+        //! To be called at the start of a function using temp memory
+        static void EnterExportedFunction();
 
-		//! frees memory allocated using GetMemoryUsingNew operator
+        //! To be called at the end of a function using temp memory
+        static void LeaveExportedFunction();
+
+        //! frees memory allocated using GetMemoryUsingNew operator
         template<typename TYPE>
-		static void FreeMemoryCreatedUsingNew(TYPE* pointerToFree)
+        static void FreeMemoryCreatedUsingNew(TYPE* pointerToFree)
         {
             delete [] pointerToFree;
         }
@@ -104,6 +107,9 @@ namespace xlw {
         char* InternalGetMemory(size_t bytes);
         //! Frees temporary memory used by the XLL
         void InternalFreeMemory(bool finished=false);
+        void InternalEnterExportedFunction();
+        void InternalLeaveExportedFunction();
+        static TempMemory* CreateTempMemory();
 
         //! Memory buffer used to store data that are passed to Excel
         /*!
@@ -136,12 +142,27 @@ namespace xlw {
         size_t offset_;
         //! Thread Id that this object belongs to
         DWORD threadId_;
+        //! Recurse depth
+        int depth_;
 
         //! Create a new static buffer and add it to the free list.
         void PushNewBuffer(size_t);
     };
-}
 
+    //! RAII class to signal that we are using Temporary memory
+    class UsesTempMemory
+    {
+    public:
+        UsesTempMemory()
+        {
+            TempMemory::EnterExportedFunction();
+        }
+        ~UsesTempMemory()
+        {
+            TempMemory::LeaveExportedFunction();
+        }
+    };
+}
 
 #define XLW_DLLMAIN_IMPL
 
