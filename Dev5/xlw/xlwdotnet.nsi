@@ -4,6 +4,7 @@
 
     !include "MUI2.nsh"
 	!include ".\version.nsh"
+	!include ".\xlw.nsh"
 	!include "LogicLib.nsh"
 	!include "winmessages.nsh"
 
