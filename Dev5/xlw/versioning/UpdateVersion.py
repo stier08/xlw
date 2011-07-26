@@ -20,12 +20,12 @@ from xml.dom import minidom
 
 vcprojects = ['../xlw/build/vc7/xlw.vcproj',
                           '../xlw/build/vc8/xlw.vcproj',
-                          '../xlw/build/vc9/xlw.vcproj'
+                          '../xlw/build/vc9/xlw.vcproj',
+                          '../xlwDotNet/Build/VS8/xlwDotNet/xlwDotNet.vcproj',
+                          '../xlwDotNet/Build/VS9/xlwDotNet/xlwDotNet.vcproj'
                           ]
 
 vcxprojects = ['../xlw/build/vc10/xlw.vcxproj',
-                          '../xlwDotNet/Build/VS8/xlwDotNet/xlwDotNet.vcproj',
-                          '../xlwDotNet/Build/VS9/xlwDotNet/xlwDotNet.vcproj',
                           '../xlwDotNet/Build/VS10/xlwDotNet/xlwDotNet.vcxproj'
                           ]
                 
@@ -89,12 +89,8 @@ for vcproj in vcprojects:
         modName = os.path.join(path,withoutExtension+".mod")
 
         with open(modName,'w') as f:
-                if float(theRoot.attributes["Version"].value)==7.1:
-                        f.write('<?xml version="1.0" encoding="Windows-1252"?>')
-                        writeVS7project(f,theRoot,"\t")
-                else:
-                        f.write( pd.toxml())
-
+                f.write('<?xml version="1.0" encoding="Windows-1252"?>')
+                writeVS7project(f,theRoot,"\t")
     
         overwrite(vcproj,modName)
 
@@ -122,7 +118,7 @@ for vcxproj in vcxprojects:
         with open(modName,'w') as f:
                 f.write( pd.toxml())
 
-        overwrite(vcproj,modName)
+        overwrite(vcxproj,modName)
         
 # Code::Blocks project files
 for cbproj in cbprojects:
