@@ -10,7 +10,7 @@ EchoShort(short x // number to be echoed
     return x;
 }
 
-#include<xlw/XlfExcel.h>
+#include<xlw/xlw.h>
 #include<xlw/XlOpenClose.h>
 
 
