@@ -65,7 +65,7 @@
 						TargetMachine="1"
 						Version="0.0.0.0"
 						AssemblyDebug="1"
-						AdditionalDependencies="xlw-vc90-mt-gd-5DEV.lib"/>
+						AdditionalDependencies="xlw-vc90-mt-gd-$(ProjectName).lib"/>
 				<Tool
 						Name="VCALinkTool"/>
 				<Tool
@@ -131,7 +131,7 @@
 						EnableCOMDATFolding="2"
 						Version="1.0.0.0"
 						KeyFile="../../../xlwDotNet/xlwDotNet.snk"
-						AdditionalDependencies="xlw-vc90-mt-5DEV.lib"/>
+						AdditionalDependencies="xlw-vc90-mt-$(ProjectName).lib"/>
 				<Tool
 						Name="VCALinkTool"/>
 				<Tool
@@ -199,7 +199,7 @@
 						TargetMachine="17"
 						Version="0.0.0.0"
 						AssemblyDebug="1"
-						AdditionalDependencies="xlw-vc90-mt-gd-5DEV.lib"/>
+						AdditionalDependencies="xlw-vc90-mt-gd-$(ProjectName).lib"/>
 				<Tool
 						Name="VCALinkTool"/>
 				<Tool
@@ -266,7 +266,7 @@
 						EnableCOMDATFolding="2"
 						Version="1.0.0.0"
 						KeyFile="../../../xlwDotNet/xlwDotNet.snk"
-						AdditionalDependencies="xlw-vc90-mt-5DEV.lib"/>
+						AdditionalDependencies="xlw-vc90-mt-$(ProjectName).lib"/>
 				<Tool
 						Name="VCALinkTool"/>
 				<Tool
