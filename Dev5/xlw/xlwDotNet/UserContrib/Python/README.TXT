@@ -1,35 +1,29 @@
 You need to install IronPython from 
-   http://ironpython.codeplex.com/Release/ProjectReleases.aspx?ReleaseId=12481
+   http://ironpython.codeplex.com/
+
+
+
 
 Then you need to make sure the Ironpython asemblies are referenced correctly in your DotNet project.
-By default they will be refernced from 
-          C:\Program Files\IronPython 2.0.1
+In this example 
+	VS2005 & VS2008 require IronPython 2.6.2 targeting .NET2.0
+        VS2010          requires IronPython 2.7  targeting .NET4.0
 
-But if you installed your IronPython elswwhere or you have a differnt version you need to re-refernce them. 
+By default they will be refernced from 
+          C:\Program Files\IronPython 2.x.x
+
+These dependecies should be changeable by the user.
+
+If you installed your IronPython elswwhere or you have a differnt version you need to re-refernce them. 
 In your DotNet project in Visual STudio you will see 'References', thats where you need to do it.
 
 
 
-Will follow up this example with more documentation
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- Copyright (C) 2008 2009  Narinder S Claire
+ Copyright (C) 2008 2009 2011 Narinder S Claire
 
  This file is part of XLWDOTNET, a free-software/open-source C# wrapper of the
  Excel C API - http://xlw.sourceforge.net/

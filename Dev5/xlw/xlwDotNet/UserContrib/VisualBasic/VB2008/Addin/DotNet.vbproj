@@ -21,7 +21,8 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
-    <gdconfig>-gd</gdconfig>
+    <version>5_0_0a0</version>
+<gdconfig>-gd</gdconfig>
     <dir64></dir64>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -33,7 +34,8 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
-    <gdconfig>
+    <version>5_0_0a0</version>
+<gdconfig>
     </gdconfig>
     <dir64></dir64>
     <DebugType>pdbonly</DebugType>
@@ -44,7 +46,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
-    <gdconfig>-gd</gdconfig>
+    <version>5_0_0a0</version>
+<gdconfig>-gd</gdconfig>
     <dir64>x64/</dir64>
     <DebugSymbols>true</DebugSymbols>
     <DefineDebug>true</DefineDebug>
@@ -54,7 +57,8 @@
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
-    <gdconfig></gdconfig>
+    <version>5_0_0a0</version>
+<gdconfig></gdconfig>
     <dir64>x64/</dir64>
     <DefineTrace>true</DefineTrace>
     <OutputPath>..\x64_Release\</OutputPath>
@@ -66,7 +70,7 @@
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="xlwDotNet, Version=0.0.0.0, Culture=neutral, PublicKeyToken=e6c495227a9be340, processorArchitecture=x86">
-      <HintPath>$(XLW)\xlwDotNet\lib\$(dir64)xlwDotNet-vc90-mt$(gdconfig)-5DEV.dll</HintPath>
+      <HintPath>$(XLW)\xlwDotNet\lib\$(dir64)xlwDotNet-vc90-mt$(gdconfig)-$(version).dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
   </ItemGroup>

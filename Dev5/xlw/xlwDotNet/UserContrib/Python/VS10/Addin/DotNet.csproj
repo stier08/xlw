@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,21 +10,25 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>$(SolutionName)</RootNamespace>
     <AssemblyName>$(SolutionName).NET</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>
     </StartupObject>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\..\common_source\KeyFile.snk</AssemblyOriginatorKeyFile>
-    <TargetFrameworkSubset>
-    </TargetFrameworkSubset>
+    <AssemblyOriginatorKeyFile>..\..\common_source\Example.snk</AssemblyOriginatorKeyFile>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
     <version>5_0_0a0</version>
-<gdconfig>-gd</gdconfig>
-    <dir64></dir64>
+    <gdconfig>-gd</gdconfig>
+    <dir64>
+    </dir64>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -37,9 +41,10 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
     <version>5_0_0a0</version>
-<gdconfig>
+    <gdconfig>
     </gdconfig>
-    <dir64></dir64>
+    <dir64>
+    </dir64>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\Release\</OutputPath>
@@ -49,7 +54,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <version>5_0_0a0</version>
-<gdconfig>-gd</gdconfig>
+    <gdconfig>-gd</gdconfig>
     <dir64>x64/</dir64>
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>..\x64_Debug\</OutputPath>
@@ -61,7 +66,8 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
     <version>5_0_0a0</version>
-<gdconfig></gdconfig>
+    <gdconfig>
+    </gdconfig>
     <dir64>x64/</dir64>
     <OutputPath>..\x64_Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -71,25 +77,42 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
-    <Reference Include="Office, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
+    <Reference Include="IronPython, Version=2.7.0.40, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\IronPython 2.7\IronPython.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.Modules, Version=2.7.0.40, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\IronPython 2.7\IronPython.Modules.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Dynamic, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\IronPython 2.7\Microsoft.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\IronPython 2.7\Microsoft.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting.Metadata, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\IronPython 2.7\Microsoft.Scripting.Metadata.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="xlwDotNet, Version=0.0.0.0, Culture=neutral, PublicKeyToken=e6c495227a9be340, processorArchitecture=x86">
-      <HintPath>$(XLW)\xlwDotNet\lib\$(dir64)xlwDotNet-vc90-mt$(gdconfig)-$(version).dll</HintPath>
+      <HintPath>$(XLW)\xlwDotNet\lib\$(dir64)xlwDotNet-vc100-mt$(gdconfig)-$(version).dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\common_source\properties\AssemblyInfo.cs" />
     <Compile Include="..\..\common_source\CSharpFunctions.cs" />
-    <Compile Include="..\..\common_source\RTD.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\common_source\KeyFile.snk" />
+    <None Include="..\..\common_source\Example.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -100,8 +123,8 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>if $(PlatformName) == x64 "$(DevEnvDir)..\..\VC\vcpackages\vcbuild"  "$(SolutionDir)Addin\$(SolutionName).sln"    "$(Configuration)|x64"
-if $(PlatformName) == x86 "$(DevEnvDir)..\..\VC\vcpackages\vcbuild"  "$(SolutionDir)Addin\$(SolutionName).sln"    "$(Configuration)|Win32"</PostBuildEvent>
+    <PostBuildEvent>if $(PlatformName) == x64 "$(MSBuildBinPath)\msbuild.exe"  /p:Configuration=$(Configuration) /p:Platform=x64  "$(SolutionDir)Addin\$(SolutionName).sln"
+if $(PlatformName) == x86 "$(MSBuildBinPath)\msbuild.exe"  /p:Configuration=$(Configuration) /p:Platform=Win32 "$(SolutionDir)Addin\$(SolutionName).sln"</PostBuildEvent>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
