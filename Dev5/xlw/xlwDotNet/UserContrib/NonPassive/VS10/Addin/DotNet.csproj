@@ -25,8 +25,8 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
-    <version>5_0_0a0</version>
-    <gdconfig>-gd</gdconfig>
+    <xlwversion>5_0_0a0</xlwversion>
+    <xlwversion>5_0_0a0</xlwversion><gdconfig>-gd</gdconfig>
     <dir64>
     </dir64>
     <DebugSymbols>true</DebugSymbols>
@@ -40,8 +40,8 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
-    <version>5_0_0a0</version>
-    <gdconfig>
+    <xlwversion>5_0_0a0</xlwversion>
+    <xlwversion>5_0_0a0</xlwversion><gdconfig>
     </gdconfig>
     <dir64>
     </dir64>
@@ -53,8 +53,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
-    <version>5_0_0a0</version>
-    <gdconfig>-gd</gdconfig>
+    <xlwversion>5_0_0a0</xlwversion>
+    <xlwversion>5_0_0a0</xlwversion><gdconfig>-gd</gdconfig>
     <dir64>x64/</dir64>
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>..\x64_Debug\</OutputPath>
@@ -65,8 +65,8 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
-    <version>5_0_0a0</version>
-    <gdconfig>
+    <xlwversion>5_0_0a0</xlwversion>
+    <xlwversion>5_0_0a0</xlwversion><gdconfig>
     </gdconfig>
     <dir64>x64/</dir64>
     <OutputPath>..\x64_Release\</OutputPath>
@@ -84,7 +84,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="xlwDotNet, Version=0.0.0.0, Culture=neutral, PublicKeyToken=e6c495227a9be340, processorArchitecture=x86">
-      <HintPath>$(XLW)\xlwDotNet\lib\$(dir64)xlwDotNet-vc100-mt$(gdconfig)-$(version).dll</HintPath>
+      <HintPath>$(XLW)\xlwDotNet\lib\$(dir64)xlwDotNet-vc100-mt$(gdconfig)-$(xlwversion).dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
   </ItemGroup>
