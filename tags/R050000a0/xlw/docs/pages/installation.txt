@@ -1,0 +1,32 @@
+
+/*!
+
+\page a01_installation Installation Instructions
+
+\section inst_download Download and Installation
+
+Get the source code installer from the
+<a href="http://sourceforge.net/projects/xlw/files/xlw/xlw%205DEV/" target="_blank">downloads page</a>.
+Run the installer to uncompress XLW to your hard drive.  The installation
+includes source code, documentation and examples.
+
+\section compiler_setup C++ Compiler Specific Notes
+
+The following compiler enviroments are supported automatically by the install and no
+further changes are needed
+
+- Visual Studio .NET 2003
+- Visual Studio 2005
+- Visual Studio 2008
+- Visual Studio 2010
+
+The following compiler enviroments are also supported but there are some changes,
+specific requirements, use the following links to get further instructions
+
+- \subpage a01_vce2005 "Visual C++ Express 2005"
+- \subpage a02_vce2008 "Visual C++ Express 2008"
+- \subpage a03_vce2010 "Visual C++ Express 2010"
+- \subpage a04_gcc "gcc command line"
+- \subpage a05_codeblocks "Code::Blocks and gcc"
+
+*/
