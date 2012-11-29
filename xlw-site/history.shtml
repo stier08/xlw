@@ -1,6 +1,10 @@
 <!--#include virtual="header.inc"-->
 <h2>Version History</h2>
 
+<h3>Release 5.0 Final - 29 November 2012</h3>
+<ul>
+<li>Version 5.0.0 finally released, after a very length alpha process fixing numerous bugs</li>
+</ul>
 
 <h3>Release 4.0 Final - 24 September 2009</h3>
 <ul>

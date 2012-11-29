@@ -50,7 +50,7 @@ a.varlink { text-decoration:none; }
 <body>
     <div id='wrapper'>
         <div id='head'></div>
-        <div id='version_string'>Release v4.0</div>
+        <div id='version_string'>Release v5.0</div>
         <div id='tagline'>A Wrapper for the Excel API</div>
         <div id='content'>
             <div id='col-left'>
@@ -58,6 +58,7 @@ a.varlink { text-decoration:none; }
                 <div id='sidebar'>
                     <ul>
                         <li><a href='index.shtml'>Home</a></li>
+                        <li><a href='http://sourceforge.net/projects/xlw/files/xlw/xlw%205.0/xlw-5.0.0f0.exe/download' target='_blank'>Download</a></li>
                         <li><a href='project.shtml'>Project</a></li>
                         <li><a href='documentation.shtml'>Documentation</a></li>
                         <li><a href='license.shtml'>License</a></li>
