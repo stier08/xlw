@@ -1,12 +1,13 @@
 <!--#include virtual="header.inc"-->
 <h2>Version History</h2>
 
-<h3>Release 5.0 Final - 10 December 2012</h3>
+<h3>Release 5.0 Final - 11 December 2012</h3>
 <ul>
 <li>Version 5.0.0 finally released, after a very length alpha process fixing numerous bugs</li>
 <li>Added support for Excel 2010</li>
 <li>Added support for 64 bit addins</li>
 <li>Added support for Visual Studio 2010 and 2012</li>
+<li>Added support for auto-generated help for addins using Sandcastle</li>
 <li>Richer set of example and improved documentation</li>
 </ul>
 
