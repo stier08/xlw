@@ -58,7 +58,7 @@ a.varlink { text-decoration:none; }
                 <div id='sidebar'>
                     <ul>
                         <li><a href='index.shtml'>Home</a></li>
-                        <li><a href='http://sourceforge.net/projects/xlw/files/xlw/xlw%205.0/xlw-5.0.0f0.exe/download' target='_blank'>Download</a></li>
+                        <li><a href='http://sourceforge.net/projects/xlw/files/xlw/xlw%205.0/xlw-5.0.1f0.exe/download' target='_blank'>Download</a></li>
                         <li><a href='http://www.markjoshi.com/books/phpBB3/viewforum.php?f=25' target='_blank'>Support</a></li>
                         <li><a href='project.shtml'>Project</a></li>
                         <li><a href='documentation.shtml'>Documentation</a></li>
